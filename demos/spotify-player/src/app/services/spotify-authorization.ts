@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class SpotifyAuthorizationService {
   static login() {
-    const redirectUrl = encodeURIComponent(`${location.protocol}//${location.host}/`);
+    const redirectUrl = encodeURIComponent(`${location.protocol}//${location.host}${location.pathname}`);
 
     const scopes = encodeURIComponent('');
 
