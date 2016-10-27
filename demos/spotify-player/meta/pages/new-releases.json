@@ -1,0 +1,62 @@
+{
+  "components": [
+    {
+      "col": 12,
+      "columns": [
+        {
+          "property": "images",
+          "template": "<img src=\"${data.images[2].url}\">",
+          "title": "Image"
+        },
+        {
+          "property": "name",
+          "title": "Name"
+        },
+        {
+          "property": "artists",
+          "template": "${data.artists[0].name}",
+          "title": "Artists"
+        },
+        {
+          "property": "album_type",
+          "title": "Type"
+        }
+      ],
+      "data": "${releases}",
+      "events": {
+        "select": [
+          {
+            "parameters": [
+              {
+                "name": "id",
+                "value": "${event.id}"
+              }
+            ],
+            "path": "tracks",
+            "type": "navigate"
+          }
+        ]
+      },
+      "height": 434,
+      "row": 0,
+      "section": null,
+      "type": "grid"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Spotify.getNewReleases",
+        "then": [
+          {
+            "name": "releases",
+            "type": "set",
+            "value": "${result.albums.items}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "New Releases"
+}

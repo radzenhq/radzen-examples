@@ -1,0 +1,49 @@
+{
+  "name": "spotify-player",
+  "dependencies": {
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
+    "@angular/http": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
+    "@angular/router": "3.0.0-rc.2",
+    "@radzen/angular": "latest",
+    "@radzen/dusk-theme": "latest",
+    "es6-promise": "3.1.2",
+    "es6-shim": "0.33.3",
+    "es7-reflect-metadata": "1.6.0",
+    "rxjs": "5.0.0-beta.11",
+    "zone.js": "^0.6.23"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^0.3.3",
+    "css-loader": "^0.23.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.4",
+    "html-webpack-plugin": "^2.15.0",
+    "json-loader": "^0.5.4",
+    "reflect-metadata": "^0.1.2",
+    "http-server": "^0.8.5",
+    "raw-loader": "0.5.1",
+    "reflect-metadata": "0.1.2",
+    "rimraf": "^2.4.4",
+    "style-loader": "^0.13.0",
+    "ts-helper": "0.0.1",
+    "ts-loader": "^0.7.2",
+    "typescript": "^1.8.10",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "scripts": {
+    "clean:dist": "./node_modules/.bin/rimraf dist",
+    "server:development": "webpack-dev-server --config webpack.config.development.js",
+    "server:production": "http-server dist --cors",
+    "build:development": "webpack --config webpack.config.development.js --progress --profile --colors --display-error-details --display-cached",
+    "prebuild:production": "npm run clean:dist",
+    "build:production": "webpack --config webpack.config.production.js --progress --profile --colors --display-error-details --display-cached",
+    "start": "npm run server:development"
+  }
+}

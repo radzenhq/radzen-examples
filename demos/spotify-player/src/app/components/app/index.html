@@ -1,0 +1,23 @@
+<aside class="sidebar">
+  <div class="logo" id="logo">
+    <img src="assets/img/logo.png">
+  </div>
+  <nav id="navigation">
+    <ul class="sidebar-menu">
+      <li routerLinkActive="active">
+        <a [routerLink]="['/new-releases']">New Releases</a>
+      </li>
+    </ul>
+  </nav>
+</aside>
+<main>
+  <header>
+    <a class="sidebar-toggler">&#9776;</a>
+    <h1 id="title"><router-outlet name="title"></router-outlet></h1>
+  </header>
+  <div class="content">
+    <section class="container-fluid" id="content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</main>

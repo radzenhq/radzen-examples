@@ -1,0 +1,18 @@
+{
+  "dataSources": [
+    "Spotify"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "logo": "assets/img/logo.png",
+  "name": "Spotify Player",
+  "navigation": [
+    "New Releases"
+  ],
+  "pages": [
+    "New Releases",
+    "Tracks"
+  ],
+  "startPage": null,
+  "theme": "@radzen/dusk-theme"
+}
