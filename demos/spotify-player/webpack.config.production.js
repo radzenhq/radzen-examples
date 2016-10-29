@@ -16,10 +16,14 @@ const metadata = {
   ENV
 }
 
+const index = process.argv.indexOf('--base-href')
+
+if (index >= 0) {
+  metadata.baseUrl = process.argv[index + 1];
+}
+
 module.exports = {
-  metadata,
   devtool: 'source-map',
-  debug: true,
 
   entry: {
     'vendor': './src/app/vendor.ts',
@@ -41,35 +45,22 @@ module.exports = {
 
   module: {
     loaders: [
-      // Support for .ts files.
       {
         test: /\.ts$/,
-        loader: 'ts',
-        query: {
-          compilerOptions: {
-            removeComments: true,
-            noEmitHelpers: true
-          },
-          ignoreDiagnostics: [
-            2304,
-            2307,
-            2661,
-            2339,
-            2403, // 2403 -> Subsequent constiable declarations
-            2300, // 2300 -> Duplicate identifier
-            2374, // 2374 -> Duplicate number index signature
-            2375  // 2375 -> Duplicate string index signature
-          ]
-        },
+        loader: 'awesome-typescript-loader',
         exclude: [ /\.(spec|e2e)\.ts$/ ]
       },
       { test: /\.json$/, loader: 'json' },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css?minimize')
+        loader: ExtractTextPlugin.extract('css')
       },
       { test: /\.(png|gif|jpg|svg|ttf|woff|woff2|eot)$/, loader: 'file?name=assets/[hash].[ext]' },
-      { test: /\.html$/, loader: 'raw' }
+      {
+        test: /\.html$/,
+        exclude: path.resolve('src/app/index.html'),
+        loader: 'raw'
+      }
     ]
   },
 
@@ -82,22 +73,21 @@ module.exports = {
     // static assets
     new CopyWebpackPlugin([ { from: path.join(__dirname, 'src', 'assets', 'img', path.basename('assets/img/logo.png')), to: 'assets/img/logo.png' } ]),
     // generating html
-    new HtmlWebpackPlugin({ template: 'src/app/index.html' }),
+    new HtmlWebpackPlugin({
+      template: 'src/app/index.html',
+      baseUrl: metadata.baseUrl
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/app/index.html',
+      filename: '404.html',
+      baseUrl: metadata.baseUrl
+    }),
     // replace
     new DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
       }
-    }),
-    new ProvidePlugin({
-      // TypeScript helpers
-      '__metadata': 'ts-helper/metadata',
-      '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/dist/browser'
     }),
     new UglifyJsPlugin({
       comments: false,
@@ -108,15 +98,5 @@ module.exports = {
         'screw_ie8': true
       }
     })
-  ],
-
-  // we need this due to problems with es6-shim
-  node: {
-    global: 'window',
-    progress: false,
-    crypto: 'empty',
-    module: false,
-    clearImmediate: false,
-    setImmediate: false
-  }
+  ]
 }

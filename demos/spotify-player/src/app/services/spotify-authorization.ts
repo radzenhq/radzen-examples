@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class SpotifyAuthorizationService {
-  static login() {
-    const redirectUrl = encodeURIComponent(`${location.protocol}//${location.host}${location.pathname}`);
+  login() {
+    const redirectUrl = encodeURIComponent(location.href.replace(this.router.url, '/'));
 
     const scopes = encodeURIComponent('');
 
@@ -21,7 +21,7 @@ export class SpotifyAuthorizationService {
     sessionStorage['SPOTIFY_TOKEN'] = value;
   }
 
-  constructor(router: Router) {
+  constructor(private router: Router) {
     const href = location.href;
 
     let token = null;

@@ -15,7 +15,6 @@ const metadata = {
 }
 
 module.exports = {
-  metadata,
   devtool: 'eval',
   debug: true,
 
@@ -41,16 +40,7 @@ module.exports = {
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'ts',
-        query: {
-          ignoreDiagnostics: [
-            2304,
-            2403, // 2403 -> Subsequent variable declarations
-            2300, // 2300 -> Duplicate identifier
-            2374, // 2374 -> Duplicate number index signature
-            2375  // 2375 -> Duplicate string index signature
-          ]
-        },
+        loader: 'awesome-typescript-loader',
         exclude: [ /\.(spec|e2e)\.ts$/ ]
       },
       { test: /\.json$/, loader: 'json' },
@@ -59,7 +49,11 @@ module.exports = {
         loader: ExtractTextPlugin.extract('css')
       },
       { test: /\.(png|gif|jpg|svg|ttf|woff|woff2|eot)$/, loader: 'file?name=assets/[hash].[ext]' },
-      { test: /\.html$/, loader: 'raw' }
+      {
+        test: /\.html$/,
+        exclude: path.resolve('src/app/index.html'),
+        loader: 'raw'
+      }
     ]
   },
 
@@ -70,7 +64,15 @@ module.exports = {
     // static assets
     new CopyWebpackPlugin([ { from: path.join(__dirname, 'src', 'assets', 'img', path.basename('assets/img/logo.png')), to: 'assets/img/logo.png' } ]),
     // generating html
-    new HtmlWebpackPlugin({ template: 'src/app/index.html' }),
+    new HtmlWebpackPlugin({
+      template: 'src/app/index.html',
+      baseUrl: metadata.baseUrl
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/app/index.html',
+      filename: '404.html',
+      baseUrl: metadata.baseUrl
+    }),
     // replace
     new DefinePlugin({
       'process.env': {
@@ -80,19 +82,11 @@ module.exports = {
     })
   ],
   devServer: {
+    inline: true,
     port: metadata.port,
     host: metadata.host,
     https: metadata.https,
     historyApiFallback: true,
     watchOptions: { aggregateTimeout: 300, poll: 1000 }
-  },
-  // we need this due to problems with es6-shim
-  node: {
-    global: 'window',
-    progress: false,
-    crypto: 'empty',
-    module: false,
-    clearImmediate: false,
-    setImmediate: false
   }
 }

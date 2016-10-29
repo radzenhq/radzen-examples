@@ -12,7 +12,7 @@ export class SpotifyService {
 
   constructor(private http: Http, private auth: SpotifyAuthorizationService) {
     if (auth.token == null) {
-      SpotifyAuthorizationService.login();
+      auth.login();
     }
   }
 
