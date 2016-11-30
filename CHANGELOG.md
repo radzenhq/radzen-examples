@@ -4,6 +4,7 @@
 
 ### Enhancements
 - MS SQL Server support.
+
 ### Fixes
 - Design-time error when the user changes the invoke method.
 
