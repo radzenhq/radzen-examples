@@ -1,5 +1,12 @@
 # Radzen change log
 
+## 1.0.0-alpha.8 - 2016-11-30
+
+### Enhancements
+- MS SQL Server support.
+### Fixes
+- Design-time error when the user changes the invoke method.
+
 ## 1.0.0-alpha.7 - 2016-11-14
 
 ### Enhancements
@@ -12,6 +19,7 @@
 
 ### Enhancements
 - Upgrade to Angular 2.1.2.
+- Ubuntu support
 
 ### Fixes
 - Dialogs go behind Radzen window in Ubuntu
