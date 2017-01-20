@@ -1,5 +1,11 @@
 # Radzen change log
 
+## 1.0.0-alpha.9 - 2017-01-20
+
+### Enhancements
+- A lot faster way to data-bind components. Automatically creates page properties and invokes data source methods.
+- DropDown component.
+
 ## 1.0.0-alpha.8 - 2016-11-30
 
 ### Enhancements
