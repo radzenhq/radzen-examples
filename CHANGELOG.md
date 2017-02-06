@@ -1,5 +1,14 @@
 # Radzen change log
 
+## 1.0.0-alpha.10 - 2017-02-06
+
+### Enhancements
+- No longer require a log when creating a new application.
+- No longer require the target directory to be empty.
+- Create the target directory if it does not exist.
+- Support for 64bit Windows.
+- Support for 64bit Ubuntu.
+
 ## 1.0.0-alpha.9 - 2017-01-20
 
 ### Enhancements
