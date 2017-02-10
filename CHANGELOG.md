@@ -1,5 +1,4 @@
 # Radzen change log
-# Radzen change log
 
 ## 1.0.0-alpha.11 - 2017-02-09
 
