@@ -1,4 +1,13 @@
 # Radzen change log
+# Radzen change log
+
+## 1.0.0-alpha.11 - 2017-02-09
+
+### Fixes
+- Build error when the user hasn't specified a logo
+- Error when the user cancels application import
+
+
 
 ## 1.0.0-alpha.10 - 2017-02-06
 
