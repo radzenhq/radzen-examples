@@ -1,5 +1,14 @@
 # Radzen change log
 
+## 1.0.0-alpha.12 - 2017-02-15
+
+### Enhancements
+- MSSQL Server CRUD support
+- MSSQL Server TrustServerCertificate configuration option
+
+### Fixes
+- The property grid displays old values for certain properties
+
 ## 1.0.0-alpha.11 - 2017-02-09
 
 ### Fixes
