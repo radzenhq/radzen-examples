@@ -1,5 +1,13 @@
 # Radzen change log
 
+## 1.0.0-alpha.13 - 2017-02-21
+
+### Enhancements
+- DataGrid paging, sorting and filtering support
+- MSSQL paging sorting and filtering support
+- Two-way data-binding support for DropDownList and TextBox components
+- Placeholder option for DropDownList
+
 ## 1.0.0-alpha.12 - 2017-02-15
 
 ### Enhancements
