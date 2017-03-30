@@ -1,5 +1,18 @@
 # Radzen change log
 
+## 1.0.0-beta.1 - 2017-03-30
+
+### Enhancements
+
+- Built-in user management for SQL Server data sources
+- Generate CRUD pages for SQL Server data sources
+- Generate user management pages
+- Ability to open pages in dialogs
+- Twelve new themes
+- Lookup form fields - ability to pick a value from a dropdown
+- Form fields for boolean properties
+- Live rebuild and reload
+
 ## 1.0.0-alpha.13 - 2017-02-21
 
 ### Enhancements
