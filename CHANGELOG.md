@@ -14,6 +14,11 @@
 - Form fields for boolean properties
 - Live rebuild and reload
 
+### Breaking changes
+
+- Old themes are removed. You have to change the current theme.
+- Angular application is generated in the `client` directory.
+
 ## 1.0.0-alpha.13 - 2017-02-21
 
 ### Enhancements
