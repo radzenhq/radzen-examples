@@ -4,6 +4,7 @@
 
 ### Enhancements
 
+- Use Angular CLI for building
 - Built-in user management for SQL Server data sources
 - Generate CRUD pages for SQL Server data sources
 - Generate user management pages
