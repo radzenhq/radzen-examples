@@ -1,1 +1,6 @@
-dist
+.env
+node_modules
+server/bin
+server/obj
+package.lock.json
+client/src/assets

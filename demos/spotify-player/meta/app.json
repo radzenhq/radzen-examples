@@ -4,7 +4,6 @@
   ],
   "generator": "@radzen/angular-generator",
   "https": false,
-  "logo": "assets/img/logo.png",
   "name": "Spotify Player",
   "navigation": [
     "New Releases"
@@ -13,6 +12,7 @@
     "New Releases",
     "Tracks"
   ],
+  "port": 8000,
   "startPage": null,
-  "theme": "@radzen/dusk-theme"
+  "theme": "blue-grey"
 }

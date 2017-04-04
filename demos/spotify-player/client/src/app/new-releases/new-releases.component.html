@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-sm-12" style="height:434px">
+    <rz-grid
+      [columns]="components[0].columns"
+      [data]="releases"
+      (select)="grid0Select($event)"
+    >  <template #columnsTemplate let-data>
+    <img src="{{(data)?.images[2].url}}">  </template>
+      <template #columnsTemplate let-data>
+    {{(data)?.artists[0].name}}  </template>
+    </rz-grid>
+  </div>
+</div>
+<rz-notification [messages]="messages"></rz-notification>
