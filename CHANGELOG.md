@@ -1,5 +1,19 @@
 # Radzen change log
 
+## 1.0.0 - 2017-04-18
+
+### Enhancements
+
+- Generate CRUD pages for OData services
+- Build output window
+- Component names
+- Display foreign keys in automatically generated pages
+- Regenerate code on property changes
+- Upgrade to Angular 4 and Angular CLI 1.0
+- Remove build indicator overlay
+- Stop auto-hiding unexpected errors
+- Allow the user to quickly find pages and components
+
 ## 1.0.0-beta.1 - 2017-03-30
 
 ### Enhancements
