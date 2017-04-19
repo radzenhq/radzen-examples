@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-12">
+    <rz-form #form0 [data]="product" name="form0" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+      <rz-form-field property="Description" title="Description" type="string">
+      </rz-form-field>
+      <rz-form-field format="date-time" property="DiscontinuedDate" title="Discontinued Date" type="string">
+      </rz-form-field>
+      <rz-form-field property="Name" title="Name" type="string">
+      </rz-form-field>
+      <rz-form-field format="double" property="Price" required="true" title="Price" type="number">
+      </rz-form-field>
+      <rz-form-field format="int32" property="Rating" required="true" title="Rating" type="integer">
+      </rz-form-field>
+      <rz-form-field format="date-time" property="ReleaseDate" required="true" title="Release Date" type="string">
+      </rz-form-field>
+    </rz-form>
+  </div>
+</div>
+<rz-notification [messages]="messages"></rz-notification>

@@ -1,0 +1,19 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "logo": "",
+  "name": "Sample OData",
+  "navigation": [
+    "Products"
+  ],
+  "pages": [
+    "Products",
+    "Add Product",
+    "Edit Product"
+  ],
+  "startPage": "Products",
+  "theme": "blue-grey"
+}

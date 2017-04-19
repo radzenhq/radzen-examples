@@ -1,0 +1,91 @@
+{
+  "components": [
+    {
+      "col": 12,
+      "data": "",
+      "events": {
+        "cancel": [
+          {
+            "type": "back"
+          }
+        ],
+        "submit": [
+          {
+            "error": [
+              {
+                "detail": "Unable to create new Product!",
+                "severity": "error",
+                "summary": "Error",
+                "type": "notify"
+              }
+            ],
+            "name": "Sample.createProduct",
+            "parameters": [
+              {
+                "name": "Product",
+                "value": "${event}"
+              }
+            ],
+            "then": [
+              {
+                "path": "products",
+                "type": "navigate"
+              }
+            ],
+            "type": "invoke"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "Description",
+          "required": false,
+          "title": "Description",
+          "type": "string"
+        },
+        {
+          "format": "date-time",
+          "property": "DiscontinuedDate",
+          "required": false,
+          "title": "Discontinued Date",
+          "type": "string"
+        },
+        {
+          "property": "Name",
+          "required": false,
+          "title": "Name",
+          "type": "string"
+        },
+        {
+          "format": "double",
+          "property": "Price",
+          "required": true,
+          "title": "Price",
+          "type": "number"
+        },
+        {
+          "format": "int32",
+          "property": "Rating",
+          "required": true,
+          "title": "Rating",
+          "type": "integer"
+        },
+        {
+          "format": "date-time",
+          "property": "ReleaseDate",
+          "required": true,
+          "title": "Release Date",
+          "type": "string"
+        }
+      ],
+      "row": 0,
+      "section": null,
+      "name": "form0",
+      "type": "form"
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Product"
+}

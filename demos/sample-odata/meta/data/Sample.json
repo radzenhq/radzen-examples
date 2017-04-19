@@ -1,0 +1,258 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "Error": {
+      "properties": {
+        "error": {
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ODataService.Models.Product": {
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "DiscontinuedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ID": {
+          "format": "int32",
+          "type": "integer",
+          "x-key": true,
+          "x-navigation": []
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Price": {
+          "format": "double",
+          "type": "number"
+        },
+        "Rating": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ReleaseDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ID",
+        "ReleaseDate",
+        "Rating",
+        "Price"
+      ],
+      "type": "object"
+    }
+  },
+  "host": "radzen-data.apphb.com",
+  "info": {
+    "title": "Sample",
+    "x-type": "odata"
+  },
+  "paths": {
+    "/Products": {
+      "get": {
+        "operationId": "getProducts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Product",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/ODataService.Models.Product"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createProduct",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Product",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ODataService.Models.Product"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Products({ID})": {
+      "delete": {
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getProductById",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Product.",
+            "schema": {
+              "$ref": "#/definitions/ODataService.Models.Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateProduct",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Product",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ODataService.Models.Product"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "security": [
+    {
+      "Sample": [
+        "openid"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "Sample": {
+      "authorizationUrl": "https://radzen.auth0.com/authorize?client_id=YxejI6yr9SVg8tuQ54ZcDNUdmQYJPijQ",
+      "flow": "implicit",
+      "scopes": {
+        "openid": ""
+      },
+      "type": "oauth2"
+    }
+  }
+}

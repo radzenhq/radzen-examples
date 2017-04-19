@@ -1,0 +1,189 @@
+{
+  "components": [
+    {
+      "name": "grid0",
+      "allowDelete": true,
+      "allowAdd": true,
+      "allowFiltering": true,
+      "allowMultiSorting": false,
+      "allowPaging": true,
+      "allowSorting": true,
+      "col": 12,
+      "count": "${getProductsCount}",
+      "data": "${getProductsResult}",
+      "events": {
+        "loadData": [
+          {
+            "name": "Sample.getProducts",
+            "parameters": [
+              {
+                "name": "$filter",
+                "value": "${event.filter}"
+              },
+              {
+                "name": "$top",
+                "value": "this.grid0.allowPaging ? event.top : null"
+              },
+              {
+                "name": "$skip",
+                "value": "this.grid0.allowPaging ? event.skip : null"
+              },
+              {
+                "name": "$orderby",
+                "value": "${event.orderby}"
+              },
+              {
+                "name": "$count",
+                "value": "this.grid0.allowPaging"
+              },
+              {
+                "name": "$expand",
+                "value": ""
+              }
+            ],
+            "then": [
+              {
+                "name": "getProductsResult",
+                "type": "set",
+                "value": "${result.value}"
+              },
+              {
+                "name": "getProductsCount",
+                "type": "set",
+                "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+              }
+            ],
+            "type": "invoke"
+          }
+        ],
+        "delete": [
+          {
+            "error": [
+              {
+                "detail": "Unable to delete Product",
+                "severity": "error",
+                "summary": "Error",
+                "type": "notify"
+              }
+            ],
+            "name": "Sample.deleteProduct",
+            "parameters": [
+              {
+                "name": "ID",
+                "value": "${event.ID}"
+              }
+            ],
+            "then": [
+              {
+                "detail": "Product deleted!",
+                "severity": "success",
+                "summary": "Success",
+                "type": "notify"
+              }
+            ],
+            "type": "invoke"
+          }
+        ],
+        "select": [
+          {
+            "parameters": [
+              {
+                "name": "ID",
+                "value": "${event.ID}"
+              }
+            ],
+            "path": "edit-product",
+            "type": "popup"
+          }
+        ],
+        "add": [
+          {
+            "path": "add-product",
+            "type": "popup"
+          }
+        ]
+      },
+      "row": 1,
+      "section": null,
+      "title": "",
+      "columns": [
+        {
+          "property": "Description",
+          "title": "Description",
+          "type": "string"
+        },
+        {
+          "format": "date-time",
+          "property": "DiscontinuedDate",
+          "title": "Discontinued Date",
+          "type": "string"
+        },
+        {
+          "format": "int32",
+          "property": "ID",
+          "title": "ID",
+          "type": "integer"
+        },
+        {
+          "property": "Name",
+          "title": "Name",
+          "type": "string"
+        },
+        {
+          "format": "double",
+          "property": "Price",
+          "title": "Price",
+          "type": "number"
+        },
+        {
+          "format": "int32",
+          "property": "Rating",
+          "title": "Rating",
+          "type": "integer"
+        },
+        {
+          "format": "date-time",
+          "property": "ReleaseDate",
+          "title": "Release Date",
+          "type": "string"
+        }
+      ],
+      "type": "grid"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Sample.getProducts",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getProductsResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getProductsCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Products"
+}
