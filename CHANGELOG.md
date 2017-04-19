@@ -1,17 +1,17 @@
 # Radzen change log
 
-# Radzen change log
-
 ## 1.0.1 - 2017-04-19
 
 ### Enhancements
 
 - Inject services in ngOnInit in order to support service replacement via dependency injection.
 - Warn if a database already exists when creating sample MS SQL schema.
+- Help / About menu item in Windows
 
 ### Fixes
 
 - Bug when deleting entities from an OData schema.
+- Inferring SQL Azure database schema hangs.
 - Compilation error during production build due to a property being private.
 
 ## 1.0.0 - 2017-04-18
