@@ -1,5 +1,18 @@
 # Radzen change log
 
+## 1.0.2 - 2017-04-21
+
+### Enhancements
+
+- Support for SQL Server dynamic ports and named instances.
+- OData v3 support.
+- Logging unhandled exceptions. The log file is called `log.txt` and can be found in `C:\Users\<user>\AppData\Roaming\Radzen` on Windows and `~/Library/Application Support/Radzen` on macOS.
+
+### Fixes
+
+- SQL Azure schema inferring hangs.
+- Sporadic 'Error: ENOENT: no such file or directory' when creating a page.
+
 ## 1.0.1 - 2017-04-19
 
 ### Enhancements
