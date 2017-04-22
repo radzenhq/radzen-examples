@@ -1,5 +1,14 @@
 # Radzen change log
 
+## 1.0.3 - 2017-04-22
+
+### Fixes
+
+- Trial version expires after upgrade to 1.0.2.
+- Error while saving a page
+
+## 1.0.1 - 2017-04-19
+
 ## 1.0.2 - 2017-04-21
 
 ### Enhancements
