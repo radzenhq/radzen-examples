@@ -1,5 +1,20 @@
 # Radzen change log
 
+## 1.0.4 - 2017-04-25
+
+### Improvements
+
+- Compatibility with SQL Server 2008 and dynamic ports.
+- Hide pages based on the current user role.
+
+### Fixes
+
+- Runtime error when creating ASP.NET Core Identity tables.
+- Cannot delete entities after inferring the schema from SQL Server. 
+- Avoid generating duplicate properties for relationships.
+- Disable filtering of date properties until proper filtering UI is implemented.
+- Endless HTTP calls during filtering.
+
 ## 1.0.3 - 2017-04-22
 
 ### Fixes
