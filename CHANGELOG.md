@@ -1,27 +1,59 @@
 # Radzen change log
-
-## 1.0.4 - 2017-04-25
-
+## 1.1.3 - 2017-05-08
 ### Improvements
-
+- Reorder forum fields and grid columns.
+- Easier way to specify a form field type.
+### Fixes
+- Cannot redeclare block-scoped variable 'result'.
+- Validation error about duplicate data source name when editing a data source.
+- TypeError: Cannot read property 'operationId' of null when inferring OData service.
+## 1.1.2 - 2017-05-05
+### Fixes
+- Empty DataGrid design-time 'hasOwnProperty()' error fixed.
+## 1.1.1 - 2017-05-05
+### Fixes
+- Generation of OData CRUD pages undefined or null object error fixed.
+## 1.1.0 - 2017-05-04
+### Improvements
+- Upgrade PrimeNG and ngx-charts.
+- Filtering UI for date DataGrid columns.
+- Enable DataGrid responsive mode.
+- Prevent the output pane from blocking the design canvas and property grid.
+- Ability to specify the position of the form buttons.
+- Page generation uses Angular date pipe to format date columns.
+- Upload component and upload form fields. Enable by setting the `format` of a string form field to `base64`.
+- Sample SQL Server database has images.
+- Ability to specify default form field values.
+- Cache the response of OData services.
+- Page generation displays dates in DataGrid columns as UTC by default.
+### Fixes
+- Popups don't always appear centered.
+- Boolean component properties are serialized as strings.
+- OData response code for POST is fixed.
+- Remove webpack build warnings.
+## 1.0.5 - 2017-04-27
+### Improvements
+- Expose the Count property of the DataGrid component.
+- Support OData v3 in the new DataGrid data source dialog.
+### Fixes
+- Compilation error when a table has a column named after the table itself.
+- Code generation error when a table name contains underscore.
+- Compilation error when the TextBox or DropDownList components are used.
+- Cannot select a data source method in the new DataGrid data source dialog.
+## 1.0.4 - 2017-04-25
+### Improvements
 - Compatibility with SQL Server 2008 and dynamic ports.
 - Hide pages based on the current user role.
-
 ### Fixes
-
 - Runtime error when creating ASP.NET Core Identity tables.
 - Cannot delete entities after inferring the schema from SQL Server. 
 - Avoid generating duplicate properties for relationships.
 - Disable filtering of date properties until proper filtering UI is implemented.
 - Endless HTTP calls during filtering.
-
 ## 1.0.3 - 2017-04-22
-
 ### Fixes
-
 - Trial version expires after upgrade to 1.0.2.
 - Error while saving a page
-
 ## 1.0.1 - 2017-04-19
 
 ## 1.0.2 - 2017-04-21
