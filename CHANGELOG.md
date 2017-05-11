@@ -1,4 +1,32 @@
 # Radzen change log
+
+# Radzen change log
+## 1.1.6 - 2017-05-11
+### Improvements
+- Text form field.
+- Rating form field.
+- Selectbar form field.
+- Form can update data on change (updateDataOnChange property false by default).
+- Form buttonPosition none option added.
+- Ability to set a form field default value from route parameters.
+### Fixes
+- Adding a form field has default string type.
+- Handling OData Edm.Binary type.
+- DataGrid new data-source code generation will respect count parameter for OData V3.
+- Server (C#) relations and property naming fixed (System.Data.SqlClient.SqlException: Invalid column name XXX).
+- Form fields and grid column reordering is not persisted.
+- OAuth login redirects twice to login page.
+## 1.1.5 - 2017-05-09
+### Fixes
+- TypeError: page.generated.ts.ejs:92 args.find is not a function
+
+## 1.1.4 - 2017-05-09
+### Improvements
+- Improved foreign key inferring from OData service
+- Auto-generated edit form will now submit ${event} 
+
+### Fixes
+- TypeError: Cannot read property of undefined when setting form field or data grid column properties
 ## 1.1.3 - 2017-05-08
 ### Improvements
 - Reorder forum fields and grid columns.
