@@ -1,6 +1,20 @@
 # Radzen change log
 
-# Radzen change log
+## 1.2.0 - 2017-05-17
+### Improvements
+- Custom styles support.
+- Add support for button icons.
+- New sample OData service.
+- Add card component.
+
+### Fixes
+- Set default form field type to string. Fixes the rz-undefined-form-field runtime error.
+- Tables with reserved names renamed.
+- Entity type used if no x-foreignKey.name and foreignKey.parentEntityType.
+- Avoid output pane button scrolling out of view.
+- Initialize the selectbar option value to text if not set.
+- Fix the navigation height so all items are visible.
+
 ## 1.1.6 - 2017-05-11
 ### Improvements
 - Text form field.
