@@ -1,5 +1,20 @@
 # Radzen change log
 
+## 1.2.2 - 2017-05-19
+### Improvements
+- Ability to set color and icon properties as expressions.
+- Add visible and empty text data grid properties.
+- Add icon property to the data grid.
+- Add data grid column width property.
+- Add ability to register custom components and services.
+### Fixes
+- MS SQL Column name with spaces fixed
+- MS SQL Table name equal to app name fixed
+- MS SQL Relations with composite and multiple keys fixed
+## 1.2.1 - 2017-05-17
+### Fixes
+- Fix the casing of the components (button, grid, dropdown) and their properties.
+
 ## 1.2.0 - 2017-05-17
 ### Improvements
 - Custom styles support.
