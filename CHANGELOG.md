@@ -1,4 +1,31 @@
 # Radzen change log
+## 1.4.0 - 2017-05-30
+
+### Improvements
+- OData entities filtering on infer using treeview witch checkboxes.
+- New page dialog now can create CRUD pages for the specified data-source schema.
+- User management customization
+
+## 1.3.1 - 2017-05-26
+### Improvements
+- Support 200 as OData PATCH response code..
+- Support UTC dates.
+- Tables and Views in the data-source infer treeview are sorted alphabetically.
+- Form submit changes only option.
+- Auto scroll the content of a popup dialog.
+
+### Fixes
+- Naming relation properties will ignore case when search for existing property
+- Excluded relations warning will not show if you exclude tables and then include excluded tables again
+- Computed columns excluded
+- Use input type number instead of p-spinner in order to handle decimal
+
+## 1.3.0 - 2017-05-25
+### Improvements
+- Pick SQL Server tables
+- Support for SQL Server views
+### Fixes
+- CRUD with tables that have GUID keys does not work.
 
 ## 1.2.2 - 2017-05-19
 ### Improvements
