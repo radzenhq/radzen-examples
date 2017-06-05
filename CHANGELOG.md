@@ -1,6 +1,15 @@
 # Radzen change log
-## 1.4.0 - 2017-05-30
 
+## 1.5.0 - 2017-06-05
+### Improvements
+- Swagger (OpenAPI) data sources support.
+- Update pages when the user deletes a data source or filters out tables/entities.
+- Support changing the port of the .NET application.
+- Ensure operation id is unique in a REST data source.
+### Fixes
+- Fix one day off issue when UTC is enabled and the user timezone is earlier than UTC.
+
+## 1.4.0 - 2017-05-30
 ### Improvements
 - OData entities filtering on infer using treeview witch checkboxes.
 - New page dialog now can create CRUD pages for the specified data-source schema.
