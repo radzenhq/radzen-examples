@@ -1,5 +1,48 @@
 # Radzen change log
 
+## 1.9.0 - 2017-07-12
+### Improvements
+- MS SQL Server stored procedures support added
+- Ability to modify data-source endpoints before deploy
+- Last deploy settings saved in .settings file under deploy key
+### Fixes
+- Form converts dates to UTC even if they are not changed
+- REST data source fixed
+
+## 1.8.2 - 2017-07-04
+### Fixes
+- MacOS FTP deploy fixed
+
+## 1.8.1 - 2017-07-03
+### Improvements
+- showTime property added to DateFormFieldComponent
+### Fixes
+- Use strict not equal in order not to filter out "false" property values.
+- ng-cli error reporting during deploy fixed
+- Generate only "List" page for tables with multiple primary keys
+
+## 1.8.0 - 2017-06-29
+### Improvements
+- Deploy Radzen applications via FTP
+
+## 1.7.0 - 2017-06-26
+### Improvements
+- Deploy Radzen applications to IIS
+- DatePicker component
+
+## 1.6.1 - 2017-06-12
+### Improvements
+- CRUD for Swagger pages.
+### Fixes
+- MySQL char(36) type is excluded from infer.
+- Computed properties will be displayed in the grid but excluded on update.
+
+## 1.6.0 - 2017-06-07
+### Improvements
+- MySQL support.
+### Fixes
+- Methods must be unique validation error.
+
 ## 1.5.0 - 2017-06-05
 ### Improvements
 - Swagger (OpenAPI) data sources support.
