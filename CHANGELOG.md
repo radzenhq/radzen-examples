@@ -1,5 +1,17 @@
 # Radzen change log
 
+## 1.10.0 - 2017-07-31
+
+### Improvements
+- Scheduler component added
+### Fixes
+- Fix dialog overlaying everything on Chrome.
+- OData operations with GUID parameters fixed
+- OData V4 GUID filtering fixed to use equal
+- OData V1-3 filtering of string, GUID and DateTime fixed
+- Typing in the Name component property no longer blurs it
+- SQL Server 2008 infer fixed
+
 ## 1.9.0 - 2017-07-12
 ### Improvements
 - MS SQL Server stored procedures support added
