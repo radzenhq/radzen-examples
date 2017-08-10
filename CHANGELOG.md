@@ -1,5 +1,25 @@
 # Radzen change log
 
+## 1.11.0 - 2017-08-10
+
+### Improvements
+- Active Directory support added
+- Controllers data read partial method added
+- Stored procedures partial read and default params methods added
+- IIS logging enabled by default to .\radzen_#####_##########.log
+- ASP.NET Identity tables exposed
+- Remove auth files when authentication is disabled
+- IIS WebDAVModule removed by default for applications built with Radzen
+- Scheduler component locale and firstDayOfWeek properties exposed
+- Exposed valueProperty for the DropDown component
+- Support for array literal properties added
+- If-Match * added for OData V3
+
+### Fixes
+- OData UTC filtering fixed
+- Build stop fixed
+- Area chart fixed
+
 ## 1.10.0 - 2017-07-31
 
 ### Improvements
