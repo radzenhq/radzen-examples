@@ -1,5 +1,11 @@
 # Radzen change log
 
+## 1.11.1 - 2017-08-14
+
+### Fixes
+- Avoid design time error for empty object properties.
+- 'If-Match', '*' added for DELETE method and removed from POST method in OData V3.
+
 ## 1.11.0 - 2017-08-10
 
 ### Improvements
