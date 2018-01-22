@@ -1,19 +1,14 @@
 <div class="row">
-  <div class="col-sm-12">
-    <rz-form #form0 name="form0" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
-      <rz-form-field property="Description" title="Description" type="string">
-      </rz-form-field>
-      <rz-form-field format="date-time" property="DiscontinuedDate" title="Discontinued Date" type="string">
-      </rz-form-field>
-      <rz-form-field property="Name" title="Name" type="string">
-      </rz-form-field>
-      <rz-form-field format="double" property="Price" required="true" title="Price" type="number">
-      </rz-form-field>
-      <rz-form-field format="int32" property="Rating" required="true" title="Rating" type="integer">
-      </rz-form-field>
-      <rz-form-field format="date-time" property="ReleaseDate" required="true" title="Release Date" type="string">
-      </rz-form-field>
+  <div class="col-md-12">
+    <rz-form #form0  (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+      <rz-integer-form-field property="Id" [required]="true" title="Id" requiredText="is required" type="integer">
+      </rz-integer-form-field>
+      <rz-string-form-field property="ProductName" [required]="false" title="Product Name" requiredText="is required" type="string">
+      </rz-string-form-field>
+      <rz-file-form-field property="ProductPicture" [required]="false" title="Product Picture" requiredText="is required" type="file">
+      </rz-file-form-field>
+      <rz-number-form-field property="ProductPrice" [required]="false" title="Product Price" requiredText="is required" type="number">
+      </rz-number-form-field>
     </rz-form>
   </div>
 </div>
-<rz-notification [messages]="messages"></rz-notification>

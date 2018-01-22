@@ -1,169 +1,77 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams, QueryEncoder } from '@angular/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import { Location } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
-import { PlusQueryEncoder } from './plus-query-encoder';
-
+import { ODataClient } from './odata-client';
 import * as models from './sample.model';
-
-import { SampleAuthorizationService } from './sample-auth.service';
 
 @Injectable()
 export class SampleService {
+  odata: ODataClient;
   basePath = environment.sample;
 
-  constructor(private http: Http, private auth: SampleAuthorizationService) {
+  constructor(private http: HttpClient) {
+    this.odata = new ODataClient(this.http, this.basePath, { legacy: false, withCredentials: true });
   }
 
-  getProducts(filter?: string, top?: number, skip?: number, orderby?: string, count?: boolean, expand?: string) {
-    const headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
-
-    const search = new URLSearchParams('', new PlusQueryEncoder());
-
-    if (filter) {
-      search.set('$filter', filter);
-    }
-
-    if (top != null) {
-      search.set('$top', top.toString());
-    }
-
-    if (skip != null) {
-      search.set('$skip', skip.toString());
-    }
-
-    if (orderby) {
-      search.set('$orderby', orderby);
-    }
-
-    if (count != null) {
-      search.set('$count', count.toString());
-    }
-
-    if (expand) {
-      search.set('$expand', expand);
-    }
-
-    return this.http.request(`${this.basePath}/Products`, {
-      method: 'get',
-      search,
-      headers
-    })
-    .map(response => {
-      switch (response.status) {
-        case 200:
-          return response.json();
-      }
-    })
-    .catch(response => {
-      return Observable.throw(response.json());
-    })
-    .toPromise();
+  getOrderDetails(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
+    return this.odata.get(`/OrderDetails`, { filter, top, skip, orderby, expand, count });
   }
 
-  createProduct(product: models.Product) {
-    const headers = new Headers();
+  createOrderDetail(orderDetail: any) {
+    return this.odata.post(`/OrderDetails`, orderDetail);
+  }
 
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
-    headers.append('Content-Type', 'application/json');
+  deleteOrderDetail(id: number) {
+    return this.odata.delete(`/OrderDetails(${id})`, item => item.Id != id);
+  }
 
-    if (product.hasOwnProperty('@odata.etag')) {
-      headers.append('If-Match', product['@odata.etag']);
-    }
+  getOrderDetailById(id: number) {
+    return this.odata.get(`/OrderDetails(${id})`);
+  }
 
-    return this.http.request(`${this.basePath}/Products`, {
-      method: 'post',
-      headers,
-      body: JSON.stringify(product)
-    })
-    .map(response => {
-      switch (response.status) {
-        case 204:
-          return product;
-      }
-    })
-    .catch(response => {
-      return Observable.throw(response.json());
-    })
-    .toPromise();
+  updateOrderDetail(id: number, orderDetail: any) {
+    return this.odata.patch(`/OrderDetails(${id})`, orderDetail, item => item.Id == id);
+  }
+
+  getOrders(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
+    return this.odata.get(`/Orders`, { filter, top, skip, orderby, expand, count });
+  }
+
+  createOrder(order: any) {
+    return this.odata.post(`/Orders`, order);
+  }
+
+  deleteOrder(id: number) {
+    return this.odata.delete(`/Orders(${id})`, item => item.Id != id);
+  }
+
+  getOrderById(id: number) {
+    return this.odata.get(`/Orders(${id})`);
+  }
+
+  updateOrder(id: number, order: any) {
+    return this.odata.patch(`/Orders(${id})`, order, item => item.Id == id);
+  }
+
+  getProducts(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
+    return this.odata.get(`/Products`, { filter, top, skip, orderby, expand, count });
+  }
+
+  createProduct(product: any) {
+    return this.odata.post(`/Products`, product);
   }
 
   deleteProduct(id: number) {
-    const headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
-
-    return this.http.request(`${this.basePath}/Products(${id})`, {
-      method: 'delete',
-      headers
-    })
-    .map(response => {
-      switch (response.status) {
-        case 204:
-          return {};
-      }
-    })
-    .catch(response => {
-      return Observable.throw(response.json());
-    })
-    .toPromise();
+    return this.odata.delete(`/Products(${id})`, item => item.Id != id);
   }
 
   getProductById(id: number) {
-    const headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
-
-    return this.http.request(`${this.basePath}/Products(${id})`, {
-      method: 'get',
-      headers
-    })
-    .map(response => {
-      switch (response.status) {
-        case 200:
-          return response.json();
-      }
-    })
-    .catch(response => {
-      return Observable.throw(response.json());
-    })
-    .toPromise();
+    return this.odata.get(`/Products(${id})`);
   }
 
-  updateProduct(id: number, product: models.Product) {
-    const headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
-    headers.append('Content-Type', 'application/json');
-
-    if (product.hasOwnProperty('@odata.etag')) {
-      headers.append('If-Match', product['@odata.etag']);
-    }
-
-    return this.http.request(`${this.basePath}/Products(${id})`, {
-      method: 'patch',
-      headers,
-      body: JSON.stringify(product)
-    })
-    .map(response => {
-      switch (response.status) {
-        case 204:
-          return product;
-      }
-    })
-    .catch(response => {
-      return Observable.throw(response.json());
-    })
-    .toPromise();
+  updateProduct(id: number, product: any) {
+    return this.odata.patch(`/Products(${id})`, product, item => item.Id == id);
   }
 }

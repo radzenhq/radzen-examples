@@ -5,12 +5,26 @@ export interface Error {
   };
 }
 
+export interface Order {
+  Id: number;
+  OrderDate: string;
+  OrderDetails: Array<OrderDetail>;
+  UserName: string;
+}
+
+export interface OrderDetail {
+  Id: number;
+  Order: Order;
+  OrderId: number;
+  Product: Product;
+  ProductId: number;
+  Quantity: number;
+}
+
 export interface Product {
-  Description: string;
-  DiscontinuedDate: string;
-  ID: number;
-  Name: string;
-  Price: number;
-  Rating: number;
-  ReleaseDate: string;
+  Id: number;
+  OrderDetails: Array<OrderDetail>;
+  ProductName: string;
+  ProductPicture: string;
+  ProductPrice: number;
 }

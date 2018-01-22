@@ -13,11 +13,7 @@
     </div>
     <div class="layout-menu">
       <div id="navigation" class="menu-scroll-content">
-        <ul class="ultima-menu ultima-main-menu clearfix">
-          <li routerLinkActive="active-menuitem">
-            <a [routerLink]="['/products']">Products</a>
-          </li>
-        </ul>
+        <navigation-menu [pages]="accessiblePages"></navigation-menu>
       </div>
     </div>
     <div class="layout-main">
@@ -27,16 +23,17 @@
       <div id="content" class="container-fluid">
         <router-outlet></router-outlet>
       </div>
-      <p-dialog
-        [width]="(popupRoute?.queryParams | async)?.width || 600"
-        [height]="(popupRoute?.queryParams | async)?.height"
-        [visible]="popupRoute"
-        [closable]="false"
-        [closeOnEscape]="false"
-        [header]="(popupRoute?.data | async)?.title"
-        [modal]="true">
-        <router-outlet name="popup"></router-outlet>
-      </p-dialog>
+      <div [ngClass]="{visible:popup.visible}">
+        <p-dialog
+          [visible]="popup.visible"
+          [width]="popup.width"
+          [height]="popup.height"
+          (onHide)="onPopupHide()"
+          [header]="popup.title"
+          [modal]="true">
+          <router-outlet name="popup"></router-outlet>
+        </p-dialog>
+      </div>
     </div>
     <div class="layout-mask"></div>
   </div>

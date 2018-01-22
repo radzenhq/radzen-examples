@@ -1,0 +1,195 @@
+{
+  "components": [
+    {
+      "type": "row",
+      "components": [
+        {
+          "type": "col",
+          "class": "col-md-12",
+          "components": [
+            {
+              "name": "grid0",
+              "allowDelete": true,
+              "allowAdd": true,
+              "allowFiltering": true,
+              "allowMultiSorting": false,
+              "allowPaging": true,
+              "allowSorting": true,
+              "count": "${getOrderDetailsCount}",
+              "data": "${getOrderDetailsResult}",
+              "events": {
+                "loadData": [
+                  {
+                    "name": "Sample.getOrderDetails",
+                    "parameters": [
+                      {
+                        "name": "$top",
+                        "value": "this.grid0.allowPaging ? event.top : null"
+                      },
+                      {
+                        "name": "$skip",
+                        "value": "this.grid0.allowPaging ? event.skip : null"
+                      },
+                      {
+                        "name": "$expand",
+                        "value": "Order,Product"
+                      },
+                      {
+                        "name": "$count",
+                        "value": "this.grid0.allowPaging"
+                      },
+                      {
+                        "name": "$filter",
+                        "value": "${event.filter}"
+                      },
+                      {
+                        "name": "$orderby",
+                        "value": "${event.orderby}"
+                      },
+                      {
+                        "name": "$expand",
+                        "value": "Order,Product"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "name": "getOrderDetailsResult",
+                        "type": "set",
+                        "value": "${result.value}"
+                      },
+                      {
+                        "name": "getOrderDetailsCount",
+                        "type": "set",
+                        "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+                      }
+                    ],
+                    "type": "invoke"
+                  }
+                ],
+                "delete": [
+                  {
+                    "error": [
+                      {
+                        "detail": "Unable to delete OrderDetail",
+                        "severity": "error",
+                        "summary": "Error",
+                        "type": "notify"
+                      }
+                    ],
+                    "name": "Sample.deleteOrderDetail",
+                    "parameters": [
+                      {
+                        "name": "Id",
+                        "value": "${event.Id}"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "detail": "OrderDetail deleted!",
+                        "severity": "success",
+                        "summary": "Success",
+                        "type": "notify"
+                      }
+                    ],
+                    "type": "invoke"
+                  }
+                ],
+                "add": [
+                  {
+                    "path": "add-order-detail",
+                    "type": "popup"
+                  }
+                ],
+                "rowSelect": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "Id",
+                        "value": "${event.Id}"
+                      }
+                    ],
+                    "path": "edit-order-detail",
+                    "type": "popup"
+                  }
+                ]
+              },
+              "title": "",
+              "columns": [
+                {
+                  "format": "int32",
+                  "property": "Id",
+                  "title": "Id",
+                  "type": "integer"
+                },
+                {
+                  "format": "int32",
+                  "property": "OrderId",
+                  "sortProperty": "Order.UserName",
+                  "filterProperty": "Order.UserName",
+                  "template": "${data.Order?.UserName}",
+                  "title": "Order",
+                  "type": "integer"
+                },
+                {
+                  "format": "int32",
+                  "property": "ProductId",
+                  "sortProperty": "Product.ProductName",
+                  "filterProperty": "Product.ProductName",
+                  "template": "${data.Product?.ProductName}",
+                  "title": "Product",
+                  "type": "integer"
+                },
+                {
+                  "format": "int32",
+                  "property": "Quantity",
+                  "title": "Quantity",
+                  "type": "integer"
+                }
+              ],
+              "type": "grid"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Sample.getOrderDetails",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          },
+          {
+            "name": "$expand",
+            "value": "Order,Product"
+          }
+        ],
+        "then": [
+          {
+            "name": "getOrderDetailsResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getOrderDetailsCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Order Details"
+}

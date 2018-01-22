@@ -1,4 +1,4 @@
 export const environment = {
-  sample: 'http://radzen-data.apphb.com/',
+  sample: 'http://services.radzen.com/odata/',
   production: true
 };

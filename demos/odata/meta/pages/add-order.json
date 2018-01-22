@@ -1,0 +1,77 @@
+{
+  "components": [
+    {
+      "type": "row",
+      "components": [
+        {
+          "type": "col",
+          "class": "col-md-12",
+          "components": [
+            {
+              "data": "",
+              "events": {
+                "cancel": [
+                  {
+                    "type": "back"
+                  }
+                ],
+                "submit": [
+                  {
+                    "error": [
+                      {
+                        "detail": "Unable to create new Order!",
+                        "severity": "error",
+                        "summary": "Error",
+                        "type": "notify"
+                      }
+                    ],
+                    "name": "Sample.createOrder",
+                    "parameters": [
+                      {
+                        "name": "Order",
+                        "value": "${event}"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "path": "orders",
+                        "type": "navigate"
+                      }
+                    ],
+                    "type": "invoke"
+                  }
+                ]
+              },
+              "fields": [
+                {
+                  "property": "Id",
+                  "required": true,
+                  "title": "Id",
+                  "type": "integer"
+                },
+                {
+                  "property": "OrderDate",
+                  "required": false,
+                  "title": "Order Date",
+                  "type": "date"
+                },
+                {
+                  "property": "UserName",
+                  "required": false,
+                  "title": "User Name",
+                  "type": "string"
+                }
+              ],
+              "name": "form0",
+              "type": "form"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Order"
+}

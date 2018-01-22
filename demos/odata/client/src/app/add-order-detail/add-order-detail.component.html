@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-12">
+    <rz-form #form0  (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+      <rz-integer-form-field property="Id" [required]="true" title="Id" requiredText="is required" type="integer">
+      </rz-integer-form-field>
+      <rz-integer-form-field property="Quantity" [required]="false" title="Quantity" requiredText="is required" type="integer">
+      </rz-integer-form-field>
+      <rz-lookup-form-field [data]="getOrdersResult" property="OrderId" [required]="false" textProperty="UserName" title="Order" valueProperty="Id" placeholder="Choose Order" requiredText="is required" type="lookup">
+      </rz-lookup-form-field>
+      <rz-lookup-form-field [data]="getProductsResult" property="ProductId" [required]="false" textProperty="ProductName" title="Product" valueProperty="Id" placeholder="Choose Product" requiredText="is required" type="lookup">
+      </rz-lookup-form-field>
+    </rz-form>
+  </div>
+</div>

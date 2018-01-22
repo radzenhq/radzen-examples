@@ -1,39 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RadzenModule } from '@radzen/angular';
 
-import { AppRoutes } from './app.routes';
-import { AppComponent, PageTitleComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
-
-import { SampleService } from './sample.service';
-import { SampleAuthorizationService } from './sample-auth.service';
+import { AppImports, AppComponent, AppDeclarations, AppProviders } from './app.module-generated';
 
 @NgModule({
   declarations: [
-    ProductsComponent,
-    AddProductComponent,
-    EditProductComponent,
-    AppComponent,
-    PageTitleComponent
+    ...AppDeclarations
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpModule,
-    RadzenModule,
-    AppRoutes
+    ...AppImports
   ],
   providers: [
-    SampleService,
-    SampleAuthorizationService,
+    ...AppProviders
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
