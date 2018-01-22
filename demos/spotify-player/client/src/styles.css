@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+  You can add custom CSS rules or import files here.
+*/
 
-@import '../node_modules/primeng/resources/primeng.min.css';
-@import './assets/css/blue-grey.css';
+
+/* Import the Radzen CSS files */
+@import './styles-generated.css';

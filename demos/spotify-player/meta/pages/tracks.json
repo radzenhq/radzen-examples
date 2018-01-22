@@ -1,22 +1,27 @@
 {
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
-      "col": 12,
       "columns": [
         {
+          "format": "",
           "property": "name",
-          "template": "",
-          "title": "Name"
+          "title": "Name",
+          "type": "string"
         },
         {
+          "format": "",
           "property": "preview_url",
-          "template": "<audio controls src=\"${data.preview_url}\"></audio>",
-          "title": "Play"
+          "template": "<audio *ngIf=\"data.preview_url\" controls src=\"${data.preview_url}\"></audio>",
+          "title": "Player",
+          "type": "string"
         }
       ],
-      "data": "${tracks}",
-      "row": 0,
-      "section": null,
+      "data": "${releases}",
+      "emptyText": "No records to display.",
+      "name": "grid0",
       "type": "grid"
     }
   ],
@@ -32,7 +37,7 @@
         ],
         "then": [
           {
-            "name": "tracks",
+            "name": "releases",
             "type": "set",
             "value": "${result.items}"
           }

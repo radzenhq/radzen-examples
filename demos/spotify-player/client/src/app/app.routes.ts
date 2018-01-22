@@ -5,8 +5,7 @@ import { PageTitleComponent } from './app.component';
 import { NewReleasesComponent } from './new-releases/new-releases.component';
 import { TracksComponent } from './tracks/tracks.component';
 
-
-export const routes: Routes = [
+export const pageRoutes: Routes = [
   {
     path: 'new-releases',
     children: [
@@ -19,18 +18,10 @@ export const routes: Routes = [
         component: PageTitleComponent,
         outlet: 'title',
         data: {
-          title: 'New Releases'
+          title: 'New Releases',
         }
       }
     ]
-  },
-  {
-    path: 'new-releases',
-    component: NewReleasesComponent,
-    outlet: 'popup',
-    data: {
-      title: 'New Releases'
-    }
   },
   {
     path: 'tracks',
@@ -44,10 +35,22 @@ export const routes: Routes = [
         component: PageTitleComponent,
         outlet: 'title',
         data: {
-          title: 'Tracks'
+          title: 'Tracks',
         }
       }
     ]
+  },
+  { path: '', redirectTo: '/new-releases', pathMatch: 'full' }
+];
+
+export const popupRoutes: Routes = [
+  {
+    path: 'new-releases',
+    component: NewReleasesComponent,
+    outlet: 'popup',
+    data: {
+      title: 'New Releases'
+    }
   },
   {
     path: 'tracks/:id',
@@ -57,7 +60,11 @@ export const routes: Routes = [
       title: 'Tracks'
     }
   },
-  { path: '', redirectTo: '/new-releases', pathMatch: 'full' }
+];
+
+export const routes: Routes = [
+  ...pageRoutes,
+  ...popupRoutes,
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

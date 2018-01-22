@@ -1,15 +1,29 @@
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { HostListener, Component, Input } from '@angular/core';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { SpotifyAuthorizationService } from './spotify-auth.service';
 
 @Component({
   selector: 'page-title',
   template: '{{ (route.data | async).title }}'
 })
 export class PageTitleComponent {
-  constructor(private route: ActivatedRoute) {
+  constructor(public route: ActivatedRoute) {
   }
+}
+
+@Component({
+  selector: 'navigation-menu',
+  template: `
+  <ul class="ultima-menu ultima-main-menu clearfix">
+      <li routerLinkActive="active-menuitem" *ngFor="let page of pages">
+        <a [routerLink]="page.link">{{ page.name }}</a>
+      </li>
+  </ul>`
+})
+export class NavigationMenuComponent {
+  @Input() pages = []
 }
 
 @Component({
@@ -19,18 +33,41 @@ export class PageTitleComponent {
 export class AppComponent {
   menuActive = true;
   mobileMenuActive = false;
-  popupRoute: ActivatedRoute;
+  popup = {
+    visible: false,
+    width: null,
+    height: null,
+    title: null
+  };
 
-  constructor (public router: Router, private route: ActivatedRoute, private location: Location) {
-   router.events.subscribe(() => {
-      this.popupRoute = this.route.children.find(route => route.outlet == 'popup');
+  pages = [
+      {
+        name: 'New Releases',
+        link: '/new-releases',
+        access: ['Everybody']
+      },
+  ];
+
+  accessiblePages: any[];
+
+  constructor (spotify: SpotifyAuthorizationService,public router: Router, private route: ActivatedRoute, private location: Location) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const route = this.route.children.find(route => route.outlet == 'popup');
+        this.accessiblePages = this.pages;
+
+        if (route) {
+          this.popup.width = route.snapshot.queryParams.width || 600;
+          this.popup.height = route.snapshot.queryParams.height || null;
+          this.popup.title = route.snapshot.data.title;
+          setTimeout(() => this.popup.visible = true);
+        } else {
+          this.popup.visible = false;
+        }
+      }
     });
-  }
 
-  closePopup() {
-    this.location.back();
   }
-
 
   onToggleMenuClick(event) {
     event.preventDefault();
@@ -39,6 +76,14 @@ export class AppComponent {
       this.menuActive = !this.menuActive;
     } else {
       this.mobileMenuActive = !this.mobileMenuActive;
+    }
+  }
+
+  onPopupHide() {
+    const popup = this.route.children.find(route => route.outlet == 'popup');
+
+    if (popup) {
+      this.router.navigate([ { outlets: { popup: null } } ]);
     }
   }
 

@@ -24,8 +24,7 @@
         "name": {
           "type": "string"
         }
-      },
-      "required": []
+      }
     },
     "Albums": {
       "properties": {
@@ -35,32 +34,29 @@
           },
           "type": "array"
         }
-      },
-      "required": []
+      }
     },
     "AlbumsResponse": {
       "properties": {
         "albums": {
-          "$ref": "#/definitions/Albums"
+          "$ref": "#/definitions/Albums",
+          "type": "object"
         }
-      },
-      "required": []
+      }
     },
     "Artist": {
       "properties": {
         "name": {
           "type": "string"
         }
-      },
-      "required": []
+      }
     },
     "Image": {
       "properties": {
         "url": {
           "type": "string"
         }
-      },
-      "required": []
+      }
     },
     "Track": {
       "properties": {
@@ -70,8 +66,7 @@
         "preview_url": {
           "type": "string"
         }
-      },
-      "required": []
+      }
     },
     "TracksResponse": {
       "properties": {
@@ -81,14 +76,12 @@
           },
           "type": "array"
         }
-      },
-      "required": []
+      }
     }
   },
   "host": "api.spotify.com",
   "info": {
     "title": "Spotify",
-    "version": "1.0.0",
     "x-type": "rest"
   },
   "paths": {
@@ -105,8 +98,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/TracksResponse",
-              "description": ""
+              "$ref": "#/definitions/TracksResponse"
             }
           }
         }
@@ -119,8 +111,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/AlbumsResponse",
-              "description": ""
+              "$ref": "#/definitions/AlbumsResponse"
             }
           }
         }

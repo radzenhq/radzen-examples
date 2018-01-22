@@ -1,31 +1,44 @@
 {
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
-      "col": 12,
       "columns": [
         {
+          "format": "",
           "property": "images",
+          "sortProperty": "",
           "template": "<img src=\"${data.images[2].url}\">",
-          "title": "Image"
+          "title": "Image",
+          "type": "array"
         },
         {
+          "format": "",
           "property": "name",
-          "title": "Name"
+          "title": "Name",
+          "type": "string"
         },
         {
+          "format": "",
           "property": "artists",
           "template": "${data.artists[0].name}",
-          "title": "Artists"
+          "title": "Artist",
+          "type": "array"
         },
         {
+          "format": "",
           "property": "album_type",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       ],
       "data": "${releases}",
+      "emptyText": "No records to display.",
       "events": {
-        "select": [
+        "rowSelect": [
           {
+            "condition": "",
             "parameters": [
               {
                 "name": "id",
@@ -37,9 +50,7 @@
           }
         ]
       },
-      "height": 434,
-      "row": 0,
-      "section": null,
+      "name": "grid0",
       "type": "grid"
     }
   ],

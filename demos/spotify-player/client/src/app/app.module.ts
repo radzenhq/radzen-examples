@@ -1,35 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RadzenModule } from '@radzen/angular';
 
-import { AppRoutes } from './app.routes';
-import { AppComponent, PageTitleComponent } from './app.component';
-import { NewReleasesComponent } from './new-releases/new-releases.component';
-import { TracksComponent } from './tracks/tracks.component';
-
-import { SpotifyService } from './spotify.service';
-import { SpotifyAuthorizationService } from './spotify-auth.service';
+import { AppImports, AppComponent, AppDeclarations, AppProviders } from './app.module-generated';
 
 @NgModule({
   declarations: [
-    NewReleasesComponent,
-    TracksComponent,
-    AppComponent,
-    PageTitleComponent
+    ...AppDeclarations
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RadzenModule,
-    AppRoutes
+    ...AppImports
   ],
   providers: [
-    SpotifyService,
-    SpotifyAuthorizationService,
+    ...AppProviders
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

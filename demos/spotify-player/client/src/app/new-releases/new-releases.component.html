@@ -1,14 +1,16 @@
-<div class="row">
-  <div class="col-sm-12" style="height:434px">
-    <rz-grid
-      [columns]="components[0].columns"
-      [data]="releases"
-      (select)="grid0Select($event)"
-    >  <template #columnsTemplate let-data>
-    <img src="{{(data)?.images[2].url}}">  </template>
-      <template #columnsTemplate let-data>
-    {{(data)?.artists[0].name}}  </template>
-    </rz-grid>
-  </div>
-</div>
-<rz-notification [messages]="messages"></rz-notification>
+<rz-grid #grid0 [data]="releases" emptyText="No records to display." (rowSelect)="grid0RowSelect($event)">
+  <rz-grid-column property="images" title="Image" type="array">
+    <ng-template let-data gridColumnTemplate>
+    <img src="{{(data?.images || {})[2]?.url}}">
+    </ng-template>
+  </rz-grid-column>
+  <rz-grid-column property="name" title="Name" type="string">
+  </rz-grid-column>
+  <rz-grid-column property="artists" title="Artist" type="array">
+    <ng-template let-data gridColumnTemplate>
+    {{(data?.artists || {})[0]?.name}}
+    </ng-template>
+  </rz-grid-column>
+  <rz-grid-column property="album_type" title="Type" type="string">
+  </rz-grid-column>
+</rz-grid>

@@ -1,11 +1,9 @@
-<div class="row">
-  <div class="col-sm-12">
-    <rz-grid
-      [columns]="components[0].columns"
-      [data]="tracks"
-    >  <template #columnsTemplate let-data>
-    <audio controls src="{{(data)?.preview_url}}"></audio>  </template>
-    </rz-grid>
-  </div>
-</div>
-<rz-notification [messages]="messages"></rz-notification>
+<rz-grid #grid0 [data]="releases" emptyText="No records to display.">
+  <rz-grid-column property="name" title="Name" type="string">
+  </rz-grid-column>
+  <rz-grid-column property="preview_url" title="Player" type="string">
+    <ng-template let-data gridColumnTemplate>
+    <audio *ngIf="data.preview_url" controls src="{{data?.preview_url}}"></audio>
+    </ng-template>
+  </rz-grid-column>
+</rz-grid>

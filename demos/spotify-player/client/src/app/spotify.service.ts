@@ -1,58 +1,56 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams, QueryEncoder } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/throw';
 
 import { environment } from '../environments/environment';
-import { PlusQueryEncoder } from './plus-query-encoder';
-
 import * as models from './spotify.model';
-
-import { SpotifyAuthorizationService } from './spotify-auth.service';
 
 @Injectable()
 export class SpotifyService {
   basePath = environment.spotify;
 
-  constructor(private http: Http, private auth: SpotifyAuthorizationService) {
+  constructor(private http: HttpClient) {
   }
 
-  getAlbumTracks(id?: string) {
-    const headers = new Headers();
+  getAlbumTracks(id: string | null) {
+    let headers = new HttpHeaders();
 
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
+    headers = headers.set('Accept', 'application/json');
 
-    return this.http.request(`${this.basePath}albums/${id}/tracks`, {
-      method: 'get',
+    return this.http.request('get', Location.joinWithSlash(`${this.basePath}`, `albums/${id}/tracks`), {
+      observe: 'response',
       headers
     })
     .map(response => {
       switch (response.status) {
-        case 200:
-          return response.json();
+        case 200: {
+          return response.body;
+        }
       }
     })
-    .toPromise();
   }
 
   getNewReleases() {
-    const headers = new Headers();
+    let headers = new HttpHeaders();
 
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Bearer ${this.auth.token}`);
+    headers = headers.set('Accept', 'application/json');
 
-    return this.http.request(`${this.basePath}browse/new-releases`, {
-      method: 'get',
+    return this.http.request('get', Location.joinWithSlash(`${this.basePath}`, `browse/new-releases`), {
+      observe: 'response',
       headers
     })
     .map(response => {
       switch (response.status) {
-        case 200:
-          return response.json();
+        case 200: {
+          return response.body;
+        }
       }
     })
-    .toPromise();
   }
 }
