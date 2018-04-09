@@ -1,5 +1,5 @@
 # Radzen
 
-This is a placeholder repository for gathering [Radzen](https://www.radzen.com/) feedback.
+This is a placeholder repository for storing [Radzen](https://www.radzen.com/) demos.
 
-Log bugs and submit feature requests here, post in our [forum](http://forum.radzen.com/) or send an email to info@radzen.com
+For bugs, feature requests or any other questions please use our [forum](http://forum.radzen.com/) or send an email to info@radzen.com
