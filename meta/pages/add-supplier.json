@@ -1,0 +1,144 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Supplier!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createSupplier",
+                        "parameters": [
+                          {
+                            "name": "Supplier",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "suppliers",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": []
+                  },
+                  "fields": [
+                    {
+                      "property": "CompanyName",
+                      "required": false,
+                      "title": "Company Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ContactName",
+                      "required": false,
+                      "title": "Contact Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "required": false,
+                      "title": "Contact Title",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Address",
+                      "required": false,
+                      "title": "Address",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "City",
+                      "required": false,
+                      "title": "City",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Region",
+                      "required": false,
+                      "title": "Region",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "required": false,
+                      "title": "Postal Code",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Country",
+                      "required": false,
+                      "title": "Country",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Phone",
+                      "required": false,
+                      "title": "Phone",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Fax",
+                      "required": false,
+                      "title": "Fax",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "HomePage",
+                      "required": false,
+                      "title": "Home Page",
+                      "type": "string",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Supplier",
+  "layout": "Main"
+}

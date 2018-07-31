@@ -1,0 +1,102 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${category}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "loadData": [],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Category",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateCategory",
+                        "parameters": [
+                          {
+                            "name": "CategoryID",
+                            "value": "${parameters.CategoryID}"
+                          },
+                          {
+                            "name": "Category",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "CategoryName",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Description",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Description",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCategoryById",
+        "parameters": [
+          {
+            "name": "CategoryID",
+            "value": "${parameters.CategoryID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "category",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit Category"
+}

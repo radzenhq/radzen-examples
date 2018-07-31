@@ -1,0 +1,2981 @@
+{
+  "info": {
+    "title": "Northwind",
+    "x-withCredentials": false,
+    "x-type": "odata"
+  },
+  "host": "services.radzen.com",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/odata/Northwind",
+  "definitions": {
+    "Error": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Sample.Models.Northwind.Category": {
+      "properties": {
+        "CategoryID": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "NorthwindProducts",
+              "type": "Sample.Models.Northwind.NorthwindProduct"
+            }
+          ]
+        },
+        "CategoryName": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Picture": {
+          "type": "string",
+          "format": "base64"
+        },
+        "NorthwindProducts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "CategoryID"
+      ]
+    },
+    "Sample.Models.Northwind.Customer": {
+      "properties": {
+        "CustomerID": {
+          "type": "string",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "NorthwindOrders",
+              "type": "Sample.Models.Northwind.NorthwindOrder"
+            },
+            {
+              "name": "CustomerCustomerDemos",
+              "type": "Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          ]
+        },
+        "CompanyName": {
+          "type": "string"
+        },
+        "ContactName": {
+          "type": "string"
+        },
+        "ContactTitle": {
+          "type": "string"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "string"
+        },
+        "Fax": {
+          "type": "string"
+        },
+        "NorthwindOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+          }
+        },
+        "CustomerCustomerDemos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "CustomerID"
+      ]
+    },
+    "Sample.Models.Northwind.CustomerCustomerDemo": {
+      "properties": {
+        "CustomerID": {
+          "type": "string",
+          "x-foreignKey": {
+            "parentTable": "Customers",
+            "parentEntityType": "Sample.Models.Northwind.Customer",
+            "type": "Customer",
+            "principalKey": "CustomerID",
+            "name": "Customer",
+            "textProperty": "CustomerID"
+          },
+          "x-key": true,
+          "x-navigation": []
+        },
+        "CustomerTypeID": {
+          "type": "string",
+          "x-foreignKey": {
+            "parentTable": "CustomerDemographics",
+            "parentEntityType": "Sample.Models.Northwind.CustomerDemographic",
+            "type": "CustomerDemographic",
+            "principalKey": "CustomerTypeID",
+            "name": "CustomerDemographic",
+            "textProperty": "CustomerTypeID"
+          },
+          "x-key": true,
+          "x-navigation": []
+        },
+        "Customer": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Customer",
+          "x-ref": {
+            "name": "Customer",
+            "constraints": [
+              {
+                "property": "CustomerID",
+                "refProperty": "CustomerID"
+              }
+            ]
+          }
+        },
+        "CustomerDemographic": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic",
+          "x-ref": {
+            "name": "CustomerDemographic",
+            "constraints": [
+              {
+                "property": "CustomerTypeID",
+                "refProperty": "CustomerTypeID"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Sample.Models.Northwind.CustomerDemographic": {
+      "properties": {
+        "CustomerTypeID": {
+          "type": "string",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "CustomerCustomerDemos",
+              "type": "Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          ]
+        },
+        "CustomerDesc": {
+          "type": "string"
+        },
+        "CustomerCustomerDemos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "CustomerTypeID"
+      ]
+    },
+    "Sample.Models.Northwind.Employee": {
+      "properties": {
+        "EmployeeID": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "NorthwindOrders",
+              "type": "Sample.Models.Northwind.NorthwindOrder"
+            },
+            {
+              "name": "EmployeeTerritories",
+              "type": "Sample.Models.Northwind.EmployeeTerritory"
+            }
+          ]
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "TitleOfCourtesy": {
+          "type": "string"
+        },
+        "BirthDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "HireDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "HomePhone": {
+          "type": "string"
+        },
+        "Extension": {
+          "type": "string"
+        },
+        "Photo": {
+          "type": "string",
+          "format": "base64"
+        },
+        "Notes": {
+          "type": "string"
+        },
+        "PhotoPath": {
+          "type": "string"
+        },
+        "NorthwindOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+          }
+        },
+        "EmployeeTerritories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "EmployeeID"
+      ]
+    },
+    "Sample.Models.Northwind.EmployeeTerritory": {
+      "properties": {
+        "EmployeeID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Employees",
+            "parentEntityType": "Sample.Models.Northwind.Employee",
+            "type": "Employee",
+            "principalKey": "EmployeeID",
+            "name": "Employee",
+            "textProperty": "LastName"
+          },
+          "x-key": true,
+          "x-navigation": []
+        },
+        "TerritoryID": {
+          "type": "string",
+          "x-foreignKey": {
+            "parentTable": "Territories",
+            "parentEntityType": "Sample.Models.Northwind.Territory",
+            "type": "Territory",
+            "principalKey": "TerritoryID",
+            "name": "Territory",
+            "textProperty": "TerritoryID"
+          },
+          "x-key": true,
+          "x-navigation": []
+        },
+        "Employee": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Employee",
+          "x-ref": {
+            "name": "Employee",
+            "constraints": [
+              {
+                "property": "EmployeeID",
+                "refProperty": "EmployeeID"
+              }
+            ]
+          }
+        },
+        "Territory": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Territory",
+          "x-ref": {
+            "name": "Territory",
+            "constraints": [
+              {
+                "property": "TerritoryID",
+                "refProperty": "TerritoryID"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Sample.Models.Northwind.NorthwindOrder": {
+      "properties": {
+        "OrderID": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "NorthwindOrderDetails",
+              "type": "Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          ]
+        },
+        "CustomerID": {
+          "type": "string",
+          "x-foreignKey": {
+            "parentTable": "Customers",
+            "parentEntityType": "Sample.Models.Northwind.Customer",
+            "type": "Customer",
+            "principalKey": "CustomerID",
+            "name": "Customer",
+            "textProperty": "CustomerID"
+          }
+        },
+        "EmployeeID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Employees",
+            "parentEntityType": "Sample.Models.Northwind.Employee",
+            "type": "Employee",
+            "principalKey": "EmployeeID",
+            "name": "Employee",
+            "textProperty": "LastName"
+          }
+        },
+        "OrderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "RequiredDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Freight": {
+          "type": "number",
+          "format": "double"
+        },
+        "ShipName": {
+          "type": "string"
+        },
+        "ShipAddress": {
+          "type": "string"
+        },
+        "ShipCity": {
+          "type": "string"
+        },
+        "ShipRegion": {
+          "type": "string"
+        },
+        "ShipPostalCode": {
+          "type": "string"
+        },
+        "ShipCountry": {
+          "type": "string"
+        },
+        "NorthwindOrderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+          }
+        },
+        "Customer": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Customer",
+          "x-ref": {
+            "name": "Customer",
+            "constraints": [
+              {
+                "property": "CustomerID",
+                "refProperty": "CustomerID"
+              }
+            ]
+          }
+        },
+        "Employee": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Employee",
+          "x-ref": {
+            "name": "Employee",
+            "constraints": [
+              {
+                "property": "EmployeeID",
+                "refProperty": "EmployeeID"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "OrderID"
+      ]
+    },
+    "Sample.Models.Northwind.NorthwindOrderDetail": {
+      "properties": {
+        "OrderID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "NorthwindOrders",
+            "parentEntityType": "Sample.Models.Northwind.NorthwindOrder",
+            "type": "NorthwindOrder",
+            "principalKey": "OrderID",
+            "name": "NorthwindOrder",
+            "textProperty": "CustomerID"
+          },
+          "x-key": true,
+          "x-navigation": []
+        },
+        "ProductID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "NorthwindProducts",
+            "parentEntityType": "Sample.Models.Northwind.NorthwindProduct",
+            "type": "NorthwindProduct",
+            "principalKey": "ProductID",
+            "name": "NorthwindProduct",
+            "textProperty": "ProductName"
+          },
+          "x-key": true,
+          "x-navigation": []
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Discount": {
+          "type": "number",
+          "format": "single"
+        },
+        "NorthwindOrder": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder",
+          "x-ref": {
+            "name": "NorthwindOrder",
+            "constraints": [
+              {
+                "property": "OrderID",
+                "refProperty": "OrderID"
+              }
+            ]
+          }
+        },
+        "NorthwindProduct": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct",
+          "x-ref": {
+            "name": "NorthwindProduct",
+            "constraints": [
+              {
+                "property": "ProductID",
+                "refProperty": "ProductID"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Sample.Models.Northwind.NorthwindProduct": {
+      "properties": {
+        "ProductID": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "NorthwindOrderDetails",
+              "type": "Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          ]
+        },
+        "ProductName": {
+          "type": "string"
+        },
+        "SupplierID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Suppliers",
+            "parentEntityType": "Sample.Models.Northwind.Supplier",
+            "type": "Supplier",
+            "principalKey": "SupplierID",
+            "name": "Supplier",
+            "textProperty": "CompanyName"
+          }
+        },
+        "CategoryID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Categories",
+            "parentEntityType": "Sample.Models.Northwind.Category",
+            "type": "Category",
+            "principalKey": "CategoryID",
+            "name": "Category",
+            "textProperty": "CategoryName"
+          }
+        },
+        "QuantityPerUnit": {
+          "type": "string"
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "UnitsInStock": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "UnitsOnOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ReorderLevel": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Discontinued": {
+          "type": "boolean"
+        },
+        "NorthwindOrderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+          }
+        },
+        "Supplier": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Supplier",
+          "x-ref": {
+            "name": "Supplier",
+            "constraints": [
+              {
+                "property": "SupplierID",
+                "refProperty": "SupplierID"
+              }
+            ]
+          }
+        },
+        "Category": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Category",
+          "x-ref": {
+            "name": "Category",
+            "constraints": [
+              {
+                "property": "CategoryID",
+                "refProperty": "CategoryID"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "ProductID"
+      ]
+    },
+    "Sample.Models.Northwind.Region": {
+      "properties": {
+        "RegionID": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "Territories",
+              "type": "Sample.Models.Northwind.Territory"
+            }
+          ]
+        },
+        "RegionDescription": {
+          "type": "string"
+        },
+        "Territories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "RegionID"
+      ]
+    },
+    "Sample.Models.Northwind.Supplier": {
+      "properties": {
+        "SupplierID": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "NorthwindProducts",
+              "type": "Sample.Models.Northwind.NorthwindProduct"
+            }
+          ]
+        },
+        "CompanyName": {
+          "type": "string"
+        },
+        "ContactName": {
+          "type": "string"
+        },
+        "ContactTitle": {
+          "type": "string"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "string"
+        },
+        "Fax": {
+          "type": "string"
+        },
+        "HomePage": {
+          "type": "string"
+        },
+        "NorthwindProducts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "SupplierID"
+      ]
+    },
+    "Sample.Models.Northwind.Territory": {
+      "properties": {
+        "TerritoryID": {
+          "type": "string",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "EmployeeTerritories",
+              "type": "Sample.Models.Northwind.EmployeeTerritory"
+            }
+          ]
+        },
+        "TerritoryDescription": {
+          "type": "string"
+        },
+        "RegionID": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Regions",
+            "parentEntityType": "Sample.Models.Northwind.Region",
+            "type": "Region",
+            "principalKey": "RegionID",
+            "name": "Region",
+            "textProperty": "RegionDescription"
+          }
+        },
+        "EmployeeTerritories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+          }
+        },
+        "Region": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Northwind.Region",
+          "x-ref": {
+            "name": "Region",
+            "constraints": [
+              {
+                "property": "RegionID",
+                "refProperty": "RegionID"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "TerritoryID"
+      ]
+    }
+  },
+  "paths": {
+    "/Categories": {
+      "get": {
+        "operationId": "getCategories",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Category",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.Category"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCategory",
+        "parameters": [
+          {
+            "name": "Category",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Category"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Categories({CategoryID})": {
+      "get": {
+        "operationId": "getCategoryById",
+        "parameters": [
+          {
+            "name": "CategoryID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Category.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteCategory",
+        "parameters": [
+          {
+            "name": "CategoryID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCategory",
+        "parameters": [
+          {
+            "name": "CategoryID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Category",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Category.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Category"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Customers": {
+      "get": {
+        "operationId": "getCustomers",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Customer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.Customer"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomer",
+        "parameters": [
+          {
+            "name": "Customer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Customer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Customer"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Customers('{CustomerID}')": {
+      "get": {
+        "operationId": "getCustomerById",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Customer.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Customer"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteCustomer",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomer",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "Customer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Customer.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Customer"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerCustomerDemos": {
+      "get": {
+        "operationId": "getCustomerCustomerDemos",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of CustomerCustomerDemo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomerCustomerDemo",
+        "parameters": [
+          {
+            "name": "CustomerCustomerDemo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerCustomerDemos('{CustomerID}','{CustomerTypeID}')": {
+      "get": {
+        "operationId": "getCustomerCustomerDemoById",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "CustomerTypeID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A CustomerCustomerDemo.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteCustomerCustomerDemo",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "CustomerTypeID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomerCustomerDemo",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "CustomerTypeID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "CustomerCustomerDemo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A CustomerCustomerDemo.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerCustomerDemo"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerDemographics": {
+      "get": {
+        "operationId": "getCustomerDemographics",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of CustomerDemographic",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomerDemographic",
+        "parameters": [
+          {
+            "name": "CustomerDemographic",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerDemographics('{CustomerTypeID}')": {
+      "get": {
+        "operationId": "getCustomerDemographicById",
+        "parameters": [
+          {
+            "name": "CustomerTypeID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A CustomerDemographic.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteCustomerDemographic",
+        "parameters": [
+          {
+            "name": "CustomerTypeID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomerDemographic",
+        "parameters": [
+          {
+            "name": "CustomerTypeID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "CustomerDemographic",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A CustomerDemographic.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.CustomerDemographic"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Employees": {
+      "get": {
+        "operationId": "getEmployees",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Employee",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.Employee"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEmployee",
+        "parameters": [
+          {
+            "name": "Employee",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Employee"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Employee"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Employees({EmployeeID})": {
+      "get": {
+        "operationId": "getEmployeeById",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Employee.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Employee"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteEmployee",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateEmployee",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Employee",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Employee.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Employee"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeTerritories": {
+      "get": {
+        "operationId": "getEmployeeTerritories",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of EmployeeTerritory",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEmployeeTerritory",
+        "parameters": [
+          {
+            "name": "EmployeeTerritory",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeTerritories({EmployeeID},'{TerritoryID}')": {
+      "get": {
+        "operationId": "getEmployeeTerritoryById",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TerritoryID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A EmployeeTerritory.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteEmployeeTerritory",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TerritoryID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateEmployeeTerritory",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TerritoryID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "EmployeeTerritory",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A EmployeeTerritory.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.EmployeeTerritory"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NorthwindOrders": {
+      "get": {
+        "operationId": "getNorthwindOrders",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NorthwindOrder",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createNorthwindOrder",
+        "parameters": [
+          {
+            "name": "NorthwindOrder",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NorthwindOrders({OrderID})": {
+      "get": {
+        "operationId": "getNorthwindOrderById",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A NorthwindOrder.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteNorthwindOrder",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateNorthwindOrder",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "NorthwindOrder",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A NorthwindOrder.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrder"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NorthwindOrderDetails": {
+      "get": {
+        "operationId": "getNorthwindOrderDetails",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NorthwindOrderDetail",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createNorthwindOrderDetail",
+        "parameters": [
+          {
+            "name": "NorthwindOrderDetail",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NorthwindOrderDetails({OrderID},{ProductID})": {
+      "get": {
+        "operationId": "getNorthwindOrderDetailById",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "ProductID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A NorthwindOrderDetail.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteNorthwindOrderDetail",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "ProductID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateNorthwindOrderDetail",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "ProductID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "NorthwindOrderDetail",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A NorthwindOrderDetail.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindOrderDetail"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NorthwindProducts": {
+      "get": {
+        "operationId": "getNorthwindProducts",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NorthwindProduct",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createNorthwindProduct",
+        "parameters": [
+          {
+            "name": "NorthwindProduct",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NorthwindProducts({ProductID})": {
+      "get": {
+        "operationId": "getNorthwindProductById",
+        "parameters": [
+          {
+            "name": "ProductID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A NorthwindProduct.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteNorthwindProduct",
+        "parameters": [
+          {
+            "name": "ProductID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateNorthwindProduct",
+        "parameters": [
+          {
+            "name": "ProductID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "NorthwindProduct",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A NorthwindProduct.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.NorthwindProduct"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Regions": {
+      "get": {
+        "operationId": "getRegions",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Region",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.Region"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRegion",
+        "parameters": [
+          {
+            "name": "Region",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Region"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Region"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Regions({RegionID})": {
+      "get": {
+        "operationId": "getRegionById",
+        "parameters": [
+          {
+            "name": "RegionID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Region.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Region"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteRegion",
+        "parameters": [
+          {
+            "name": "RegionID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateRegion",
+        "parameters": [
+          {
+            "name": "RegionID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Region",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Region"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Region.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Region"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Suppliers": {
+      "get": {
+        "operationId": "getSuppliers",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Supplier",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.Supplier"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSupplier",
+        "parameters": [
+          {
+            "name": "Supplier",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Supplier"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Supplier"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Suppliers({SupplierID})": {
+      "get": {
+        "operationId": "getSupplierById",
+        "parameters": [
+          {
+            "name": "SupplierID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Supplier.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Supplier"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteSupplier",
+        "parameters": [
+          {
+            "name": "SupplierID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSupplier",
+        "parameters": [
+          {
+            "name": "SupplierID",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Supplier",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Supplier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Supplier.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Supplier"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Territories": {
+      "get": {
+        "operationId": "getTerritories",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Territory",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTerritory",
+        "parameters": [
+          {
+            "name": "Territory",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Territories('{TerritoryID}')": {
+      "get": {
+        "operationId": "getTerritoryById",
+        "parameters": [
+          {
+            "name": "TerritoryID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Territory.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteTerritory",
+        "parameters": [
+          {
+            "name": "TerritoryID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateTerritory",
+        "parameters": [
+          {
+            "name": "TerritoryID",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "Territory",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Territory.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Northwind.Territory"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

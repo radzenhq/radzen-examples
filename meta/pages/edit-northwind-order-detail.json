@@ -1,0 +1,256 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${northwindorderdetail}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update NorthwindOrderDetail",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateNorthwindOrderDetail",
+                        "parameters": [
+                          {
+                            "name": "OrderID",
+                            "value": "${parameters.OrderID}"
+                          },
+                          {
+                            "name": "ProductID",
+                            "value": "${parameters.ProductID}"
+                          },
+                          {
+                            "name": "NorthwindOrderDetail",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getNorthwindOrders",
+                        "condition": "event.property == 'OrderID'",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "${event.top}"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "${event.skip}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "true"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getNorthwindOrdersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getNorthwindOrdersCount",
+                            "type": "set",
+                            "value": "result['@odata.count']"
+                          }
+                        ],
+                        "type": "invoke"
+                      },
+                      {
+                        "name": "Northwind.getNorthwindProducts",
+                        "condition": "event.property == 'ProductID'",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "${event.top}"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "${event.skip}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "true"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getNorthwindProductsResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getNorthwindProductsCount",
+                            "type": "set",
+                            "value": "result['@odata.count']"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "UnitPrice",
+                      "required": [],
+                      "title": "Unit Price",
+                      "type": "number",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Quantity",
+                      "required": [],
+                      "title": "Quantity",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Discount",
+                      "required": [],
+                      "title": "Discount",
+                      "type": "number",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getNorthwindOrderDetailById",
+        "parameters": [
+          {
+            "name": "OrderID",
+            "value": "${parameters.OrderID}"
+          },
+          {
+            "name": "ProductID",
+            "value": "${parameters.ProductID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "northwindorderdetail",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getNorthwindOrders",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "(<any>this.form0.fields.find(f => f.property == 'OrderID')).pageSize"
+          },
+          {
+            "name": "$skip",
+            "value": "0"
+          },
+          {
+            "name": "$count",
+            "value": "true"
+          }
+        ],
+        "then": [
+          {
+            "name": "getNorthwindOrdersResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getNorthwindOrdersCount",
+            "type": "set",
+            "value": "result['@odata.count']"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getNorthwindProducts",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "(<any>this.form0.fields.find(f => f.property == 'ProductID')).pageSize"
+          },
+          {
+            "name": "$skip",
+            "value": "0"
+          },
+          {
+            "name": "$count",
+            "value": "true"
+          }
+        ],
+        "then": [
+          {
+            "name": "getNorthwindProductsResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getNorthwindProductsCount",
+            "type": "set",
+            "value": "result['@odata.count']"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Northwind Order Detail",
+  "layout": "Main"
+}

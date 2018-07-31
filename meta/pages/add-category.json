@@ -1,0 +1,81 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "loadData": [],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Category!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createCategory",
+                        "parameters": [
+                          {
+                            "name": "Category",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "categories",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "CategoryName",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Description",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Description",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "layout": "Main",
+  "name": "Add Category"
+}

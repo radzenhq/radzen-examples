@@ -1,0 +1,280 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new NorthwindProduct!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createNorthwindProduct",
+                        "parameters": [
+                          {
+                            "name": "NorthwindProduct",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "northwind-products",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getSuppliers",
+                        "condition": "event.property == 'SupplierID'",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "${event.top}"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "${event.skip}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "true"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getSuppliersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getSuppliersCount",
+                            "type": "set",
+                            "value": "result['@odata.count']"
+                          }
+                        ],
+                        "type": "invoke"
+                      },
+                      {
+                        "name": "Northwind.getCategories",
+                        "condition": "event.property == 'CategoryID'",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "${event.top}"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "${event.skip}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "true"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getCategoriesResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getCategoriesCount",
+                            "type": "set",
+                            "value": "result['@odata.count']"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "ProductName",
+                      "required": false,
+                      "title": "Product Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getSuppliersResult}",
+                      "property": "SupplierID",
+                      "required": false,
+                      "textProperty": "CompanyName",
+                      "title": "Supplier",
+                      "type": "lookuppopup",
+                      "valueProperty": "SupplierID",
+                      "placeholder": "Choose Supplier",
+                      "count": "${getSuppliersCount}",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getCategoriesResult}",
+                      "property": "CategoryID",
+                      "required": false,
+                      "textProperty": "CategoryName",
+                      "title": "Category",
+                      "type": "lookuppopup",
+                      "valueProperty": "CategoryID",
+                      "placeholder": "Choose Category",
+                      "count": "${getCategoriesCount}",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "QuantityPerUnit",
+                      "required": false,
+                      "title": "Quantity Per Unit",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitPrice",
+                      "required": false,
+                      "title": "Unit Price",
+                      "type": "number",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitsInStock",
+                      "required": false,
+                      "title": "Units In Stock",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitsOnOrder",
+                      "required": false,
+                      "title": "Units On Order",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ReorderLevel",
+                      "required": false,
+                      "title": "Reorder Level",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Discontinued",
+                      "required": false,
+                      "title": "Discontinued",
+                      "type": "boolean",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getSuppliers",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "(<any>this.form0.fields.find(f => f.property == 'SupplierID')).pageSize"
+          },
+          {
+            "name": "$skip",
+            "value": "0"
+          },
+          {
+            "name": "$count",
+            "value": "true"
+          }
+        ],
+        "then": [
+          {
+            "name": "getSuppliersResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getSuppliersCount",
+            "type": "set",
+            "value": "result['@odata.count']"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getCategories",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "(<any>this.form0.fields.find(f => f.property == 'CategoryID')).pageSize"
+          },
+          {
+            "name": "$skip",
+            "value": "0"
+          },
+          {
+            "name": "$count",
+            "value": "true"
+          }
+        ],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getCategoriesCount",
+            "type": "set",
+            "value": "result['@odata.count']"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Add Northwind Product",
+  "layout": "Main"
+}

@@ -1,0 +1,179 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Employee!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createEmployee",
+                        "parameters": [
+                          {
+                            "name": "Employee",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "employees",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": []
+                  },
+                  "fields": [
+                    {
+                      "property": "LastName",
+                      "required": false,
+                      "title": "Last Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "FirstName",
+                      "required": false,
+                      "title": "First Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Title",
+                      "required": false,
+                      "title": "Title",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "TitleOfCourtesy",
+                      "required": false,
+                      "title": "Title Of Courtesy",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "BirthDate",
+                      "required": false,
+                      "title": "Birth Date",
+                      "type": "date",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "HireDate",
+                      "required": false,
+                      "title": "Hire Date",
+                      "type": "date",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Address",
+                      "required": false,
+                      "title": "Address",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "City",
+                      "required": false,
+                      "title": "City",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Region",
+                      "required": false,
+                      "title": "Region",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "required": false,
+                      "title": "Postal Code",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Country",
+                      "required": false,
+                      "title": "Country",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "HomePhone",
+                      "required": false,
+                      "title": "Home Phone",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Extension",
+                      "required": false,
+                      "title": "Extension",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Photo",
+                      "required": false,
+                      "title": "Photo",
+                      "type": "file",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Notes",
+                      "required": false,
+                      "title": "Notes",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "PhotoPath",
+                      "required": false,
+                      "title": "Photo Path",
+                      "type": "string",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Employee",
+  "layout": "Main"
+}

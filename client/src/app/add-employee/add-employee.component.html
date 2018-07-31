@@ -1,0 +1,40 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="LastName" [required]="false" title="Last Name" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="FirstName" [required]="false" title="First Name" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Title" [required]="false" title="Title" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="TitleOfCourtesy" [required]="false" title="Title Of Courtesy" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-date-form-field property="BirthDate" [required]="false" title="Birth Date" requiredText="is required" type="date">
+        </rz-date-form-field>
+        <rz-date-form-field property="HireDate" [required]="false" title="Hire Date" requiredText="is required" type="date">
+        </rz-date-form-field>
+        <rz-string-form-field property="Address" [required]="false" title="Address" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="City" [required]="false" title="City" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Region" [required]="false" title="Region" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="PostalCode" [required]="false" title="Postal Code" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Country" [required]="false" title="Country" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="HomePhone" [required]="false" title="Home Phone" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Extension" [required]="false" title="Extension" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-file-form-field property="Photo" [required]="false" title="Photo" requiredText="is required" type="file">
+        </rz-file-form-field>
+        <rz-string-form-field property="Notes" [required]="false" title="Notes" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="PhotoPath" [required]="false" title="Photo Path" requiredText="is required" type="string">
+        </rz-string-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

@@ -1,0 +1,177 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${territory}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Territory",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateTerritory",
+                        "parameters": [
+                          {
+                            "name": "TerritoryID",
+                            "value": "${parameters.TerritoryID}"
+                          },
+                          {
+                            "name": "Territory",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getRegions",
+                        "condition": "event.property == 'RegionID'",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "${event.top}"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "${event.skip}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "true"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getRegionsResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getRegionsCount",
+                            "type": "set",
+                            "value": "result['@odata.count']"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "TerritoryDescription",
+                      "required": false,
+                      "title": "Territory Description",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getRegionsResult}",
+                      "property": "RegionID",
+                      "required": false,
+                      "textProperty": "RegionDescription",
+                      "title": "Region",
+                      "type": "lookuppopup",
+                      "valueProperty": "RegionID",
+                      "placeholder": "Choose Region",
+                      "count": "${getRegionsCount}",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getTerritoryById",
+        "parameters": [
+          {
+            "name": "TerritoryID",
+            "value": "${parameters.TerritoryID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "territory",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getRegions",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "(<any>this.form0.fields.find(f => f.property == 'RegionID')).pageSize"
+          },
+          {
+            "name": "$skip",
+            "value": "0"
+          },
+          {
+            "name": "$count",
+            "value": "true"
+          }
+        ],
+        "then": [
+          {
+            "name": "getRegionsResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getRegionsCount",
+            "type": "set",
+            "value": "result['@odata.count']"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Territory",
+  "layout": "Main"
+}

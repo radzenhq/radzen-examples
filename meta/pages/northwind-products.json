@@ -1,0 +1,245 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Products",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "addText": "Add",
+                  "allowAdd": true,
+                  "allowDelete": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "format": "int32",
+                      "property": "ProductID",
+                      "title": "Product ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "Supplier.CompanyName",
+                      "format": "int32",
+                      "property": "SupplierID",
+                      "sortProperty": "Supplier.CompanyName",
+                      "template": "${data.Supplier?.CompanyName}",
+                      "title": "Supplier",
+                      "type": "integer"
+                    },
+                    {
+                      "filterProperty": "Category.CategoryName",
+                      "format": "int32",
+                      "property": "CategoryID",
+                      "sortProperty": "Category.CategoryName",
+                      "template": "${data.Category?.CategoryName}",
+                      "title": "Category",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "QuantityPerUnit",
+                      "title": "Quantity Per Unit",
+                      "type": "string"
+                    },
+                    {
+                      "format": "double",
+                      "property": "UnitPrice",
+                      "title": "Unit Price",
+                      "type": "number"
+                    },
+                    {
+                      "format": "int32",
+                      "property": "UnitsInStock",
+                      "title": "Units In Stock",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "int32",
+                      "property": "UnitsOnOrder",
+                      "title": "Units On Order",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "int32",
+                      "property": "ReorderLevel",
+                      "title": "Reorder Level",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "Discontinued",
+                      "title": "Discontinued",
+                      "type": "boolean"
+                    }
+                  ],
+                  "count": "${getNorthwindProductsCount}",
+                  "data": "${getNorthwindProductsResult}",
+                  "emptyText": "No records to display.",
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-northwind-product",
+                        "title": "Add Product",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete NorthwindProduct",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteNorthwindProduct",
+                        "parameters": [
+                          {
+                            "name": "ProductID",
+                            "value": "${event.ProductID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "NorthwindProduct deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getNorthwindProducts",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Supplier,Category"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Supplier,Category"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getNorthwindProductsResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getNorthwindProductsCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "ProductID",
+                            "value": "${event.ProductID}"
+                          }
+                        ],
+                        "path": "edit-northwind-product",
+                        "title": "Edit Product",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getNorthwindProducts",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          },
+          {
+            "name": "$expand",
+            "value": "Supplier,Category"
+          }
+        ],
+        "then": [
+          {
+            "name": "getNorthwindProductsResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getNorthwindProductsCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Northwind Products"
+}

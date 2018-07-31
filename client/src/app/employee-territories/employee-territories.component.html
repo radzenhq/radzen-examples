@@ -1,0 +1,20 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Employee Territories">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeeTerritoriesCount" [data]="getEmployeeTerritoriesResult" emptyText="No records to display." addText="Add" (loadData)="grid0LoadData($event)" (delete)="grid0Delete($event)" (add)="grid0Add($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column format="int32" property="EmployeeID" sortProperty="Employee.LastName" filterProperty="Employee.LastName" title="Employee" type="integer">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Employee?.LastName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="TerritoryID" sortProperty="Territory.TerritoryID" filterProperty="Territory.TerritoryID" title="Territory" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Territory?.TerritoryID}}
+          </ng-template>
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

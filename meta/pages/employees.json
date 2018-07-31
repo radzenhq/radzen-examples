@@ -1,0 +1,263 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Employees"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowDelete": true,
+                  "allowAdd": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getEmployeesCount}",
+                  "data": "${getEmployeesResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getEmployees",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getEmployeesResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getEmployeesCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Employee",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteEmployee",
+                        "parameters": [
+                          {
+                            "name": "EmployeeID",
+                            "value": "${event.EmployeeID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Employee deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "add": [
+                      {
+                        "path": "add-employee",
+                        "type": "popup"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "EmployeeID",
+                            "value": "${event.EmployeeID}"
+                          }
+                        ],
+                        "path": "edit-employee",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "format": "int32",
+                      "property": "EmployeeID",
+                      "title": "Employee ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "LastName",
+                      "title": "Last Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "FirstName",
+                      "title": "First Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Title",
+                      "title": "Title",
+                      "type": "string"
+                    },
+                    {
+                      "property": "TitleOfCourtesy",
+                      "title": "Title Of Courtesy",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "BirthDate",
+                      "template": "${data.BirthDate | utcDate}",
+                      "title": "Birth Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "HireDate",
+                      "template": "${data.HireDate | utcDate}",
+                      "title": "Hire Date",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Address",
+                      "title": "Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Region",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "title": "Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "HomePhone",
+                      "title": "Home Phone",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Extension",
+                      "title": "Extension",
+                      "type": "string"
+                    },
+                    {
+                      "format": "base64",
+                      "property": "Photo",
+                      "title": "Photo",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Notes",
+                      "title": "Notes",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PhotoPath",
+                      "title": "Photo Path",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "emptyText": "No records to display.",
+                  "addText": "Add"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getEmployeesCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Employees",
+  "layout": "Main"
+}

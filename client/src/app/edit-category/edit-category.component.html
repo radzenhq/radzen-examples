@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="category" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="CategoryName" [required]="false" requiredText="is required" title="Category Name" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Description" [required]="false" requiredText="is required" title="Description" type="string">
+        </rz-string-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>
