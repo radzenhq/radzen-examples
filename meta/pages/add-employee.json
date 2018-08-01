@@ -1,14 +1,10 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -19,6 +15,7 @@
                         "type": "back"
                       }
                     ],
+                    "loadData": [],
                     "submit": [
                       {
                         "error": [
@@ -44,136 +41,125 @@
                         ],
                         "type": "invoke"
                       }
-                    ],
-                    "loadData": []
+                    ]
                   },
                   "fields": [
                     {
                       "property": "LastName",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Last Name",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "FirstName",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "First Name",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Title",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Title",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "TitleOfCourtesy",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Title Of Courtesy",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "BirthDate",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Birth Date",
-                      "type": "date",
-                      "requiredText": "is required"
+                      "type": "date"
                     },
                     {
                       "property": "HireDate",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Hire Date",
-                      "type": "date",
-                      "requiredText": "is required"
+                      "type": "date"
                     },
                     {
                       "property": "Address",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Address",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "City",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "City",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Region",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Region",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "PostalCode",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Postal Code",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Country",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Country",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "HomePhone",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Home Phone",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Extension",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Extension",
-                      "type": "string",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "property": "Photo",
-                      "required": false,
-                      "title": "Photo",
-                      "type": "file",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Notes",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Notes",
-                      "type": "string",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "property": "PhotoPath",
-                      "required": false,
-                      "title": "Photo Path",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     }
                   ],
                   "name": "form0",
                   "type": "form"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
     "load": []
   },
-  "name": "Add Employee",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Add Employee"
 }

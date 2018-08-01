@@ -28,7 +28,7 @@
                       "property": "OrderID",
                       "sortProperty": "NorthwindOrder.CustomerID",
                       "template": "${data.NorthwindOrder?.CustomerID}",
-                      "title": "Northwind Order",
+                      "title": "Order",
                       "type": "integer"
                     },
                     {
@@ -37,7 +37,7 @@
                       "property": "ProductID",
                       "sortProperty": "NorthwindProduct.ProductName",
                       "template": "${data.NorthwindProduct?.ProductName}",
-                      "title": "Northwind Product",
+                      "title": "Product",
                       "type": "integer"
                     },
                     {

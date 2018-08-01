@@ -96,15 +96,8 @@ export class EmployeesGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0LoadData(event: any) {
-    this.northwind.getEmployees(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
-    .subscribe((result: any) => {
-      this.getEmployeesResult = result.value;
-
-      this.getEmployeesCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
-    }, (result: any) => {
-
-    });
+  grid0Add(event: any) {
+    this.dialogService.open(AddEmployeeComponent, { parameters: {}, title: 'Add Employee' });
   }
 
   grid0Delete(event: any) {
@@ -116,8 +109,15 @@ export class EmployeesGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0Add(event: any) {
-    this.dialogService.open(AddEmployeeComponent, { parameters: {}, title: 'Add Employee' });
+  grid0LoadData(event: any) {
+    this.northwind.getEmployees(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    .subscribe((result: any) => {
+      this.getEmployeesResult = result.value;
+
+      this.getEmployeesCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
+    }, (result: any) => {
+
+    });
   }
 
   grid0RowSelect(event: any) {
