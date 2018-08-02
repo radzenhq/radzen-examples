@@ -16,6 +16,7 @@ import { LabelModule } from '@radzen/angular/dist/label';
 import { SidebarModule } from '@radzen/angular/dist/sidebar';
 import { PanelMenuModule } from '@radzen/angular/dist/panelmenu';
 import { FooterModule } from '@radzen/angular/dist/footer';
+import { LinkModule } from '@radzen/angular/dist/link';
 import { ContentModule } from '@radzen/angular/dist/content';
 import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
@@ -177,6 +178,7 @@ export const AppImports = [
   SidebarModule,
   PanelMenuModule,
   FooterModule,
+  LinkModule,
   ContentModule,
   HeadingModule,
   GridModule,

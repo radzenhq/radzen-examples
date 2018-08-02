@@ -17,6 +17,7 @@ import { ContentContainerComponent } from '@radzen/angular/dist/content-containe
 import { SidebarComponent } from '@radzen/angular/dist/sidebar';
 import { PanelMenuComponent } from '@radzen/angular/dist/panelmenu';
 import { FooterComponent } from '@radzen/angular/dist/footer';
+import { LinkComponent } from '@radzen/angular/dist/link';
 
 
 export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
@@ -29,7 +30,7 @@ export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('sidebar0') sidebar0: SidebarComponent;
   @ViewChild('panelmenu0') panelmenu0: PanelMenuComponent;
   @ViewChild('footer0') footer0: FooterComponent;
-  @ViewChild('footerText') footerText: LabelComponent;
+  @ViewChild('link0') link0: LinkComponent;
 
   router: Router;
 

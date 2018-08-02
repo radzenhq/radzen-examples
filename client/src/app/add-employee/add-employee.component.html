@@ -1,7 +1,7 @@
 <rz-content #content1 container="main">
   <div class="row">
     <div class="col-md-12">
-      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+      <rz-form #form0 [columns]="2" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
         <rz-string-form-field property="LastName" [required]="true" requiredText="is required" title="Last Name" type="string">
         </rz-string-form-field>
         <rz-string-form-field property="FirstName" [required]="true" requiredText="is required" title="First Name" type="string">
