@@ -1,14 +1,6 @@
 <rz-content #content1 container="main">
-  <div class="row">
-    <div class="col-md-1">
-      <rz-button #button0 text="Region" (click)="button0Click($event)">
-      </rz-button>
-    </div>
-    <div class="col-md-11">
-      <rz-heading #pageTitle size="H1" text="Territories by Region: {{territory?.Region?.RegionDescription}}">
-      </rz-heading>
-    </div>
-  </div>
+  <rz-heading #pageTitle size="H1" text="Territories by Region: {{territory?.Region?.RegionDescription}}">
+  </rz-heading>
   <div class="row">
     <div class="col-md-12">
       <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getTerritoriesCount" [data]="getTerritoriesResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">

@@ -61,15 +61,15 @@
               "text": "Employees"
             },
             {
-              "path": "northwind-orders",
+              "path": "orders",
               "text": "Orders"
             },
             {
-              "path": "northwind-order-details",
+              "path": "order-details",
               "text": "Order Details"
             },
             {
-              "path": "northwind-products",
+              "path": "products",
               "text": "Products"
             },
             {

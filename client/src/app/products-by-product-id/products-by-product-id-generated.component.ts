@@ -12,8 +12,8 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { AddNorthwindProductComponent } from '../add-northwind-product/add-northwind-product.component';
-import { EditNorthwindProductComponent } from '../edit-northwind-product/edit-northwind-product.component';
+import { AddProductComponent } from '../add-product/add-product.component';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 
 import { NorthwindService } from '../northwind.service';
 
@@ -101,7 +101,7 @@ export class ProductsByProductIdGenerated implements AfterViewInit, OnInit, OnDe
   }
 
   grid0Add(event: any) {
-    this.dialogService.open(AddNorthwindProductComponent, { parameters: {}, title: 'Add Product' });
+    this.dialogService.open(AddProductComponent, { parameters: {}, title: 'Add Product' });
   }
 
   grid0Delete(event: any) {
@@ -125,6 +125,6 @@ export class ProductsByProductIdGenerated implements AfterViewInit, OnInit, OnDe
   }
 
   grid0RowSelect(event: any) {
-    this.dialogService.open(EditNorthwindProductComponent, { parameters: {ProductID: event.ProductID}, title: 'Edit Product' });
+    this.dialogService.open(EditProductComponent, { parameters: {ProductID: event.ProductID}, title: 'Edit Product' });
   }
 }

@@ -1,14 +1,10 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -19,39 +15,10 @@
                         "type": "back"
                       }
                     ],
-                    "submit": [
-                      {
-                        "error": [
-                          {
-                            "detail": "Unable to update Territory",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "Northwind.updateTerritory",
-                        "parameters": [
-                          {
-                            "name": "TerritoryID",
-                            "value": "${parameters.TerritoryID}"
-                          },
-                          {
-                            "name": "Territory",
-                            "value": "${event}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "type": "back"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
                     "loadData": [
                       {
-                        "name": "Northwind.getRegions",
                         "condition": "event.property == 'RegionID'",
+                        "name": "Northwind.getRegions",
                         "parameters": [
                           {
                             "name": "$top",
@@ -88,37 +55,70 @@
                         ],
                         "type": "invoke"
                       }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Territory",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateTerritory",
+                        "parameters": [
+                          {
+                            "name": "TerritoryID",
+                            "value": "${parameters.TerritoryID}"
+                          },
+                          {
+                            "name": "Territory",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
                     ]
                   },
                   "fields": [
                     {
                       "property": "TerritoryDescription",
-                      "required": false,
+                      "required": true,
+                      "requiredText": "is required",
                       "title": "Territory Description",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
+                      "count": "${getRegionsCount}",
                       "data": "${getRegionsResult}",
+                      "placeholder": "Choose Region",
                       "property": "RegionID",
-                      "required": false,
+                      "required": true,
+                      "requiredText": "is required",
                       "textProperty": "RegionDescription",
                       "title": "Region",
                       "type": "lookuppopup",
-                      "valueProperty": "RegionID",
-                      "placeholder": "Choose Region",
-                      "count": "${getRegionsCount}",
-                      "requiredText": "is required"
+                      "valueProperty": "RegionID"
                     }
                   ],
                   "name": "form0",
                   "type": "form"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -172,6 +172,6 @@
       }
     ]
   },
-  "name": "Edit Territory",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Edit Territory"
 }

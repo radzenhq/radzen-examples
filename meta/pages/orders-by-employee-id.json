@@ -3,53 +3,13 @@
     {
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-1 justify-content-start align-items-center d-flex",
-              "components": [
-                {
-                  "events": {
-                    "click": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "EmployeeID",
-                            "value": "${parameters.EmployeeID}"
-                          }
-                        ],
-                        "path": "employees-by-employee-id",
-                        "type": "navigate"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "button1",
-                  "text": "Employee",
-                  "type": "button"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-11 justify-content-start align-items-center d-flex",
-              "components": [
-                {
-                  "name": "pageTitle",
-                  "size": "H1",
-                  "style": {
-                    "marginLeft": "10px"
-                  },
-                  "text": "Orders by Employee: ${order.Employee.FirstName} ${order.Employee.LastName}",
-                  "type": "heading"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "type": "row"
+          "name": "pageTitle",
+          "size": "H1",
+          "style": {
+            "marginLeft": "10px"
+          },
+          "text": "Orders by Employee: ${order.Employee.FirstName} ${order.Employee.LastName}",
+          "type": "heading"
         },
         {
           "components": [
@@ -163,7 +123,7 @@
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-order",
+                        "path": "add-order",
                         "title": "Add Order",
                         "type": "popup"
                       }
@@ -252,7 +212,7 @@
                             "value": "${event.OrderID}"
                           }
                         ],
-                        "path": "edit-northwind-order",
+                        "path": "edit-order",
                         "title": "Edit Order",
                         "type": "popup"
                       }

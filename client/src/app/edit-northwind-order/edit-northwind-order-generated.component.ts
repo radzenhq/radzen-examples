@@ -131,7 +131,7 @@ export class EditNorthwindOrderGenerated implements AfterViewInit, OnInit, OnDes
         this._location.back();
       }
     }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to update NorthwindOrder` });
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to update Order` });
     });
   }
 

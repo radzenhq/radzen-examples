@@ -100,18 +100,6 @@ export class AddTerritoryGenerated implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  form0Submit(event: any) {
-    this.northwind.createTerritory(event)
-    .subscribe((result: any) => {
-      if (this.dialogRef) {
-        this.dialogRef.close();
-      }
-      this.router.navigate(['territories']);
-    }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new Territory!` });
-    });
-  }
-
   form0LoadData(event: any) {
     if (event.property == 'RegionID') {
           this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
@@ -123,5 +111,17 @@ export class AddTerritoryGenerated implements AfterViewInit, OnInit, OnDestroy {
     
       });
     }
+  }
+
+  form0Submit(event: any) {
+    this.northwind.createTerritory(event)
+    .subscribe((result: any) => {
+      if (this.dialogRef) {
+        this.dialogRef.close();
+      }
+      this.router.navigate(['territories']);
+    }, (result: any) => {
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new Territory!` });
+    });
   }
 }

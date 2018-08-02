@@ -10,18 +10,16 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
-import { ButtonComponent } from '@radzen/angular/dist/button';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { AddNorthwindOrderDetailComponent } from '../add-northwind-order-detail/add-northwind-order-detail.component';
-import { EditNorthwindOrderDetailComponent } from '../edit-northwind-order-detail/edit-northwind-order-detail.component';
+import { AddOrderDetailComponent } from '../add-order-detail/add-order-detail.component';
+import { EditOrderDetailComponent } from '../edit-order-detail/edit-order-detail.component';
 
 import { NorthwindService } from '../northwind.service';
 
 export class OrderDetailsByOrderIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
-  @ViewChild('button1') button1: ButtonComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('grid0') grid0: GridComponent;
 
@@ -98,15 +96,8 @@ export class OrderDetailsByOrderIdGenerated implements AfterViewInit, OnInit, On
     });
   }
 
-  button1Click(event: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['orders-by-order-id', this.parameters.OrderID]);
-  }
-
   grid0Add(event: any) {
-    this.dialogService.open(AddNorthwindOrderDetailComponent, { parameters: {}, title: 'Add Order Detail' });
+    this.dialogService.open(AddOrderDetailComponent, { parameters: {}, title: 'Add Order Detail' });
   }
 
   grid0Delete(event: any) {
@@ -130,6 +121,6 @@ export class OrderDetailsByOrderIdGenerated implements AfterViewInit, OnInit, On
   }
 
   grid0RowSelect(event: any) {
-    this.dialogService.open(EditNorthwindOrderDetailComponent, { parameters: {OrderID: event.OrderID, ProductID: event.ProductID}, title: 'Edit Order Detail' });
+    this.dialogService.open(EditOrderDetailComponent, { parameters: {OrderID: event.OrderID, ProductID: event.ProductID}, title: 'Edit Order Detail' });
   }
 }

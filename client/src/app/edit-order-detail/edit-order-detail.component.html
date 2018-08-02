@@ -1,0 +1,18 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="northwindorderdetail" (cancel)="form0Cancel($event)" (loadData)="form0LoadData($event)" (submit)="form0Submit($event)">
+        <rz-lookuppopup-form-field [count]="getOrdersCount" [data]="getOrdersResult" [disabled]="true" placeholder="Choose Order" property="OrderID" [required]="true" requiredText="is required" textProperty="CustomerID" title="Order" valueProperty="OrderID" type="lookuppopup">
+        </rz-lookuppopup-form-field>
+        <rz-lookuppopup-form-field [count]="getProductsCount" [data]="getProductsResult" [disabled]="true" placeholder="Choose Product" property="ProductID" [required]="true" requiredText="is required" textProperty="ProductName" title="Product" valueProperty="ProductID" type="lookuppopup">
+        </rz-lookuppopup-form-field>
+        <rz-number-form-field property="UnitPrice" requiredText="is required" title="Unit Price" type="number">
+        </rz-number-form-field>
+        <rz-integer-form-field property="Quantity" requiredText="is required" title="Quantity" type="integer">
+        </rz-integer-form-field>
+        <rz-number-form-field property="Discount" requiredText="is required" title="Discount" type="number">
+        </rz-number-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

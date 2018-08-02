@@ -13,8 +13,8 @@ import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
 import { ButtonComponent } from '@radzen/angular/dist/button';
-import { AddNorthwindOrderComponent } from '../add-northwind-order/add-northwind-order.component';
-import { EditNorthwindOrderComponent } from '../edit-northwind-order/edit-northwind-order.component';
+import { AddOrderComponent } from '../add-order/add-order.component';
+import { EditOrderComponent } from '../edit-order/edit-order.component';
 
 import { NorthwindService } from '../northwind.service';
 
@@ -98,7 +98,7 @@ export class OrdersByOrderIdGenerated implements AfterViewInit, OnInit, OnDestro
   }
 
   grid0Add(event: any) {
-    this.dialogService.open(AddNorthwindOrderComponent, { parameters: {}, title: 'Add Order' });
+    this.dialogService.open(AddOrderComponent, { parameters: {}, title: 'Add Order' });
   }
 
   grid0Delete(event: any) {
@@ -122,10 +122,10 @@ export class OrdersByOrderIdGenerated implements AfterViewInit, OnInit, OnDestro
   }
 
   grid0RowSelect(event: any) {
-    this.dialogService.open(EditNorthwindOrderComponent, { parameters: {OrderID: event.OrderID}, title: 'Edit Order' });
+    this.dialogService.open(EditOrderComponent, { parameters: {OrderID: event.OrderID}, title: 'Edit Order' });
   }
 
-  button1Click(event: any, data: any) {
+  customersButtonClick(event: any, data: any) {
     if (this.dialogRef) {
       this.dialogRef.close();
     }

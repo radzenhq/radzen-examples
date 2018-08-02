@@ -10,18 +10,17 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
-import { ButtonComponent } from '@radzen/angular/dist/button';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { AddNorthwindOrderComponent } from '../add-northwind-order/add-northwind-order.component';
-import { EditNorthwindOrderComponent } from '../edit-northwind-order/edit-northwind-order.component';
+import { ButtonComponent } from '@radzen/angular/dist/button';
+import { AddOrderComponent } from '../add-order/add-order.component';
+import { EditOrderComponent } from '../edit-order/edit-order.component';
 
 import { NorthwindService } from '../northwind.service';
 
 export class OrdersByCustomerIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
-  @ViewChild('button1') button1: ButtonComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('grid0') grid0: GridComponent;
 
@@ -102,15 +101,8 @@ export class OrdersByCustomerIdGenerated implements AfterViewInit, OnInit, OnDes
     });
   }
 
-  button1Click(event: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['customers-by-customer-id', this.parameters.CustomerID]);
-  }
-
   grid0Add(event: any) {
-    this.dialogService.open(AddNorthwindOrderComponent, { parameters: {}, title: 'Add Order' });
+    this.dialogService.open(AddOrderComponent, { parameters: {}, title: 'Add Order' });
   }
 
   grid0Delete(event: any) {
@@ -134,7 +126,14 @@ export class OrdersByCustomerIdGenerated implements AfterViewInit, OnInit, OnDes
   }
 
   grid0RowSelect(event: any) {
-    this.dialogService.open(EditNorthwindOrderComponent, { parameters: {OrderID: event.OrderID}, title: 'Edit Order' });
+    this.dialogService.open(EditOrderComponent, { parameters: {OrderID: event.OrderID}, title: 'Edit Order' });
+  }
+
+  employeesButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['employees-by-employee-id', data.EmployeeID]);
   }
 
   button0Click(event: any, data: any) {

@@ -21,15 +21,15 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { EmployeeTerritoriesComponent } from './employee-territories/employee-territories.component';
 import { AddEmployeeTerritoryComponent } from './add-employee-territory/add-employee-territory.component';
 import { EditEmployeeTerritoryComponent } from './edit-employee-territory/edit-employee-territory.component';
-import { NorthwindOrdersComponent } from './northwind-orders/northwind-orders.component';
-import { AddNorthwindOrderComponent } from './add-northwind-order/add-northwind-order.component';
-import { EditNorthwindOrderComponent } from './edit-northwind-order/edit-northwind-order.component';
-import { NorthwindOrderDetailsComponent } from './northwind-order-details/northwind-order-details.component';
-import { AddNorthwindOrderDetailComponent } from './add-northwind-order-detail/add-northwind-order-detail.component';
-import { EditNorthwindOrderDetailComponent } from './edit-northwind-order-detail/edit-northwind-order-detail.component';
-import { NorthwindProductsComponent } from './northwind-products/northwind-products.component';
-import { AddNorthwindProductComponent } from './add-northwind-product/add-northwind-product.component';
-import { EditNorthwindProductComponent } from './edit-northwind-product/edit-northwind-product.component';
+import { OrdersComponent } from './orders/orders.component';
+import { AddOrderComponent } from './add-order/add-order.component';
+import { EditOrderComponent } from './edit-order/edit-order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { AddOrderDetailComponent } from './add-order-detail/add-order-detail.component';
+import { EditOrderDetailComponent } from './edit-order-detail/edit-order-detail.component';
+import { ProductsComponent } from './products/products.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { RegionsComponent } from './regions/regions.component';
 import { AddRegionComponent } from './add-region/add-region.component';
 import { EditRegionComponent } from './edit-region/edit-region.component';
@@ -132,40 +132,40 @@ export const routes: Routes = [
         component: EditEmployeeTerritoryComponent
       },
       {
-        path: 'northwind-orders',
-        component: NorthwindOrdersComponent
+        path: 'orders',
+        component: OrdersComponent
       },
       {
-        path: 'add-northwind-order',
-        component: AddNorthwindOrderComponent
+        path: 'add-order',
+        component: AddOrderComponent
       },
       {
-        path: 'edit-northwind-order/:OrderID',
-        component: EditNorthwindOrderComponent
+        path: 'edit-order/:OrderID',
+        component: EditOrderComponent
       },
       {
-        path: 'northwind-order-details',
-        component: NorthwindOrderDetailsComponent
+        path: 'order-details',
+        component: OrderDetailsComponent
       },
       {
-        path: 'add-northwind-order-detail',
-        component: AddNorthwindOrderDetailComponent
+        path: 'add-order-detail',
+        component: AddOrderDetailComponent
       },
       {
-        path: 'edit-northwind-order-detail/:OrderID/:ProductID',
-        component: EditNorthwindOrderDetailComponent
+        path: 'edit-order-detail/:OrderID/:ProductID',
+        component: EditOrderDetailComponent
       },
       {
-        path: 'northwind-products',
-        component: NorthwindProductsComponent
+        path: 'products',
+        component: ProductsComponent
       },
       {
-        path: 'add-northwind-product',
-        component: AddNorthwindProductComponent
+        path: 'add-product',
+        component: AddProductComponent
       },
       {
-        path: 'edit-northwind-product/:ProductID',
-        component: EditNorthwindProductComponent
+        path: 'edit-product/:ProductID',
+        component: EditProductComponent
       },
       {
         path: 'regions',

@@ -3,51 +3,10 @@
     {
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-1",
-              "components": [
-                {
-                  "events": {
-                    "click": [
-                      {
-                        "condition": "",
-                        "parameters": [
-                          {
-                            "name": "RegionID",
-                            "value": "${parameters.RegionID}"
-                          }
-                        ],
-                        "path": "regions-by-region-id",
-                        "type": "navigate"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "button0",
-                  "text": "Region",
-                  "type": "button"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-11",
-              "components": [
-                {
-                  "name": "pageTitle",
-                  "size": "H1",
-                  "text": "Territories by Region: ${territory.Region.RegionDescription}",
-                  "type": "heading"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "type": "row"
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Territories by Region: ${territory.Region.RegionDescription}",
+          "type": "heading"
         },
         {
           "components": [

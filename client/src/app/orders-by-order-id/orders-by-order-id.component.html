@@ -6,9 +6,9 @@
       <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrdersCount" [data]="getNorthwindOrdersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column format="int32" property="OrderID" title="Order ID" type="integer">
         </rz-grid-column>
-        <rz-grid-column filterProperty="Customer.CustomerID" property="CustomerID" sortProperty="Customer.CustomerID" title="Customer" width="160px" type="string">
+        <rz-grid-column filterProperty="Customer.CompanyName" property="CustomerID" sortProperty="Customer.CompanyName" title="Customer" width="360px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #button1 [style]="{'width':'140px'}" [text]="data?.CustomerID" (click)="button1Click($event, data)">
+            <rz-button #customersButton [style]="{'width':'340px'}" [text]="data?.Customer?.CompanyName" (click)="customersButtonClick($event, data)">
             </rz-button>
           </ng-template>
         </rz-grid-column>

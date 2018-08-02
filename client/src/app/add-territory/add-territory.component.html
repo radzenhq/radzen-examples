@@ -1,10 +1,10 @@
 <rz-content #content1 container="main">
   <div class="row">
     <div class="col-md-12">
-      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)" (loadData)="form0LoadData($event)">
-        <rz-string-form-field property="TerritoryDescription" [required]="false" title="Territory Description" requiredText="is required" type="string">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (loadData)="form0LoadData($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="TerritoryDescription" [required]="true" requiredText="is required" title="Territory Description" type="string">
         </rz-string-form-field>
-        <rz-lookuppopup-form-field [data]="getRegionsResult" property="RegionID" [required]="false" textProperty="RegionDescription" title="Region" valueProperty="RegionID" placeholder="Choose Region" [count]="getRegionsCount" requiredText="is required" type="lookuppopup">
+        <rz-lookuppopup-form-field [count]="getRegionsCount" [data]="getRegionsResult" placeholder="Choose Region" property="RegionID" [required]="true" requiredText="is required" textProperty="RegionDescription" title="Region" valueProperty="RegionID" type="lookuppopup">
         </rz-lookuppopup-form-field>
       </rz-form>
     </div>

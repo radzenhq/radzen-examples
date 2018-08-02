@@ -12,7 +12,7 @@
               "class": "col-md-12",
               "components": [
                 {
-                  "data": "${northwindproduct}",
+                  "data": "${northwindorder}",
                   "events": {
                     "cancel": [
                       {
@@ -23,20 +23,20 @@
                       {
                         "error": [
                           {
-                            "detail": "Unable to update NorthwindProduct",
+                            "detail": "Unable to update Order",
                             "severity": "error",
                             "summary": "Error",
                             "type": "notify"
                           }
                         ],
-                        "name": "Northwind.updateNorthwindProduct",
+                        "name": "Northwind.updateNorthwindOrder",
                         "parameters": [
                           {
-                            "name": "ProductID",
-                            "value": "${parameters.ProductID}"
+                            "name": "OrderID",
+                            "value": "${parameters.OrderID}"
                           },
                           {
-                            "name": "NorthwindProduct",
+                            "name": "NorthwindOrder",
                             "value": "${event}"
                           }
                         ],
@@ -50,8 +50,8 @@
                     ],
                     "loadData": [
                       {
-                        "name": "Northwind.getSuppliers",
-                        "condition": "event.property == 'SupplierID'",
+                        "name": "Northwind.getCustomers",
+                        "condition": "event.property == 'CustomerID'",
                         "parameters": [
                           {
                             "name": "$top",
@@ -76,12 +76,12 @@
                         ],
                         "then": [
                           {
-                            "name": "getSuppliersResult",
+                            "name": "getCustomersResult",
                             "type": "set",
                             "value": "${result.value}"
                           },
                           {
-                            "name": "getSuppliersCount",
+                            "name": "getCustomersCount",
                             "type": "set",
                             "value": "result['@odata.count']"
                           }
@@ -89,8 +89,8 @@
                         "type": "invoke"
                       },
                       {
-                        "name": "Northwind.getCategories",
-                        "condition": "event.property == 'CategoryID'",
+                        "name": "Northwind.getEmployees",
+                        "condition": "event.property == 'EmployeeID'",
                         "parameters": [
                           {
                             "name": "$top",
@@ -115,12 +115,12 @@
                         ],
                         "then": [
                           {
-                            "name": "getCategoriesResult",
+                            "name": "getEmployeesResult",
                             "type": "set",
                             "value": "${result.value}"
                           },
                           {
-                            "name": "getCategoriesCount",
+                            "name": "getEmployeesCount",
                             "type": "set",
                             "value": "result['@odata.count']"
                           }
@@ -131,76 +131,97 @@
                   },
                   "fields": [
                     {
-                      "property": "ProductName",
-                      "required": false,
-                      "title": "Product Name",
-                      "type": "string",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "data": "${getSuppliersResult}",
-                      "property": "SupplierID",
+                      "data": "${getCustomersResult}",
+                      "property": "CustomerID",
                       "required": false,
                       "textProperty": "CompanyName",
-                      "title": "Supplier",
+                      "title": "Customer",
                       "type": "lookuppopup",
-                      "valueProperty": "SupplierID",
-                      "placeholder": "Choose Supplier",
-                      "count": "${getSuppliersCount}",
+                      "valueProperty": "CustomerID",
+                      "placeholder": "Choose Customer",
+                      "count": "${getCustomersCount}",
                       "requiredText": "is required"
                     },
                     {
-                      "data": "${getCategoriesResult}",
-                      "property": "CategoryID",
+                      "data": "${getEmployeesResult}",
+                      "property": "EmployeeID",
                       "required": false,
-                      "textProperty": "CategoryName",
-                      "title": "Category",
+                      "textProperty": "LastName",
+                      "title": "Employee",
                       "type": "lookuppopup",
-                      "valueProperty": "CategoryID",
-                      "placeholder": "Choose Category",
-                      "count": "${getCategoriesCount}",
+                      "valueProperty": "EmployeeID",
+                      "placeholder": "Choose Employee",
+                      "count": "${getEmployeesCount}",
                       "requiredText": "is required"
                     },
                     {
-                      "property": "QuantityPerUnit",
+                      "property": "OrderDate",
                       "required": false,
-                      "title": "Quantity Per Unit",
-                      "type": "string",
+                      "title": "Order Date",
+                      "type": "date",
                       "requiredText": "is required"
                     },
                     {
-                      "property": "UnitPrice",
+                      "property": "RequiredDate",
                       "required": false,
-                      "title": "Unit Price",
+                      "title": "Required Date",
+                      "type": "date",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ShippedDate",
+                      "required": false,
+                      "title": "Shipped Date",
+                      "type": "date",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Freight",
+                      "required": false,
+                      "title": "Freight",
                       "type": "number",
                       "requiredText": "is required"
                     },
                     {
-                      "property": "UnitsInStock",
+                      "property": "ShipName",
                       "required": false,
-                      "title": "Units In Stock",
-                      "type": "integer",
+                      "title": "Ship Name",
+                      "type": "string",
                       "requiredText": "is required"
                     },
                     {
-                      "property": "UnitsOnOrder",
+                      "property": "ShipAddress",
                       "required": false,
-                      "title": "Units On Order",
-                      "type": "integer",
+                      "title": "Ship Address",
+                      "type": "string",
                       "requiredText": "is required"
                     },
                     {
-                      "property": "ReorderLevel",
+                      "property": "ShipCity",
                       "required": false,
-                      "title": "Reorder Level",
-                      "type": "integer",
+                      "title": "Ship City",
+                      "type": "string",
                       "requiredText": "is required"
                     },
                     {
-                      "property": "Discontinued",
+                      "property": "ShipRegion",
                       "required": false,
-                      "title": "Discontinued",
-                      "type": "boolean",
+                      "title": "Ship Region",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ShipPostalCode",
+                      "required": false,
+                      "title": "Ship Postal Code",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "required": false,
+                      "title": "Ship Country",
+                      "type": "string",
                       "requiredText": "is required"
                     }
                   ],
@@ -217,16 +238,16 @@
   "events": {
     "load": [
       {
-        "name": "Northwind.getNorthwindProductById",
+        "name": "Northwind.getNorthwindOrderById",
         "parameters": [
           {
-            "name": "ProductID",
-            "value": "${parameters.ProductID}"
+            "name": "OrderID",
+            "value": "${parameters.OrderID}"
           }
         ],
         "then": [
           {
-            "name": "northwindproduct",
+            "name": "northwindorder",
             "type": "set",
             "value": "${result}"
           }
@@ -234,11 +255,11 @@
         "type": "invoke"
       },
       {
-        "name": "Northwind.getSuppliers",
+        "name": "Northwind.getCustomers",
         "parameters": [
           {
             "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'SupplierID')).pageSize"
+            "value": "(<any>this.form0.fields.find(f => f.property == 'CustomerID')).pageSize"
           },
           {
             "name": "$skip",
@@ -251,12 +272,12 @@
         ],
         "then": [
           {
-            "name": "getSuppliersResult",
+            "name": "getCustomersResult",
             "type": "set",
             "value": "${result.value}"
           },
           {
-            "name": "getSuppliersCount",
+            "name": "getCustomersCount",
             "type": "set",
             "value": "result['@odata.count']"
           }
@@ -264,11 +285,11 @@
         "type": "invoke"
       },
       {
-        "name": "Northwind.getCategories",
+        "name": "Northwind.getEmployees",
         "parameters": [
           {
             "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'CategoryID')).pageSize"
+            "value": "(<any>this.form0.fields.find(f => f.property == 'EmployeeID')).pageSize"
           },
           {
             "name": "$skip",
@@ -281,12 +302,12 @@
         ],
         "then": [
           {
-            "name": "getCategoriesResult",
+            "name": "getEmployeesResult",
             "type": "set",
             "value": "${result.value}"
           },
           {
-            "name": "getCategoriesCount",
+            "name": "getEmployeesCount",
             "type": "set",
             "value": "result['@odata.count']"
           }
@@ -295,6 +316,6 @@
       }
     ]
   },
-  "name": "Edit Northwind Product",
+  "name": "Edit Order",
   "layout": "Main"
 }

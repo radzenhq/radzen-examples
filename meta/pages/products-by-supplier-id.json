@@ -3,50 +3,10 @@
     {
       "components": [
         {
-          "components": [
-            {
-              "class": "justify-content-start align-items-center d-flex col-md-1",
-              "components": [
-                {
-                  "events": {
-                    "click": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "SupplierID",
-                            "value": "${parameters.SupplierID}"
-                          }
-                        ],
-                        "path": "suppliers-by-supplier-id",
-                        "type": "navigate"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "button1",
-                  "text": "Supplier",
-                  "type": "button"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "align-items-center d-flex justify-content-start col-md-11",
-              "components": [
-                {
-                  "name": "pageTitle",
-                  "size": "H1",
-                  "text": "Products by Supplier: ${product.Supplier.CompanyName}",
-                  "type": "heading"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "type": "row"
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Products by Supplier: ${product.Supplier.CompanyName}",
+          "type": "heading"
         },
         {
           "components": [
@@ -114,7 +74,7 @@
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-product",
+                        "path": "add-product",
                         "title": "Add Product",
                         "type": "popup"
                       }
@@ -203,7 +163,7 @@
                             "value": "${event.ProductID}"
                           }
                         ],
-                        "path": "edit-northwind-product",
+                        "path": "edit-product",
                         "title": "Edit Product",
                         "type": "popup"
                       }

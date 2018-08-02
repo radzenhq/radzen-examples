@@ -46,14 +46,14 @@
                   "fields": [
                     {
                       "property": "LastName",
-                      "required": false,
+                      "required": true,
                       "requiredText": "is required",
                       "title": "Last Name",
                       "type": "string"
                     },
                     {
                       "property": "FirstName",
-                      "required": false,
+                      "required": true,
                       "requiredText": "is required",
                       "title": "First Name",
                       "type": "string"

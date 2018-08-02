@@ -109,19 +109,6 @@ export class EditTerritoryGenerated implements AfterViewInit, OnInit, OnDestroy 
     }
   }
 
-  form0Submit(event: any) {
-    this.northwind.updateTerritory(`${this.parameters.TerritoryID}`, event)
-    .subscribe((result: any) => {
-      if (this.dialogRef) {
-        this.dialogRef.close();
-      } else {
-        this._location.back();
-      }
-    }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to update Territory` });
-    });
-  }
-
   form0LoadData(event: any) {
     if (event.property == 'RegionID') {
           this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
@@ -133,5 +120,18 @@ export class EditTerritoryGenerated implements AfterViewInit, OnInit, OnDestroy 
     
       });
     }
+  }
+
+  form0Submit(event: any) {
+    this.northwind.updateTerritory(`${this.parameters.TerritoryID}`, event)
+    .subscribe((result: any) => {
+      if (this.dialogRef) {
+        this.dialogRef.close();
+      } else {
+        this._location.back();
+      }
+    }, (result: any) => {
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to update Territory` });
+    });
   }
 }

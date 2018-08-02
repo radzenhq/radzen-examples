@@ -1,14 +1,6 @@
 <rz-content #content1 container="main">
-  <div class="row">
-    <div class="justify-content-start align-items-center d-flex col-md-1">
-      <rz-button #button1 text="Category" (click)="button1Click($event)">
-      </rz-button>
-    </div>
-    <div class="align-items-center d-flex justify-content-start col-md-11">
-      <rz-heading #pageTitle size="H1" text="Products by Category: {{product?.Category?.CategoryName}}">
-      </rz-heading>
-    </div>
-  </div>
+  <rz-heading #pageTitle size="H1" text="Products by Category: {{product?.Category?.CategoryName}}">
+  </rz-heading>
   <div class="row">
     <div class="col-md-12">
       <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindProductsCount" [data]="getNorthwindProductsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">

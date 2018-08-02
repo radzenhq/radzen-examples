@@ -49,7 +49,7 @@
                   "fields": [
                     {
                       "property": "CompanyName",
-                      "required": false,
+                      "required": true,
                       "requiredText": "is required",
                       "title": "Company Name",
                       "type": "string"

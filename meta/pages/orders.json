@@ -5,7 +5,7 @@
         {
           "name": "pageTitle",
           "size": "H1",
-          "text": "Products",
+          "text": "Orders",
           "type": "heading"
         },
         {
@@ -24,18 +24,14 @@
                   "columns": [
                     {
                       "format": "int32",
-                      "property": "ProductID",
-                      "title": "Product ID",
+                      "property": "OrderID",
+                      "title": "Order ID",
                       "type": "integer"
                     },
                     {
-                      "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
-                    },
-                    {
-                      "filterProperty": "Supplier.CompanyName",
-                      "sortProperty": "Supplier.CompanyName",
+                      "filterProperty": "Customer.CompanyName",
+                      "property": "CustomerID",
+                      "sortProperty": "Customer.CompanyName",
                       "template": [
                         {
                           "events": {
@@ -43,31 +39,33 @@
                               {
                                 "parameters": [
                                   {
-                                    "name": "SupplierID",
-                                    "value": "${data.SupplierID}"
+                                    "name": "CustomerID",
+                                    "value": "${data.CustomerID}"
                                   }
                                 ],
-                                "path": "suppliers-by-supplier-id",
+                                "path": "customers-by-customer-id",
                                 "type": "navigate"
                               }
                             ]
                           },
                           "icon": "",
-                          "name": "supplierButton",
+                          "name": "customersButton",
                           "style": {
                             "width": "340px"
                           },
-                          "text": "${data.Supplier?.CompanyName}",
+                          "text": "${data.Customer?.CompanyName}",
                           "type": "button"
                         }
                       ],
-                      "title": "Supplier",
+                      "title": "Customer",
                       "type": "string",
                       "width": "360px"
                     },
                     {
-                      "filterProperty": "Category.CategoryName",
-                      "sortProperty": "Category.CategoryName",
+                      "filterProperty": "Employee.LastName",
+                      "format": "int32",
+                      "property": "EmployeeID",
+                      "sortProperty": "Employee.LastName",
                       "template": [
                         {
                           "events": {
@@ -75,72 +73,123 @@
                               {
                                 "parameters": [
                                   {
-                                    "name": "CategoryID",
-                                    "value": "${data.CategoryID}"
+                                    "name": "EmployeeID",
+                                    "value": "${data.EmployeeID}"
                                   }
                                 ],
-                                "path": "categories-by-category-id",
+                                "path": "employees-by-employee-id",
                                 "type": "navigate"
                               }
                             ]
                           },
                           "icon": "",
-                          "name": "categoryButton",
+                          "name": "employeesButton",
                           "style": {
-                            "width": "240px"
+                            "width": "140px"
                           },
-                          "text": "${data.Category?.CategoryName}",
+                          "text": "${data.Employee.LastName}",
                           "type": "button"
                         }
                       ],
-                      "title": "Category",
-                      "type": "string",
-                      "width": "260px"
+                      "title": "Employee",
+                      "type": "integer",
+                      "width": "160px"
                     },
                     {
-                      "property": "QuantityPerUnit",
-                      "title": "Quantity Per Unit",
+                      "format": "date-time",
+                      "property": "OrderDate",
+                      "template": "${data.OrderDate | utcDate}",
+                      "title": "Order Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "RequiredDate",
+                      "template": "${data.RequiredDate | utcDate}",
+                      "title": "Required Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "template": "${data.ShippedDate | utcDate}",
+                      "title": "Shipped Date",
                       "type": "string"
                     },
                     {
                       "format": "double",
-                      "property": "UnitPrice",
-                      "template": "{{ data.UnitPrice | currency}}",
-                      "title": "Unit Price",
+                      "property": "Freight",
+                      "template": "{{ data.Freight | currency}}",
+                      "title": "Freight",
                       "type": "number"
                     },
                     {
-                      "format": "int32",
-                      "property": "UnitsInStock",
-                      "title": "Units In Stock",
-                      "type": "integer"
+                      "property": "ShipName",
+                      "title": "Ship Name",
+                      "type": "string"
                     },
                     {
-                      "format": "int32",
-                      "property": "UnitsOnOrder",
-                      "title": "Units On Order",
-                      "type": "integer"
+                      "property": "ShipAddress",
+                      "title": "Ship Address",
+                      "type": "string"
                     },
                     {
-                      "format": "int32",
-                      "property": "ReorderLevel",
-                      "title": "Reorder Level",
-                      "type": "integer"
+                      "property": "ShipCity",
+                      "title": "Ship City",
+                      "type": "string"
                     },
                     {
-                      "property": "Discontinued",
-                      "title": "Discontinued",
-                      "type": "boolean"
+                      "property": "ShipRegion",
+                      "title": "Ship Region",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "",
+                      "property": "ShipPostalCode",
+                      "title": "Ship Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "title": "Ship Country",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "OrderID",
+                                    "value": "${data.OrderID}"
+                                  }
+                                ],
+                                "path": "order-details-by-order-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "orderDetailsButton",
+                          "text": "Details",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
                     }
                   ],
-                  "count": "${getNorthwindProductsCount}",
-                  "data": "${getNorthwindProductsResult}",
+                  "count": "${getNorthwindOrdersCount}",
+                  "data": "${getNorthwindOrdersResult}",
                   "emptyText": "No records to display.",
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-product",
-                        "title": "Add Product",
+                        "path": "add-order",
+                        "title": "Add Order",
                         "type": "popup"
                       }
                     ],
@@ -148,22 +197,22 @@
                       {
                         "error": [
                           {
-                            "detail": "Unable to delete NorthwindProduct",
+                            "detail": "Unable to delete NorthwindOrder",
                             "severity": "error",
                             "summary": "Error",
                             "type": "notify"
                           }
                         ],
-                        "name": "Northwind.deleteNorthwindProduct",
+                        "name": "Northwind.deleteNorthwindOrder",
                         "parameters": [
                           {
-                            "name": "ProductID",
-                            "value": "${event.ProductID}"
+                            "name": "OrderID",
+                            "value": "${event.OrderID}"
                           }
                         ],
                         "then": [
                           {
-                            "detail": "NorthwindProduct deleted!",
+                            "detail": "NorthwindOrder deleted!",
                             "severity": "success",
                             "summary": "Success",
                             "type": "notify"
@@ -174,7 +223,7 @@
                     ],
                     "loadData": [
                       {
-                        "name": "Northwind.getNorthwindProducts",
+                        "name": "Northwind.getNorthwindOrders",
                         "parameters": [
                           {
                             "name": "$top",
@@ -186,7 +235,7 @@
                           },
                           {
                             "name": "$expand",
-                            "value": "Supplier,Category"
+                            "value": "Customer,Employee"
                           },
                           {
                             "name": "$count",
@@ -202,17 +251,17 @@
                           },
                           {
                             "name": "$expand",
-                            "value": "Supplier,Category"
+                            "value": "Customer,Employee"
                           }
                         ],
                         "then": [
                           {
-                            "name": "getNorthwindProductsResult",
+                            "name": "getNorthwindOrdersResult",
                             "type": "set",
                             "value": "${result.value}"
                           },
                           {
-                            "name": "getNorthwindProductsCount",
+                            "name": "getNorthwindOrdersCount",
                             "type": "set",
                             "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
                           }
@@ -224,12 +273,12 @@
                       {
                         "parameters": [
                           {
-                            "name": "ProductID",
-                            "value": "${event.ProductID}"
+                            "name": "OrderID",
+                            "value": "${event.OrderID}"
                           }
                         ],
-                        "path": "edit-northwind-product",
-                        "title": "Edit Product",
+                        "path": "edit-order",
+                        "title": "Edit Order",
                         "type": "popup"
                       }
                     ]
@@ -252,7 +301,7 @@
   "events": {
     "load": [
       {
-        "name": "Northwind.getNorthwindProducts",
+        "name": "Northwind.getNorthwindOrders",
         "parameters": [
           {
             "name": "$top",
@@ -268,17 +317,17 @@
           },
           {
             "name": "$expand",
-            "value": "Supplier,Category"
+            "value": "Customer,Employee"
           }
         ],
         "then": [
           {
-            "name": "getNorthwindProductsResult",
+            "name": "getNorthwindOrdersResult",
             "type": "set",
             "value": "${result.value}"
           },
           {
-            "name": "getNorthwindProductsCount",
+            "name": "getNorthwindOrdersCount",
             "type": "set",
             "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
           }
@@ -288,5 +337,5 @@
     ]
   },
   "layout": "Main",
-  "name": "Northwind Products"
+  "name": "Orders"
 }

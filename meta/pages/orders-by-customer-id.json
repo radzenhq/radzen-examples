@@ -3,52 +3,13 @@
     {
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-1 justify-content-start align-items-center d-flex",
-              "components": [
-                {
-                  "events": {
-                    "click": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "CustomerID",
-                            "value": "${parameters.CustomerID}"
-                          }
-                        ],
-                        "path": "customers-by-customer-id",
-                        "type": "navigate"
-                      }
-                    ]
-                  },
-                  "name": "button1",
-                  "text": "Customer",
-                  "type": "button"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-11 justify-content-start align-items-center d-flex",
-              "components": [
-                {
-                  "name": "pageTitle",
-                  "size": "H1",
-                  "style": {
-                    "marginLeft": "10px"
-                  },
-                  "text": "Orders by Customer: ${order.Customer.CompanyName}",
-                  "type": "heading"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "type": "row"
+          "name": "pageTitle",
+          "size": "H1",
+          "style": {
+            "marginLeft": "10px"
+          },
+          "text": "Orders by Customer: ${order.Customer.CompanyName}",
+          "type": "heading"
         },
         {
           "components": [
@@ -75,9 +36,34 @@
                       "format": "int32",
                       "property": "EmployeeID",
                       "sortProperty": "Employee.LastName",
-                      "template": "${data.Employee?.LastName}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "EmployeeID",
+                                    "value": "${data.EmployeeID}"
+                                  }
+                                ],
+                                "path": "employees-by-employee-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "employeesButton",
+                          "style": {
+                            "width": "140px"
+                          },
+                          "text": "${data.Employee.LastName}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Employee",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "160px"
                     },
                     {
                       "format": "date-time",
@@ -171,7 +157,7 @@
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-order",
+                        "path": "add-order",
                         "title": "Add Order",
                         "type": "popup"
                       }
@@ -260,7 +246,7 @@
                             "value": "${event.OrderID}"
                           }
                         ],
-                        "path": "edit-northwind-order",
+                        "path": "edit-order",
                         "title": "Edit Order",
                         "type": "popup"
                       }

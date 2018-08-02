@@ -119,9 +119,9 @@ export class AddNorthwindOrderGenerated implements AfterViewInit, OnInit, OnDest
       if (this.dialogRef) {
         this.dialogRef.close();
       }
-      this.router.navigate(['northwind-orders']);
+      this.router.navigate(['orders']);
     }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new NorthwindOrder!` });
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new Order!` });
     });
   }
 

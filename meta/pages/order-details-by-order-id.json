@@ -3,50 +3,10 @@
     {
       "components": [
         {
-          "components": [
-            {
-              "class": "d-flex justify-content-start col-md-1 align-items-center",
-              "components": [
-                {
-                  "events": {
-                    "click": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "OrderID",
-                            "value": "${parameters.OrderID}"
-                          }
-                        ],
-                        "path": "orders-by-order-id",
-                        "type": "navigate"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "button1",
-                  "text": "Order",
-                  "type": "button"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            },
-            {
-              "class": "justify-content-start  d-flex col-md-11 align-items-center",
-              "components": [
-                {
-                  "name": "pageTitle",
-                  "size": "H1",
-                  "text": "Order Details by OrderID: ${parameters.OrderID}",
-                  "type": "heading"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "type": "row"
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Order Details by OrderID: ${parameters.OrderID}",
+          "type": "heading"
         },
         {
           "components": [
@@ -97,7 +57,7 @@
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-order-detail",
+                        "path": "add-order-detail",
                         "title": "Add Order Detail",
                         "type": "popup"
                       }
@@ -194,7 +154,7 @@
                             "value": "${event.ProductID}"
                           }
                         ],
-                        "path": "edit-northwind-order-detail",
+                        "path": "edit-order-detail",
                         "title": "Edit Order Detail",
                         "type": "popup"
                       }

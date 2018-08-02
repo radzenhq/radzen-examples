@@ -119,9 +119,9 @@ export class AddNorthwindOrderDetailGenerated implements AfterViewInit, OnInit, 
       if (this.dialogRef) {
         this.dialogRef.close();
       }
-      this.router.navigate(['northwind-order-details']);
+      this.router.navigate(['order-details']);
     }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new NorthwindOrderDetail!` });
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new OrderDetail!` });
     });
   }
 

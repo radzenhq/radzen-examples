@@ -29,9 +29,9 @@
                       "type": "integer"
                     },
                     {
-                      "filterProperty": "Customer.CustomerID",
+                      "filterProperty": "Customer.CompanyName",
                       "property": "CustomerID",
-                      "sortProperty": "Customer.CustomerID",
+                      "sortProperty": "Customer.CompanyName",
                       "template": [
                         {
                           "events": {
@@ -49,17 +49,17 @@
                             ]
                           },
                           "icon": "",
-                          "name": "button1",
+                          "name": "customersButton",
                           "style": {
-                            "width": "140px"
+                            "width": "340px"
                           },
-                          "text": "${data.CustomerID}",
+                          "text": "${data.Customer?.CompanyName}",
                           "type": "button"
                         }
                       ],
                       "title": "Customer",
                       "type": "string",
-                      "width": "160px"
+                      "width": "360px"
                     },
                     {
                       "filterProperty": "Employee.LastName",
@@ -162,7 +162,7 @@
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-order",
+                        "path": "add-order",
                         "title": "Add Order",
                         "type": "popup"
                       }
@@ -251,7 +251,7 @@
                             "value": "${event.OrderID}"
                           }
                         ],
-                        "path": "edit-northwind-order",
+                        "path": "edit-order",
                         "title": "Edit Order",
                         "type": "popup"
                       }

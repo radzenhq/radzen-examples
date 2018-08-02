@@ -1,0 +1,26 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (loadData)="form0LoadData($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="ProductName" [required]="true" requiredText="is required" title="Product Name" type="string">
+        </rz-string-form-field>
+        <rz-lookuppopup-form-field [count]="getSuppliersCount" [data]="getSuppliersResult" placeholder="Choose Supplier" property="SupplierID" [required]="false" requiredText="is required" textProperty="CompanyName" title="Supplier" valueProperty="SupplierID" type="lookuppopup">
+        </rz-lookuppopup-form-field>
+        <rz-lookuppopup-form-field [count]="getCategoriesCount" [data]="getCategoriesResult" placeholder="Choose Category" property="CategoryID" [required]="false" requiredText="is required" textProperty="CategoryName" title="Category" valueProperty="CategoryID" type="lookuppopup">
+        </rz-lookuppopup-form-field>
+        <rz-string-form-field property="QuantityPerUnit" [required]="true" requiredText="is required" title="Quantity Per Unit" type="string">
+        </rz-string-form-field>
+        <rz-number-form-field property="UnitPrice" [required]="false" requiredText="is required" title="Unit Price" type="number">
+        </rz-number-form-field>
+        <rz-integer-form-field property="UnitsInStock" [required]="false" requiredText="is required" title="Units In Stock" type="integer">
+        </rz-integer-form-field>
+        <rz-integer-form-field property="UnitsOnOrder" [required]="false" requiredText="is required" title="Units On Order" type="integer">
+        </rz-integer-form-field>
+        <rz-integer-form-field property="ReorderLevel" [required]="false" requiredText="is required" title="Reorder Level" type="integer">
+        </rz-integer-form-field>
+        <rz-boolean-form-field property="Discontinued" [required]="true" requiredText="is required" title="Discontinued" type="boolean">
+        </rz-boolean-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

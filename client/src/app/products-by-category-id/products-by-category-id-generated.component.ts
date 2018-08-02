@@ -10,18 +10,16 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
-import { ButtonComponent } from '@radzen/angular/dist/button';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { AddNorthwindProductComponent } from '../add-northwind-product/add-northwind-product.component';
-import { EditNorthwindProductComponent } from '../edit-northwind-product/edit-northwind-product.component';
+import { AddProductComponent } from '../add-product/add-product.component';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 
 import { NorthwindService } from '../northwind.service';
 
 export class ProductsByCategoryIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
-  @ViewChild('button1') button1: ButtonComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('grid0') grid0: GridComponent;
 
@@ -102,15 +100,8 @@ export class ProductsByCategoryIdGenerated implements AfterViewInit, OnInit, OnD
     });
   }
 
-  button1Click(event: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['categories-by-category-id', this.parameters.CategoryID]);
-  }
-
   grid0Add(event: any) {
-    this.dialogService.open(AddNorthwindProductComponent, { parameters: {}, title: 'Add Product' });
+    this.dialogService.open(AddProductComponent, { parameters: {}, title: 'Add Product' });
   }
 
   grid0Delete(event: any) {
@@ -134,6 +125,6 @@ export class ProductsByCategoryIdGenerated implements AfterViewInit, OnInit, OnD
   }
 
   grid0RowSelect(event: any) {
-    this.dialogService.open(EditNorthwindProductComponent, { parameters: {ProductID: event.ProductID}, title: 'Edit Product' });
+    this.dialogService.open(EditProductComponent, { parameters: {ProductID: event.ProductID}, title: 'Edit Product' });
   }
 }

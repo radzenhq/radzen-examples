@@ -46,7 +46,7 @@
                   "fields": [
                     {
                       "property": "CategoryName",
-                      "required": false,
+                      "required": true,
                       "requiredText": "is required",
                       "title": "Category Name",
                       "type": "string"

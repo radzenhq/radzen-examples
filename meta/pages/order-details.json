@@ -15,7 +15,7 @@
               "components": [
                 {
                   "addText": "Add",
-                  "allowAdd": false,
+                  "allowAdd": true,
                   "allowDelete": true,
                   "allowFiltering": true,
                   "allowMultiSorting": false,
@@ -112,7 +112,7 @@
                   "events": {
                     "add": [
                       {
-                        "path": "add-northwind-order-detail",
+                        "path": "add-order-detail",
                         "title": "Add Order Detail",
                         "type": "popup"
                       }
@@ -209,7 +209,7 @@
                             "value": "${event.ProductID}"
                           }
                         ],
-                        "path": "edit-northwind-order-detail",
+                        "path": "edit-order-detail",
                         "title": "Edit Order Detail",
                         "type": "popup"
                       }
@@ -269,5 +269,5 @@
     ]
   },
   "layout": "Main",
-  "name": "Northwind Order Details"
+  "name": "Order Details"
 }

@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
-import { ButtonComponent } from '@radzen/angular/dist/button';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
 import { AddTerritoryComponent } from '../add-territory/add-territory.component';
@@ -21,7 +20,6 @@ import { NorthwindService } from '../northwind.service';
 export class TerritoriesByRegionIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
-  @ViewChild('button0') button0: ButtonComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('grid0') grid0: GridComponent;
 
@@ -100,13 +98,6 @@ export class TerritoriesByRegionIdGenerated implements AfterViewInit, OnInit, On
     }, (result: any) => {
 
     });
-  }
-
-  button0Click(event: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['regions-by-region-id', this.parameters.RegionID]);
   }
 
   grid0Add(event: any) {

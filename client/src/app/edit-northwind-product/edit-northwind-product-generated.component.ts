@@ -131,7 +131,7 @@ export class EditNorthwindProductGenerated implements AfterViewInit, OnInit, OnD
         this._location.back();
       }
     }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to update NorthwindProduct` });
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to update Product` });
     });
   }
 

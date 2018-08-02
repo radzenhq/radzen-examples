@@ -119,9 +119,9 @@ export class AddNorthwindProductGenerated implements AfterViewInit, OnInit, OnDe
       if (this.dialogRef) {
         this.dialogRef.close();
       }
-      this.router.navigate(['northwind-products']);
+      this.router.navigate(['products']);
     }, (result: any) => {
-      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new NorthwindProduct!` });
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new Product!` });
     });
   }
 

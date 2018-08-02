@@ -1,14 +1,10 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -19,6 +15,7 @@
                         "type": "back"
                       }
                     ],
+                    "loadData": [],
                     "submit": [
                       {
                         "error": [
@@ -44,31 +41,34 @@
                         ],
                         "type": "invoke"
                       }
-                    ],
-                    "loadData": []
+                    ]
                   },
                   "fields": [
                     {
                       "property": "RegionDescription",
-                      "required": false,
+                      "required": true,
+                      "requiredText": "is required",
                       "title": "Region Description",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     }
                   ],
                   "name": "form0",
                   "type": "form"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
     "load": []
   },
-  "name": "Add Region",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Add Region"
 }
