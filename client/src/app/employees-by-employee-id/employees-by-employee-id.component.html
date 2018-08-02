@@ -1,0 +1,52 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Employee: {{employee?.FirstName}}  {{employee?.LastName}}">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column format="int32" property="EmployeeID" title="Employee ID" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="LastName" title="Last Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="FirstName" title="First Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Title" title="Title" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="TitleOfCourtesy" title="Title Of Courtesy" type="string">
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="BirthDate" title="Birth Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.BirthDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="HireDate" title="Hire Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.HireDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="Address" title="Address" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="City" title="City" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Region" title="Region" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="PostalCode" title="Postal Code" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Country" title="Country" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="HomePhone" title="Home Phone" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Extension" title="Extension" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Notes" title="Notes" type="string">
+        </rz-grid-column>
+        <rz-grid-column [filterable]="false" [sortable]="false" width="140px">
+          <ng-template let-data gridColumnTemplate>
+            <rz-button #button0 text="Orders" (click)="button0Click($event, data)">
+            </rz-button>
+          </ng-template>
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

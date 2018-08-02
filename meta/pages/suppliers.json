@@ -1,125 +1,26 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "heading",
           "name": "pageTitle",
           "size": "H1",
-          "text": "Suppliers"
+          "text": "Suppliers",
+          "type": "heading"
         },
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "name": "grid0",
-                  "allowDelete": true,
+                  "addText": "Add",
                   "allowAdd": true,
+                  "allowDelete": true,
                   "allowFiltering": true,
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getSuppliersCount}",
-                  "data": "${getSuppliersResult}",
-                  "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getSuppliers",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getSuppliersResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getSuppliersCount",
-                            "type": "set",
-                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "delete": [
-                      {
-                        "error": [
-                          {
-                            "detail": "Unable to delete Supplier",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "Northwind.deleteSupplier",
-                        "parameters": [
-                          {
-                            "name": "SupplierID",
-                            "value": "${event.SupplierID}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "detail": "Supplier deleted!",
-                            "severity": "success",
-                            "summary": "Success",
-                            "type": "notify"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "add": [
-                      {
-                        "path": "add-supplier",
-                        "type": "popup"
-                      }
-                    ],
-                    "rowSelect": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "SupplierID",
-                            "value": "${event.SupplierID}"
-                          }
-                        ],
-                        "path": "edit-supplier",
-                        "type": "popup"
-                      }
-                    ]
-                  },
-                  "title": "",
                   "columns": [
                     {
                       "format": "int32",
@@ -178,20 +79,141 @@
                       "type": "string"
                     },
                     {
-                      "property": "HomePage",
-                      "title": "Home Page",
-                      "type": "string"
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "SupplierID",
+                                    "value": "${data.SupplierID}"
+                                  }
+                                ],
+                                "path": "products-by-supplier-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "suppliersButton",
+                          "text": "Products",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "160px"
                     }
                   ],
-                  "type": "grid",
+                  "count": "${getSuppliersCount}",
+                  "data": "${getSuppliersResult}",
                   "emptyText": "No records to display.",
-                  "addText": "Add"
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-supplier",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Supplier",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteSupplier",
+                        "parameters": [
+                          {
+                            "name": "SupplierID",
+                            "value": "${event.SupplierID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Supplier deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getSuppliers",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getSuppliersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getSuppliersCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "SupplierID",
+                            "value": "${event.SupplierID}"
+                          }
+                        ],
+                        "path": "edit-supplier",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -228,6 +250,6 @@
       }
     ]
   },
-  "name": "Suppliers",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Suppliers"
 }

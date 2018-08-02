@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 import { EditSupplierComponent } from '../edit-supplier/edit-supplier.component';
 
@@ -96,15 +97,8 @@ export class SuppliersGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0LoadData(event: any) {
-    this.northwind.getSuppliers(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
-    .subscribe((result: any) => {
-      this.getSuppliersResult = result.value;
-
-      this.getSuppliersCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
-    }, (result: any) => {
-
-    });
+  grid0Add(event: any) {
+    this.dialogService.open(AddSupplierComponent, { parameters: {}, title: 'Add Supplier' });
   }
 
   grid0Delete(event: any) {
@@ -116,11 +110,25 @@ export class SuppliersGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0Add(event: any) {
-    this.dialogService.open(AddSupplierComponent, { parameters: {}, title: 'Add Supplier' });
+  grid0LoadData(event: any) {
+    this.northwind.getSuppliers(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    .subscribe((result: any) => {
+      this.getSuppliersResult = result.value;
+
+      this.getSuppliersCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
+    }, (result: any) => {
+
+    });
   }
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditSupplierComponent, { parameters: {SupplierID: event.SupplierID}, title: 'Edit Supplier' });
+  }
+
+  suppliersButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['products-by-supplier-id', data.SupplierID]);
   }
 }

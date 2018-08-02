@@ -23,26 +23,73 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "filterProperty": "NorthwindOrder.CustomerID",
                       "format": "int32",
                       "property": "OrderID",
-                      "sortProperty": "NorthwindOrder.CustomerID",
-                      "template": "${data.NorthwindOrder?.CustomerID}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "OrderID",
+                                    "value": "${data.OrderID}"
+                                  }
+                                ],
+                                "path": "orders-by-order-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "orderButton",
+                          "style": {
+                            "width": "140px"
+                          },
+                          "text": "${data.OrderID}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Order",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "160px"
                     },
                     {
                       "filterProperty": "NorthwindProduct.ProductName",
-                      "format": "int32",
-                      "property": "ProductID",
                       "sortProperty": "NorthwindProduct.ProductName",
-                      "template": "${data.NorthwindProduct?.ProductName}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "ProductID",
+                                    "value": "${data.ProductID}"
+                                  }
+                                ],
+                                "path": "products-by-product-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "productButton",
+                          "style": {
+                            "width": "340px"
+                          },
+                          "text": "${data.NorthwindProduct.ProductName}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Product",
-                      "type": "integer"
+                      "type": "string",
+                      "width": "360px"
                     },
                     {
                       "format": "double",
                       "property": "UnitPrice",
+                      "template": "{{ data.UnitPrice | currency}}",
                       "title": "Unit Price",
                       "type": "number"
                     },

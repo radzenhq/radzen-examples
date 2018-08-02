@@ -39,6 +39,19 @@ import { EditSupplierComponent } from './edit-supplier/edit-supplier.component';
 import { TerritoriesComponent } from './territories/territories.component';
 import { AddTerritoryComponent } from './add-territory/add-territory.component';
 import { EditTerritoryComponent } from './edit-territory/edit-territory.component';
+import { OrderDetailsByOrderIdComponent } from './order-details-by-order-id/order-details-by-order-id.component';
+import { OrdersByOrderIdComponent } from './orders-by-order-id/orders-by-order-id.component';
+import { OrdersByCustomerIdComponent } from './orders-by-customer-id/orders-by-customer-id.component';
+import { ProductsByCategoryIdComponent } from './products-by-category-id/products-by-category-id.component';
+import { CategoriesByCategoryIdComponent } from './categories-by-category-id/categories-by-category-id.component';
+import { CustomersByCustomerIdComponent } from './customers-by-customer-id/customers-by-customer-id.component';
+import { OrdersByEmployeeIdComponent } from './orders-by-employee-id/orders-by-employee-id.component';
+import { EmployeesByEmployeeIdComponent } from './employees-by-employee-id/employees-by-employee-id.component';
+import { ProductsByProductIdComponent } from './products-by-product-id/products-by-product-id.component';
+import { SuppliersBySupplierIdComponent } from './suppliers-by-supplier-id/suppliers-by-supplier-id.component';
+import { ProductsBySupplierIdComponent } from './products-by-supplier-id/products-by-supplier-id.component';
+import { RegionsByRegionIdComponent } from './regions-by-region-id/regions-by-region-id.component';
+import { TerritoriesByRegionIdComponent } from './territories-by-region-id/territories-by-region-id.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/categories', pathMatch: 'full' },
@@ -189,6 +202,58 @@ export const routes: Routes = [
       {
         path: 'edit-territory/:TerritoryID',
         component: EditTerritoryComponent
+      },
+      {
+        path: 'order-details-by-order-id/:OrderID',
+        component: OrderDetailsByOrderIdComponent
+      },
+      {
+        path: 'orders-by-order-id/:OrderID',
+        component: OrdersByOrderIdComponent
+      },
+      {
+        path: 'orders-by-customer-id/:CustomerID',
+        component: OrdersByCustomerIdComponent
+      },
+      {
+        path: 'products-by-category-id/:CategoryID',
+        component: ProductsByCategoryIdComponent
+      },
+      {
+        path: 'categories-by-category-id/:CategoryID',
+        component: CategoriesByCategoryIdComponent
+      },
+      {
+        path: 'customers-by-customer-id/:CustomerID',
+        component: CustomersByCustomerIdComponent
+      },
+      {
+        path: 'orders-by-employee-id/:EmployeeID',
+        component: OrdersByEmployeeIdComponent
+      },
+      {
+        path: 'employees-by-employee-id/:EmployeeID',
+        component: EmployeesByEmployeeIdComponent
+      },
+      {
+        path: 'products-by-product-id/:ProductID',
+        component: ProductsByProductIdComponent
+      },
+      {
+        path: 'suppliers-by-supplier-id/:SupplierID',
+        component: SuppliersBySupplierIdComponent
+      },
+      {
+        path: 'products-by-supplier-id/:SupplierID',
+        component: ProductsBySupplierIdComponent
+      },
+      {
+        path: 'regions-by-region-id/:RegionID',
+        component: RegionsByRegionIdComponent
+      },
+      {
+        path: 'territories-by-region-id/:RegionID',
+        component: TerritoriesByRegionIdComponent
       },
     ]
   },

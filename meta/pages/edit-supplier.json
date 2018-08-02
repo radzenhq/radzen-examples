@@ -1,14 +1,10 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -19,6 +15,7 @@
                         "type": "back"
                       }
                     ],
+                    "loadData": [],
                     "submit": [
                       {
                         "error": [
@@ -47,96 +44,92 @@
                         ],
                         "type": "invoke"
                       }
-                    ],
-                    "loadData": []
+                    ]
                   },
                   "fields": [
                     {
                       "property": "CompanyName",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Company Name",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "ContactName",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Contact Name",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "ContactTitle",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Contact Title",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Address",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Address",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "City",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "City",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Region",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Region",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "PostalCode",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Postal Code",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Country",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Country",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Phone",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Phone",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     },
                     {
                       "property": "Fax",
                       "required": false,
+                      "requiredText": "is required",
                       "title": "Fax",
-                      "type": "string",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "property": "HomePage",
-                      "required": false,
-                      "title": "Home Page",
-                      "type": "string",
-                      "requiredText": "is required"
+                      "type": "string"
                     }
                   ],
                   "name": "form0",
                   "type": "form"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -160,6 +153,6 @@
       }
     ]
   },
-  "name": "Edit Supplier",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Edit Supplier"
 }

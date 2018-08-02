@@ -1,0 +1,241 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-1",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "condition": "",
+                        "parameters": [
+                          {
+                            "name": "RegionID",
+                            "value": "${parameters.RegionID}"
+                          }
+                        ],
+                        "path": "regions-by-region-id",
+                        "type": "navigate"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "button0",
+                  "text": "Region",
+                  "type": "button"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-11",
+              "components": [
+                {
+                  "name": "pageTitle",
+                  "size": "H1",
+                  "text": "Territories by Region: ${territory.Region.RegionDescription}",
+                  "type": "heading"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "addText": "Add",
+                  "allowAdd": false,
+                  "allowDelete": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "TerritoryID",
+                      "title": "Territory ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "TerritoryDescription",
+                      "title": "Territory Description",
+                      "type": "string"
+                    }
+                  ],
+                  "count": "${getTerritoriesCount}",
+                  "data": "${getTerritoriesResult}",
+                  "emptyText": "No records to display.",
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-territory",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Territory",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteTerritory",
+                        "parameters": [
+                          {
+                            "name": "TerritoryID",
+                            "value": "${event.TerritoryID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Territory deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getTerritories",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Region"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter ? event.filter + ' and ':''}RegionID eq ${parameters.RegionID}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Region"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getTerritoriesResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getTerritoriesCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "TerritoryID",
+                            "value": "${event.TerritoryID}"
+                          }
+                        ],
+                        "path": "edit-territory",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getTerritories",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          },
+          {
+            "name": "$expand",
+            "value": "Region"
+          },
+          {
+            "name": "$filter",
+            "value": "RegionID eq ${parameters.RegionID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "getTerritoriesResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getTerritoriesCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          },
+          {
+            "condition": "",
+            "name": "territory",
+            "type": "set",
+            "value": "${result.value[0]}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Territories by RegionID"
+}

@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddTerritoryComponent } from '../add-territory/add-territory.component';
 import { EditTerritoryComponent } from '../edit-territory/edit-territory.component';
 
@@ -122,5 +123,12 @@ export class TerritoriesGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditTerritoryComponent, { parameters: {TerritoryID: event.TerritoryID}, title: 'Edit Territory' });
+  }
+
+  regionButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['regions-by-region-id', data.RegionID]);
   }
 }

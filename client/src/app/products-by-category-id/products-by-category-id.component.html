@@ -1,0 +1,39 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="justify-content-start align-items-center d-flex col-md-1">
+      <rz-button #button1 text="Category" (click)="button1Click($event)">
+      </rz-button>
+    </div>
+    <div class="align-items-center d-flex justify-content-start col-md-11">
+      <rz-heading #pageTitle size="H1" text="Products by Category: {{product?.Category?.CategoryName}}">
+      </rz-heading>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindProductsCount" [data]="getNorthwindProductsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column format="int32" property="ProductID" title="Product ID" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="ProductName" title="Product Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column filterProperty="Supplier.CompanyName" format="int32" property="SupplierID" sortProperty="Supplier.CompanyName" title="Supplier" type="integer">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Supplier?.CompanyName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="QuantityPerUnit" title="Quantity Per Unit" type="string">
+        </rz-grid-column>
+        <rz-grid-column format="double" property="UnitPrice" title="Unit Price" type="number">
+        </rz-grid-column>
+        <rz-grid-column format="int32" property="UnitsInStock" title="Units In Stock" type="integer">
+        </rz-grid-column>
+        <rz-grid-column format="int32" property="UnitsOnOrder" title="Units On Order" type="integer">
+        </rz-grid-column>
+        <rz-grid-column format="int32" property="ReorderLevel" title="Reorder Level" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="Discontinued" title="Discontinued" type="boolean">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

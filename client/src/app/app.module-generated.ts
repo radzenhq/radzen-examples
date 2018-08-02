@@ -19,6 +19,7 @@ import { FooterModule } from '@radzen/angular/dist/footer';
 import { ContentModule } from '@radzen/angular/dist/content';
 import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
+import { ButtonModule } from '@radzen/angular/dist/button';
 import { FormModule } from '@radzen/angular/dist/form';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
@@ -65,6 +66,19 @@ import { EditSupplierComponent } from './edit-supplier/edit-supplier.component';
 import { TerritoriesComponent } from './territories/territories.component';
 import { AddTerritoryComponent } from './add-territory/add-territory.component';
 import { EditTerritoryComponent } from './edit-territory/edit-territory.component';
+import { OrderDetailsByOrderIdComponent } from './order-details-by-order-id/order-details-by-order-id.component';
+import { OrdersByOrderIdComponent } from './orders-by-order-id/orders-by-order-id.component';
+import { OrdersByCustomerIdComponent } from './orders-by-customer-id/orders-by-customer-id.component';
+import { ProductsByCategoryIdComponent } from './products-by-category-id/products-by-category-id.component';
+import { CategoriesByCategoryIdComponent } from './categories-by-category-id/categories-by-category-id.component';
+import { CustomersByCustomerIdComponent } from './customers-by-customer-id/customers-by-customer-id.component';
+import { OrdersByEmployeeIdComponent } from './orders-by-employee-id/orders-by-employee-id.component';
+import { EmployeesByEmployeeIdComponent } from './employees-by-employee-id/employees-by-employee-id.component';
+import { ProductsByProductIdComponent } from './products-by-product-id/products-by-product-id.component';
+import { SuppliersBySupplierIdComponent } from './suppliers-by-supplier-id/suppliers-by-supplier-id.component';
+import { ProductsBySupplierIdComponent } from './products-by-supplier-id/products-by-supplier-id.component';
+import { RegionsByRegionIdComponent } from './regions-by-region-id/regions-by-region-id.component';
+import { TerritoriesByRegionIdComponent } from './territories-by-region-id/territories-by-region-id.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
@@ -107,6 +121,19 @@ export const PageDeclarations = [
   TerritoriesComponent,
   AddTerritoryComponent,
   EditTerritoryComponent,
+  OrderDetailsByOrderIdComponent,
+  OrdersByOrderIdComponent,
+  OrdersByCustomerIdComponent,
+  ProductsByCategoryIdComponent,
+  CategoriesByCategoryIdComponent,
+  CustomersByCustomerIdComponent,
+  OrdersByEmployeeIdComponent,
+  EmployeesByEmployeeIdComponent,
+  ProductsByProductIdComponent,
+  SuppliersBySupplierIdComponent,
+  ProductsBySupplierIdComponent,
+  RegionsByRegionIdComponent,
+  TerritoriesByRegionIdComponent,
 ];
 
 export const LayoutDeclarations = [
@@ -153,6 +180,7 @@ export const AppImports = [
   ContentModule,
   HeadingModule,
   GridModule,
+  ButtonModule,
   FormModule,
   SharedModule,
   NotificationModule,

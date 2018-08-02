@@ -1,33 +1,104 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "heading",
           "name": "pageTitle",
           "size": "H1",
-          "text": "Regions"
+          "text": "Regions",
+          "type": "heading"
         },
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "name": "grid0",
-                  "allowDelete": true,
+                  "addText": "Add",
                   "allowAdd": true,
+                  "allowDelete": true,
                   "allowFiltering": true,
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columns": [
+                    {
+                      "format": "int32",
+                      "property": "RegionID",
+                      "title": "Region ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "RegionDescription",
+                      "title": "Region Description",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "RegionID",
+                                    "value": "${data.RegionID}"
+                                  }
+                                ],
+                                "path": "territories-by-region-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "territoriesButton",
+                          "text": "Territories",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "170px"
+                    }
+                  ],
                   "count": "${getRegionsCount}",
                   "data": "${getRegionsResult}",
+                  "emptyText": "No records to display.",
                   "events": {
+                    "add": [
+                      {
+                        "path": "add-region",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Region",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteRegion",
+                        "parameters": [
+                          {
+                            "name": "RegionID",
+                            "value": "${event.RegionID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Region deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
                     "loadData": [
                       {
                         "name": "Northwind.getRegions",
@@ -72,40 +143,6 @@
                         "type": "invoke"
                       }
                     ],
-                    "delete": [
-                      {
-                        "error": [
-                          {
-                            "detail": "Unable to delete Region",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "Northwind.deleteRegion",
-                        "parameters": [
-                          {
-                            "name": "RegionID",
-                            "value": "${event.RegionID}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "detail": "Region deleted!",
-                            "severity": "success",
-                            "summary": "Success",
-                            "type": "notify"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "add": [
-                      {
-                        "path": "add-region",
-                        "type": "popup"
-                      }
-                    ],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -119,29 +156,19 @@
                       }
                     ]
                   },
+                  "name": "grid0",
                   "title": "",
-                  "columns": [
-                    {
-                      "format": "int32",
-                      "property": "RegionID",
-                      "title": "Region ID",
-                      "type": "integer"
-                    },
-                    {
-                      "property": "RegionDescription",
-                      "title": "Region Description",
-                      "type": "string"
-                    }
-                  ],
-                  "type": "grid",
-                  "emptyText": "No records to display.",
-                  "addText": "Add"
+                  "type": "grid"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -178,6 +205,6 @@
       }
     ]
   },
-  "name": "Regions",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Regions"
 }

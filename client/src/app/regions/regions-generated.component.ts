@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddRegionComponent } from '../add-region/add-region.component';
 import { EditRegionComponent } from '../edit-region/edit-region.component';
 
@@ -96,15 +97,8 @@ export class RegionsGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0LoadData(event: any) {
-    this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
-    .subscribe((result: any) => {
-      this.getRegionsResult = result.value;
-
-      this.getRegionsCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
-    }, (result: any) => {
-
-    });
+  grid0Add(event: any) {
+    this.dialogService.open(AddRegionComponent, { parameters: {}, title: 'Add Region' });
   }
 
   grid0Delete(event: any) {
@@ -116,11 +110,25 @@ export class RegionsGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0Add(event: any) {
-    this.dialogService.open(AddRegionComponent, { parameters: {}, title: 'Add Region' });
+  grid0LoadData(event: any) {
+    this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    .subscribe((result: any) => {
+      this.getRegionsResult = result.value;
+
+      this.getRegionsCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
+    }, (result: any) => {
+
+    });
   }
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditRegionComponent, { parameters: {RegionID: event.RegionID}, title: 'Edit Region' });
+  }
+
+  territoriesButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['territories-by-region-id', data.RegionID]);
   }
 }

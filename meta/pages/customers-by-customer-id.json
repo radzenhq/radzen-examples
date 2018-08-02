@@ -1,0 +1,259 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "pageTitle",
+                  "size": "H1",
+                  "text": "Customer: ${customer.CompanyName}",
+                  "type": "heading"
+                },
+                {
+                  "addText": "Add",
+                  "allowAdd": false,
+                  "allowDelete": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactName",
+                      "title": "Contact Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "title": "Contact Title",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Address",
+                      "title": "Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Region",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "title": "Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Phone",
+                      "title": "Phone",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Fax",
+                      "title": "Fax",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "CustomerID",
+                                    "value": "${data.CustomerID}"
+                                  }
+                                ],
+                                "path": "orders-by-customer-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "button0",
+                          "text": "Orders",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
+                    }
+                  ],
+                  "count": "${getCustomersCount}",
+                  "data": "${getCustomersResult}",
+                  "emptyText": "No records to display.",
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-customer",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Customer",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteCustomer",
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Customer deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getCustomers",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter ? event.filter + ' and ':''}CustomerID eq '${parameters.CustomerID}'"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getCustomersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getCustomersCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          }
+                        ],
+                        "path": "edit-customer",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          },
+          {
+            "name": "$filter",
+            "value": "CustomerID eq '${parameters.CustomerID}'"
+          }
+        ],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getCustomersCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          },
+          {
+            "condition": "",
+            "name": "customer",
+            "type": "set",
+            "value": "${result.value[0]}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Customers by CustomerID"
+}

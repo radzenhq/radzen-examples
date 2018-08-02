@@ -136,13 +136,36 @@
                       "type": "string"
                     },
                     {
-                      "format": "int32",
-                      "property": "RegionID",
-                      "sortProperty": "Region.RegionDescription",
                       "filterProperty": "Region.RegionDescription",
-                      "template": "${data.Region?.RegionDescription}",
+                      "sortProperty": "Region.RegionDescription",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "RegionID",
+                                    "value": "${data.RegionID}"
+                                  }
+                                ],
+                                "path": "regions-by-region-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "regionButton",
+                          "style": {
+                            "width": "140px"
+                          },
+                          "text": "${data.Region?.RegionDescription}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Region",
-                      "type": "integer"
+                      "type": "string",
+                      "width": "160px"
                     }
                   ],
                   "type": "grid",

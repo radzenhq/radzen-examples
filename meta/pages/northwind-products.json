@@ -35,21 +35,67 @@
                     },
                     {
                       "filterProperty": "Supplier.CompanyName",
-                      "format": "int32",
-                      "property": "SupplierID",
                       "sortProperty": "Supplier.CompanyName",
-                      "template": "${data.Supplier?.CompanyName}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "SupplierID",
+                                    "value": "${data.SupplierID}"
+                                  }
+                                ],
+                                "path": "suppliers-by-supplier-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "supplierButton",
+                          "style": {
+                            "width": "340px"
+                          },
+                          "text": "${data.Supplier?.CompanyName}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Supplier",
-                      "type": "integer"
+                      "type": "string",
+                      "width": "360px"
                     },
                     {
                       "filterProperty": "Category.CategoryName",
-                      "format": "int32",
-                      "property": "CategoryID",
                       "sortProperty": "Category.CategoryName",
-                      "template": "${data.Category?.CategoryName}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "CategoryID",
+                                    "value": "${data.CategoryID}"
+                                  }
+                                ],
+                                "path": "categories-by-category-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "categoryButton",
+                          "style": {
+                            "width": "240px"
+                          },
+                          "text": "${data.Category?.CategoryName}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Category",
-                      "type": "integer"
+                      "type": "string",
+                      "width": "260px"
                     },
                     {
                       "property": "QuantityPerUnit",
@@ -59,6 +105,7 @@
                     {
                       "format": "double",
                       "property": "UnitPrice",
+                      "template": "{{ data.UnitPrice | currency}}",
                       "title": "Unit Price",
                       "type": "number"
                     },

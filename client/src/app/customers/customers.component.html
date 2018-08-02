@@ -26,6 +26,12 @@
         </rz-grid-column>
         <rz-grid-column property="Fax" title="Fax" type="string">
         </rz-grid-column>
+        <rz-grid-column [filterable]="false" [sortable]="false" width="140px">
+          <ng-template let-data gridColumnTemplate>
+            <rz-button #button0 text="Orders" (click)="button0Click($event, data)">
+            </rz-button>
+          </ng-template>
+        </rz-grid-column>
       </rz-grid>
     </div>
   </div>

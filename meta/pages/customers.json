@@ -175,6 +175,33 @@
                       "property": "Fax",
                       "title": "Fax",
                       "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "CustomerID",
+                                    "value": "${data.CustomerID}"
+                                  }
+                                ],
+                                "path": "orders-by-customer-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "button0",
+                          "text": "Orders",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
                     }
                   ],
                   "type": "grid",

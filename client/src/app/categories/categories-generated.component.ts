@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
@@ -122,5 +123,12 @@ export class CategoriesGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditCategoryComponent, { parameters: {CategoryID: event.CategoryID}, title: 'Edit Category' });
+  }
+
+  button0Click(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['products-by-category-id', data.CategoryID]);
   }
 }

@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
 
@@ -122,5 +123,12 @@ export class EmployeesGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditEmployeeComponent, { parameters: {EmployeeID: event.EmployeeID}, title: 'Edit Employee' });
+  }
+
+  button0Click(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['orders-by-employee-id', data.EmployeeID]);
   }
 }

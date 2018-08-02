@@ -1,0 +1,36 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-heading #pageTitle size="H1" text="Customer: {{customer?.CompanyName}}">
+      </rz-heading>
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getCustomersCount" [data]="getCustomersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="CompanyName" title="Company Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ContactName" title="Contact Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ContactTitle" title="Contact Title" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Address" title="Address" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="City" title="City" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Region" title="Region" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="PostalCode" title="Postal Code" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Country" title="Country" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Phone" title="Phone" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Fax" title="Fax" type="string">
+        </rz-grid-column>
+        <rz-grid-column [filterable]="false" [sortable]="false" width="140px">
+          <ng-template let-data gridColumnTemplate>
+            <rz-button #button0 text="Orders" (click)="button0Click($event, data)">
+            </rz-button>
+          </ng-template>
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

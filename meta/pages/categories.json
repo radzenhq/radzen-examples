@@ -37,6 +37,33 @@
                       "property": "Description",
                       "title": "Description",
                       "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "CategoryID",
+                                    "value": "${data.CategoryID}"
+                                  }
+                                ],
+                                "path": "products-by-category-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "button0",
+                          "text": "Products",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "160px"
                     }
                   ],
                   "count": "${getCategoriesCount}",

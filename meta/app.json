@@ -60,7 +60,20 @@
     "Edit Supplier",
     "Territories",
     "Add Territory",
-    "Edit Territory"
+    "Edit Territory",
+    "Order Details by OrderID",
+    "Orders by OrderID",
+    "Orders by CustomerID",
+    "Products by CategoryID",
+    "Categories by CategoryID",
+    "Customers by CustomerID",
+    "Orders by EmployeeID",
+    "Employees by EmployeeID",
+    "Products by ProductID",
+    "Suppliers by SupplierID",
+    "Products by SupplierID",
+    "Regions by RegionID",
+    "Territories by RegionID"
   ],
   "startPage": "Categories",
   "theme": "default"

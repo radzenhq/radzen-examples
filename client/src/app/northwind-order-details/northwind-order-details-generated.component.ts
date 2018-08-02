@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddNorthwindOrderDetailComponent } from '../add-northwind-order-detail/add-northwind-order-detail.component';
 import { EditNorthwindOrderDetailComponent } from '../edit-northwind-order-detail/edit-northwind-order-detail.component';
 
@@ -122,5 +123,19 @@ export class NorthwindOrderDetailsGenerated implements AfterViewInit, OnInit, On
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditNorthwindOrderDetailComponent, { parameters: {OrderID: event.OrderID, ProductID: event.ProductID}, title: 'Edit Order Detail' });
+  }
+
+  orderButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['orders-by-order-id', data.OrderID]);
+  }
+
+  productButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['products-by-product-id', data.ProductID]);
   }
 }

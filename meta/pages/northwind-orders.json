@@ -32,18 +32,68 @@
                       "filterProperty": "Customer.CustomerID",
                       "property": "CustomerID",
                       "sortProperty": "Customer.CustomerID",
-                      "template": "${data.Customer?.CustomerID}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "CustomerID",
+                                    "value": "${data.CustomerID}"
+                                  }
+                                ],
+                                "path": "customers-by-customer-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "customersButton",
+                          "style": {
+                            "width": "140px"
+                          },
+                          "text": "${data.CustomerID}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Customer",
-                      "type": "string"
+                      "type": "string",
+                      "width": "160px"
                     },
                     {
                       "filterProperty": "Employee.LastName",
                       "format": "int32",
                       "property": "EmployeeID",
                       "sortProperty": "Employee.LastName",
-                      "template": "${data.Employee?.LastName}",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "EmployeeID",
+                                    "value": "${data.EmployeeID}"
+                                  }
+                                ],
+                                "path": "employees-by-employee-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "employeesButton",
+                          "style": {
+                            "width": "140px"
+                          },
+                          "text": "${data.Employee.LastName}",
+                          "type": "button"
+                        }
+                      ],
                       "title": "Employee",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "160px"
                     },
                     {
                       "format": "date-time",
@@ -69,6 +119,7 @@
                     {
                       "format": "double",
                       "property": "Freight",
+                      "template": "{{ data.Freight | currency}}",
                       "title": "Freight",
                       "type": "number"
                     },
@@ -93,6 +144,7 @@
                       "type": "string"
                     },
                     {
+                      "filterProperty": "",
                       "property": "ShipPostalCode",
                       "title": "Ship Postal Code",
                       "type": "string"
@@ -101,6 +153,33 @@
                       "property": "ShipCountry",
                       "title": "Ship Country",
                       "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "OrderID",
+                                    "value": "${data.OrderID}"
+                                  }
+                                ],
+                                "path": "order-details-by-order-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "orderDetailsButton",
+                          "text": "Details",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
                     }
                   ],
                   "count": "${getNorthwindOrdersCount}",

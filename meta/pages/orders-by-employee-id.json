@@ -1,0 +1,326 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-1 justify-content-start align-items-center d-flex",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "EmployeeID",
+                            "value": "${parameters.EmployeeID}"
+                          }
+                        ],
+                        "path": "employees-by-employee-id",
+                        "type": "navigate"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "button1",
+                  "text": "Employee",
+                  "type": "button"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-11 justify-content-start align-items-center d-flex",
+              "components": [
+                {
+                  "name": "pageTitle",
+                  "size": "H1",
+                  "style": {
+                    "marginLeft": "10px"
+                  },
+                  "text": "Orders by Employee: ${order.Employee.FirstName} ${order.Employee.LastName}",
+                  "type": "heading"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "addText": "Add",
+                  "allowAdd": false,
+                  "allowDelete": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "format": "int32",
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "OrderDate",
+                      "template": "${data.OrderDate | utcDate}",
+                      "title": "Order Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "RequiredDate",
+                      "template": "${data.RequiredDate | utcDate}",
+                      "title": "Required Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "template": "${data.ShippedDate | utcDate}",
+                      "title": "Shipped Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "double",
+                      "property": "Freight",
+                      "title": "Freight",
+                      "type": "number"
+                    },
+                    {
+                      "property": "ShipName",
+                      "title": "Ship Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipAddress",
+                      "title": "Ship Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCity",
+                      "title": "Ship City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipRegion",
+                      "title": "Ship Region",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "",
+                      "property": "ShipPostalCode",
+                      "title": "Ship Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "title": "Ship Country",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "OrderID",
+                                    "value": "${data.OrderID}"
+                                  }
+                                ],
+                                "path": "order-details-by-order-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "button0",
+                          "text": "Details",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
+                    }
+                  ],
+                  "count": "${getNorthwindOrdersCount}",
+                  "data": "${getNorthwindOrdersResult}",
+                  "emptyText": "No records to display.",
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-northwind-order",
+                        "title": "Add Order",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete NorthwindOrder",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteNorthwindOrder",
+                        "parameters": [
+                          {
+                            "name": "OrderID",
+                            "value": "${event.OrderID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "NorthwindOrder deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getNorthwindOrders",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,Employee"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter ? event.filter + ' and ':''}EmployeeID eq ${parameters.EmployeeID}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,Employee"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getNorthwindOrdersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getNorthwindOrdersCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "OrderID",
+                            "value": "${event.OrderID}"
+                          }
+                        ],
+                        "path": "edit-northwind-order",
+                        "title": "Edit Order",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getNorthwindOrders",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          },
+          {
+            "name": "$expand",
+            "value": "Customer,Employee"
+          },
+          {
+            "name": "$filter",
+            "value": "EmployeeID eq ${parameters.EmployeeID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "getNorthwindOrdersResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getNorthwindOrdersCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          },
+          {
+            "condition": "",
+            "name": "order",
+            "type": "set",
+            "value": "${result.value[0]}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Orders by EmployeeID"
+}

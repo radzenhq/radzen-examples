@@ -101,6 +101,33 @@
                       "property": "Notes",
                       "title": "Notes",
                       "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "EmployeeID",
+                                    "value": "${data.EmployeeID}"
+                                  }
+                                ],
+                                "path": "orders-by-employee-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "button0",
+                          "text": "Orders",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
                     }
                   ],
                   "count": "${getEmployeesCount}",

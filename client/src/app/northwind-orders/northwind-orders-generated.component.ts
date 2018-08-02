@@ -12,6 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddNorthwindOrderComponent } from '../add-northwind-order/add-northwind-order.component';
 import { EditNorthwindOrderComponent } from '../edit-northwind-order/edit-northwind-order.component';
 
@@ -122,5 +123,26 @@ export class NorthwindOrdersGenerated implements AfterViewInit, OnInit, OnDestro
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditNorthwindOrderComponent, { parameters: {OrderID: event.OrderID}, title: 'Edit Order' });
+  }
+
+  customersButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['customers-by-customer-id', data.CustomerID]);
+  }
+
+  employeesButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['employees-by-employee-id', data.EmployeeID]);
+  }
+
+  orderDetailsButtonClick(event: any, data: any) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.router.navigate(['order-details-by-order-id', data.OrderID]);
   }
 }
