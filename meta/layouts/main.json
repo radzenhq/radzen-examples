@@ -14,7 +14,7 @@
                 },
                 {
                   "name": "label0",
-                  "text": "Northwind",
+                  "text": "Radzen Northwind Demo",
                   "type": "label"
                 }
               ],
@@ -98,9 +98,11 @@
     {
       "components": [
         {
-          "name": "footerText",
-          "text": "Northwind, Copyright &copy; 2018",
-          "type": "label"
+          "icon": "",
+          "name": "link0",
+          "path": "https://github.com/akorchev/radzen/",
+          "text": "Source Code",
+          "type": "link"
         }
       ],
       "name": "footer0",

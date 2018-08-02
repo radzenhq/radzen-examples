@@ -8,6 +8,7 @@
               "class": "col-md-12",
               "components": [
                 {
+                  "columns": 2,
                   "data": "",
                   "events": {
                     "cancel": [

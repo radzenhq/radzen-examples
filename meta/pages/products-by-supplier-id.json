@@ -41,6 +41,7 @@
                     {
                       "format": "double",
                       "property": "UnitPrice",
+                      "template": "{{ data.UnitPrice | currency}}",
                       "title": "Unit Price",
                       "type": "number"
                     },
