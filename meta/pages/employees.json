@@ -63,43 +63,13 @@
                       "type": "string"
                     },
                     {
-                      "property": "Address",
-                      "title": "Address",
-                      "type": "string"
-                    },
-                    {
                       "property": "City",
                       "title": "City",
                       "type": "string"
                     },
                     {
-                      "property": "Region",
-                      "title": "Region",
-                      "type": "string"
-                    },
-                    {
-                      "property": "PostalCode",
-                      "title": "Postal Code",
-                      "type": "string"
-                    },
-                    {
                       "property": "Country",
                       "title": "Country",
-                      "type": "string"
-                    },
-                    {
-                      "property": "HomePhone",
-                      "title": "Home Phone",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Extension",
-                      "title": "Extension",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Notes",
-                      "title": "Notes",
                       "type": "string"
                     },
                     {

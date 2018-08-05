@@ -4722,11 +4722,15 @@ rz-button[type] {
   line-height: initial;
   font-size: 1.0625rem; }
   .ui-button:focus, .ui-paginator-element:focus {
-    outline: none;
-    box-shadow: none !important; }
-  .ui-button:not(.ui-state-disabled):hover, .ui-paginator-element:not(.ui-state-disabled):hover {
-    opacity: 0.9;
-    box-shadow: inset 0 -3px 0 0 rgba(255, 255, 255, 0.2); }
+    outline: none; }
+  .ui-button:not(.ui-state-disabled), .ui-paginator-element:not(.ui-state-disabled) {
+    cursor: pointer; }
+    .ui-button:not(.ui-state-disabled):hover:not(:active), .ui-paginator-element:not(.ui-state-disabled):hover:not(:active) {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+      box-shadow: inset 0 -3px 0 0 rgba(255, 255, 255, 0.2); }
+    .ui-button:not(.ui-state-disabled):active, .ui-paginator-element:not(.ui-state-disabled):active {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+      box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.1); }
   .ui-button.ui-state-disabled, .ui-state-disabled.ui-paginator-element {
     opacity: 0.2; }
   .ui-button .ui-button-text, .ui-paginator-element .ui-button-text {
@@ -4738,7 +4742,8 @@ rz-button[type] {
   .ui-splitbutton .ui-button-text-only, .ui-splitbutton-menubutton, .ui-selectbutton .ui-button, .ui-selectbutton .ui-paginator-element, .ui-date-filter-buttons .ui-button, .ui-date-filter-buttons .ui-paginator-element {
     font-size: 1.0625rem;
     font-weight: normal;
-    padding: 0 2.25rem; }
+    padding: 0 2rem;
+    height: 2.1875rem; }
     .ui-button-md.ui-button-text-icon-left, .ui-picklist-buttons-cell .ui-button-text-icon-left.ui-button, .ui-picklist-buttons-cell .ui-button-text-icon-left.ui-paginator-element, .ui-splitbutton .ui-button-text-icon-left, .ui-button-text-icon-left.ui-splitbutton-menubutton, .ui-selectbutton .ui-button-text-icon-left.ui-button, .ui-selectbutton .ui-button-text-icon-left.ui-paginator-element, .ui-date-filter-buttons .ui-button-text-icon-left.ui-button, .ui-date-filter-buttons .ui-button-text-icon-left.ui-paginator-element {
       padding: 0 1.375rem; }
     .ui-button-md.ui-button-icon-only, .ui-picklist-buttons-cell .ui-button-icon-only.ui-button, .ui-picklist-buttons-cell .ui-paginator-element, .ui-picklist-buttons-cell .ui-button.fc-prev-button, .ui-picklist-buttons-cell
@@ -4766,7 +4771,8 @@ rz-button[type] {
   .ui-button-sm, .ui-fileupload .ui-button, .ui-fileupload .ui-paginator-element, .ui-paginator-element, .fc .fc-prev-button,
   .fc .fc-next-button {
     font-size: 0.875rem;
-    padding: 0 2.875rem; }
+    padding: 0 2.875rem;
+    height: 1.75rem; }
     .ui-button-sm.ui-button-text-icon-left, .ui-fileupload .ui-button-text-icon-left.ui-button, .ui-button-text-icon-left.ui-paginator-element, .fc .ui-button-text-icon-left.fc-prev-button,
     .fc .ui-button-text-icon-left.fc-next-button {
       padding: 0 1.375rem; }
@@ -4788,7 +4794,7 @@ rz-button[type] {
 .btn-primary {
   background-color: #ff6d41; }
 
-.btn-light, .ui-datatable-header .ui-button, .ui-datatable-header .ui-paginator-element {
+.btn-light {
   background-color: #e6ecef;
   color: #3a474d; }
 
@@ -6187,18 +6193,30 @@ p-radiobutton {
 .ui-datatable-even td {
   background-color: #ffffff; }
 
-.ui-datatable-data .ui-button-sm, .ui-datatable-data .ui-fileupload .ui-button, .ui-fileupload .ui-datatable-data .ui-button, .ui-datatable-data .ui-paginator-element, .ui-datatable-data .fc .fc-prev-button, .fc .ui-datatable-data .fc-prev-button, .ui-datatable-data
+.ui-datatable-data .ui-cell-data .ui-button-sm, .ui-datatable-data .ui-cell-data .ui-fileupload .ui-button, .ui-fileupload .ui-datatable-data .ui-cell-data .ui-button, .ui-datatable-data .ui-cell-data .ui-paginator-element, .ui-datatable-data .ui-cell-data .fc .fc-prev-button, .fc .ui-datatable-data .ui-cell-data .fc-prev-button, .ui-datatable-data .ui-cell-data
 .fc .fc-next-button,
-.fc .ui-datatable-data .fc-next-button {
-  padding: 0.1875rem 0.25rem;
-  line-height: 0.6875rem; }
-  .ui-datatable-data .ui-button-sm .ui-button-icon-left, .ui-datatable-data .ui-fileupload .ui-button .ui-button-icon-left, .ui-fileupload .ui-datatable-data .ui-button .ui-button-icon-left, .ui-datatable-data .ui-paginator-element .ui-button-icon-left, .ui-datatable-data .fc .fc-prev-button .ui-button-icon-left, .fc .ui-datatable-data .fc-prev-button .ui-button-icon-left, .ui-datatable-data
+.fc .ui-datatable-data .ui-cell-data .fc-next-button {
+  line-height: 1.25rem;
+  padding: 0 0.6875rem;
+  height: 1.25rem;
+  font-size: 0.75rem; }
+  .ui-datatable-data .ui-cell-data .ui-button-sm .ui-button-icon-left, .ui-datatable-data .ui-cell-data .ui-fileupload .ui-button .ui-button-icon-left, .ui-fileupload .ui-datatable-data .ui-cell-data .ui-button .ui-button-icon-left, .ui-datatable-data .ui-cell-data .ui-paginator-element .ui-button-icon-left, .ui-datatable-data .ui-cell-data .fc .fc-prev-button .ui-button-icon-left, .fc .ui-datatable-data .ui-cell-data .fc-prev-button .ui-button-icon-left, .ui-datatable-data .ui-cell-data
   .fc .fc-next-button .ui-button-icon-left,
-  .fc .ui-datatable-data .fc-next-button .ui-button-icon-left {
-    font-size: 0.6875rem;
-    height: 0.6875rem;
-    line-height: 1;
-    width: 0.6875rem; }
+  .fc .ui-datatable-data .ui-cell-data .fc-next-button .ui-button-icon-left {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    width: 0.75rem; }
+  .ui-datatable-data .ui-cell-data .ui-button-sm .ui-button-text, .ui-datatable-data .ui-cell-data .ui-fileupload .ui-button .ui-button-text, .ui-fileupload .ui-datatable-data .ui-cell-data .ui-button .ui-button-text, .ui-datatable-data .ui-cell-data .ui-paginator-element .ui-button-text, .ui-datatable-data .ui-cell-data .fc .fc-prev-button .ui-button-text, .fc .ui-datatable-data .ui-cell-data .fc-prev-button .ui-button-text, .ui-datatable-data .ui-cell-data
+  .fc .fc-next-button .ui-button-text,
+  .fc .ui-datatable-data .ui-cell-data .fc-next-button .ui-button-text {
+    line-height: 1.25rem; }
+  .ui-datatable-data .ui-cell-data .ui-button-sm.ui-button-icon-only, .ui-datatable-data .ui-cell-data .ui-fileupload .ui-button-icon-only.ui-button, .ui-fileupload .ui-datatable-data .ui-cell-data .ui-button-icon-only.ui-button, .ui-datatable-data .ui-cell-data .ui-fileupload .ui-paginator-element, .ui-fileupload .ui-datatable-data .ui-cell-data .ui-paginator-element, .ui-datatable-data .ui-cell-data .ui-fileupload .ui-button.fc-prev-button, .ui-fileupload .ui-datatable-data .ui-cell-data .ui-button.fc-prev-button, .ui-datatable-data .ui-cell-data .ui-fileupload
+  .ui-button.fc-next-button, .ui-fileupload .ui-datatable-data .ui-cell-data
+  .ui-button.fc-next-button, .ui-datatable-data .ui-cell-data .ui-paginator-element, .ui-datatable-data .ui-cell-data .fc .fc-prev-button, .fc .ui-datatable-data .ui-cell-data .fc-prev-button, .ui-datatable-data .ui-cell-data
+  .fc .fc-next-button,
+  .fc .ui-datatable-data .ui-cell-data .fc-next-button, .ui-datatable-data .ui-cell-data .ui-button-sm.fc-prev-button, .ui-datatable-data .ui-cell-data .fc-prev-button.ui-paginator-element, .ui-datatable-data .ui-cell-data
+  .ui-button-sm.fc-next-button, .ui-datatable-data .ui-cell-data .fc-next-button.ui-paginator-element {
+    padding: 0 0.25rem; }
 
 .ui-datatable-data td {
   padding: 0.5rem 0.625rem 0.5rem 0.625rem;
