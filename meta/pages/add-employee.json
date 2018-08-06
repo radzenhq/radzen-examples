@@ -142,6 +142,12 @@
                       "requiredText": "is required",
                       "title": "Notes",
                       "type": "string"
+                    },
+                    {
+                      "property": "Photo",
+                      "title": "Photo",
+                      "type": "file",
+                      "requiredText": "is required"
                     }
                   ],
                   "name": "form0",

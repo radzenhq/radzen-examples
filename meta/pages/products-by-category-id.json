@@ -23,12 +23,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "int32",
-                      "property": "ProductID",
-                      "title": "Product ID",
-                      "type": "integer"
-                    },
-                    {
                       "property": "ProductName",
                       "title": "Product Name",
                       "type": "string"

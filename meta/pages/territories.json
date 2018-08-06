@@ -1,33 +1,103 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "heading",
           "name": "pageTitle",
           "size": "H1",
-          "text": "Territories"
+          "text": "Territories",
+          "type": "heading"
         },
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "name": "grid0",
-                  "allowDelete": true,
+                  "addText": "Add",
                   "allowAdd": true,
+                  "allowDelete": true,
                   "allowFiltering": true,
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "TerritoryDescription",
+                      "title": "Territory Description",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "Region.RegionDescription",
+                      "sortProperty": "Region.RegionDescription",
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "RegionID",
+                                    "value": "${data.RegionID}"
+                                  }
+                                ],
+                                "path": "regions-by-region-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "regionButton",
+                          "style": {
+                            "width": "140px"
+                          },
+                          "text": "${data.Region?.RegionDescription}",
+                          "type": "button"
+                        }
+                      ],
+                      "title": "Region",
+                      "type": "string",
+                      "width": "160px"
+                    }
+                  ],
                   "count": "${getTerritoriesCount}",
                   "data": "${getTerritoriesResult}",
+                  "emptyText": "No records to display.",
                   "events": {
+                    "add": [
+                      {
+                        "path": "add-territory",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Territory",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteTerritory",
+                        "parameters": [
+                          {
+                            "name": "TerritoryID",
+                            "value": "${event.TerritoryID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Territory deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
                     "loadData": [
                       {
                         "name": "Northwind.getTerritories",
@@ -76,40 +146,6 @@
                         "type": "invoke"
                       }
                     ],
-                    "delete": [
-                      {
-                        "error": [
-                          {
-                            "detail": "Unable to delete Territory",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "Northwind.deleteTerritory",
-                        "parameters": [
-                          {
-                            "name": "TerritoryID",
-                            "value": "${event.TerritoryID}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "detail": "Territory deleted!",
-                            "severity": "success",
-                            "summary": "Success",
-                            "type": "notify"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "add": [
-                      {
-                        "path": "add-territory",
-                        "type": "popup"
-                      }
-                    ],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -123,60 +159,19 @@
                       }
                     ]
                   },
+                  "name": "grid0",
                   "title": "",
-                  "columns": [
-                    {
-                      "property": "TerritoryID",
-                      "title": "Territory ID",
-                      "type": "string"
-                    },
-                    {
-                      "property": "TerritoryDescription",
-                      "title": "Territory Description",
-                      "type": "string"
-                    },
-                    {
-                      "filterProperty": "Region.RegionDescription",
-                      "sortProperty": "Region.RegionDescription",
-                      "template": [
-                        {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "RegionID",
-                                    "value": "${data.RegionID}"
-                                  }
-                                ],
-                                "path": "regions-by-region-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "regionButton",
-                          "style": {
-                            "width": "140px"
-                          },
-                          "text": "${data.Region?.RegionDescription}",
-                          "type": "button"
-                        }
-                      ],
-                      "title": "Region",
-                      "type": "string",
-                      "width": "160px"
-                    }
-                  ],
-                  "type": "grid",
-                  "emptyText": "No records to display.",
-                  "addText": "Add"
+                  "type": "grid"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -217,6 +212,6 @@
       }
     ]
   },
-  "name": "Territories",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Territories"
 }

@@ -23,11 +23,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "property": "TerritoryID",
-                      "title": "Territory ID",
-                      "type": "string"
-                    },
-                    {
                       "property": "TerritoryDescription",
                       "title": "Territory Description",
                       "type": "string"

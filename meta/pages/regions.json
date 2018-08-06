@@ -23,12 +23,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "int32",
-                      "property": "RegionID",
-                      "title": "Region ID",
-                      "type": "integer"
-                    },
-                    {
                       "property": "RegionDescription",
                       "title": "Region Description",
                       "type": "string"

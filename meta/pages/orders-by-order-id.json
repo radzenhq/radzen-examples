@@ -23,12 +23,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "int32",
-                      "property": "OrderID",
-                      "title": "Order ID",
-                      "type": "integer"
-                    },
-                    {
                       "filterProperty": "Customer.CompanyName",
                       "property": "CustomerID",
                       "sortProperty": "Customer.CompanyName",

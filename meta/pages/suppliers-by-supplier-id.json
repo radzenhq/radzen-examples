@@ -23,12 +23,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "int32",
-                      "property": "SupplierID",
-                      "title": "Supplier ID",
-                      "type": "integer"
-                    },
-                    {
                       "property": "CompanyName",
                       "title": "Company Name",
                       "type": "string"

@@ -23,12 +23,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "int32",
-                      "property": "CategoryID",
-                      "title": "Category ID",
-                      "type": "integer"
-                    },
-                    {
                       "property": "CategoryName",
                       "title": "Category Name",
                       "type": "string"

@@ -97,15 +97,8 @@ export class CustomersGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0LoadData(event: any) {
-    this.northwind.getCustomers(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
-    .subscribe((result: any) => {
-      this.getCustomersResult = result.value;
-
-      this.getCustomersCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
-    }, (result: any) => {
-
-    });
+  grid0Add(event: any) {
+    this.dialogService.open(AddCustomerComponent, { parameters: {}, title: 'Add Customer' });
   }
 
   grid0Delete(event: any) {
@@ -117,8 +110,15 @@ export class CustomersGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0Add(event: any) {
-    this.dialogService.open(AddCustomerComponent, { parameters: {}, title: 'Add Customer' });
+  grid0LoadData(event: any) {
+    this.northwind.getCustomers(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    .subscribe((result: any) => {
+      this.getCustomersResult = result.value;
+
+      this.getCustomersCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
+    }, (result: any) => {
+
+    });
   }
 
   grid0RowSelect(event: any) {

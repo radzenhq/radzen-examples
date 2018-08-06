@@ -4821,12 +4821,15 @@ rz-button[type] {
   border: 1px solid #cecece; }
 
 .textbox:disabled, .textarea:disabled, p-inputmask .ui-inputtext:disabled, .ui-dropdown:disabled, .ui-multiselect:disabled, .ui-calendar-w-btn:disabled, .ui-spinner:disabled, .ui-lookup-search input:disabled, .ui-chkbox-box.ui-state-disabled, .ui-radiobutton-box.ui-state-disabled, .ui-state-disabled.ui-dropdown, .ui-state-disabled.ui-multiselect, .ui-autocomplete-input:disabled, .ui-listbox.ui-state-disabled, .ui-picklist.ui-state-disabled, .ui-calendar-w-btn.ui-state-disabled, .ui-spinner.ui-state-disabled {
-  color: rgba(58, 58, 58, 0.2);
+  color: rgba(58, 58, 58, 0.4);
   box-shadow: inset 0 4px 7px 0 rgba(0, 0, 0, 0.03);
   background-color: rgba(255, 255, 255, 0.7);
   border: solid 1px #eaeaea; }
   .textbox:disabled::placeholder, .textarea:disabled::placeholder, p-inputmask .ui-inputtext:disabled::placeholder, .ui-dropdown:disabled::placeholder, .ui-multiselect:disabled::placeholder, .ui-calendar-w-btn:disabled::placeholder, .ui-spinner:disabled::placeholder, .ui-lookup-search input:disabled::placeholder, .ui-chkbox-box.ui-state-disabled::placeholder, .ui-radiobutton-box.ui-state-disabled::placeholder, .ui-state-disabled.ui-dropdown::placeholder, .ui-state-disabled.ui-multiselect::placeholder, .ui-autocomplete-input:disabled::placeholder, .ui-listbox.ui-state-disabled::placeholder, .ui-picklist.ui-state-disabled::placeholder, .ui-calendar-w-btn.ui-state-disabled::placeholder, .ui-spinner.ui-state-disabled::placeholder {
-    color: rgba(58, 58, 58, 0.2); }
+    color: rgba(58, 58, 58, 0.4); }
+  .textbox:disabled .ui-inputtext, .textarea:disabled .ui-inputtext, p-inputmask .ui-inputtext:disabled .ui-inputtext, .ui-dropdown:disabled .ui-inputtext, .ui-multiselect:disabled .ui-inputtext, .ui-calendar-w-btn:disabled .ui-inputtext, .ui-spinner:disabled .ui-inputtext, .ui-lookup-search input:disabled .ui-inputtext, .ui-chkbox-box.ui-state-disabled .ui-inputtext, .ui-radiobutton-box.ui-state-disabled .ui-inputtext, .ui-state-disabled.ui-dropdown .ui-inputtext, .ui-state-disabled.ui-multiselect .ui-inputtext, .ui-autocomplete-input:disabled .ui-inputtext, .ui-listbox.ui-state-disabled .ui-inputtext, .ui-picklist.ui-state-disabled .ui-inputtext, .ui-calendar-w-btn.ui-state-disabled .ui-inputtext, .ui-spinner.ui-state-disabled .ui-inputtext {
+    background-color: transparent;
+    color: inherit; }
 
 .textbox:focus, .textarea:focus, p-inputmask .ui-inputtext:focus, .ui-dropdown:focus, .ui-multiselect:focus, .ui-calendar-w-btn:focus, .ui-spinner:focus, .ui-lookup-search input:focus, .ui-chkbox-box.ui-state-focus, .ui-radiobutton-box.ui-state-focus {
   outline: none; }
@@ -5820,8 +5823,6 @@ p-radiobutton {
   .ui-calendar-w-btn:not(.ui-state-disabled):hover .ui-datepicker-trigger {
     box-shadow: none;
     color: #479cc8; }
-  .ui-calendar-w-btn.ui-state-disabled .ui-inputtext {
-    background-color: transparent; }
 
 .ui-datepicker-trigger {
   position: absolute;
@@ -5985,8 +5986,6 @@ p-radiobutton {
     .ui-spinner input[type='number']::-webkit-inner-spin-button, .ui-spinner input[type='number']::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0; }
-  .ui-spinner.ui-state-disabled .ui-inputtext {
-    background-color: transparent; }
   .ui-spinner.ui-state-disabled .ui-spinner-button {
     background-color: #dadfe2;
     color: #88989b; }
@@ -6797,6 +6796,7 @@ p-radiobutton {
   margin: 0; }
   .ui-tabview-nav li {
     border: solid 1px #dfe7ec;
+    border-top-width: 2px;
     border-bottom-color: #e6ecef;
     background-color: #e6ecef;
     border-radius: 4px 4px 0 0; }
@@ -6806,7 +6806,8 @@ p-radiobutton {
       .ui-tabview-nav li:hover:not(.ui-tabview-selected) a {
         color: #479cc8; }
     .ui-tabview-nav li a {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       color: rgba(58, 71, 77, 0.5);
       padding: 0.375rem 1.875rem;
       font-weight: 600; }
@@ -6829,6 +6830,9 @@ p-radiobutton {
 .ui-tabview-panel {
   overflow: auto;
   padding: 1.25rem; }
+
+.ui-tabview-left-icon {
+  font-size: 1.0625rem; }
 
 .ui-dialog {
   position: fixed;

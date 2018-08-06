@@ -124,37 +124,6 @@
                       "type": "number"
                     },
                     {
-                      "property": "ShipName",
-                      "title": "Ship Name",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipAddress",
-                      "title": "Ship Address",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipCity",
-                      "title": "Ship City",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipRegion",
-                      "title": "Ship Region",
-                      "type": "string"
-                    },
-                    {
-                      "filterProperty": "",
-                      "property": "ShipPostalCode",
-                      "title": "Ship Postal Code",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipCountry",
-                      "title": "Ship Country",
-                      "type": "string"
-                    },
-                    {
                       "filterable": false,
                       "sortable": false,
                       "template": [

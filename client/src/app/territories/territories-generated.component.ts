@@ -97,15 +97,8 @@ export class TerritoriesGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0LoadData(event: any) {
-    this.northwind.getTerritories(`${event.filter}`, event.top, event.skip, `${event.orderby}`, `Region`, event.top != null && event.skip != null)
-    .subscribe((result: any) => {
-      this.getTerritoriesResult = result.value;
-
-      this.getTerritoriesCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
-    }, (result: any) => {
-
-    });
+  grid0Add(event: any) {
+    this.dialogService.open(AddTerritoryComponent, { parameters: {}, title: 'Add Territory' });
   }
 
   grid0Delete(event: any) {
@@ -117,8 +110,15 @@ export class TerritoriesGenerated implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  grid0Add(event: any) {
-    this.dialogService.open(AddTerritoryComponent, { parameters: {}, title: 'Add Territory' });
+  grid0LoadData(event: any) {
+    this.northwind.getTerritories(`${event.filter}`, event.top, event.skip, `${event.orderby}`, `Region`, event.top != null && event.skip != null)
+    .subscribe((result: any) => {
+      this.getTerritoriesResult = result.value;
+
+      this.getTerritoriesCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
+    }, (result: any) => {
+
+    });
   }
 
   grid0RowSelect(event: any) {

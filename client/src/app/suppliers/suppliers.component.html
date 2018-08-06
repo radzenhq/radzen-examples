@@ -4,8 +4,6 @@
   <div class="row">
     <div class="col-md-12">
       <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getSuppliersCount" [data]="getSuppliersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
-        <rz-grid-column format="int32" property="SupplierID" title="Supplier ID" type="integer">
-        </rz-grid-column>
         <rz-grid-column property="CompanyName" title="Company Name" type="string">
         </rz-grid-column>
         <rz-grid-column property="ContactName" title="Contact Name" type="string">

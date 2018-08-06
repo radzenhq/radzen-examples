@@ -23,19 +23,23 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "int32",
-                      "property": "EmployeeID",
-                      "title": "Employee ID",
-                      "type": "integer"
-                    },
-                    {
-                      "property": "LastName",
-                      "title": "Last Name",
-                      "type": "string"
+                      "filterable": false,
+                      "format": "base64",
+                      "property": "Photo",
+                      "sortable": false,
+                      "template": "<img width='100%' height='100%' src='${data.Photo}' />",
+                      "title": "Photo",
+                      "type": "string",
+                      "width": "120px"
                     },
                     {
                       "property": "FirstName",
                       "title": "First Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "LastName",
+                      "title": "Last Name",
                       "type": "string"
                     },
                     {
@@ -63,43 +67,13 @@
                       "type": "string"
                     },
                     {
-                      "property": "Address",
-                      "title": "Address",
-                      "type": "string"
-                    },
-                    {
                       "property": "City",
                       "title": "City",
                       "type": "string"
                     },
                     {
-                      "property": "Region",
-                      "title": "Region",
-                      "type": "string"
-                    },
-                    {
-                      "property": "PostalCode",
-                      "title": "Postal Code",
-                      "type": "string"
-                    },
-                    {
                       "property": "Country",
                       "title": "Country",
-                      "type": "string"
-                    },
-                    {
-                      "property": "HomePhone",
-                      "title": "Home Phone",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Extension",
-                      "title": "Extension",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Notes",
-                      "title": "Notes",
                       "type": "string"
                     },
                     {

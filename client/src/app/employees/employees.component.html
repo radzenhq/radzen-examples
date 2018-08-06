@@ -4,11 +4,14 @@
   <div class="row">
     <div class="col-md-12">
       <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
-        <rz-grid-column format="int32" property="EmployeeID" title="Employee ID" type="integer">
-        </rz-grid-column>
-        <rz-grid-column property="LastName" title="Last Name" type="string">
+        <rz-grid-column [filterable]="false" format="base64" property="Photo" [sortable]="false" title="Photo" width="120px" type="string">
+          <ng-template let-data gridColumnTemplate>
+          <img width='100%' height='100%' src='{{data?.Photo}}' />
+          </ng-template>
         </rz-grid-column>
         <rz-grid-column property="FirstName" title="First Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="LastName" title="Last Name" type="string">
         </rz-grid-column>
         <rz-grid-column property="Title" title="Title" type="string">
         </rz-grid-column>

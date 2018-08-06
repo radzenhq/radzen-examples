@@ -1,131 +1,27 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "heading",
           "name": "pageTitle",
           "size": "H1",
-          "text": "Customers"
+          "text": "Customers",
+          "type": "heading"
         },
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "name": "grid0",
-                  "allowDelete": true,
+                  "addText": "Add",
                   "allowAdd": true,
+                  "allowDelete": true,
                   "allowFiltering": true,
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getCustomersCount}",
-                  "data": "${getCustomersResult}",
-                  "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getCustomers",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getCustomersResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getCustomersCount",
-                            "type": "set",
-                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "delete": [
-                      {
-                        "error": [
-                          {
-                            "detail": "Unable to delete Customer",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "Northwind.deleteCustomer",
-                        "parameters": [
-                          {
-                            "name": "CustomerID",
-                            "value": "${event.CustomerID}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "detail": "Customer deleted!",
-                            "severity": "success",
-                            "summary": "Success",
-                            "type": "notify"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "add": [
-                      {
-                        "path": "add-customer",
-                        "type": "popup"
-                      }
-                    ],
-                    "rowSelect": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "CustomerID",
-                            "value": "${event.CustomerID}"
-                          }
-                        ],
-                        "path": "edit-customer",
-                        "type": "popup"
-                      }
-                    ]
-                  },
-                  "title": "",
                   "columns": [
-                    {
-                      "property": "CustomerID",
-                      "title": "Customer ID",
-                      "type": "string"
-                    },
                     {
                       "property": "CompanyName",
                       "title": "Company Name",
@@ -204,15 +100,114 @@
                       "width": "140px"
                     }
                   ],
-                  "type": "grid",
+                  "count": "${getCustomersCount}",
+                  "data": "${getCustomersResult}",
                   "emptyText": "No records to display.",
-                  "addText": "Add"
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-customer",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Customer",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteCustomer",
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Customer deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "Northwind.getCustomers",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getCustomersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getCustomersCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          }
+                        ],
+                        "path": "edit-customer",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -249,6 +244,6 @@
       }
     ]
   },
-  "name": "Customers",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Customers"
 }
