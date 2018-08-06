@@ -141,13 +141,13 @@
                       "required": false,
                       "requiredText": "is required",
                       "title": "Notes",
-                      "type": "string"
+                      "type": "text"
                     },
                     {
                       "property": "Photo",
+                      "requiredText": "is required",
                       "title": "Photo",
-                      "type": "file",
-                      "requiredText": "is required"
+                      "type": "file"
                     }
                   ],
                   "name": "form0",
