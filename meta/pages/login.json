@@ -1,0 +1,79 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "content": "<h1 style='display:inline'>Login</h1>\n<i style='float:right;width:250px;'>\nadmin@example.com/@Admin123\nuser@example.com/@User123\n</i>\n",
+          "name": "html0",
+          "type": "html"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "allowRegister": false,
+                  "allowResetPassword": false,
+                  "events": {
+                    "login": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Security.login",
+                        "parameters": [
+                          {
+                            "name": "username",
+                            "value": "${event.username.trim()}"
+                          },
+                          {
+                            "name": "password",
+                            "value": "${event.password.trim()}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "register": [
+                      {
+                        "path": "register-application-user",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "loginText": "Login",
+                  "name": "login0",
+                  "passwordRequired": "Password is required",
+                  "passwordText": "Password",
+                  "registerMessageText": "Don't have an account yet?",
+                  "registerText": "Sign up",
+                  "type": "login",
+                  "userRequired": "Username is required",
+                  "userText": "Username"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "layout": "Login",
+  "name": "Login"
+}

@@ -17,6 +17,7 @@ import { AddCategoryComponent } from '../add-category/add-category.component';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class CategoriesByCategoryIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -41,6 +42,8 @@ export class CategoriesByCategoryIdGenerated implements AfterViewInit, OnInit, O
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getCategoriesResult: any;
 
@@ -69,6 +72,7 @@ export class CategoriesByCategoryIdGenerated implements AfterViewInit, OnInit, O
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

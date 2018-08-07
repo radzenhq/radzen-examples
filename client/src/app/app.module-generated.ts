@@ -13,6 +13,8 @@ import { ContentContainerModule } from '@radzen/angular/dist/content-container';
 import { HeaderModule } from '@radzen/angular/dist/header';
 import { SidebarToggleModule } from '@radzen/angular/dist/sidebar-toggle';
 import { LabelModule } from '@radzen/angular/dist/label';
+import { ProfileMenuModule } from '@radzen/angular/dist/profilemenu';
+import { GravatarModule } from '@radzen/angular/dist/gravatar';
 import { SidebarModule } from '@radzen/angular/dist/sidebar';
 import { PanelMenuModule } from '@radzen/angular/dist/panelmenu';
 import { FooterModule } from '@radzen/angular/dist/footer';
@@ -22,6 +24,8 @@ import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
 import { ButtonModule } from '@radzen/angular/dist/button';
 import { FormModule } from '@radzen/angular/dist/form';
+import { HtmlModule } from '@radzen/angular/dist/html';
+import { LoginModule } from '@radzen/angular/dist/login';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -80,10 +84,22 @@ import { SuppliersBySupplierIdComponent } from './suppliers-by-supplier-id/suppl
 import { ProductsBySupplierIdComponent } from './products-by-supplier-id/products-by-supplier-id.component';
 import { RegionsByRegionIdComponent } from './regions-by-region-id/regions-by-region-id.component';
 import { TerritoriesByRegionIdComponent } from './territories-by-region-id/territories-by-region-id.component';
+import { LoginComponent } from './login/login.component';
+import { AddApplicationRoleComponent } from './add-application-role/add-application-role.component';
+import { AddApplicationUserComponent } from './add-application-user/add-application-user.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ApplicationRolesComponent } from './application-roles/application-roles.component';
+import { ApplicationUsersComponent } from './application-users/application-users.component';
+import { RegisterApplicationUserComponent } from './register-application-user/register-application-user.component';
+import { EditApplicationUserComponent } from './edit-application-user/edit-application-user.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 import { NorthwindService } from './northwind.service';
+import { SecurityService, UserService } from './security.service';
+import { SecurityInterceptor } from './security.interceptor';
+import { AuthGuard } from './auth.guard';
 
 export const PageDeclarations = [
   CategoriesComponent,
@@ -135,6 +151,15 @@ export const PageDeclarations = [
   ProductsBySupplierIdComponent,
   RegionsByRegionIdComponent,
   TerritoriesByRegionIdComponent,
+  LoginComponent,
+  AddApplicationRoleComponent,
+  AddApplicationUserComponent,
+  ProfileComponent,
+  ApplicationRolesComponent,
+  ApplicationUsersComponent,
+  RegisterApplicationUserComponent,
+  EditApplicationUserComponent,
+  UnauthorizedComponent,
 ];
 
 export const LayoutDeclarations = [
@@ -155,6 +180,14 @@ export const AppProviders = [
     multi: true
   },
   NorthwindService,
+  UserService,
+  SecurityService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: SecurityInterceptor,
+    multi: true
+  },
+  AuthGuard,
   ConfigService,
   {
     provide: APP_INITIALIZER,
@@ -175,6 +208,8 @@ export const AppImports = [
   HeaderModule,
   SidebarToggleModule,
   LabelModule,
+  ProfileMenuModule,
+  GravatarModule,
   SidebarModule,
   PanelMenuModule,
   FooterModule,
@@ -184,6 +219,8 @@ export const AppImports = [
   GridModule,
   ButtonModule,
   FormModule,
+  HtmlModule,
+  LoginModule,
   SharedModule,
   NotificationModule,
   DialogModule,

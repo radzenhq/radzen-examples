@@ -264,7 +264,7 @@ export class ODataClient {
 
   private filterRequestBody(body) {
     return Object.keys(body)
-      .filter(key => !Array.isArray(body[key]) && !(Object.prototype.toString.call(body[key]) === '[object Object]'))
+      .filter(key => key == 'RoleNames' || (!Array.isArray(body[key]) && !(Object.prototype.toString.call(body[key]) === '[object Object]')))
       .reduce((obj, key) => {
         return {
           ...obj,

@@ -1,0 +1,72 @@
+{
+  "access": [
+    "admin"
+  ],
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "name": "Security.createRole",
+                        "parameters": [
+                          {
+                            "name": "Role",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "application-roles",
+                            "type": "navigate"
+                          }
+                        ],
+                        "error": [
+                          {
+                            "severity": "error",
+                            "summary": "Cannot create role",
+                            "detail": "${result.error.message}",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Name",
+                      "required": true,
+                      "title": "Name",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "name": "Add Application Role",
+  "layout": "Main"
+}

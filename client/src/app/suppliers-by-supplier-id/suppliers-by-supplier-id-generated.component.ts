@@ -16,6 +16,7 @@ import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 import { EditSupplierComponent } from '../edit-supplier/edit-supplier.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class SuppliersBySupplierIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -40,6 +41,8 @@ export class SuppliersBySupplierIdGenerated implements AfterViewInit, OnInit, On
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getSuppliersResult: any;
 
@@ -68,6 +71,7 @@ export class SuppliersBySupplierIdGenerated implements AfterViewInit, OnInit, On
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

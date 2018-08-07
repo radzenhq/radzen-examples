@@ -16,6 +16,7 @@ import { AddEmployeeTerritoryComponent } from '../add-employee-territory/add-emp
 import { EditEmployeeTerritoryComponent } from '../edit-employee-territory/edit-employee-territory.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class EmployeeTerritoriesGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -40,6 +41,8 @@ export class EmployeeTerritoriesGenerated implements AfterViewInit, OnInit, OnDe
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getEmployeeTerritoriesResult: any;
 
@@ -66,6 +69,7 @@ export class EmployeeTerritoriesGenerated implements AfterViewInit, OnInit, OnDe
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

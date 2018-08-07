@@ -16,6 +16,7 @@ import { AddRegionComponent } from '../add-region/add-region.component';
 import { EditRegionComponent } from '../edit-region/edit-region.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class RegionsByRegionIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -40,6 +41,8 @@ export class RegionsByRegionIdGenerated implements AfterViewInit, OnInit, OnDest
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getRegionsResult: any;
 
@@ -68,6 +71,7 @@ export class RegionsByRegionIdGenerated implements AfterViewInit, OnInit, OnDest
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

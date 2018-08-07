@@ -1,0 +1,15 @@
+<rz-content #content1 container="main">
+  <rz-html #html0>
+    <h1 style='display:inline'>Login</h1>
+    <i style='float:right;width:250px;'>
+    admin@example.com/@Admin123
+    user@example.com/@User123
+    </i>
+  </rz-html>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-login #login0 [allowRegister]="false" [allowResetPassword]="false" loginText="Login" passwordRequired="Password is required" passwordText="Password" registerMessageText="Don't have an account yet?" registerText="Sign up" userRequired="Username is required" userText="Username" (login)="login0Login($event)" (register)="login0Register($event)">
+      </rz-login>
+    </div>
+  </div>
+</rz-content>

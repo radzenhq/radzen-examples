@@ -17,6 +17,7 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class ProductsGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -41,6 +42,8 @@ export class ProductsGenerated implements AfterViewInit, OnInit, OnDestroy {
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getNorthwindProductsResult: any;
 
@@ -67,6 +70,7 @@ export class ProductsGenerated implements AfterViewInit, OnInit, OnDestroy {
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

@@ -16,6 +16,7 @@ import { AddTerritoryComponent } from '../add-territory/add-territory.component'
 import { EditTerritoryComponent } from '../edit-territory/edit-territory.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class TerritoriesByRegionIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -40,6 +41,8 @@ export class TerritoriesByRegionIdGenerated implements AfterViewInit, OnInit, On
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getTerritoriesResult: any;
 
@@ -68,6 +71,7 @@ export class TerritoriesByRegionIdGenerated implements AfterViewInit, OnInit, On
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

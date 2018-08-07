@@ -1,4 +1,5 @@
 {
+  "access": "Authenticated",
   "components": [
     {
       "components": [

@@ -1,0 +1,133 @@
+{
+  "access": [
+    "admin"
+  ],
+  "events": {
+    "load": [
+      {
+        "type": "invoke",
+        "name": "Security.getUserById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "type": "set",
+            "name": "user",
+            "value": "${result}"
+          }
+        ]
+      },
+      {
+        "type": "invoke",
+        "name": "Security.getRoles",
+        "then": [
+          {
+            "type": "set",
+            "name": "roles",
+            "value": "${result.value}"
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${user}",
+                  "fields": [
+                    {
+                      "property": "UserName",
+                      "type": "string",
+                      "disabled": true,
+                      "title": "User Name"
+                    },
+                    {
+                      "property": "Email",
+                      "type": "string",
+                      "title": "Email"
+                    },
+                    {
+                      "title": "Roles",
+                      "property": "RoleNames",
+                      "type": "lookup",
+                      "data": "${roles}",
+                      "multiple": true,
+                      "textProperty": "Name",
+                      "valueProperty": "Name"
+                    },
+                    {
+                      "type": "password",
+                      "property": "Password",
+                      "title": "Password"
+                    },
+                    {
+                      "type": "password",
+                      "property": "ConfirmPassword",
+                      "compare": "Password",
+                      "title": "Confirm password"
+                    }
+                  ],
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot update user",
+                            "type": "notify"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "name": "Security.updateUser",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "User",
+                            "value": "${event}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "submitText": "Save",
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "name": "Edit Application User",
+  "layout": "Main"
+}

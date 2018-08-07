@@ -73,8 +73,26 @@
     "Suppliers by SupplierID",
     "Products by SupplierID",
     "Regions by RegionID",
-    "Territories by RegionID"
+    "Territories by RegionID",
+    "Login",
+    "Add Application Role",
+    "Add Application User",
+    "Profile",
+    "Application Roles",
+    "Application Users",
+    "Register Application User",
+    "Edit Application User",
+    "Unauthorized"
   ],
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "Northwind",
+    "duration": 5,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "provider": "default",
+    "loginPage": "Login"
+  },
   "startPage": "Categories",
   "theme": "default"
 }

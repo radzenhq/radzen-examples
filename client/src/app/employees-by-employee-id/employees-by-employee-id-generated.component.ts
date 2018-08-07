@@ -17,6 +17,7 @@ import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class EmployeesByEmployeeIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -41,6 +42,8 @@ export class EmployeesByEmployeeIdGenerated implements AfterViewInit, OnInit, On
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getEmployeesResult: any;
 
@@ -69,6 +72,7 @@ export class EmployeesByEmployeeIdGenerated implements AfterViewInit, OnInit, On
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

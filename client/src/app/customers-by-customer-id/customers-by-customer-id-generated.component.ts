@@ -17,6 +17,7 @@ import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class CustomersByCustomerIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -41,6 +42,8 @@ export class CustomersByCustomerIdGenerated implements AfterViewInit, OnInit, On
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getCustomersResult: any;
 
@@ -69,6 +72,7 @@ export class CustomersByCustomerIdGenerated implements AfterViewInit, OnInit, On
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

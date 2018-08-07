@@ -1,6 +1,7 @@
 import { HostListener, Component, Input } from '@angular/core';
 import { Location } from '@angular/common';
 
+import { SecurityService } from './security.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,6 @@ import { Location } from '@angular/common';
 })
 export class AppComponent {
 
-  constructor (private location: Location) {
+  constructor (public security: SecurityService,private location: Location) {
   }
 }

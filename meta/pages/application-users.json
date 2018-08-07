@@ -1,0 +1,112 @@
+{
+  "access": [
+    "admin"
+  ],
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Application Users"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "allowDelete": true,
+                  "allowAdd": true,
+                  "data": "${getUsersResult}",
+                  "events": {
+                    "delete": [
+                      {
+                        "name": "Security.deleteUser",
+                        "parameters": [
+                          {
+                            "name": "id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "type": "invoke",
+                        "then": [
+                          {
+                            "type": "notify",
+                            "severity": "info",
+                            "summary": "Success",
+                            "detail": "User \"${event.UserName}\" has been deleted."
+                          }
+                        ],
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot delete user",
+                            "type": "notify"
+                          }
+                        ]
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-application-user",
+                        "type": "popup"
+                      }
+                    ],
+                    "add": [
+                      {
+                        "type": "popup",
+                        "path": "add-application-user"
+                      }
+                    ]
+                  },
+                  "columns": [
+                    {
+                      "property": "UserName",
+                      "title": "User Name"
+                    },
+                    {
+                      "property": "Email",
+                      "title": "Email"
+                    }
+                  ],
+                  "name": "grid0",
+                  "type": "grid"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Security.getUsers",
+        "then": [
+          {
+            "name": "getUsersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Application Users",
+  "layout": "Main"
+}

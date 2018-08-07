@@ -16,6 +16,7 @@ import { AddCustomerDemographicComponent } from '../add-customer-demographic/add
 import { EditCustomerDemographicComponent } from '../edit-customer-demographic/edit-customer-demographic.component';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class CustomerDemographicsGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -40,6 +41,8 @@ export class CustomerDemographicsGenerated implements AfterViewInit, OnInit, OnD
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   getCustomerDemographicsResult: any;
 
@@ -66,6 +69,7 @@ export class CustomerDemographicsGenerated implements AfterViewInit, OnInit, OnD
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

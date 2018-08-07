@@ -13,6 +13,7 @@ import { ContentComponent } from '@radzen/angular/dist/content';
 import { FormComponent } from '@radzen/angular/dist/form';
 
 import { NorthwindService } from '../northwind.service';
+import { SecurityService } from '../security.service';
 
 export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -36,6 +37,8 @@ export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit,
   _subscription: Subscription;
 
   northwind: NorthwindService;
+
+  security: SecurityService;
 
   customercustomerdemo: any;
 
@@ -68,6 +71,7 @@ export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit,
     this.route = this.injector.get(ActivatedRoute);
 
     this.northwind = this.injector.get(NorthwindService);
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

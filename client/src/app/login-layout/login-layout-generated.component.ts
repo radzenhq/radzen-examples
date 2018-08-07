@@ -13,6 +13,7 @@ import { BodyComponent } from '@radzen/angular/dist/body';
 import { CardComponent } from '@radzen/angular/dist/card';
 import { ContentContainerComponent } from '@radzen/angular/dist/content-container';
 
+import { SecurityService } from '../security.service';
 
 export class LoginLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
@@ -36,6 +37,8 @@ export class LoginLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   _subscription: Subscription;
 
+  security: SecurityService;
+
   parameters: any;
 
   constructor(private injector: Injector) {
@@ -56,6 +59,7 @@ export class LoginLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
 
     this.route = this.injector.get(ActivatedRoute);
 
+    this.security = this.injector.get(SecurityService);
   }
 
   ngAfterViewInit() {

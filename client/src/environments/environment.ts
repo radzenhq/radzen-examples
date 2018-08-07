@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 export const environment = {
   northwind: 'http://services.radzen.com/odata/Northwind',
+
+  securityUrl: 'http://services.radzen.com/auth',
   production: false,
 };
