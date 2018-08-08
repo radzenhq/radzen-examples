@@ -61,11 +61,12 @@ import { ApplicationUsersComponent } from './application-users/application-users
 import { RegisterApplicationUserComponent } from './register-application-user/register-application-user.component';
 import { EditApplicationUserComponent } from './edit-application-user/edit-application-user.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { SecurityService } from './security.service';
 import { AuthGuard } from './auth.guard';
 export const routes: Routes = [
-  { path: '', redirectTo: '/categories', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: '',
     component: MainLayoutComponent,
@@ -523,6 +524,13 @@ export const routes: Routes = [
           roles: ['Everybody'],
         },
         component: UnauthorizedComponent
+      },
+      {
+        path: 'dashboard',
+        data: {
+          roles: ['Everybody'],
+        },
+        component: DashboardComponent
       },
     ]
   },

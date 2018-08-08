@@ -25,7 +25,6 @@
               "class": "col-md-6 text-lg-right",
               "components": [
                 {
-                  "items": [],
                   "name": "profilemenu0",
                   "template": [
                     {
@@ -62,6 +61,15 @@
       "components": [
         {
           "items": [
+            {
+              "path": "dashboard",
+              "text": "Dashboard"
+            },
+            {
+              "path": "login",
+              "text": "Administration",
+              "visible": "${!security.isAuthenticated()}"
+            },
             {
               "path": "categories",
               "text": "Categories"
@@ -112,9 +120,8 @@
     {
       "components": [
         {
-          "icon": "",
           "name": "link0",
-          "path": "https://github.com/akorchev/radzen/",
+          "path": "https://github.com/akorchev/radzen",
           "text": "Source Code",
           "type": "link"
         }

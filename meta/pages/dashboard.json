@@ -1,0 +1,507 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "allowPaging": true,
+                          "count": "${getEmployeesCount}",
+                          "data": "${getEmployeesResult}",
+                          "defaultRowText": "Template for index",
+                          "emptyText": " ",
+                          "events": {
+                            "loadData": [
+                              {
+                                "name": "Northwind.getEmployees",
+                                "parameters": [
+                                  {
+                                    "name": "$top",
+                                    "value": "event.top"
+                                  },
+                                  {
+                                    "name": "$skip",
+                                    "value": "event.skip"
+                                  },
+                                  {
+                                    "name": "$expand",
+                                    "value": ""
+                                  },
+                                  {
+                                    "name": "$count",
+                                    "value": "event.top != null && event.skip != null"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "name": "getEmployeesResult",
+                                    "type": "set",
+                                    "value": "${result.value}"
+                                  },
+                                  {
+                                    "name": "getEmployeesCount",
+                                    "type": "set",
+                                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                                  },
+                                  {
+                                    "condition": "",
+                                    "name": "employee",
+                                    "type": "set",
+                                    "value": "${result.value[0]}"
+                                  },
+                                  {
+                                    "name": "Northwind.getNorthwindOrders",
+                                    "parameters": [
+                                      {
+                                        "name": "$filter",
+                                        "value": "EmployeeID eq ${employee.EmployeeID}"
+                                      },
+                                      {
+                                        "name": "$top",
+                                        "value": "10"
+                                      },
+                                      {
+                                        "name": "$orderby",
+                                        "value": "OrderDate DESC"
+                                      },
+                                      {
+                                        "name": "$expand",
+                                        "value": "Customer"
+                                      }
+                                    ],
+                                    "then": [
+                                      {
+                                        "condition": "",
+                                        "name": "getOrdersResult",
+                                        "type": "set",
+                                        "value": "${result.value}"
+                                      },
+                                      {
+                                        "condition": "",
+                                        "name": "order",
+                                        "type": "set",
+                                        "value": "${result.value[0]}"
+                                      },
+                                      {
+                                        "name": "Northwind.getNorthwindOrders",
+                                        "parameters": [
+                                          {
+                                            "name": "$filter",
+                                            "value": "CustomerID eq '${order.CustomerID}'"
+                                          },
+                                          {
+                                            "name": "$expand",
+                                            "value": "Customer"
+                                          }
+                                        ],
+                                        "then": [
+                                          {
+                                            "condition": "",
+                                            "name": "ordersByCustomer",
+                                            "type": "set",
+                                            "value": "${result.value}"
+                                          }
+                                        ],
+                                        "type": "invoke"
+                                      }
+                                    ],
+                                    "type": "invoke"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "name": "datalist0",
+                          "pageSize": 1,
+                          "template": [
+                            {
+                              "components": [
+                                {
+                                  "class": "col-md-3",
+                                  "components": [
+                                    {
+                                      "name": "image0",
+                                      "path": "${data.Photo}",
+                                      "style": {},
+                                      "type": "image"
+                                    }
+                                  ],
+                                  "name": "col2",
+                                  "type": "col"
+                                },
+                                {
+                                  "class": "col-md-9",
+                                  "components": [
+                                    {
+                                      "components": [
+                                        {
+                                          "class": "col-md-12",
+                                          "components": [
+                                            {
+                                              "name": "heading0",
+                                              "size": "H1",
+                                              "text": "${data.FirstName + ' ' + data.LastName}",
+                                              "type": "heading"
+                                            }
+                                          ],
+                                          "name": "col4",
+                                          "type": "col"
+                                        }
+                                      ],
+                                      "name": "row2",
+                                      "type": "row"
+                                    },
+                                    {
+                                      "components": [
+                                        {
+                                          "class": "col-md-12",
+                                          "components": [
+                                            {
+                                              "name": "heading1",
+                                              "size": "H5",
+                                              "text": "${data.Notes}",
+                                              "type": "heading"
+                                            }
+                                          ],
+                                          "name": "col5",
+                                          "type": "col"
+                                        }
+                                      ],
+                                      "name": "row3",
+                                      "type": "row"
+                                    }
+                                  ],
+                                  "name": "col3",
+                                  "type": "col"
+                                }
+                              ],
+                              "name": "row1",
+                              "style": {},
+                              "type": "row"
+                            }
+                          ],
+                          "type": "datalist"
+                        }
+                      ],
+                      "name": "fieldset2",
+                      "style": {},
+                      "text": "Employees",
+                      "type": "fieldset"
+                    }
+                  ],
+                  "name": "card2",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col6",
+              "type": "col"
+            },
+            {
+              "class": "col-md-6",
+              "components": [
+                {
+                  "items": [
+                    {
+                      "components": [
+                        {
+                          "categoryProperty": "OrderDate",
+                          "chartType": "Pie",
+                          "data": "${ordersByCustomer}",
+                          "labels": true,
+                          "legend": false,
+                          "name": "pie0",
+                          "style": {
+                            "height": "300px"
+                          },
+                          "type": "pie",
+                          "valueProperty": "Freight"
+                        }
+                      ],
+                      "icon": "",
+                      "selected": true,
+                      "text": "Sales"
+                    },
+                    {
+                      "components": [
+                        {
+                          "data": "${ordersByCustomer}",
+                          "endProperty": "ShippedDate",
+                          "name": "scheduler0",
+                          "startProperty": "OrderDate",
+                          "style": {
+                            "height": "300px"
+                          },
+                          "titleProperty": "Customer.CompanyName",
+                          "type": "scheduler"
+                        }
+                      ],
+                      "selected": false,
+                      "text": "Schedule"
+                    }
+                  ],
+                  "name": "tabs0",
+                  "style": {
+                    "width": ""
+                  },
+                  "type": "tabs"
+                }
+              ],
+              "name": "col7",
+              "type": "col"
+            }
+          ],
+          "name": "row4",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "addText": "Add",
+                          "columns": [
+                            {
+                              "filterProperty": "Customer.CompanyName",
+                              "property": "CustomerID",
+                              "sortProperty": "Customer.CompanyName",
+                              "template": "${data.Customer?.CompanyName}",
+                              "title": "Customer",
+                              "type": "string"
+                            },
+                            {
+                              "format": "date-time",
+                              "property": "OrderDate",
+                              "template": "${data.OrderDate | utcDate}",
+                              "title": "Order Date",
+                              "type": "string"
+                            },
+                            {
+                              "format": "decimal",
+                              "property": "Freight",
+                              "template": "{{ data.Freight * 100 | currency}}",
+                              "title": "Amount",
+                              "type": "number"
+                            }
+                          ],
+                          "data": "${getOrdersResult}",
+                          "emptyText": " ",
+                          "events": {
+                            "loadData": [
+                              {
+                                "name": "Northwind.getNorthwindOrders",
+                                "parameters": [
+                                  {
+                                    "name": "$expand",
+                                    "value": "Employee,Customer,Shipper"
+                                  }
+                                ],
+                                "then": [],
+                                "type": "invoke"
+                              }
+                            ],
+                            "rowSelect": [
+                              {
+                                "name": "Northwind.getNorthwindOrders",
+                                "parameters": [
+                                  {
+                                    "name": "$filter",
+                                    "value": "CustomerID eq '${event.CustomerID}'"
+                                  },
+                                  {
+                                    "name": "$expand",
+                                    "value": "Customer"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "name": "ordersByCustomer",
+                                    "type": "set",
+                                    "value": "${result.value}"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "expandableGroups": false,
+                          "name": "grid0",
+                          "type": "grid",
+                          "value": "${order}"
+                        }
+                      ],
+                      "name": "fieldset0",
+                      "style": {},
+                      "text": "LAST 10 ORDERS BY EMPLOYEE",
+                      "type": "fieldset"
+                    }
+                  ],
+                  "name": "card0",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "barPadding": 8,
+                          "categoryProperty": "OrderDate",
+                          "chartType": "Column",
+                          "data": "${ordersByCustomer}",
+                          "legend": false,
+                          "name": "chart0",
+                          "series": "Customer.CompanyName",
+                          "style": {},
+                          "type": "chart",
+                          "valueProperty": "Freight"
+                        }
+                      ],
+                      "name": "fieldset1",
+                      "style": {},
+                      "text": "ORDERS BY CUSTOMER",
+                      "type": "fieldset"
+                    }
+                  ],
+                  "name": "card1",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.datalist0.allowPaging ? this.datalist0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.datalist0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.datalist0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getEmployeesCount",
+            "type": "set",
+            "value": "this.datalist0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          },
+          {
+            "condition": "",
+            "name": "employee",
+            "type": "set",
+            "value": "${result.value[0]}"
+          },
+          {
+            "name": "Northwind.getNorthwindOrders",
+            "parameters": [
+              {
+                "name": "$filter",
+                "value": "EmployeeID eq ${employee.EmployeeID}"
+              },
+              {
+                "name": "$top",
+                "value": "10"
+              },
+              {
+                "name": "$orderby",
+                "value": "OrderDate DESC"
+              },
+              {
+                "name": "$expand",
+                "value": "Customer"
+              }
+            ],
+            "then": [
+              {
+                "condition": "",
+                "name": "getOrdersResult",
+                "type": "set",
+                "value": "${result.value}"
+              },
+              {
+                "condition": "",
+                "name": "order",
+                "type": "set",
+                "value": "${result.value[0]}"
+              },
+              {
+                "name": "Northwind.getNorthwindOrders",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "value": "CustomerID eq '${order.CustomerID}'"
+                  },
+                  {
+                    "name": "$expand",
+                    "value": "Customer"
+                  }
+                ],
+                "then": [
+                  {
+                    "condition": "",
+                    "name": "ordersByCustomer",
+                    "type": "set",
+                    "value": "${result.value}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ],
+            "type": "invoke"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Dashboard"
+}

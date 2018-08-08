@@ -26,6 +26,13 @@ import { ButtonModule } from '@radzen/angular/dist/button';
 import { FormModule } from '@radzen/angular/dist/form';
 import { HtmlModule } from '@radzen/angular/dist/html';
 import { LoginModule } from '@radzen/angular/dist/login';
+import { FieldsetModule } from '@radzen/angular/dist/fieldset';
+import { DataListModule } from '@radzen/angular/dist/datalist';
+import { ImageModule } from '@radzen/angular/dist/image';
+import { TabsModule } from '@radzen/angular/dist/tabs';
+import { PieModule } from '@radzen/angular/dist/pie';
+import { SchedulerModule } from '@radzen/angular/dist/scheduler';
+import { ChartModule } from '@radzen/angular/dist/chart';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -93,6 +100,7 @@ import { ApplicationUsersComponent } from './application-users/application-users
 import { RegisterApplicationUserComponent } from './register-application-user/register-application-user.component';
 import { EditApplicationUserComponent } from './edit-application-user/edit-application-user.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
@@ -160,6 +168,7 @@ export const PageDeclarations = [
   RegisterApplicationUserComponent,
   EditApplicationUserComponent,
   UnauthorizedComponent,
+  DashboardComponent,
 ];
 
 export const LayoutDeclarations = [
@@ -221,6 +230,13 @@ export const AppImports = [
   FormModule,
   HtmlModule,
   LoginModule,
+  FieldsetModule,
+  DataListModule,
+  ImageModule,
+  TabsModule,
+  PieModule,
+  SchedulerModule,
+  ChartModule,
   SharedModule,
   NotificationModule,
   DialogModule,

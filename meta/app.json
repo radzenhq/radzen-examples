@@ -22,7 +22,8 @@
     "Products",
     "Regions",
     "Suppliers",
-    "Territories"
+    "Territories",
+    "Dashboard"
   ],
   "pages": [
     "Categories",
@@ -82,7 +83,8 @@
     "Application Users",
     "Register Application User",
     "Edit Application User",
-    "Unauthorized"
+    "Unauthorized",
+    "Dashboard"
   ],
   "security": {
     "autoGeneratePages": true,
@@ -93,6 +95,6 @@
     "provider": "default",
     "loginPage": "Login"
   },
-  "startPage": "Categories",
+  "startPage": "Dashboard",
   "theme": "default"
 }
