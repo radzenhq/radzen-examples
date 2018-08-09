@@ -8,10 +8,7 @@
         {
           "name": "pageTitle",
           "size": "H1",
-          "style": {
-            "marginLeft": "10px"
-          },
-          "text": "Orders by Employee: ${order.Employee.FirstName} ${order.Employee.LastName}",
+          "text": "Orders by Product: ${product.ProductName}",
           "type": "heading"
         },
         {
@@ -29,65 +26,10 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "format": "date-time",
-                      "property": "OrderDate",
-                      "template": "${data.OrderDate | utcDate}",
-                      "title": "Order Date",
-                      "type": "string"
-                    },
-                    {
-                      "format": "date-time",
-                      "property": "RequiredDate",
-                      "template": "${data.RequiredDate | utcDate}",
-                      "title": "Required Date",
-                      "type": "string"
-                    },
-                    {
-                      "format": "date-time",
-                      "property": "ShippedDate",
-                      "template": "${data.ShippedDate | utcDate}",
-                      "title": "Shipped Date",
-                      "type": "string"
-                    },
-                    {
-                      "format": "double",
-                      "property": "Freight",
-                      "title": "Freight",
-                      "type": "number"
-                    },
-                    {
-                      "property": "ShipName",
-                      "title": "Ship Name",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipAddress",
-                      "title": "Ship Address",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipCity",
-                      "title": "Ship City",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipRegion",
-                      "title": "Ship Region",
-                      "type": "string"
-                    },
-                    {
-                      "filterProperty": "",
-                      "property": "ShipPostalCode",
-                      "title": "Ship Postal Code",
-                      "type": "string"
-                    },
-                    {
-                      "property": "ShipCountry",
-                      "title": "Ship Country",
-                      "type": "string"
-                    },
-                    {
+                      "filterProperty": "NorthwindOrder.Customer.CompanyName",
                       "filterable": false,
+                      "property": "CustomerID",
+                      "sortProperty": "NorthwindOrder.Customer.CompanyName",
                       "sortable": false,
                       "template": [
                         {
@@ -96,32 +38,56 @@
                               {
                                 "parameters": [
                                   {
-                                    "name": "OrderID",
-                                    "value": "${data.OrderID}"
+                                    "name": "CustomerID",
+                                    "value": "${data.NorthwindOrder.CustomerID}"
                                   }
                                 ],
-                                "path": "order-details-by-order-id",
+                                "path": "customers-by-customer-id",
                                 "type": "navigate"
                               }
                             ]
                           },
                           "icon": "",
-                          "name": "button0",
-                          "text": "Details",
+                          "name": "customersButton",
+                          "style": {
+                            "width": "340px"
+                          },
+                          "text": "${data.NorthwindOrder?.Customer?.CompanyName}",
                           "type": "button"
                         }
                       ],
-                      "width": "140px"
+                      "title": "Customer",
+                      "type": "string",
+                      "width": "360px"
+                    },
+                    {
+                      "format": "double",
+                      "property": "UnitPrice",
+                      "template": "{{ data.UnitPrice | currency}}",
+                      "title": "Unit Price",
+                      "type": "number"
+                    },
+                    {
+                      "format": "int32",
+                      "property": "Quantity",
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "single",
+                      "property": "Discount",
+                      "title": "Discount",
+                      "type": "number"
                     }
                   ],
-                  "count": "${getNorthwindOrdersCount}",
-                  "data": "${getNorthwindOrdersResult}",
+                  "count": "${getNorthwindOrderDetailsCount}",
+                  "data": "${getNorthwindOrderDetailsResult}",
                   "emptyText": "No records to display.",
                   "events": {
                     "add": [
                       {
-                        "path": "add-order",
-                        "title": "Add Order",
+                        "path": "add-order-detail",
+                        "title": "Add Order Detail",
                         "type": "popup"
                       }
                     ],
@@ -129,22 +95,26 @@
                       {
                         "error": [
                           {
-                            "detail": "Unable to delete NorthwindOrder",
+                            "detail": "Unable to delete NorthwindOrderDetail",
                             "severity": "error",
                             "summary": "Error",
                             "type": "notify"
                           }
                         ],
-                        "name": "Northwind.deleteNorthwindOrder",
+                        "name": "Northwind.deleteNorthwindOrderDetail",
                         "parameters": [
                           {
                             "name": "OrderID",
                             "value": "${event.OrderID}"
+                          },
+                          {
+                            "name": "ProductID",
+                            "value": "${event.ProductID}"
                           }
                         ],
                         "then": [
                           {
-                            "detail": "NorthwindOrder deleted!",
+                            "detail": "NorthwindOrderDetail deleted!",
                             "severity": "success",
                             "summary": "Success",
                             "type": "notify"
@@ -155,7 +125,7 @@
                     ],
                     "loadData": [
                       {
-                        "name": "Northwind.getNorthwindOrders",
+                        "name": "Northwind.getNorthwindOrderDetails",
                         "parameters": [
                           {
                             "name": "$top",
@@ -167,7 +137,7 @@
                           },
                           {
                             "name": "$expand",
-                            "value": "Customer,Employee"
+                            "value": "NorthwindOrder,NorthwindProduct"
                           },
                           {
                             "name": "$count",
@@ -175,7 +145,7 @@
                           },
                           {
                             "name": "$filter",
-                            "value": "${event.filter ? event.filter + ' and ':''}EmployeeID eq ${parameters.EmployeeID}"
+                            "value": "${event.filter ? event.filter + ' and ':''}ProductID eq ${parameters.ProductID}"
                           },
                           {
                             "name": "$orderby",
@@ -183,17 +153,17 @@
                           },
                           {
                             "name": "$expand",
-                            "value": "Customer,Employee"
+                            "value": "NorthwindOrder,NorthwindProduct"
                           }
                         ],
                         "then": [
                           {
-                            "name": "getNorthwindOrdersResult",
+                            "name": "getNorthwindOrderDetailsResult",
                             "type": "set",
                             "value": "${result.value}"
                           },
                           {
-                            "name": "getNorthwindOrdersCount",
+                            "name": "getNorthwindOrderDetailsCount",
                             "type": "set",
                             "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
                           }
@@ -201,21 +171,10 @@
                         "type": "invoke"
                       }
                     ],
-                    "rowSelect": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "OrderID",
-                            "value": "${event.OrderID}"
-                          }
-                        ],
-                        "path": "edit-order",
-                        "title": "Edit Order",
-                        "type": "popup"
-                      }
-                    ]
+                    "rowSelect": []
                   },
                   "name": "grid0",
+                  "template": "",
                   "title": "",
                   "type": "grid"
                 }
@@ -233,7 +192,7 @@
   "events": {
     "load": [
       {
-        "name": "Northwind.getNorthwindOrders",
+        "name": "Northwind.getNorthwindOrderDetails",
         "parameters": [
           {
             "name": "$top",
@@ -249,29 +208,28 @@
           },
           {
             "name": "$expand",
-            "value": "Customer,Employee"
+            "value": "NorthwindOrder($expand=Customer),NorthwindProduct"
           },
           {
             "name": "$filter",
-            "value": "EmployeeID eq ${parameters.EmployeeID}"
+            "value": "ProductID eq ${parameters.ProductID}"
           }
         ],
         "then": [
           {
-            "name": "getNorthwindOrdersResult",
+            "name": "getNorthwindOrderDetailsResult",
             "type": "set",
             "value": "${result.value}"
           },
           {
-            "name": "getNorthwindOrdersCount",
+            "name": "getNorthwindOrderDetailsCount",
             "type": "set",
             "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
           },
           {
-            "condition": "",
-            "name": "order",
+            "name": "product",
             "type": "set",
-            "value": "${result.value[0]}"
+            "value": "${result.value[0].NorthwindProduct}"
           }
         ],
         "type": "invoke"
@@ -279,5 +237,5 @@
     ]
   },
   "layout": "Main",
-  "name": "Orders by EmployeeID"
+  "name": "Orders by ProductID"
 }

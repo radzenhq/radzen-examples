@@ -1,0 +1,25 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Orders by Product: {{product?.ProductName}}">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrderDetailsCount" [data]="getNorthwindOrderDetailsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)">
+        <rz-grid-column filterProperty="NorthwindOrder.Customer.CompanyName" [filterable]="false" property="CustomerID" sortProperty="NorthwindOrder.Customer.CompanyName" [sortable]="false" title="Customer" width="360px" type="string">
+          <ng-template let-data gridColumnTemplate>
+            <rz-button #customersButton [style]="{'width':'340px'}" [text]="data?.NorthwindOrder?.Customer?.CompanyName" (click)="customersButtonClick($event, data)">
+            </rz-button>
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="double" property="UnitPrice" title="Unit Price" type="number">
+          <ng-template let-data gridColumnTemplate>
+          {{ data.UnitPrice | currency}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="int32" property="Quantity" title="Quantity" type="integer">
+        </rz-grid-column>
+        <rz-grid-column format="single" property="Discount" title="Discount" type="number">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

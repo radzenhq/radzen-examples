@@ -62,6 +62,7 @@ import { RegisterApplicationUserComponent } from './register-application-user/re
 import { EditApplicationUserComponent } from './edit-application-user/edit-application-user.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { OrdersByProductIdComponent } from './orders-by-product-id/orders-by-product-id.component';
 
 import { SecurityService } from './security.service';
 import { AuthGuard } from './auth.guard';
@@ -531,6 +532,14 @@ export const routes: Routes = [
           roles: ['Everybody'],
         },
         component: DashboardComponent
+      },
+      {
+        path: 'orders-by-product-id/:ProductID',
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['Authenticated'],
+        },
+        component: OrdersByProductIdComponent
       },
     ]
   },

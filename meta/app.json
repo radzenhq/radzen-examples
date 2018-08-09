@@ -84,7 +84,8 @@
     "Register Application User",
     "Edit Application User",
     "Unauthorized",
-    "Dashboard"
+    "Dashboard",
+    "Orders by ProductID"
   ],
   "security": {
     "autoGeneratePages": true,
@@ -92,8 +93,8 @@
     "duration": 5,
     "layout": "Main",
     "loginLayout": "Login",
-    "provider": "default",
-    "loginPage": "Login"
+    "loginPage": "Login",
+    "provider": "default"
   },
   "startPage": "Dashboard",
   "theme": "default"

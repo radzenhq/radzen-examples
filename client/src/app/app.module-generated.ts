@@ -101,6 +101,7 @@ import { RegisterApplicationUserComponent } from './register-application-user/re
 import { EditApplicationUserComponent } from './edit-application-user/edit-application-user.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { OrdersByProductIdComponent } from './orders-by-product-id/orders-by-product-id.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
@@ -169,6 +170,7 @@ export const PageDeclarations = [
   EditApplicationUserComponent,
   UnauthorizedComponent,
   DashboardComponent,
+  OrdersByProductIdComponent,
 ];
 
 export const LayoutDeclarations = [

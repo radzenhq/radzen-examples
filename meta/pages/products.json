@@ -126,6 +126,33 @@
                       "property": "Discontinued",
                       "title": "Discontinued",
                       "type": "boolean"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "ProductID",
+                                    "value": "${data.ProductID}"
+                                  }
+                                ],
+                                "path": "orders-by-product-id",
+                                "type": "navigate"
+                              }
+                            ]
+                          },
+                          "icon": "",
+                          "name": "button0",
+                          "text": "Orders",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "140px"
                     }
                   ],
                   "count": "${getNorthwindProductsCount}",
