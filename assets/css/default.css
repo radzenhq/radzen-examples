@@ -5168,6 +5168,10 @@ ul.profile-menu {
       ul.profile-menu .navigation-menu .navigation-item-wrapper:hover {
         background-color: #479cc8;
         color: #ffffff; }
+        ul.profile-menu .navigation-menu .navigation-item-wrapper:hover .navigation-item-link {
+          color: #ffffff; }
+    ul.profile-menu .navigation-menu .navigation-item-link {
+      color: #3a474d; }
     ul.profile-menu .navigation-menu .material-icons, ul.profile-menu .navigation-menu .fc-prev-button .ui-icon, .fc-prev-button ul.profile-menu .navigation-menu .ui-icon, ul.profile-menu .navigation-menu
     .fc-next-button .ui-icon,
     .fc-next-button ul.profile-menu .navigation-menu .ui-icon {
@@ -6508,6 +6512,10 @@ p-radiobutton {
     border: 1px solid #e6ecef;
     padding: 0.25rem 0.625rem; }
 
+@media (max-width: 768px) {
+  .ui-paginator-page:not(.ui-state-active) {
+    display: none; } }
+
 .ui-overlaypanel {
   position: absolute;
   overflow: hidden;
@@ -6990,3 +6998,8 @@ p-radiobutton {
   margin-top: 1rem;
   display: flex;
   justify-content: flex-end; }
+
+.ssrsviewer {
+  display: flex; }
+  .ssrsviewer iframe {
+    flex: auto; }
