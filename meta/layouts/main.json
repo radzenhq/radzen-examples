@@ -67,7 +67,7 @@
             },
             {
               "path": "login",
-              "text": "Administration",
+              "text": "Login",
               "visible": "${!security.isAuthenticated()}"
             },
             {

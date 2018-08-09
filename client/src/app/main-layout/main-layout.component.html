@@ -32,7 +32,7 @@
   <rz-panelmenu #panelmenu0 [style]="{'height':'100%'}">
     <rz-panelmenu-item path="dashboard" text="Dashboard" *ngIf="security?.isInRole(['Everybody'])">
     </rz-panelmenu-item>
-    <rz-panelmenu-item path="login" text="Administration" *ngIf="!security?.isAuthenticated()">
+    <rz-panelmenu-item path="login" text="Login" *ngIf="!security?.isAuthenticated()">
     </rz-panelmenu-item>
     <rz-panelmenu-item path="categories" text="Categories" *ngIf="security?.isInRole(['Authenticated'])">
     </rz-panelmenu-item>

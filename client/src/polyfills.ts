@@ -35,4 +35,5 @@ import 'web-animations-js';
 
 // NgClass on SVG elements
 // Needed for: IE10, IE11
-// import 'classlist.js';
+import 'classlist.js';
+import 'core-js/es7/array';
