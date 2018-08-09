@@ -216,11 +216,11 @@
                     {
                       "components": [
                         {
-                          "categoryProperty": "Freight",
+                          "categoryProperty": "Customer.CompanyName",
                           "chartType": "Pie",
-                          "data": "${ordersByCustomer}",
+                          "data": "${getOrdersResult}",
                           "labels": true,
-                          "legend": false,
+                          "legend": true,
                           "name": "pie0",
                           "style": {
                             "height": "300px"
