@@ -216,7 +216,7 @@
                     {
                       "components": [
                         {
-                          "categoryProperty": "OrderDate",
+                          "categoryProperty": "Freight",
                           "chartType": "Pie",
                           "data": "${ordersByCustomer}",
                           "labels": true,

@@ -33,7 +33,7 @@
     <div class="col-md-6">
       <rz-tabs #tabs0 [style]="{'width':''}">
         <rz-tabs-item [selected]="true" text="Sales">
-          <rz-pie #pie0 categoryProperty="OrderDate" chartType="Pie" [data]="ordersByCustomer" [labels]="true" [legend]="false" [style]="{'height':'300px'}" valueProperty="Freight">
+          <rz-pie #pie0 categoryProperty="Freight" chartType="Pie" [data]="ordersByCustomer" [labels]="true" [legend]="false" [style]="{'height':'300px'}" valueProperty="Freight">
           </rz-pie>
         </rz-tabs-item>
         <rz-tabs-item [selected]="false" text="Schedule">
