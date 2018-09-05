@@ -10,16 +10,12 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
-import { CardComponent } from '@radzen/angular/dist/card';
-import { FieldsetComponent } from '@radzen/angular/dist/fieldset';
-import { DataListComponent } from '@radzen/angular/dist/datalist';
-import { ImageComponent } from '@radzen/angular/dist/image';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
-import { TabsComponent } from '@radzen/angular/dist/tabs';
-import { PieComponent } from '@radzen/angular/dist/pie';
-import { SchedulerComponent } from '@radzen/angular/dist/scheduler';
-import { GridComponent } from '@radzen/angular/dist/grid';
-import { ChartComponent } from '@radzen/angular/dist/chart';
+import { CardComponent } from '@radzen/angular/dist/card';
+import { ProgressBarComponent } from '@radzen/angular/dist/progressbar';
+import { GaugeComponent } from '@radzen/angular/dist/gauge';
+import { SparklineComponent } from '@radzen/angular/dist/sparkline';
+import { ImageComponent } from '@radzen/angular/dist/image';
 
 import { NorthwindService } from '../northwind.service';
 import { SecurityService } from '../security.service';
@@ -27,18 +23,27 @@ import { SecurityService } from '../security.service';
 export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
-  @ViewChild('card2') card2: CardComponent;
-  @ViewChild('fieldset2') fieldset2: FieldsetComponent;
-  @ViewChild('datalist0') datalist0: DataListComponent;
-  @ViewChild('tabs0') tabs0: TabsComponent;
-  @ViewChild('pie0') pie0: PieComponent;
-  @ViewChild('scheduler0') scheduler0: SchedulerComponent;
+  @ViewChild('heading8') heading8: HeadingComponent;
+  @ViewChild('heading9') heading9: HeadingComponent;
   @ViewChild('card0') card0: CardComponent;
-  @ViewChild('fieldset0') fieldset0: FieldsetComponent;
-  @ViewChild('grid0') grid0: GridComponent;
+  @ViewChild('heading0') heading0: HeadingComponent;
+  @ViewChild('heading1') heading1: HeadingComponent;
+  @ViewChild('progressbar0') progressbar0: ProgressBarComponent;
+  @ViewChild('heading3') heading3: HeadingComponent;
+  @ViewChild('heading4') heading4: HeadingComponent;
+  @ViewChild('card3') card3: CardComponent;
+  @ViewChild('heading12') heading12: HeadingComponent;
+  @ViewChild('gauge0') gauge0: GaugeComponent;
   @ViewChild('card1') card1: CardComponent;
-  @ViewChild('fieldset1') fieldset1: FieldsetComponent;
-  @ViewChild('chart0') chart0: ChartComponent;
+  @ViewChild('heading2') heading2: HeadingComponent;
+  @ViewChild('heading5') heading5: HeadingComponent;
+  @ViewChild('sparkline0') sparkline0: SparklineComponent;
+  @ViewChild('heading6') heading6: HeadingComponent;
+  @ViewChild('heading7') heading7: HeadingComponent;
+  @ViewChild('card2') card2: CardComponent;
+  @ViewChild('heading10') heading10: HeadingComponent;
+  @ViewChild('image0') image0: ImageComponent;
+  @ViewChild('heading11') heading11: HeadingComponent;
 
   router: Router;
 
@@ -60,17 +65,15 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   security: SecurityService;
 
-  getEmployeesResult: any;
+  totalSales: any;
 
-  getEmployeesCount: any;
+  salesTarget: any;
 
-  employee: any;
+  customers: any;
 
-  getOrdersResult: any;
+  employeeOfTheMonthName: any;
 
-  order: any;
-
-  ordersByCustomer: any;
+  employeeOfTheMonth: any;
 
   parameters: any;
 
@@ -114,76 +117,19 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
-    this.northwind.getEmployees(null, this.datalist0.allowPaging ? this.datalist0.pageSize : null, this.datalist0.allowPaging ? 0 : null, null, null, this.datalist0.allowPaging)
+    this.totalSales = 49234;
+
+    this.salesTarget = 80000;
+
+    this.customers = [134, 193, 156, 123, 192, 155, 132, 163, 143, 182, 192, 233, 129, 183, 233, 150, 113, 233, 323, 354, 433, 425, 365, 322, 280, 321, 393, 436,530,553,576];
+
+    this.employeeOfTheMonthName = "Loading ...";
+
+    this.northwind.getEmployeeById(1)
     .subscribe((result: any) => {
-      this.getEmployeesResult = result.value;
+      this.employeeOfTheMonth = result;
 
-      this.getEmployeesCount = this.datalist0.allowPaging ? result['@odata.count'] : result.value.length;
-
-      this.employee = result.value[0];
-
-      this.northwind.getNorthwindOrders(`EmployeeID eq ${this.employee.EmployeeID}`, 10, null, `OrderDate DESC`, `Customer`, null)
-      .subscribe((result: any) => {
-        this.getOrdersResult = result.value;
-
-        this.order = result.value[0];
-
-        this.northwind.getNorthwindOrders(`CustomerID eq '${this.order.CustomerID}'`, null, null, null, `Customer`, null)
-        .subscribe((result: any) => {
-          this.ordersByCustomer = result.value;
-        }, (result: any) => {
-
-        });
-      }, (result: any) => {
-
-      });
-    }, (result: any) => {
-
-    });
-  }
-
-  datalist0LoadData(event: any) {
-    this.northwind.getEmployees(null, event.top, event.skip, null, ``, event.top != null && event.skip != null)
-    .subscribe((result: any) => {
-      this.getEmployeesResult = result.value;
-
-      this.getEmployeesCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
-
-      this.employee = result.value[0];
-
-      this.northwind.getNorthwindOrders(`EmployeeID eq ${this.employee.EmployeeID}`, 10, null, `OrderDate DESC`, `Customer`, null)
-      .subscribe((result: any) => {
-        this.getOrdersResult = result.value;
-
-        this.order = result.value[0];
-
-        this.northwind.getNorthwindOrders(`CustomerID eq '${this.order.CustomerID}'`, null, null, null, `Customer`, null)
-        .subscribe((result: any) => {
-          this.ordersByCustomer = result.value;
-        }, (result: any) => {
-
-        });
-      }, (result: any) => {
-
-      });
-    }, (result: any) => {
-
-    });
-  }
-
-  grid0LoadData(event: any) {
-    this.northwind.getNorthwindOrders(null, null, null, null, `Employee,Customer,Shipper`, null)
-    .subscribe((result: any) => {
-
-    }, (result: any) => {
-
-    });
-  }
-
-  grid0RowSelect(event: any) {
-    this.northwind.getNorthwindOrders(`CustomerID eq '${event.CustomerID}'`, null, null, null, `Customer`, null)
-    .subscribe((result: any) => {
-      this.ordersByCustomer = result.value;
+      this.employeeOfTheMonthName = result.FirstName + ' ' + result.LastName;
     }, (result: any) => {
 
     });

@@ -6096,7 +6096,8 @@ p-radiobutton {
 
 .ui-datatable-tablewrapper > table,
 .ui-datatable-scrollable-header-box > table,
-.ui-datatable-scrollable-table-wrapper > table {
+.ui-datatable-scrollable-table-wrapper > table,
+.ui-datatable-scrollable-footer-box > table {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%; }
@@ -6132,6 +6133,10 @@ p-radiobutton {
 .ui-row-toggler {
   color: #48606c; }
 
+.ui-datatable-scrollable-footer {
+  background-color: #e6ecef;
+  border-top: solid 1px #dfe7eb; }
+
 .ui-datatable-thead .fa {
   color: #48606c; }
 
@@ -6150,6 +6155,17 @@ p-radiobutton {
     color: #3a474d;
     padding: 0 0 0.625rem 0.625rem;
     font-weight: normal; }
+
+.ui-datatable-tfoot td {
+  background-color: #e6ecef;
+  font-size: 0.875rem;
+  color: #48606c;
+  padding: 0.5rem 0.625rem 0.5rem 0.625rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  .ui-datatable-tfoot td:not(:last-child) {
+    border-right: solid 1px #dfe7eb; }
 
 .ui-datatable-scrollable-header {
   background-color: #e6ecef;
@@ -6797,6 +6813,10 @@ p-radiobutton {
   .fc-toolbar.fc-header-toolbar {
     margin: 0; }
 
+.ui-tabview {
+  display: flex;
+  flex-direction: column; }
+
 .ui-tabview-nav {
   list-style: none;
   display: flex;
@@ -6825,6 +6845,7 @@ p-radiobutton {
     background-color: #ffffff;
     border-bottom-color: #ffffff;
     margin-bottom: -1px;
+    position: relative;
     border-top-color: #479cc8; }
     .ui-tabview-nav .ui-tabview-selected a {
       color: #3a474d; }
@@ -6833,10 +6854,11 @@ p-radiobutton {
   background-color: #ffffff;
   border: solid 1px #dfe7ec;
   border-radius: 0 0 4px 4px;
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01); }
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01);
+  flex-basis: auto;
+  overflow: auto; }
 
 .ui-tabview-panel {
-  overflow: auto;
   padding: 1.25rem; }
 
 .ui-tabview-left-icon {
@@ -7003,3 +7025,88 @@ p-radiobutton {
   display: flex; }
   .ssrsviewer iframe {
     flex: auto; }
+
+.ui-map {
+  height: 10rem;
+  padding: 1.25rem;
+  background-color: #ffffff;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01);
+  border-radius: 4px; }
+
+.ui-map-container {
+  height: 100%; }
+
+.ui-sparkline {
+  display: inline-block;
+  width: 150px;
+  height: 20px; }
+  .ui-sparkline .line-highlight {
+    display: none; }
+
+.ui-gauge {
+  display: inline-block;
+  width: 90px;
+  height: 90px; }
+
+.ui-progressbar {
+  border-radius: 4px;
+  height: 1.25rem;
+  position: relative;
+  background-color: #e6ecef;
+  text-align: center;
+  display: flex;
+  align-items: center; }
+
+.ui-progressbar-value {
+  border-radius: 4px;
+  position: absolute;
+  background-color: #479cc8;
+  height: 100%;
+  width: 100%; }
+
+.ui-progressbar-label {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1rem; }
+
+.ui-progressbar-indeterminate {
+  overflow: hidden; }
+  .ui-progressbar-indeterminate .ui-progressbar-value {
+    background-color: transparent; }
+    .ui-progressbar-indeterminate .ui-progressbar-value:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #479cc8;
+      will-change: left, right;
+      animation: 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite ui-progressbar-indeterminate-anim; }
+    .ui-progressbar-indeterminate .ui-progressbar-value:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #479cc8;
+      will-change: left, right;
+      animation: 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite ui-progressbar-indeterminate-anim-short;
+      animation-delay: 1.15s; }
+
+@keyframes ui-progressbar-indeterminate-anim {
+  0% {
+    left: -35%;
+    right: 100%; }
+  100%, 60% {
+    left: 100%;
+    right: -90%; } }
+
+@keyframes ui-progressbar-indeterminate-anim-short {
+  0% {
+    left: -200%;
+    right: 100%; }
+  100%, 60% {
+    left: 107%;
+    right: -8%; } }

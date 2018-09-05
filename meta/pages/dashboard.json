@@ -8,395 +8,446 @@
         {
           "components": [
             {
-              "class": "col-md-6",
+              "class": "col-md-12 align-items-center d-flex",
               "components": [
                 {
-                  "components": [
-                    {
-                      "components": [
-                        {
-                          "allowPaging": true,
-                          "count": "${getEmployeesCount}",
-                          "data": "${getEmployeesResult}",
-                          "defaultRowText": "Template for index",
-                          "emptyText": " ",
-                          "events": {
-                            "loadData": [
-                              {
-                                "name": "Northwind.getEmployees",
-                                "parameters": [
-                                  {
-                                    "name": "$top",
-                                    "value": "event.top"
-                                  },
-                                  {
-                                    "name": "$skip",
-                                    "value": "event.skip"
-                                  },
-                                  {
-                                    "name": "$expand",
-                                    "value": ""
-                                  },
-                                  {
-                                    "name": "$count",
-                                    "value": "event.top != null && event.skip != null"
-                                  }
-                                ],
-                                "then": [
-                                  {
-                                    "name": "getEmployeesResult",
-                                    "type": "set",
-                                    "value": "${result.value}"
-                                  },
-                                  {
-                                    "name": "getEmployeesCount",
-                                    "type": "set",
-                                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
-                                  },
-                                  {
-                                    "condition": "",
-                                    "name": "employee",
-                                    "type": "set",
-                                    "value": "${result.value[0]}"
-                                  },
-                                  {
-                                    "name": "Northwind.getNorthwindOrders",
-                                    "parameters": [
-                                      {
-                                        "name": "$filter",
-                                        "value": "EmployeeID eq ${employee.EmployeeID}"
-                                      },
-                                      {
-                                        "name": "$top",
-                                        "value": "10"
-                                      },
-                                      {
-                                        "name": "$orderby",
-                                        "value": "OrderDate DESC"
-                                      },
-                                      {
-                                        "name": "$expand",
-                                        "value": "Customer"
-                                      }
-                                    ],
-                                    "then": [
-                                      {
-                                        "condition": "",
-                                        "name": "getOrdersResult",
-                                        "type": "set",
-                                        "value": "${result.value}"
-                                      },
-                                      {
-                                        "condition": "",
-                                        "name": "order",
-                                        "type": "set",
-                                        "value": "${result.value[0]}"
-                                      },
-                                      {
-                                        "name": "Northwind.getNorthwindOrders",
-                                        "parameters": [
-                                          {
-                                            "name": "$filter",
-                                            "value": "CustomerID eq '${order.CustomerID}'"
-                                          },
-                                          {
-                                            "name": "$expand",
-                                            "value": "Customer"
-                                          }
-                                        ],
-                                        "then": [
-                                          {
-                                            "condition": "",
-                                            "name": "ordersByCustomer",
-                                            "type": "set",
-                                            "value": "${result.value}"
-                                          }
-                                        ],
-                                        "type": "invoke"
-                                      }
-                                    ],
-                                    "type": "invoke"
-                                  }
-                                ],
-                                "type": "invoke"
-                              }
-                            ]
-                          },
-                          "name": "datalist0",
-                          "pageSize": 1,
-                          "template": [
-                            {
-                              "components": [
-                                {
-                                  "class": "col-md-3",
-                                  "components": [
-                                    {
-                                      "name": "image0",
-                                      "path": "${data.Photo}",
-                                      "style": {},
-                                      "type": "image"
-                                    }
-                                  ],
-                                  "name": "col2",
-                                  "type": "col"
-                                },
-                                {
-                                  "class": "col-md-9",
-                                  "components": [
-                                    {
-                                      "components": [
-                                        {
-                                          "class": "col-md-12",
-                                          "components": [
-                                            {
-                                              "name": "heading0",
-                                              "size": "H1",
-                                              "text": "${data.FirstName + ' ' + data.LastName}",
-                                              "type": "heading"
-                                            }
-                                          ],
-                                          "name": "col4",
-                                          "type": "col"
-                                        }
-                                      ],
-                                      "name": "row2",
-                                      "type": "row"
-                                    },
-                                    {
-                                      "components": [
-                                        {
-                                          "class": "col-md-12",
-                                          "components": [
-                                            {
-                                              "name": "heading1",
-                                              "size": "H5",
-                                              "text": "${data.Notes}",
-                                              "type": "heading"
-                                            }
-                                          ],
-                                          "name": "col5",
-                                          "type": "col"
-                                        }
-                                      ],
-                                      "name": "row3",
-                                      "type": "row"
-                                    }
-                                  ],
-                                  "name": "col3",
-                                  "type": "col"
-                                }
-                              ],
-                              "name": "row1",
-                              "style": {},
-                              "type": "row"
-                            }
-                          ],
-                          "type": "datalist"
-                        }
-                      ],
-                      "name": "fieldset2",
-                      "style": {},
-                      "text": "Employees",
-                      "type": "fieldset"
-                    }
-                  ],
-                  "name": "card2",
-                  "type": "card",
-                  "visible": true
-                }
-              ],
-              "name": "col6",
-              "type": "col"
-            },
-            {
-              "class": "col-md-6",
-              "components": [
-                {
-                  "items": [
-                    {
-                      "components": [
-                        {
-                          "categoryProperty": "Customer.CompanyName",
-                          "chartType": "Pie",
-                          "data": "${getOrdersResult}",
-                          "labels": true,
-                          "legend": true,
-                          "name": "pie0",
-                          "style": {
-                            "height": "300px"
-                          },
-                          "type": "pie",
-                          "valueProperty": "Freight"
-                        }
-                      ],
-                      "icon": "",
-                      "selected": true,
-                      "text": "Sales"
-                    },
-                    {
-                      "components": [
-                        {
-                          "data": "${ordersByCustomer}",
-                          "endProperty": "ShippedDate",
-                          "name": "scheduler0",
-                          "startProperty": "OrderDate",
-                          "style": {
-                            "height": "300px"
-                          },
-                          "titleProperty": "Customer.CompanyName",
-                          "type": "scheduler"
-                        }
-                      ],
-                      "selected": false,
-                      "text": "Schedule"
-                    }
-                  ],
-                  "name": "tabs0",
+                  "name": "heading8",
+                  "size": "H1",
                   "style": {
-                    "width": ""
+                    "display": "inline-block"
                   },
-                  "type": "tabs"
+                  "text": "Dashboard",
+                  "type": "heading"
+                },
+                {
+                  "name": "heading9",
+                  "size": "H3",
+                  "style": {
+                    "display": "inline-block",
+                    "marginLeft": "1rem"
+                  },
+                  "text": "| statistics and overview",
+                  "type": "heading"
                 }
               ],
-              "name": "col7",
+              "name": "col10",
               "type": "col"
             }
           ],
-          "name": "row4",
-          "style": {},
+          "name": "row5",
+          "style": {
+            "marginBottom": "1rem"
+          },
           "type": "row"
         },
         {
           "components": [
             {
-              "class": "col-md-6",
+              "class": "col-xl-3 col-lg-6",
               "components": [
                 {
                   "components": [
                     {
+                      "class": "align-items-center",
                       "components": [
                         {
-                          "addText": "Add",
-                          "columns": [
+                          "class": "col-6",
+                          "components": [
                             {
-                              "filterProperty": "Customer.CompanyName",
-                              "property": "CustomerID",
-                              "sortProperty": "Customer.CompanyName",
-                              "template": "${data.Customer?.CompanyName}",
-                              "title": "Customer",
-                              "type": "string"
-                            },
-                            {
-                              "format": "date-time",
-                              "property": "OrderDate",
-                              "template": "${data.OrderDate | utcDate}",
-                              "title": "Order Date",
-                              "type": "string"
-                            },
-                            {
-                              "format": "decimal",
-                              "property": "Freight",
-                              "template": "{{ data.Freight * 100 | currency}}",
-                              "title": "Amount",
-                              "type": "number"
+                              "name": "heading0",
+                              "size": "H5",
+                              "style": {
+                                "display": "inline"
+                              },
+                              "text": "Total Sales",
+                              "type": "heading"
                             }
                           ],
-                          "data": "${getOrdersResult}",
-                          "emptyText": " ",
-                          "events": {
-                            "loadData": [
-                              {
-                                "name": "Northwind.getNorthwindOrders",
-                                "parameters": [
-                                  {
-                                    "name": "$expand",
-                                    "value": "Employee,Customer,Shipper"
-                                  }
-                                ],
-                                "then": [],
-                                "type": "invoke"
-                              }
-                            ],
-                            "rowSelect": [
-                              {
-                                "name": "Northwind.getNorthwindOrders",
-                                "parameters": [
-                                  {
-                                    "name": "$filter",
-                                    "value": "CustomerID eq '${event.CustomerID}'"
-                                  },
-                                  {
-                                    "name": "$expand",
-                                    "value": "Customer"
-                                  }
-                                ],
-                                "then": [
-                                  {
-                                    "name": "ordersByCustomer",
-                                    "type": "set",
-                                    "value": "${result.value}"
-                                  }
-                                ],
-                                "type": "invoke"
-                              }
-                            ]
-                          },
-                          "expandableGroups": false,
-                          "name": "grid0",
-                          "type": "grid",
-                          "value": "${order}"
+                          "name": "col4",
+                          "style": {},
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading1",
+                              "size": "H3",
+                              "style": {
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "#479cc8",
+                                "display": "block",
+                                "float": "none",
+                                "fontSize": "1.75rem",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "${totalSales | currency:'USD':'symbol':'2.0-0'}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col5",
+                          "type": "col"
                         }
                       ],
-                      "name": "fieldset0",
-                      "style": {},
-                      "text": "LAST 10 ORDERS BY EMPLOYEE",
-                      "type": "fieldset"
+                      "name": "row0",
+                      "type": "row"
+                    },
+                    {
+                      "name": "progressbar0",
+                      "showValue": false,
+                      "style": {
+                        "height": "8px",
+                        "marginBottom": "0.5rem",
+                        "marginTop": "2rem"
+                      },
+                      "type": "progressbar",
+                      "value": "${totalSales * 100/salesTarget}"
+                    },
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading3",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "inline"
+                              },
+                              "text": "Target",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading4",
+                              "size": "H5",
+                              "style": {
+                                "color": "#479cc8",
+                                "display": "block",
+                                "float": "none",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "${totalSales / salesTarget | percent}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row1",
+                      "type": "row"
                     }
                   ],
                   "name": "card0",
+                  "style": {
+                    "borderRadius": "",
+                    "display": "block"
+                  },
                   "type": "card",
                   "visible": true
                 }
               ],
               "name": "col0",
+              "style": {
+                "marginBottom": "1rem"
+              },
               "type": "col"
             },
             {
-              "class": "col-md-6",
+              "class": "col-xl-3 col-lg-6",
               "components": [
                 {
                   "components": [
                     {
+                      "class": "align-items-center",
                       "components": [
                         {
-                          "barPadding": 8,
-                          "categoryProperty": "OrderDate",
-                          "chartType": "Column",
-                          "data": "${ordersByCustomer}",
-                          "legend": false,
-                          "name": "chart0",
-                          "series": "Customer.CompanyName",
-                          "style": {},
-                          "type": "chart",
-                          "valueProperty": "Freight"
+                          "class": "",
+                          "components": [
+                            {
+                              "name": "heading12",
+                              "size": "H5",
+                              "style": {
+                                "display": "inline",
+                                "marginTop": "10px",
+                                "width": "undefinedpx"
+                              },
+                              "text": "Downloads",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col17",
+                          "type": "col"
                         }
                       ],
-                      "name": "fieldset1",
-                      "style": {},
-                      "text": "ORDERS BY CUSTOMER",
-                      "type": "fieldset"
+                      "name": "row8",
+                      "style": {
+                        "marginLeft": "0px",
+                        "marginRight": "0px"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-12",
+                          "components": [
+                            {
+                              "max": 100,
+                              "min": 0,
+                              "name": "gauge0",
+                              "style": {
+                                "height": "96px"
+                              },
+                              "text": "+74%",
+                              "type": "gauge",
+                              "value": 74
+                            }
+                          ],
+                          "name": "col15",
+                          "style": {
+                            "textAlign": "center"
+                          },
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row9",
+                      "type": "row"
                     }
                   ],
-                  "name": "card1",
+                  "name": "card3",
+                  "style": {
+                    "borderRadius": "5px",
+                    "display": "block",
+                    "paddingBottom": "8px"
+                  },
                   "type": "card",
                   "visible": true
                 }
               ],
-              "name": "col1",
+              "name": "col13",
+              "style": {
+                "marginBottom": "1rem"
+              },
+              "type": "col"
+            },
+            {
+              "class": "col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading2",
+                              "size": "H5",
+                              "style": {
+                                "display": "inline"
+                              },
+                              "text": "New Customers",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col6",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading5",
+                              "size": "H3",
+                              "style": {
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "#5dbf74",
+                                "display": "block",
+                                "float": "none",
+                                "fontSize": "1.75rem",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "576",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col7",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
+                      "type": "row"
+                    },
+                    {
+                      "color": "#5dbf74",
+                      "data": "${customers}",
+                      "name": "sparkline0",
+                      "style": {
+                        "display": "inline-block",
+                        "marginTop": "22px",
+                        "width": "100%"
+                      },
+                      "type": "sparkline"
+                    },
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading6",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "inline"
+                              },
+                              "text": "2017",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col8",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading7",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "block",
+                                "float": "none",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "2018",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col9",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row3",
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card1",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "1rem"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col3",
+              "type": "col"
+            },
+            {
+              "class": "col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-md-12",
+                          "components": [
+                            {
+                              "name": "heading10",
+                              "size": "H5",
+                              "style": {
+                                "display": "block",
+                                "marginLeft": "0px",
+                                "marginTop": "10px"
+                              },
+                              "text": "Employee of the month",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col12",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row6",
+                      "type": "row"
+                    },
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "",
+                          "components": [
+                            {
+                              "name": "image0",
+                              "path": "${employeeOfTheMonth.Photo}",
+                              "style": {
+                                "borderRadius": "50%",
+                                "height": "64px",
+                                "marginRight": "1rem",
+                                "width": "64px"
+                              },
+                              "type": "image",
+                              "visible": "${employeeOfTheMonth}"
+                            },
+                            {
+                              "name": "heading11",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "inline-block",
+                                "lineHeight": "66px",
+                                "marginBottom": "0px"
+                              },
+                              "text": "${employeeOfTheMonthName}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col14",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row7",
+                      "style": {
+                        "marginLeft": "0px",
+                        "marginRight": "0px"
+                      },
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card2",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "16px"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col11",
               "type": "col"
             }
           ],
-          "name": "row0",
+          "name": "row4",
+          "style": {},
           "type": "row"
         }
       ],
@@ -407,95 +458,43 @@
   "events": {
     "load": [
       {
-        "name": "Northwind.getEmployees",
+        "name": "totalSales",
+        "type": "set",
+        "value": "49234"
+      },
+      {
+        "name": "salesTarget",
+        "type": "set",
+        "value": "80000"
+      },
+      {
+        "name": "customers",
+        "type": "set",
+        "value": "[134, 193, 156, 123, 192, 155, 132, 163, 143, 182, 192, 233, 129, 183, 233, 150, 113, 233, 323, 354, 433, 425, 365, 322, 280, 321, 393, 436,530,553,576]"
+      },
+      {
+        "name": "employeeOfTheMonthName",
+        "type": "set",
+        "value": "\"Loading ...\""
+      },
+      {
+        "name": "Northwind.getEmployeeById",
         "parameters": [
           {
-            "name": "$top",
-            "value": "this.datalist0.allowPaging ? this.datalist0.pageSize : null"
-          },
-          {
-            "name": "$skip",
-            "value": "this.datalist0.allowPaging ? 0 : null"
-          },
-          {
-            "name": "$count",
-            "value": "this.datalist0.allowPaging"
+            "name": "EmployeeID",
+            "value": "1"
           }
         ],
         "then": [
           {
-            "name": "getEmployeesResult",
+            "name": "employeeOfTheMonth",
             "type": "set",
-            "value": "${result.value}"
+            "value": "${result}"
           },
           {
-            "name": "getEmployeesCount",
+            "name": "employeeOfTheMonthName",
             "type": "set",
-            "value": "this.datalist0.allowPaging ? result['@odata.count'] : ${result.value.length}"
-          },
-          {
-            "condition": "",
-            "name": "employee",
-            "type": "set",
-            "value": "${result.value[0]}"
-          },
-          {
-            "name": "Northwind.getNorthwindOrders",
-            "parameters": [
-              {
-                "name": "$filter",
-                "value": "EmployeeID eq ${employee.EmployeeID}"
-              },
-              {
-                "name": "$top",
-                "value": "10"
-              },
-              {
-                "name": "$orderby",
-                "value": "OrderDate DESC"
-              },
-              {
-                "name": "$expand",
-                "value": "Customer"
-              }
-            ],
-            "then": [
-              {
-                "condition": "",
-                "name": "getOrdersResult",
-                "type": "set",
-                "value": "${result.value}"
-              },
-              {
-                "condition": "",
-                "name": "order",
-                "type": "set",
-                "value": "${result.value[0]}"
-              },
-              {
-                "name": "Northwind.getNorthwindOrders",
-                "parameters": [
-                  {
-                    "name": "$filter",
-                    "value": "CustomerID eq '${order.CustomerID}'"
-                  },
-                  {
-                    "name": "$expand",
-                    "value": "Customer"
-                  }
-                ],
-                "then": [
-                  {
-                    "condition": "",
-                    "name": "ordersByCustomer",
-                    "type": "set",
-                    "value": "${result.value}"
-                  }
-                ],
-                "type": "invoke"
-              }
-            ],
-            "type": "invoke"
+            "value": "${result.FirstName} + ' ' + ${result.LastName}"
           }
         ],
         "type": "invoke"

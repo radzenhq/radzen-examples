@@ -1,78 +1,97 @@
 <rz-content #content1 container="main">
-  <div  class="row">
-    <div class="col-md-6">
-      <rz-card #card2>
-        <rz-fieldset #fieldset2  text="Employees">
-          <rz-datalist #datalist0 [allowPaging]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" defaultRowText="Template for index" emptyText=" " [pageSize]="1" (loadData)="datalist0LoadData($event)">
-            <ng-template let-data datalistTemplate>
-              <div  class="row">
-                <div class="col-md-3">
-                  <rz-image #image0 [path]="data?.Photo" >
-                  </rz-image>
-                </div>
-                <div class="col-md-9">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <rz-heading #heading0 size="H1" [text]="data?.FirstName + ' ' + data?.LastName">
-                      </rz-heading>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <rz-heading #heading1 size="H5" [text]="data?.Notes">
-                      </rz-heading>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </rz-datalist>
-        </rz-fieldset>
-      </rz-card>
-    </div>
-    <div class="col-md-6">
-      <rz-tabs #tabs0 [style]="{'width':''}">
-        <rz-tabs-item [selected]="true" text="Sales">
-          <rz-pie #pie0 categoryProperty="Customer.CompanyName" chartType="Pie" [data]="getOrdersResult" [labels]="true" [legend]="true" [style]="{'height':'300px'}" valueProperty="Freight">
-          </rz-pie>
-        </rz-tabs-item>
-        <rz-tabs-item [selected]="false" text="Schedule">
-          <rz-scheduler #scheduler0 [data]="ordersByCustomer" endProperty="ShippedDate" startProperty="OrderDate" [style]="{'height':'300px'}" titleProperty="Customer.CompanyName">
-          </rz-scheduler>
-        </rz-tabs-item>
-      </rz-tabs>
+  <div [ngStyle]="{'marginBottom':'1rem'}" class="row">
+    <div class="col-md-12 align-items-center d-flex">
+      <rz-heading #heading8 size="H1" [style]="{'display':'inline-block'}" text="Dashboard">
+      </rz-heading>
+      <rz-heading #heading9 size="H3" [style]="{'display':'inline-block','marginLeft':'1rem'}" text="| statistics and overview">
+      </rz-heading>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <rz-card #card0>
-        <rz-fieldset #fieldset0  text="LAST 10 ORDERS BY EMPLOYEE">
-          <rz-grid #grid0 addText="Add" [data]="getOrdersResult" emptyText=" " [expandableGroups]="false" [(value)]="order" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
-            <rz-grid-column filterProperty="Customer.CompanyName" property="CustomerID" sortProperty="Customer.CompanyName" title="Customer" type="string">
-              <ng-template let-data gridColumnTemplate>
-              {{data?.Customer?.CompanyName}}
-              </ng-template>
-            </rz-grid-column>
-            <rz-grid-column format="date-time" property="OrderDate" title="Order Date" type="string">
-              <ng-template let-data gridColumnTemplate>
-              {{data?.OrderDate | utcDate}}
-              </ng-template>
-            </rz-grid-column>
-            <rz-grid-column format="decimal" property="Freight" title="Amount" type="number">
-              <ng-template let-data gridColumnTemplate>
-              {{ data.Freight * 100 | currency}}
-              </ng-template>
-            </rz-grid-column>
-          </rz-grid>
-        </rz-fieldset>
+  <div [ngStyle]="{}" class="row">
+    <div class="col-xl-3 col-lg-6" [ngStyle]="{'marginBottom':'1rem'}">
+      <rz-card #card0 [style]="{'borderRadius':'','display':'block'}">
+        <div class="row align-items-center">
+          <div class="col-6" [ngStyle]="{}">
+            <rz-heading #heading0 size="H5" [style]="{'display':'inline'}" text="Total Sales">
+            </rz-heading>
+          </div>
+          <div class="col-6">
+            <rz-heading #heading1 size="H3" [style]="{'backgroundColor':'rgba(0, 0, 0, 0)','color':'#479cc8','display':'block','float':'none','fontSize':'1.75rem','marginBottom':'0px','textAlign':'right'}" [text]="totalSales | currency:'USD':'symbol':'2.0-0'">
+            </rz-heading>
+          </div>
+        </div>
+        <rz-progressbar #progressbar0 [showValue]="false" [style]="{'height':'8px','marginBottom':'0.5rem','marginTop':'2rem'}" [value]="totalSales * 100 / salesTarget">
+        </rz-progressbar>
+        <div class="row align-items-center">
+          <div class="col-6">
+            <rz-heading #heading3 size="H5" [style]="{'color':'#5d717b','display':'inline'}" text="Target">
+            </rz-heading>
+          </div>
+          <div class="col-6">
+            <rz-heading #heading4 size="H5" [style]="{'color':'#479cc8','display':'block','float':'none','marginBottom':'0px','textAlign':'right'}" [text]="totalSales / salesTarget | percent">
+            </rz-heading>
+          </div>
+        </div>
       </rz-card>
     </div>
-    <div class="col-md-6">
-      <rz-card #card1>
-        <rz-fieldset #fieldset1  text="ORDERS BY CUSTOMER">
-          <rz-chart #chart0 [barPadding]="8" categoryProperty="OrderDate" chartType="Column" [data]="ordersByCustomer" [legend]="false" series="Customer.CompanyName"  valueProperty="Freight">
-          </rz-chart>
-        </rz-fieldset>
+    <div class="col-xl-3 col-lg-6" [ngStyle]="{'marginBottom':'1rem'}">
+      <rz-card #card3 [style]="{'borderRadius':'5px','display':'block','paddingBottom':'8px'}">
+        <div class="row align-items-center" [ngStyle]="{'marginLeft':'0px','marginRight':'0px'}">
+          <div>
+            <rz-heading #heading12 size="H5" [style]="{'display':'inline','marginTop':'10px','width':'undefinedpx'}" text="Downloads">
+            </rz-heading>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" [ngStyle]="{'textAlign':'center'}">
+            <rz-gauge #gauge0 [max]="100" [min]="0" [style]="{'height':'96px'}" text="+74%" [value]="74">
+            </rz-gauge>
+          </div>
+        </div>
+      </rz-card>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <rz-card #card1 [style]="{'display':'block','marginBottom':'1rem'}">
+        <div class="row align-items-center">
+          <div class="col-6">
+            <rz-heading #heading2 size="H5" [style]="{'display':'inline'}" text="New Customers">
+            </rz-heading>
+          </div>
+          <div class="col-6">
+            <rz-heading #heading5 size="H3" [style]="{'backgroundColor':'rgba(0, 0, 0, 0)','color':'#5dbf74','display':'block','float':'none','fontSize':'1.75rem','marginBottom':'0px','textAlign':'right'}" text="576">
+            </rz-heading>
+          </div>
+        </div>
+        <rz-sparkline #sparkline0 color="#5dbf74" [data]="customers" [style]="{'display':'inline-block','marginTop':'22px','width':'100%'}">
+        </rz-sparkline>
+        <div class="row align-items-center">
+          <div class="col-6">
+            <rz-heading #heading6 size="H5" [style]="{'color':'#5d717b','display':'inline'}" text="2017">
+            </rz-heading>
+          </div>
+          <div class="col-6">
+            <rz-heading #heading7 size="H5" [style]="{'color':'#5d717b','display':'block','float':'none','marginBottom':'0px','textAlign':'right'}" text="2018">
+            </rz-heading>
+          </div>
+        </div>
+      </rz-card>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <rz-card #card2 [style]="{'display':'block','marginBottom':'16px'}">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <rz-heading #heading10 size="H5" [style]="{'display':'block','marginLeft':'0px','marginTop':'10px'}" text="Employee of the month">
+            </rz-heading>
+          </div>
+        </div>
+        <div class="row align-items-center" [ngStyle]="{'marginLeft':'0px','marginRight':'0px'}">
+          <div>
+            <rz-image #image0 [path]="employeeOfTheMonth?.Photo" [style]="{'borderRadius':'50%','height':'64px','marginRight':'1rem','width':'64px'}" *ngIf="employeeOfTheMonth">
+            </rz-image>
+            <rz-heading #heading11 size="H5" [style]="{'color':'#5d717b','display':'inline-block','lineHeight':'66px','marginBottom':'0px'}" [text]="employeeOfTheMonthName">
+            </rz-heading>
+          </div>
+        </div>
       </rz-card>
     </div>
   </div>
