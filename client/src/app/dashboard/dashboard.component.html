@@ -1,12 +1,8 @@
 <rz-content #content1 container="main">
-  <div [ngStyle]="{'marginBottom':'1rem'}" class="row">
-    <div class="col-md-12 align-items-center d-flex">
-      <rz-heading #heading8 size="H1" [style]="{'display':'inline-block'}" text="Dashboard">
-      </rz-heading>
-      <rz-heading #heading9 size="H3" [style]="{'display':'inline-block','marginLeft':'1rem'}" text="| statistics and overview">
-      </rz-heading>
-    </div>
-  </div>
+  <rz-heading #heading8 size="H1" [style]="{'display':'inline-block','marginRight':'1rem'}" text="Dashboard">
+  </rz-heading>
+  <rz-heading #heading9 size="H3" [style]="{'display':'inline-block','marginLeft':'0px'}" text="| statistics and overview">
+  </rz-heading>
   <div [ngStyle]="{}" class="row">
     <div class="col-xl-3 col-lg-6" [ngStyle]="{'marginBottom':'1rem'}">
       <rz-card #card0 [style]="{'borderRadius':'','display':'block'}">
@@ -92,6 +88,36 @@
             </rz-heading>
           </div>
         </div>
+      </rz-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <rz-card #card4 [style]="{'display':'block'}">
+        <rz-button #button1 buttonStyle="secondary" icon="file_download" [style]="{'float':'right'}" text="Export" (click)="button1Click($event)">
+        </rz-button>
+        <rz-heading #heading13 size="H3" text="Employees">
+        </rz-heading>
+        <rz-grid #grid0 addText="Add" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." [isLoading]="true" [pageSize]="5" [style]="{'height':'377px'}" (loadData)="grid0LoadData($event)">
+          <rz-grid-column sortProperty="FirstName" [sortable]="true" title="Employee">
+            <ng-template let-data gridColumnTemplate>
+              <rz-image #image1 [path]="data?.Photo" [style]="{'borderRadius':'50%','height':'40px','width':'40px'}">
+              </rz-image>
+              <rz-label #label0 text="{{data?.FirstName}} {{data?.LastName}}">
+              </rz-label>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column property="City" title="City" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="Country" title="Country" width="100px" type="string">
+            <ng-template let-data gridColumnTemplate>
+              <rz-image #image2 path="/assets/images/{{data?.Country?.toLowerCase()}}.png" [style]="{'display':'block','marginLeft':'auto','marginRight':'auto','width':'40px'}">
+              </rz-image>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column property="HomePhone" title="Home Phone" type="string">
+          </rz-grid-column>
+        </rz-grid>
       </rz-card>
     </div>
   </div>

@@ -6,39 +6,24 @@
     {
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-12 align-items-center d-flex",
-              "components": [
-                {
-                  "name": "heading8",
-                  "size": "H1",
-                  "style": {
-                    "display": "inline-block"
-                  },
-                  "text": "Dashboard",
-                  "type": "heading"
-                },
-                {
-                  "name": "heading9",
-                  "size": "H3",
-                  "style": {
-                    "display": "inline-block",
-                    "marginLeft": "1rem"
-                  },
-                  "text": "| statistics and overview",
-                  "type": "heading"
-                }
-              ],
-              "name": "col10",
-              "type": "col"
-            }
-          ],
-          "name": "row5",
+          "name": "heading8",
+          "size": "H1",
           "style": {
-            "marginBottom": "1rem"
+            "display": "inline-block",
+            "marginRight": "1rem"
           },
-          "type": "row"
+          "text": "Dashboard",
+          "type": "heading"
+        },
+        {
+          "name": "heading9",
+          "size": "H3",
+          "style": {
+            "display": "inline-block",
+            "marginLeft": "0px"
+          },
+          "text": "| statistics and overview",
+          "type": "heading"
         },
         {
           "components": [
@@ -449,6 +434,168 @@
           "name": "row4",
           "style": {},
           "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "buttonStyle": "secondary",
+                      "events": {
+                        "click": [
+                          {
+                            "format": "xlsx",
+                            "name": "Northwind.getEmployees",
+                            "type": "export"
+                          }
+                        ]
+                      },
+                      "icon": "file_download",
+                      "name": "button1",
+                      "style": {
+                        "float": "right"
+                      },
+                      "text": "Export",
+                      "type": "button"
+                    },
+                    {
+                      "name": "heading13",
+                      "size": "H3",
+                      "text": "Employees",
+                      "type": "heading"
+                    },
+                    {
+                      "addText": "Add",
+                      "allowPaging": true,
+                      "allowSorting": true,
+                      "columns": [
+                        {
+                          "filterProperty": "",
+                          "sortProperty": "FirstName",
+                          "sortable": true,
+                          "template": [
+                            {
+                              "name": "image1",
+                              "path": "${data.Photo}",
+                              "style": {
+                                "borderRadius": "50%",
+                                "height": "40px",
+                                "width": "40px"
+                              },
+                              "type": "image"
+                            },
+                            {
+                              "name": "label0",
+                              "text": "${data.FirstName} ${data.LastName}",
+                              "type": "label"
+                            }
+                          ],
+                          "title": "Employee",
+                          "visible": true
+                        },
+                        {
+                          "property": "City",
+                          "title": "City",
+                          "type": "string"
+                        },
+                        {
+                          "filterProperty": "",
+                          "footerTemplate": "",
+                          "property": "Country",
+                          "template": [
+                            {
+                              "name": "image2",
+                              "path": "/assets/images/${data.Country.toLowerCase()}.png",
+                              "style": {
+                                "display": "block",
+                                "marginLeft": "auto",
+                                "marginRight": "auto",
+                                "width": "40px"
+                              },
+                              "type": "image"
+                            }
+                          ],
+                          "title": "Country",
+                          "type": "string",
+                          "width": "100px"
+                        },
+                        {
+                          "property": "HomePhone",
+                          "title": "Home Phone",
+                          "type": "string"
+                        }
+                      ],
+                      "count": "${getEmployeesCount}",
+                      "data": "${getEmployeesResult}",
+                      "emptyText": "No records to display.",
+                      "events": {
+                        "loadData": [
+                          {
+                            "name": "Northwind.getEmployees",
+                            "parameters": [
+                              {
+                                "name": "$top",
+                                "value": "event.top"
+                              },
+                              {
+                                "name": "$skip",
+                                "value": "event.skip"
+                              },
+                              {
+                                "name": "$expand",
+                                "value": ""
+                              },
+                              {
+                                "name": "$count",
+                                "value": "event.top != null && event.skip != null"
+                              },
+                              {
+                                "name": "$orderby",
+                                "value": "${event.orderby}"
+                              }
+                            ],
+                            "then": [
+                              {
+                                "name": "getEmployeesResult",
+                                "type": "set",
+                                "value": "${result.value}"
+                              },
+                              {
+                                "name": "getEmployeesCount",
+                                "type": "set",
+                                "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                              }
+                            ],
+                            "type": "invoke"
+                          }
+                        ]
+                      },
+                      "isLoading": true,
+                      "name": "grid0",
+                      "pageSize": 5,
+                      "style": {
+                        "height": "377px"
+                      },
+                      "type": "grid"
+                    }
+                  ],
+                  "name": "card4",
+                  "style": {
+                    "display": "block"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col10",
+              "type": "col"
+            }
+          ],
+          "name": "row5",
+          "type": "row"
         }
       ],
       "container": "main",
@@ -495,6 +642,40 @@
             "name": "employeeOfTheMonthName",
             "type": "set",
             "value": "${result.FirstName} + ' ' + ${result.LastName}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getEmployeesCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          },
+          {
+            "code": "this.grid0.isLoading = false",
+            "type": "execute"
           }
         ],
         "type": "invoke"

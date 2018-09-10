@@ -16,6 +16,9 @@ import { ProgressBarComponent } from '@radzen/angular/dist/progressbar';
 import { GaugeComponent } from '@radzen/angular/dist/gauge';
 import { SparklineComponent } from '@radzen/angular/dist/sparkline';
 import { ImageComponent } from '@radzen/angular/dist/image';
+import { ButtonComponent } from '@radzen/angular/dist/button';
+import { GridComponent } from '@radzen/angular/dist/grid';
+import { LabelComponent } from '@radzen/angular/dist/label';
 
 import { NorthwindService } from '../northwind.service';
 import { SecurityService } from '../security.service';
@@ -44,6 +47,10 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('heading10') heading10: HeadingComponent;
   @ViewChild('image0') image0: ImageComponent;
   @ViewChild('heading11') heading11: HeadingComponent;
+  @ViewChild('card4') card4: CardComponent;
+  @ViewChild('button1') button1: ButtonComponent;
+  @ViewChild('heading13') heading13: HeadingComponent;
+  @ViewChild('grid0') grid0: GridComponent;
 
   router: Router;
 
@@ -74,6 +81,10 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
   employeeOfTheMonthName: any;
 
   employeeOfTheMonth: any;
+
+  getEmployeesResult: any;
+
+  getEmployeesCount: any;
 
   parameters: any;
 
@@ -130,6 +141,32 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
       this.employeeOfTheMonth = result;
 
       this.employeeOfTheMonthName = result.FirstName + ' ' + result.LastName;
+    }, (result: any) => {
+
+    });
+
+    this.northwind.getEmployees(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging)
+    .subscribe((result: any) => {
+      this.getEmployeesResult = result.value;
+
+      this.getEmployeesCount = this.grid0.allowPaging ? result['@odata.count'] : result.value.length;
+
+      this.grid0.isLoading = false
+    }, (result: any) => {
+
+    });
+  }
+
+  button1Click(event: any) {
+    this.northwind.getEmployees(null, null, null, null, null, null)
+  }
+
+  grid0LoadData(event: any) {
+    this.northwind.getEmployees(null, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    .subscribe((result: any) => {
+      this.getEmployeesResult = result.value;
+
+      this.getEmployeesCount = event.top != null && event.skip != null ? result['@odata.count'] : result.value.length;
     }, (result: any) => {
 
     });
