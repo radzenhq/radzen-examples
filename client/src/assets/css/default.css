@@ -6855,7 +6855,7 @@ p-radiobutton {
   border: solid 1px #dfe7ec;
   border-radius: 0 0 4px 4px;
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01);
-  flex-basis: auto;
+  flex: auto;
   overflow: auto; }
 
 .ui-tabview-panel {
@@ -7110,3 +7110,20 @@ p-radiobutton {
   100%, 60% {
     left: 107%;
     right: -8%; } }
+
+.chart .ngx-charts,
+.pie .ngx-charts {
+  overflow: visible !important; }
+
+.chart .chart-legend .legend-labels,
+.pie .chart-legend .legend-labels {
+  background-color: transparent; }
+
+.chart .legend-title,
+.pie .legend-title {
+  display: none; }
+
+.chart .tick text,
+.pie .tick text {
+  fill: rgba(65, 65, 65, 0.5);
+  font-size: 0.875rem !important; }

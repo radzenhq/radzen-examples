@@ -8,7 +8,7 @@
       <rz-card #card0 [style]="{'borderRadius':'','display':'block'}">
         <div class="row align-items-center">
           <div class="col-6" [ngStyle]="{}">
-            <rz-heading #heading0 size="H5" [style]="{'display':'inline'}" text="Total Sales">
+            <rz-heading #heading0 size="H5" [style]="{'display':'inline'}" text="Total sales">
             </rz-heading>
           </div>
           <div class="col-6">
@@ -50,7 +50,7 @@
       <rz-card #card1 [style]="{'display':'block','marginBottom':'1rem'}">
         <div class="row align-items-center">
           <div class="col-6">
-            <rz-heading #heading2 size="H5" [style]="{'display':'inline'}" text="New Customers">
+            <rz-heading #heading2 size="H5" [style]="{'display':'inline'}" text="New customers">
             </rz-heading>
           </div>
           <div class="col-6">
@@ -93,10 +93,10 @@
   </div>
   <div class="row">
     <div class="col-lg-6">
-      <rz-card #card4 [style]="{'display':'block'}">
+      <rz-card #card4 [style]="{'display':'block','marginBottom':'1rem'}">
         <rz-button #button1 buttonStyle="secondary" icon="file_download" [style]="{'float':'right'}" text="Export" (click)="button1Click($event)">
         </rz-button>
-        <rz-heading #heading13 size="H3" text="Employees">
+        <rz-heading #heading13 size="H3" [style]="{'marginBottom':'22px'}" text="Employees">
         </rz-heading>
         <rz-grid #grid0 addText="Add" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." [isLoading]="true" [pageSize]="5" [style]="{'height':'377px'}" (loadData)="grid0LoadData($event)">
           <rz-grid-column sortProperty="FirstName" [sortable]="true" title="Employee">
@@ -118,6 +118,42 @@
           <rz-grid-column property="HomePhone" title="Home Phone" type="string">
           </rz-grid-column>
         </rz-grid>
+      </rz-card>
+    </div>
+    <div class="col-lg-6">
+      <rz-card #card5 [style]="{'display':'block','marginBottom':'1rem'}">
+        <rz-selectbar #selectbar0 [style]="{'float':'right'}" [(ngModel)]="selectedYear" name="selectbar0" (change)="selectbar0Change($event)">
+          <rz-selectbar-option text="2016" value="2016">
+          </rz-selectbar-option>
+          <rz-selectbar-option text="2017" value="2017">
+          </rz-selectbar-option>
+          <rz-selectbar-option text="2018" value="2018">
+          </rz-selectbar-option>
+        </rz-selectbar>
+        <rz-heading #sales size="H3" [style]="{'marginBottom':'22px'}" text="Product sales">
+        </rz-heading>
+        <rz-chart #chart0 categoryProperty="Date" chartType="Area" [colors]="['#e6ecef','#479cc8','#5dbf74','#ff6d41','#68d5c8','#f9777f','#cb6992','#e6c54f']" [data]="salesData" [legend]="true" series="CategoryName" [style]="{'height':'377px','width':'100%'}" valueProperty="Total">
+        </rz-chart>
+      </rz-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <rz-card #card7 [style]="{'display':'block'}">
+        <rz-heading #heading15 size="H3" [style]="{'marginBottom':'22px'}" text="Pending shipments">
+        </rz-heading>
+        <rz-scheduler #scheduler0 [data]="orders" defaultDate="2018-01-01" endProperty="RequiredDate" idProperty="OrderID" startProperty="OrderDate" [style]="{'height':'468px'}" titleProperty="ShipCity">
+        </rz-scheduler>
+      </rz-card>
+    </div>
+    <div class="col-lg-6">
+      <rz-card #card6 [style]="{'display':'block'}">
+        <rz-heading #heading14 size="H3" [style]="{'marginBottom':'22px'}" text="HQ Address">
+        </rz-heading>
+        <rz-googlemap #googlemap0 apiKey="AIzaSyAJLieBqU3cH3BA3OxUlKDYjpv7Bh6dHbY" [center]="{'lat':47.642232,'lng':-122.13679100000002}" [style]="{'height':'500px','marginBottom':'-1rem','marginLeft':'-1rem','marginRight':'-1rem','marginTop':'-1rem'}" [zoom]="17">
+          <rz-googlemap-marker [position]="{'lat':47.642232,'lng':-122.13679100000002}">
+          </rz-googlemap-marker>
+        </rz-googlemap>
       </rz-card>
     </div>
   </div>

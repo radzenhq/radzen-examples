@@ -30,6 +30,10 @@ import { ProgressBarModule } from '@radzen/angular/dist/progressbar';
 import { GaugeModule } from '@radzen/angular/dist/gauge';
 import { SparklineModule } from '@radzen/angular/dist/sparkline';
 import { ImageModule } from '@radzen/angular/dist/image';
+import { SelectBarModule } from '@radzen/angular/dist/selectbar';
+import { ChartModule } from '@radzen/angular/dist/chart';
+import { SchedulerModule } from '@radzen/angular/dist/scheduler';
+import { GoogleMapModule } from '@radzen/angular/dist/googlemap';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -233,6 +237,10 @@ export const AppImports = [
   GaugeModule,
   SparklineModule,
   ImageModule,
+  SelectBarModule,
+  ChartModule,
+  SchedulerModule,
+  GoogleMapModule,
   SharedModule,
   NotificationModule,
   DialogModule,
