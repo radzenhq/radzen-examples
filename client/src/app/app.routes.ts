@@ -74,393 +74,344 @@ export const routes: Routes = [
     children: [
       {
         path: 'categories',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: CategoriesComponent
       },
       {
         path: 'add-category',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddCategoryComponent
       },
       {
         path: 'edit-category/:CategoryID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditCategoryComponent
       },
       {
         path: 'customers',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: CustomersComponent
       },
       {
         path: 'add-customer',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddCustomerComponent
       },
       {
         path: 'edit-customer/:CustomerID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditCustomerComponent
       },
       {
         path: 'customer-customer-demos',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: CustomerCustomerDemosComponent
       },
       {
         path: 'add-customer-customer-demo',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddCustomerCustomerDemoComponent
       },
       {
         path: 'edit-customer-customer-demo/:CustomerID/:CustomerTypeID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditCustomerCustomerDemoComponent
       },
       {
         path: 'customer-demographics',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: CustomerDemographicsComponent
       },
       {
         path: 'add-customer-demographic',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddCustomerDemographicComponent
       },
       {
         path: 'edit-customer-demographic/:CustomerTypeID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditCustomerDemographicComponent
       },
       {
         path: 'employees',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EmployeesComponent
       },
       {
         path: 'add-employee',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddEmployeeComponent
       },
       {
         path: 'edit-employee/:EmployeeID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditEmployeeComponent
       },
       {
         path: 'employee-territories',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EmployeeTerritoriesComponent
       },
       {
         path: 'add-employee-territory',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddEmployeeTerritoryComponent
       },
       {
         path: 'edit-employee-territory/:EmployeeID/:TerritoryID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditEmployeeTerritoryComponent
       },
       {
         path: 'orders',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrdersComponent
       },
       {
         path: 'add-order',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddOrderComponent
       },
       {
         path: 'edit-order/:OrderID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditOrderComponent
       },
       {
         path: 'order-details',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrderDetailsComponent
       },
       {
         path: 'add-order-detail',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddOrderDetailComponent
       },
       {
         path: 'edit-order-detail/:OrderID/:ProductID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditOrderDetailComponent
       },
       {
         path: 'products',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: ProductsComponent
       },
       {
         path: 'add-product',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddProductComponent
       },
       {
         path: 'edit-product/:ProductID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditProductComponent
       },
       {
         path: 'regions',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: RegionsComponent
       },
       {
         path: 'add-region',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddRegionComponent
       },
       {
         path: 'edit-region/:RegionID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditRegionComponent
       },
       {
         path: 'suppliers',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: SuppliersComponent
       },
       {
         path: 'add-supplier',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddSupplierComponent
       },
       {
         path: 'edit-supplier/:SupplierID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditSupplierComponent
       },
       {
         path: 'territories',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: TerritoriesComponent
       },
       {
         path: 'add-territory',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: AddTerritoryComponent
       },
       {
         path: 'edit-territory/:TerritoryID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EditTerritoryComponent
       },
       {
         path: 'order-details-by-order-id/:OrderID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrderDetailsByOrderIdComponent
       },
       {
         path: 'orders-by-order-id/:OrderID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrdersByOrderIdComponent
       },
       {
         path: 'orders-by-customer-id/:CustomerID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrdersByCustomerIdComponent
       },
       {
         path: 'products-by-category-id/:CategoryID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: ProductsByCategoryIdComponent
       },
       {
         path: 'categories-by-category-id/:CategoryID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: CategoriesByCategoryIdComponent
       },
       {
         path: 'customers-by-customer-id/:CustomerID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: CustomersByCustomerIdComponent
       },
       {
         path: 'orders-by-employee-id/:EmployeeID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrdersByEmployeeIdComponent
       },
       {
         path: 'employees-by-employee-id/:EmployeeID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: EmployeesByEmployeeIdComponent
       },
       {
         path: 'products-by-product-id/:ProductID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: ProductsByProductIdComponent
       },
       {
         path: 'suppliers-by-supplier-id/:SupplierID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: SuppliersBySupplierIdComponent
       },
       {
         path: 'products-by-supplier-id/:SupplierID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: ProductsBySupplierIdComponent
       },
       {
         path: 'regions-by-region-id/:RegionID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: RegionsByRegionIdComponent
       },
       {
         path: 'territories-by-region-id/:RegionID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: TerritoriesByRegionIdComponent
       },
@@ -482,9 +433,8 @@ export const routes: Routes = [
       },
       {
         path: 'profile',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: ProfileComponent
       },
@@ -535,9 +485,8 @@ export const routes: Routes = [
       },
       {
         path: 'orders-by-product-id/:ProductID',
-        canActivate: [AuthGuard],
         data: {
-          roles: ['Authenticated'],
+          roles: ['Everybody'],
         },
         component: OrdersByProductIdComponent
       },

@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -20,7 +22,7 @@
                   "allowDelete": true,
                   "allowFiltering": true,
                   "allowMultiSorting": false,
-                  "allowPaging": true,
+                  "allowPaging": false,
                   "allowSorting": true,
                   "columns": [
                     {
@@ -38,26 +40,13 @@
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CategoryID",
-                                    "value": "${data.CategoryID}"
-                                  }
-                                ],
-                                "path": "products-by-category-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "name": "link0",
+                          "path": "products-by-category-id/${data.CategoryID}",
                           "text": "Products",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Products",
                       "width": "160px"
                     }
                   ],
@@ -156,7 +145,11 @@
                       }
                     ]
                   },
+                  "filterDateFormat": "mm/dd/yy",
+                  "isLoading": false,
                   "name": "grid0",
+                  "pageSize": 10,
+                  "style": {},
                   "title": "",
                   "type": "grid"
                 }

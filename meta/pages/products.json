@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -22,14 +24,19 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "",
                   "columns": [
                     {
+                      "footerTemplate": "",
                       "property": "ProductName",
+                      "template": "",
                       "title": "Product Name",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "filterProperty": "Supplier.CompanyName",
+                      "format": "int32",
                       "sortProperty": "Supplier.CompanyName",
                       "template": [
                         {
@@ -50,18 +57,19 @@
                           "icon": "",
                           "name": "supplierButton",
                           "style": {
-                            "width": "340px"
+                            "width": "100%"
                           },
                           "text": "${data.Supplier?.CompanyName}",
                           "type": "button"
                         }
                       ],
-                      "title": "Supplier",
-                      "type": "string",
-                      "width": "360px"
+                      "title": "Product ID",
+                      "type": "integer",
+                      "width": "300px"
                     },
                     {
                       "filterProperty": "Category.CategoryName",
+                      "footerTemplate": "",
                       "sortProperty": "Category.CategoryName",
                       "template": [
                         {
@@ -82,7 +90,7 @@
                           "icon": "",
                           "name": "categoryButton",
                           "style": {
-                            "width": "240px"
+                            "width": "100%"
                           },
                           "text": "${data.Category?.CategoryName}",
                           "type": "button"
@@ -90,46 +98,46 @@
                       ],
                       "title": "Category",
                       "type": "string",
-                      "width": "260px"
+                      "width": "200px"
                     },
                     {
-                      "property": "QuantityPerUnit",
-                      "title": "Quantity Per Unit",
-                      "type": "string"
-                    },
-                    {
+                      "footerTemplate": "",
                       "format": "double",
                       "property": "UnitPrice",
                       "template": "{{ data.UnitPrice | currency}}",
                       "title": "Unit Price",
-                      "type": "number"
+                      "type": "number",
+                      "width": "100px"
                     },
                     {
+                      "footerTemplate": "",
                       "format": "int32",
                       "property": "UnitsInStock",
+                      "template": "",
                       "title": "Units In Stock",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "100px"
                     },
                     {
+                      "footerTemplate": "",
                       "format": "int32",
                       "property": "UnitsOnOrder",
                       "title": "Units On Order",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "100px"
                     },
                     {
-                      "format": "int32",
-                      "property": "ReorderLevel",
-                      "title": "Reorder Level",
-                      "type": "integer"
-                    },
-                    {
+                      "footerTemplate": "",
                       "property": "Discontinued",
+                      "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
-                      "type": "boolean"
+                      "type": "boolean",
+                      "width": "100px"
                     },
                     {
                       "filterable": false,
-                      "sortable": false,
+                      "format": "",
+                      "sortable": true,
                       "template": [
                         {
                           "events": {
@@ -148,10 +156,15 @@
                           },
                           "icon": "",
                           "name": "button0",
+                          "style": {
+                            "width": "100%"
+                          },
                           "text": "Orders",
                           "type": "button"
                         }
                       ],
+                      "title": "Category Northwind Products",
+                      "type": "array",
                       "width": "140px"
                     }
                   ],
@@ -257,8 +270,10 @@
                     ]
                   },
                   "name": "grid0",
+                  "template": "",
                   "title": "",
-                  "type": "grid"
+                  "type": "grid",
+                  "value": ""
                 }
               ],
               "type": "col"

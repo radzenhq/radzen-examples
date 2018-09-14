@@ -3,12 +3,12 @@
     <div class="col-md-6 d-flex align-items-center">
       <rz-sidebar-toggle #sidebarToggle0>
       </rz-sidebar-toggle>
-      <rz-label #label0 text="Radzen Northwind Demo">
+      <rz-label #label0 text="Radzen Showcase Demo">
       </rz-label>
     </div>
     <div class="col-md-6 text-lg-right">
       <rz-profilemenu #profilemenu0 *ngIf="security?.isAuthenticated()" (click)="profilemenu0Click($event)">
-        <rz-profilemenu-item path="profile" icon="settings" text="Profile" *ngIf="security?.isInRole(['Authenticated'])">
+        <rz-profilemenu-item path="profile" icon="settings" text="Profile" *ngIf="security?.isInRole(['Everybody'])">
         </rz-profilemenu-item>
         <rz-profilemenu-item path="application-users" icon="person" text="Users" *ngIf="security?.isInRole(['admin'])">
         </rz-profilemenu-item>
@@ -30,27 +30,27 @@
 </rz-body>
 <rz-sidebar #sidebar0>
   <rz-panelmenu #panelmenu0 [style]="{'height':'100%'}">
-    <rz-panelmenu-item path="dashboard" text="Dashboard" *ngIf="security?.isInRole(['Everybody'])">
+    <rz-panelmenu-item icon="home" path="dashboard" text="Dashboard" *ngIf="security?.isInRole(['Everybody'])">
     </rz-panelmenu-item>
-    <rz-panelmenu-item path="login" text="Login" *ngIf="!security?.isAuthenticated()">
+    <rz-panelmenu-item icon="flight_takeoff" text="Northwind">
+      <rz-panelmenu-item icon="folder" path="categories" text="Categories">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item icon="add_shopping_cart" path="products" text="Products">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item icon="credit_card" path="customers" text="Customers">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item icon="face" path="employees" text="Employees">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item icon="shopping_cart" path="orders" text="Orders">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item icon="details" path="order-details" text="Order Details">
+      </rz-panelmenu-item>
     </rz-panelmenu-item>
-    <rz-panelmenu-item path="categories" text="Categories" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="customers" text="Customers" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="employees" text="Employees" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="orders" text="Orders" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="order-details" text="Order Details" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="products" text="Products" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="regions" text="Regions" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="suppliers" text="Suppliers" *ngIf="security?.isInRole(['Authenticated'])">
-    </rz-panelmenu-item>
-    <rz-panelmenu-item path="territories" text="Territories" *ngIf="security?.isInRole(['Authenticated'])">
+    <rz-panelmenu-item icon="settings" text="User Management">
+      <rz-panelmenu-item icon="supervisor_account" path="application-users" text="Users">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item icon="work" path="application-roles" text="Roles">
+      </rz-panelmenu-item>
     </rz-panelmenu-item>
   </rz-panelmenu>
 </rz-sidebar>

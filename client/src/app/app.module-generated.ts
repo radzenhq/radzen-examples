@@ -22,8 +22,8 @@ import { LinkModule } from '@radzen/angular/dist/link';
 import { ContentModule } from '@radzen/angular/dist/content';
 import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
-import { ButtonModule } from '@radzen/angular/dist/button';
 import { FormModule } from '@radzen/angular/dist/form';
+import { ButtonModule } from '@radzen/angular/dist/button';
 import { HtmlModule } from '@radzen/angular/dist/html';
 import { LoginModule } from '@radzen/angular/dist/login';
 import { ProgressBarModule } from '@radzen/angular/dist/progressbar';
@@ -229,8 +229,8 @@ export const AppImports = [
   ContentModule,
   HeadingModule,
   GridModule,
-  ButtonModule,
   FormModule,
+  ButtonModule,
   HtmlModule,
   LoginModule,
   ProgressBarModule,

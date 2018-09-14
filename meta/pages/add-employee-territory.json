@@ -1,5 +1,5 @@
 {
-  "access": "Authenticated",
+  "access": "Everybody",
   "components": [
     {
       "type": "content",

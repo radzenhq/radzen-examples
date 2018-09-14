@@ -258,7 +258,7 @@ export class ODataClient {
       this.downloadFile(response, `Export.${odataParams.format}`)
     })
     .catch(response => {
-      return Observable.throw(response.status == 0 ? {error: response} : response.error);
+      return Observable.throw(response);
     });
   }
 
@@ -287,7 +287,7 @@ export class ODataClient {
       withCredentials: this.options.withCredentials
     })
     .catch(response => {
-      return Observable.throw(response.status == 0 ? {error: response} : response.error);
+      return Observable.throw(response);
     });
   }
 

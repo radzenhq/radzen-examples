@@ -14,7 +14,7 @@
                 },
                 {
                   "name": "label0",
-                  "text": "Radzen Northwind Demo",
+                  "text": "Radzen Showcase Demo",
                   "type": "label"
                 }
               ],
@@ -62,49 +62,61 @@
         {
           "items": [
             {
+              "icon": "home",
               "path": "dashboard",
               "text": "Dashboard"
             },
             {
-              "path": "login",
-              "text": "Login",
-              "visible": "${!security.isAuthenticated()}"
+              "icon": "flight_takeoff",
+              "items": [
+                {
+                  "icon": "folder",
+                  "path": "categories",
+                  "text": "Categories"
+                },
+                {
+                  "icon": "add_shopping_cart",
+                  "path": "products",
+                  "text": "Products"
+                },
+                {
+                  "icon": "credit_card",
+                  "path": "customers",
+                  "text": "Customers"
+                },
+                {
+                  "icon": "face",
+                  "path": "employees",
+                  "text": "Employees"
+                },
+                {
+                  "icon": "shopping_cart",
+                  "path": "orders",
+                  "text": "Orders"
+                },
+                {
+                  "icon": "details",
+                  "path": "order-details",
+                  "text": "Order Details"
+                }
+              ],
+              "text": "Northwind"
             },
             {
-              "path": "categories",
-              "text": "Categories"
-            },
-            {
-              "path": "customers",
-              "text": "Customers"
-            },
-            {
-              "path": "employees",
-              "text": "Employees"
-            },
-            {
-              "path": "orders",
-              "text": "Orders"
-            },
-            {
-              "path": "order-details",
-              "text": "Order Details"
-            },
-            {
-              "path": "products",
-              "text": "Products"
-            },
-            {
-              "path": "regions",
-              "text": "Regions"
-            },
-            {
-              "path": "suppliers",
-              "text": "Suppliers"
-            },
-            {
-              "path": "territories",
-              "text": "Territories"
+              "icon": "settings",
+              "items": [
+                {
+                  "icon": "supervisor_account",
+                  "path": "application-users",
+                  "text": "Users"
+                },
+                {
+                  "icon": "work",
+                  "path": "application-roles",
+                  "text": "Roles"
+                }
+              ],
+              "text": "User Management"
             }
           ],
           "name": "panelmenu0",
@@ -120,6 +132,7 @@
     {
       "components": [
         {
+          "icon": "",
           "name": "link0",
           "path": "https://github.com/akorchev/radzen",
           "text": "Source Code",

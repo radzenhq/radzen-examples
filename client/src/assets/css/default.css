@@ -4897,7 +4897,7 @@ input {
   flex-direction: column;
   padding: 1.25rem 1.5625rem;
   border-radius: 4px;
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01);
+  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.06);
   background-color: #ffffff; }
   .card h1,
   .card h2,
@@ -5119,19 +5119,24 @@ p-accordiontab {
       background-color: #1f2b31;
       color: inherit; }
     .panel-menu .navigation-menu .navigation-item-wrapper {
-      padding: 0.25rem 0 0.25rem 0.4375rem; }
+      padding: 0.25rem 0;
+      background-color: #28363c; }
       .panel-menu .navigation-menu .navigation-item-wrapper:hover {
         background-color: #1f2b31;
         color: inherit; }
+    .panel-menu .navigation-menu .navigation-item-icon {
+      margin: 0 0.75rem 0 -2.25rem; }
     .panel-menu .navigation-menu .navigation-menu .navigation-item-link {
       padding-left: 0.75rem; }
     .panel-menu .navigation-menu .navigation-menu .navigation-item-active,
     .panel-menu .navigation-menu .navigation-menu .navigation-item-wrapper-active {
       background-color: #172024;
       color: inherit; }
-    .panel-menu .navigation-menu .navigation-menu .navigation-item-wrapper:hover {
-      background-color: #172024;
-      color: inherit; }
+    .panel-menu .navigation-menu .navigation-menu .navigation-item-wrapper {
+      background-color: #1f2b31; }
+      .panel-menu .navigation-menu .navigation-menu .navigation-item-wrapper:hover {
+        background-color: #172024;
+        color: inherit; }
     .panel-menu .navigation-menu .navigation-menu .navigation-menu .navigation-item-link {
       padding-left: 1.5rem; }
     .panel-menu .navigation-menu .navigation-item {
@@ -6679,7 +6684,7 @@ p-radiobutton {
   overflow: hidden;
   border-radius: 4px;
   border: solid 1px #cecece;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.06); }
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01); }
   .fc .fc-prev-button,
   .fc .fc-next-button {
     height: auto;
@@ -6855,8 +6860,12 @@ p-radiobutton {
   border: solid 1px #dfe7ec;
   border-radius: 0 0 4px 4px;
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.01);
-  flex: auto;
+  flex: 1;
   overflow: auto; }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ui-tabview-panels {
+    flex: auto; } }
 
 .ui-tabview-panel {
   padding: 1.25rem; }
@@ -7127,3 +7136,12 @@ p-radiobutton {
 .pie .tick text {
   fill: rgba(65, 65, 65, 0.5);
   font-size: 0.875rem !important; }
+
+.link .link-text {
+  vertical-align: middle; }
+
+.link .material-icons, .link .fc-prev-button .ui-icon, .fc-prev-button .link .ui-icon, .link
+.fc-next-button .ui-icon,
+.fc-next-button .link .ui-icon {
+  font-size: inherit;
+  vertical-align: middle; }
