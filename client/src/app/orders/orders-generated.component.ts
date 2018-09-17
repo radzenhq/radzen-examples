@@ -12,7 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { ButtonComponent } from '@radzen/angular/dist/button';
+import { LinkComponent } from '@radzen/angular/dist/link';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { EditOrderComponent } from '../edit-order/edit-order.component';
 
@@ -127,26 +127,5 @@ export class OrdersGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditOrderComponent, { parameters: {OrderID: event.OrderID}, title: 'Edit Order' });
-  }
-
-  customersButtonClick(event: any, data: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['customers-by-customer-id', data.CustomerID]);
-  }
-
-  employeesButtonClick(event: any, data: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['employees-by-employee-id', data.EmployeeID]);
-  }
-
-  orderDetailsButtonClick(event: any, data: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['order-details-by-order-id', data.OrderID]);
   }
 }

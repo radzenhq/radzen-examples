@@ -12,27 +12,28 @@ import { CardModule } from '@radzen/angular/dist/card';
 import { ContentContainerModule } from '@radzen/angular/dist/content-container';
 import { HeaderModule } from '@radzen/angular/dist/header';
 import { SidebarToggleModule } from '@radzen/angular/dist/sidebar-toggle';
-import { LabelModule } from '@radzen/angular/dist/label';
+import { HeadingModule } from '@radzen/angular/dist/heading';
 import { ProfileMenuModule } from '@radzen/angular/dist/profilemenu';
 import { GravatarModule } from '@radzen/angular/dist/gravatar';
 import { SidebarModule } from '@radzen/angular/dist/sidebar';
+import { ImageModule } from '@radzen/angular/dist/image';
 import { PanelMenuModule } from '@radzen/angular/dist/panelmenu';
 import { FooterModule } from '@radzen/angular/dist/footer';
 import { LinkModule } from '@radzen/angular/dist/link';
 import { ContentModule } from '@radzen/angular/dist/content';
-import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
-import { ButtonModule } from '@radzen/angular/dist/button';
 import { FormModule } from '@radzen/angular/dist/form';
+import { LabelModule } from '@radzen/angular/dist/label';
+import { ButtonModule } from '@radzen/angular/dist/button';
 import { HtmlModule } from '@radzen/angular/dist/html';
 import { LoginModule } from '@radzen/angular/dist/login';
-import { FieldsetModule } from '@radzen/angular/dist/fieldset';
-import { DataListModule } from '@radzen/angular/dist/datalist';
-import { ImageModule } from '@radzen/angular/dist/image';
-import { TabsModule } from '@radzen/angular/dist/tabs';
-import { PieModule } from '@radzen/angular/dist/pie';
-import { SchedulerModule } from '@radzen/angular/dist/scheduler';
+import { ProgressBarModule } from '@radzen/angular/dist/progressbar';
+import { GaugeModule } from '@radzen/angular/dist/gauge';
+import { SparklineModule } from '@radzen/angular/dist/sparkline';
+import { SelectBarModule } from '@radzen/angular/dist/selectbar';
 import { ChartModule } from '@radzen/angular/dist/chart';
+import { SchedulerModule } from '@radzen/angular/dist/scheduler';
+import { GoogleMapModule } from '@radzen/angular/dist/googlemap';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -218,27 +219,28 @@ export const AppImports = [
   ContentContainerModule,
   HeaderModule,
   SidebarToggleModule,
-  LabelModule,
+  HeadingModule,
   ProfileMenuModule,
   GravatarModule,
   SidebarModule,
+  ImageModule,
   PanelMenuModule,
   FooterModule,
   LinkModule,
   ContentModule,
-  HeadingModule,
   GridModule,
-  ButtonModule,
   FormModule,
+  LabelModule,
+  ButtonModule,
   HtmlModule,
   LoginModule,
-  FieldsetModule,
-  DataListModule,
-  ImageModule,
-  TabsModule,
-  PieModule,
-  SchedulerModule,
+  ProgressBarModule,
+  GaugeModule,
+  SparklineModule,
+  SelectBarModule,
   ChartModule,
+  SchedulerModule,
+  GoogleMapModule,
   SharedModule,
   NotificationModule,
   DialogModule,

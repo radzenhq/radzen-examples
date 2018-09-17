@@ -3,11 +3,11 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrdersCount" [data]="getNorthwindOrdersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
-        <rz-grid-column filterProperty="Employee.LastName" format="int32" property="EmployeeID" sortProperty="Employee.LastName" title="Employee" width="160px" type="integer">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" columnWidth="150px" [count]="getNorthwindOrdersCount" [data]="getNorthwindOrdersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column filterProperty="Employee.FirstName" format="int32" property="EmployeeID" sortProperty="Employee.FirstName" title="Employee" width="160px" type="integer">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #employeesButton [style]="{'width':'140px'}" [text]="data?.Employee?.LastName" (click)="employeesButtonClick($event, data)">
-            </rz-button>
+            <rz-link #link0 icon="face" [parameters]="[{'name':'EmployeeID','value':data?.EmployeeID}]" path="employees-by-employee-id" text="{{data?.Employee?.FirstName}} {{data?.Employee?.LastName}}">
+            </rz-link>
           </ng-template>
         </rz-grid-column>
         <rz-grid-column format="date-time" property="OrderDate" title="Order Date" type="string">
@@ -39,10 +39,10 @@
         </rz-grid-column>
         <rz-grid-column property="ShipCountry" title="Ship Country" type="string">
         </rz-grid-column>
-        <rz-grid-column [filterable]="false" [sortable]="false" width="140px">
+        <rz-grid-column [filterable]="false" [sortable]="false" title="Details" width="140px">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #button0 text="Details" (click)="button0Click($event, data)">
-            </rz-button>
+            <rz-link #link1 icon="details" [parameters]="[{'name':'OrderID','value':data?.OrderID}]" path="order-details-by-order-id" text="Details">
+            </rz-link>
           </ng-template>
         </rz-grid-column>
       </rz-grid>

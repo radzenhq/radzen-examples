@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <rz-heading #pageTitle size="H1" text="Customer: {{customer?.CompanyName}}">
       </rz-heading>
-      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getCustomersCount" [data]="getCustomersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" columnWidth="200px" [count]="getCustomersCount" [data]="getCustomersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column property="CompanyName" title="Company Name" type="string">
         </rz-grid-column>
         <rz-grid-column property="ContactName" title="Contact Name" type="string">
@@ -24,10 +24,10 @@
         </rz-grid-column>
         <rz-grid-column property="Fax" title="Fax" type="string">
         </rz-grid-column>
-        <rz-grid-column [filterable]="false" [sortable]="false" width="140px">
+        <rz-grid-column [filterable]="false" [sortable]="false" title="Orders" width="140px">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #button0 text="Orders" (click)="button0Click($event, data)">
-            </rz-button>
+            <rz-link #link0 icon="shopping_cart" [parameters]="[{'name':'CustomerID','value':data?.CustomerID}]" path="orders-by-customer-id" text="Orders">
+            </rz-link>
           </ng-template>
         </rz-grid-column>
       </rz-grid>

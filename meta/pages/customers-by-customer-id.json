@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -22,6 +24,7 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "200px",
                   "columns": [
                     {
                       "property": "CompanyName",
@@ -78,26 +81,20 @@
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CustomerID",
-                                    "value": "${data.CustomerID}"
-                                  }
-                                ],
-                                "path": "orders-by-customer-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "icon": "shopping_cart",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "CustomerID",
+                              "value": "${data.CustomerID}"
+                            }
+                          ],
+                          "path": "orders-by-customer-id",
                           "text": "Orders",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Orders",
                       "width": "140px"
                     }
                   ],

@@ -1,6 +1,6 @@
 {
   "access": [
-    "Authenticated"
+    "Everybody"
   ],
   "components": [
     {
@@ -33,27 +33,17 @@
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CustomerID",
-                                    "value": "${data.NorthwindOrder.CustomerID}"
-                                  }
-                                ],
-                                "path": "customers-by-customer-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "customersButton",
-                          "style": {
-                            "width": "340px"
-                          },
+                          "icon": "credit_card",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "CustomerID",
+                              "value": "${data.NorthwindOrder.CustomerID}"
+                            }
+                          ],
+                          "path": "customers-by-customer-id",
                           "text": "${data.NorthwindOrder?.Customer?.CompanyName}",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
                       "title": "Customer",

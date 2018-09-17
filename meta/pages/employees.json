@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -74,34 +76,45 @@
                     },
                     {
                       "property": "Country",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "/assets/images/${data.Country.toLowerCase()}.png",
+                          "style": {
+                            "height": "20px",
+                            "width": "40px"
+                          },
+                          "type": "image"
+                        },
+                        {
+                          "name": "label0",
+                          "text": "${data.Country}",
+                          "type": "label"
+                        }
+                      ],
                       "title": "Country",
-                      "type": "string"
+                      "type": "string",
+                      "width": "150px"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "EmployeeID",
-                                    "value": "${data.EmployeeID}"
-                                  }
-                                ],
-                                "path": "orders-by-employee-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "icon": "shopping_cart",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "EmployeeID",
+                              "value": "${data.EmployeeID}"
+                            }
+                          ],
+                          "path": "orders-by-employee-id",
                           "text": "Orders",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Orders",
                       "width": "140px"
                     }
                   ],

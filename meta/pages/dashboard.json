@@ -6,259 +6,428 @@
     {
       "components": [
         {
+          "name": "heading8",
+          "size": "H1",
+          "style": {
+            "display": "inline-block",
+            "marginRight": "1rem"
+          },
+          "text": "Dashboard",
+          "type": "heading"
+        },
+        {
+          "name": "heading9",
+          "size": "H3",
+          "style": {
+            "display": "inline-block",
+            "marginLeft": "0px"
+          },
+          "text": "| statistics and overview",
+          "type": "heading"
+        },
+        {
           "components": [
             {
-              "class": "col-md-6",
+              "class": "col-xl-3 col-lg-6",
               "components": [
                 {
                   "components": [
                     {
+                      "class": "align-items-center",
                       "components": [
                         {
-                          "allowPaging": true,
-                          "count": "${getEmployeesCount}",
-                          "data": "${getEmployeesResult}",
-                          "defaultRowText": "Template for index",
-                          "emptyText": " ",
-                          "events": {
-                            "loadData": [
-                              {
-                                "name": "Northwind.getEmployees",
-                                "parameters": [
-                                  {
-                                    "name": "$top",
-                                    "value": "event.top"
-                                  },
-                                  {
-                                    "name": "$skip",
-                                    "value": "event.skip"
-                                  },
-                                  {
-                                    "name": "$expand",
-                                    "value": ""
-                                  },
-                                  {
-                                    "name": "$count",
-                                    "value": "event.top != null && event.skip != null"
-                                  }
-                                ],
-                                "then": [
-                                  {
-                                    "name": "getEmployeesResult",
-                                    "type": "set",
-                                    "value": "${result.value}"
-                                  },
-                                  {
-                                    "name": "getEmployeesCount",
-                                    "type": "set",
-                                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
-                                  },
-                                  {
-                                    "condition": "",
-                                    "name": "employee",
-                                    "type": "set",
-                                    "value": "${result.value[0]}"
-                                  },
-                                  {
-                                    "name": "Northwind.getNorthwindOrders",
-                                    "parameters": [
-                                      {
-                                        "name": "$filter",
-                                        "value": "EmployeeID eq ${employee.EmployeeID}"
-                                      },
-                                      {
-                                        "name": "$top",
-                                        "value": "10"
-                                      },
-                                      {
-                                        "name": "$orderby",
-                                        "value": "OrderDate DESC"
-                                      },
-                                      {
-                                        "name": "$expand",
-                                        "value": "Customer"
-                                      }
-                                    ],
-                                    "then": [
-                                      {
-                                        "condition": "",
-                                        "name": "getOrdersResult",
-                                        "type": "set",
-                                        "value": "${result.value}"
-                                      },
-                                      {
-                                        "condition": "",
-                                        "name": "order",
-                                        "type": "set",
-                                        "value": "${result.value[0]}"
-                                      },
-                                      {
-                                        "name": "Northwind.getNorthwindOrders",
-                                        "parameters": [
-                                          {
-                                            "name": "$filter",
-                                            "value": "CustomerID eq '${order.CustomerID}'"
-                                          },
-                                          {
-                                            "name": "$expand",
-                                            "value": "Customer"
-                                          }
-                                        ],
-                                        "then": [
-                                          {
-                                            "condition": "",
-                                            "name": "ordersByCustomer",
-                                            "type": "set",
-                                            "value": "${result.value}"
-                                          }
-                                        ],
-                                        "type": "invoke"
-                                      }
-                                    ],
-                                    "type": "invoke"
-                                  }
-                                ],
-                                "type": "invoke"
-                              }
-                            ]
-                          },
-                          "name": "datalist0",
-                          "pageSize": 1,
-                          "template": [
+                          "class": "col-6",
+                          "components": [
                             {
-                              "components": [
-                                {
-                                  "class": "col-md-3",
-                                  "components": [
-                                    {
-                                      "name": "image0",
-                                      "path": "${data.Photo}",
-                                      "style": {},
-                                      "type": "image"
-                                    }
-                                  ],
-                                  "name": "col2",
-                                  "type": "col"
-                                },
-                                {
-                                  "class": "col-md-9",
-                                  "components": [
-                                    {
-                                      "components": [
-                                        {
-                                          "class": "col-md-12",
-                                          "components": [
-                                            {
-                                              "name": "heading0",
-                                              "size": "H1",
-                                              "text": "${data.FirstName + ' ' + data.LastName}",
-                                              "type": "heading"
-                                            }
-                                          ],
-                                          "name": "col4",
-                                          "type": "col"
-                                        }
-                                      ],
-                                      "name": "row2",
-                                      "type": "row"
-                                    },
-                                    {
-                                      "components": [
-                                        {
-                                          "class": "col-md-12",
-                                          "components": [
-                                            {
-                                              "name": "heading1",
-                                              "size": "H5",
-                                              "text": "${data.Notes}",
-                                              "type": "heading"
-                                            }
-                                          ],
-                                          "name": "col5",
-                                          "type": "col"
-                                        }
-                                      ],
-                                      "name": "row3",
-                                      "type": "row"
-                                    }
-                                  ],
-                                  "name": "col3",
-                                  "type": "col"
-                                }
-                              ],
-                              "name": "row1",
-                              "style": {},
-                              "type": "row"
+                              "name": "heading0",
+                              "size": "H5",
+                              "style": {
+                                "display": "inline"
+                              },
+                              "text": "Total sales",
+                              "type": "heading"
                             }
                           ],
-                          "type": "datalist"
+                          "name": "col4",
+                          "style": {},
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading1",
+                              "size": "H3",
+                              "style": {
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "#479cc8",
+                                "display": "block",
+                                "float": "none",
+                                "fontSize": "1.75rem",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "${totalSales | currency:'USD':'symbol':'2.0-0'}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col5",
+                          "type": "col"
                         }
                       ],
-                      "name": "fieldset2",
-                      "style": {},
-                      "text": "Employees",
-                      "type": "fieldset"
+                      "name": "row0",
+                      "type": "row"
+                    },
+                    {
+                      "name": "progressbar0",
+                      "showValue": false,
+                      "style": {
+                        "height": "8px",
+                        "marginBottom": "0.5rem",
+                        "marginTop": "2rem"
+                      },
+                      "type": "progressbar",
+                      "value": "${totalSales * 100/salesTarget}"
+                    },
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading3",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "inline"
+                              },
+                              "text": "Target",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading4",
+                              "size": "H5",
+                              "style": {
+                                "color": "#479cc8",
+                                "display": "block",
+                                "float": "none",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "${totalSales / salesTarget | percent}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row1",
+                      "type": "row"
                     }
                   ],
-                  "name": "card2",
+                  "name": "card0",
+                  "style": {
+                    "borderRadius": "",
+                    "display": "block"
+                  },
                   "type": "card",
                   "visible": true
                 }
               ],
-              "name": "col6",
+              "name": "col0",
+              "style": {
+                "marginBottom": "1rem"
+              },
               "type": "col"
             },
             {
-              "class": "col-md-6",
+              "class": "col-xl-3 col-lg-6",
               "components": [
                 {
-                  "items": [
+                  "components": [
                     {
+                      "class": "align-items-center",
                       "components": [
                         {
-                          "categoryProperty": "Customer.CompanyName",
-                          "chartType": "Pie",
-                          "data": "${getOrdersResult}",
-                          "labels": true,
-                          "legend": true,
-                          "name": "pie0",
-                          "style": {
-                            "height": "300px"
-                          },
-                          "type": "pie",
-                          "valueProperty": "Freight"
+                          "class": "",
+                          "components": [
+                            {
+                              "name": "heading12",
+                              "size": "H5",
+                              "style": {
+                                "display": "inline",
+                                "marginTop": "10px",
+                                "width": "undefinedpx"
+                              },
+                              "text": "Downloads",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col17",
+                          "type": "col"
                         }
                       ],
-                      "icon": "",
-                      "selected": true,
-                      "text": "Sales"
+                      "name": "row8",
+                      "style": {
+                        "marginLeft": "0px",
+                        "marginRight": "0px"
+                      },
+                      "type": "row"
                     },
                     {
                       "components": [
                         {
-                          "data": "${ordersByCustomer}",
-                          "endProperty": "ShippedDate",
-                          "name": "scheduler0",
-                          "startProperty": "OrderDate",
+                          "class": "col-md-12",
+                          "components": [
+                            {
+                              "max": 100,
+                              "min": 0,
+                              "name": "gauge0",
+                              "style": {
+                                "height": "96px"
+                              },
+                              "text": "+74%",
+                              "type": "gauge",
+                              "value": 74
+                            }
+                          ],
+                          "name": "col15",
                           "style": {
-                            "height": "300px"
+                            "textAlign": "center"
                           },
-                          "titleProperty": "Customer.CompanyName",
-                          "type": "scheduler"
+                          "type": "col"
                         }
                       ],
-                      "selected": false,
-                      "text": "Schedule"
+                      "name": "row9",
+                      "type": "row"
                     }
                   ],
-                  "name": "tabs0",
+                  "name": "card3",
                   "style": {
-                    "width": ""
+                    "borderRadius": "5px",
+                    "display": "block",
+                    "paddingBottom": "8px"
                   },
-                  "type": "tabs"
+                  "type": "card",
+                  "visible": true
                 }
               ],
-              "name": "col7",
+              "name": "col13",
+              "style": {
+                "marginBottom": "1rem"
+              },
+              "type": "col"
+            },
+            {
+              "class": "col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading2",
+                              "size": "H5",
+                              "style": {
+                                "display": "inline"
+                              },
+                              "text": "New customers",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col6",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading5",
+                              "size": "H3",
+                              "style": {
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "#5dbf74",
+                                "display": "block",
+                                "float": "none",
+                                "fontSize": "1.75rem",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "576",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col7",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
+                      "type": "row"
+                    },
+                    {
+                      "color": "#5dbf74",
+                      "data": "${customers}",
+                      "name": "sparkline0",
+                      "style": {
+                        "display": "inline-block",
+                        "marginTop": "22px",
+                        "width": "100%"
+                      },
+                      "type": "sparkline"
+                    },
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading6",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "inline"
+                              },
+                              "text": "2017",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col8",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-6",
+                          "components": [
+                            {
+                              "name": "heading7",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "block",
+                                "float": "none",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "2018",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col9",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row3",
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card1",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "1rem"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col3",
+              "type": "col"
+            },
+            {
+              "class": "col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "col-md-12",
+                          "components": [
+                            {
+                              "name": "heading10",
+                              "size": "H5",
+                              "style": {
+                                "display": "block",
+                                "marginLeft": "0px",
+                                "marginTop": "10px"
+                              },
+                              "text": "Employee of the month",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col12",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row6",
+                      "type": "row"
+                    },
+                    {
+                      "class": "align-items-center",
+                      "components": [
+                        {
+                          "class": "",
+                          "components": [
+                            {
+                              "name": "image0",
+                              "path": "${employeeOfTheMonth.Photo}",
+                              "style": {
+                                "borderRadius": "50%",
+                                "height": "64px",
+                                "marginRight": "1rem",
+                                "width": "64px"
+                              },
+                              "type": "image",
+                              "visible": "${employeeOfTheMonth}"
+                            },
+                            {
+                              "name": "heading11",
+                              "size": "H5",
+                              "style": {
+                                "color": "#5d717b",
+                                "display": "inline-block",
+                                "lineHeight": "66px",
+                                "marginBottom": "0px"
+                              },
+                              "text": "${employeeOfTheMonthName}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col14",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row7",
+                      "style": {
+                        "marginLeft": "0px",
+                        "marginRight": "0px"
+                      },
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card2",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "16px"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col11",
               "type": "col"
             }
           ],
@@ -269,134 +438,359 @@
         {
           "components": [
             {
-              "class": "col-md-6",
+              "class": "col-lg-6",
               "components": [
                 {
                   "components": [
                     {
-                      "components": [
+                      "buttonStyle": "secondary",
+                      "events": {
+                        "click": [
+                          {
+                            "format": "xlsx",
+                            "name": "Northwind.getEmployees",
+                            "type": "export"
+                          }
+                        ]
+                      },
+                      "icon": "file_download",
+                      "name": "button1",
+                      "style": {
+                        "float": "right"
+                      },
+                      "text": "Export",
+                      "type": "button"
+                    },
+                    {
+                      "name": "heading13",
+                      "size": "H3",
+                      "style": {
+                        "marginBottom": "22px"
+                      },
+                      "text": "Employees",
+                      "type": "heading"
+                    },
+                    {
+                      "addText": "Add",
+                      "allowPaging": true,
+                      "allowSorting": true,
+                      "columns": [
                         {
-                          "addText": "Add",
-                          "columns": [
+                          "filterProperty": "",
+                          "sortProperty": "FirstName",
+                          "sortable": true,
+                          "template": [
                             {
-                              "filterProperty": "Customer.CompanyName",
-                              "property": "CustomerID",
-                              "sortProperty": "Customer.CompanyName",
-                              "template": "${data.Customer?.CompanyName}",
-                              "title": "Customer",
-                              "type": "string"
+                              "name": "image1",
+                              "path": "${data.Photo}",
+                              "style": {
+                                "borderRadius": "50%",
+                                "height": "40px",
+                                "width": "40px"
+                              },
+                              "type": "image"
                             },
                             {
-                              "format": "date-time",
-                              "property": "OrderDate",
-                              "template": "${data.OrderDate | utcDate}",
-                              "title": "Order Date",
-                              "type": "string"
-                            },
-                            {
-                              "format": "decimal",
-                              "property": "Freight",
-                              "template": "{{ data.Freight * 100 | currency}}",
-                              "title": "Amount",
-                              "type": "number"
+                              "name": "label0",
+                              "text": "${data.FirstName} ${data.LastName}",
+                              "type": "label"
                             }
                           ],
-                          "data": "${getOrdersResult}",
-                          "emptyText": " ",
-                          "events": {
-                            "loadData": [
-                              {
-                                "name": "Northwind.getNorthwindOrders",
-                                "parameters": [
-                                  {
-                                    "name": "$expand",
-                                    "value": "Employee,Customer,Shipper"
-                                  }
-                                ],
-                                "then": [],
-                                "type": "invoke"
-                              }
-                            ],
-                            "rowSelect": [
-                              {
-                                "name": "Northwind.getNorthwindOrders",
-                                "parameters": [
-                                  {
-                                    "name": "$filter",
-                                    "value": "CustomerID eq '${event.CustomerID}'"
-                                  },
-                                  {
-                                    "name": "$expand",
-                                    "value": "Customer"
-                                  }
-                                ],
-                                "then": [
-                                  {
-                                    "name": "ordersByCustomer",
-                                    "type": "set",
-                                    "value": "${result.value}"
-                                  }
-                                ],
-                                "type": "invoke"
-                              }
-                            ]
-                          },
-                          "expandableGroups": false,
-                          "name": "grid0",
-                          "type": "grid",
-                          "value": "${order}"
+                          "title": "Employee",
+                          "visible": true
+                        },
+                        {
+                          "property": "City",
+                          "title": "City",
+                          "type": "string"
+                        },
+                        {
+                          "filterProperty": "",
+                          "footerTemplate": "",
+                          "property": "Country",
+                          "template": [
+                            {
+                              "name": "image2",
+                              "path": "/assets/images/${data.Country.toLowerCase()}.png",
+                              "style": {
+                                "display": "block",
+                                "marginLeft": "auto",
+                                "marginRight": "auto",
+                                "width": "40px"
+                              },
+                              "type": "image"
+                            }
+                          ],
+                          "title": "Country",
+                          "type": "string",
+                          "width": "100px"
+                        },
+                        {
+                          "property": "HomePhone",
+                          "title": "Home Phone",
+                          "type": "string"
                         }
                       ],
-                      "name": "fieldset0",
-                      "style": {},
-                      "text": "LAST 10 ORDERS BY EMPLOYEE",
-                      "type": "fieldset"
+                      "count": "${getEmployeesCount}",
+                      "data": "${getEmployeesResult}",
+                      "emptyText": "No records to display.",
+                      "events": {
+                        "loadData": [
+                          {
+                            "name": "Northwind.getEmployees",
+                            "parameters": [
+                              {
+                                "name": "$top",
+                                "value": "event.top"
+                              },
+                              {
+                                "name": "$skip",
+                                "value": "event.skip"
+                              },
+                              {
+                                "name": "$expand",
+                                "value": ""
+                              },
+                              {
+                                "name": "$count",
+                                "value": "event.top != null && event.skip != null"
+                              },
+                              {
+                                "name": "$orderby",
+                                "value": "${event.orderby}"
+                              }
+                            ],
+                            "then": [
+                              {
+                                "name": "getEmployeesResult",
+                                "type": "set",
+                                "value": "${result.value}"
+                              },
+                              {
+                                "name": "getEmployeesCount",
+                                "type": "set",
+                                "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                              }
+                            ],
+                            "type": "invoke"
+                          }
+                        ]
+                      },
+                      "isLoading": true,
+                      "name": "grid0",
+                      "pageSize": 5,
+                      "style": {
+                        "height": "377px"
+                      },
+                      "type": "grid"
                     }
                   ],
-                  "name": "card0",
+                  "name": "card4",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "1rem"
+                  },
                   "type": "card",
                   "visible": true
                 }
               ],
-              "name": "col0",
+              "name": "col10",
               "type": "col"
             },
             {
-              "class": "col-md-6",
+              "class": "col-lg-6",
               "components": [
                 {
                   "components": [
                     {
-                      "components": [
+                      "events": {
+                        "change": [
+                          {
+                            "condition": "${event} == 2016",
+                            "name": "salesData",
+                            "type": "set",
+                            "value": "${salesFor2016}"
+                          },
+                          {
+                            "condition": "${event} == 2017",
+                            "name": "salesData",
+                            "type": "set",
+                            "value": "${salesFor2017}"
+                          },
+                          {
+                            "condition": "${event} == 2018",
+                            "name": "salesData",
+                            "type": "set",
+                            "value": "${salesFor2018}"
+                          }
+                        ]
+                      },
+                      "name": "selectbar0",
+                      "options": [
                         {
-                          "barPadding": 8,
-                          "categoryProperty": "OrderDate",
-                          "chartType": "Column",
-                          "data": "${ordersByCustomer}",
-                          "legend": false,
-                          "name": "chart0",
-                          "series": "Customer.CompanyName",
-                          "style": {},
-                          "type": "chart",
-                          "valueProperty": "Freight"
+                          "text": "2016",
+                          "value": "2016"
+                        },
+                        {
+                          "text": "2017",
+                          "value": "2017"
+                        },
+                        {
+                          "text": "2018",
+                          "value": "2018"
                         }
                       ],
-                      "name": "fieldset1",
-                      "style": {},
-                      "text": "ORDERS BY CUSTOMER",
-                      "type": "fieldset"
+                      "style": {
+                        "float": "right"
+                      },
+                      "type": "selectbar",
+                      "value": "${selectedYear}"
+                    },
+                    {
+                      "name": "Sales",
+                      "size": "H3",
+                      "style": {
+                        "marginBottom": "22px"
+                      },
+                      "text": "Product sales",
+                      "type": "heading"
+                    },
+                    {
+                      "categoryProperty": "Date",
+                      "chartType": "Area",
+                      "colors": [
+                        "#e6ecef",
+                        "#479cc8",
+                        "#5dbf74",
+                        "#ff6d41",
+                        "#68d5c8",
+                        "#f9777f",
+                        "#cb6992",
+                        "#e6c54f"
+                      ],
+                      "data": "${salesData}",
+                      "legend": true,
+                      "name": "chart0",
+                      "series": "CategoryName",
+                      "style": {
+                        "height": "377px",
+                        "width": "100%"
+                      },
+                      "type": "chart",
+                      "valueProperty": "Total"
                     }
                   ],
-                  "name": "card1",
+                  "name": "card5",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "1rem"
+                  },
                   "type": "card",
                   "visible": true
                 }
               ],
-              "name": "col1",
+              "name": "col16",
               "type": "col"
             }
           ],
-          "name": "row0",
+          "name": "row5",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "name": "heading15",
+                      "size": "H3",
+                      "style": {
+                        "marginBottom": "22px"
+                      },
+                      "text": "Pending shipments",
+                      "type": "heading"
+                    },
+                    {
+                      "data": "${orders}",
+                      "defaultDate": "2018-01-01",
+                      "endProperty": "RequiredDate",
+                      "idProperty": "OrderID",
+                      "name": "scheduler0",
+                      "startProperty": "OrderDate",
+                      "style": {
+                        "height": "468px"
+                      },
+                      "titleProperty": "ShipCity",
+                      "type": "scheduler"
+                    }
+                  ],
+                  "name": "card7",
+                  "style": {
+                    "display": "block"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col19",
+              "type": "col"
+            },
+            {
+              "class": "col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "name": "heading14",
+                      "size": "H3",
+                      "style": {
+                        "marginBottom": "22px"
+                      },
+                      "text": "HQ Address",
+                      "type": "heading"
+                    },
+                    {
+                      "apiKey": "AIzaSyAJLieBqU3cH3BA3OxUlKDYjpv7Bh6dHbY",
+                      "center": {
+                        "lat": 47.642232,
+                        "lng": -122.13679100000002
+                      },
+                      "markers": [
+                        {
+                          "label": "",
+                          "position": {
+                            "lat": 47.642232,
+                            "lng": -122.13679100000002
+                          }
+                        }
+                      ],
+                      "name": "googlemap0",
+                      "style": {
+                        "height": "500px",
+                        "marginBottom": "-1rem",
+                        "marginLeft": "-1rem",
+                        "marginRight": "-1rem",
+                        "marginTop": "-1rem"
+                      },
+                      "type": "googlemap",
+                      "zoom": 17
+                    }
+                  ],
+                  "name": "card6",
+                  "style": {
+                    "display": "block"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col18",
+              "type": "col"
+            }
+          ],
+          "name": "row10",
           "type": "row"
         }
       ],
@@ -407,19 +801,61 @@
   "events": {
     "load": [
       {
+        "name": "totalSales",
+        "type": "set",
+        "value": "49234"
+      },
+      {
+        "name": "salesTarget",
+        "type": "set",
+        "value": "80000"
+      },
+      {
+        "name": "customers",
+        "type": "set",
+        "value": "[134, 193, 156, 123, 192, 155, 132, 163, 143, 182, 192, 233, 129, 183, 233, 150, 113, 233, 323, 354, 433, 425, 365, 322, 280, 321, 393, 436,530,553,576]"
+      },
+      {
+        "name": "employeeOfTheMonthName",
+        "type": "set",
+        "value": "\"Loading ...\""
+      },
+      {
+        "name": "Northwind.getEmployeeById",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "value": "1"
+          }
+        ],
+        "then": [
+          {
+            "name": "employeeOfTheMonth",
+            "type": "set",
+            "value": "${result}"
+          },
+          {
+            "name": "employeeOfTheMonthName",
+            "type": "set",
+            "value": "${result.FirstName} + ' ' + ${result.LastName}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
         "name": "Northwind.getEmployees",
         "parameters": [
           {
             "name": "$top",
-            "value": "this.datalist0.allowPaging ? this.datalist0.pageSize : null"
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
           },
           {
             "name": "$skip",
-            "value": "this.datalist0.allowPaging ? 0 : null"
+            "value": "this.grid0.allowPaging ? 0 : null"
           },
           {
             "name": "$count",
-            "value": "this.datalist0.allowPaging"
+            "value": "this.grid0.allowPaging"
           }
         ],
         "then": [
@@ -431,71 +867,54 @@
           {
             "name": "getEmployeesCount",
             "type": "set",
-            "value": "this.datalist0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
           },
           {
-            "condition": "",
-            "name": "employee",
+            "code": "this.grid0.isLoading = false",
+            "type": "execute"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "salesFor2016",
+        "type": "set",
+        "value": "[\n  {\n    CategoryName: 'Beverages',\n    Total: 3438,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 2177.8,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 6261,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 7385.6,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 1273.6,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 2722.2,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 4163.4,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 2770.5,\n    Date: new Date(2016, 6, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 5036.4,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 2333.8,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 5224.8,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 4918.4,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 270.6,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 3807.2,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 812.8,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 4205.4,\n    Date: new Date(2016, 7, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 5131.6,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 1864,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 6450.5,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 4290,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 819.2,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 4538.5,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 1164.8,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 3377.4,\n    Date: new Date(2016, 8, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 8793.2,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 4577.2,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 3797.1,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 8117.6,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 2501.2,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 3914.1,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 2898.2,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 6605,\n    Date: new Date(2016, 9, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 19712,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 6918.3,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 3227.8,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 7738.8,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 2599.8,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 5887.2,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 2413.2,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 1206.9,\n    Date: new Date(2016, 10, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 11768,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 1587.2,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 6550.4,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 12165.4,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 2353.2,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 9423,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 3681.8,\n    Date: new Date(2016, 11, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 3424.4,\n    Date: new Date(2016, 11, 1)\n  }\n]"
+      },
+      {
+        "name": "selectedYear",
+        "type": "set",
+        "value": "2016"
+      },
+      {
+        "name": "salesData",
+        "type": "set",
+        "value": "${salesFor2016}"
+      },
+      {
+        "name": "salesFor2017",
+        "type": "set",
+        "value": "[  \n  {\n    CategoryName: 'Beverages',\n    Total: 24224.4,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 5698.8,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 9582.3,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 9872,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 4570.2,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 7775.8,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 2895,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 2074.3,\n    Date: new Date(2017, 0, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 3090.4,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 6618.4,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 7413.5,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 5616,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 5043.4,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 8442.9,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 2698.8,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 2283.8,\n    Date: new Date(2017, 1, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 11027.2,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 1905.9,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 3324.9,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 9844.4,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 3350,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 3271.6,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 3676.8,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 3579.1,\n    Date: new Date(2017, 2, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 7377.5,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 5903,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 11714.65,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 6647,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 6555.6,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 6846.24,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 6137.1,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 4518.3,\n    Date: new Date(2017, 3, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 15654,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 5728.8,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 7997.5,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 11491.5,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 2551.5,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 3548.05,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 3481.2,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 6371.15,\n    Date: new Date(2017, 4, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 3602,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 1886.85,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 2494.4,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 9507.7,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 6882.5,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 5006.3,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 6231,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 3477.25,\n    Date: new Date(2017, 5, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 8343.5,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 6798.7,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 6968.03,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 13570.1,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 4780,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 4902.3,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 1650,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 8452.3,\n    Date: new Date(2017, 6, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 6154,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 4501.8,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 8025.3,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 7375.5,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 5529.25,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 4943.64,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 4455,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 8997.2,\n    Date: new Date(2017, 7, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 6198.75,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 3748.9,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 7192.5,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 12054,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 5755.75,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 12406.54,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 2887.25,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 9489.33,\n    Date: new Date(2017, 8, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 9043,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 6780.45,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 8051.55,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 13745,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 3392,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 14703.23,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 7291,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 7322.27,\n    Date: new Date(2017, 9, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 4034,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 3854.8,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 5271.16,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 13597.1,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 6266,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 1068,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 3268.25,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 8554.05,\n    Date: new Date(2017, 10, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 11675.25,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 6252.6,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 9191.98,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 10590.5,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 5810.75,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 14706.43,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 13047.15,\n    Date: new Date(2017, 11, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 6201.6,\n    Date: new Date(2017, 11, 1)\n  }\n]"
+      },
+      {
+        "name": "salesFor2018",
+        "type": "set",
+        "value": "[  \n  {\n    CategoryName: 'Beverages',\n    Total: 28558,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 5000.45,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 12387.75,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 19448,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 12573.75,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 5603.17,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 1639,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 15644.6,\n    Date: new Date(2018, 0, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 35869.5,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 6727.2,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 10026.15,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 11277,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 4127.75,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 23739.86,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 1202.8,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 11591.69,\n    Date: new Date(2018, 1, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 28729.25,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 11018.3,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 24302.85,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 14990.8,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 3510.5,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 4203.66,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 13168,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 9902.09,\n    Date: new Date(2018, 2, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 24470,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 10737.5,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 9183.53,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 36452.1,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 5789.25,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 22612.88,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 15073,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 10312.3,\n    Date: new Date(2018, 3, 1)\n  },\n  {\n    CategoryName: 'Beverages',\n    Total: 4597,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Condiments',\n    Total: 1074,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Confections',\n    Total: 2459.45,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Dairy Products',\n    Total: 636,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Grains/Cereals',\n    Total: 4421,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Meat/Poultry',\n    Total: 4116,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Produce',\n    Total: 1333.05,\n    Date: new Date(2018, 4, 1)\n  },\n  {\n    CategoryName: 'Seafood',\n    Total: 1262.16,\n    Date: new Date(2018, 4, 1)\n  }\n]"
+      },
+      {
+        "condition": "",
+        "name": "Northwind.getNorthwindOrders",
+        "parameters": [
+          {
+            "name": "$filter",
+            "value": "OrderDate ge 2018-01-01T00:00:00Z"
+          }
+        ],
+        "then": [
+          {
+            "name": "orders",
             "type": "set",
-            "value": "${result.value[0]}"
-          },
-          {
-            "name": "Northwind.getNorthwindOrders",
-            "parameters": [
-              {
-                "name": "$filter",
-                "value": "EmployeeID eq ${employee.EmployeeID}"
-              },
-              {
-                "name": "$top",
-                "value": "10"
-              },
-              {
-                "name": "$orderby",
-                "value": "OrderDate DESC"
-              },
-              {
-                "name": "$expand",
-                "value": "Customer"
-              }
-            ],
-            "then": [
-              {
-                "condition": "",
-                "name": "getOrdersResult",
-                "type": "set",
-                "value": "${result.value}"
-              },
-              {
-                "condition": "",
-                "name": "order",
-                "type": "set",
-                "value": "${result.value[0]}"
-              },
-              {
-                "name": "Northwind.getNorthwindOrders",
-                "parameters": [
-                  {
-                    "name": "$filter",
-                    "value": "CustomerID eq '${order.CustomerID}'"
-                  },
-                  {
-                    "name": "$expand",
-                    "value": "Customer"
-                  }
-                ],
-                "then": [
-                  {
-                    "condition": "",
-                    "name": "ordersByCustomer",
-                    "type": "set",
-                    "value": "${result.value}"
-                  }
-                ],
-                "type": "invoke"
-              }
-            ],
-            "type": "invoke"
+            "value": "${result.value}"
           }
         ],
         "type": "invoke"

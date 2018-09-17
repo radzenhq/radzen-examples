@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [

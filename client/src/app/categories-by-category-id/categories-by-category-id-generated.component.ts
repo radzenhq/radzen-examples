@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
+import { LinkComponent } from '@radzen/angular/dist/link';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { ButtonComponent } from '@radzen/angular/dist/button';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
@@ -22,6 +22,7 @@ import { SecurityService } from '../security.service';
 export class CategoriesByCategoryIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
+  @ViewChild('link0') link0: LinkComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('grid0') grid0: GridComponent;
 
@@ -131,12 +132,5 @@ export class CategoriesByCategoryIdGenerated implements AfterViewInit, OnInit, O
 
   grid0RowSelect(event: any) {
     this.dialogService.open(EditCategoryComponent, { parameters: {CategoryID: event.CategoryID}, title: 'Edit Category' });
-  }
-
-  button0Click(event: any, data: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['products-by-category-id', data.CategoryID]);
   }
 }

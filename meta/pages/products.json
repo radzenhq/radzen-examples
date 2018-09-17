@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -22,136 +24,117 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "",
                   "columns": [
                     {
+                      "footerTemplate": "",
                       "property": "ProductName",
+                      "template": "",
                       "title": "Product Name",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "filterProperty": "Supplier.CompanyName",
+                      "format": "int32",
                       "sortProperty": "Supplier.CompanyName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "SupplierID",
-                                    "value": "${data.SupplierID}"
-                                  }
-                                ],
-                                "path": "suppliers-by-supplier-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "supplierButton",
-                          "style": {
-                            "width": "340px"
-                          },
-                          "text": "${data.Supplier?.CompanyName}",
-                          "type": "button"
+                          "icon": "motorcycle",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "SupplierID",
+                              "value": "${data.SupplierID}"
+                            }
+                          ],
+                          "path": "suppliers-by-supplier-id",
+                          "text": "${data.Supplier.CompanyName}",
+                          "type": "link"
                         }
                       ],
                       "title": "Supplier",
-                      "type": "string",
-                      "width": "360px"
+                      "type": "integer",
+                      "width": "300px"
                     },
                     {
                       "filterProperty": "Category.CategoryName",
+                      "footerTemplate": "",
                       "sortProperty": "Category.CategoryName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CategoryID",
-                                    "value": "${data.CategoryID}"
-                                  }
-                                ],
-                                "path": "categories-by-category-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "categoryButton",
-                          "style": {
-                            "width": "240px"
-                          },
-                          "text": "${data.Category?.CategoryName}",
-                          "type": "button"
+                          "icon": "folder",
+                          "name": "link1",
+                          "parameters": [
+                            {
+                              "name": "CategoryID",
+                              "value": "${data.CategoryID}"
+                            }
+                          ],
+                          "path": "categories-by-category-id",
+                          "text": "${data.Category.CategoryName}",
+                          "type": "link"
                         }
                       ],
                       "title": "Category",
                       "type": "string",
-                      "width": "260px"
+                      "width": "200px"
                     },
                     {
-                      "property": "QuantityPerUnit",
-                      "title": "Quantity Per Unit",
-                      "type": "string"
-                    },
-                    {
+                      "footerTemplate": "",
                       "format": "double",
                       "property": "UnitPrice",
                       "template": "{{ data.UnitPrice | currency}}",
                       "title": "Unit Price",
-                      "type": "number"
+                      "type": "number",
+                      "width": "100px"
                     },
                     {
+                      "footerTemplate": "",
                       "format": "int32",
                       "property": "UnitsInStock",
+                      "template": "",
                       "title": "Units In Stock",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "120px"
                     },
                     {
+                      "footerTemplate": "",
                       "format": "int32",
                       "property": "UnitsOnOrder",
                       "title": "Units On Order",
-                      "type": "integer"
+                      "type": "integer",
+                      "width": "130px"
                     },
                     {
-                      "format": "int32",
-                      "property": "ReorderLevel",
-                      "title": "Reorder Level",
-                      "type": "integer"
-                    },
-                    {
+                      "footerTemplate": "",
                       "property": "Discontinued",
+                      "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
-                      "type": "boolean"
+                      "type": "boolean",
+                      "width": "120px"
                     },
                     {
                       "filterable": false,
-                      "sortable": false,
+                      "format": "",
+                      "sortable": true,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "ProductID",
-                                    "value": "${data.ProductID}"
-                                  }
-                                ],
-                                "path": "orders-by-product-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "icon": "shopping_cart",
+                          "name": "link2",
+                          "parameters": [
+                            {
+                              "name": "ProductID",
+                              "value": "${data.ProductID}"
+                            }
+                          ],
+                          "path": "orders-by-product-id",
                           "text": "Orders",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Orders",
+                      "type": "array",
                       "width": "140px"
                     }
                   ],
@@ -257,8 +240,10 @@
                     ]
                   },
                   "name": "grid0",
+                  "template": "",
                   "title": "",
-                  "type": "grid"
+                  "type": "grid",
+                  "value": ""
                 }
               ],
               "type": "col"

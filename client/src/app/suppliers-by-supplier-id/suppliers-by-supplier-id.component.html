@@ -1,30 +1,26 @@
 <rz-content #content1 container="main">
+  <rz-link #link0 icon="arrow_back" path="products" [style]="{'float':'right','lineHeight':'54px'}" text="Back to Products">
+  </rz-link>
   <rz-heading #pageTitle size="H1" text="Supplier: {{supplier?.CompanyName}}">
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getSuppliersCount" [data]="getSuppliersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
-        <rz-grid-column property="CompanyName" title="Company Name" type="string">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" columnWidth="100px" [count]="getSuppliersCount" [data]="getSuppliersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="CompanyName" title="Company Name" width="150px" type="string">
         </rz-grid-column>
-        <rz-grid-column property="ContactName" title="Contact Name" type="string">
+        <rz-grid-column property="ContactName" title="Contact Name" width="200px" type="string">
         </rz-grid-column>
-        <rz-grid-column property="ContactTitle" title="Contact Title" type="string">
+        <rz-grid-column property="ContactTitle" title="Contact Title" width="200px" type="string">
         </rz-grid-column>
-        <rz-grid-column property="Address" title="Address" type="string">
+        <rz-grid-column property="Address" title="Address" width="200px" type="string">
         </rz-grid-column>
-        <rz-grid-column property="City" title="City" type="string">
-        </rz-grid-column>
-        <rz-grid-column property="Region" title="Region" type="string">
+        <rz-grid-column property="City" title="City" width="200px" type="string">
         </rz-grid-column>
         <rz-grid-column property="PostalCode" title="Postal Code" type="string">
         </rz-grid-column>
         <rz-grid-column property="Country" title="Country" type="string">
         </rz-grid-column>
         <rz-grid-column property="Phone" title="Phone" type="string">
-        </rz-grid-column>
-        <rz-grid-column property="Fax" title="Fax" type="string">
-        </rz-grid-column>
-        <rz-grid-column property="HomePage" title="Home Page" type="string">
         </rz-grid-column>
       </rz-grid>
     </div>

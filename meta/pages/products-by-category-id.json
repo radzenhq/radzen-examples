@@ -1,13 +1,29 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
         {
           "name": "pageTitle",
           "size": "H1",
-          "text": "Products by Category: ${product.Category.CategoryName}",
+          "style": {
+            "display": "inline-block"
+          },
+          "text": "Products from the ${product.Category.CategoryName} category",
           "type": "heading"
+        },
+        {
+          "icon": "arrow_back",
+          "name": "link0",
+          "path": "categories",
+          "style": {
+            "float": "right",
+            "lineHeight": "54px"
+          },
+          "text": "Back to Categories",
+          "type": "link"
         },
         {
           "components": [
@@ -26,18 +42,25 @@
                     {
                       "property": "ProductName",
                       "title": "Product Name",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "filterProperty": "Supplier.CompanyName",
-                      "format": "int32",
-                      "property": "SupplierID",
+                      "filterable": true,
+                      "footerTemplate": "",
+                      "format": "",
+                      "property": "Supplier.CompanyName",
                       "sortProperty": "Supplier.CompanyName",
+                      "sortable": true,
                       "template": "${data.Supplier?.CompanyName}",
-                      "title": "Supplier",
-                      "type": "integer"
+                      "title": "Supplier Company Name",
+                      "type": "string",
+                      "visible": true,
+                      "width": "200px"
                     },
                     {
+                      "filterable": true,
                       "property": "QuantityPerUnit",
                       "title": "Quantity Per Unit",
                       "type": "string"
@@ -68,7 +91,9 @@
                       "type": "integer"
                     },
                     {
+                      "footerTemplate": "",
                       "property": "Discontinued",
+                      "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
                       "type": "boolean"
                     }
@@ -174,7 +199,9 @@
                       }
                     ]
                   },
+                  "isLoading": false,
                   "name": "grid0",
+                  "style": {},
                   "title": "",
                   "type": "grid"
                 }

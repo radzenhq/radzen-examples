@@ -1,8 +1,21 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
+        {
+          "icon": "arrow_back",
+          "name": "link0",
+          "path": "products",
+          "style": {
+            "float": "right",
+            "lineHeight": "54px"
+          },
+          "text": "Back to Products",
+          "type": "link"
+        },
         {
           "name": "pageTitle",
           "size": "H1",
@@ -38,26 +51,20 @@
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CategoryID",
-                                    "value": "${data.CategoryID}"
-                                  }
-                                ],
-                                "path": "products-by-category-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "icon": "add_shopping_cart",
+                          "name": "link1",
+                          "parameters": [
+                            {
+                              "name": "CategoryID",
+                              "value": "${data.CategoryID}"
+                            }
+                          ],
+                          "path": "products-by-category-id",
                           "text": "Products",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Products",
                       "width": "160px"
                     }
                   ],

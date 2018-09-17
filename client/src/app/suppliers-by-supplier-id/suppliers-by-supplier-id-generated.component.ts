@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
+import { LinkComponent } from '@radzen/angular/dist/link';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
 import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
@@ -21,6 +22,7 @@ import { SecurityService } from '../security.service';
 export class SuppliersBySupplierIdGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
+  @ViewChild('link0') link0: LinkComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('grid0') grid0: GridComponent;
 

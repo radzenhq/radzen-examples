@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -59,7 +61,9 @@
                       "type": "integer"
                     },
                     {
+                      "footerTemplate": "",
                       "property": "Discontinued",
+                      "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
                       "type": "boolean"
                     }

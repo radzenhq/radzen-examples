@@ -29,12 +29,18 @@
         </rz-grid-column>
         <rz-grid-column property="City" title="City" type="string">
         </rz-grid-column>
-        <rz-grid-column property="Country" title="Country" type="string">
-        </rz-grid-column>
-        <rz-grid-column [filterable]="false" [sortable]="false" width="140px">
+        <rz-grid-column property="Country" title="Country" width="150px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #button0 text="Orders" (click)="button0Click($event, data)">
-            </rz-button>
+            <rz-image #image0 path="/assets/images/{{data?.Country?.toLowerCase()}}.png" [style]="{'height':'20px','width':'40px'}">
+            </rz-image>
+            <rz-label #label0 [text]="data?.Country">
+            </rz-label>
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column [filterable]="false" [sortable]="false" title="Orders" width="140px">
+          <ng-template let-data gridColumnTemplate>
+            <rz-link #link0 icon="shopping_cart" [parameters]="[{'name':'EmployeeID','value':data?.EmployeeID}]" path="orders-by-employee-id" text="Orders">
+            </rz-link>
           </ng-template>
         </rz-grid-column>
       </rz-grid>

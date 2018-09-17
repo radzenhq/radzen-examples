@@ -13,9 +13,13 @@
                   "type": "sidebar-toggle"
                 },
                 {
-                  "name": "label0",
-                  "text": "Radzen Northwind Demo",
-                  "type": "label"
+                  "name": "heading0",
+                  "size": "H3",
+                  "style": {
+                    "marginBottom": "0px"
+                  },
+                  "text": "Radzen Showcase Demo",
+                  "type": "heading"
                 }
               ],
               "name": "leftCol",
@@ -55,74 +59,109 @@
         }
       ],
       "name": "body0",
+      "style": {},
       "type": "body"
     },
     {
       "components": [
         {
+          "name": "image0",
+          "path": "/assets/images/radzen-logo-white.svg",
+          "style": {
+            "marginBottom": "20px",
+            "marginLeft": "20px",
+            "marginRight": "20px",
+            "marginTop": "20px",
+            "width": "200px"
+          },
+          "type": "image"
+        },
+        {
           "items": [
             {
+              "icon": "dashboard",
               "path": "dashboard",
               "text": "Dashboard"
             },
             {
-              "path": "login",
-              "text": "Login",
-              "visible": "${!security.isAuthenticated()}"
+              "icon": "flight_takeoff",
+              "items": [
+                {
+                  "icon": "folder",
+                  "path": "categories",
+                  "text": "Categories"
+                },
+                {
+                  "icon": "add_shopping_cart",
+                  "path": "products",
+                  "text": "Products"
+                },
+                {
+                  "icon": "credit_card",
+                  "path": "customers",
+                  "text": "Customers"
+                },
+                {
+                  "icon": "face",
+                  "path": "employees",
+                  "text": "Employees"
+                },
+                {
+                  "icon": "shopping_cart",
+                  "path": "orders",
+                  "text": "Orders"
+                },
+                {
+                  "icon": "details",
+                  "path": "order-details",
+                  "text": "Order Details"
+                },
+                {
+                  "icon": "motorcycle",
+                  "path": "suppliers",
+                  "text": "Suppliers"
+                }
+              ],
+              "text": "Northwind"
             },
             {
-              "path": "categories",
-              "text": "Categories"
+              "icon": "settings",
+              "items": [
+                {
+                  "icon": "supervisor_account",
+                  "path": "application-users",
+                  "text": "Users"
+                },
+                {
+                  "icon": "work",
+                  "path": "application-roles",
+                  "text": "Roles"
+                }
+              ],
+              "text": "User Management"
             },
             {
-              "path": "customers",
-              "text": "Customers"
-            },
-            {
-              "path": "employees",
-              "text": "Employees"
-            },
-            {
-              "path": "orders",
-              "text": "Orders"
-            },
-            {
-              "path": "order-details",
-              "text": "Order Details"
-            },
-            {
-              "path": "products",
-              "text": "Products"
-            },
-            {
-              "path": "regions",
-              "text": "Regions"
-            },
-            {
-              "path": "suppliers",
-              "text": "Suppliers"
-            },
-            {
-              "path": "territories",
-              "text": "Territories"
+              "image": "/assets/images/radzen-small.svg",
+              "path": "https://www.radzen.com",
+              "text": "www.radzen.com"
             }
           ],
           "name": "panelmenu0",
-          "style": {
-            "height": "100%"
-          },
+          "style": {},
           "type": "panelmenu"
         }
       ],
       "name": "sidebar0",
+      "stretch": true,
       "type": "sidebar"
     },
     {
       "components": [
         {
+          "icon": "code",
           "name": "link0",
           "path": "https://github.com/akorchev/radzen",
-          "text": "Source Code",
+          "text": "Get the source on Github",
           "type": "link"
         }
       ],

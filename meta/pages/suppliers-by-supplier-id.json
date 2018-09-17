@@ -1,8 +1,21 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
+        {
+          "icon": "arrow_back",
+          "name": "link0",
+          "path": "products",
+          "style": {
+            "float": "right",
+            "lineHeight": "54px"
+          },
+          "text": "Back to Products",
+          "type": "link"
+        },
         {
           "name": "pageTitle",
           "size": "H1",
@@ -22,36 +35,37 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "100px",
                   "columns": [
                     {
                       "property": "CompanyName",
                       "title": "Company Name",
-                      "type": "string"
+                      "type": "string",
+                      "width": "150px"
                     },
                     {
                       "property": "ContactName",
                       "title": "Contact Name",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "property": "ContactTitle",
                       "title": "Contact Title",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "property": "Address",
                       "title": "Address",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "property": "City",
                       "title": "City",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Region",
-                      "title": "Region",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "property": "PostalCode",
@@ -66,16 +80,6 @@
                     {
                       "property": "Phone",
                       "title": "Phone",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Fax",
-                      "title": "Fax",
-                      "type": "string"
-                    },
-                    {
-                      "property": "HomePage",
-                      "title": "Home Page",
                       "type": "string"
                     }
                   ],

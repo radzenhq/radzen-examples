@@ -1,5 +1,7 @@
 {
-  "access": "Authenticated",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -22,6 +24,7 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "100px",
                   "columns": [
                     {
                       "format": "int32",
@@ -35,27 +38,17 @@
                       "sortProperty": "Customer.CompanyName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CustomerID",
-                                    "value": "${data.CustomerID}"
-                                  }
-                                ],
-                                "path": "customers-by-customer-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "customersButton",
-                          "style": {
-                            "width": "340px"
-                          },
-                          "text": "${data.Customer?.CompanyName}",
-                          "type": "button"
+                          "icon": "credit_card",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "CustomerID",
+                              "value": "${data.CustomerID}"
+                            }
+                          ],
+                          "path": "customers-by-customer-id",
+                          "text": "${data.Customer.CompanyName}",
+                          "type": "link"
                         }
                       ],
                       "title": "Customer",
@@ -63,38 +56,49 @@
                       "width": "360px"
                     },
                     {
-                      "filterProperty": "Employee.LastName",
+                      "filterProperty": "Employee.FirstName",
                       "format": "int32",
                       "property": "EmployeeID",
-                      "sortProperty": "Employee.LastName",
+                      "sortProperty": "Employee.FirstName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "EmployeeID",
-                                    "value": "${data.EmployeeID}"
-                                  }
-                                ],
-                                "path": "employees-by-employee-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "employeesButton",
-                          "style": {
-                            "width": "140px"
-                          },
-                          "text": "${data.Employee.LastName}",
-                          "type": "button"
+                          "icon": "face",
+                          "name": "link1",
+                          "parameters": [
+                            {
+                              "name": "EmployeeID",
+                              "value": "${data.EmployeeID}"
+                            }
+                          ],
+                          "path": "employees-by-employee-id",
+                          "text": "${data.Employee.FirstName} ${data.Employee.LastName}",
+                          "type": "link"
                         }
                       ],
                       "title": "Employee",
                       "type": "integer",
                       "width": "160px"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "icon": "details",
+                          "name": "link2",
+                          "parameters": [
+                            {
+                              "name": "OrderID",
+                              "value": "${data.OrderID}"
+                            }
+                          ],
+                          "path": "order-details-by-order-id",
+                          "text": "Order Details",
+                          "type": "link"
+                        }
+                      ],
+                      "title": "Details",
+                      "width": "140px"
                     },
                     {
                       "format": "date-time",
@@ -123,33 +127,6 @@
                       "template": "{{ data.Freight | currency}}",
                       "title": "Freight",
                       "type": "number"
-                    },
-                    {
-                      "filterable": false,
-                      "sortable": false,
-                      "template": [
-                        {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "OrderID",
-                                    "value": "${data.OrderID}"
-                                  }
-                                ],
-                                "path": "order-details-by-order-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "orderDetailsButton",
-                          "text": "Details",
-                          "type": "button"
-                        }
-                      ],
-                      "width": "140px"
                     }
                   ],
                   "count": "${getNorthwindOrdersCount}",
