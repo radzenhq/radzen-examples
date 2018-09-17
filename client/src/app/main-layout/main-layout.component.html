@@ -3,8 +3,8 @@
     <div class="col-md-6 d-flex align-items-center">
       <rz-sidebar-toggle #sidebarToggle0>
       </rz-sidebar-toggle>
-      <rz-label #label0 text="Radzen Showcase Demo">
-      </rz-label>
+      <rz-heading #heading0 size="H3" [style]="{'marginBottom':'0px'}" text="Radzen Showcase Demo">
+      </rz-heading>
     </div>
     <div class="col-md-6 text-lg-right">
       <rz-profilemenu #profilemenu0 *ngIf="security?.isAuthenticated()" (click)="profilemenu0Click($event)">
@@ -24,13 +24,15 @@
     </div>
   </div>
 </rz-header>
-<rz-body #body0>
+<rz-body #body0 [style]="{}">
   <rz-content-container #main name="main">
   </rz-content-container>
 </rz-body>
-<rz-sidebar #sidebar0>
-  <rz-panelmenu #panelmenu0 [style]="{'height':'100%'}">
-    <rz-panelmenu-item icon="home" path="dashboard" text="Dashboard" *ngIf="security?.isInRole(['Everybody'])">
+<rz-sidebar #sidebar0 [stretch]="true">
+  <rz-image #image0 path="/assets/images/radzen-logo-white.svg" [style]="{'marginBottom':'20px','marginLeft':'20px','marginRight':'20px','marginTop':'20px','width':'200px'}">
+  </rz-image>
+  <rz-panelmenu #panelmenu0 [style]="{}">
+    <rz-panelmenu-item icon="dashboard" path="dashboard" text="Dashboard" *ngIf="security?.isInRole(['Everybody'])">
     </rz-panelmenu-item>
     <rz-panelmenu-item icon="flight_takeoff" text="Northwind">
       <rz-panelmenu-item icon="folder" path="categories" text="Categories">
@@ -45,6 +47,8 @@
       </rz-panelmenu-item>
       <rz-panelmenu-item icon="details" path="order-details" text="Order Details">
       </rz-panelmenu-item>
+      <rz-panelmenu-item icon="motorcycle" path="suppliers" text="Suppliers">
+      </rz-panelmenu-item>
     </rz-panelmenu-item>
     <rz-panelmenu-item icon="settings" text="User Management">
       <rz-panelmenu-item icon="supervisor_account" path="application-users" text="Users">
@@ -52,10 +56,12 @@
       <rz-panelmenu-item icon="work" path="application-roles" text="Roles">
       </rz-panelmenu-item>
     </rz-panelmenu-item>
+    <rz-panelmenu-item image="/assets/images/radzen-small.svg" path="https://www.radzen.com" text="www.radzen.com">
+    </rz-panelmenu-item>
   </rz-panelmenu>
 </rz-sidebar>
 <rz-footer #footer0>
-  <rz-link #link0 path="https://github.com/akorchev/radzen" text="Source Code">
+  <rz-link #link0 icon="code" path="https://github.com/akorchev/radzen" text="Get the source on Github">
   </rz-link>
 </rz-footer>
 <router-outlet></router-outlet>

@@ -1,4 +1,6 @@
 <rz-content #content1 container="main">
+  <rz-link #link0 icon="arrow_back" path="products" [style]="{'float':'right','lineHeight':'54px'}" text="Back to Products">
+  </rz-link>
   <rz-heading #pageTitle size="H1" text="Category: {{category?.CategoryName}}">
   </rz-heading>
   <div class="row">
@@ -8,10 +10,10 @@
         </rz-grid-column>
         <rz-grid-column property="Description" title="Description" type="string">
         </rz-grid-column>
-        <rz-grid-column [filterable]="false" [sortable]="false" width="160px">
+        <rz-grid-column [filterable]="false" [sortable]="false" title="Products" width="160px">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #button0 text="Products" (click)="button0Click($event, data)">
-            </rz-button>
+            <rz-link #link1 icon="add_shopping_cart" [parameters]="[{'name':'CategoryID','value':data?.CategoryID}]" path="products-by-category-id" text="Products">
+            </rz-link>
           </ng-template>
         </rz-grid-column>
       </rz-grid>

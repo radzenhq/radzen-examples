@@ -13,9 +13,13 @@
                   "type": "sidebar-toggle"
                 },
                 {
-                  "name": "label0",
+                  "name": "heading0",
+                  "size": "H3",
+                  "style": {
+                    "marginBottom": "0px"
+                  },
                   "text": "Radzen Showcase Demo",
-                  "type": "label"
+                  "type": "heading"
                 }
               ],
               "name": "leftCol",
@@ -55,14 +59,27 @@
         }
       ],
       "name": "body0",
+      "style": {},
       "type": "body"
     },
     {
       "components": [
         {
+          "name": "image0",
+          "path": "/assets/images/radzen-logo-white.svg",
+          "style": {
+            "marginBottom": "20px",
+            "marginLeft": "20px",
+            "marginRight": "20px",
+            "marginTop": "20px",
+            "width": "200px"
+          },
+          "type": "image"
+        },
+        {
           "items": [
             {
-              "icon": "home",
+              "icon": "dashboard",
               "path": "dashboard",
               "text": "Dashboard"
             },
@@ -98,6 +115,11 @@
                   "icon": "details",
                   "path": "order-details",
                   "text": "Order Details"
+                },
+                {
+                  "icon": "motorcycle",
+                  "path": "suppliers",
+                  "text": "Suppliers"
                 }
               ],
               "text": "Northwind"
@@ -117,25 +139,29 @@
                 }
               ],
               "text": "User Management"
+            },
+            {
+              "image": "/assets/images/radzen-small.svg",
+              "path": "https://www.radzen.com",
+              "text": "www.radzen.com"
             }
           ],
           "name": "panelmenu0",
-          "style": {
-            "height": "100%"
-          },
+          "style": {},
           "type": "panelmenu"
         }
       ],
       "name": "sidebar0",
+      "stretch": true,
       "type": "sidebar"
     },
     {
       "components": [
         {
-          "icon": "",
+          "icon": "code",
           "name": "link0",
           "path": "https://github.com/akorchev/radzen",
-          "text": "Source Code",
+          "text": "Get the source on Github",
           "type": "link"
         }
       ],

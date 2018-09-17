@@ -11,12 +11,13 @@ import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dis
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { HeaderComponent } from '@radzen/angular/dist/header';
 import { SidebarToggleComponent } from '@radzen/angular/dist/sidebar-toggle';
-import { LabelComponent } from '@radzen/angular/dist/label';
+import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { ProfileMenuComponent } from '@radzen/angular/dist/profilemenu';
 import { GravatarComponent } from '@radzen/angular/dist/gravatar';
 import { BodyComponent } from '@radzen/angular/dist/body';
 import { ContentContainerComponent } from '@radzen/angular/dist/content-container';
 import { SidebarComponent } from '@radzen/angular/dist/sidebar';
+import { ImageComponent } from '@radzen/angular/dist/image';
 import { PanelMenuComponent } from '@radzen/angular/dist/panelmenu';
 import { FooterComponent } from '@radzen/angular/dist/footer';
 import { LinkComponent } from '@radzen/angular/dist/link';
@@ -27,11 +28,12 @@ export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('header0') header0: HeaderComponent;
   @ViewChild('sidebar-toggle0') sidebarToggle0: SidebarToggleComponent;
-  @ViewChild('label0') label0: LabelComponent;
+  @ViewChild('heading0') heading0: HeadingComponent;
   @ViewChild('profilemenu0') profilemenu0: ProfileMenuComponent;
   @ViewChild('body0') body0: BodyComponent;
   @ViewChild('main') main: ContentContainerComponent;
   @ViewChild('sidebar0') sidebar0: SidebarComponent;
+  @ViewChild('image0') image0: ImageComponent;
   @ViewChild('panelmenu0') panelmenu0: PanelMenuComponent;
   @ViewChild('footer0') footer0: FooterComponent;
   @ViewChild('link0') link0: LinkComponent;

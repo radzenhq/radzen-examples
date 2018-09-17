@@ -12,24 +12,24 @@ import { CardModule } from '@radzen/angular/dist/card';
 import { ContentContainerModule } from '@radzen/angular/dist/content-container';
 import { HeaderModule } from '@radzen/angular/dist/header';
 import { SidebarToggleModule } from '@radzen/angular/dist/sidebar-toggle';
-import { LabelModule } from '@radzen/angular/dist/label';
+import { HeadingModule } from '@radzen/angular/dist/heading';
 import { ProfileMenuModule } from '@radzen/angular/dist/profilemenu';
 import { GravatarModule } from '@radzen/angular/dist/gravatar';
 import { SidebarModule } from '@radzen/angular/dist/sidebar';
+import { ImageModule } from '@radzen/angular/dist/image';
 import { PanelMenuModule } from '@radzen/angular/dist/panelmenu';
 import { FooterModule } from '@radzen/angular/dist/footer';
 import { LinkModule } from '@radzen/angular/dist/link';
 import { ContentModule } from '@radzen/angular/dist/content';
-import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
 import { FormModule } from '@radzen/angular/dist/form';
+import { LabelModule } from '@radzen/angular/dist/label';
 import { ButtonModule } from '@radzen/angular/dist/button';
 import { HtmlModule } from '@radzen/angular/dist/html';
 import { LoginModule } from '@radzen/angular/dist/login';
 import { ProgressBarModule } from '@radzen/angular/dist/progressbar';
 import { GaugeModule } from '@radzen/angular/dist/gauge';
 import { SparklineModule } from '@radzen/angular/dist/sparkline';
-import { ImageModule } from '@radzen/angular/dist/image';
 import { SelectBarModule } from '@radzen/angular/dist/selectbar';
 import { ChartModule } from '@radzen/angular/dist/chart';
 import { SchedulerModule } from '@radzen/angular/dist/scheduler';
@@ -219,24 +219,24 @@ export const AppImports = [
   ContentContainerModule,
   HeaderModule,
   SidebarToggleModule,
-  LabelModule,
+  HeadingModule,
   ProfileMenuModule,
   GravatarModule,
   SidebarModule,
+  ImageModule,
   PanelMenuModule,
   FooterModule,
   LinkModule,
   ContentModule,
-  HeadingModule,
   GridModule,
   FormModule,
+  LabelModule,
   ButtonModule,
   HtmlModule,
   LoginModule,
   ProgressBarModule,
   GaugeModule,
   SparklineModule,
-  ImageModule,
   SelectBarModule,
   ChartModule,
   SchedulerModule,

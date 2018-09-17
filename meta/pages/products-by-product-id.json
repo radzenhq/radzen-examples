@@ -20,10 +20,10 @@
                   "addText": "Add",
                   "allowAdd": false,
                   "allowDelete": true,
-                  "allowFiltering": true,
+                  "allowFiltering": false,
                   "allowMultiSorting": false,
                   "allowPaging": true,
-                  "allowSorting": true,
+                  "allowSorting": false,
                   "columns": [
                     {
                       "property": "ProductName",
@@ -70,7 +70,9 @@
                       "type": "integer"
                     },
                     {
+                      "footerTemplate": "",
                       "property": "Discontinued",
+                      "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
                       "type": "boolean"
                     }

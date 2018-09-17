@@ -6,8 +6,8 @@
       <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrderDetailsCount" [data]="getNorthwindOrderDetailsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)">
         <rz-grid-column filterProperty="NorthwindOrder.Customer.CompanyName" [filterable]="false" property="CustomerID" sortProperty="NorthwindOrder.Customer.CompanyName" [sortable]="false" title="Customer" width="360px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #customersButton [style]="{'width':'340px'}" [text]="data?.NorthwindOrder?.Customer?.CompanyName" (click)="customersButtonClick($event, data)">
-            </rz-button>
+            <rz-link #link0 icon="credit_card" [parameters]="[{'name':'CustomerID','value':data?.NorthwindOrder?.CustomerID}]" path="customers-by-customer-id" [text]="data?.NorthwindOrder?.Customer?.CompanyName">
+            </rz-link>
           </ng-template>
         </rz-grid-column>
         <rz-grid-column format="double" property="UnitPrice" title="Unit Price" type="number">

@@ -61,7 +61,9 @@
                       "type": "integer"
                     },
                     {
+                      "footerTemplate": "",
                       "property": "Discontinued",
+                      "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
                       "type": "boolean"
                     }

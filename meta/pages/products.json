@@ -40,30 +40,20 @@
                       "sortProperty": "Supplier.CompanyName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "SupplierID",
-                                    "value": "${data.SupplierID}"
-                                  }
-                                ],
-                                "path": "suppliers-by-supplier-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "supplierButton",
-                          "style": {
-                            "width": "100%"
-                          },
-                          "text": "${data.Supplier?.CompanyName}",
-                          "type": "button"
+                          "icon": "motorcycle",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "SupplierID",
+                              "value": "${data.SupplierID}"
+                            }
+                          ],
+                          "path": "suppliers-by-supplier-id",
+                          "text": "${data.Supplier.CompanyName}",
+                          "type": "link"
                         }
                       ],
-                      "title": "Product ID",
+                      "title": "Supplier",
                       "type": "integer",
                       "width": "300px"
                     },
@@ -73,27 +63,17 @@
                       "sortProperty": "Category.CategoryName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CategoryID",
-                                    "value": "${data.CategoryID}"
-                                  }
-                                ],
-                                "path": "categories-by-category-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "categoryButton",
-                          "style": {
-                            "width": "100%"
-                          },
-                          "text": "${data.Category?.CategoryName}",
-                          "type": "button"
+                          "icon": "folder",
+                          "name": "link1",
+                          "parameters": [
+                            {
+                              "name": "CategoryID",
+                              "value": "${data.CategoryID}"
+                            }
+                          ],
+                          "path": "categories-by-category-id",
+                          "text": "${data.Category.CategoryName}",
+                          "type": "link"
                         }
                       ],
                       "title": "Category",
@@ -116,7 +96,7 @@
                       "template": "",
                       "title": "Units In Stock",
                       "type": "integer",
-                      "width": "100px"
+                      "width": "120px"
                     },
                     {
                       "footerTemplate": "",
@@ -124,7 +104,7 @@
                       "property": "UnitsOnOrder",
                       "title": "Units On Order",
                       "type": "integer",
-                      "width": "100px"
+                      "width": "130px"
                     },
                     {
                       "footerTemplate": "",
@@ -132,7 +112,7 @@
                       "template": "${data.Discontinued ? 'Yes' : 'No'}",
                       "title": "Discontinued",
                       "type": "boolean",
-                      "width": "100px"
+                      "width": "120px"
                     },
                     {
                       "filterable": false,
@@ -140,30 +120,20 @@
                       "sortable": true,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "ProductID",
-                                    "value": "${data.ProductID}"
-                                  }
-                                ],
-                                "path": "orders-by-product-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
-                          "style": {
-                            "width": "100%"
-                          },
+                          "icon": "shopping_cart",
+                          "name": "link2",
+                          "parameters": [
+                            {
+                              "name": "ProductID",
+                              "value": "${data.ProductID}"
+                            }
+                          ],
+                          "path": "orders-by-product-id",
                           "text": "Orders",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
-                      "title": "Category Northwind Products",
+                      "title": "Orders",
                       "type": "array",
                       "width": "140px"
                     }

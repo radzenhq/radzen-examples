@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
+import { ImageComponent } from '@radzen/angular/dist/image';
+import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { HtmlComponent } from '@radzen/angular/dist/html';
 import { LoginComponent } from '@radzen/angular/dist/login';
 import { RegisterApplicationUserComponent } from '../register-application-user/register-application-user.component';
@@ -19,6 +21,8 @@ import { SecurityService } from '../security.service';
 export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
+  @ViewChild('image0') image0: ImageComponent;
+  @ViewChild('heading0') heading0: HeadingComponent;
   @ViewChild('html0') html0: HtmlComponent;
   @ViewChild('login0') login0: LoginComponent;
 

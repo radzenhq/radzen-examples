@@ -40,8 +40,15 @@
                       "sortable": false,
                       "template": [
                         {
+                          "icon": "add_shopping_cart",
                           "name": "link0",
-                          "path": "products-by-category-id/${data.CategoryID}",
+                          "parameters": [
+                            {
+                              "name": "CategoryID",
+                              "value": "${data.CategoryID}"
+                            }
+                          ],
+                          "path": "products-by-category-id",
                           "text": "Products",
                           "type": "link"
                         }

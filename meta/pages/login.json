@@ -6,9 +6,45 @@
     {
       "components": [
         {
-          "content": "<h1 style='display:inline'>Login</h1>\n<i style='float:right;width:250px;'>\nadmin@example.com/@Admin123\nuser@example.com/@User123\n</i>\n",
-          "name": "html0",
-          "type": "html"
+          "components": [
+            {
+              "class": "justify-content-center col-md-12",
+              "components": [
+                {
+                  "name": "image0",
+                  "path": "/assets/images/radzen-logo.svg",
+                  "style": {
+                    "marginBottom": "1rem",
+                    "width": "70%"
+                  },
+                  "type": "image"
+                },
+                {
+                  "name": "heading0",
+                  "size": "H3",
+                  "style": {
+                    "color": "#ff6d41"
+                  },
+                  "text": "Radzen Showcase Application Log In",
+                  "type": "heading"
+                },
+                {
+                  "content": "<i>(username: admin@example.com password: @Admin123)</i>",
+                  "name": "html0",
+                  "type": "html"
+                }
+              ],
+              "name": "col0",
+              "style": {
+                "marginBottom": "1rem",
+                "marginLeft": "0px",
+                "textAlign": "center"
+              },
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
         },
         {
           "components": [
@@ -56,6 +92,10 @@
                   "passwordText": "Password",
                   "registerMessageText": "Don't have an account yet?",
                   "registerText": "Sign up",
+                  "style": {
+                    "paddingLeft": "16px",
+                    "paddingRight": "16px"
+                  },
                   "type": "login",
                   "userRequired": "Username is required",
                   "userText": "Username"

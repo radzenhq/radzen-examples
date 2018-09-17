@@ -6,7 +6,7 @@
           "class": "justify-content-center",
           "components": [
             {
-              "class": "justify-content-center col-xl-5 col-md-7",
+              "class": "justify-content-center        col-lg-6 col-md-7 col-xl-4",
               "components": [
                 {
                   "components": [

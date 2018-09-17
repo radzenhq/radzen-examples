@@ -10,7 +10,7 @@
         </rz-grid-column>
         <rz-grid-column [filterable]="false" [sortable]="false" title="Products" width="160px">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link0 path="products-by-category-id/{{data?.CategoryID}}" text="Products">
+            <rz-link #link0 icon="add_shopping_cart" [parameters]="[{'name':'CategoryID','value':data?.CategoryID}]" path="products-by-category-id" text="Products">
             </rz-link>
           </ng-template>
         </rz-grid-column>

@@ -5099,8 +5099,10 @@ p-accordiontab {
       width: 4px;
       background-color: #479cc8; }
   .panel-menu .navigation-item-link {
-    margin: 0 1.25rem 0 1.25rem;
+    padding: 0 1.25rem 0 1.25rem;
     color: inherit; }
+  .panel-menu a.navigation-item-link {
+    cursor: pointer; }
   .panel-menu .navigation-item-text {
     flex: auto; }
   .panel-menu .navigation-item-icon-children {
@@ -5143,7 +5145,7 @@ p-accordiontab {
       border-bottom: none;
       font-size: 0.875rem; }
       .panel-menu .navigation-menu .navigation-item .navigation-item-link {
-        margin-left: 3.625rem; }
+        padding-left: 3.625rem; }
 
 ul.profile-menu {
   list-style: none;
@@ -7145,3 +7147,6 @@ p-radiobutton {
 .fc-next-button .link .ui-icon {
   font-size: inherit;
   vertical-align: middle; }
+
+.ui-state-highlight .link {
+  color: #ffffff; }

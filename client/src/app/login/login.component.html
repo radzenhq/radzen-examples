@@ -1,14 +1,18 @@
 <rz-content #content1 container="main">
-  <rz-html #html0>
-    <h1 style='display:inline'>Login</h1>
-    <i style='float:right;width:250px;'>
-    admin@example.com/@Admin123
-    user@example.com/@User123
-    </i>
-  </rz-html>
+  <div class="row">
+    <div class="justify-content-center col-md-12" [ngStyle]="{'marginBottom':'1rem','marginLeft':'0px','textAlign':'center'}">
+      <rz-image #image0 path="/assets/images/radzen-logo.svg" [style]="{'marginBottom':'1rem','width':'70%'}">
+      </rz-image>
+      <rz-heading #heading0 size="H3" [style]="{'color':'#ff6d41'}" text="Radzen Showcase Application Log In">
+      </rz-heading>
+      <rz-html #html0>
+        <i>(username: admin@example.com password: @Admin123)</i>
+      </rz-html>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
-      <rz-login #login0 [allowRegister]="false" [allowResetPassword]="false" loginText="Login" passwordRequired="Password is required" passwordText="Password" registerMessageText="Don't have an account yet?" registerText="Sign up" userRequired="Username is required" userText="Username" (login)="login0Login($event)" (register)="login0Register($event)">
+      <rz-login #login0 [allowRegister]="false" [allowResetPassword]="false" loginText="Login" passwordRequired="Password is required" passwordText="Password" registerMessageText="Don't have an account yet?" registerText="Sign up" [style]="{'paddingLeft':'16px','paddingRight':'16px'}" userRequired="Username is required" userText="Username" (login)="login0Login($event)" (register)="login0Register($event)">
       </rz-login>
     </div>
   </div>

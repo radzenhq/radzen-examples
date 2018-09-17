@@ -1,5 +1,7 @@
 {
-  "access": "Everybody",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -28,59 +30,39 @@
                       "property": "OrderID",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "OrderID",
-                                    "value": "${data.OrderID}"
-                                  }
-                                ],
-                                "path": "orders-by-order-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "orderButton",
-                          "style": {
-                            "width": "140px"
-                          },
+                          "icon": "shopping_cart",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "OrderID",
+                              "value": "${data.OrderID}"
+                            }
+                          ],
+                          "path": "orders-by-order-id",
                           "text": "${data.OrderID}",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
                       "title": "Order",
                       "type": "integer",
-                      "width": "160px"
+                      "width": "140px"
                     },
                     {
                       "filterProperty": "NorthwindProduct.ProductName",
                       "sortProperty": "NorthwindProduct.ProductName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "ProductID",
-                                    "value": "${data.ProductID}"
-                                  }
-                                ],
-                                "path": "products-by-product-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "productButton",
-                          "style": {
-                            "width": "340px"
-                          },
+                          "icon": "add_shopping_cart",
+                          "name": "link1",
+                          "parameters": [
+                            {
+                              "name": "ProductID",
+                              "value": "${data.ProductID}"
+                            }
+                          ],
+                          "path": "products-by-product-id",
                           "text": "${data.NorthwindProduct.ProductName}",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
                       "title": "Product",

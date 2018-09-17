@@ -24,11 +24,14 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "150px",
                   "columns": [
                     {
+                      "format": "",
                       "property": "CompanyName",
                       "title": "Company Name",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "property": "ContactName",
@@ -46,23 +49,34 @@
                       "type": "string"
                     },
                     {
+                      "property": "Country",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "/assets/images/${data.Country.toLowerCase()}.png",
+                          "style": {
+                            "height": "20px",
+                            "width": "40px"
+                          },
+                          "type": "image"
+                        },
+                        {
+                          "name": "label0",
+                          "text": "${data.Country}",
+                          "type": "label"
+                        }
+                      ],
+                      "title": "Country",
+                      "type": "string"
+                    },
+                    {
                       "property": "City",
                       "title": "City",
                       "type": "string"
                     },
                     {
-                      "property": "Region",
-                      "title": "Region",
-                      "type": "string"
-                    },
-                    {
                       "property": "PostalCode",
                       "title": "Postal Code",
-                      "type": "string"
-                    },
-                    {
-                      "property": "Country",
-                      "title": "Country",
                       "type": "string"
                     },
                     {
@@ -80,26 +94,20 @@
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "CustomerID",
-                                    "value": "${data.CustomerID}"
-                                  }
-                                ],
-                                "path": "orders-by-customer-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "icon": "shopping_cart",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "CustomerID",
+                              "value": "${data.CustomerID}"
+                            }
+                          ],
+                          "path": "orders-by-customer-id",
                           "text": "Orders",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Orders",
                       "width": "140px"
                     }
                   ],

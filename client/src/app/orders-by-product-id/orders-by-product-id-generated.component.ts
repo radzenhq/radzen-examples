@@ -12,7 +12,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { ButtonComponent } from '@radzen/angular/dist/button';
+import { LinkComponent } from '@radzen/angular/dist/link';
 import { AddOrderDetailComponent } from '../add-order-detail/add-order-detail.component';
 
 import { NorthwindService } from '../northwind.service';
@@ -126,12 +126,5 @@ export class OrdersByProductIdGenerated implements AfterViewInit, OnInit, OnDest
     }, (result: any) => {
 
     });
-  }
-
-  customersButtonClick(event: any, data: any) {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    this.router.navigate(['customers-by-customer-id', data.NorthwindOrder.CustomerID]);
   }
 }

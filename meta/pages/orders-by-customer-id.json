@@ -1,5 +1,7 @@
 {
-  "access": "Everybody",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "components": [
@@ -25,35 +27,26 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "columnWidth": "150px",
                   "columns": [
                     {
-                      "filterProperty": "Employee.LastName",
+                      "filterProperty": "Employee.FirstName",
                       "format": "int32",
                       "property": "EmployeeID",
-                      "sortProperty": "Employee.LastName",
+                      "sortProperty": "Employee.FirstName",
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "EmployeeID",
-                                    "value": "${data.EmployeeID}"
-                                  }
-                                ],
-                                "path": "employees-by-employee-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "employeesButton",
-                          "style": {
-                            "width": "140px"
-                          },
-                          "text": "${data.Employee.LastName}",
-                          "type": "button"
+                          "icon": "face",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "EmployeeID",
+                              "value": "${data.EmployeeID}"
+                            }
+                          ],
+                          "path": "employees-by-employee-id",
+                          "text": "${data.Employee.FirstName} ${data.Employee.LastName}",
+                          "type": "link"
                         }
                       ],
                       "title": "Employee",
@@ -119,30 +112,25 @@
                       "type": "string"
                     },
                     {
+                      "filterProperty": "",
                       "filterable": false,
                       "sortable": false,
                       "template": [
                         {
-                          "events": {
-                            "click": [
-                              {
-                                "parameters": [
-                                  {
-                                    "name": "OrderID",
-                                    "value": "${data.OrderID}"
-                                  }
-                                ],
-                                "path": "order-details-by-order-id",
-                                "type": "navigate"
-                              }
-                            ]
-                          },
-                          "icon": "",
-                          "name": "button0",
+                          "icon": "details",
+                          "name": "link1",
+                          "parameters": [
+                            {
+                              "name": "OrderID",
+                              "value": "${data.OrderID}"
+                            }
+                          ],
+                          "path": "order-details-by-order-id",
                           "text": "Details",
-                          "type": "button"
+                          "type": "link"
                         }
                       ],
+                      "title": "Details",
                       "width": "140px"
                     }
                   ],
