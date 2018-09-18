@@ -57,7 +57,7 @@
                     },
                     {
                       "filterProperty": "Employee.FirstName",
-                      "format": "int32",
+                      "format": 0,
                       "property": "EmployeeID",
                       "sortProperty": "Employee.FirstName",
                       "template": [
@@ -76,7 +76,7 @@
                         }
                       ],
                       "title": "Employee",
-                      "type": "integer",
+                      "type": "string",
                       "width": "160px"
                     },
                     {
