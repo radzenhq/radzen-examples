@@ -1,7 +1,7 @@
 {
   "info": {
     "title": "Northwind",
-    "x-withCredentials": false,
+    "x-withCredentials": true,
     "x-type": "odata"
   },
   "host": "services.radzen.com",
