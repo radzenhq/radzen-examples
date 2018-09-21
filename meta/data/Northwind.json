@@ -6,7 +6,7 @@
   },
   "host": "services.radzen.com",
   "schemes": [
-    "http"
+    "https"
   ],
   "basePath": "/odata/Northwind",
   "definitions": {
