@@ -449,6 +449,9 @@
                           {
                             "format": "xlsx",
                             "name": "Northwind.getEmployees",
+                            "then": [
+                              {}
+                            ],
                             "type": "export"
                           }
                         ]

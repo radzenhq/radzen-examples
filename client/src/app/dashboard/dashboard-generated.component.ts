@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -171,7 +171,7 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
 
     });
 
-    this.northwind.getEmployees(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging)
+    this.northwind.getEmployees(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging, null, null)
     .subscribe((result: any) => {
       this.getEmployeesResult = result.value;
 
@@ -1115,7 +1115,7 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 ];
 
-    this.northwind.getNorthwindOrders(`OrderDate ge 2018-01-01T00:00:00Z`, null, null, null, null, null)
+    this.northwind.getNorthwindOrders(`OrderDate ge 2018-01-01T00:00:00Z`, null, null, null, null, null, null, null)
     .subscribe((result: any) => {
       this.orders = result.value;
     }, (result: any) => {
@@ -1124,11 +1124,16 @@ export class DashboardGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   button1Click(event: any) {
-    this.northwind.getEmployees(null, null, null, null, null, null)
+    this.northwind.getEmployees(null, null, null, null, null, null, `xlsx`, null)
+    .subscribe((result: any) => {
+
+    }, (result: any) => {
+
+    });
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getEmployees(null, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    this.northwind.getEmployees(null, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null, null, null)
     .subscribe((result: any) => {
       this.getEmployeesResult = result.value;
 

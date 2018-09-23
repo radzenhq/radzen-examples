@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -91,7 +91,7 @@ export class RegionsGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
-    this.northwind.getRegions(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging)
+    this.northwind.getRegions(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging, null, null)
     .subscribe((result: any) => {
       this.getRegionsResult = result.value;
 
@@ -115,7 +115,7 @@ export class RegionsGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null, null, null)
     .subscribe((result: any) => {
       this.getRegionsResult = result.value;
 

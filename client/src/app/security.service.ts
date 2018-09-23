@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { environment } from '../environments/environment';
@@ -179,7 +179,7 @@ export class SecurityService {
 
           this.router.navigateByUrl(redirectUrl);
         }
-      })      
+      })
       .catch(response => {
         return Observable.throw(response.error);
       });

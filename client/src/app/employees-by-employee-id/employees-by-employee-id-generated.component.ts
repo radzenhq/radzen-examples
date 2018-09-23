@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -93,7 +93,7 @@ export class EmployeesByEmployeeIdGenerated implements AfterViewInit, OnInit, On
 
 
   load() {
-    this.northwind.getEmployees(`EmployeeID eq ${this.parameters.EmployeeID}`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging)
+    this.northwind.getEmployees(`EmployeeID eq ${this.parameters.EmployeeID}`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging, null, null)
     .subscribe((result: any) => {
       this.getEmployeesResult = result.value;
 
@@ -119,7 +119,7 @@ export class EmployeesByEmployeeIdGenerated implements AfterViewInit, OnInit, On
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getEmployees(`${event.filter ? event.filter + ' and ' : ''}EmployeeID eq ${this.parameters.EmployeeID}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    this.northwind.getEmployees(`${event.filter ? event.filter + ' and ' : ''}EmployeeID eq ${this.parameters.EmployeeID}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null, null, null)
     .subscribe((result: any) => {
       this.getEmployeesResult = result.value;
 

@@ -1,6 +1,6 @@
 export const environment = {
-  northwind: 'http://services.radzen.com/odata/Northwind',
+  northwind: 'https://services.radzen.com/odata/Northwind',
 
-  securityUrl: 'http://services.radzen.com/auth',
+  securityUrl: 'https://services.radzen.com/auth',
   production: true
 };

@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -95,7 +95,7 @@ export class EditTerritoryGenerated implements AfterViewInit, OnInit, OnDestroy 
 
     });
 
-    this.northwind.getRegions(null, (<any>this.form0.fields.find(f => f.property == 'RegionID')).pageSize, 0, null, null, true)
+    this.northwind.getRegions(null, (<any>this.form0.fields.find(f => f.property == 'RegionID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getRegionsResult = result.value;
 
@@ -115,7 +115,7 @@ export class EditTerritoryGenerated implements AfterViewInit, OnInit, OnDestroy 
 
   form0LoadData(event: any) {
     if (event.property == 'RegionID') {
-          this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getRegions(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getRegionsResult = result.value;
 

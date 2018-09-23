@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -94,7 +94,7 @@ export class ProductsByCategoryIdGenerated implements AfterViewInit, OnInit, OnD
 
 
   load() {
-    this.northwind.getNorthwindProducts(`CategoryID eq ${this.parameters.CategoryID}`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, `Supplier,Category`, this.grid0.allowPaging)
+    this.northwind.getNorthwindProducts(`CategoryID eq ${this.parameters.CategoryID}`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, `Supplier,Category`, this.grid0.allowPaging, null, null)
     .subscribe((result: any) => {
       this.getNorthwindProductsResult = result.value;
 
@@ -120,7 +120,7 @@ export class ProductsByCategoryIdGenerated implements AfterViewInit, OnInit, OnD
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getNorthwindProducts(`${event.filter ? event.filter + ' and ' : ''}CategoryID eq ${this.parameters.CategoryID}`, event.top, event.skip, `${event.orderby}`, `Supplier,Category`, event.top != null && event.skip != null)
+    this.northwind.getNorthwindProducts(`${event.filter ? event.filter + ' and ' : ''}CategoryID eq ${this.parameters.CategoryID}`, event.top, event.skip, `${event.orderby}`, `Supplier,Category`, event.top != null && event.skip != null, null, null)
     .subscribe((result: any) => {
       this.getNorthwindProductsResult = result.value;
 

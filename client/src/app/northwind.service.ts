@@ -16,8 +16,8 @@ export class NorthwindService {
     this.odata = new ODataClient(this.http, this.basePath, { legacy: false, withCredentials: true });
   }
 
-  getCategories(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/Categories`, { filter, top, skip, orderby, expand, count });
+  getCategories(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/Categories`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createCategory(category: any) {
@@ -36,8 +36,8 @@ export class NorthwindService {
     return this.odata.patch(`/Categories(${categoryId})`, category, item => item.CategoryID == categoryId);
   }
 
-  getCustomers(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/Customers`, { filter, top, skip, orderby, expand, count });
+  getCustomers(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/Customers`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createCustomer(customer: any) {
@@ -45,19 +45,19 @@ export class NorthwindService {
   }
 
   getCustomerById(customerId: string) {
-    return this.odata.get(`/Customers('${customerId}')`);
+    return this.odata.get(`/Customers('${encodeURIComponent(customerId)}')`);
   }
 
   deleteCustomer(customerId: string) {
-    return this.odata.delete(`/Customers('${customerId}')`, item => !(item.CustomerID == customerId));
+    return this.odata.delete(`/Customers('${encodeURIComponent(customerId)}')`, item => !(item.CustomerID == customerId));
   }
 
   updateCustomer(customerId: string, customer: any) {
-    return this.odata.patch(`/Customers('${customerId}')`, customer, item => item.CustomerID == customerId);
+    return this.odata.patch(`/Customers('${encodeURIComponent(customerId)}')`, customer, item => item.CustomerID == customerId);
   }
 
-  getCustomerCustomerDemos(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/CustomerCustomerDemos`, { filter, top, skip, orderby, expand, count });
+  getCustomerCustomerDemos(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/CustomerCustomerDemos`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createCustomerCustomerDemo(customerCustomerDemo: any) {
@@ -65,19 +65,19 @@ export class NorthwindService {
   }
 
   getCustomerCustomerDemoById(customerId: string, customerTypeId: string) {
-    return this.odata.get(`/CustomerCustomerDemos('${customerId}','${customerTypeId}')`);
+    return this.odata.get(`/CustomerCustomerDemos('${encodeURIComponent(customerId)}','${encodeURIComponent(customerTypeId)}')`);
   }
 
   deleteCustomerCustomerDemo(customerId: string, customerTypeId: string) {
-    return this.odata.delete(`/CustomerCustomerDemos('${customerId}','${customerTypeId}')`, item => !(item.CustomerID == customerId && item.CustomerTypeID == customerTypeId));
+    return this.odata.delete(`/CustomerCustomerDemos('${encodeURIComponent(customerId)}','${encodeURIComponent(customerTypeId)}')`, item => !(item.CustomerID == customerId && item.CustomerTypeID == customerTypeId));
   }
 
   updateCustomerCustomerDemo(customerId: string, customerTypeId: string, customerCustomerDemo: any) {
-    return this.odata.patch(`/CustomerCustomerDemos('${customerId}','${customerTypeId}')`, customerCustomerDemo, item => item.CustomerID == customerId && item.CustomerTypeID == customerTypeId);
+    return this.odata.patch(`/CustomerCustomerDemos('${encodeURIComponent(customerId)}','${encodeURIComponent(customerTypeId)}')`, customerCustomerDemo, item => item.CustomerID == customerId && item.CustomerTypeID == customerTypeId);
   }
 
-  getCustomerDemographics(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/CustomerDemographics`, { filter, top, skip, orderby, expand, count });
+  getCustomerDemographics(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/CustomerDemographics`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createCustomerDemographic(customerDemographic: any) {
@@ -85,19 +85,19 @@ export class NorthwindService {
   }
 
   getCustomerDemographicById(customerTypeId: string) {
-    return this.odata.get(`/CustomerDemographics('${customerTypeId}')`);
+    return this.odata.get(`/CustomerDemographics('${encodeURIComponent(customerTypeId)}')`);
   }
 
   deleteCustomerDemographic(customerTypeId: string) {
-    return this.odata.delete(`/CustomerDemographics('${customerTypeId}')`, item => !(item.CustomerTypeID == customerTypeId));
+    return this.odata.delete(`/CustomerDemographics('${encodeURIComponent(customerTypeId)}')`, item => !(item.CustomerTypeID == customerTypeId));
   }
 
   updateCustomerDemographic(customerTypeId: string, customerDemographic: any) {
-    return this.odata.patch(`/CustomerDemographics('${customerTypeId}')`, customerDemographic, item => item.CustomerTypeID == customerTypeId);
+    return this.odata.patch(`/CustomerDemographics('${encodeURIComponent(customerTypeId)}')`, customerDemographic, item => item.CustomerTypeID == customerTypeId);
   }
 
-  getEmployees(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/Employees`, { filter, top, skip, orderby, expand, count });
+  getEmployees(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/Employees`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createEmployee(employee: any) {
@@ -116,8 +116,8 @@ export class NorthwindService {
     return this.odata.patch(`/Employees(${employeeId})`, employee, item => item.EmployeeID == employeeId);
   }
 
-  getEmployeeTerritories(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/EmployeeTerritories`, { filter, top, skip, orderby, expand, count });
+  getEmployeeTerritories(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/EmployeeTerritories`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createEmployeeTerritory(employeeTerritory: any) {
@@ -125,19 +125,19 @@ export class NorthwindService {
   }
 
   getEmployeeTerritoryById(employeeId: number, territoryId: string) {
-    return this.odata.get(`/EmployeeTerritories(${employeeId},'${territoryId}')`);
+    return this.odata.get(`/EmployeeTerritories(${employeeId},'${encodeURIComponent(territoryId)}')`);
   }
 
   deleteEmployeeTerritory(employeeId: number, territoryId: string) {
-    return this.odata.delete(`/EmployeeTerritories(${employeeId},'${territoryId}')`, item => !(item.EmployeeID == employeeId && item.TerritoryID == territoryId));
+    return this.odata.delete(`/EmployeeTerritories(${employeeId},'${encodeURIComponent(territoryId)}')`, item => !(item.EmployeeID == employeeId && item.TerritoryID == territoryId));
   }
 
   updateEmployeeTerritory(employeeId: number, territoryId: string, employeeTerritory: any) {
-    return this.odata.patch(`/EmployeeTerritories(${employeeId},'${territoryId}')`, employeeTerritory, item => item.EmployeeID == employeeId && item.TerritoryID == territoryId);
+    return this.odata.patch(`/EmployeeTerritories(${employeeId},'${encodeURIComponent(territoryId)}')`, employeeTerritory, item => item.EmployeeID == employeeId && item.TerritoryID == territoryId);
   }
 
-  getNorthwindOrders(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/NorthwindOrders`, { filter, top, skip, orderby, expand, count });
+  getNorthwindOrders(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/NorthwindOrders`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createNorthwindOrder(northwindOrder: any) {
@@ -156,8 +156,8 @@ export class NorthwindService {
     return this.odata.patch(`/NorthwindOrders(${orderId})`, northwindOrder, item => item.OrderID == orderId);
   }
 
-  getNorthwindOrderDetails(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/NorthwindOrderDetails`, { filter, top, skip, orderby, expand, count });
+  getNorthwindOrderDetails(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/NorthwindOrderDetails`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createNorthwindOrderDetail(northwindOrderDetail: any) {
@@ -176,8 +176,8 @@ export class NorthwindService {
     return this.odata.patch(`/NorthwindOrderDetails(${orderId},${productId})`, northwindOrderDetail, item => item.OrderID == orderId && item.ProductID == productId);
   }
 
-  getNorthwindProducts(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/NorthwindProducts`, { filter, top, skip, orderby, expand, count });
+  getNorthwindProducts(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/NorthwindProducts`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createNorthwindProduct(northwindProduct: any) {
@@ -196,8 +196,8 @@ export class NorthwindService {
     return this.odata.patch(`/NorthwindProducts(${productId})`, northwindProduct, item => item.ProductID == productId);
   }
 
-  getRegions(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/Regions`, { filter, top, skip, orderby, expand, count });
+  getRegions(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/Regions`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createRegion(region: any) {
@@ -216,8 +216,8 @@ export class NorthwindService {
     return this.odata.patch(`/Regions(${regionId})`, region, item => item.RegionID == regionId);
   }
 
-  getSuppliers(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/Suppliers`, { filter, top, skip, orderby, expand, count });
+  getSuppliers(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/Suppliers`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createSupplier(supplier: any) {
@@ -236,8 +236,8 @@ export class NorthwindService {
     return this.odata.patch(`/Suppliers(${supplierId})`, supplier, item => item.SupplierID == supplierId);
   }
 
-  getTerritories(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null) {
-    return this.odata.get(`/Territories`, { filter, top, skip, orderby, expand, count });
+  getTerritories(filter: string | null, top: number | null, skip: number | null, orderby: string | null, expand: string | null, count: boolean | null, format: string | null, select: string | null) {
+    return this.odata.get(`/Territories`, { filter, top, skip, orderby, expand, count, format, select });
   }
 
   createTerritory(territory: any) {
@@ -245,14 +245,14 @@ export class NorthwindService {
   }
 
   getTerritoryById(territoryId: string) {
-    return this.odata.get(`/Territories('${territoryId}')`);
+    return this.odata.get(`/Territories('${encodeURIComponent(territoryId)}')`);
   }
 
   deleteTerritory(territoryId: string) {
-    return this.odata.delete(`/Territories('${territoryId}')`, item => !(item.TerritoryID == territoryId));
+    return this.odata.delete(`/Territories('${encodeURIComponent(territoryId)}')`, item => !(item.TerritoryID == territoryId));
   }
 
   updateTerritory(territoryId: string, territory: any) {
-    return this.odata.patch(`/Territories('${territoryId}')`, territory, item => item.TerritoryID == territoryId);
+    return this.odata.patch(`/Territories('${encodeURIComponent(territoryId)}')`, territory, item => item.TerritoryID == territoryId);
   }
 }

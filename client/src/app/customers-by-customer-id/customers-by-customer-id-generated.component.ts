@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -93,7 +93,7 @@ export class CustomersByCustomerIdGenerated implements AfterViewInit, OnInit, On
 
 
   load() {
-    this.northwind.getCustomers(`CustomerID eq '${this.parameters.CustomerID}'`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging)
+    this.northwind.getCustomers(`CustomerID eq '${this.parameters.CustomerID}'`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, null, this.grid0.allowPaging, null, null)
     .subscribe((result: any) => {
       this.getCustomersResult = result.value;
 
@@ -119,7 +119,7 @@ export class CustomersByCustomerIdGenerated implements AfterViewInit, OnInit, On
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getCustomers(`${event.filter ? event.filter + ' and ' : ''}CustomerID eq '${this.parameters.CustomerID}'`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    this.northwind.getCustomers(`${event.filter ? event.filter + ' and ' : ''}CustomerID eq '${this.parameters.CustomerID}'`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null, null, null)
     .subscribe((result: any) => {
       this.getCustomersResult = result.value;
 

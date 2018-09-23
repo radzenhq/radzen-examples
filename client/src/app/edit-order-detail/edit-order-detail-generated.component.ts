@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -99,7 +99,7 @@ export class EditOrderDetailGenerated implements AfterViewInit, OnInit, OnDestro
 
     });
 
-    this.northwind.getNorthwindOrders(null, (<any>this.form0.fields.find(f => f.property == 'OrderID')).pageSize, 0, null, null, true)
+    this.northwind.getNorthwindOrders(null, (<any>this.form0.fields.find(f => f.property == 'OrderID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getOrdersResult = result.value;
 
@@ -108,7 +108,7 @@ export class EditOrderDetailGenerated implements AfterViewInit, OnInit, OnDestro
 
     });
 
-    this.northwind.getNorthwindProducts(null, (<any>this.form0.fields.find(f => f.property == 'ProductID')).pageSize, 0, null, null, true)
+    this.northwind.getNorthwindProducts(null, (<any>this.form0.fields.find(f => f.property == 'ProductID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getProductsResult = result.value;
 
@@ -128,7 +128,7 @@ export class EditOrderDetailGenerated implements AfterViewInit, OnInit, OnDestro
 
   form0LoadData(event: any) {
     if (event.property == 'OrderID') {
-          this.northwind.getNorthwindOrders(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getNorthwindOrders(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getOrdersResult = result.value;
 
@@ -139,7 +139,7 @@ export class EditOrderDetailGenerated implements AfterViewInit, OnInit, OnDestro
     }
 
     if (event.property == 'ProductID') {
-          this.northwind.getNorthwindProducts(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getNorthwindProducts(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getProductsResult = result.value;
 

@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -99,7 +99,7 @@ export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit,
 
     });
 
-    this.northwind.getCustomers(null, (<any>this.form0.fields.find(f => f.property == 'CustomerID')).pageSize, 0, null, null, true)
+    this.northwind.getCustomers(null, (<any>this.form0.fields.find(f => f.property == 'CustomerID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getCustomersResult = result.value;
 
@@ -108,7 +108,7 @@ export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit,
 
     });
 
-    this.northwind.getCustomerDemographics(null, (<any>this.form0.fields.find(f => f.property == 'CustomerTypeID')).pageSize, 0, null, null, true)
+    this.northwind.getCustomerDemographics(null, (<any>this.form0.fields.find(f => f.property == 'CustomerTypeID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getCustomerDemographicsResult = result.value;
 
@@ -141,7 +141,7 @@ export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit,
 
   form0LoadData(event: any) {
     if (event.property == 'CustomerID') {
-          this.northwind.getCustomers(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getCustomers(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getCustomersResult = result.value;
 
@@ -152,7 +152,7 @@ export class EditCustomerCustomerDemoGenerated implements AfterViewInit, OnInit,
     }
 
     if (event.property == 'CustomerTypeID') {
-          this.northwind.getCustomerDemographics(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getCustomerDemographics(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getCustomerDemographicsResult = result.value;
 

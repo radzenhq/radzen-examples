@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -90,7 +90,7 @@ export class AddEmployeeTerritoryGenerated implements AfterViewInit, OnInit, OnD
 
 
   load() {
-    this.northwind.getEmployees(null, (<any>this.form0.fields.find(f => f.property == 'EmployeeID')).pageSize, 0, null, null, true)
+    this.northwind.getEmployees(null, (<any>this.form0.fields.find(f => f.property == 'EmployeeID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getEmployeesResult = result.value;
 
@@ -99,7 +99,7 @@ export class AddEmployeeTerritoryGenerated implements AfterViewInit, OnInit, OnD
 
     });
 
-    this.northwind.getTerritories(null, (<any>this.form0.fields.find(f => f.property == 'TerritoryID')).pageSize, 0, null, null, true)
+    this.northwind.getTerritories(null, (<any>this.form0.fields.find(f => f.property == 'TerritoryID')).pageSize, 0, null, null, true, null, null)
     .subscribe((result: any) => {
       this.getTerritoriesResult = result.value;
 
@@ -131,7 +131,7 @@ export class AddEmployeeTerritoryGenerated implements AfterViewInit, OnInit, OnD
 
   form0LoadData(event: any) {
     if (event.property == 'EmployeeID') {
-          this.northwind.getEmployees(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getEmployees(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getEmployeesResult = result.value;
 
@@ -142,7 +142,7 @@ export class AddEmployeeTerritoryGenerated implements AfterViewInit, OnInit, OnD
     }
 
     if (event.property == 'TerritoryID') {
-          this.northwind.getTerritories(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true)
+          this.northwind.getTerritories(`${event.filter}`, event.top, event.skip, `${event.orderby}`, null, true, null, null)
       .subscribe((result: any) => {
           this.getTerritoriesResult = result.value;
 

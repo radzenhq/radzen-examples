@@ -5,7 +5,7 @@
 import { ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -90,7 +90,7 @@ export class EmployeeTerritoriesGenerated implements AfterViewInit, OnInit, OnDe
 
 
   load() {
-    this.northwind.getEmployeeTerritories(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, `Employee,Territory`, this.grid0.allowPaging)
+    this.northwind.getEmployeeTerritories(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, `Employee,Territory`, this.grid0.allowPaging, null, null)
     .subscribe((result: any) => {
       this.getEmployeeTerritoriesResult = result.value;
 
@@ -101,7 +101,7 @@ export class EmployeeTerritoriesGenerated implements AfterViewInit, OnInit, OnDe
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getEmployeeTerritories(`${event.filter}`, event.top, event.skip, `${event.orderby}`, `Employee,Territory`, event.top != null && event.skip != null)
+    this.northwind.getEmployeeTerritories(`${event.filter}`, event.top, event.skip, `${event.orderby}`, `Employee,Territory`, event.top != null && event.skip != null, null, null)
     .subscribe((result: any) => {
       this.getEmployeeTerritoriesResult = result.value;
 
