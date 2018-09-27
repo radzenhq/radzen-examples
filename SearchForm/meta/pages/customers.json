@@ -1,0 +1,160 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Customers",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-10",
+              "components": [
+                {
+                  "name": "textbox0",
+                  "style": {
+                    "width": "100%"
+                  },
+                  "type": "textbox",
+                  "value": ""
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-2",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "name": "Northwind.getCustomers",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "contains(CompanyName, '${this.textbox0.value}')"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "condition": "",
+                            "name": "customers",
+                            "type": "set",
+                            "value": "${result.value}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "button0",
+                  "style": {
+                    "width": "100%"
+                  },
+                  "text": "Search",
+                  "type": "button"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "columns": [
+                    {
+                      "property": "CustomerID",
+                      "title": "Customer ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactName",
+                      "title": "Contact Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "title": "Contact Title",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Address",
+                      "title": "Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Region",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "title": "Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Phone",
+                      "title": "Phone",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Fax",
+                      "title": "Fax",
+                      "type": "string"
+                    }
+                  ],
+                  "data": "${customers}",
+                  "name": "grid0",
+                  "style": {
+                    "marginTop": "20px"
+                  },
+                  "type": "grid",
+                  "emptyText": "No records to display.",
+                  "addText": "Add"
+                }
+              ],
+              "name": "col2",
+              "type": "col"
+            }
+          ],
+          "name": "row1",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Customers"
+}
