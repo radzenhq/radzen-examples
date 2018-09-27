@@ -1,0 +1,35 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Employees">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column format="int32" property="EmployeeID" title="Employee ID" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="LastName" title="Last Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="FirstName" title="First Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Title" title="Title" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="TitleOfCourtesy" title="Title Of Courtesy" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="City" title="City" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Country" title="Country" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Photo" title="Photo" type="string">
+          <ng-template let-data gridColumnTemplate>
+          <img width='50%' height='50%' src='{{data?.Photo}}' />
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column title="Preview">
+          <ng-template let-data gridColumnTemplate>
+            <rz-button #button0 text="Preview" (click)="button0Click($event, data)">
+            </rz-button>
+          </ng-template>
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

@@ -1,0 +1,25 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "ImagePreview",
+  "navigation": [
+    "Employees"
+  ],
+  "pages": [
+    "Employees",
+    "Add Employee",
+    "Edit Employee",
+    "Image"
+  ],
+  "serverVersion": "1",
+  "startPage": "Employees",
+  "theme": "default"
+}

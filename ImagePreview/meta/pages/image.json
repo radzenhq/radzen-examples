@@ -1,0 +1,48 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "${employee.FirstName + ' ' + employee.LastName} ",
+          "type": "heading"
+        },
+        {
+          "name": "image0",
+          "path": "${employee.Photo}",
+          "type": "image"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getEmployeeById",
+        "parameters": [
+          {
+            "name": "EmployeeID",
+            "value": "${parameters.EmployeeID}"
+          }
+        ],
+        "then": [
+          {
+            "condition": "",
+            "name": "employee",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Image"
+}
