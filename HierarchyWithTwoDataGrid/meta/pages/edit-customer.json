@@ -1,0 +1,230 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${customer}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Customer",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateCustomer",
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${parameters.CustomerID}"
+                          },
+                          {
+                            "name": "Customer",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "CustomerID",
+                      "required": true,
+                      "title": "Customer ID",
+                      "type": "string",
+                      "maxLength": 5
+                    },
+                    {
+                      "property": "CompanyName",
+                      "required": true,
+                      "title": "Company Name",
+                      "type": "string",
+                      "maxLength": 40
+                    },
+                    {
+                      "property": "ContactName",
+                      "required": false,
+                      "title": "Contact Name",
+                      "type": "string",
+                      "maxLength": 30
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "required": false,
+                      "title": "Contact Title",
+                      "type": "string",
+                      "maxLength": 30
+                    },
+                    {
+                      "property": "Address",
+                      "required": false,
+                      "title": "Address",
+                      "type": "string",
+                      "maxLength": 60
+                    },
+                    {
+                      "property": "City",
+                      "required": false,
+                      "title": "City",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "Region",
+                      "required": false,
+                      "title": "Region",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "PostalCode",
+                      "required": false,
+                      "title": "Postal Code",
+                      "type": "string",
+                      "maxLength": 10
+                    },
+                    {
+                      "property": "Country",
+                      "required": false,
+                      "title": "Country",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "Phone",
+                      "required": false,
+                      "title": "Phone",
+                      "type": "string",
+                      "maxLength": 24
+                    },
+                    {
+                      "property": "Fax",
+                      "required": false,
+                      "title": "Fax",
+                      "type": "string",
+                      "maxLength": 24
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getCustomerByCustomerID",
+        "parameters": [
+          {
+            "name": "CustomerID",
+            "value": "${parameters.CustomerID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "customer",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Customer",
+  "layout": "Main"
+}

@@ -1,0 +1,415 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Customers"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowDelete": true,
+                  "allowAdd": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getCustomersCount}",
+                  "data": "${getCustomersResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getCustomers",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getCustomersResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getCustomersCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Customer",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.deleteCustomer",
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Customer deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "add": [
+                      {
+                        "path": "add-customer",
+                        "type": "popup"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          }
+                        ],
+                        "path": "edit-customer",
+                        "type": "popup"
+                      }
+                    ],
+                    "rowExpand": [
+                      {
+                        "name": "master",
+                        "type": "set",
+                        "value": "${event}"
+                      },
+                      {
+                        "name": "Northwind.getOrders",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "CustomerID eq '${event.CustomerID}'"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,Employee,Shipper"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "execute",
+                            "code": "${event.Orders = result.value}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CustomerID",
+                      "title": "Customer ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactName",
+                      "title": "Contact Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "title": "Contact Title",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Address",
+                      "title": "Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Region",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "title": "Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Phone",
+                      "title": "Phone",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Fax",
+                      "title": "Fax",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "template": [
+                    {
+                      "name": "heading1",
+                      "size": "H1",
+                      "text": "Orders",
+                      "type": "heading"
+                    },
+                    {
+                      "name": "grid1",
+                      "data": "${data.Orders}",
+                      "columns": [
+                        {
+                          "property": "OrderID",
+                          "title": "Order ID",
+                          "type": "integer"
+                        },
+                        {
+                          "property": "CustomerID",
+                          "sortProperty": "Customer.CompanyName",
+                          "filterProperty": "Customer.CompanyName",
+                          "template": "${data.Customer?.CompanyName}",
+                          "title": "Customer",
+                          "type": "string"
+                        },
+                        {
+                          "property": "EmployeeID",
+                          "sortProperty": "Employee.LastName",
+                          "filterProperty": "Employee.LastName",
+                          "template": "${data.Employee?.LastName}",
+                          "title": "Employee",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "property": "OrderDate",
+                          "template": "${data.OrderDate | utcDate}",
+                          "title": "Order Date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "property": "RequiredDate",
+                          "template": "${data.RequiredDate | utcDate}",
+                          "title": "Required Date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "property": "ShippedDate",
+                          "template": "${data.ShippedDate | utcDate}",
+                          "title": "Shipped Date",
+                          "type": "string"
+                        },
+                        {
+                          "property": "ShipVia",
+                          "sortProperty": "Shipper.CompanyName",
+                          "filterProperty": "Shipper.CompanyName",
+                          "template": "${data.Shipper?.CompanyName}",
+                          "title": "Shipper",
+                          "type": "string"
+                        },
+                        {
+                          "format": "decimal",
+                          "property": "Freight",
+                          "title": "Freight",
+                          "type": "number"
+                        },
+                        {
+                          "property": "ShipName",
+                          "title": "Ship Name",
+                          "type": "string"
+                        },
+                        {
+                          "property": "ShipAddress",
+                          "title": "Ship Address",
+                          "type": "string"
+                        },
+                        {
+                          "property": "ShipCity",
+                          "title": "Ship City",
+                          "type": "string"
+                        },
+                        {
+                          "property": "ShipRegion",
+                          "title": "Ship Region",
+                          "type": "string"
+                        },
+                        {
+                          "property": "ShipPostalCode",
+                          "title": "Ship Postal Code",
+                          "type": "string"
+                        },
+                        {
+                          "property": "ShipCountry",
+                          "title": "Ship Country",
+                          "type": "string"
+                        }
+                      ],
+                      "type": "grid",
+                      "allowAdd": true,
+                      "allowDelete": true,
+                      "allowFiltering": true,
+                      "allowMultiSorting": false,
+                      "allowPaging": true,
+                      "allowSorting": true,
+                      "events": {
+                        "add": [
+                          {
+                            "path": "add-order",
+                            "type": "popup",
+                            "parameters": [
+                              {
+                                "name": "CustomerID",
+                                "value": "${data.CustomerID}"
+                              }
+                            ]
+                          }
+                        ],
+                        "delete": [
+                          {
+                            "error": [
+                              {
+                                "detail": "Unable to delete Order",
+                                "severity": "error",
+                                "summary": "Error",
+                                "type": "notify"
+                              }
+                            ],
+                            "name": "Northwind.deleteOrder",
+                            "parameters": [
+                              {
+                                "name": "OrderID",
+                                "value": "${event.OrderID}"
+                              }
+                            ],
+                            "then": [
+                              {
+                                "detail": "Order deleted!",
+                                "severity": "success",
+                                "summary": "Success",
+                                "type": "notify"
+                              }
+                            ],
+                            "type": "invoke"
+                          }
+                        ],
+                        "rowSelect": [
+                          {
+                            "parameters": [
+                              {
+                                "name": "OrderID",
+                                "value": "${event.OrderID}"
+                              }
+                            ],
+                            "path": "edit-order",
+                            "type": "popup"
+                          }
+                        ]
+                      },
+                      "pageSize": 5
+                    }
+                  ],
+                  "pageSize": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getCustomersCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Customers",
+  "layout": "Main"
+}

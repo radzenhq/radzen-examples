@@ -1,0 +1,143 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Customer!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createCustomer",
+                        "parameters": [
+                          {
+                            "name": "Customer",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "customers",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "CustomerID",
+                      "required": true,
+                      "title": "Customer ID",
+                      "type": "string",
+                      "maxLength": 5
+                    },
+                    {
+                      "property": "CompanyName",
+                      "required": true,
+                      "title": "Company Name",
+                      "type": "string",
+                      "maxLength": 40
+                    },
+                    {
+                      "property": "ContactName",
+                      "required": false,
+                      "title": "Contact Name",
+                      "type": "string",
+                      "maxLength": 30
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "required": false,
+                      "title": "Contact Title",
+                      "type": "string",
+                      "maxLength": 30
+                    },
+                    {
+                      "property": "Address",
+                      "required": false,
+                      "title": "Address",
+                      "type": "string",
+                      "maxLength": 60
+                    },
+                    {
+                      "property": "City",
+                      "required": false,
+                      "title": "City",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "Region",
+                      "required": false,
+                      "title": "Region",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "PostalCode",
+                      "required": false,
+                      "title": "Postal Code",
+                      "type": "string",
+                      "maxLength": 10
+                    },
+                    {
+                      "property": "Country",
+                      "required": false,
+                      "title": "Country",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "Phone",
+                      "required": false,
+                      "title": "Phone",
+                      "type": "string",
+                      "maxLength": 24
+                    },
+                    {
+                      "property": "Fax",
+                      "required": false,
+                      "title": "Fax",
+                      "type": "string",
+                      "maxLength": 24
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Customer",
+  "layout": "Main"
+}
