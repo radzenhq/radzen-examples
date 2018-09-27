@@ -1,0 +1,28 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "ManyToManyCRUD",
+  "navigation": [
+    "Orders"
+  ],
+  "pages": [
+    "Orders",
+    "Add Order Detail",
+    "Add Order",
+    "Edit Order",
+    "Edit Order Detail"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "Orders",
+  "theme": "default"
+}

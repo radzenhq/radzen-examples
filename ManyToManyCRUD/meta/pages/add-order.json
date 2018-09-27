@@ -1,0 +1,199 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Order!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createOrder",
+                        "parameters": [
+                          {
+                            "name": "Order",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "orders",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "data": "${getCustomersResult}",
+                      "property": "CustomerID",
+                      "required": false,
+                      "textProperty": "CompanyName",
+                      "title": "Customer",
+                      "type": "lookup",
+                      "valueProperty": "CustomerID",
+                      "placeholder": "Choose Customer"
+                    },
+                    {
+                      "data": "${getEmployeesResult}",
+                      "property": "EmployeeID",
+                      "required": false,
+                      "textProperty": "LastName",
+                      "title": "Employee",
+                      "type": "lookup",
+                      "valueProperty": "EmployeeID",
+                      "placeholder": "Choose Employee"
+                    },
+                    {
+                      "property": "OrderDate",
+                      "required": false,
+                      "title": "Order Date",
+                      "type": "date"
+                    },
+                    {
+                      "property": "RequiredDate",
+                      "required": false,
+                      "title": "Required Date",
+                      "type": "date"
+                    },
+                    {
+                      "property": "ShippedDate",
+                      "required": false,
+                      "title": "Shipped Date",
+                      "type": "date"
+                    },
+                    {
+                      "data": "${getShippersResult}",
+                      "property": "ShipVia",
+                      "required": false,
+                      "textProperty": "CompanyName",
+                      "title": "Shipper",
+                      "type": "lookup",
+                      "valueProperty": "ShipperID",
+                      "placeholder": "Choose Shipper"
+                    },
+                    {
+                      "property": "Freight",
+                      "required": false,
+                      "title": "Freight",
+                      "type": "number"
+                    },
+                    {
+                      "property": "ShipName",
+                      "required": false,
+                      "title": "Ship Name",
+                      "type": "string",
+                      "maxLength": 40
+                    },
+                    {
+                      "property": "ShipAddress",
+                      "required": false,
+                      "title": "Ship Address",
+                      "type": "string",
+                      "maxLength": 60
+                    },
+                    {
+                      "property": "ShipCity",
+                      "required": false,
+                      "title": "Ship City",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "ShipRegion",
+                      "required": false,
+                      "title": "Ship Region",
+                      "type": "string",
+                      "maxLength": 15
+                    },
+                    {
+                      "property": "ShipPostalCode",
+                      "required": false,
+                      "title": "Ship Postal Code",
+                      "type": "string",
+                      "maxLength": 10
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "required": false,
+                      "title": "Ship Country",
+                      "type": "string",
+                      "maxLength": 15
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getShippers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getShippersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Add Order",
+  "layout": "Main"
+}

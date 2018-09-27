@@ -1,0 +1,116 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new OrderDetail!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createOrderDetail",
+                        "parameters": [
+                          {
+                            "name": "OrderDetail",
+                            "value": "${Object.assign(event, {OrderID: this.parameters.OrderID})}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "orders",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "data": "${getProductsResult}",
+                      "placeholder": "Choose Product",
+                      "property": "ProductID",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "ProductName",
+                      "title": "Product",
+                      "type": "lookup",
+                      "valueProperty": "ProductID"
+                    },
+                    {
+                      "property": "UnitPrice",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Unit Price",
+                      "type": "number"
+                    },
+                    {
+                      "property": "Quantity",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "Discount",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Discount",
+                      "type": "number"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getProducts",
+        "parameters": [
+          {
+            "name": "$filter",
+            "value": "(OrderDetails/any(d:d/OrderID ne ${parameters.OrderID}))"
+          }
+        ],
+        "then": [
+          {
+            "name": "getProductsResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Order Detail"
+}
