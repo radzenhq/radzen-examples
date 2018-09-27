@@ -1,0 +1,10 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="MainPage">
+  </rz-heading>
+  <rz-dropdown #dropdown0 [data]="types" placeholder="Choose type..." textProperty="text" valueProperty="text" name="dropdown0" (change)="dropdown0Change($event)">
+  </rz-dropdown>
+  <rz-grid #grid0 [data]="data" emptyText="No records to display." addText="Add">
+    <rz-grid-column property="name">
+    </rz-grid-column>
+  </rz-grid>
+</rz-content>

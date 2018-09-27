@@ -1,0 +1,73 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "data": "${types}",
+          "events": {
+            "change": [
+              {
+                "code": "return (<any>this).getData(event.text);",
+                "then": [
+                  {
+                    "condition": "",
+                    "name": "data",
+                    "type": "set",
+                    "value": "${result}"
+                  }
+                ],
+                "type": "execute"
+              }
+            ]
+          },
+          "name": "dropdown0",
+          "placeholder": "Choose type...",
+          "textProperty": "text",
+          "type": "dropdown",
+          "valueProperty": "text"
+        },
+        {
+          "columns": [
+            {
+              "property": "name",
+              "sortProperty": ""
+            }
+          ],
+          "data": "${data}",
+          "name": "grid0",
+          "type": "grid",
+          "emptyText": "No records to display.",
+          "addText": "Add"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "types",
+        "type": "set",
+        "value": "[{text: 'A'}, {text: 'B'}]"
+      },
+      {
+        "condition": "",
+        "name": "data",
+        "type": "set",
+        "value": "[]"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}
