@@ -1,0 +1,26 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "content": "<my-component text=\"Label\" (navigate)=\"onNavigate()\"></my-component>",
+          "name": "html0",
+          "type": "html"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "MainPage"
+}

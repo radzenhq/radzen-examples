@@ -1,0 +1,19 @@
+{
+  "dataSources": [],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "CustomComponent",
+  "navigation": [
+    "MainPage"
+  ],
+  "pages": [
+    "MainPage"
+  ],
+  "startPage": "MainPage",
+  "theme": "default"
+}
