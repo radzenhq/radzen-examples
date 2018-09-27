@@ -1,0 +1,28 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "MasterDetailTwoDataGrid",
+  "navigation": [
+    "Customers"
+  ],
+  "pages": [
+    "Customers",
+    "Add Order",
+    "Add Customer",
+    "Edit Customer",
+    "Edit Order"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "Customers",
+  "theme": "default"
+}

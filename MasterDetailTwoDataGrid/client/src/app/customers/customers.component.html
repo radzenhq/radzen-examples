@@ -1,0 +1,82 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Customers">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getCustomersCount" [data]="getCustomersResult" [(value)]="master" [pageSize]="5" emptyText="No records to display." addText="Add" (loadData)="grid0LoadData($event)" (delete)="grid0Delete($event)" (add)="grid0Add($event)" (rowDoubleClick)="grid0RowDoubleClick($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="CustomerID" title="Customer ID" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="CompanyName" title="Company Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ContactName" title="Contact Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ContactTitle" title="Contact Title" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Address" title="Address" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="City" title="City" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Region" title="Region" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="PostalCode" title="Postal Code" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Country" title="Country" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Phone" title="Phone" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Fax" title="Fax" type="string">
+        </rz-grid-column>
+      </rz-grid>
+      <rz-heading #heading1 size="H1" text="Orders">
+      </rz-heading>
+      <rz-grid #grid1 [data]="Orders" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [pageSize]="5" emptyText="No records to display." addText="Add" (add)="grid1Add($event)" (delete)="grid1Delete($event)" (rowSelect)="grid1RowSelect($event)">
+        <rz-grid-column property="OrderID" title="Order ID" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="CustomerID" sortProperty="Customer.CompanyName" filterProperty="Customer.CompanyName" title="Customer" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Customer?.CompanyName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="EmployeeID" sortProperty="Employee.LastName" filterProperty="Employee.LastName" title="Employee" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Employee?.LastName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="OrderDate" title="Order Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.OrderDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="RequiredDate" title="Required Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.RequiredDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="ShippedDate" title="Shipped Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.ShippedDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="ShipVia" sortProperty="Shipper.CompanyName" filterProperty="Shipper.CompanyName" title="Shipper" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Shipper?.CompanyName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="decimal" property="Freight" title="Freight" type="number">
+        </rz-grid-column>
+        <rz-grid-column property="ShipName" title="Ship Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ShipAddress" title="Ship Address" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ShipCity" title="Ship City" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ShipRegion" title="Ship Region" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ShipPostalCode" title="Ship Postal Code" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ShipCountry" title="Ship Country" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>
