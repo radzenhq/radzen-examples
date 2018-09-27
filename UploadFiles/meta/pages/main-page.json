@@ -1,0 +1,29 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "accept": "",
+          "multiple": true,
+          "name": "upload0",
+          "parameterName": "files",
+          "type": "upload",
+          "url": "http://localhost:5000/upload"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "MainPage"
+}

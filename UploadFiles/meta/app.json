@@ -1,0 +1,22 @@
+{
+  "dataSources": [],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "UploadFiles",
+  "navigation": [
+    "MainPage"
+  ],
+  "pages": [
+    "MainPage"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "MainPage",
+  "theme": "default"
+}
