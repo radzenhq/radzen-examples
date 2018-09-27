@@ -1,0 +1,9 @@
+.env
+.settings
+.vs
+node_modules
+server/**
+client/**
+server/bin
+server/obj
+package.lock.json

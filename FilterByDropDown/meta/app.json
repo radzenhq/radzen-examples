@@ -1,0 +1,22 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "FilterByDropDown",
+  "navigation": [
+    "Orders by Customer"
+  ],
+  "pages": [
+    "Orders by Customer"
+  ],
+  "serverVersion": "1",
+  "startPage": "Orders by Customer",
+  "theme": "default"
+}

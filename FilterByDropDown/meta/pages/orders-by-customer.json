@@ -1,0 +1,165 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Orders by Customer",
+          "type": "heading"
+        },
+        {
+          "data": "${getCustomersResult}",
+          "events": {
+            "change": [
+              {
+                "name": "Northwind.getNorthwindOrders",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "value": "CustomerID eq '${event.CustomerID}'"
+                  }
+                ],
+                "then": [
+                  {
+                    "condition": "",
+                    "name": "orders",
+                    "type": "set",
+                    "value": "${result.value}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "dropdown0",
+          "placeholder": "Choose Customer",
+          "textProperty": "CompanyName",
+          "type": "dropdown"
+        },
+        {
+          "addText": "Add",
+          "columns": [
+            {
+              "format": "int32",
+              "property": "OrderID",
+              "title": "Order ID",
+              "type": "integer"
+            },
+            {
+              "filterProperty": "Customer.CustomerID",
+              "property": "CustomerID",
+              "sortProperty": "Customer.CustomerID",
+              "template": "${data.Customer ? data.Customer.CompanyName : data.CustomerID}",
+              "title": "Customer",
+              "type": "string"
+            },
+            {
+              "filterProperty": "Employee.LastName",
+              "footerTemplate": "",
+              "format": "int32",
+              "property": "EmployeeID",
+              "sortProperty": "Employee.LastName",
+              "template": "${data.Employee ? data.Employee.LastName : data.EmployeeID}",
+              "title": "Employee",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "property": "OrderDate",
+              "template": "${data.OrderDate | utcDate}",
+              "title": "Order Date",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "property": "RequiredDate",
+              "template": "${data.RequiredDate | utcDate}",
+              "title": "Required Date",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "property": "ShippedDate",
+              "template": "${data.ShippedDate | utcDate}",
+              "title": "Shipped Date",
+              "type": "string"
+            },
+            {
+              "filterProperty": "Shipper.CompanyName",
+              "format": "int32",
+              "property": "ShipVia",
+              "sortProperty": "Shipper.CompanyName",
+              "template": "${data.Shipper ? data.Shipper.CompanyName : data.ShipVia}",
+              "title": "Shipper",
+              "type": "string"
+            },
+            {
+              "format": "double",
+              "property": "Freight",
+              "title": "Freight",
+              "type": "number"
+            },
+            {
+              "property": "ShipName",
+              "title": "Ship Name",
+              "type": "string"
+            },
+            {
+              "property": "ShipAddress",
+              "title": "Ship Address",
+              "type": "string"
+            },
+            {
+              "property": "ShipCity",
+              "title": "Ship City",
+              "type": "string"
+            },
+            {
+              "property": "ShipRegion",
+              "title": "Ship Region",
+              "type": "string"
+            },
+            {
+              "property": "ShipPostalCode",
+              "title": "Ship Postal Code",
+              "type": "string"
+            },
+            {
+              "property": "ShipCountry",
+              "title": "Ship Country",
+              "type": "string"
+            }
+          ],
+          "data": "${orders}",
+          "emptyText": "No records to display.",
+          "name": "grid0",
+          "type": "grid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Orders by Customer"
+}
