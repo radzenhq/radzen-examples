@@ -16,8 +16,10 @@
           "allowSorting": true,
           "columns": [
             {
-              "filterValue": "${defaultOrderIDFilterValue}",
+              "filterProperty": "",
+              "filterValue": "${defaultOrderID}",
               "property": "OrderID",
+              "sortProperty": "",
               "title": "Order ID",
               "type": "integer"
             },
@@ -169,7 +171,7 @@
     "load": [
       {
         "condition": "",
-        "name": "defaultOrderIDFilterValue",
+        "name": "defaultOrderID",
         "type": "set",
         "value": "10250"
       },
@@ -194,7 +196,7 @@
           },
           {
             "name": "$filter",
-            "value": "OrderID eq ${defaultOrderIDFilterValue}"
+            "value": "OrderID eq ${defaultOrderID}"
           }
         ],
         "then": [

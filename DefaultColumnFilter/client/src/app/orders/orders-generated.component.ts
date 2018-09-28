@@ -39,7 +39,7 @@ export class OrdersGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   northwind: NorthwindService;
 
-  defaultOrderIDFilterValue: any;
+  defaultOrderID: any;
 
   getOrdersResult: any;
 
@@ -86,9 +86,9 @@ export class OrdersGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
-    this.defaultOrderIDFilterValue = 10250;
+    this.defaultOrderID = 10250;
 
-    this.northwind.getOrders(`OrderID eq ${this.defaultOrderIDFilterValue}`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, this.grid0.allowPaging, `Customer,Employee,Shipper`, null, null)
+    this.northwind.getOrders(`OrderID eq ${this.defaultOrderID}`, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, this.grid0.allowPaging, `Customer,Employee,Shipper`, null, null)
     .subscribe((result: any) => {
       this.getOrdersResult = result.value;
 

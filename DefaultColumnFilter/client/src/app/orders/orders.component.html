@@ -2,7 +2,7 @@
   <rz-heading #pageTitle size="H1" text="Orders">
   </rz-heading>
   <rz-grid #grid0 addText="Add" [allowFiltering]="true" [allowPaging]="true" [allowSorting]="true" [count]="getOrdersCount" [data]="getOrdersResult" emptyText="No records to display." [pageSize]="10" (loadData)="grid0LoadData($event)">
-    <rz-grid-column [filterValue]="defaultOrderIDFilterValue" property="OrderID" title="Order ID" type="integer">
+    <rz-grid-column [filterValue]="defaultOrderID" property="OrderID" title="Order ID" type="integer">
     </rz-grid-column>
     <rz-grid-column filterProperty="Customer.CompanyName" property="CustomerID" sortProperty="Customer.CompanyName" title="Customer" type="string">
       <ng-template let-data gridColumnTemplate>
