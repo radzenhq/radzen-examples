@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="MainPage">
+  </rz-heading>
+  <rz-treegrid #treegrid0 [data]="getEmployeesResult" (nodeExpand)="treegrid0NodeExpand($event)" (nodeLoaded)="treegrid0NodeLoaded($event)">
+    <rz-treegrid-column property="EmployeeID" title="Employee ID">
+    </rz-treegrid-column>
+    <rz-treegrid-column property="LastName" title="Last Name">
+    </rz-treegrid-column>
+    <rz-treegrid-column property="FirstName" title="First Name">
+    </rz-treegrid-column>
+  </rz-treegrid>
+</rz-content>

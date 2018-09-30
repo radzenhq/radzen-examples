@@ -1,0 +1,84 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "columns": [
+            {
+              "property": "EmployeeID",
+              "title": "Employee ID"
+            },
+            {
+              "property": "LastName",
+              "title": "Last Name"
+            },
+            {
+              "property": "FirstName",
+              "title": "First Name"
+            }
+          ],
+          "data": "${getEmployeesResult}",
+          "events": {
+            "nodeExpand": [
+              {
+                "name": "Northwind.getEmployees",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "value": "EmployeeID eq ${event.data.ReportsTo}"
+                  }
+                ],
+                "then": [
+                  {
+                    "code": "${event.children = result.value}",
+                    "condition": "",
+                    "type": "execute"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ],
+            "nodeLoaded": [
+              {
+                "code": "${event.leaf = event.data.ReportsTo == null}",
+                "condition": "",
+                "type": "execute"
+              }
+            ]
+          },
+          "name": "treegrid0",
+          "type": "treegrid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}
