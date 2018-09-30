@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="MainPage">
+  </rz-heading>
+  <rz-tree #tree0 [data]="getCustomersResult" (nodeExpand)="tree0NodeExpand($event)">
+    <rz-tree-level textProperty="CompanyName">
+    </rz-tree-level>
+    <rz-tree-level textProperty="OrderID">
+    </rz-tree-level>
+    <rz-tree-level [leaf]="true" textProperty="ProductID">
+    </rz-tree-level>
+  </rz-tree>
+</rz-content>

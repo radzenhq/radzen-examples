@@ -1,0 +1,97 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "data": "${getCustomersResult}",
+          "events": {
+            "nodeExpand": [
+              {
+                "condition": "event.level == 0",
+                "name": "Northwind.getOrders",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "value": "CustomerID eq '${event.data.CustomerID}'"
+                  }
+                ],
+                "then": [
+                  {
+                    "code": "${event.children = result.value}",
+                    "condition": "",
+                    "type": "execute"
+                  }
+                ],
+                "type": "invoke"
+              },
+              {
+                "condition": "event.level == 1",
+                "name": "Northwind.getOrderDetails",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "value": "OrderID eq ${event.data.OrderID}"
+                  }
+                ],
+                "then": [
+                  {
+                    "code": "${event.children = result.value}",
+                    "condition": "",
+                    "type": "execute"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "levels": [
+            {
+              "schema": "Customer",
+              "textProperty": "CompanyName"
+            },
+            {
+              "schema": "Order",
+              "textProperty": "OrderID"
+            },
+            {
+              "leaf": true,
+              "schema": "OrderDetail",
+              "textProperty": "ProductID"
+            }
+          ],
+          "name": "tree0",
+          "type": "tree"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}
