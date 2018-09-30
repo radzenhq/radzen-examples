@@ -1,0 +1,56 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Categories",
+          "type": "heading"
+        },
+        {
+          "filterBy": "CategoryName",
+          "name": "picklist0",
+          "source": "${getCategoriesResult}",
+          "sourceFilterPlaceholder": "Search...",
+          "sourceHeader": "Categories",
+          "target": "${selectedCategories}",
+          "targetFilterPlaceholder": "Search...",
+          "targetHeader": "Selected categories",
+          "template": "${data.CategoryName}",
+          "type": "picklist",
+          "defaultItemText": "Template for index"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCategories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "condition": "",
+        "name": "selectedCategories",
+        "type": "set",
+        "value": "[]"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}

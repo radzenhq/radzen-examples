@@ -1,0 +1,9 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Categories">
+  </rz-heading>
+  <rz-picklist #picklist0 filterBy="CategoryName" [source]="getCategoriesResult" sourceFilterPlaceholder="Search..." sourceHeader="Categories" [target]="selectedCategories" targetFilterPlaceholder="Search..." targetHeader="Selected categories" defaultItemText="Template for index">
+    <ng-template let-data picklistTemplate>
+    {{data?.CategoryName}}
+    </ng-template>
+  </rz-picklist>
+</rz-content>
