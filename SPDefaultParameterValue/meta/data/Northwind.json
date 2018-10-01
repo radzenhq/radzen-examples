@@ -1,0 +1,781 @@
+{
+  "info": {
+    "title": "Northwind",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 13
+  },
+  "definitions": {
+    "CustOrderHist": {
+      "x-view": "sp",
+      "x-table": "dbo.CustOrderHist",
+      "x-parameters": [
+        {
+          "name": "CustomerID",
+          "type": "string"
+        }
+      ],
+      "resource": "CustOrderHists",
+      "required": [
+        "ProductName"
+      ],
+      "properties": {
+        "ProductName": {
+          "x-key": true,
+          "type": "string",
+          "length": 80
+        },
+        "Total": {
+          "x-key": false,
+          "type": "integer"
+        }
+      }
+    },
+    "CustOrdersDetail": {
+      "x-view": "sp",
+      "x-table": "dbo.CustOrdersDetail",
+      "x-parameters": [
+        {
+          "name": "OrderID",
+          "type": "integer"
+        }
+      ],
+      "resource": "CustOrdersDetails",
+      "required": [
+        "ProductName",
+        "Quantity"
+      ],
+      "properties": {
+        "ProductName": {
+          "x-key": true,
+          "type": "string",
+          "length": 80
+        },
+        "UnitPrice": {
+          "x-key": false,
+          "x-computed": true,
+          "type": "number",
+          "format": "decimal"
+        },
+        "Quantity": {
+          "x-key": false,
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discount": {
+          "x-key": false,
+          "x-computed": true,
+          "type": "integer"
+        },
+        "ExtendedPrice": {
+          "x-key": false,
+          "x-computed": true,
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "CustOrdersOrder": {
+      "x-view": "sp",
+      "x-table": "dbo.CustOrdersOrders",
+      "x-parameters": [
+        {
+          "name": "CustomerID",
+          "type": "string"
+        }
+      ],
+      "resource": "CustOrdersOrders",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "OrderID": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "OrderDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "RequiredDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShippedDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "EmployeeSalesByCountry": {
+      "x-view": "sp",
+      "x-table": "dbo.Employee Sales by Country",
+      "x-parameters": [
+        {
+          "name": "Beginning_Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "name": "Ending_Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      ],
+      "resource": "EmployeeSalesByCountries",
+      "required": [
+        "LastName",
+        "FirstName",
+        "OrderID"
+      ],
+      "properties": {
+        "Country": {
+          "x-key": false,
+          "type": "string",
+          "length": 30
+        },
+        "LastName": {
+          "x-key": true,
+          "type": "string",
+          "length": 40
+        },
+        "FirstName": {
+          "x-key": false,
+          "type": "string",
+          "length": 20
+        },
+        "ShippedDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderID": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "SaleAmount": {
+          "x-key": false,
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "SalesByCategory1": {
+      "x-view": "sp",
+      "x-table": "dbo.SalesByCategory",
+      "x-parameters": [
+        {
+          "name": "CategoryName",
+          "type": "string"
+        },
+        {
+          "name": "OrdYear",
+          "type": "string"
+        }
+      ],
+      "resource": "SalesByCategory1s",
+      "required": [
+        "ProductName"
+      ],
+      "properties": {
+        "ProductName": {
+          "x-key": true,
+          "type": "string",
+          "length": 80
+        },
+        "TotalPurchase": {
+          "x-key": false,
+          "x-computed": true,
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "SalesByYear": {
+      "x-view": "sp",
+      "x-table": "dbo.Sales by Year",
+      "x-parameters": [
+        {
+          "name": "Beginning_Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "name": "Ending_Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      ],
+      "resource": "SalesByYears",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "ShippedDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderID": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "Subtotal": {
+          "x-key": false,
+          "type": "number",
+          "format": "decimal"
+        },
+        "Year": {
+          "x-key": false,
+          "x-computed": true,
+          "type": "string",
+          "length": 60
+        }
+      }
+    },
+    "TenMostExpensiveProduct": {
+      "x-view": "sp",
+      "x-table": "dbo.Ten Most Expensive Products",
+      "resource": "TenMostExpensiveProducts",
+      "required": [
+        "TenMostExpensiveProducts"
+      ],
+      "properties": {
+        "TenMostExpensiveProducts": {
+          "x-key": true,
+          "type": "string",
+          "length": 80
+        },
+        "UnitPrice": {
+          "x-key": false,
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/CustOrderHistsFunc(CustomerID='{CustomerID}')": {
+      "get": {
+        "operationId": "getCustOrderHists",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustOrderHist"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustOrdersDetailsFunc(OrderID={OrderID})": {
+      "get": {
+        "operationId": "getCustOrdersDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustOrdersDetail"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustOrdersOrdersFunc(CustomerID='{CustomerID}')": {
+      "get": {
+        "operationId": "getCustOrdersOrders",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustOrdersOrder"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeSalesByCountriesFunc(Beginning_Date='{Beginning_Date}',Ending_Date='{Ending_Date}')": {
+      "get": {
+        "operationId": "getEmployeeSalesByCountries",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Beginning_Date",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "Ending_Date",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/EmployeeSalesByCountry"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SalesByCategory1sFunc(CategoryName='{CategoryName}',OrdYear='{OrdYear}')": {
+      "get": {
+        "operationId": "getSalesByCategory1s",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CategoryName",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "OrdYear",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SalesByCategory1"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SalesByYearsFunc(Beginning_Date='{Beginning_Date}',Ending_Date='{Ending_Date}')": {
+      "get": {
+        "operationId": "getSalesByYears",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Beginning_Date",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "Ending_Date",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SalesByYear"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/TenMostExpensiveProductsFunc()": {
+      "get": {
+        "operationId": "getTenMostExpensiveProducts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/TenMostExpensiveProduct"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/Northwind",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "name": "Northwind.getCustOrderHists",
+                "then": [
+                  {
+                    "condition": "",
+                    "name": "orders",
+                    "type": "set",
+                    "value": "${result.value}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "button0",
+          "text": "Customer Orders",
+          "type": "button"
+        },
+        {
+          "columns": [
+            {
+              "property": "ProductName",
+              "title": "Product Name",
+              "type": "string"
+            },
+            {
+              "property": "Total",
+              "title": "Total",
+              "type": "integer"
+            }
+          ],
+          "data": "${orders}",
+          "name": "grid0",
+          "type": "grid",
+          "emptyText": "No records to display.",
+          "addText": "Add"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "MainPage"
+}
