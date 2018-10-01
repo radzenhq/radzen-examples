@@ -1,0 +1,36 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MaiPage",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "code": "(<any>this).getFile('ProductSales.pdf');",
+                "condition": "",
+                "type": "execute"
+              }
+            ]
+          },
+          "icon": "",
+          "name": "button0",
+          "text": "Download file",
+          "type": "button"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "MainPage"
+}
