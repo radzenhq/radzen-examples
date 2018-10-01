@@ -1,0 +1,28 @@
+<rz-content #content1 container="main">
+  <div [ngStyle]="{}" class="row">
+    <div class="col-md-9">
+      <rz-label #closeLabel [style]="{'fontWeight':'bold'}" text="Item no longer available." *ngIf="!canEdit">
+      </rz-label>
+    </div>
+    <div class="col-md-3">
+      <rz-button #closeButton buttonStyle="secondary" [style]="{'marginBottom':'20px'}" text="Close" *ngIf="!canEdit" (click)="closeButtonClick($event)">
+      </rz-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="orderdetail" *ngIf="canEdit" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-lookup-form-field [data]="getOrdersResult" property="OrderID" [required]="true" textProperty="CustomerID" title="Order" valueProperty="OrderID" placeholder="Choose Order" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-lookup-form-field [data]="getProductsResult" property="ProductID" [required]="true" textProperty="ProductName" title="Product" valueProperty="ProductID" placeholder="Choose Product" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-number-form-field property="UnitPrice" [required]="false" title="Unit Price" requiredText="is required" type="number">
+        </rz-number-form-field>
+        <rz-integer-form-field property="Quantity" [required]="false" title="Quantity" requiredText="is required" type="integer">
+        </rz-integer-form-field>
+        <rz-number-form-field property="Discount" [required]="false" title="Discount" requiredText="is required" type="number">
+        </rz-number-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

@@ -1,0 +1,85 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Shipper!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createShipper",
+                        "parameters": [
+                          {
+                            "name": "Shipper",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "shippers",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "CompanyName",
+                      "required": true,
+                      "title": "Company Name",
+                      "type": "string",
+                      "maxLength": 40,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Phone",
+                      "required": false,
+                      "title": "Phone",
+                      "type": "string",
+                      "maxLength": 24,
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Shipper",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

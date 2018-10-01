@@ -1,0 +1,36 @@
+<rz-content #content1 container="main">
+  <div [ngStyle]="{}" class="row">
+    <div class="col-md-9">
+      <rz-label #closeLabel [style]="{'fontWeight':'bold'}" text="Item no longer available." *ngIf="!canEdit">
+      </rz-label>
+    </div>
+    <div class="col-md-3">
+      <rz-button #closeButton buttonStyle="secondary" [style]="{'marginBottom':'20px'}" text="Close" *ngIf="!canEdit" (click)="closeButtonClick($event)">
+      </rz-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="product" *ngIf="canEdit" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="ProductName" [required]="true" title="Product Name" [maxLength]="40" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-lookup-form-field [data]="getSuppliersResult" property="SupplierID" [required]="false" textProperty="CompanyName" title="Supplier" valueProperty="SupplierID" placeholder="Choose Supplier" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-lookup-form-field [data]="getCategoriesResult" property="CategoryID" [required]="false" textProperty="CategoryName" title="Category" valueProperty="CategoryID" placeholder="Choose Category" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-string-form-field property="QuantityPerUnit" [required]="false" title="Quantity Per Unit" [maxLength]="20" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-number-form-field property="UnitPrice" [required]="false" title="Unit Price" requiredText="is required" type="number">
+        </rz-number-form-field>
+        <rz-integer-form-field property="UnitsInStock" [required]="false" title="Units In Stock" requiredText="is required" type="integer">
+        </rz-integer-form-field>
+        <rz-integer-form-field property="UnitsOnOrder" [required]="false" title="Units On Order" requiredText="is required" type="integer">
+        </rz-integer-form-field>
+        <rz-integer-form-field property="ReorderLevel" [required]="false" title="Reorder Level" requiredText="is required" type="integer">
+        </rz-integer-form-field>
+        <rz-boolean-form-field property="Discontinued" [required]="false" title="Discontinued" requiredText="is required" type="boolean">
+        </rz-boolean-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

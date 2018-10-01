@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-integer-form-field property="RegionID" [required]="true" title="Region ID" requiredText="is required" type="integer">
+        </rz-integer-form-field>
+        <rz-string-form-field property="RegionDescription" [required]="true" title="Region Description" [maxLength]="50" requiredText="is required" type="string">
+        </rz-string-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

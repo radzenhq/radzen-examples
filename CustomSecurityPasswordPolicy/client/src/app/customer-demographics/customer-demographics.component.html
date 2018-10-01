@@ -1,0 +1,14 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Customer Demographics">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getCustomerDemographicsCount" [data]="getCustomerDemographicsResult" emptyText="No records to display." addText="Add" (loadData)="grid0LoadData($event)" (delete)="grid0Delete($event)" (add)="grid0Add($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="CustomerTypeID" title="Customer Type ID" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="CustomerDesc" title="Customer Desc" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

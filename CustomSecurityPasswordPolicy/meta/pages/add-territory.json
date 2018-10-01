@@ -1,0 +1,109 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Territory!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createTerritory",
+                        "parameters": [
+                          {
+                            "name": "Territory",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "territories",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "TerritoryID",
+                      "required": true,
+                      "title": "Territory ID",
+                      "type": "string",
+                      "maxLength": 20,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "TerritoryDescription",
+                      "required": true,
+                      "title": "Territory Description",
+                      "type": "string",
+                      "maxLength": 50,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getRegionsResult}",
+                      "property": "RegionID",
+                      "required": true,
+                      "textProperty": "RegionDescription",
+                      "title": "Region",
+                      "type": "lookup",
+                      "valueProperty": "RegionID",
+                      "placeholder": "Choose Region",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getRegions",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getRegionsResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Add Territory",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

@@ -1,0 +1,18 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Categories">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getCategoriesCount" [data]="getCategoriesResult" emptyText="No records to display." addText="Add" (loadData)="grid0LoadData($event)" (delete)="grid0Delete($event)" (add)="grid0Add($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="CategoryID" title="Category ID" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="CategoryName" title="Category Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Description" title="Description" type="string">
+        </rz-grid-column>
+        <rz-grid-column format="binary" property="Picture" title="Picture" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

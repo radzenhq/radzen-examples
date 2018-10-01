@@ -1,0 +1,243 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${supplier}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Supplier",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateSupplier",
+                        "parameters": [
+                          {
+                            "name": "SupplierID",
+                            "value": "${parameters.SupplierID}"
+                          },
+                          {
+                            "name": "Supplier",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "CompanyName",
+                      "required": true,
+                      "title": "Company Name",
+                      "type": "string",
+                      "maxLength": 40,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ContactName",
+                      "required": false,
+                      "title": "Contact Name",
+                      "type": "string",
+                      "maxLength": 30,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ContactTitle",
+                      "required": false,
+                      "title": "Contact Title",
+                      "type": "string",
+                      "maxLength": 30,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Address",
+                      "required": false,
+                      "title": "Address",
+                      "type": "string",
+                      "maxLength": 60,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "City",
+                      "required": false,
+                      "title": "City",
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Region",
+                      "required": false,
+                      "title": "Region",
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "required": false,
+                      "title": "Postal Code",
+                      "type": "string",
+                      "maxLength": 10,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Country",
+                      "required": false,
+                      "title": "Country",
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Phone",
+                      "required": false,
+                      "title": "Phone",
+                      "type": "string",
+                      "maxLength": 24,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Fax",
+                      "required": false,
+                      "title": "Fax",
+                      "type": "string",
+                      "maxLength": 24,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "HomePage",
+                      "required": false,
+                      "title": "Home Page",
+                      "type": "string",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getSupplierBySupplierID",
+        "parameters": [
+          {
+            "name": "SupplierID",
+            "value": "${parameters.SupplierID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "supplier",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Supplier",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}
