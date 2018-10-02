@@ -1,0 +1,21 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "FilterByMultipleFields",
+  "navigation": [
+    "Customers"
+  ],
+  "pages": [
+    "Customers"
+  ],
+  "startPage": "Customers",
+  "theme": "default"
+}

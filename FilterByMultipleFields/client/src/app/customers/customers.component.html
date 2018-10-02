@@ -1,0 +1,64 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Customers">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-2">
+          <rz-label #label0 component="textbox0" [style]="{'textAlign':'left'}" text="City">
+          </rz-label>
+        </div>
+        <div class="col-md-10">
+          <rz-textbox #textbox0 [style]="{'width':'100%'}" name="textbox0" (change)="textbox0Change($event)">
+          </rz-textbox>
+        </div>
+      </div>
+      <div [ngStyle]="{'marginTop':'10px'}" class="row">
+        <div class="col-md-2">
+          <rz-label #label1 component="textbox1" text="Country">
+          </rz-label>
+        </div>
+        <div class="col-md-10">
+          <rz-textbox #textbox1 [style]="{'width':'100%'}" name="textbox1" (change)="textbox1Change($event)">
+          </rz-textbox>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <rz-dropdown #dropdown0 [data]="operators" [style]="{'display':'block','width':'70px'}" textProperty="name" [(ngModel)]="operator" valueProperty="value" name="dropdown0" (change)="dropdown0Change($event)">
+      </rz-dropdown>
+      <rz-button #button0 [style]="{'marginTop':'10px'}" text="Search" (click)="button0Click($event)">
+      </rz-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-fieldset #fieldset0 text="Customers">
+        <rz-grid #customersGrid addText="Add" [allowFiltering]="true" [allowPaging]="true" [allowSorting]="true" [count]="getCustomersCount" [data]="getCustomersResult" emptyText="No records to display." [pageSize]="10" (loadData)="customersGridLoadData($event)">
+          <rz-grid-column property="CustomerID" title="Customer ID" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="CompanyName" title="Company Name" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="ContactName" title="Contact Name" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="ContactTitle" title="Contact Title" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="Address" title="Address" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="City" title="City" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="Region" title="Region" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="PostalCode" title="Postal Code" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="Country" title="Country" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="Phone" title="Phone" type="string">
+          </rz-grid-column>
+          <rz-grid-column property="Fax" title="Fax" type="string">
+          </rz-grid-column>
+        </rz-grid>
+      </rz-fieldset>
+    </div>
+  </div>
+</rz-content>
