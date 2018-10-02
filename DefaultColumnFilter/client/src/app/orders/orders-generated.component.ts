@@ -99,7 +99,9 @@ export class OrdersGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   grid0LoadData(event: any) {
-    this.northwind.getOrders(`${event.filter}`, event.top, event.skip, `${event.orderby}`, event.top != null && event.skip != null, `Customer,Employee,Shipper`, null, null)
+    this.defaultOrderID = this.grid0.columns.first.filterValue;
+
+    this.northwind.getOrders(`${event.filter ? event.filter + ' and ' : ''}${this.defaultOrderID ? 'OrderID eq ' + this.defaultOrderID : ''}`, event.top, event.skip, `${event.orderby}`, event.top != null && event.skip != null, `Customer,Employee,Shipper`, null, null)
     .subscribe((result: any) => {
       this.getOrdersResult = result.value;
 

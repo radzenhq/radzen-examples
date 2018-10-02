@@ -111,6 +111,12 @@
           "events": {
             "loadData": [
               {
+                "condition": "",
+                "name": "defaultOrderID",
+                "type": "set",
+                "value": "this.grid0.columns.first.filterValue"
+              },
+              {
                 "name": "Northwind.getOrders",
                 "parameters": [
                   {
@@ -131,7 +137,7 @@
                   },
                   {
                     "name": "$filter",
-                    "value": "${event.filter}"
+                    "value": "${event.filter ? event.filter + ' and ':''}${this.defaultOrderID ? 'OrderID eq ' + this.defaultOrderID : ''}"
                   },
                   {
                     "name": "$orderby",
