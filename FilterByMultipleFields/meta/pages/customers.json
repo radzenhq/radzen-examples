@@ -256,7 +256,7 @@
                               },
                               {
                                 "name": "$filter",
-                                "value": "${this.filter(event.filter)}"
+                                "value": "${(<any>this).filter(event.filter)}"
                               },
                               {
                                 "name": "$orderby",

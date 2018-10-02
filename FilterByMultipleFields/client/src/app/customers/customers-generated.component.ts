@@ -135,7 +135,7 @@ export class CustomersGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   customersGridLoadData(event: any) {
-    this.northwind.getCustomers(`${this.filter(event.filter)}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
+    this.northwind.getCustomers(`${(<any>this).filter(event.filter)}`, event.top, event.skip, `${event.orderby}`, ``, event.top != null && event.skip != null)
     .subscribe((result: any) => {
       this.getCustomersResult = result.value;
 
