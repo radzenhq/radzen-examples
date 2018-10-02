@@ -1,0 +1,137 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new OrderDetail!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createOrderDetail",
+                        "parameters": [
+                          {
+                            "name": "OrderDetail",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "order-details",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "data": "${getOrdersResult}",
+                      "property": "OrderID",
+                      "required": true,
+                      "textProperty": "CustomerID",
+                      "title": "Order",
+                      "type": "lookup",
+                      "valueProperty": "OrderID",
+                      "placeholder": "Choose Order",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getProductsResult}",
+                      "property": "ProductID",
+                      "required": true,
+                      "textProperty": "ProductName",
+                      "title": "Product",
+                      "type": "lookup",
+                      "valueProperty": "ProductID",
+                      "placeholder": "Choose Product",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitPrice",
+                      "required": false,
+                      "title": "Unit Price",
+                      "type": "number",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Quantity",
+                      "required": false,
+                      "title": "Quantity",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Discount",
+                      "required": false,
+                      "title": "Discount",
+                      "type": "number",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getOrders",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOrdersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getProducts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getProductsResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Add Order Detail",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

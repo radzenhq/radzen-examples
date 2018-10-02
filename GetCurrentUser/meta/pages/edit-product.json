@@ -1,0 +1,253 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${product}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Product",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateProduct",
+                        "parameters": [
+                          {
+                            "name": "ProductID",
+                            "value": "${parameters.ProductID}"
+                          },
+                          {
+                            "name": "Product",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "ProductName",
+                      "required": true,
+                      "title": "Product Name",
+                      "type": "string",
+                      "maxLength": 40,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getSuppliersResult}",
+                      "property": "SupplierID",
+                      "required": false,
+                      "textProperty": "CompanyName",
+                      "title": "Supplier",
+                      "type": "lookup",
+                      "valueProperty": "SupplierID",
+                      "placeholder": "Choose Supplier",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "data": "${getCategoriesResult}",
+                      "property": "CategoryID",
+                      "required": false,
+                      "textProperty": "CategoryName",
+                      "title": "Category",
+                      "type": "lookup",
+                      "valueProperty": "CategoryID",
+                      "placeholder": "Choose Category",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "QuantityPerUnit",
+                      "required": false,
+                      "title": "Quantity Per Unit",
+                      "type": "string",
+                      "maxLength": 20,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitPrice",
+                      "required": false,
+                      "title": "Unit Price",
+                      "type": "number",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitsInStock",
+                      "required": false,
+                      "title": "Units In Stock",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "UnitsOnOrder",
+                      "required": false,
+                      "title": "Units On Order",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ReorderLevel",
+                      "required": false,
+                      "title": "Reorder Level",
+                      "type": "integer",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Discontinued",
+                      "required": false,
+                      "title": "Discontinued",
+                      "type": "boolean",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getProductByProductID",
+        "parameters": [
+          {
+            "name": "ProductID",
+            "value": "${parameters.ProductID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "product",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getSuppliers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSuppliersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getCategories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Product",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

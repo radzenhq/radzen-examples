@@ -1,0 +1,30 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="CustomerID" [required]="true" title="Customer ID" [maxLength]="5" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="CompanyName" [required]="true" title="Company Name" [maxLength]="40" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="ContactName" [required]="false" title="Contact Name" [maxLength]="30" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="ContactTitle" [required]="false" title="Contact Title" [maxLength]="30" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Address" [required]="false" title="Address" [maxLength]="60" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="City" [required]="false" title="City" [maxLength]="15" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Region" [required]="false" title="Region" [maxLength]="15" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="PostalCode" [required]="false" title="Postal Code" [maxLength]="10" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Country" [required]="false" title="Country" [maxLength]="15" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Phone" [required]="false" title="Phone" [maxLength]="24" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Fax" [required]="false" title="Fax" [maxLength]="24" requiredText="is required" type="string">
+        </rz-string-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

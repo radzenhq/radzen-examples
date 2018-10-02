@@ -1,0 +1,14 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="TerritoryID" [required]="true" title="Territory ID" [maxLength]="20" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="TerritoryDescription" [required]="true" title="Territory Description" [maxLength]="50" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-lookup-form-field [data]="getRegionsResult" property="RegionID" [required]="true" textProperty="RegionDescription" title="Region" valueProperty="RegionID" placeholder="Choose Region" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>
