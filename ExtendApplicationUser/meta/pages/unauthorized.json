@@ -1,0 +1,35 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Unauthorized"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "content": "The current user is not authorized to see this page.",
+                  "name": "html0",
+                  "type": "html"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "name": "Unauthorized",
+  "layout": "Main"
+}

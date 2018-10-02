@@ -1,0 +1,118 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot add user",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Security.createUser",
+                        "parameters": [
+                          {
+                            "name": "User",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Email",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    {
+                      "data": "${roles}",
+                      "multiple": true,
+                      "property": "RoleNames",
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Roles",
+                      "type": "lookup",
+                      "valueProperty": "Name"
+                    },
+                    {
+                      "property": "Password",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Password",
+                      "type": "password"
+                    },
+                    {
+                      "compare": "Password",
+                      "property": "ConfirmPassword",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Confirm password",
+                      "type": "password"
+                    },
+                    {
+                      "property": "Country",
+                      "requiredText": "is required",
+                      "title": "Country",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "submitText": "Save",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Security.getRoles",
+        "then": [
+          {
+            "name": "roles",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Application User"
+}

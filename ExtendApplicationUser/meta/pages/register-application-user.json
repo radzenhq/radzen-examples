@@ -1,0 +1,94 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot register user",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Security.registerUser",
+                        "parameters": [
+                          {
+                            "name": "User",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Email",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Password",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Password",
+                      "type": "password"
+                    },
+                    {
+                      "compare": "Password",
+                      "property": "ConfirmPassword",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Confirm password",
+                      "type": "password"
+                    },
+                    {
+                      "defaultValue": "",
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "submitText": "Register",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Register Application User"
+}
