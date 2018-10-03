@@ -1,0 +1,20 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="New Releases">
+  </rz-heading>
+  <rz-grid #grid0 [data]="releases" emptyText="No records to display." addText="Add" (rowSelect)="grid0RowSelect($event)">
+    <rz-grid-column property="images" title="Image" type="array">
+      <ng-template let-data gridColumnTemplate>
+      <img src="{{(data?.images || {})[2]?.url}}">
+      </ng-template>
+    </rz-grid-column>
+    <rz-grid-column property="name" title="Name" type="string">
+    </rz-grid-column>
+    <rz-grid-column property="artists" title="Artist" type="array">
+      <ng-template let-data gridColumnTemplate>
+      {{(data?.artists || {})[0]?.name}}
+      </ng-template>
+    </rz-grid-column>
+    <rz-grid-column property="album_type" title="Type" type="string">
+    </rz-grid-column>
+  </rz-grid>
+</rz-content>

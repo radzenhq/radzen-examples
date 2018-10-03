@@ -1,0 +1,27 @@
+{
+  "dataSources": [
+    "Spotify"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Main",
+    "Login"
+  ],
+  "logo": "",
+  "name": "Spotify Player",
+  "navigation": [
+    "New Releases"
+  ],
+  "pages": [
+    "New Releases",
+    "Tracks"
+  ],
+  "port": 8000,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": false,
+  "serverVersion": "2",
+  "startPage": "New Releases",
+  "theme": "default"
+}
