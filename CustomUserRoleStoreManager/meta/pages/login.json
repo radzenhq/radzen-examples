@@ -1,0 +1,70 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Login"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "login": [
+                      {
+                        "name": "Security.login",
+                        "parameters": [
+                          {
+                            "name": "username",
+                            "value": "${event.username}"
+                          },
+                          {
+                            "name": "password",
+                            "value": "${event.password}"
+                          }
+                        ],
+                        "type": "invoke",
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ]
+                      }
+                    ],
+                    "register": [
+                      {
+                        "path": "register-application-user",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "allowResetPassword": false,
+                  "name": "login0",
+                  "type": "login"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Login",
+  "layout": "Login"
+}
