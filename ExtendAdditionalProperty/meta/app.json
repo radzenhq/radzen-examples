@@ -1,0 +1,26 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "ExtendAdditionalProperty",
+  "navigation": [
+    "Order Details"
+  ],
+  "pages": [
+    "Order Details",
+    "Add Order Detail",
+    "Edit Order Detail"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "Order Details",
+  "theme": "default"
+}
