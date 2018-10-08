@@ -22,10 +22,11 @@ namespace ExtendAdditionalProperty.Controllers.Northwind
     {
         partial void OnOrderDetailsRead(ref IQueryable<Models.Northwind.OrderDetail> items)
         {
+            var orderDetailsExtended = this.context.OrderDetailsExtendeds.ToList();
             // Populate additional property
             foreach (var item in items)
             {
-                var orderDetailExtended = this.context.OrderDetailsExtendeds
+                var orderDetailExtended = orderDetailsExtended
                   .Where(ode => ode.OrderID == item.OrderID && ode.ProductID == item.ProductID)
                   .FirstOrDefault();
 
