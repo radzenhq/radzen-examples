@@ -1,0 +1,154 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "allowFiltering": true,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "property": "OrderID",
+              "title": "Order ID",
+              "type": "integer"
+            },
+            {
+              "property": "ProductID",
+              "title": "Product ID",
+              "type": "integer"
+            },
+            {
+              "property": "ProductName",
+              "title": "Product Name",
+              "type": "string"
+            },
+            {
+              "format": "decimal",
+              "property": "UnitPrice",
+              "title": "Unit Price",
+              "type": "number"
+            },
+            {
+              "format": "int16",
+              "property": "Quantity",
+              "title": "Quantity",
+              "type": "integer"
+            },
+            {
+              "format": "float",
+              "property": "Discount",
+              "title": "Discount",
+              "type": "number"
+            },
+            {
+              "format": "decimal",
+              "property": "ExtendedPrice",
+              "title": "Extended Price",
+              "type": "number"
+            }
+          ],
+          "count": "${getOrderDetailsExtendedsCount}",
+          "data": "${getOrderDetailsExtendedsResult}",
+          "events": {
+            "loadData": [
+              {
+                "name": "Northwind.getOrderDetailsExtendeds",
+                "parameters": [
+                  {
+                    "name": "$top",
+                    "value": "event.top"
+                  },
+                  {
+                    "name": "$skip",
+                    "value": "event.skip"
+                  },
+                  {
+                    "name": "$expand",
+                    "value": ""
+                  },
+                  {
+                    "name": "$count",
+                    "value": "event.top != null && event.skip != null"
+                  },
+                  {
+                    "name": "$filter",
+                    "value": "${event.filter}"
+                  },
+                  {
+                    "name": "$orderby",
+                    "value": "${event.orderby}"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getOrderDetailsExtendedsResult",
+                    "type": "set",
+                    "value": "${result.value}"
+                  },
+                  {
+                    "name": "getOrderDetailsExtendedsCount",
+                    "type": "set",
+                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "grid0",
+          "pageSize": 10,
+          "type": "grid",
+          "emptyText": "No records to display.",
+          "addText": "Add"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getOrderDetailsExtendeds",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getOrderDetailsExtendedsResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getOrderDetailsExtendedsCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}
