@@ -1,0 +1,7 @@
+C:\Users\vladi\.nuget\packages\microsoft.aspnetcore.blazor\0.6.0\lib\netstandard2.0\Microsoft.AspNetCore.Blazor.dll
+C:\Users\vladi\.nuget\packages\microsoft.aspnetcore.blazor.browser\0.6.0\lib\netstandard2.0\Microsoft.AspNetCore.Blazor.Browser.dll
+C:\Users\vladi\.nuget\packages\microsoft.aspnetcore.blazor.build\0.6.0\lib\netstandard1.0\Microsoft.AspNetCore.Blazor.TagHelperWorkaround.dll
+C:\Users\vladi\.nuget\packages\microsoft.extensions.dependencyinjection\2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\vladi\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\vladi\.nuget\packages\microsoft.jsinterop\0.6.0\lib\netstandard2.0\Microsoft.JSInterop.dll
+C:\Users\vladi\.nuget\packages\mono.webassembly.interop\0.6.0\lib\netstandard2.0\Mono.WebAssembly.Interop.dll
