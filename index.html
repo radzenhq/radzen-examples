@@ -2,7 +2,9 @@
   
   <script>
   if(/Android/.test(navigator.appVersion)){
+    alert('Android');
    window.addEventListener("resize", function(){
+     alert('resize');
       if (document.activeElement.tagName == "INPUT"){
          window.setTimeout(function(){
             document.activeElement.scrollIntoViewIfNeeded();
