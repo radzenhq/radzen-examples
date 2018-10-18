@@ -3,7 +3,7 @@
   <script>
   if(/Android/.test(navigator.appVersion)){
    window.addEventListener("resize", function(){
-     if (document.activeElement.tagName == "INPUT"){
+     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA"){
          window.setTimeout(function(){
             document.activeElement.scrollIntoView();
          },0);
@@ -15,6 +15,7 @@
     @media (max-width: 768px) {
        .ui-dialog {
            top: 0 !important;
+           height: 100% !important;
         }
     }
   </style>
