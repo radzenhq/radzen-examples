@@ -4,9 +4,10 @@
   if(/Android/.test(navigator.appVersion)){
     alert(navigator.appVersion);
    window.addEventListener("resize", function(){
-     alert('resize');
-      if (document.activeElement.tagName == "INPUT"){
+     if (document.activeElement.tagName == "INPUT"){
          window.setTimeout(function(){
+            alert('scrolling ...');
+      
             document.activeElement.scrollIntoView();
          },0);
       }
