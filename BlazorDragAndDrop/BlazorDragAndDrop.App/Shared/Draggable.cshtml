@@ -1,0 +1,21 @@
+@typeparam T
+@using BlazorDragAndDrop.App.Services
+@inject DragAndDropService DragAndDropService
+<div draggable="true" ondragstart="@OnDragStart">
+    @ChildContent
+</div>
+@functions {
+    [Parameter]
+    RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    string Zone { get; set; }
+
+    [Parameter]
+    T Data { get; set;}
+
+    void OnDragStart()
+    {
+        DragAndDropService.StartDrag(Data, Zone);
+    }
+}
