@@ -1,0 +1,21 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "HighCharts",
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "startPage": null,
+  "theme": "default"
+}

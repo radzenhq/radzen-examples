@@ -1,0 +1,42 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "content": "<high-charts value=\"ProductPrice\" category=\"ProductName\" type=\"column\" [data]=\"products\">\n</high-charts>",
+          "name": "html0",
+          "type": "html"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "condition": "",
+        "name": "Sample.getProducts",
+        "then": [
+          {
+            "name": "products",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Home"
+}
