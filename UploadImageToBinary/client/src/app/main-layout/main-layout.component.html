@@ -1,0 +1,27 @@
+<rz-header #header0>
+  <div class="row justify-content-start align-items-center">
+    <div class="col-md-6 d-flex align-items-center">
+      <rz-sidebar-toggle #sidebarToggle0>
+      </rz-sidebar-toggle>
+      <rz-label #label0 text="MyApp">
+      </rz-label>
+    </div>
+    <div class="col-md-6 text-lg-right">
+    </div>
+  </div>
+</rz-header>
+<rz-body #body0>
+  <rz-content-container #main name="main">
+  </rz-content-container>
+</rz-body>
+<rz-sidebar #sidebar0>
+  <rz-panelmenu #panelmenu0 [style]="{'height':'100%'}">
+    <rz-panelmenu-item text="Products" path="products">
+    </rz-panelmenu-item>
+  </rz-panelmenu>
+</rz-sidebar>
+<rz-footer #footer0>
+  <rz-label #footerText text="MyApp, Copyright &copy; 2018">
+  </rz-label>
+</rz-footer>
+<router-outlet></router-outlet>

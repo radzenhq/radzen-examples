@@ -1,0 +1,26 @@
+{
+  "dataSources": [
+    "Test"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "MyApp",
+  "navigation": [
+    "Products"
+  ],
+  "pages": [
+    "Products",
+    "Add Product",
+    "Edit Product"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "Products",
+  "theme": "default"
+}
