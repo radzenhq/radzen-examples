@@ -1,0 +1,42 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "ignore": [
+    "client\\src\\environments\\environment.ts",
+    "client\\src\\environments\\environment.prod.ts",
+    "server\\Program.cs",
+    "server\\Data\\SampleContext.cs"
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "MultiTenantSample",
+  "navigation": [
+    "Orders",
+    "Order Details",
+    "Products"
+  ],
+  "pages": [
+    "Orders",
+    "Add Order",
+    "Edit Order",
+    "Order Details",
+    "Add Order Detail",
+    "Edit Order Detail",
+    "Products",
+    "Add Product",
+    "Edit Product"
+  ],
+  "port": 8000,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "Orders",
+  "theme": "default"
+}
