@@ -6,7 +6,6 @@
   "https": false,
   "ignore": [
     "client\\src\\environments\\environment.ts",
-    "client\\src\\environments\\environment.prod.ts",
     "server\\Program.cs",
     "server\\Data\\SampleContext.cs"
   ],
