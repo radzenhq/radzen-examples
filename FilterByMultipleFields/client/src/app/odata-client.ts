@@ -53,6 +53,14 @@ function updateCount(result, amount) {
   }
 }
 
+function errorResponse(response) {
+  if (response.status == 0) {
+    return { ...response, error: { message: response.statusText } };
+  } else {
+    return { ...response, ...response.error };
+  }
+}
+
 export class ODataClient {
   cache: { [resource: string]: { result: BehaviorSubject<any> } } = {};
 
@@ -258,7 +266,7 @@ export class ODataClient {
       this.downloadFile(response, `Export.${odataParams.format}`)
     })
     .catch(response => {
-      return Observable.throw(response);
+      return Observable.throw(errorResponse(response));
     });
   }
 
@@ -287,7 +295,7 @@ export class ODataClient {
       withCredentials: this.options.withCredentials
     })
     .catch(response => {
-      return Observable.throw(response);
+      return Observable.throw(errorResponse(response));
     });
   }
 

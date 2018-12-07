@@ -131,6 +131,8 @@ export class CustomersGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   button0Click(event: any) {
+    this.customersGrid.skip = 0;
+
     this.customersGrid.callLoadData();
   }
 

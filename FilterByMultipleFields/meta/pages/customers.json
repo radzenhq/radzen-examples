@@ -140,6 +140,10 @@
                   "events": {
                     "click": [
                       {
+                        "code": "this.customersGrid.skip = 0;",
+                        "type": "execute"
+                      },
+                      {
                         "code": "this.customersGrid.callLoadData();",
                         "type": "execute"
                       }
