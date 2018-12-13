@@ -1,0 +1,81 @@
+﻿@using WebApplication1.App.Services
+@using NorthwindBlazor.Data
+@using NorthwindBlazor.Models.Northwind
+@using System.Linq
+@using Microsoft.EntityFrameworkCore
+@page "/fetchdata"
+
+<h1>Products</h1>
+
+<p>This component demonstrates fetching data from the server using IQueryable.</p>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <RadzenGrid AllowPaging="true" AllowSorting="true" Data="@products" TItem="Product">
+        <Columns>
+            <RadzenGridColumn TItem="Product" Context="data" Property="ProductID" Title="Product ID" Type="integer">
+                <Template>
+                    @data.ProductID
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Property="ProductName" Title="Product Name" Type="string">
+                <Template>
+                    @data.ProductName
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Property="SupplierID" SortProperty="Supplier.CompanyName" Title="Supplier" Type="string">
+                <Template>
+                    @data.Supplier?.CompanyName
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Property="CategoryID" SortProperty="Category.CategoryName" Title="Category" Type="string">
+                <Template>
+                    @data.Category?.CategoryName
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Property="QuantityPerUnit" Title="Quantity Per Unit" Type="string">
+                <Template>
+                    @data.QuantityPerUnit
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+                <Template>
+                    @data.UnitPrice
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Format="int16" Property="UnitsInStock" Title="Units In Stock" Type="integer">
+                <Template>
+                    @data.UnitsInStock
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Format="int16" Property="UnitsOnOrder" Title="Units On Order" Type="integer">
+                <Template>
+                    @data.UnitsOnOrder
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Format="int16" Property="ReorderLevel" Title="Reorder Level" Type="integer">
+                <Template>
+                    @data.ReorderLevel
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Product" Context="data" Property="Discontinued" Title="Discontinued" Type="boolean">
+                <Template>
+                    @data.Discontinued
+                </Template>
+            </RadzenGridColumn>
+        </Columns>
+    </RadzenGrid>
+}
+
+@functions {
+    IQueryable<Product> products;
+
+    protected override async Task OnInitAsync()
+    {
+        products = await Task.FromResult(new NorthwindContext().Products.Include(p => p.Supplier).Include(p => p.Category).AsQueryable());
+    }
+}
