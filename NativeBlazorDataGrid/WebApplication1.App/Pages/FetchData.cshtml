@@ -1,8 +1,7 @@
-﻿@using WebApplication1.App.Services
-@using WebApplication1.App.Northwind
-@using System.Linq
-@using Microsoft.EntityFrameworkCore
+﻿@using WebApplication1.App.Northwind
 @page "/fetchdata"
+
+@inject NorthwindContext context
 
 <h1>Products</h1>
 
@@ -75,6 +74,6 @@ IQueryable<Product> products;
 
 protected override async Task OnInitAsync()
 {
-    products = await Task.FromResult(new NorthwindContext().Products.AsQueryable());
+    products = await Task.FromResult(context.Products.AsQueryable());
 }
 }
