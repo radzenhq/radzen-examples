@@ -1,6 +1,5 @@
 ﻿@using WebApplication1.App.Services
-@using NorthwindBlazor.Data
-@using NorthwindBlazor.Models.Northwind
+@using WebApplication1.App.Northwind
 @using System.Linq
 @using Microsoft.EntityFrameworkCore
 @page "/fetchdata"
@@ -27,14 +26,14 @@ else
                     @data.ProductName
                 </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Product" Context="data" Property="SupplierID" SortProperty="Supplier.CompanyName" Title="Supplier" Type="string">
+            <RadzenGridColumn TItem="Product" Context="data" Property="SupplierID" Title="SupplierID" Type="string">
                 <Template>
-                    @data.Supplier?.CompanyName
+                    @data.SupplierID
                 </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Product" Context="data" Property="CategoryID" SortProperty="Category.CategoryName" Title="Category" Type="string">
+            <RadzenGridColumn TItem="Product" Context="data" Property="CategoryID" Title="CategoryID" Type="string">
                 <Template>
-                    @data.Category?.CategoryName
+                    @data.CategoryID
                 </Template>
             </RadzenGridColumn>
             <RadzenGridColumn TItem="Product" Context="data" Property="QuantityPerUnit" Title="Quantity Per Unit" Type="string">
@@ -72,10 +71,10 @@ else
 }
 
 @functions {
-    IQueryable<Product> products;
+IQueryable<Product> products;
 
-    protected override async Task OnInitAsync()
-    {
-        products = await Task.FromResult(new NorthwindContext().Products.Include(p => p.Supplier).Include(p => p.Category).AsQueryable());
-    }
+protected override async Task OnInitAsync()
+{
+    products = await Task.FromResult(new NorthwindContext().Products.AsQueryable());
+}
 }
