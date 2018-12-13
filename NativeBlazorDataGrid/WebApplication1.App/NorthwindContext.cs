@@ -21,7 +21,10 @@ namespace NorthwindBlazor.Data
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=.;Initial Catalog=Northwind;Persist Security Info=False;Integrated Security=true;MultipleActiveResultSets=False;Encrypt=false;TrustServerCertificate=true;Connection Timeout=30");
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=.;Initial Catalog=Northwind;Persist Security Info=False;Integrated Security=true;MultipleActiveResultSets=False;Encrypt=false;TrustServerCertificate=true;Connection Timeout=30");
+        }
     }
 
     partial void OnModelBuilding(ModelBuilder builder);
