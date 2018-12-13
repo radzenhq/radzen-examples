@@ -1,0 +1,232 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Add Customer Customer Demo"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Customer",
+                              "component": "CustomerID",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getCustomersResult}",
+                              "textProperty": "CompanyName",
+                              "valueProperty": "CustomerID",
+                              "placeholder": "Choose Customer",
+                              "type": "dropdown",
+                              "name": "CustomerID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              }
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "CustomerIDRequiredValidator",
+                              "component": "CustomerID",
+                              "text": "CustomerID is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Customer Demographic",
+                              "component": "CustomerTypeID",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getCustomerDemographicsResult}",
+                              "textProperty": "CustomerDesc",
+                              "valueProperty": "CustomerTypeID",
+                              "placeholder": "Choose CustomerDemographic",
+                              "type": "dropdown",
+                              "name": "CustomerTypeID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              }
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "CustomerTypeIDRequiredValidator",
+                              "component": "CustomerTypeID",
+                              "text": "CustomerTypeID is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "path": "customer-customer-demos",
+                                    "type": "navigate"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new CustomerCustomerDemo!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createCustomerCustomerDemo",
+                        "parameters": [
+                          {
+                            "name": "CustomerCustomerDemo",
+                            "value": "${customercustomerdemo}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "customer-customer-demos",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke",
+                        "argType": "CustomerCustomerDemo"
+                      }
+                    ]
+                  },
+                  "data": "${customercustomerdemo}",
+                  "visible": "${customercustomerdemo != null}",
+                  "itemType": "CustomerCustomerDemo"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Customer>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getCustomerDemographics",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomerDemographicsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<CustomerDemographic>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "customercustomerdemo",
+        "type": "set",
+        "value": "new CustomerCustomerDemo()",
+        "valueType": "CustomerCustomerDemo"
+      }
+    ]
+  },
+  "name": "Add Customer Customer Demo",
+  "layout": "Main"
+}

@@ -1,0 +1,129 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+@page "/EditProduct/{ProductID}"
+@inherits NorthwindBlazor.App.Pages.EditProductModel
+<RadzenContent ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading ref="pageTitle" Size="H1" Text="Edit Product">
+    </RadzenHeading>
+    <div style="null" class="row">
+      <div class="col-md-9">
+        <RadzenLabel ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@{!canEdit}">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+        <RadzenButton ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@{!canEdit}" Click="@CloseButtonClick">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm ref="form0" Data="@product" Visible="@{product != null && canEdit}" TItem="Product" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label2" Text="Product Name" Component="ProductName" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="productName" MaxLength="40" style="display: block; width: 100%;" Name="ProductName">
+                </RadzenTextBox>
+                <RadzenRequiredValidator ref="productNameRequiredValidator" Component="ProductName" Text="ProductName is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label3" Text="Supplier" Component="SupplierID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="supplierId" Data="@getSuppliersResult" TextProperty="CompanyName" ValueProperty="SupplierID" Placeholder="Choose Supplier" style="width: 100%;" Name="SupplierID">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label4" Text="Category" Component="CategoryID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="categoryId" Data="@getCategoriesResult" TextProperty="CategoryName" ValueProperty="CategoryID" Placeholder="Choose Category" style="width: 100%;" Name="CategoryID">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label5" Text="Quantity Per Unit" Component="QuantityPerUnit" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="quantityPerUnit" MaxLength="20" style="width: 100%;" Name="QuantityPerUnit">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label6" Text="Unit Price" Component="UnitPrice" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric ref="unitPrice" style="width: 100%;" Name="UnitPrice" TItem="dynamic">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label7" Text="Units In Stock" Component="UnitsInStock" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric ref="unitsInStock" style="width: 100%;" Name="UnitsInStock" TItem="dynamic">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label8" Text="Units On Order" Component="UnitsOnOrder" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric ref="unitsOnOrder" style="width: 100%;" Name="UnitsOnOrder" TItem="dynamic">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label9" Text="Reorder Level" Component="ReorderLevel" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric ref="reorderLevel" style="width: 100%;" Name="ReorderLevel" TItem="dynamic">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label10" Text="Discontinued" Component="Discontinued" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenCheckBox ref="discontinued" TriState="true" Name="Discontinued">
+                </RadzenCheckBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

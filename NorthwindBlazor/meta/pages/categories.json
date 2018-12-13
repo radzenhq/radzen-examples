@@ -1,0 +1,189 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Categories"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button",
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-category",
+                        "type": "navigate"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "grid0",
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getCategoriesCount}",
+                  "data": "${getCategoriesResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getCategories",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getCategoriesResult",
+                            "type": "set",
+                            "value": "${result.value}",
+                            "valueType": "IEnumerable<Category>"
+                          },
+                          {
+                            "name": "getCategoriesCount",
+                            "type": "set",
+                            "value": "result.Count",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "CategoryID",
+                            "value": "${event.CategoryID}"
+                          }
+                        ],
+                        "path": "edit-category",
+                        "type": "navigate",
+                        "argType": "Category"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CategoryID",
+                      "template": "@data.CategoryID",
+                      "title": "Category ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CategoryName",
+                      "template": "@data.CategoryName",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Description",
+                      "template": "@data.Description",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    {
+                      "format": "binary",
+                      "property": "Picture",
+                      "template": "@data.Picture",
+                      "title": "Picture",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "bubble": false,
+                      "width": "70px",
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "text": "",
+                          "size": "sm",
+                          "type": "button",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Category",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Northwind.deleteCategory",
+                                "parameters": [
+                                  {
+                                    "name": "CategoryID",
+                                    "value": "${data.CategoryID}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result.IsSuccessStatusCode",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke",
+                                "argType": "Category"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "Category"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Categories",
+  "layout": "Main"
+}

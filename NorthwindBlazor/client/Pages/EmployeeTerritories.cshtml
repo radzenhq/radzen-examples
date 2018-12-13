@@ -1,0 +1,37 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+@page "/EmployeeTerritories"
+@inherits NorthwindBlazor.App.Pages.EmployeeTerritoriesModel
+<RadzenContent ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading ref="pageTitle" Size="H1" Text="Employee Territories">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid ref="grid0" AllowPaging="true" AllowSorting="true" Count="@getEmployeeTerritoriesCount" Data="@getEmployeeTerritoriesResult" TItem="EmployeeTerritory" LoadData="@Grid0LoadData" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="EmployeeTerritory" Context="data" Property="EmployeeID" SortProperty="Employee.LastName" Title="Employee" Type="string">
+              <Template>
+              @data.Employee?.LastName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="EmployeeTerritory" Context="data" Property="TerritoryID" SortProperty="Territory.TerritoryDescription" Title="Territory" Type="string">
+              <Template>
+              @data.Territory?.TerritoryDescription
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="EmployeeTerritory" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template>
+                <RadzenButton ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,190 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Customer Customer Demos"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button",
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-customer-customer-demo",
+                        "type": "navigate"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "grid0",
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getCustomerCustomerDemosCount}",
+                  "data": "${getCustomerCustomerDemosResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getCustomerCustomerDemos",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,CustomerDemographic"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,CustomerDemographic"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getCustomerCustomerDemosResult",
+                            "type": "set",
+                            "value": "${result.value}",
+                            "valueType": "IEnumerable<CustomerCustomerDemo>"
+                          },
+                          {
+                            "name": "getCustomerCustomerDemosCount",
+                            "type": "set",
+                            "value": "result.Count",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "CustomerID",
+                            "value": "${event.CustomerID}"
+                          },
+                          {
+                            "name": "CustomerTypeID",
+                            "value": "${event.CustomerTypeID}"
+                          }
+                        ],
+                        "path": "edit-customer-customer-demo",
+                        "type": "navigate",
+                        "argType": "CustomerCustomerDemo"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CustomerID",
+                      "sortProperty": "Customer.CompanyName",
+                      "template": "@data.Customer?.CompanyName",
+                      "title": "Customer",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CustomerTypeID",
+                      "sortProperty": "CustomerDemographic.CustomerDesc",
+                      "template": "@data.CustomerDemographic?.CustomerDesc",
+                      "title": "Customer Demographic",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "bubble": false,
+                      "width": "70px",
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "text": "",
+                          "size": "sm",
+                          "type": "button",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete CustomerCustomerDemo",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Northwind.deleteCustomerCustomerDemo",
+                                "parameters": [
+                                  {
+                                    "name": "CustomerID",
+                                    "value": "${data.CustomerID}"
+                                  },
+                                  {
+                                    "name": "CustomerTypeID",
+                                    "value": "${data.CustomerTypeID}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result.IsSuccessStatusCode",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke",
+                                "argType": "CustomerCustomerDemo"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "CustomerCustomerDemo"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Customer Customer Demos",
+  "layout": "Main"
+}

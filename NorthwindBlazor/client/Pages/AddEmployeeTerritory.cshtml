@@ -1,0 +1,51 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+@page "/AddEmployeeTerritory"
+@inherits NorthwindBlazor.App.Pages.AddEmployeeTerritoryModel
+<RadzenContent ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading ref="pageTitle" Size="H1" Text="Add Employee Territory">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm ref="form0" Data="@employeeterritory" Visible="@{employeeterritory != null}" TItem="EmployeeTerritory" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label1" Text="Employee" Component="EmployeeID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="employeeId" Data="@getEmployeesResult" TextProperty="LastName" ValueProperty="EmployeeID" Placeholder="Choose Employee" style="display: block; width: 100%;" Name="EmployeeID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator ref="employeeIdRequiredValidator" Component="EmployeeID" Text="EmployeeID is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label2" Text="Territory" Component="TerritoryID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="territoryId" Data="@getTerritoriesResult" TextProperty="TerritoryDescription" ValueProperty="TerritoryID" Placeholder="Choose Territory" style="display: block; width: 100%;" Name="TerritoryID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator ref="territoryIdRequiredValidator" Component="TerritoryID" Text="TerritoryID is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ref="button1" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton ref="button2" ButtonStyle="light" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

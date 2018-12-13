@@ -1,0 +1,182 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Shippers"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button",
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-shipper",
+                        "type": "navigate"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "grid0",
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getShippersCount}",
+                  "data": "${getShippersResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getShippers",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getShippersResult",
+                            "type": "set",
+                            "value": "${result.value}",
+                            "valueType": "IEnumerable<Shipper>"
+                          },
+                          {
+                            "name": "getShippersCount",
+                            "type": "set",
+                            "value": "result.Count",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "ShipperID",
+                            "value": "${event.ShipperID}"
+                          }
+                        ],
+                        "path": "edit-shipper",
+                        "type": "navigate",
+                        "argType": "Shipper"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "ShipperID",
+                      "template": "@data.ShipperID",
+                      "title": "Shipper ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "template": "@data.CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Phone",
+                      "template": "@data.Phone",
+                      "title": "Phone",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "bubble": false,
+                      "width": "70px",
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "text": "",
+                          "size": "sm",
+                          "type": "button",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Shipper",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Northwind.deleteShipper",
+                                "parameters": [
+                                  {
+                                    "name": "ShipperID",
+                                    "value": "${data.ShipperID}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result.IsSuccessStatusCode",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke",
+                                "argType": "Shipper"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "Shipper"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Shippers",
+  "layout": "Main"
+}

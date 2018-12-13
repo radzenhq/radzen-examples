@@ -1,0 +1,187 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Territories"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button",
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-territory",
+                        "type": "navigate"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "grid0",
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getTerritoriesCount}",
+                  "data": "${getTerritoriesResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getTerritories",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Region"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Region"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getTerritoriesResult",
+                            "type": "set",
+                            "value": "${result.value}",
+                            "valueType": "IEnumerable<Territory>"
+                          },
+                          {
+                            "name": "getTerritoriesCount",
+                            "type": "set",
+                            "value": "result.Count",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "TerritoryID",
+                            "value": "${event.TerritoryID}"
+                          }
+                        ],
+                        "path": "edit-territory",
+                        "type": "navigate",
+                        "argType": "Territory"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "TerritoryID",
+                      "template": "@data.TerritoryID",
+                      "title": "Territory ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "TerritoryDescription",
+                      "template": "@data.TerritoryDescription",
+                      "title": "Territory Description",
+                      "type": "string"
+                    },
+                    {
+                      "property": "RegionID",
+                      "sortProperty": "Region.RegionDescription",
+                      "template": "@data.Region?.RegionDescription",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "bubble": false,
+                      "width": "70px",
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "text": "",
+                          "size": "sm",
+                          "type": "button",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Territory",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Northwind.deleteTerritory",
+                                "parameters": [
+                                  {
+                                    "name": "TerritoryID",
+                                    "value": "${data.TerritoryID}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result.IsSuccessStatusCode",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke",
+                                "argType": "Territory"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "Territory"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Territories",
+  "layout": "Main"
+}

@@ -1,0 +1,259 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Orders"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button",
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-order",
+                        "type": "navigate"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "grid0",
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getOrdersCount}",
+                  "data": "${getOrdersResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Northwind.getOrders",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,Employee,Shipper"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Customer,Employee,Shipper"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getOrdersResult",
+                            "type": "set",
+                            "value": "${result.value}",
+                            "valueType": "IEnumerable<Order>"
+                          },
+                          {
+                            "name": "getOrdersCount",
+                            "type": "set",
+                            "value": "result.Count",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "OrderID",
+                            "value": "${event.OrderID}"
+                          }
+                        ],
+                        "path": "edit-order",
+                        "type": "navigate",
+                        "argType": "Order"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "OrderID",
+                      "template": "@data.OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CustomerID",
+                      "sortProperty": "Customer.CompanyName",
+                      "template": "@data.Customer?.CompanyName",
+                      "title": "Customer",
+                      "type": "string"
+                    },
+                    {
+                      "property": "EmployeeID",
+                      "sortProperty": "Employee.LastName",
+                      "template": "@data.Employee?.LastName",
+                      "title": "Employee",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "OrderDate",
+                      "template": "@String.Format(\"{0:d}\", data.OrderDate)",
+                      "title": "Order Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "RequiredDate",
+                      "template": "@String.Format(\"{0:d}\", data.RequiredDate)",
+                      "title": "Required Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "template": "@String.Format(\"{0:d}\", data.ShippedDate)",
+                      "title": "Shipped Date",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipVia",
+                      "sortProperty": "Shipper.CompanyName",
+                      "template": "@data.Shipper?.CompanyName",
+                      "title": "Shipper",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "Freight",
+                      "template": "@data.Freight",
+                      "title": "Freight",
+                      "type": "number"
+                    },
+                    {
+                      "property": "ShipName",
+                      "template": "@data.ShipName",
+                      "title": "Ship Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipAddress",
+                      "template": "@data.ShipAddress",
+                      "title": "Ship Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCity",
+                      "template": "@data.ShipCity",
+                      "title": "Ship City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipRegion",
+                      "template": "@data.ShipRegion",
+                      "title": "Ship Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipPostalCode",
+                      "template": "@data.ShipPostalCode",
+                      "title": "Ship Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "template": "@data.ShipCountry",
+                      "title": "Ship Country",
+                      "type": "string"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "bubble": false,
+                      "width": "70px",
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "text": "",
+                          "size": "sm",
+                          "type": "button",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Order",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Northwind.deleteOrder",
+                                "parameters": [
+                                  {
+                                    "name": "OrderID",
+                                    "value": "${data.OrderID}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result.IsSuccessStatusCode",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke",
+                                "argType": "Order"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "Order"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Orders",
+  "layout": "Main"
+}

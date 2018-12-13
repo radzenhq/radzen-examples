@@ -1,0 +1,167 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+@page "/EditOrder/{OrderID}"
+@inherits NorthwindBlazor.App.Pages.EditOrderModel
+<RadzenContent ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading ref="pageTitle" Size="H1" Text="Edit Order">
+    </RadzenHeading>
+    <div style="null" class="row">
+      <div class="col-md-9">
+        <RadzenLabel ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@{!canEdit}">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+        <RadzenButton ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@{!canEdit}" Click="@CloseButtonClick">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm ref="form0" Data="@order" Visible="@{order != null && canEdit}" TItem="Order" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label2" Text="Customer" Component="CustomerID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="customerId" Data="@getCustomersResult" TextProperty="CompanyName" ValueProperty="CustomerID" Placeholder="Choose Customer" style="width: 100%;" Name="CustomerID">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label3" Text="Employee" Component="EmployeeID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="employeeId" Data="@getEmployeesResult" TextProperty="LastName" ValueProperty="EmployeeID" Placeholder="Choose Employee" style="width: 100%;" Name="EmployeeID">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label4" Text="Order Date" Component="OrderDate" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ref="orderDate" style="width: 100%;" Name="OrderDate">
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label5" Text="Required Date" Component="RequiredDate" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ref="requiredDate" style="width: 100%;" Name="RequiredDate">
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label6" Text="Shipped Date" Component="ShippedDate" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ref="shippedDate" style="width: 100%;" Name="ShippedDate">
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label7" Text="Shipper" Component="ShipVia" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown ref="shipVia" Data="@getShippersResult" TextProperty="CompanyName" ValueProperty="ShipperID" Placeholder="Choose Shipper" style="width: 100%;" Name="ShipVia">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label8" Text="Freight" Component="Freight" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric ref="freight" style="width: 100%;" Name="Freight" TItem="dynamic">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label9" Text="Ship Name" Component="ShipName" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="shipName" MaxLength="40" style="width: 100%;" Name="ShipName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label10" Text="Ship Address" Component="ShipAddress" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="shipAddress" MaxLength="60" style="width: 100%;" Name="ShipAddress">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label11" Text="Ship City" Component="ShipCity" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="shipCity" MaxLength="15" style="width: 100%;" Name="ShipCity">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label12" Text="Ship Region" Component="ShipRegion" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="shipRegion" MaxLength="15" style="width: 100%;" Name="ShipRegion">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label13" Text="Ship Postal Code" Component="ShipPostalCode" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="shipPostalCode" MaxLength="10" style="width: 100%;" Name="ShipPostalCode">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel ref="label14" Text="Ship Country" Component="ShipCountry" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox ref="shipCountry" MaxLength="15" style="width: 100%;" Name="ShipCountry">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

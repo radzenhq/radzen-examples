@@ -1,0 +1,232 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Add Employee Territory"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Employee",
+                              "component": "EmployeeID",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getEmployeesResult}",
+                              "textProperty": "LastName",
+                              "valueProperty": "EmployeeID",
+                              "placeholder": "Choose Employee",
+                              "type": "dropdown",
+                              "name": "EmployeeID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              }
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "EmployeeIDRequiredValidator",
+                              "component": "EmployeeID",
+                              "text": "EmployeeID is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Territory",
+                              "component": "TerritoryID",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getTerritoriesResult}",
+                              "textProperty": "TerritoryDescription",
+                              "valueProperty": "TerritoryID",
+                              "placeholder": "Choose Territory",
+                              "type": "dropdown",
+                              "name": "TerritoryID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              }
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "TerritoryIDRequiredValidator",
+                              "component": "TerritoryID",
+                              "text": "TerritoryID is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "path": "employee-territories",
+                                    "type": "navigate"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new EmployeeTerritory!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.createEmployeeTerritory",
+                        "parameters": [
+                          {
+                            "name": "EmployeeTerritory",
+                            "value": "${employeeterritory}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "employee-territories",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke",
+                        "argType": "EmployeeTerritory"
+                      }
+                    ]
+                  },
+                  "data": "${employeeterritory}",
+                  "visible": "${employeeterritory != null}",
+                  "itemType": "EmployeeTerritory"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Employee>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getTerritories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getTerritoriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Territory>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "employeeterritory",
+        "type": "set",
+        "value": "new EmployeeTerritory()",
+        "valueType": "EmployeeTerritory"
+      }
+    ]
+  },
+  "name": "Add Employee Territory",
+  "layout": "Main"
+}

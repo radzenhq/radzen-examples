@@ -1,0 +1,117 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+@page "/Employees"
+@inherits NorthwindBlazor.App.Pages.EmployeesModel
+<RadzenContent ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading ref="pageTitle" Size="H1" Text="Employees">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid ref="grid0" AllowPaging="true" AllowSorting="true" Count="@getEmployeesCount" Data="@getEmployeesResult" TItem="Employee" LoadData="@Grid0LoadData" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="EmployeeID" Title="Employee ID" Type="integer">
+              <Template>
+              @data.EmployeeID
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="LastName" Title="Last Name" Type="string">
+              <Template>
+              @data.LastName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="FirstName" Title="First Name" Type="string">
+              <Template>
+              @data.FirstName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Title" Title="Title" Type="string">
+              <Template>
+              @data.Title
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="TitleOfCourtesy" Title="Title Of Courtesy" Type="string">
+              <Template>
+              @data.TitleOfCourtesy
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Format="{date-time}" Property="BirthDate" Title="Birth Date" Type="string">
+              <Template>
+              @String.Format("{0:d}", data.BirthDate)
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Format="{date-time}" Property="HireDate" Title="Hire Date" Type="string">
+              <Template>
+              @String.Format("{0:d}", data.HireDate)
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Address" Title="Address" Type="string">
+              <Template>
+              @data.Address
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="City" Title="City" Type="string">
+              <Template>
+              @data.City
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Region" Title="Region" Type="string">
+              <Template>
+              @data.Region
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="PostalCode" Title="Postal Code" Type="string">
+              <Template>
+              @data.PostalCode
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Country" Title="Country" Type="string">
+              <Template>
+              @data.Country
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="HomePhone" Title="Home Phone" Type="string">
+              <Template>
+              @data.HomePhone
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Extension" Title="Extension" Type="string">
+              <Template>
+              @data.Extension
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Format="binary" Property="Photo" Title="Photo" Type="string">
+              <Template>
+              @data.Photo
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Notes" Title="Notes" Type="string">
+              <Template>
+              @data.Notes
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="ReportsTo" SortProperty="Employee1.LastName" Title="Employee" Type="string">
+              <Template>
+              @data.Employee1?.LastName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="PhotoPath" Title="Photo Path" Type="string">
+              <Template>
+              @data.PhotoPath
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template>
+                <RadzenButton ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
