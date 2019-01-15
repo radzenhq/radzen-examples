@@ -205,5 +205,7 @@
   },
   "name": "Edit Order Detail",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

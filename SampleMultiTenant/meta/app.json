@@ -7,7 +7,7 @@
   "ignore": [
     "client\\src\\environments\\environment.ts",
     "server\\Program.cs",
-    "server\\Data\\SampleContext.cs"
+    ""
   ],
   "layouts": [
     "Login",
@@ -29,9 +29,33 @@
     "Edit Order Detail",
     "Products",
     "Add Product",
-    "Edit Product"
+    "Edit Product",
+    "Application Users",
+    "Register Application User",
+    "Add Application Role",
+    "Add Application User",
+    "Edit Application User",
+    "Unauthorized",
+    "Profile",
+    "Application Roles",
+    "Login"
   ],
   "port": 8000,
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "Sample",
+    "duration": 5,
+    "emailConfirmation": false,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "loginPage": "Login",
+    "provider": "default",
+    "smtpFrom": "",
+    "smtpPassword": "",
+    "smtpSSL": false,
+    "smtpServer": "",
+    "smtpUser": ""
+  },
   "serverLang": "cs",
   "serverPort": 5000,
   "serverProject": true,

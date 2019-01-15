@@ -87,5 +87,7 @@
   },
   "name": "Add Product",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

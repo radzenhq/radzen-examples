@@ -195,5 +195,7 @@
   },
   "name": "Products",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

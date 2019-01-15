@@ -186,5 +186,7 @@
   },
   "name": "Orders",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

@@ -165,5 +165,7 @@
   },
   "name": "Edit Order",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

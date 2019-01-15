@@ -78,5 +78,7 @@
   },
   "name": "Add Order",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

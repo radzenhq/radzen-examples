@@ -174,5 +174,7 @@
   },
   "name": "Edit Product",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

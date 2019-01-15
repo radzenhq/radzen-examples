@@ -1,0 +1,18 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="user" submitText="Save" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="UserName" [disabled]="true" title="User Name" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Email" title="Email" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-lookup-form-field title="Roles" property="RoleNames" [data]="roles" [multiple]="true" textProperty="Name" valueProperty="Name" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-password-form-field property="Password" title="Password" requiredText="is required" type="password">
+        </rz-password-form-field>
+        <rz-password-form-field property="ConfirmPassword" compare="Password" title="Confirm password" requiredText="is required" type="password">
+        </rz-password-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

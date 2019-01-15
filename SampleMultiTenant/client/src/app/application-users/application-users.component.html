@@ -1,0 +1,14 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Application Users">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [data]="getUsersResult" emptyText="No records to display." addText="Add" (delete)="grid0Delete($event)" (rowSelect)="grid0RowSelect($event)" (add)="grid0Add($event)">
+        <rz-grid-column property="UserName" title="User Name">
+        </rz-grid-column>
+        <rz-grid-column property="Email" title="Email">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

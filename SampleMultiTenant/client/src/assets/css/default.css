@@ -4881,7 +4881,7 @@ input {
     left: 0;
     right: 0; }
 
-.sidebar {
+.rz-sidebar {
   background-color: #3a474d;
   border-right: 1px solid #eaeef0;
   position: fixed;
@@ -6046,6 +6046,8 @@ p-radiobutton {
   display: inline-block; }
   .ui-fileupload .ui-button:not(.ui-fileupload-choose), .ui-fileupload .ui-paginator-element:not(.ui-fileupload-choose) {
     background-color: #ff6d41; }
+  .ui-fileupload .ui-button[disabled], .ui-fileupload [disabled].ui-paginator-element {
+    opacity: 0.5; }
 
 .ui-fileupload-choose {
   position: relative;
@@ -6739,12 +6741,13 @@ p-radiobutton {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
 
-.fc-event {
+a.fc-event {
   font-size: 0.6875rem;
   background-color: #68d5c8;
   border: none; }
-  .fc-event .fc-content {
-    color: #ffffff;
+  a.fc-event:not([href]):not([tabindex]) {
+    color: #ffffff; }
+  a.fc-event .fc-content {
     padding: 0.25rem; }
 
 .fc-prev-button,

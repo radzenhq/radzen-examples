@@ -203,5 +203,7 @@
   },
   "name": "Order Details",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }

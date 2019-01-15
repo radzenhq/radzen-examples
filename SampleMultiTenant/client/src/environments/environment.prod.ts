@@ -1,4 +1,6 @@
 export const environment = {
-  sample: '/odata/Sample',
+  sample: 'http://localhost:5000/odata/Sample',
+
+  securityUrl: 'http://localhost:5000/auth',
   production: true
 };

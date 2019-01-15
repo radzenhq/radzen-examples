@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Builder;
@@ -17,6 +19,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 using MultiTenantSample.Data;
+using MultiTenantSample.Models;
+using MultiTenantSample.Authentication;
 
 namespace MultiTenantSample
 {
@@ -48,6 +52,40 @@ namespace MultiTenantSample
       services.AddODataQueryFilter();
 
 
+      var tokenValidationParameters = new TokenValidationParameters
+      {
+          ValidateIssuerSigningKey = true,
+          IssuerSigningKey = TokenProviderOptions.Key,
+          ValidateIssuer = true,
+          ValidIssuer = TokenProviderOptions.Issuer,
+          ValidateAudience = true,
+          ValidAudience = TokenProviderOptions.Audience,
+          ValidateLifetime = true,
+          ClockSkew = TimeSpan.Zero
+      };
+
+      services.AddAuthentication(options =>
+      {
+          options.DefaultScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+      }).AddJwtBearer(options =>
+      {
+          options.Audience = TokenProviderOptions.Audience;
+          options.ClaimsIssuer = TokenProviderOptions.Issuer;
+          options.TokenValidationParameters = tokenValidationParameters;
+          options.SaveToken = true;
+      });
+
+      services.AddDbContext<ApplicationIdentityDbContext>(options =>
+      {
+         options.UseSqlServer(Configuration.GetConnectionString("SampleConnection"));
+      });
+
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
+
+      services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationPrincipalFactory>();
+
+
       services.AddDbContext<MultiTenantSample.Data.SampleContext>(options =>
       {
         options.UseSqlServer(Configuration.GetConnectionString("SampleConnection"));
@@ -58,7 +96,7 @@ namespace MultiTenantSample
 
     partial void OnConfigure(IApplicationBuilder app);
     partial void OnConfigureOData(ODataConventionModelBuilder builder);
-
+   
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
       loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -123,12 +161,17 @@ namespace MultiTenantSample
 
           this.OnConfigureOData(oDataBuilder);
 
+          oDataBuilder.EntitySet<ApplicationUser>("ApplicationUsers");
+          var usersType = oDataBuilder.StructuralTypes.First(x => x.ClrType == typeof(ApplicationUser));
+          usersType.AddCollectionProperty(typeof(ApplicationUser).GetProperty("RoleNames"));
+          oDataBuilder.EntitySet<IdentityRole>("ApplicationRoles");
+
           var model = oDataBuilder.GetEdmModel();
 
           builder.MapODataServiceRoute("odata/Sample", "odata/Sample", model);
 
+          builder.MapODataServiceRoute("auth", "auth", model);
       });
-
 
       if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RADZEN")) && env.IsDevelopment())
       {

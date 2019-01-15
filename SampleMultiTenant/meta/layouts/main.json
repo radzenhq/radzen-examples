@@ -23,7 +23,19 @@
             },
             {
               "class": "col-md-6 text-lg-right",
-              "components": [],
+              "components": [
+                {
+                  "type": "profilemenu",
+                  "name": "profilemenu0",
+                  "visible": "${security.isAuthenticated()}",
+                  "template": [
+                    {
+                      "email": "${security.user.name}",
+                      "type": "gravatar"
+                    }
+                  ]
+                }
+              ],
               "name": "rightCol",
               "type": "col"
             }

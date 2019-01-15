@@ -119,5 +119,7 @@
   },
   "name": "Add Order Detail",
   "layout": "Main",
-  "access": []
+  "access": [
+    "Authenticated"
+  ]
 }
