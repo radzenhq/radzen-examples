@@ -1,0 +1,183 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "style": {
+            "marginBottom": "8px"
+          },
+          "text": "Sign in",
+          "type": "heading"
+        },
+        {
+          "name": "heading0",
+          "size": "H5",
+          "style": {
+            "marginBottom": "32px"
+          },
+          "text": "with your RadzenCRM account",
+          "type": "heading"
+        },
+        {
+          "component": "password0",
+          "name": "label0",
+          "style": {
+            "display": "block",
+            "marginBottom": "8px"
+          },
+          "text": "Username",
+          "type": "label"
+        },
+        {
+          "name": "textbox0",
+          "style": {
+            "display": "block",
+            "marginBottom": "16px",
+            "width": "100%"
+          },
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "component": "password0",
+          "name": "label1",
+          "style": {
+            "display": "block",
+            "marginBottom": "8px"
+          },
+          "text": "Password",
+          "type": "label"
+        },
+        {
+          "name": "password0",
+          "style": {
+            "display": "block",
+            "marginBottom": "16px",
+            "width": "100%"
+          },
+          "type": "password",
+          "value": ""
+        },
+        {
+          "buttonStyle": "info",
+          "name": "button0",
+          "size": "md",
+          "style": {
+            "display": "block",
+            "width": "100%"
+          },
+          "text": "Sign in",
+          "type": "button"
+        },
+        {
+          "name": "heading1",
+          "size": "H5",
+          "style": {
+            "marginBottom": "16px",
+            "marginTop": "48px",
+            "textAlign": "center"
+          },
+          "text": "or sign in as a demo user",
+          "type": "heading"
+        },
+        {
+          "buttonStyle": "light",
+          "events": {
+            "click": [
+              {
+                "name": "Security.login",
+                "parameters": [
+                  {
+                    "name": "username",
+                    "value": "salesmanager@demo.radzen.com"
+                  },
+                  {
+                    "name": "password",
+                    "value": "SalesManager1@"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "icon": "",
+          "name": "button3",
+          "style": {
+            "display": "block",
+            "marginBottom": "16px",
+            "width": "100%"
+          },
+          "text": "Sales Manager",
+          "type": "button"
+        },
+        {
+          "name": "heading2",
+          "size": "H5",
+          "style": {
+            "marginBottom": "16px",
+            "marginTop": "16px",
+            "textAlign": "center"
+          },
+          "text": "or",
+          "type": "heading"
+        },
+        {
+          "buttonStyle": "light",
+          "events": {
+            "click": [
+              {
+                "name": "Security.login",
+                "parameters": [
+                  {
+                    "name": "username",
+                    "value": "salesrep@demo.radzen.com"
+                  },
+                  {
+                    "name": "password",
+                    "value": "SalesRep1@"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "icon": "",
+          "name": "button2",
+          "style": {
+            "width": "100%"
+          },
+          "text": "Sales Representative",
+          "type": "button"
+        },
+        {
+          "components": [
+            {
+              "class": "",
+              "components": [],
+              "type": "col"
+            },
+            {
+              "class": "col-md-9 justify-content-between  d-flex align-items-center",
+              "components": [],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "layout": "Login",
+  "name": "Login"
+}

@@ -1,0 +1,301 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Tasks",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "addText": "Add",
+                  "allowAdd": true,
+                  "allowDelete": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "Title",
+                      "title": "Title",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "DueDate",
+                      "template": "${data.DueDate | utcDate}",
+                      "title": "Due Date",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "TaskStatus.Name",
+                      "filterValue": "",
+                      "footerTemplate": "",
+                      "format": "",
+                      "property": "StatusId",
+                      "sortProperty": "TaskStatus.Name",
+                      "template": [
+                        {
+                          "icon": "check_circle",
+                          "name": "icon3",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskStatus.Name == 'Complete'}"
+                        },
+                        {
+                          "icon": "cancel",
+                          "name": "icon4",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskStatus.Name == 'Not Started'}"
+                        },
+                        {
+                          "icon": "autorenew",
+                          "name": "icon5",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskStatus.Name == 'In Progress'}"
+                        },
+                        {
+                          "name": "label1",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "text": "${data.TaskStatus.Name}",
+                          "type": "label"
+                        }
+                      ],
+                      "title": "Status",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "TaskType.Name",
+                      "property": "TypeId",
+                      "sortProperty": "TaskType.Name",
+                      "template": [
+                        {
+                          "icon": "settings_phone",
+                          "name": "icon0",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskType.Name == 'Call'}"
+                        },
+                        {
+                          "icon": "video_call",
+                          "name": "icon1",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskType.Name == 'Online Meeting'}"
+                        },
+                        {
+                          "icon": "email",
+                          "name": "icon2",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskType.Name == 'Email'}"
+                        },
+                        {
+                          "name": "label0",
+                          "style": {
+                            "lineHeight": "24px",
+                            "verticalAlign": "middle"
+                          },
+                          "text": "${data.TaskType.Name}",
+                          "type": "label"
+                        }
+                      ],
+                      "title": "Type",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "Opportunity.Name",
+                      "filterValue": "",
+                      "filterable": true,
+                      "footerTemplate": "",
+                      "property": "OpportunityId",
+                      "sortProperty": "Opportunity.Name",
+                      "template": "${data.Opportunity?.Name}",
+                      "title": "Opportunity",
+                      "type": "string"
+                    },
+                    {
+                      "footerTemplate": "",
+                      "sortProperty": "",
+                      "template": "${data.Opportunity.User.UserName}",
+                      "title": "Sales Representative",
+                      "visible": "${security.user.isInRole(\"Sales Manager\")}"
+                    }
+                  ],
+                  "count": "${getTasksCount}",
+                  "data": "${getTasksResult}",
+                  "emptyText": "No records to display.",
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-task",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete Task",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.deleteTask",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Task deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "loadData": [
+                      {
+                        "name": "CRM.getTasks",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Opportunity,Opportunity($expand=User),TaskType,TaskStatus"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getTasksResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getTasksCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-task",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getTasks",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          },
+          {
+            "name": "$expand",
+            "value": "Opportunity,Opportunity($expand=User),TaskType,TaskStatus"
+          }
+        ],
+        "then": [
+          {
+            "name": "getTasksResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getTasksCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Tasks"
+}

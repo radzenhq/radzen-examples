@@ -1,0 +1,206 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "class": "justify-content-start align-items-center",
+          "components": [
+            {
+              "class": "d-flex align-items-center col-7",
+              "components": [
+                {
+                  "name": "sidebar-toggle0",
+                  "style": {},
+                  "type": "sidebar-toggle"
+                },
+                {
+                  "name": "image1",
+                  "path": "/assets/images/logo.png",
+                  "style": {
+                    "borderRadius": "50%",
+                    "height": "50px",
+                    "width": "50px"
+                  },
+                  "type": "image"
+                },
+                {
+                  "name": "label0",
+                  "style": {
+                    "fontSize": "20px",
+                    "marginLeft": "16px"
+                  },
+                  "text": "RadzenCRM Demo",
+                  "type": "label"
+                }
+              ],
+              "name": "leftCol",
+              "type": "col"
+            },
+            {
+              "class": "text-lg-right  justify-content-end  d-flex align-items-end col-5",
+              "components": [
+                {
+                  "items": [
+                    {
+                      "icon": "settings",
+                      "path": "profile",
+                      "text": "Profile"
+                    },
+                    {
+                      "icon": "person",
+                      "path": "application-users",
+                      "text": "Users",
+                      "visible": "${security.user.isInRole('Sales Manager')}"
+                    },
+                    {
+                      "icon": "security",
+                      "path": "application-roles",
+                      "text": "Roles",
+                      "visible": "${security.user.isInRole('Sales Manager')}"
+                    },
+                    {
+                      "icon": "power_settings_new",
+                      "text": "Logout"
+                    }
+                  ],
+                  "name": "profilemenu0",
+                  "style": {},
+                  "template": [
+                    {
+                      "name": "label1",
+                      "style": {},
+                      "text": "${userData.FirstName} ${userData.LastName}",
+                      "type": "label",
+                      "visible": true
+                    },
+                    {
+                      "name": "image0",
+                      "path": "${userData.Picture}",
+                      "style": {
+                        "border": "2px solid ",
+                        "borderRadius": "16px",
+                        "height": "32px",
+                        "width": "32px"
+                      },
+                      "type": "image"
+                    }
+                  ],
+                  "type": "profilemenu",
+                  "visible": "${security.isAuthenticated()}"
+                }
+              ],
+              "name": "rightCol",
+              "type": "col"
+            }
+          ],
+          "name": "headerRow",
+          "style": {
+            "height": "64px"
+          },
+          "type": "row"
+        }
+      ],
+      "name": "header0",
+      "style": {},
+      "type": "header"
+    },
+    {
+      "components": [
+        {
+          "name": "main",
+          "type": "content-container"
+        }
+      ],
+      "name": "body0",
+      "type": "body"
+    },
+    {
+      "components": [
+        {
+          "items": [
+            {
+              "icon": "home",
+              "path": "home",
+              "text": "Dashboard"
+            },
+            {
+              "icon": "work",
+              "path": "tasks",
+              "text": "Tasks"
+            },
+            {
+              "icon": "perm_contact_calendar",
+              "path": "contacts",
+              "text": "Contacts"
+            },
+            {
+              "icon": "shopping_cart",
+              "path": "opportunities",
+              "text": "Opportunities"
+            },
+            {
+              "icon": "settings",
+              "items": [
+                {
+                  "icon": "",
+                  "path": "opportunity-statuses",
+                  "text": "Opportunity Statuses"
+                },
+                {
+                  "icon": "",
+                  "path": "task-statuses",
+                  "text": "Task Statuses"
+                },
+                {
+                  "path": "task-types",
+                  "text": "Task Types"
+                }
+              ],
+              "path": "",
+              "text": "Settings",
+              "visible": "${security.user.isInRole(\"Sales Manager\")}"
+            }
+          ],
+          "name": "panelmenu0",
+          "style": {
+            "height": "100%"
+          },
+          "type": "panelmenu"
+        }
+      ],
+      "name": "sidebar0",
+      "stretch": false,
+      "type": "sidebar"
+    },
+    {
+      "components": [
+        {
+          "name": "footerText",
+          "text": "CRM, Copyright &copy; 2019",
+          "type": "label"
+        }
+      ],
+      "name": "footer0",
+      "type": "footer"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "condition": "",
+        "name": "ServerMethodsController.UserPersonalData",
+        "path": "api/ServerMethods/UserPersonalData",
+        "then": [
+          {
+            "name": "userData",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke-method",
+        "verb": "get"
+      }
+    ]
+  },
+  "name": "Main"
+}

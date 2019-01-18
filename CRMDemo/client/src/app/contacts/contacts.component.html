@@ -1,0 +1,27 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Contacts">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12 align-items-center d-flex justify-content-end" [ngStyle]="{'marginBottom':'1rem','marginTop':'1rem'}">
+      <rz-textbox #textbox0 placeholder="Search for a contact" [style]="{'marginRight':'1rem','width':'313px'}" [(ngModel)]="contactFilter" name="textbox0">
+      </rz-textbox>
+      <rz-button #button0 size="md" text="Search" (click)="button0Click($event)">
+      </rz-button>
+    </div>
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getContactsCount" [data]="getContactsResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column filterProperty="FirstName" property="FirstName" sortProperty="FirstName" title="Name" type="string">
+          <ng-template let-data gridColumnTemplate>
+          <img style="width: 30px; height: 30px; border-radius: 50%" src="https://logo.clearbit.com/{{(data?.Email?.split('@') || {})[1]}}"> {{data?.FirstName}} {{data?.LastName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="Email" title="Email" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Phone" title="Phone" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Company" title="Company" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

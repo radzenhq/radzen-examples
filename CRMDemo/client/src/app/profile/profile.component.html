@@ -1,0 +1,32 @@
+<rz-content #content1 container="main">
+  <rz-icon #icon0 icon="fingerprint">
+  </rz-icon>
+  <rz-heading #pageTitle size="H1" [style]="{'display':'inline-block'}" text="Profile">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12 col-xl-6">
+      <rz-fieldset #fieldset1 [style]="{'marginBottom':'32px'}" text="Personal Data">
+        <rz-form #form1 [data]="personalData" submitText="Save" (cancel)="form1Cancel($event)" (submit)="form1Submit($event)">
+          <rz-string-form-field property="FirstName" [required]="true" requiredText="is required" title="First Name" type="string">
+          </rz-string-form-field>
+          <rz-string-form-field property="LastName" [required]="true" requiredText="is required" title="Last Name" type="string">
+          </rz-string-form-field>
+          <rz-file-form-field property="Picture" requiredText="is required" title="Picture" type="file">
+          </rz-file-form-field>
+        </rz-form>
+      </rz-fieldset>
+    </div>
+    <div class="col-md-12 col-xl-6">
+      <rz-fieldset #fieldset3 text="Password">
+        <rz-form #form3 submitText="Change password" (cancel)="form3Cancel($event)" (submit)="form3Submit($event)">
+          <rz-password-form-field property="OldPassword" [required]="true" requiredText="is required" title="Old Password" type="password">
+          </rz-password-form-field>
+          <rz-password-form-field property="NewPassword" [required]="true" requiredText="is required" title="New Password" type="password">
+          </rz-password-form-field>
+          <rz-password-form-field compare="NewPassword" property="ConfirmPassword" [required]="true" requiredText="is required" title="Confirm password" type="password">
+          </rz-password-form-field>
+        </rz-form>
+      </rz-fieldset>
+    </div>
+  </div>
+</rz-content>

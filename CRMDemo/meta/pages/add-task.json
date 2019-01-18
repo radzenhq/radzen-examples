@@ -1,0 +1,167 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Task!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createTask",
+                        "parameters": [
+                          {
+                            "name": "Task",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "tasks",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "autoComplete": false,
+                      "placeholder": "",
+                      "property": "Title",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Title",
+                      "type": "string"
+                    },
+                    {
+                      "data": "${getOpportunitiesResult}",
+                      "placeholder": "Choose Opportunity",
+                      "property": "OpportunityId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Opportunity",
+                      "type": "lookup",
+                      "valueProperty": "Id"
+                    },
+                    {
+                      "property": "DueDate",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Due Date",
+                      "type": "date"
+                    },
+                    {
+                      "data": "${getTaskTypesResult}",
+                      "multiple": false,
+                      "placeholder": "Choose Type",
+                      "property": "TypeId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Type",
+                      "type": "lookup",
+                      "valueProperty": "Id",
+                      "visible": true
+                    },
+                    {
+                      "data": "${getTaskStatusesResult}",
+                      "multiple": false,
+                      "placeholder": "Choose Status",
+                      "property": "StatusId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Status",
+                      "type": "lookup",
+                      "valueProperty": "Id",
+                      "visible": true
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getOpportunities",
+        "parameters": [
+          {
+            "name": "$filter",
+            "value": "OpportunityStatus/Name in ('Active', 'Inactive')"
+          },
+          {
+            "name": "$expand",
+            "value": "OpportunityStatus"
+          }
+        ],
+        "then": [
+          {
+            "name": "getOpportunitiesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getTaskTypes",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getTaskTypesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getTaskStatuses",
+        "then": [
+          {
+            "name": "getTaskStatusesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Task"
+}

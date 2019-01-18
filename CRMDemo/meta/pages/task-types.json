@@ -1,0 +1,185 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Task Types"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowDelete": true,
+                  "allowAdd": true,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getTaskTypesCount}",
+                  "data": "${getTaskTypesResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "CRM.getTaskTypes",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getTaskTypesResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getTaskTypesCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to delete TaskType",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.deleteTaskType",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "TaskType deleted!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "add": [
+                      {
+                        "path": "add-task-type",
+                        "type": "popup"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-task-type",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "Id",
+                      "title": "Id",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "Name",
+                      "title": "Name",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "emptyText": "No records to display.",
+                  "addText": "Add"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getTaskTypes",
+        "parameters": [
+          {
+            "name": "$top",
+            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
+          },
+          {
+            "name": "$skip",
+            "value": "this.grid0.allowPaging ? 0 : null"
+          },
+          {
+            "name": "$count",
+            "value": "this.grid0.allowPaging"
+          }
+        ],
+        "then": [
+          {
+            "name": "getTaskTypesResult",
+            "type": "set",
+            "value": "${result.value}"
+          },
+          {
+            "name": "getTaskTypesCount",
+            "type": "set",
+            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Task Types",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

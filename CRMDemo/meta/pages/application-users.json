@@ -1,0 +1,141 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Application Users",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "addText": "Add",
+                  "allowAdd": true,
+                  "allowDelete": true,
+                  "columns": [
+                    {
+                      "filterProperty": "",
+                      "filterValue": "",
+                      "format": "",
+                      "property": "Id",
+                      "sortProperty": "",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "${data.Picture}",
+                          "style": {
+                            "border": "2px solid rgb(71, 156, 200)",
+                            "borderRadius": "16px",
+                            "height": "32px",
+                            "width": "32px"
+                          },
+                          "type": "image"
+                        }
+                      ],
+                      "title": "Picture",
+                      "type": "string"
+                    },
+                    {
+                      "property": "FirstName",
+                      "title": "First Name",
+                      "visible": true
+                    },
+                    {
+                      "property": "LastName",
+                      "title": "Last Name"
+                    },
+                    {
+                      "property": "Email",
+                      "title": "Email"
+                    }
+                  ],
+                  "data": "${getUsersResult}",
+                  "emptyText": "No records to display.",
+                  "events": {
+                    "add": [
+                      {
+                        "path": "add-application-user",
+                        "type": "popup"
+                      }
+                    ],
+                    "delete": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot delete user",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Security.deleteUser",
+                        "parameters": [
+                          {
+                            "name": "id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "User \"${event.UserName}\" has been deleted.",
+                            "severity": "info",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-application-user",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Security.getUsers",
+        "then": [
+          {
+            "name": "getUsersResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Application Users"
+}

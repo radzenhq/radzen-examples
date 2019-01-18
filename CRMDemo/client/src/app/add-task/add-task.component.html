@@ -1,0 +1,18 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field [autoComplete]="false" property="Title" [required]="false" requiredText="is required" title="Title" type="string">
+        </rz-string-form-field>
+        <rz-lookup-form-field [data]="getOpportunitiesResult" placeholder="Choose Opportunity" property="OpportunityId" [required]="true" requiredText="is required" textProperty="Name" title="Opportunity" valueProperty="Id" type="lookup">
+        </rz-lookup-form-field>
+        <rz-date-form-field property="DueDate" [required]="true" requiredText="is required" title="Due Date" type="date">
+        </rz-date-form-field>
+        <rz-lookup-form-field [data]="getTaskTypesResult" [multiple]="false" placeholder="Choose Type" property="TypeId" [required]="true" requiredText="is required" textProperty="Name" title="Type" valueProperty="Id" type="lookup">
+        </rz-lookup-form-field>
+        <rz-lookup-form-field [data]="getTaskStatusesResult" [multiple]="false" placeholder="Choose Status" property="StatusId" [required]="true" requiredText="is required" textProperty="Name" title="Status" valueProperty="Id" type="lookup">
+        </rz-lookup-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

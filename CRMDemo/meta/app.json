@@ -1,0 +1,77 @@
+{
+  "dataSources": [
+    "CRM"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "ignore": [
+    ""
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "CRM",
+  "navigation": [
+    "Contacts",
+    "Opportunities",
+    "Opportunity Statuses",
+    "Tasks",
+    "Task Types",
+    "Task Statuses",
+    "Home"
+  ],
+  "pages": [
+    "Contacts",
+    "Add Contact",
+    "Edit Contact",
+    "Opportunities",
+    "Add Opportunity",
+    "Edit Opportunity",
+    "Opportunity Statuses",
+    "Add Opportunity Status",
+    "Edit Opportunity Status",
+    "Tasks",
+    "Add Task",
+    "Edit Task",
+    "Task Types",
+    "Add Task Type",
+    "Edit Task Type",
+    "Login",
+    "Add Application Role",
+    "Application Roles",
+    "Register Application User",
+    "Application Users",
+    "Add Application User",
+    "Edit Application User",
+    "Profile",
+    "Unauthorized",
+    "Task Statuses",
+    "Add Task Status",
+    "Edit Task Status",
+    "Home"
+  ],
+  "port": 8000,
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "CRM",
+    "duration": 60,
+    "emailConfirmation": false,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "loginPage": "Login",
+    "provider": "default",
+    "smtpFrom": "",
+    "smtpPassword": "",
+    "smtpSSL": false,
+    "smtpServer": "",
+    "smtpUser": ""
+  },
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "2",
+  "startPage": "Home",
+  "theme": "dark"
+}

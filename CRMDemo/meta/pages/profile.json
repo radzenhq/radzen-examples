@@ -1,0 +1,229 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "icon": "fingerprint",
+          "name": "icon0",
+          "type": "icon"
+        },
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "style": {
+            "display": "inline-block"
+          },
+          "text": "Profile",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12 col-xl-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "data": "${personalData}",
+                      "events": {
+                        "cancel": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "submit": [
+                          {
+                            "error": [
+                              {
+                                "detail": "There was an error: ${event.error.message}",
+                                "severity": "error",
+                                "summary": "Error",
+                                "type": "notify"
+                              }
+                            ],
+                            "name": "ServerMethodsController.UpdatePersonalData",
+                            "parameters": [
+                              {
+                                "in": "body",
+                                "name": "firstName",
+                                "type": "string",
+                                "value": "${event.FirstName}"
+                              },
+                              {
+                                "in": "body",
+                                "name": "lastName",
+                                "type": "string",
+                                "value": "${event.LastName}"
+                              },
+                              {
+                                "in": "body",
+                                "name": "picture",
+                                "type": "string",
+                                "value": "${event.Picture}"
+                              }
+                            ],
+                            "path": "api/ServerMethods/UpdatePersonalData",
+                            "then": [
+                              {
+                                "detail": "Personal data updated successfully!",
+                                "severity": "success",
+                                "summary": "Success",
+                                "type": "notify"
+                              }
+                            ],
+                            "type": "invoke-method",
+                            "verb": "post"
+                          }
+                        ]
+                      },
+                      "fields": [
+                        {
+                          "property": "FirstName",
+                          "required": true,
+                          "requiredText": "is required",
+                          "title": "First Name",
+                          "type": "string"
+                        },
+                        {
+                          "defaultValue": "",
+                          "property": "LastName",
+                          "required": true,
+                          "requiredText": "is required",
+                          "title": "Last Name",
+                          "type": "string"
+                        },
+                        {
+                          "property": "Picture",
+                          "requiredText": "is required",
+                          "title": "Picture",
+                          "type": "file"
+                        }
+                      ],
+                      "name": "form1",
+                      "submitText": "Save",
+                      "type": "form"
+                    }
+                  ],
+                  "name": "fieldset1",
+                  "style": {
+                    "marginBottom": "32px"
+                  },
+                  "text": "Personal Data",
+                  "type": "fieldset"
+                }
+              ],
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-xl-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "events": {
+                        "cancel": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "submit": [
+                          {
+                            "error": [
+                              {
+                                "detail": "${result.error.message}",
+                                "severity": "error",
+                                "summary": "Cannot change password",
+                                "type": "notify"
+                              }
+                            ],
+                            "name": "Security.changePassword",
+                            "parameters": [
+                              {
+                                "name": "OldPassword",
+                                "value": "${event.OldPassword}"
+                              },
+                              {
+                                "name": "NewPassword",
+                                "value": "${event.NewPassword}"
+                              }
+                            ],
+                            "then": [
+                              {
+                                "detail": "Password has been changed.",
+                                "severity": "info",
+                                "summary": "Success",
+                                "type": "notify"
+                              }
+                            ],
+                            "type": "invoke"
+                          }
+                        ]
+                      },
+                      "fields": [
+                        {
+                          "property": "OldPassword",
+                          "required": true,
+                          "requiredText": "is required",
+                          "title": "Old Password",
+                          "type": "password"
+                        },
+                        {
+                          "property": "NewPassword",
+                          "required": true,
+                          "requiredText": "is required",
+                          "title": "New Password",
+                          "type": "password"
+                        },
+                        {
+                          "compare": "NewPassword",
+                          "property": "ConfirmPassword",
+                          "required": true,
+                          "requiredText": "is required",
+                          "title": "Confirm password",
+                          "type": "password"
+                        }
+                      ],
+                      "name": "form3",
+                      "submitText": "Change password",
+                      "type": "form"
+                    }
+                  ],
+                  "name": "fieldset3",
+                  "text": "Password",
+                  "type": "fieldset"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "ServerMethodsController.UserPersonalData",
+        "path": "api/ServerMethods/UserPersonalData",
+        "then": [
+          {
+            "name": "personalData",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke-method",
+        "verb": "get"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Profile"
+}

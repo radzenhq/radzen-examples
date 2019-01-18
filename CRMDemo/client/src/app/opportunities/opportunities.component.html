@@ -1,0 +1,48 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Opportunities">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getOpportunitiesCount" [data]="getOpportunitiesResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column format="decimal" property="Amount" title="Amount" type="number">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Amount | currency}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="UserId" title="Sales Representative" *ngIf="security?.user?.isInRole('Sales Manager')" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.User?.UserName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column filterProperty="Contact.Email" property="ContactId" sortProperty="Contact.Email" title="Contact" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Contact?.FirstName}} {{data?.Contact?.LastName}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column filterProperty="OpportunityStatus.Name" property="StatusId" sortProperty="OpportunityStatus.Name" title="Opportunity Status" type="string">
+          <ng-template let-data gridColumnTemplate>
+            <rz-html #html0 *ngIf="data?.OpportunityStatus?.Name == 'Active'">
+              <span class="badge badge-secondary">{{data?.OpportunityStatus?.Name}}</span>
+            </rz-html>
+            <rz-html #html1 *ngIf="data?.OpportunityStatus?.Name == 'Won'">
+              <span class="badge badge-success">{{data?.OpportunityStatus?.Name}}</span>
+            </rz-html>
+            <rz-html #html2 *ngIf="data?.OpportunityStatus?.Name == 'Inactive'">
+              <span class="badge badge-light">{{data?.OpportunityStatus?.Name}}</span>
+            </rz-html>
+            <rz-html #html3 *ngIf="data?.OpportunityStatus?.Name == 'Lost'">
+              <span class="badge badge-danger">{{data?.OpportunityStatus?.Name}}</span>
+            </rz-html>
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="CloseDate" title="Close Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.CloseDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="Name" title="Name" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

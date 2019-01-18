@@ -1,0 +1,14 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Task Types">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getTaskTypesCount" [data]="getTaskTypesResult" emptyText="No records to display." addText="Add" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (loadData)="grid0LoadData($event)" (delete)="grid0Delete($event)" (add)="grid0Add($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="Id" title="Id" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="Name" title="Name" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

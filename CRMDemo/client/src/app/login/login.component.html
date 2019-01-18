@@ -1,0 +1,30 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" [style]="{'marginBottom':'8px'}" text="Sign in">
+  </rz-heading>
+  <rz-heading #heading0 size="H5" [style]="{'marginBottom':'32px'}" text="with your RadzenCRM account">
+  </rz-heading>
+  <rz-label #label0 component="password0" [style]="{'display':'block','marginBottom':'8px'}" text="Username">
+  </rz-label>
+  <rz-textbox #textbox0 [style]="{'display':'block','marginBottom':'16px','width':'100%'}" name="textbox0">
+  </rz-textbox>
+  <rz-label #label1 component="password0" [style]="{'display':'block','marginBottom':'8px'}" text="Password">
+  </rz-label>
+  <rz-password #password0 [style]="{'display':'block','marginBottom':'16px','width':'100%'}" name="password0">
+  </rz-password>
+  <rz-button #button0 buttonStyle="info" size="md" [style]="{'display':'block','width':'100%'}" text="Sign in">
+  </rz-button>
+  <rz-heading #heading1 size="H5" [style]="{'marginBottom':'16px','marginTop':'48px','textAlign':'center'}" text="or sign in as a demo user">
+  </rz-heading>
+  <rz-button #button3 buttonStyle="light" [style]="{'display':'block','marginBottom':'16px','width':'100%'}" text="Sales Manager" (click)="button3Click($event)">
+  </rz-button>
+  <rz-heading #heading2 size="H5" [style]="{'marginBottom':'16px','marginTop':'16px','textAlign':'center'}" text="or">
+  </rz-heading>
+  <rz-button #button2 buttonStyle="light" [style]="{'width':'100%'}" text="Sales Representative" (click)="button2Click($event)">
+  </rz-button>
+  <div class="row">
+    <div>
+    </div>
+    <div class="col-md-9 justify-content-between  d-flex align-items-center">
+    </div>
+  </div>
+</rz-content>

@@ -1,0 +1,1248 @@
+{
+  "info": {
+    "title": "CRM",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 14
+  },
+  "definitions": {
+    "Contact": {
+      "x-table": "dbo.Contacts",
+      "resource": "Contacts",
+      "required": [
+        "Email"
+      ],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Contact",
+              "name": "Opportunities",
+              "type": "Opportunity"
+            }
+          ]
+        },
+        "Email": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "Company": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "LastName": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "FirstName": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "Phone": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "Opportunities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Opportunity"
+          }
+        }
+      }
+    },
+    "Opportunity": {
+      "x-table": "dbo.Opportunities",
+      "resource": "Opportunities",
+      "required": [
+        "Amount",
+        "UserId",
+        "ContactId",
+        "StatusId",
+        "CloseDate",
+        "Name"
+      ],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Opportunity",
+              "name": "Tasks",
+              "type": "Task"
+            }
+          ]
+        },
+        "Amount": {
+          "x-key": false,
+          "type": "number",
+          "format": "decimal"
+        },
+        "UserId": {
+          "x-key": false,
+          "type": "string",
+          "length": 450
+        },
+        "ContactId": {
+          "x-key": false,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Contacts",
+            "parentEntityType": "Contact",
+            "type": "Contact",
+            "principalKey": "Id",
+            "name": "Contact",
+            "textProperty": "Email",
+            "navigationProperty": "Opportunities"
+          }
+        },
+        "StatusId": {
+          "x-key": false,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "OpportunityStatuses",
+            "parentEntityType": "OpportunityStatus",
+            "type": "OpportunityStatus",
+            "principalKey": "Id",
+            "name": "OpportunityStatus",
+            "textProperty": "Name",
+            "navigationProperty": "Opportunities"
+          }
+        },
+        "CloseDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "Name": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        }
+      }
+    },
+    "OpportunityStatus": {
+      "x-table": "dbo.OpportunityStatuses",
+      "resource": "OpportunityStatuses",
+      "required": [],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "OpportunityStatus",
+              "name": "Opportunities",
+              "type": "Opportunity"
+            }
+          ]
+        },
+        "Name": {
+          "x-key": false,
+          "type": "string"
+        },
+        "Opportunities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Opportunity"
+          }
+        }
+      }
+    },
+    "Task": {
+      "x-table": "dbo.Tasks",
+      "resource": "Tasks",
+      "required": [
+        "OpportunityId",
+        "DueDate",
+        "TypeId"
+      ],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer"
+        },
+        "Title": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "OpportunityId": {
+          "x-key": false,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Opportunities",
+            "parentEntityType": "Opportunity",
+            "type": "Opportunity",
+            "principalKey": "Id",
+            "name": "Opportunity",
+            "textProperty": "UserId",
+            "navigationProperty": "Tasks"
+          }
+        },
+        "DueDate": {
+          "x-key": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "TypeId": {
+          "x-key": false,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "TaskTypes",
+            "parentEntityType": "TaskType",
+            "type": "TaskType",
+            "principalKey": "Id",
+            "name": "TaskType",
+            "textProperty": "Name",
+            "navigationProperty": "Tasks"
+          }
+        },
+        "StatusId": {
+          "x-key": false,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "TaskStatuses",
+            "parentEntityType": "TaskStatus",
+            "type": "TaskStatus",
+            "principalKey": "Id",
+            "name": "TaskStatus",
+            "textProperty": "Name",
+            "navigationProperty": "Tasks"
+          }
+        }
+      }
+    },
+    "TaskStatus": {
+      "x-table": "dbo.TaskStatuses",
+      "resource": "TaskStatuses",
+      "required": [],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "TaskStatus",
+              "name": "Tasks",
+              "type": "Task"
+            }
+          ]
+        },
+        "Name": {
+          "x-key": false,
+          "type": "string",
+          "length": 256
+        },
+        "Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        }
+      }
+    },
+    "TaskType": {
+      "x-table": "dbo.TaskTypes",
+      "resource": "TaskTypes",
+      "required": [],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "TaskType",
+              "name": "Tasks",
+              "type": "Task"
+            }
+          ]
+        },
+        "Name": {
+          "x-key": false,
+          "type": "string"
+        },
+        "Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Contacts": {
+      "get": {
+        "operationId": "getContacts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Contact"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createContact",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Contact",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Opportunities": {
+      "get": {
+        "operationId": "getOpportunities",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Opportunity"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOpportunity",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Opportunity",
+            "schema": {
+              "$ref": "#/definitions/Opportunity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Opportunity"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OpportunityStatuses": {
+      "get": {
+        "operationId": "getOpportunityStatuses",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/OpportunityStatus"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOpportunityStatus",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "OpportunityStatus",
+            "schema": {
+              "$ref": "#/definitions/OpportunityStatus"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/OpportunityStatus"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Tasks": {
+      "get": {
+        "operationId": "getTasks",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Task"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTask",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Task",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/TaskStatuses": {
+      "get": {
+        "operationId": "getTaskStatuses",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/TaskStatus"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTaskStatus",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "TaskStatus",
+            "schema": {
+              "$ref": "#/definitions/TaskStatus"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/TaskStatus"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/TaskTypes": {
+      "get": {
+        "operationId": "getTaskTypes",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/TaskType"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTaskType",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "TaskType",
+            "schema": {
+              "$ref": "#/definitions/TaskType"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/TaskType"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Contacts({Id})": {
+      "delete": {
+        "operationId": "deleteContact",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getContactById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateContact",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Contact",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Opportunities({Id})": {
+      "delete": {
+        "operationId": "deleteOpportunity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getOpportunityById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Opportunity"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateOpportunity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Opportunity",
+            "schema": {
+              "$ref": "#/definitions/Opportunity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OpportunityStatuses({Id})": {
+      "delete": {
+        "operationId": "deleteOpportunityStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getOpportunityStatusById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/OpportunityStatus"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateOpportunityStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "OpportunityStatus",
+            "schema": {
+              "$ref": "#/definitions/OpportunityStatus"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Tasks({Id})": {
+      "delete": {
+        "operationId": "deleteTask",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getTaskById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateTask",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Task",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/TaskStatuses({Id})": {
+      "delete": {
+        "operationId": "deleteTaskStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getTaskStatusById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/TaskStatus"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateTaskStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "TaskStatus",
+            "schema": {
+              "$ref": "#/definitions/TaskStatus"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/TaskTypes({Id})": {
+      "delete": {
+        "operationId": "deleteTaskType",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getTaskTypeById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/TaskType"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateTaskType",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "TaskType",
+            "schema": {
+              "$ref": "#/definitions/TaskType"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/CRM",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

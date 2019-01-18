@@ -1,0 +1,144 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "columns": 1,
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Opportunity!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createOpportunity",
+                        "parameters": [
+                          {
+                            "name": "Opportunity",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "opportunities",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "maxText": "cannot be more than",
+                      "minText": "cannot be less than",
+                      "property": "Amount",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Amount",
+                      "type": "number"
+                    },
+                    {
+                      "allowFiltering": true,
+                      "data": "${getContactsResult}",
+                      "defaultValue": "",
+                      "multiple": false,
+                      "placeholder": "Choose Contact",
+                      "property": "ContactId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "template": "${data.FirstName} ${data.LastName}",
+                      "textProperty": "FirstName",
+                      "title": "Contact",
+                      "type": "lookup",
+                      "valueProperty": "Id"
+                    },
+                    {
+                      "data": "${getOpportunityStatusesResult}",
+                      "placeholder": "Choose OpportunityStatus",
+                      "property": "StatusId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Status",
+                      "type": "lookup",
+                      "valueProperty": "Id"
+                    },
+                    {
+                      "property": "CloseDate",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Close Date",
+                      "type": "date"
+                    },
+                    {
+                      "property": "Name",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Name",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getContacts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getContactsResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getOpportunityStatuses",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOpportunityStatusesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Opportunity"
+}

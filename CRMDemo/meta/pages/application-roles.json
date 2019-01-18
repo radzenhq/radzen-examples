@@ -1,0 +1,98 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Application Roles"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "allowDelete": true,
+                  "allowAdd": true,
+                  "columns": [
+                    {
+                      "property": "Name",
+                      "title": "Name"
+                    }
+                  ],
+                  "data": "${getRolesResult}",
+                  "events": {
+                    "delete": [
+                      {
+                        "name": "Security.deleteRole",
+                        "parameters": [
+                          {
+                            "name": "id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "type": "invoke",
+                        "then": [
+                          {
+                            "type": "notify",
+                            "severity": "info",
+                            "summary": "Success",
+                            "detail": "Role \"${event.Name}\" has been deleted."
+                          }
+                        ],
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot delete role",
+                            "type": "notify"
+                          }
+                        ]
+                      }
+                    ],
+                    "add": [
+                      {
+                        "type": "popup",
+                        "path": "add-application-role"
+                      }
+                    ]
+                  },
+                  "name": "grid0",
+                  "type": "grid",
+                  "emptyText": "No records to display.",
+                  "addText": "Add"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Security.getRoles",
+        "then": [
+          {
+            "name": "getRolesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Application Roles",
+  "layout": "Main"
+}

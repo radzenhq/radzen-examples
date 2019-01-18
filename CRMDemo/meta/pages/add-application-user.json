@@ -1,0 +1,112 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "events": {
+    "load": [
+      {
+        "type": "invoke",
+        "name": "Security.getRoles",
+        "then": [
+          {
+            "type": "set",
+            "name": "roles",
+            "value": "${result.value}"
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "fields": [
+                    {
+                      "property": "Email",
+                      "type": "string",
+                      "required": true,
+                      "title": "Email",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "title": "Roles",
+                      "property": "RoleNames",
+                      "type": "lookup",
+                      "data": "${roles}",
+                      "multiple": true,
+                      "textProperty": "Name",
+                      "valueProperty": "Name",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "type": "password",
+                      "property": "Password",
+                      "required": true,
+                      "title": "Password",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "type": "password",
+                      "property": "ConfirmPassword",
+                      "compare": "Password",
+                      "required": true,
+                      "title": "Confirm password",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot add user",
+                            "type": "notify"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "name": "Security.createUser",
+                        "parameters": [
+                          {
+                            "name": "User",
+                            "value": "${event}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "submitText": "Save",
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "name": "Add Application User",
+  "layout": "Main"
+}

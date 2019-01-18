@@ -1,0 +1,191 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${contact}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Contact",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.updateContact",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "Contact",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Email",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    {
+                      "property": "FirstName",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "First Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "LastName",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Last Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Company",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Company",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Phone",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Phone",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "name": "CRM.getContactById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "contact",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit Contact"
+}

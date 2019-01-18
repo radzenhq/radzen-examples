@@ -1,0 +1,18 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="Email" [required]="true" requiredText="is required" title="Email" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="FirstName" [required]="false" requiredText="is required" title="First Name" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="LastName" [required]="false" requiredText="is required" title="Last Name" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Company" [required]="false" requiredText="is required" title="Company" type="string">
+        </rz-string-form-field>
+        <rz-string-form-field property="Phone" [required]="false" requiredText="is required" title="Phone" type="string">
+        </rz-string-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

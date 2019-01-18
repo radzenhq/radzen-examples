@@ -1,0 +1,22 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Application Users">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [data]="getUsersResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="Id" title="Picture" type="string">
+          <ng-template let-data gridColumnTemplate>
+            <rz-image #image0 [path]="data?.Picture" [style]="{'border':'2px solid rgb(71, 156, 200)','borderRadius':'16px','height':'32px','width':'32px'}">
+            </rz-image>
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column property="FirstName" title="First Name">
+        </rz-grid-column>
+        <rz-grid-column property="LastName" title="Last Name">
+        </rz-grid-column>
+        <rz-grid-column property="Email" title="Email">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

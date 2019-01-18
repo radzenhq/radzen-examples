@@ -1,0 +1,76 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new OpportunityStatus!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createOpportunityStatus",
+                        "parameters": [
+                          {
+                            "name": "OpportunityStatus",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "opportunity-statuses",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Name",
+                      "required": false,
+                      "title": "Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Opportunity Status",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

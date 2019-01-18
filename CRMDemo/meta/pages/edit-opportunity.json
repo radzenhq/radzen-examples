@@ -1,0 +1,225 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${opportunity}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Opportunity",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.updateOpportunity",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "Opportunity",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "maxText": "cannot be more than",
+                      "minText": "cannot be less than",
+                      "property": "Amount",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Amount",
+                      "type": "number"
+                    },
+                    {
+                      "data": "${getContactsResult}",
+                      "placeholder": "Choose Contact",
+                      "property": "ContactId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "Email",
+                      "title": "Contact",
+                      "type": "lookup",
+                      "valueProperty": "Id"
+                    },
+                    {
+                      "data": "${getOpportunityStatusesResult}",
+                      "placeholder": "Choose OpportunityStatus",
+                      "property": "StatusId",
+                      "required": true,
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Opportunity Status",
+                      "type": "lookup",
+                      "valueProperty": "Id"
+                    },
+                    {
+                      "property": "CloseDate",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Close Date",
+                      "type": "date"
+                    },
+                    {
+                      "property": "Name",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Name",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "name": "CRM.getOpportunityById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "opportunity",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getContacts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getContactsResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getOpportunityStatuses",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOpportunityStatusesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit Opportunity"
+}

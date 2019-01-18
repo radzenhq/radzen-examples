@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Application Roles">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [data]="getRolesResult" emptyText="No records to display." addText="Add" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (delete)="grid0Delete($event)" (add)="grid0Add($event)">
+        <rz-grid-column property="Name" title="Name">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

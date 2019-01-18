@@ -1,0 +1,77 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new TaskStatus!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createTaskStatus",
+                        "parameters": [
+                          {
+                            "name": "TaskStatus",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "path": "task-statuses",
+                            "type": "navigate"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Name",
+                      "required": false,
+                      "title": "Name",
+                      "type": "string",
+                      "maxLength": 256,
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Task Status",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
+}

@@ -1,0 +1,51 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Tasks">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getTasksCount" [data]="getTasksResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="Title" title="Title" type="string">
+        </rz-grid-column>
+        <rz-grid-column format="date-time" property="DueDate" title="Due Date" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.DueDate | utcDate}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column filterProperty="TaskStatus.Name" property="StatusId" sortProperty="TaskStatus.Name" title="Status" type="string">
+          <ng-template let-data gridColumnTemplate>
+            <rz-icon #icon3 icon="check_circle" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskStatus?.Name == 'Complete'">
+            </rz-icon>
+            <rz-icon #icon4 icon="cancel" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskStatus?.Name == 'Not Started'">
+            </rz-icon>
+            <rz-icon #icon5 icon="autorenew" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskStatus?.Name == 'In Progress'">
+            </rz-icon>
+            <rz-label #label1 [style]="{'verticalAlign':'middle'}" [text]="data?.TaskStatus?.Name">
+            </rz-label>
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column filterProperty="TaskType.Name" property="TypeId" sortProperty="TaskType.Name" title="Type" type="string">
+          <ng-template let-data gridColumnTemplate>
+            <rz-icon #icon0 icon="settings_phone" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Call'">
+            </rz-icon>
+            <rz-icon #icon1 icon="video_call" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Online Meeting'">
+            </rz-icon>
+            <rz-icon #icon2 icon="email" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Email'">
+            </rz-icon>
+            <rz-label #label0 [style]="{'lineHeight':'24px','verticalAlign':'middle'}" [text]="data?.TaskType?.Name">
+            </rz-label>
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column filterProperty="Opportunity.Name" [filterable]="true" property="OpportunityId" sortProperty="Opportunity.Name" title="Opportunity" type="string">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Opportunity?.Name}}
+          </ng-template>
+        </rz-grid-column>
+        <rz-grid-column title="Sales Representative" *ngIf="security?.user?.isInRole('Sales Manager')">
+          <ng-template let-data gridColumnTemplate>
+          {{data?.Opportunity?.User?.UserName}}
+          </ng-template>
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

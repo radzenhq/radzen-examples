@@ -1,0 +1,153 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${user}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot update user",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Security.updateUser",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "User",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "maxLength": "",
+                      "property": "FirstName",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "First Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "LastName",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Last Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Email",
+                      "requiredText": "is required",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    {
+                      "data": "${roles}",
+                      "multiple": true,
+                      "property": "RoleNames",
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Roles",
+                      "type": "lookup",
+                      "valueProperty": "Name"
+                    },
+                    {
+                      "property": "Picture",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Picture",
+                      "type": "file"
+                    },
+                    {
+                      "property": "Password",
+                      "requiredText": "is required",
+                      "title": "Password",
+                      "type": "password"
+                    },
+                    {
+                      "compare": "Password",
+                      "property": "ConfirmPassword",
+                      "requiredText": "is required",
+                      "title": "Confirm password",
+                      "type": "password"
+                    }
+                  ],
+                  "name": "form0",
+                  "submitText": "Save",
+                  "type": "form"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Security.getUserById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "user",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Security.getRoles",
+        "then": [
+          {
+            "name": "roles",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit Application User"
+}

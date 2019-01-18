@@ -1,0 +1,207 @@
+<rz-content #content1 container="main">
+  <rz-icon #icon0 icon="assessment">
+  </rz-icon>
+  <rz-heading #pageTitle size="H1" [style]="{'display':'inline-block'}" text="CRM Dashboard">
+  </rz-heading>
+  <rz-heading #heading11 size="H2" [style]="{'marginBottom':'24px','marginTop':'32px'}" text="Monthly Stats">
+  </rz-heading>
+  <div [ngStyle]="{}" class="row">
+    <div class="col-xl-3 col-lg-6">
+      <rz-card #card2 [style]="{'marginBottom':'16px','position':'relative'}">
+        <div class="row">
+          <div class="align-items-center d-flex col-4">
+            <rz-card #card7 [style]="{'backgroundColor':'#68d5c8','float':'none','height':'64px','paddingBottom':'0','paddingLeft':'0','paddingRight':'0','paddingTop':'0','textAlign':'center','top':'','verticalAlign':'middle','width':'64px'}">
+              <rz-icon #icon1 icon="attach_money" [style]="{'color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
+              </rz-icon>
+            </rz-card>
+          </div>
+          <div class="col-8">
+            <rz-heading #heading2 size="H4" [style]="{'display':'block','marginBottom':'0px','textAlign':'right'}" text="Revenue">
+            </rz-heading>
+            <rz-heading #heading13 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
+            </rz-heading>
+            <rz-heading #heading3 size="H3" [style]="{'color':'#68d5c8','fontSize':'24px','textAlign':'right'}" [text]="(revenueByMonth || {})[revenueByMonth?.length - 1]?.Revenue | currency">
+            </rz-heading>
+          </div>
+        </div>
+      </rz-card>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <rz-card #card3 [style]="{'marginBottom':'16px'}">
+        <div class="row">
+          <div class="align-items-center d-flex col-4">
+            <rz-card #card8 [style]="{'backgroundColor':'#f9777f','float':'none','height':'64px','paddingBottom':'0','paddingLeft':'0','paddingRight':'0','paddingTop':'0','textAlign':'center','top':'','verticalAlign':'middle','width':'64px'}">
+              <rz-icon #icon2 icon="shopping_cart" [style]="{'color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
+              </rz-icon>
+            </rz-card>
+          </div>
+          <div class="col-8">
+            <rz-heading #heading14 size="H4" [style]="{'display':'block','marginBottom':'0px','textAlign':'right'}" text="Opportunities">
+            </rz-heading>
+            <rz-heading #heading15 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
+            </rz-heading>
+            <rz-heading #heading4 size="H3" [style]="{'color':'#f9777f','fontSize':'24px','textAlign':'right'}" [text]="revenueByCompany?.length">
+            </rz-heading>
+          </div>
+        </div>
+      </rz-card>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <rz-card #card4 [style]="{'marginBottom':'16px'}">
+        <div class="row">
+          <div class="align-items-center d-flex col-4">
+            <rz-card #card9 [style]="{'backgroundColor':'#ff6d41','float':'none','height':'64px','paddingBottom':'0','paddingLeft':'0','paddingRight':'0','paddingTop':'0','textAlign':'center','top':'','verticalAlign':'middle','width':'64px'}">
+              <rz-icon #icon3 icon="account_balance_wallet" [style]="{'color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
+              </rz-icon>
+            </rz-card>
+          </div>
+          <div class="col-8">
+            <rz-heading #heading5 size="H4" [style]="{'display':'block','marginBottom':'0px','textAlign':'right'}" text="Average Deal Size">
+            </rz-heading>
+            <rz-heading #heading16 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
+            </rz-heading>
+            <rz-heading #heading17 size="H3" [style]="{'color':'#ff6d41','fontSize':'24px','textAlign':'right'}" [text]="(dealSizeByMonth || {})[dealSizeByMonth?.length - 1]?.DealSize | currency">
+            </rz-heading>
+          </div>
+        </div>
+      </rz-card>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <rz-card #card5 [style]="{'marginBottom':'16px'}">
+        <div class="row">
+          <div class="align-items-center d-flex col-4">
+            <rz-card #card10 [style]="{'backgroundColor':'#479cc8','float':'none','height':'64px','paddingBottom':'0','paddingLeft':'0','paddingRight':'0','paddingTop':'0','textAlign':'center','top':'','verticalAlign':'middle','width':'64px'}">
+              <rz-icon #icon4 icon="thumb_up" [style]="{'color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
+              </rz-icon>
+            </rz-card>
+          </div>
+          <div class="col-8">
+            <rz-heading #heading6 size="H4" [style]="{'display':'block','marginBottom':'0px','textAlign':'right'}" text="Win Rate">
+            </rz-heading>
+            <rz-heading #heading7 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
+            </rz-heading>
+            <rz-heading #heading8 size="H3" [style]="{'color':'#479cc8','fontSize':'24px','marginBottom':'0px','textAlign':'right'}" [text]="dealsWonRatio | percent">
+            </rz-heading>
+            <rz-progressbar #progressbar0 [showValue]="false" [style]="{'height':'10px'}" unit="%" [value]="dealsWonRatio * 100">
+            </rz-progressbar>
+          </div>
+        </div>
+      </rz-card>
+    </div>
+  </div>
+  <rz-heading #heading12 size="H2" [style]="{'marginBottom':'24px','marginTop':'32px'}" text="Company Performance">
+  </rz-heading>
+  <div [ngStyle]="{'marginBottom':'32px'}" class="row">
+    <div class="col-lg-6 col-xl-4">
+      <rz-card #card0 [style]="{'marginBottom':'16px'}">
+        <rz-heading #heading0 size="H5" text="Customer Life Time Value">
+        </rz-heading>
+        <rz-chart #chart0 categoryProperty="Company" chartType="Column" [data]="revenueByCompany" [legend]="false" [style]="{'height':'200px','width':'100%'}" valueProperty="Revenue">
+        </rz-chart>
+      </rz-card>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <rz-card #card1 [style]="{'marginBottom':'16px'}">
+        <rz-heading #heading1 size="H5" [style]="{'display':'inline-block'}" text="Revenue">
+        </rz-heading>
+        <rz-chart #chart1 categoryProperty="Month" chartType="Line" [data]="revenueByMonth" [legend]="false" [style]="{'height':'200px','width':'100%'}" valueProperty="Revenue">
+        </rz-chart>
+      </rz-card>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <rz-card #card6 [style]="{'marginBottom':'16px'}">
+        <rz-heading #heading10 size="H5" [style]="{'display':'inline-block'}" text="Revenue per Employee">
+        </rz-heading>
+        <rz-chart #chart2 categoryProperty="Employee" chartType="Bar" [data]="revenueByEmployee" [legend]="false" [style]="{'height':'200px','width':'100%'}" valueProperty="Revenue">
+        </rz-chart>
+      </rz-card>
+    </div>
+  </div>
+  <rz-heading #heading9 size="H2" [style]="{'marginBottom':'24px','marginTop':'32px'}" text="Pending Work">
+  </rz-heading>
+  <div class="row">
+    <div class="col-xl-6">
+      <rz-card #card11>
+        <rz-heading #heading18 size="H2" text="Open Opportunities">
+        </rz-heading>
+        <rz-grid #grid0 addText="Add" [allowSorting]="true" [data]="getOpportunitiesResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel">
+          <rz-grid-column property="Name" title="Opportunity" type="string">
+            <ng-template let-data gridColumnTemplate>
+              <rz-label #label0 [style]="{'display':'block'}" [text]="data?.Name">
+              </rz-label>
+              <rz-label #label1 [style]="{'fontSize':'12px'}" [text]="data?.Contact?.Company">
+              </rz-label>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column format="decimal" property="Amount" title="Amount" type="number">
+            <ng-template let-data gridColumnTemplate>
+            {{data?.Amount | currency}}
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column property="StatusId" title="Status" type="integer">
+            <ng-template let-data gridColumnTemplate>
+              <rz-html #html1 *ngIf="data?.OpportunityStatus?.Name == 'Active'">
+                <span class="badge badge-secondary">{{data?.OpportunityStatus?.Name}}</span>
+              </rz-html>
+              <rz-html #html4 *ngIf="data?.OpportunityStatus?.Name == 'Won'">
+                <span class="badge badge-success">{{data?.OpportunityStatus?.Name}}</span>
+              </rz-html>
+              <rz-html #html2 *ngIf="data?.OpportunityStatus?.Name == 'Inactive'">
+                <span class="badge badge-light">{{data?.OpportunityStatus?.Name}}</span>
+              </rz-html>
+              <rz-html #html3 *ngIf="data?.OpportunityStatus?.Name == 'Lost'">
+                <span class="badge badge-danger">{{data?.OpportunityStatus?.Name}}</span>
+              </rz-html>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column format="date-time" property="CloseDate" title="Close Date" width="100px" type="string">
+            <ng-template let-data gridColumnTemplate>
+            {{data?.CloseDate | utcDate}}
+            </ng-template>
+          </rz-grid-column>
+        </rz-grid>
+      </rz-card>
+    </div>
+    <div class="col-xl-6">
+      <rz-card #card12>
+        <rz-heading #heading20 size="H2" text="Active Tasks">
+        </rz-heading>
+        <rz-grid #grid1 addText="Add" [allowSorting]="true" [data]="getTasksResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel">
+          <rz-grid-column property="OpportunityId" sortProperty="Opportunity.User.FirstName" title="Employee" type="integer">
+            <ng-template let-data gridColumnTemplate>
+              <rz-image #image0 [path]="data?.Opportunity?.User?.Picture" [style]="{'borderRadius':'16px','height':'32px','width':'32px'}">
+              </rz-image>
+              <rz-label #label3 [style]="{'display':'inline-block','fontSize':'12px'}" text="{{data?.Opportunity?.User?.FirstName}} {{data?.Opportunity?.User?.LastName}}">
+              </rz-label>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column property="Title" title="Task" type="string">
+            <ng-template let-data gridColumnTemplate>
+              <rz-icon #icon5 icon="settings_phone" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Call'">
+              </rz-icon>
+              <rz-icon #icon6 icon="video_call" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Online Meeting'">
+              </rz-icon>
+              <rz-icon #icon7 icon="email" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Email'">
+              </rz-icon>
+              <rz-label #label2 [style]="{'display':'inline-block'}" [text]="data?.Title">
+              </rz-label>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column property="OpportunityId" sortProperty="Opportunity.Name" title="Opportunity" type="integer">
+            <ng-template let-data gridColumnTemplate>
+              <rz-label #label4 [style]="{'display':'block'}" [text]="data?.Opportunity?.Name">
+              </rz-label>
+              <rz-label #label5 [style]="{'fontSize':'12px'}" text="{{data?.Opportunity?.Contact?.FirstName}} {{data?.Opportunity?.Contact?.LastName}}">
+              </rz-label>
+            </ng-template>
+          </rz-grid-column>
+          <rz-grid-column format="date-time" property="DueDate" title="Due Date" width="100px" type="string">
+            <ng-template let-data gridColumnTemplate>
+            {{data?.DueDate | utcDate}}
+            </ng-template>
+          </rz-grid-column>
+        </rz-grid>
+      </rz-card>
+    </div>
+  </div>
+</rz-content>

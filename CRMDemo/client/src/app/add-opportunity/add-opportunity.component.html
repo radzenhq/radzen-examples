@@ -1,0 +1,21 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [columns]="1" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-number-form-field maxText="cannot be more than" minText="cannot be less than" property="Amount" [required]="true" requiredText="is required" title="Amount" type="number">
+        </rz-number-form-field>
+        <rz-lookup-form-field [allowFiltering]="true" [data]="getContactsResult" [multiple]="false" placeholder="Choose Contact" property="ContactId" [required]="true" requiredText="is required" textProperty="FirstName" title="Contact" valueProperty="Id" type="lookup">
+          <ng-template let-data lookupFormFieldTemplate>
+          {{data?.FirstName}} {{data?.LastName}}
+          </ng-template>
+        </rz-lookup-form-field>
+        <rz-lookup-form-field [data]="getOpportunityStatusesResult" placeholder="Choose OpportunityStatus" property="StatusId" [required]="true" requiredText="is required" textProperty="Name" title="Status" valueProperty="Id" type="lookup">
+        </rz-lookup-form-field>
+        <rz-date-form-field property="CloseDate" [required]="true" requiredText="is required" title="Close Date" type="date">
+        </rz-date-form-field>
+        <rz-string-form-field property="Name" [required]="true" requiredText="is required" title="Name" type="string">
+        </rz-string-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>
