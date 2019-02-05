@@ -32,7 +32,7 @@
                           "name": "image0",
                           "path": "${data.Picture}",
                           "style": {
-                            "border": "2px solid rgb(71, 156, 200)",
+                            "border": "2px solid ",
                             "borderRadius": "16px",
                             "height": "32px",
                             "width": "32px"
@@ -57,6 +57,10 @@
                       "title": "Email"
                     }
                   ],
+                  "confirmDeleteCancelText": "Cancel",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
                   "data": "${getUsersResult}",
                   "emptyText": "No records to display.",
                   "events": {

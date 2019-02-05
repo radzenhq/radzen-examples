@@ -15,6 +15,8 @@ import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { TextBoxComponent } from '@radzen/angular/dist/textbox';
 import { ButtonComponent } from '@radzen/angular/dist/button';
 import { GridComponent } from '@radzen/angular/dist/grid';
+import { ImageComponent } from '@radzen/angular/dist/image';
+import { LabelComponent } from '@radzen/angular/dist/label';
 import { AddContactComponent } from '../add-contact/add-contact.component';
 import { EditContactComponent } from '../edit-contact/edit-contact.component';
 

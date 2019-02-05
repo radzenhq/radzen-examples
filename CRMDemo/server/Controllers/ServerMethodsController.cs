@@ -47,7 +47,7 @@ namespace Crm.Controllers
         {
             var result = context.Opportunities
                                 .Include(opportunity => opportunity.User)
-                                .GroupBy(opportunity => opportunity.User.UserName)
+                                .GroupBy(opportunity => $"{opportunity.User.FirstName} {opportunity.User.LastName}")
                                 .Select(group => new {
                                      Employee = group.Key,
                                      Revenue = group.Sum(opportunity => opportunity.Amount)
@@ -63,11 +63,14 @@ namespace Crm.Controllers
         public IActionResult RevenueByMonth()
         {
             var result = context.Opportunities
-                                 .GroupBy(opportunity => new DateTime(opportunity.CloseDate.Year, opportunity.CloseDate.Month, 1))
-                                 .Select(group => new {
-                                     Revenue = group.Sum(opportunity => opportunity.Amount),
-                                     Month = group.Key
-                                 });
+                                .Include(opportunity => opportunity.OpportunityStatus)
+                                .Where(opportunity => opportunity.OpportunityStatus.Name == "Won")
+                                .GroupBy(opportunity => new DateTime(opportunity.CloseDate.Year, opportunity.CloseDate.Month, 1))
+                                .Select(group => new {
+                                    Revenue = group.Sum(opportunity => opportunity.Amount),
+                                    Month = group.Key
+                                })
+                                .OrderBy(deals => deals.Month);
             
             return Json(new { value = result }, new JsonSerializerSettings()
             {
@@ -78,11 +81,14 @@ namespace Crm.Controllers
         public IActionResult AverageDealSizeByMonth()
         {
             var result = context.Opportunities
+                                .Include(opportunity => opportunity.OpportunityStatus)
+                                .Where(opportunity => opportunity.OpportunityStatus.Name == "Won")
                                 .GroupBy(opportunity => new DateTime(opportunity.CloseDate.Year, opportunity.CloseDate.Month, 1))
                                 .Select(group => new {
                                     DealSize = group.Average(opportunity => opportunity.Amount),
                                     Month = group.Key
-                                });
+                                })
+                                .OrderBy(deals => deals.Month);
             
             return Json(new { value = result }, new JsonSerializerSettings()
             {

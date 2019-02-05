@@ -89,8 +89,14 @@ export class ODataClient {
         return params;
       }
 
-      if (key == 'filter' && this.options.legacy) {
-        value = toLegacyFilter(value);
+      if (key == 'filter') {
+        if(this.options.legacy) {
+          value = toLegacyFilter(value);
+        }
+
+        if(value.startsWith(' and ') || value.endsWith(' and ')) {
+          value = value.split(' and ').filter(v => v).join(' and ');
+        }
       }
 
       return params.set(`$${key}`, value.toString());
@@ -249,8 +255,14 @@ export class ODataClient {
         return params;
       }
 
-      if (key == 'filter' && this.options.legacy) {
-        value = toLegacyFilter(value);
+      if (key == 'filter') {
+        if(this.options.legacy) {
+          value = toLegacyFilter(value);
+        }
+
+        if(value.startsWith(' and ') || value.endsWith(' and ')) {
+          value = value.split(' and ').filter(v => v).join(' and ');
+        }
       }
 
       return params.set(`$${key}`, value.toString());

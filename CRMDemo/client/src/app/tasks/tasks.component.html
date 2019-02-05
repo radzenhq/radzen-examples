@@ -3,7 +3,7 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getTasksCount" [data]="getTasksResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getTasksCount" [data]="getTasksResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column property="Title" title="Title" type="string">
         </rz-grid-column>
         <rz-grid-column format="date-time" property="DueDate" title="Due Date" type="string">
@@ -42,7 +42,10 @@
         </rz-grid-column>
         <rz-grid-column title="Sales Representative" *ngIf="security?.user?.isInRole('Sales Manager')">
           <ng-template let-data gridColumnTemplate>
-          {{data?.Opportunity?.User?.UserName}}
+            <rz-image #image0 [path]="data?.Opportunity?.User?.Picture" [style]="{'borderRadius':'15px','height':'30px','width':'30px'}">
+            </rz-image>
+            <rz-label #label2 text="{{data?.Opportunity?.User?.FirstName}} {{data?.Opportunity?.User?.LastName}}">
+            </rz-label>
           </ng-template>
         </rz-grid-column>
       </rz-grid>

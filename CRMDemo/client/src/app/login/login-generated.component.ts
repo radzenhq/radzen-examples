@@ -12,6 +12,7 @@ import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dis
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
+import { TemplateFormComponent } from '@radzen/angular/dist/template-form';
 import { LabelComponent } from '@radzen/angular/dist/label';
 import { TextBoxComponent } from '@radzen/angular/dist/textbox';
 import { PasswordComponent } from '@radzen/angular/dist/password';
@@ -24,10 +25,11 @@ export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('content1') content1: ContentComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
   @ViewChild('heading0') heading0: HeadingComponent;
+  @ViewChild('templateForm0') templateForm0: TemplateFormComponent;
   @ViewChild('label0') label0: LabelComponent;
-  @ViewChild('textbox0') textbox0: TextBoxComponent;
+  @ViewChild('Username') username: TextBoxComponent;
   @ViewChild('label1') label1: LabelComponent;
-  @ViewChild('password0') password0: PasswordComponent;
+  @ViewChild('Password') password: PasswordComponent;
   @ViewChild('button0') button0: ButtonComponent;
   @ViewChild('heading1') heading1: HeadingComponent;
   @ViewChild('button3') button3: ButtonComponent;
@@ -101,6 +103,15 @@ export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   load() {
 
+  }
+
+  templateForm0Submit(event: any) {
+    this.security.login(`${event.Username}`, `${event.Password}`)
+    .subscribe((result: any) => {
+
+    }, (result: any) => {
+      this.notificationService.notify({ severity: "error", summary: `Error`, detail: `${result.error.message}` });
+    });
   }
 
   button3Click(event: any) {

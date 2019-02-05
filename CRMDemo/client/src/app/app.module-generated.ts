@@ -24,10 +24,11 @@ import { TextBoxModule } from '@radzen/angular/dist/textbox';
 import { ButtonModule } from '@radzen/angular/dist/button';
 import { GridModule } from '@radzen/angular/dist/grid';
 import { FormModule } from '@radzen/angular/dist/form';
-import { HtmlModule } from '@radzen/angular/dist/html';
 import { IconModule } from '@radzen/angular/dist/icon';
+import { TemplateFormModule } from '@radzen/angular/dist/template-form';
 import { PasswordModule } from '@radzen/angular/dist/password';
 import { FieldsetModule } from '@radzen/angular/dist/fieldset';
+import { HtmlModule } from '@radzen/angular/dist/html';
 import { ProgressBarModule } from '@radzen/angular/dist/progressbar';
 import { ChartModule } from '@radzen/angular/dist/chart';
 import { SharedModule } from '@radzen/angular/dist/shared';
@@ -163,10 +164,11 @@ export const AppImports = [
   ButtonModule,
   GridModule,
   FormModule,
-  HtmlModule,
   IconModule,
+  TemplateFormModule,
   PasswordModule,
   FieldsetModule,
+  HtmlModule,
   ProgressBarModule,
   ChartModule,
   SharedModule,

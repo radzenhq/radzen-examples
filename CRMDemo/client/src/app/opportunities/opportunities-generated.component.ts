@@ -13,7 +13,8 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
-import { HtmlComponent } from '@radzen/angular/dist/html';
+import { ImageComponent } from '@radzen/angular/dist/image';
+import { LabelComponent } from '@radzen/angular/dist/label';
 import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.component';
 import { EditOpportunityComponent } from '../edit-opportunity/edit-opportunity.component';
 
@@ -121,7 +122,7 @@ export class OpportunitiesGenerated implements AfterViewInit, OnInit, OnDestroy 
   }
 
   grid0LoadData(event: any) {
-    this.crm.getOpportunities(`${event.filter}`, event.top, event.skip, `${event.orderby}`, event.top != null && event.skip != null, `Contact,OpportunityStatus`, null, null)
+    this.crm.getOpportunities(`${event.filter}`, event.top, event.skip, `${event.orderby}`, event.top != null && event.skip != null, `Contact,OpportunityStatus,User`, null, null)
     .subscribe((result: any) => {
       this.getOpportunitiesResult = result.value;
 

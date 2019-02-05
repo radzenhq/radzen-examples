@@ -143,11 +143,31 @@
                     {
                       "footerTemplate": "",
                       "sortProperty": "",
-                      "template": "${data.Opportunity.User.UserName}",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "${data.Opportunity.User.Picture}",
+                          "style": {
+                            "borderRadius": "15px",
+                            "height": "30px",
+                            "width": "30px"
+                          },
+                          "type": "image"
+                        },
+                        {
+                          "name": "label2",
+                          "text": "${data.Opportunity.User.FirstName} ${data.Opportunity.User.LastName}",
+                          "type": "label"
+                        }
+                      ],
                       "title": "Sales Representative",
                       "visible": "${security.user.isInRole(\"Sales Manager\")}"
                     }
                   ],
+                  "confirmDeleteCancelText": "Cancel",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
                   "count": "${getTasksCount}",
                   "data": "${getTasksResult}",
                   "emptyText": "No records to display.",

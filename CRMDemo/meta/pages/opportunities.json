@@ -34,10 +34,31 @@
                       "type": "number"
                     },
                     {
+                      "filterProperty": "User.FirstName",
+                      "filterValue": "",
                       "footerTemplate": "",
                       "property": "UserId",
-                      "sortProperty": "",
-                      "template": "${data.User.UserName}",
+                      "sortProperty": "User.FirstName",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "${data.User.Picture}",
+                          "style": {
+                            "borderRadius": "15px",
+                            "height": "30px",
+                            "width": "30px"
+                          },
+                          "type": "image"
+                        },
+                        {
+                          "name": "label0",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "text": "${data.User.FirstName} ${data.User.LastName}",
+                          "type": "label"
+                        }
+                      ],
                       "title": "Sales Representative",
                       "type": "string",
                       "visible": "${security.user.isInRole(\"Sales Manager\")}"
@@ -58,28 +79,16 @@
                       "sortProperty": "OpportunityStatus.Name",
                       "template": [
                         {
-                          "content": "<span class=\"badge badge-secondary\">${data.OpportunityStatus.Name}</span>",
-                          "name": "html0",
-                          "type": "html",
-                          "visible": "${data.OpportunityStatus.Name == 'Active'}"
-                        },
-                        {
-                          "content": "<span class=\"badge badge-success\">${data.OpportunityStatus.Name}</span>",
-                          "name": "html1",
-                          "type": "html",
-                          "visible": "${data.OpportunityStatus.Name == 'Won'}"
-                        },
-                        {
-                          "content": "<span class=\"badge badge-light\">${data.OpportunityStatus.Name}</span>",
-                          "name": "html2",
-                          "type": "html",
-                          "visible": "${data.OpportunityStatus.Name == 'Inactive'}"
-                        },
-                        {
-                          "content": "<span class=\"badge badge-danger\">${data.OpportunityStatus.Name}</span>",
-                          "name": "html3",
-                          "type": "html",
-                          "visible": "${data.OpportunityStatus.Name == 'Lost'}"
+                          "classList": {
+                            "badge": true,
+                            "badge-danger": "${data.OpportunityStatus.Name == 'Lost'}",
+                            "badge-light": "${data.OpportunityStatus.Name == 'Inactive'}",
+                            "badge-secondary": "${data.OpportunityStatus.Name == 'Active'}",
+                            "badge-success": "${data.OpportunityStatus.Name == 'Won'}"
+                          },
+                          "name": "label1",
+                          "text": "${data.OpportunityStatus.Name}",
+                          "type": "label"
                         }
                       ],
                       "title": "Opportunity Status",
@@ -98,6 +107,10 @@
                       "type": "string"
                     }
                   ],
+                  "confirmDeleteCancelText": "Cancel",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
                   "count": "${getOpportunitiesCount}",
                   "data": "${getOpportunitiesResult}",
                   "emptyText": "No records to display.",
@@ -150,7 +163,7 @@
                           },
                           {
                             "name": "$expand",
-                            "value": "Contact,OpportunityStatus"
+                            "value": "Contact,OpportunityStatus,User"
                           },
                           {
                             "name": "$count",
@@ -163,10 +176,6 @@
                           {
                             "name": "$orderby",
                             "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Contact,OpportunityStatus"
                           }
                         ],
                         "then": [

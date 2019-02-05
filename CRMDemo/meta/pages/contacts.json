@@ -33,12 +33,12 @@
                         "name": "CRM.getContacts",
                         "parameters": [
                           {
-                            "name": "$filter",
-                            "value": "contains(FirstName, '${contactFilter}') or contains(LastName, '${contactFilter}') or contains(Company, '${contactFilter}') or contains(Email, '${contactFilter}')"
-                          },
-                          {
                             "name": "$count",
                             "value": "true"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "contains(FirstName, '${contactFilter}') or contains(LastName, '${contactFilter}') or contains(Company, '${contactFilter}') or contains(Email, '${contactFilter}')"
                           }
                         ],
                         "then": [
@@ -89,7 +89,24 @@
                       "footerTemplate": "",
                       "property": "FirstName",
                       "sortProperty": "FirstName",
-                      "template": "<img style=\"width: 30px; height: 30px; border-radius: 50%\" src=\"https://logo.clearbit.com/${data.Email.split(\"@\")[1]}\"> ${data.FirstName} ${data.LastName}",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "https://logo.clearbit.com/${data.Email.split(\"@\")[1]}",
+                          "style": {
+                            "border": "1px solid rgb(255, 255, 255)",
+                            "borderRadius": "15px",
+                            "height": "30px",
+                            "width": "30px"
+                          },
+                          "type": "image"
+                        },
+                        {
+                          "name": "label0",
+                          "text": "${data.FirstName} ${data.LastName}",
+                          "type": "label"
+                        }
+                      ],
                       "title": "Name",
                       "type": "string"
                     },
@@ -109,6 +126,10 @@
                       "type": "string"
                     }
                   ],
+                  "confirmDeleteCancelText": "Cancel",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
                   "count": "${getContactsCount}",
                   "data": "${getContactsResult}",
                   "emptyText": "No records to display.",

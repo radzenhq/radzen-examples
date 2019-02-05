@@ -67,6 +67,9 @@
                   "style": {},
                   "template": [
                     {
+                      "classList": {
+                        "d-none d-lg-inline-block": true
+                      },
                       "name": "label1",
                       "style": {},
                       "text": "${userData.FirstName} ${userData.LastName}",

@@ -2,68 +2,15 @@
   "access": [
     "Authenticated"
   ],
-  "events": {
-    "load": [
-      {
-        "type": "invoke",
-        "name": "Security.getRoles",
-        "then": [
-          {
-            "type": "set",
-            "name": "roles",
-            "value": "${result.value}"
-          }
-        ]
-      }
-    ]
-  },
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "fields": [
-                    {
-                      "property": "Email",
-                      "type": "string",
-                      "required": true,
-                      "title": "Email",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "title": "Roles",
-                      "property": "RoleNames",
-                      "type": "lookup",
-                      "data": "${roles}",
-                      "multiple": true,
-                      "textProperty": "Name",
-                      "valueProperty": "Name",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "type": "password",
-                      "property": "Password",
-                      "required": true,
-                      "title": "Password",
-                      "requiredText": "is required"
-                    },
-                    {
-                      "type": "password",
-                      "property": "ConfirmPassword",
-                      "compare": "Password",
-                      "required": true,
-                      "title": "Confirm password",
-                      "requiredText": "is required"
-                    }
-                  ],
                   "events": {
                     "cancel": [
                       {
@@ -80,11 +27,6 @@
                             "type": "notify"
                           }
                         ],
-                        "then": [
-                          {
-                            "type": "back"
-                          }
-                        ],
                         "name": "Security.createUser",
                         "parameters": [
                           {
@@ -92,21 +34,100 @@
                             "value": "${event}"
                           }
                         ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
                         "type": "invoke"
                       }
                     ]
                   },
-                  "submitText": "Save",
+                  "fields": [
+                    {
+                      "property": "FirstName",
+                      "required": true,
+                      "title": "First Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "LastName",
+                      "required": true,
+                      "title": "Last Name",
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Email",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    {
+                      "data": "${roles}",
+                      "multiple": true,
+                      "property": "RoleNames",
+                      "requiredText": "is required",
+                      "textProperty": "Name",
+                      "title": "Roles",
+                      "type": "lookup",
+                      "valueProperty": "Name"
+                    },
+                    {
+                      "property": "Picture",
+                      "required": true,
+                      "title": "Picture",
+                      "type": "file",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Password",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Password",
+                      "type": "password"
+                    },
+                    {
+                      "compare": "Password",
+                      "property": "ConfirmPassword",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Confirm password",
+                      "type": "password"
+                    }
+                  ],
                   "name": "form0",
+                  "submitText": "Save",
                   "type": "form"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
-  "name": "Add Application User",
-  "layout": "Main"
+  "events": {
+    "load": [
+      {
+        "name": "Security.getRoles",
+        "then": [
+          {
+            "name": "roles",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Application User"
 }

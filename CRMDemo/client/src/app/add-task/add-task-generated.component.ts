@@ -12,6 +12,8 @@ import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dis
 import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { FormComponent } from '@radzen/angular/dist/form';
+import { IconComponent } from '@radzen/angular/dist/icon';
+import { LabelComponent } from '@radzen/angular/dist/label';
 
 import { CrmService } from '../crm.service';
 import { SecurityService } from '../security.service';

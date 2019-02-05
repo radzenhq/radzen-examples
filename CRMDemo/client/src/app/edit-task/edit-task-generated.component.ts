@@ -14,6 +14,7 @@ import { ContentComponent } from '@radzen/angular/dist/content';
 import { LabelComponent } from '@radzen/angular/dist/label';
 import { ButtonComponent } from '@radzen/angular/dist/button';
 import { FormComponent } from '@radzen/angular/dist/form';
+import { IconComponent } from '@radzen/angular/dist/icon';
 
 import { CrmService } from '../crm.service';
 import { SecurityService } from '../security.service';

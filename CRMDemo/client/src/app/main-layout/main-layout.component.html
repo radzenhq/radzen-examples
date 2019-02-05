@@ -19,7 +19,7 @@
         <rz-profilemenu-item icon="power_settings_new" text="Logout">
         </rz-profilemenu-item>
         <ng-template let-data profilemenuTemplate>
-          <rz-label #label1 [style]="{}" text="{{userData?.FirstName}} {{userData?.LastName}}">
+          <rz-label #label1 [classList]="{'d-none d-lg-inline-block':true}" [style]="{}" text="{{userData?.FirstName}} {{userData?.LastName}}">
           </rz-label>
           <rz-image #image0 [path]="userData?.Picture" [style]="{'border':'2px solid ','borderRadius':'16px','height':'32px','width':'32px'}">
           </rz-image>

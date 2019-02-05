@@ -15,6 +15,7 @@ import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
 import { IconComponent } from '@radzen/angular/dist/icon';
 import { LabelComponent } from '@radzen/angular/dist/label';
+import { ImageComponent } from '@radzen/angular/dist/image';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { EditTaskComponent } from '../edit-task/edit-task.component';
 

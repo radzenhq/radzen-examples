@@ -104,7 +104,7 @@
       <rz-card #card1 [style]="{'marginBottom':'16px'}">
         <rz-heading #heading1 size="H5" [style]="{'display':'inline-block'}" text="Revenue">
         </rz-heading>
-        <rz-chart #chart1 categoryProperty="Month" chartType="Line" [data]="revenueByMonth" [legend]="false" [style]="{'height':'200px','width':'100%'}" valueProperty="Revenue">
+        <rz-chart #chart1 categoryProperty="Month" chartType="Area" [data]="revenueByMonth" [legend]="false" [showGridLines]="false" [style]="{'width':'100%'}" valueProperty="Revenue">
         </rz-chart>
       </rz-card>
     </div>
@@ -112,7 +112,7 @@
       <rz-card #card6 [style]="{'marginBottom':'16px'}">
         <rz-heading #heading10 size="H5" [style]="{'display':'inline-block'}" text="Revenue per Employee">
         </rz-heading>
-        <rz-chart #chart2 categoryProperty="Employee" chartType="Bar" [data]="revenueByEmployee" [legend]="false" [style]="{'height':'200px','width':'100%'}" valueProperty="Revenue">
+        <rz-chart #chart2 categoryProperty="Employee" chartType="Bar" [data]="revenueByEmployee" [legend]="false" [showGridLines]="false" [style]="{}" valueProperty="Revenue">
         </rz-chart>
       </rz-card>
     </div>
@@ -122,9 +122,9 @@
   <div class="row">
     <div class="col-xl-6">
       <rz-card #card11>
-        <rz-heading #heading18 size="H2" text="Open Opportunities">
+        <rz-heading #heading18 size="H2" text="Recent Opportunities">
         </rz-heading>
-        <rz-grid #grid0 addText="Add" [allowSorting]="true" [data]="getOpportunitiesResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel">
+        <rz-grid #grid0 addText="Add" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [data]="getOpportunitiesResult" emptyText="No records to display.">
           <rz-grid-column property="Name" title="Opportunity" type="string">
             <ng-template let-data gridColumnTemplate>
               <rz-label #label0 [style]="{'display':'block'}" [text]="data?.Name">
@@ -166,7 +166,7 @@
       <rz-card #card12>
         <rz-heading #heading20 size="H2" text="Active Tasks">
         </rz-heading>
-        <rz-grid #grid1 addText="Add" [allowSorting]="true" [data]="getTasksResult" emptyText="No records to display." confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel">
+        <rz-grid #grid1 addText="Add" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [data]="getTasksResult" emptyText="No records to display.">
           <rz-grid-column property="OpportunityId" sortProperty="Opportunity.User.FirstName" title="Employee" type="integer">
             <ng-template let-data gridColumnTemplate>
               <rz-image #image0 [path]="data?.Opportunity?.User?.Picture" [style]="{'borderRadius':'16px','height':'32px','width':'32px'}">

@@ -112,11 +112,19 @@
                       "type": "number"
                     },
                     {
+                      "allowFiltering": true,
                       "data": "${getContactsResult}",
                       "placeholder": "Choose Contact",
                       "property": "ContactId",
                       "required": true,
                       "requiredText": "is required",
+                      "template": [
+                        {
+                          "name": "label0",
+                          "text": "${data.FirstName} ${data.LastName}",
+                          "type": "label"
+                        }
+                      ],
                       "textProperty": "Email",
                       "title": "Contact",
                       "type": "lookup",
@@ -124,10 +132,24 @@
                     },
                     {
                       "data": "${getOpportunityStatusesResult}",
-                      "placeholder": "Choose OpportunityStatus",
+                      "placeholder": "Choose Status",
                       "property": "StatusId",
                       "required": true,
                       "requiredText": "is required",
+                      "template": [
+                        {
+                          "classList": {
+                            "badge": true,
+                            "badge-danger": "${data.Name == 'Lost'}",
+                            "badge-light": "${data.Name == 'Inactive'}",
+                            "badge-secondary": "${data.Name == 'Active'}",
+                            "badge-success": "${data.Name == 'Won'}"
+                          },
+                          "name": "label1",
+                          "text": "${data.Name}",
+                          "type": "label"
+                        }
+                      ],
                       "textProperty": "Name",
                       "title": "Opportunity Status",
                       "type": "lookup",

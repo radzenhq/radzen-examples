@@ -525,12 +525,12 @@
                     },
                     {
                       "categoryProperty": "Month",
-                      "chartType": "Line",
+                      "chartType": "Area",
                       "data": "${revenueByMonth}",
                       "legend": false,
                       "name": "chart1",
+                      "showGridLines": false,
                       "style": {
-                        "height": "200px",
                         "width": "100%"
                       },
                       "type": "chart",
@@ -568,13 +568,11 @@
                       "data": "${revenueByEmployee}",
                       "legend": false,
                       "name": "chart2",
-                      "style": {
-                        "height": "200px",
-                        "width": "100%"
-                      },
+                      "showGridLines": false,
+                      "style": {},
                       "type": "chart",
                       "valueProperty": "Revenue",
-                      "visible": ""
+                      "visible": true
                     }
                   ],
                   "name": "card6",
@@ -615,7 +613,7 @@
                     {
                       "name": "heading18",
                       "size": "H2",
-                      "text": "Open Opportunities",
+                      "text": "Recent Opportunities",
                       "type": "heading"
                     },
                     {
@@ -694,6 +692,10 @@
                           "width": "100px"
                         }
                       ],
+                      "confirmDeleteCancelText": "Cancel",
+                      "confirmDeleteOkText": "Ok",
+                      "confirmDeleteText": "Are you sure you want to delete this record?",
+                      "confirmDeleteTitle": "Confirmation",
                       "data": "${getOpportunitiesResult}",
                       "emptyText": "No records to display.",
                       "events": {
@@ -834,6 +836,10 @@
                           "width": "100px"
                         }
                       ],
+                      "confirmDeleteCancelText": "Cancel",
+                      "confirmDeleteOkText": "Ok",
+                      "confirmDeleteText": "Are you sure you want to delete this record?",
+                      "confirmDeleteTitle": "Confirmation",
                       "data": "${getTasksResult}",
                       "emptyText": "No records to display.",
                       "events": {

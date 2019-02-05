@@ -133,6 +133,43 @@
                       "property": "TypeId",
                       "required": true,
                       "requiredText": "is required",
+                      "template": [
+                        {
+                          "icon": "settings_phone",
+                          "name": "icon0",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.Name == 'Call'}"
+                        },
+                        {
+                          "icon": "video_call",
+                          "name": "icon1",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.Name == 'Online Meeting'}"
+                        },
+                        {
+                          "icon": "email",
+                          "name": "icon2",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.Name == 'Email'}"
+                        },
+                        {
+                          "name": "label0",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "text": "${data.Name}",
+                          "type": "label"
+                        }
+                      ],
                       "textProperty": "Name",
                       "title": "Type",
                       "type": "lookup",
@@ -143,6 +180,43 @@
                       "placeholder": "Choose Status",
                       "property": "StatusId",
                       "requiredText": "is required",
+                      "template": [
+                        {
+                          "icon": "check_circle",
+                          "name": "icon3",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.Name == 'Complete'}"
+                        },
+                        {
+                          "icon": "autorenew",
+                          "name": "icon4",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.Name == 'In Progress'}"
+                        },
+                        {
+                          "icon": "cancel",
+                          "name": "icon5",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.Name == 'Not Started'}"
+                        },
+                        {
+                          "name": "label1",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "text": "${data.Name}",
+                          "type": "label"
+                        }
+                      ],
                       "textProperty": "Name",
                       "title": "Status",
                       "type": "lookup",

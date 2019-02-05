@@ -4893,8 +4893,6 @@ input {
   width: 250px; }
 
 .card {
-  display: flex;
-  flex-direction: column;
   padding: 1.25rem 1.5625rem;
   border-radius: 4px;
   box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.06);
@@ -5243,11 +5241,14 @@ ul.profile-menu {
 .ui-steps-prev {
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
   color: #88989b !important; }
-  .ui-steps-next:hover,
-  .ui-steps-prev:hover {
+  .ui-steps-next:not(.ui-state-disabled):hover,
+  .ui-steps-prev:not(.ui-state-disabled):hover {
+    cursor: pointer;
     color: #479cc8 !important; }
+  .ui-steps-next.ui-state-disabled,
+  .ui-steps-prev.ui-state-disabled {
+    color: rgba(136, 152, 155, 0.5) !important; }
   .ui-steps-next .material-icons, .ui-steps-next .fc-prev-button .ui-icon, .fc-prev-button .ui-steps-next .ui-icon, .ui-steps-next
   .fc-next-button .ui-icon,
   .fc-next-button .ui-steps-next .ui-icon,
@@ -7175,7 +7176,7 @@ a.fc-event {
     overflow: visible !important; }
     .chart .ngx-charts .gridline-path,
     .pie .ngx-charts .gridline-path {
-      stroke: rgba(255, 255, 255, 0.5); }
+      stroke: rgba(255, 255, 255, 0.2); }
   .chart .chart-legend .legend-labels,
   .pie .chart-legend .legend-labels {
     background-color: transparent; }

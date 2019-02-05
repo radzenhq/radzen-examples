@@ -24,55 +24,89 @@
           "type": "heading"
         },
         {
-          "component": "password0",
-          "name": "label0",
-          "style": {
-            "display": "block",
-            "marginBottom": "8px"
+          "components": [
+            {
+              "component": "Username",
+              "name": "label0",
+              "style": {
+                "display": "block",
+                "marginBottom": "8px"
+              },
+              "text": "Username",
+              "type": "label"
+            },
+            {
+              "name": "Username",
+              "style": {
+                "display": "block",
+                "marginBottom": "16px",
+                "width": "100%"
+              },
+              "type": "textbox",
+              "value": ""
+            },
+            {
+              "component": "Password",
+              "name": "label1",
+              "style": {
+                "display": "block",
+                "marginBottom": "8px"
+              },
+              "text": "Password",
+              "type": "label"
+            },
+            {
+              "name": "Password",
+              "style": {
+                "display": "block",
+                "marginBottom": "16px",
+                "width": "100%"
+              },
+              "type": "password",
+              "value": ""
+            },
+            {
+              "buttonStyle": "primary",
+              "buttonType": "submit",
+              "classList": {},
+              "name": "button0",
+              "size": "md",
+              "style": {
+                "display": "block",
+                "width": "100%"
+              },
+              "text": "Sign in",
+              "type": "button"
+            }
+          ],
+          "events": {
+            "submit": [
+              {
+                "error": [
+                  {
+                    "detail": "${result.error.message}",
+                    "severity": "error",
+                    "summary": "Error",
+                    "type": "notify"
+                  }
+                ],
+                "name": "Security.login",
+                "parameters": [
+                  {
+                    "name": "username",
+                    "value": "${event.Username}"
+                  },
+                  {
+                    "name": "password",
+                    "value": "${event.Password}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
           },
-          "text": "Username",
-          "type": "label"
-        },
-        {
-          "name": "textbox0",
-          "style": {
-            "display": "block",
-            "marginBottom": "16px",
-            "width": "100%"
-          },
-          "type": "textbox",
-          "value": ""
-        },
-        {
-          "component": "password0",
-          "name": "label1",
-          "style": {
-            "display": "block",
-            "marginBottom": "8px"
-          },
-          "text": "Password",
-          "type": "label"
-        },
-        {
-          "name": "password0",
-          "style": {
-            "display": "block",
-            "marginBottom": "16px",
-            "width": "100%"
-          },
-          "type": "password",
-          "value": ""
-        },
-        {
-          "buttonStyle": "info",
-          "name": "button0",
-          "size": "md",
-          "style": {
-            "display": "block",
-            "width": "100%"
-          },
-          "text": "Sign in",
-          "type": "button"
+          "name": "templateForm0",
+          "type": "template-form"
         },
         {
           "name": "heading1",
@@ -159,12 +193,6 @@
             {
               "class": "",
               "components": [],
-              "type": "col"
-            },
-            {
-              "class": "col-md-9 justify-content-between  d-flex align-items-center",
-              "components": [],
-              "name": "col0",
               "type": "col"
             }
           ],
