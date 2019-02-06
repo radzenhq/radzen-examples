@@ -1,0 +1,2 @@
+A [Razor Components](https://docs.microsoft.com/en-us/aspnet/core/razor-components/components?view=aspnetcore-3.0) sample application showing the power of Radzen Razor Components.
+For bugs, feature requests or any other questions please use our [forum](http://forum.radzen.com/) or send an email to info@radzen.com
