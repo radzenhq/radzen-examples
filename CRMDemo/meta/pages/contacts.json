@@ -17,16 +17,20 @@
               "class": "col-md-12 align-items-center d-flex justify-content-end",
               "components": [
                 {
-                  "name": "textbox0",
-                  "placeholder": "Search for a contact",
+                  "autoComplete": false,
+                  "disabled": true,
+                  "name": "textbox0asdfasdfasdfasdf",
+                  "placeholder": "Find contact",
                   "style": {
                     "marginRight": "1rem",
                     "width": "313px"
                   },
                   "type": "textbox",
-                  "value": "${contactFilter}"
+                  "value": "${contactFilter}",
+                  "visible": true
                 },
                 {
+                  "disabled": false,
                   "events": {
                     "click": [
                       {

@@ -30,7 +30,7 @@ export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('Username') username: TextBoxComponent;
   @ViewChild('label1') label1: LabelComponent;
   @ViewChild('Password') password: PasswordComponent;
-  @ViewChild('button0') button0: ButtonComponent;
+  @ViewChild('button0asdfasdfasfasdfasdfasdasdfasdfasdf') button0Asdfasdfasfasdfasdfasdasdfasdfasdf: ButtonComponent;
   @ViewChild('heading1') heading1: HeadingComponent;
   @ViewChild('button3') button3: ButtonComponent;
   @ViewChild('heading2') heading2: HeadingComponent;

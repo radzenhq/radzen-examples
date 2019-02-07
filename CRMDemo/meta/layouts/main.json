@@ -124,17 +124,20 @@
             {
               "icon": "home",
               "path": "home",
+              "selected": false,
               "text": "Dashboard"
-            },
-            {
-              "icon": "work",
-              "path": "tasks",
-              "text": "Tasks"
             },
             {
               "icon": "perm_contact_calendar",
               "path": "contacts",
+              "selected": false,
               "text": "Contacts"
+            },
+            {
+              "icon": "work",
+              "path": "tasks",
+              "selected": false,
+              "text": "Tasks"
             },
             {
               "icon": "shopping_cart",
@@ -150,13 +153,13 @@
                   "text": "Opportunity Statuses"
                 },
                 {
+                  "path": "task-types",
+                  "text": "Task Types"
+                },
+                {
                   "icon": "",
                   "path": "task-statuses",
                   "text": "Task Statuses"
-                },
-                {
-                  "path": "task-types",
-                  "text": "Task Types"
                 }
               ],
               "path": "",
@@ -179,7 +182,7 @@
       "components": [
         {
           "name": "footerText",
-          "text": "CRM, Copyright &copy; 2019",
+          "text": "RadzenCRM &copy; 2016-2019, Radzen Ltd.",
           "type": "label"
         }
       ],

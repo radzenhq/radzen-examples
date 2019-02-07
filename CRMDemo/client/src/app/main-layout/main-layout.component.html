@@ -34,26 +34,26 @@
 </rz-body>
 <rz-sidebar #sidebar0 [stretch]="false">
   <rz-panelmenu #panelmenu0 [style]="{'height':'100%'}">
-    <rz-panelmenu-item icon="home" path="home" text="Dashboard" *ngIf="security?.isInRole(['Authenticated'])">
+    <rz-panelmenu-item icon="home" path="home" [selected]="false" text="Dashboard" *ngIf="security?.isInRole(['Authenticated'])">
     </rz-panelmenu-item>
-    <rz-panelmenu-item icon="work" path="tasks" text="Tasks" *ngIf="security?.isInRole(['Authenticated'])">
+    <rz-panelmenu-item icon="perm_contact_calendar" path="contacts" [selected]="false" text="Contacts" *ngIf="security?.isInRole(['Authenticated'])">
     </rz-panelmenu-item>
-    <rz-panelmenu-item icon="perm_contact_calendar" path="contacts" text="Contacts" *ngIf="security?.isInRole(['Authenticated'])">
+    <rz-panelmenu-item icon="work" path="tasks" [selected]="false" text="Tasks" *ngIf="security?.isInRole(['Authenticated'])">
     </rz-panelmenu-item>
     <rz-panelmenu-item icon="shopping_cart" path="opportunities" text="Opportunities" *ngIf="security?.isInRole(['Authenticated'])">
     </rz-panelmenu-item>
     <rz-panelmenu-item icon="settings" text="Settings" *ngIf="security?.user?.isInRole('Sales Manager')">
       <rz-panelmenu-item path="opportunity-statuses" text="Opportunity Statuses">
       </rz-panelmenu-item>
-      <rz-panelmenu-item path="task-statuses" text="Task Statuses">
-      </rz-panelmenu-item>
       <rz-panelmenu-item path="task-types" text="Task Types">
+      </rz-panelmenu-item>
+      <rz-panelmenu-item path="task-statuses" text="Task Statuses">
       </rz-panelmenu-item>
     </rz-panelmenu-item>
   </rz-panelmenu>
 </rz-sidebar>
 <rz-footer #footer0>
-  <rz-label #footerText text="CRM, Copyright &copy; 2019">
+  <rz-label #footerText text="RadzenCRM &copy; 2016-2019, Radzen Ltd.">
   </rz-label>
 </rz-footer>
 <router-outlet></router-outlet>
