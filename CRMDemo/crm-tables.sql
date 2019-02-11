@@ -85,11 +85,12 @@ GO
 CREATE TABLE [dbo].[Opportunities](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Amount] [money] NOT NULL,
+	[Name] [nvarchar](256) NOT NULL,
 	[UserId] [nvarchar](450) NOT NULL,
 	[ContactId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[CloseDate] [datetime] NOT NULL,
-	[Name] [nvarchar](256) NOT NULL,
+	[CloseDate] [datetime] NOT NULL
+
  CONSTRAINT [PK_Opportunities] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
