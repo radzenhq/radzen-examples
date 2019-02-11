@@ -1,0 +1,136 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Orders",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "format": "xlsx",
+                "name": "Sample.getOrders",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "value": "${gridFilters}"
+                  }
+                ],
+                "type": "export"
+              }
+            ]
+          },
+          "icon": "",
+          "name": "button0",
+          "text": "Export",
+          "type": "button"
+        },
+        {
+          "allowFiltering": true,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "property": "Id",
+              "title": "Id",
+              "type": "integer"
+            },
+            {
+              "property": "UserName",
+              "title": "User Name",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "property": "OrderDate",
+              "template": "${data.OrderDate | utcDate}",
+              "title": "Order Date",
+              "type": "string"
+            }
+          ],
+          "count": "${getOrdersCount}",
+          "data": "${getOrdersResult}",
+          "events": {
+            "loadData": [
+              {
+                "name": "gridFilters",
+                "type": "set",
+                "value": "${event.filter}"
+              },
+              {
+                "name": "Sample.getOrders",
+                "parameters": [
+                  {
+                    "name": "$top",
+                    "value": "event.top"
+                  },
+                  {
+                    "name": "$skip",
+                    "value": "event.skip"
+                  },
+                  {
+                    "name": "$expand",
+                    "value": ""
+                  },
+                  {
+                    "name": "$count",
+                    "value": "event.top != null && event.skip != null"
+                  },
+                  {
+                    "name": "$filter",
+                    "value": "${event.filter}"
+                  },
+                  {
+                    "name": "$orderby",
+                    "value": "${event.orderby}"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getOrdersResult",
+                    "type": "set",
+                    "value": "${result.value}"
+                  },
+                  {
+                    "name": "getOrdersCount",
+                    "type": "set",
+                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "grid0",
+          "pageSize": 10,
+          "type": "grid",
+          "confirmDeleteText": "Are you sure you want to delete this record?",
+          "confirmDeleteTitle": "Confirmation",
+          "confirmDeleteOkText": "Ok",
+          "confirmDeleteCancelText": "Cancel",
+          "emptyText": "No records to display.",
+          "addText": "Add"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "code": "this.grid0.load();",
+        "type": "execute"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Orders"
+}
