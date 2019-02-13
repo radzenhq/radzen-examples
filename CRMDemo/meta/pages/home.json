@@ -47,7 +47,7 @@
                                   "icon": "attach_money",
                                   "name": "icon1",
                                   "style": {
-                                    "color": "#ffffff",
+                                    "backgroundColor": "#68d5c8",
                                     "fontSize": "48px",
                                     "height": "64px",
                                     "width": "100%"
@@ -111,7 +111,7 @@
                                 "fontSize": "24px",
                                 "textAlign": "right"
                               },
-                              "text": "${revenueByMonth[revenueByMonth.length-1].Revenue | currency}",
+                              "text": "${monthlyStats.Revenue | currency}",
                               "type": "heading"
                             }
                           ],
@@ -215,7 +215,7 @@
                                 "fontSize": "24px",
                                 "textAlign": "right"
                               },
-                              "text": "${revenueByCompany.length}",
+                              "text": "${monthlyStats.Opportunities}",
                               "type": "heading"
                             }
                           ],
@@ -318,7 +318,7 @@
                                 "fontSize": "24px",
                                 "textAlign": "right"
                               },
-                              "text": "${dealSizeByMonth[dealSizeByMonth.length-1].DealSize | currency}",
+                              "text": "${monthlyStats.AverageDealSize | currency}",
                               "type": "heading"
                             }
                           ],
@@ -357,6 +357,7 @@
                                   "icon": "thumb_up",
                                   "name": "icon4",
                                   "style": {
+                                    "backgroundColor": "#479cc8",
                                     "color": "#ffffff",
                                     "fontSize": "48px",
                                     "height": "64px",
@@ -422,7 +423,7 @@
                                 "marginBottom": "0px",
                                 "textAlign": "right"
                               },
-                              "text": "${dealsWonRatio | percent}",
+                              "text": "${monthlyStats.Ratio | percent}",
                               "type": "heading"
                             },
                             {
@@ -433,7 +434,7 @@
                               },
                               "type": "progressbar",
                               "unit": "%",
-                              "value": "${dealsWonRatio * 100}"
+                              "value": "${monthlyStats.Ratio * 100}"
                             }
                           ],
                           "name": "col14",
@@ -559,7 +560,7 @@
                       "style": {
                         "display": "inline-block"
                       },
-                      "text": "Revenue per Employee",
+                      "text": "Revenue by Employee",
                       "type": "heading"
                     },
                     {
@@ -869,6 +870,19 @@
   "events": {
     "load": [
       {
+        "name": "ServerMethodsController.MonthlyStats",
+        "path": "api/ServerMethods/MonthlyStats",
+        "then": [
+          {
+            "name": "monthlyStats",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke-method",
+        "verb": "get"
+      },
+      {
         "name": "ServerMethodsController.RevenueByCompany",
         "path": "api/ServerMethods/RevenueByCompany",
         "then": [
@@ -888,32 +902,6 @@
         "then": [
           {
             "name": "revenueByMonth",
-            "type": "set",
-            "value": "${result.value}"
-          }
-        ],
-        "type": "invoke-method",
-        "verb": "get"
-      },
-      {
-        "name": "ServerMethodsController.AverageDealSizeByMonth",
-        "path": "api/ServerMethods/AverageDealSizeByMonth",
-        "then": [
-          {
-            "name": "dealSizeByMonth",
-            "type": "set",
-            "value": "${result.value}"
-          }
-        ],
-        "type": "invoke-method",
-        "verb": "get"
-      },
-      {
-        "name": "ServerMethodsController.DealsWonRatio",
-        "path": "api/ServerMethods/DealsWonRatio",
-        "then": [
-          {
-            "name": "dealsWonRatio",
             "type": "set",
             "value": "${result.value}"
           }

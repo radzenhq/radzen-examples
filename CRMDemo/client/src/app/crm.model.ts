@@ -5,7 +5,6 @@ export interface Contact {
   LastName: string;
   FirstName: string;
   Phone: string;
-  Opportunities: Array<Opportunity>;
 }
 
 export interface Opportunity {
@@ -16,13 +15,11 @@ export interface Opportunity {
   StatusId: number;
   CloseDate: string;
   Name: string;
-  Tasks: Array<Task>;
 }
 
 export interface OpportunityStatus {
   Id: number;
   Name: string;
-  Opportunities: Array<Opportunity>;
 }
 
 export interface Task {
@@ -37,11 +34,9 @@ export interface Task {
 export interface TaskStatus {
   Id: number;
   Name: string;
-  Tasks: Array<Task>;
 }
 
 export interface TaskType {
   Id: number;
   Name: string;
-  Tasks: Array<Task>;
 }

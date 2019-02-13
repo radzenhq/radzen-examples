@@ -19,7 +19,7 @@
                 {
                   "autoComplete": false,
                   "disabled": true,
-                  "name": "textbox0asdfasdfasdfasdf",
+                  "name": "textbox0",
                   "placeholder": "Find contact",
                   "style": {
                     "marginRight": "1rem",

@@ -20,7 +20,7 @@
           "class": "align-items-center justify-content-center",
           "components": [
             {
-              "class": "col-xl-3 col-lg-4 col-md-5 col-sm-8",
+              "class": "col-xl-3 col-lg-4 col-md-5 col-sm-8  d-flex none none",
               "components": [
                 {
                   "components": [

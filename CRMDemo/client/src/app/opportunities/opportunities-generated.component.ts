@@ -50,9 +50,9 @@ export class OpportunitiesGenerated implements AfterViewInit, OnInit, OnDestroy 
   crm: CrmService;
 
   security: SecurityService;
+  parameters: any;
   getOpportunitiesResult: any;
   getOpportunitiesCount: any;
-  parameters: any;
 
   constructor(private injector: Injector) {
   }
@@ -98,14 +98,7 @@ export class OpportunitiesGenerated implements AfterViewInit, OnInit, OnDestroy 
 
 
   load() {
-    this.crm.getOpportunities(null, this.grid0.allowPaging ? this.grid0.pageSize : null, this.grid0.allowPaging ? 0 : null, null, this.grid0.allowPaging, `Contact,OpportunityStatus,User`, null, null)
-    .subscribe((result: any) => {
-      this.getOpportunitiesResult = result.value;
-
-      this.getOpportunitiesCount = this.grid0.allowPaging ? result['@odata.count'] : result.value.length;
-    }, (result: any) => {
-
-    });
+    this.grid0.load();
   }
 
   grid0Add(event: any) {

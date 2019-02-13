@@ -96,10 +96,9 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
   crm: CrmService;
 
   security: SecurityService;
+  monthlyStats: any;
   revenueByCompany: any;
   revenueByMonth: any;
-  dealSizeByMonth: any;
-  dealsWonRatio: any;
   revenueByEmployee: any;
   getOpportunitiesResult: any;
   getTasksResult: any;
@@ -149,6 +148,17 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
+    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/MonthlyStats', {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.security.token}`
+      })
+    })
+    .subscribe((result: any) => {
+      this.monthlyStats = result;
+    }, (result: any) => {
+
+    });
+
     this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/RevenueByCompany', {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
@@ -167,28 +177,6 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
     })
     .subscribe((result: any) => {
       this.revenueByMonth = result.value;
-    }, (result: any) => {
-
-    });
-
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/AverageDealSizeByMonth', {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.security.token}`
-      })
-    })
-    .subscribe((result: any) => {
-      this.dealSizeByMonth = result.value;
-    }, (result: any) => {
-
-    });
-
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/DealsWonRatio', {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.security.token}`
-      })
-    })
-    .subscribe((result: any) => {
-      this.dealsWonRatio = result.value;
     }, (result: any) => {
 
     });

@@ -13,7 +13,7 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { IconComponent } from '@radzen/angular/dist/icon';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
-import { FieldsetComponent } from '@radzen/angular/dist/fieldset';
+import { TabsComponent } from '@radzen/angular/dist/tabs';
 import { FormComponent } from '@radzen/angular/dist/form';
 
 import { SecurityService } from '../security.service';
@@ -23,9 +23,8 @@ export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('content1') content1: ContentComponent;
   @ViewChild('icon0') icon0: IconComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
-  @ViewChild('fieldset1') fieldset1: FieldsetComponent;
+  @ViewChild('tabs0') tabs0: TabsComponent;
   @ViewChild('form1') form1: FormComponent;
-  @ViewChild('fieldset3') fieldset3: FieldsetComponent;
   @ViewChild('form3') form3: FormComponent;
 
   router: Router;

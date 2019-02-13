@@ -20,187 +20,170 @@
           "type": "heading"
         },
         {
-          "components": [
+          "items": [
             {
-              "class": "col-md-12 col-xl-6",
               "components": [
                 {
-                  "components": [
-                    {
-                      "data": "${personalData}",
-                      "events": {
-                        "cancel": [
+                  "data": "${personalData}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
                           {
-                            "type": "back"
+                            "detail": "There was an error: ${event.error.message}",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
                           }
                         ],
-                        "submit": [
+                        "name": "ServerMethodsController.UpdatePersonalData",
+                        "parameters": [
                           {
-                            "error": [
-                              {
-                                "detail": "There was an error: ${event.error.message}",
-                                "severity": "error",
-                                "summary": "Error",
-                                "type": "notify"
-                              }
-                            ],
-                            "name": "ServerMethodsController.UpdatePersonalData",
-                            "parameters": [
-                              {
-                                "in": "body",
-                                "name": "firstName",
-                                "type": "string",
-                                "value": "${event.FirstName}"
-                              },
-                              {
-                                "in": "body",
-                                "name": "lastName",
-                                "type": "string",
-                                "value": "${event.LastName}"
-                              },
-                              {
-                                "in": "body",
-                                "name": "picture",
-                                "type": "string",
-                                "value": "${event.Picture}"
-                              }
-                            ],
-                            "path": "api/ServerMethods/UpdatePersonalData",
-                            "then": [
-                              {
-                                "detail": "Personal data updated successfully!",
-                                "severity": "success",
-                                "summary": "Success",
-                                "type": "notify"
-                              }
-                            ],
-                            "type": "invoke-method",
-                            "verb": "post"
+                            "in": "body",
+                            "name": "firstName",
+                            "type": "string",
+                            "value": "${event.FirstName}"
+                          },
+                          {
+                            "in": "body",
+                            "name": "lastName",
+                            "type": "string",
+                            "value": "${event.LastName}"
+                          },
+                          {
+                            "in": "body",
+                            "name": "picture",
+                            "type": "string",
+                            "value": "${event.Picture}"
                           }
-                        ]
-                      },
-                      "fields": [
-                        {
-                          "property": "FirstName",
-                          "required": true,
-                          "requiredText": "is required",
-                          "title": "First Name",
-                          "type": "string"
-                        },
-                        {
-                          "defaultValue": "",
-                          "property": "LastName",
-                          "required": true,
-                          "requiredText": "is required",
-                          "title": "Last Name",
-                          "type": "string"
-                        },
-                        {
-                          "property": "Picture",
-                          "requiredText": "is required",
-                          "title": "Picture",
-                          "type": "file"
-                        }
-                      ],
-                      "name": "form1",
-                      "submitText": "Save",
-                      "type": "form"
+                        ],
+                        "path": "api/ServerMethods/UpdatePersonalData",
+                        "then": [
+                          {
+                            "detail": "Personal data updated successfully!",
+                            "severity": "success",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke-method",
+                        "verb": "post"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "FirstName",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "First Name",
+                      "type": "string"
+                    },
+                    {
+                      "defaultValue": "",
+                      "property": "LastName",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Last Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Picture",
+                      "requiredText": "is required",
+                      "title": "Picture",
+                      "type": "file"
                     }
                   ],
-                  "name": "fieldset1",
-                  "style": {
-                    "marginBottom": "32px"
-                  },
-                  "text": "Personal Data",
-                  "type": "fieldset"
+                  "name": "form1",
+                  "submitText": "Save",
+                  "type": "form"
                 }
               ],
-              "type": "col"
+              "selected": true,
+              "text": "Personal"
             },
             {
-              "class": "col-md-12 col-xl-6",
               "components": [
                 {
-                  "components": [
-                    {
-                      "events": {
-                        "cancel": [
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
                           {
-                            "type": "back"
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot change password",
+                            "type": "notify"
                           }
                         ],
-                        "submit": [
+                        "name": "Security.changePassword",
+                        "parameters": [
                           {
-                            "error": [
-                              {
-                                "detail": "${result.error.message}",
-                                "severity": "error",
-                                "summary": "Cannot change password",
-                                "type": "notify"
-                              }
-                            ],
-                            "name": "Security.changePassword",
-                            "parameters": [
-                              {
-                                "name": "OldPassword",
-                                "value": "${event.OldPassword}"
-                              },
-                              {
-                                "name": "NewPassword",
-                                "value": "${event.NewPassword}"
-                              }
-                            ],
-                            "then": [
-                              {
-                                "detail": "Password has been changed.",
-                                "severity": "info",
-                                "summary": "Success",
-                                "type": "notify"
-                              }
-                            ],
-                            "type": "invoke"
+                            "name": "OldPassword",
+                            "value": "${event.OldPassword}"
+                          },
+                          {
+                            "name": "NewPassword",
+                            "value": "${event.NewPassword}"
                           }
-                        ]
-                      },
-                      "fields": [
-                        {
-                          "property": "OldPassword",
-                          "required": true,
-                          "requiredText": "is required",
-                          "title": "Old Password",
-                          "type": "password"
-                        },
-                        {
-                          "property": "NewPassword",
-                          "required": true,
-                          "requiredText": "is required",
-                          "title": "New Password",
-                          "type": "password"
-                        },
-                        {
-                          "compare": "NewPassword",
-                          "property": "ConfirmPassword",
-                          "required": true,
-                          "requiredText": "is required",
-                          "title": "Confirm password",
-                          "type": "password"
-                        }
-                      ],
-                      "name": "form3",
-                      "submitText": "Change password",
-                      "type": "form"
+                        ],
+                        "then": [
+                          {
+                            "detail": "Password has been changed.",
+                            "severity": "info",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "OldPassword",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Old Password",
+                      "type": "password"
+                    },
+                    {
+                      "property": "NewPassword",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "New Password",
+                      "type": "password"
+                    },
+                    {
+                      "compare": "NewPassword",
+                      "property": "ConfirmPassword",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Confirm password",
+                      "type": "password"
                     }
                   ],
-                  "name": "fieldset3",
-                  "text": "Password",
-                  "type": "fieldset"
+                  "name": "form3",
+                  "submitText": "Change password",
+                  "type": "form"
                 }
               ],
-              "name": "col0",
-              "type": "col"
+              "selected": false,
+              "text": "Password"
             }
           ],
-          "type": "row"
+          "name": "tabs0",
+          "type": "tabs"
         }
       ],
       "container": "main",

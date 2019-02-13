@@ -27,7 +27,7 @@ import { FormModule } from '@radzen/angular/dist/form';
 import { IconModule } from '@radzen/angular/dist/icon';
 import { TemplateFormModule } from '@radzen/angular/dist/template-form';
 import { PasswordModule } from '@radzen/angular/dist/password';
-import { FieldsetModule } from '@radzen/angular/dist/fieldset';
+import { TabsModule } from '@radzen/angular/dist/tabs';
 import { HtmlModule } from '@radzen/angular/dist/html';
 import { ProgressBarModule } from '@radzen/angular/dist/progressbar';
 import { ChartModule } from '@radzen/angular/dist/chart';
@@ -167,7 +167,7 @@ export const AppImports = [
   IconModule,
   TemplateFormModule,
   PasswordModule,
-  FieldsetModule,
+  TabsModule,
   HtmlModule,
   ProgressBarModule,
   ChartModule,

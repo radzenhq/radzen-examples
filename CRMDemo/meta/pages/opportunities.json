@@ -224,38 +224,8 @@
   "events": {
     "load": [
       {
-        "name": "CRM.getOpportunities",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "this.grid0.allowPaging ? this.grid0.pageSize : null"
-          },
-          {
-            "name": "$skip",
-            "value": "this.grid0.allowPaging ? 0 : null"
-          },
-          {
-            "name": "$count",
-            "value": "this.grid0.allowPaging"
-          },
-          {
-            "name": "$expand",
-            "value": "Contact,OpportunityStatus,User"
-          }
-        ],
-        "then": [
-          {
-            "name": "getOpportunitiesResult",
-            "type": "set",
-            "value": "${result.value}"
-          },
-          {
-            "name": "getOpportunitiesCount",
-            "type": "set",
-            "value": "this.grid0.allowPaging ? result['@odata.count'] : ${result.value.length}"
-          }
-        ],
-        "type": "invoke"
+        "code": "this.grid0.load();",
+        "type": "execute"
       }
     ]
   },

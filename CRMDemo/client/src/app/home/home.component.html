@@ -11,7 +11,7 @@
         <div class="row">
           <div class="align-items-center d-flex col-4">
             <rz-card #card7 [style]="{'backgroundColor':'#68d5c8','float':'none','height':'64px','paddingBottom':'0','paddingLeft':'0','paddingRight':'0','paddingTop':'0','textAlign':'center','top':'','verticalAlign':'middle','width':'64px'}">
-              <rz-icon #icon1 icon="attach_money" [style]="{'color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
+              <rz-icon #icon1 icon="attach_money" [style]="{'backgroundColor':'#68d5c8','fontSize':'48px','height':'64px','width':'100%'}">
               </rz-icon>
             </rz-card>
           </div>
@@ -20,7 +20,7 @@
             </rz-heading>
             <rz-heading #heading13 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
             </rz-heading>
-            <rz-heading #heading3 size="H3" [style]="{'color':'#68d5c8','fontSize':'24px','textAlign':'right'}" [text]="(revenueByMonth || {})[revenueByMonth?.length - 1]?.Revenue | currency">
+            <rz-heading #heading3 size="H3" [style]="{'color':'#68d5c8','fontSize':'24px','textAlign':'right'}" [text]="monthlyStats?.Revenue | currency">
             </rz-heading>
           </div>
         </div>
@@ -40,7 +40,7 @@
             </rz-heading>
             <rz-heading #heading15 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
             </rz-heading>
-            <rz-heading #heading4 size="H3" [style]="{'color':'#f9777f','fontSize':'24px','textAlign':'right'}" [text]="revenueByCompany?.length">
+            <rz-heading #heading4 size="H3" [style]="{'color':'#f9777f','fontSize':'24px','textAlign':'right'}" [text]="monthlyStats?.Opportunities">
             </rz-heading>
           </div>
         </div>
@@ -60,7 +60,7 @@
             </rz-heading>
             <rz-heading #heading16 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
             </rz-heading>
-            <rz-heading #heading17 size="H3" [style]="{'color':'#ff6d41','fontSize':'24px','textAlign':'right'}" [text]="(dealSizeByMonth || {})[dealSizeByMonth?.length - 1]?.DealSize | currency">
+            <rz-heading #heading17 size="H3" [style]="{'color':'#ff6d41','fontSize':'24px','textAlign':'right'}" [text]="monthlyStats?.AverageDealSize | currency">
             </rz-heading>
           </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="row">
           <div class="align-items-center d-flex col-4">
             <rz-card #card10 [style]="{'backgroundColor':'#479cc8','float':'none','height':'64px','paddingBottom':'0','paddingLeft':'0','paddingRight':'0','paddingTop':'0','textAlign':'center','top':'','verticalAlign':'middle','width':'64px'}">
-              <rz-icon #icon4 icon="thumb_up" [style]="{'color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
+              <rz-icon #icon4 icon="thumb_up" [style]="{'backgroundColor':'#479cc8','color':'#ffffff','fontSize':'48px','height':'64px','width':'100%'}">
               </rz-icon>
             </rz-card>
           </div>
@@ -80,9 +80,9 @@
             </rz-heading>
             <rz-heading #heading7 size="H4" [style]="{'color':'#88989b','display':'block','fontSize':'12px','fontWeight':'normal','textAlign':'right'}" text="LAST MONTH">
             </rz-heading>
-            <rz-heading #heading8 size="H3" [style]="{'color':'#479cc8','fontSize':'24px','marginBottom':'0px','textAlign':'right'}" [text]="dealsWonRatio | percent">
+            <rz-heading #heading8 size="H3" [style]="{'color':'#479cc8','fontSize':'24px','marginBottom':'0px','textAlign':'right'}" [text]="monthlyStats?.Ratio | percent">
             </rz-heading>
-            <rz-progressbar #progressbar0 [showValue]="false" [style]="{'height':'10px'}" unit="%" [value]="dealsWonRatio * 100">
+            <rz-progressbar #progressbar0 [showValue]="false" [style]="{'height':'10px'}" unit="%" [value]="monthlyStats?.Ratio * 100">
             </rz-progressbar>
           </div>
         </div>
@@ -110,7 +110,7 @@
     </div>
     <div class="col-lg-6 col-xl-4">
       <rz-card #card6 [style]="{'marginBottom':'16px'}">
-        <rz-heading #heading10 size="H5" [style]="{'display':'inline-block'}" text="Revenue per Employee">
+        <rz-heading #heading10 size="H5" [style]="{'display':'inline-block'}" text="Revenue by Employee">
         </rz-heading>
         <rz-chart #chart2 categoryProperty="Employee" chartType="Bar" [data]="revenueByEmployee" [legend]="false" [showGridLines]="false" [style]="{}" valueProperty="Revenue">
         </rz-chart>

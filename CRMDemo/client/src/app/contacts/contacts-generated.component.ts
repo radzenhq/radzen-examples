@@ -27,7 +27,7 @@ export class ContactsGenerated implements AfterViewInit, OnInit, OnDestroy {
   // Components
   @ViewChild('content1') content1: ContentComponent;
   @ViewChild('pageTitle') pageTitle: HeadingComponent;
-  @ViewChild('textbox0asdfasdfasdfasdf') textbox0Asdfasdfasdfasdf: TextBoxComponent;
+  @ViewChild('textbox0') textbox0: TextBoxComponent;
   @ViewChild('button0') button0: ButtonComponent;
   @ViewChild('grid0') grid0: GridComponent;
 
