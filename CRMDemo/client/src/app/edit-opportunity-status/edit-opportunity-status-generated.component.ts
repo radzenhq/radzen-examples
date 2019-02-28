@@ -15,6 +15,8 @@ import { LabelComponent } from '@radzen/angular/dist/label';
 import { ButtonComponent } from '@radzen/angular/dist/button';
 import { FormComponent } from '@radzen/angular/dist/form';
 
+import { ConfigService } from '../config.service';
+
 import { CrmService } from '../crm.service';
 import { SecurityService } from '../security.service';
 
@@ -32,6 +34,8 @@ export class EditOpportunityStatusGenerated implements AfterViewInit, OnInit, On
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -57,6 +61,8 @@ export class EditOpportunityStatusGenerated implements AfterViewInit, OnInit, On
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

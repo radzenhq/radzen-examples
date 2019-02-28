@@ -53,7 +53,7 @@ namespace Crm.Controllers.Crm
     partial void OnTaskTypeDeleted(Models.Crm.TaskType item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteTaskType(int key) 
+    public IActionResult DeleteTaskType(int key)
     {
         try
         {
@@ -71,7 +71,7 @@ namespace Crm.Controllers.Crm
             if (item == null)
             {
                 return BadRequest();
-            }                
+            }
 
             this.OnTaskTypeDeleted(item);
             this.context.TaskTypes.Remove(item);
@@ -79,7 +79,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -89,6 +89,7 @@ namespace Crm.Controllers.Crm
     partial void OnTaskTypeUpdated(Models.Crm.TaskType item);
 
     [HttpPut("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PutTaskType(int key, [FromBody]Models.Crm.TaskType newItem)
     {
         try
@@ -109,7 +110,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -117,6 +118,7 @@ namespace Crm.Controllers.Crm
     }
 
     [HttpPatch("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PatchTaskType(int key, [FromBody]Delta<Models.Crm.TaskType> patch)
     {
         try
@@ -126,8 +128,8 @@ namespace Crm.Controllers.Crm
                 return BadRequest(ModelState);
             }
 
-            var item = this.context.TaskTypes.Where(i=>i.Id == key).FirstOrDefault();
-            
+            var item = this.context.TaskTypes.Where(i => i.Id == key).FirstOrDefault();
+
             if (item == null)
             {
                 return BadRequest();
@@ -141,7 +143,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -151,6 +153,7 @@ namespace Crm.Controllers.Crm
     partial void OnTaskTypeCreated(Models.Crm.TaskType item);
 
     [HttpPost]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult Post([FromBody] Models.Crm.TaskType item)
     {
         try
@@ -171,7 +174,7 @@ namespace Crm.Controllers.Crm
 
             return Created($"odata/Crm/TaskTypes/{item.Id}", item);
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);

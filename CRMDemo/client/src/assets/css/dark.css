@@ -5152,7 +5152,8 @@ ul.profile-menu {
   display: inline-block;
   background-color: #5d717b;
   border-left: 1px solid #435863;
-  position: relative; }
+  position: relative;
+  z-index: 1; }
   ul.profile-menu .navigation-item-icon-children {
     color: #ffffff; }
   ul.profile-menu .navigation-menu {

@@ -14,6 +14,8 @@ import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
 import { ImageComponent } from '@radzen/angular/dist/image';
+
+import { ConfigService } from '../config.service';
 import { AddApplicationUserComponent } from '../add-application-user/add-application-user.component';
 import { EditApplicationUserComponent } from '../edit-application-user/edit-application-user.component';
 
@@ -32,6 +34,8 @@ export class ApplicationUsersGenerated implements AfterViewInit, OnInit, OnDestr
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -54,6 +58,8 @@ export class ApplicationUsersGenerated implements AfterViewInit, OnInit, OnDestr
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

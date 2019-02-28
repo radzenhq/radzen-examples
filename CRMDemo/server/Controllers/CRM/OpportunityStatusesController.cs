@@ -53,7 +53,7 @@ namespace Crm.Controllers.Crm
     partial void OnOpportunityStatusDeleted(Models.Crm.OpportunityStatus item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteOpportunityStatus(int key) 
+    public IActionResult DeleteOpportunityStatus(int key)
     {
         try
         {
@@ -71,7 +71,7 @@ namespace Crm.Controllers.Crm
             if (item == null)
             {
                 return BadRequest();
-            }                
+            }
 
             this.OnOpportunityStatusDeleted(item);
             this.context.OpportunityStatuses.Remove(item);
@@ -79,7 +79,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -89,6 +89,7 @@ namespace Crm.Controllers.Crm
     partial void OnOpportunityStatusUpdated(Models.Crm.OpportunityStatus item);
 
     [HttpPut("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PutOpportunityStatus(int key, [FromBody]Models.Crm.OpportunityStatus newItem)
     {
         try
@@ -109,7 +110,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -117,6 +118,7 @@ namespace Crm.Controllers.Crm
     }
 
     [HttpPatch("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PatchOpportunityStatus(int key, [FromBody]Delta<Models.Crm.OpportunityStatus> patch)
     {
         try
@@ -126,8 +128,8 @@ namespace Crm.Controllers.Crm
                 return BadRequest(ModelState);
             }
 
-            var item = this.context.OpportunityStatuses.Where(i=>i.Id == key).FirstOrDefault();
-            
+            var item = this.context.OpportunityStatuses.Where(i => i.Id == key).FirstOrDefault();
+
             if (item == null)
             {
                 return BadRequest();
@@ -141,7 +143,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -151,6 +153,7 @@ namespace Crm.Controllers.Crm
     partial void OnOpportunityStatusCreated(Models.Crm.OpportunityStatus item);
 
     [HttpPost]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult Post([FromBody] Models.Crm.OpportunityStatus item)
     {
         try
@@ -171,7 +174,7 @@ namespace Crm.Controllers.Crm
 
             return Created($"odata/Crm/OpportunityStatuses/{item.Id}", item);
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);

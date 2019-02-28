@@ -61,10 +61,48 @@ function errorResponse(response) {
   }
 }
 
+function toHttpParams(odataParams: ODataQueryParams | null, legacy: boolean): HttpParams | null {
+  if (odataParams == null) {
+    return null;
+  }
+
+  return Object.keys(odataParams).reduce((params, key) => {
+    let value = odataParams[key];
+
+    if (value == null || value === '') {
+      return params;
+    }
+
+    if (key == 'filter') {
+      if (legacy) {
+        value = toLegacyFilter(value);
+      }
+
+      if (value.startsWith(' and ') || value.endsWith(' and ')) {
+        value = value.split(' and ').filter(v => v).join(' and ');
+      }
+    }
+
+    return params.set(`$${key}`, value.toString());
+  }, new HttpParams());
+}
+
 export class ODataClient {
   cache: { [resource: string]: { result: BehaviorSubject<any> } } = {};
 
   constructor(private http: HttpClient, private basePath: string, private options: { legacy: boolean, withCredentials: boolean }) {
+  }
+
+  getById(path: string, odataParams?: ODataQueryParams) {
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('get', path, params)
+      .map(response => {
+        switch (response.status) {
+          case 200:
+            return this.filterResponseBody(response.body);
+        }
+      });
   }
 
   get(path: string, odataParams?: ODataQueryParams) {
@@ -82,25 +120,7 @@ export class ODataClient {
       return this.export(path, odataParams);
     }
 
-    const params = Object.keys(odataParams).reduce((params, key) => {
-      let value = odataParams[key];
-
-      if (value == null || value === '') {
-        return params;
-      }
-
-      if (key == 'filter') {
-        if(this.options.legacy) {
-          value = toLegacyFilter(value);
-        }
-
-        if(value.startsWith(' and ') || value.endsWith(' and ')) {
-          value = value.split(' and ').filter(v => v).join(' and ');
-        }
-      }
-
-      return params.set(`$${key}`, value.toString());
-    }, new HttpParams());
+    const params = toHttpParams(odataParams, this.options.legacy);
 
     return this.request('get', path, params)
     .map(response => {
@@ -153,10 +173,12 @@ export class ODataClient {
     });
   }
 
-  post(path: string, body: any) {
+  post(path: string, body: any, odataParams?: ODataQueryParams) {
     const cache = this.cache[cacheKey(path)];
 
-    return this.request('post', path, null, body)
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('post', path, params, body)
     .map(response => {
       switch (response.status) {
         case 201: {
@@ -177,10 +199,12 @@ export class ODataClient {
     });
   }
 
-  put(path: string, body: any, findByKeys: (item: any) => boolean) {
+  put(path: string, body: any, findByKeys: (item: any) => boolean, odataParams?: ODataQueryParams) {
     const cache = this.cache[cacheKey(path)];
 
-    return this.request('put', path, null, body)
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('put', path, params, body)
     .map(response => {
       switch (response.status) {
         case 200:
@@ -214,10 +238,12 @@ export class ODataClient {
     });
   }
 
-  patch(path: string, body: any, findByKeys: (item: any) => boolean) {
+  patch(path: string, body: any, findByKeys: (item: any) => boolean, odataParams?: ODataQueryParams) {
     const cache = this.cache[cacheKey(path)];
 
-    return this.request('patch', path, null, body)
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('patch', path, params, body)
     .map(response => {
       switch (response.status) {
         case 200:

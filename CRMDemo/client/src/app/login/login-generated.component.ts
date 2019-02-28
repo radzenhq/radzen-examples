@@ -18,6 +18,8 @@ import { TextBoxComponent } from '@radzen/angular/dist/textbox';
 import { PasswordComponent } from '@radzen/angular/dist/password';
 import { ButtonComponent } from '@radzen/angular/dist/button';
 
+import { ConfigService } from '../config.service';
+
 import { SecurityService } from '../security.service';
 
 export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
@@ -44,6 +46,8 @@ export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   notificationService: NotificationService;
 
+  configService: ConfigService;
+
   dialogService: DialogService;
 
   dialogRef: DialogRef;
@@ -64,6 +68,8 @@ export class LoginGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

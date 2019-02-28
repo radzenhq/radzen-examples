@@ -10,25 +10,25 @@
         </rz-date-form-field>
         <rz-lookup-form-field [data]="getTaskTypesResult" [multiple]="false" placeholder="Choose Type" property="TypeId" [required]="true" requiredText="is required" textProperty="Name" title="Type" valueProperty="Id" type="lookup">
           <ng-template let-data lookupFormFieldTemplate>
-            <rz-icon #icon0 icon="settings_phone" [style]="{'verticalAlign':'middle'}" *ngIf="data?.Name == 'Call'">
+            <rz-icon #icon0 icon="settings_phone" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.Name == 'Call'">
             </rz-icon>
-            <rz-icon #icon1 icon="video_call" [style]="{'verticalAlign':'middle'}" *ngIf="data?.Name == 'Online Meeting'">
+            <rz-icon #icon1 icon="video_call" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.Name == 'Online Meeting'">
             </rz-icon>
-            <rz-icon #icon2 icon="email" [style]="{'verticalAlign':'middle'}" *ngIf="data?.Name == 'Email'">
+            <rz-icon #icon2 icon="email" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.Name == 'Email'">
             </rz-icon>
-            <rz-label #label0 [style]="{'verticalAlign':'middle'}" [text]="data?.Name">
+            <rz-label #label0 [style]="{'verticalAlign': 'middle'}" [text]="data?.Name">
             </rz-label>
           </ng-template>
         </rz-lookup-form-field>
         <rz-lookup-form-field [data]="getTaskStatusesResult" [multiple]="false" placeholder="Choose Status" property="StatusId" [required]="true" requiredText="is required" textProperty="Name" title="Status" valueProperty="Id" type="lookup">
           <ng-template let-data lookupFormFieldTemplate>
-            <rz-icon #icon3 icon="check_circle" [style]="{'verticalAlign':'middle'}" *ngIf="data?.Name == 'Complete'">
+            <rz-icon #icon3 icon="check_circle" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.Name == 'Complete'">
             </rz-icon>
-            <rz-icon #icon4 icon="autorenew" [style]="{'verticalAlign':'middle'}" *ngIf="data?.Name == 'In Progress'">
+            <rz-icon #icon4 icon="autorenew" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.Name == 'In Progress'">
             </rz-icon>
-            <rz-icon #icon5 icon="cancel" [style]="{'verticalAlign':'middle'}" *ngIf="data?.Name == 'Not Started'">
+            <rz-icon #icon5 icon="cancel" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.Name == 'Not Started'">
             </rz-icon>
-            <rz-label #label1 [style]="{'verticalAlign':'middle'}" [text]="data?.Name">
+            <rz-label #label1 [style]="{'verticalAlign': 'middle'}" [text]="data?.Name">
             </rz-label>
           </ng-template>
         </rz-lookup-form-field>

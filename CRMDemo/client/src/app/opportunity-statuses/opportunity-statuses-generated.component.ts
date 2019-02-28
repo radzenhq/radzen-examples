@@ -13,6 +13,8 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+
+import { ConfigService } from '../config.service';
 import { AddOpportunityStatusComponent } from '../add-opportunity-status/add-opportunity-status.component';
 import { EditOpportunityStatusComponent } from '../edit-opportunity-status/edit-opportunity-status.component';
 
@@ -32,6 +34,8 @@ export class OpportunityStatusesGenerated implements AfterViewInit, OnInit, OnDe
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -57,6 +61,8 @@ export class OpportunityStatusesGenerated implements AfterViewInit, OnInit, OnDe
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

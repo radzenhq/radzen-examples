@@ -16,6 +16,8 @@ import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { TabsComponent } from '@radzen/angular/dist/tabs';
 import { FormComponent } from '@radzen/angular/dist/form';
 
+import { ConfigService } from '../config.service';
+
 import { SecurityService } from '../security.service';
 
 export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
@@ -34,6 +36,8 @@ export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -56,6 +60,8 @@ export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 
@@ -94,7 +100,8 @@ export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/UserPersonalData', {
+    this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/UserPersonalData`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })
@@ -119,7 +126,8 @@ export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
     formData.append('firstName', `${event.FirstName}`);
     formData.append('lastName', `${event.LastName}`);
     formData.append('picture', `${event.Picture}`);
-    this.httpClient.request('post', 'http://localhost:5000/api/ServerMethods/UpdatePersonalData', {
+    this.httpClient.request('post', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/UpdatePersonalData`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       }),

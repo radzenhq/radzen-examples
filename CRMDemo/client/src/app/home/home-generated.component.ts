@@ -21,6 +21,8 @@ import { LabelComponent } from '@radzen/angular/dist/label';
 import { HtmlComponent } from '@radzen/angular/dist/html';
 import { ImageComponent } from '@radzen/angular/dist/image';
 
+import { ConfigService } from '../config.service';
+
 import { CrmService } from '../crm.service';
 import { SecurityService } from '../security.service';
 
@@ -81,6 +83,8 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   notificationService: NotificationService;
 
+  configService: ConfigService;
+
   dialogService: DialogService;
 
   dialogRef: DialogRef;
@@ -109,6 +113,8 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 
@@ -148,7 +154,8 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/MonthlyStats', {
+    this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/MonthlyStats`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })
@@ -159,7 +166,8 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
     });
 
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/RevenueByCompany', {
+    this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/RevenueByCompany`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })
@@ -170,7 +178,8 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
     });
 
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/RevenueByMonth', {
+    this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/RevenueByMonth`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })
@@ -181,7 +190,8 @@ export class HomeGenerated implements AfterViewInit, OnInit, OnDestroy {
 
     });
 
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/RevenueByEmployee', {
+    this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/RevenueByEmployee`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })

@@ -53,7 +53,7 @@ namespace Crm.Controllers.Crm
     partial void OnTaskStatusDeleted(Models.Crm.TaskStatus item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteTaskStatus(int key) 
+    public IActionResult DeleteTaskStatus(int key)
     {
         try
         {
@@ -71,7 +71,7 @@ namespace Crm.Controllers.Crm
             if (item == null)
             {
                 return BadRequest();
-            }                
+            }
 
             this.OnTaskStatusDeleted(item);
             this.context.TaskStatuses.Remove(item);
@@ -79,7 +79,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -89,6 +89,7 @@ namespace Crm.Controllers.Crm
     partial void OnTaskStatusUpdated(Models.Crm.TaskStatus item);
 
     [HttpPut("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PutTaskStatus(int key, [FromBody]Models.Crm.TaskStatus newItem)
     {
         try
@@ -109,7 +110,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -117,6 +118,7 @@ namespace Crm.Controllers.Crm
     }
 
     [HttpPatch("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PatchTaskStatus(int key, [FromBody]Delta<Models.Crm.TaskStatus> patch)
     {
         try
@@ -126,8 +128,8 @@ namespace Crm.Controllers.Crm
                 return BadRequest(ModelState);
             }
 
-            var item = this.context.TaskStatuses.Where(i=>i.Id == key).FirstOrDefault();
-            
+            var item = this.context.TaskStatuses.Where(i => i.Id == key).FirstOrDefault();
+
             if (item == null)
             {
                 return BadRequest();
@@ -141,7 +143,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -151,6 +153,7 @@ namespace Crm.Controllers.Crm
     partial void OnTaskStatusCreated(Models.Crm.TaskStatus item);
 
     [HttpPost]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult Post([FromBody] Models.Crm.TaskStatus item)
     {
         try
@@ -171,7 +174,7 @@ namespace Crm.Controllers.Crm
 
             return Created($"odata/Crm/TaskStatuses/{item.Id}", item);
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);

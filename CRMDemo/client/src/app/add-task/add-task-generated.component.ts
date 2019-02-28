@@ -15,6 +15,8 @@ import { FormComponent } from '@radzen/angular/dist/form';
 import { IconComponent } from '@radzen/angular/dist/icon';
 import { LabelComponent } from '@radzen/angular/dist/label';
 
+import { ConfigService } from '../config.service';
+
 import { CrmService } from '../crm.service';
 import { SecurityService } from '../security.service';
 
@@ -30,6 +32,8 @@ export class AddTaskGenerated implements AfterViewInit, OnInit, OnDestroy {
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -56,6 +60,8 @@ export class AddTaskGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

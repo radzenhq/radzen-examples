@@ -13,6 +13,8 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
+
+import { ConfigService } from '../config.service';
 import { AddApplicationRoleComponent } from '../add-application-role/add-application-role.component';
 
 import { SecurityService } from '../security.service';
@@ -30,6 +32,8 @@ export class ApplicationRolesGenerated implements AfterViewInit, OnInit, OnDestr
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -52,6 +56,8 @@ export class ApplicationRolesGenerated implements AfterViewInit, OnInit, OnDestr
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

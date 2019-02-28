@@ -16,6 +16,8 @@ import { GridComponent } from '@radzen/angular/dist/grid';
 import { IconComponent } from '@radzen/angular/dist/icon';
 import { LabelComponent } from '@radzen/angular/dist/label';
 import { ImageComponent } from '@radzen/angular/dist/image';
+
+import { ConfigService } from '../config.service';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { EditTaskComponent } from '../edit-task/edit-task.component';
 
@@ -35,6 +37,8 @@ export class TasksGenerated implements AfterViewInit, OnInit, OnDestroy {
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -60,6 +64,8 @@ export class TasksGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

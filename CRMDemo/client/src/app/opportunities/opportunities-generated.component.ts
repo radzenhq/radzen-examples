@@ -15,6 +15,8 @@ import { HeadingComponent } from '@radzen/angular/dist/heading';
 import { GridComponent } from '@radzen/angular/dist/grid';
 import { ImageComponent } from '@radzen/angular/dist/image';
 import { LabelComponent } from '@radzen/angular/dist/label';
+
+import { ConfigService } from '../config.service';
 import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.component';
 import { EditOpportunityComponent } from '../edit-opportunity/edit-opportunity.component';
 
@@ -34,6 +36,8 @@ export class OpportunitiesGenerated implements AfterViewInit, OnInit, OnDestroy 
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -59,6 +63,8 @@ export class OpportunitiesGenerated implements AfterViewInit, OnInit, OnDestroy 
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

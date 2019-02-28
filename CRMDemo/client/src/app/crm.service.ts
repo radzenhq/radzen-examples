@@ -21,7 +21,7 @@ export class CrmService {
   }
 
   createContact(contact: models.Contact | null) {
-    return this.odata.post(`/Contacts`, contact);
+    return this.odata.post(`/Contacts`, contact, {  });
   }
 
   deleteContact(id: number | null) {
@@ -29,11 +29,11 @@ export class CrmService {
   }
 
   getContactById(id: number | null) {
-    return this.odata.get(`/Contacts(${id})`);
+    return this.odata.getById(`/Contacts(${id})`, {  });
   }
 
   updateContact(id: number | null, contact: models.Contact | null) {
-    return this.odata.patch(`/Contacts(${id})`, contact, item => item.Id == id);
+    return this.odata.patch(`/Contacts(${id})`, contact, item => item.Id == id, {  });
   }
 
   getOpportunities(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
@@ -41,7 +41,7 @@ export class CrmService {
   }
 
   createOpportunity(opportunity: models.Opportunity | null) {
-    return this.odata.post(`/Opportunities`, opportunity);
+    return this.odata.post(`/Opportunities`, opportunity, {  });
   }
 
   deleteOpportunity(id: number | null) {
@@ -49,11 +49,11 @@ export class CrmService {
   }
 
   getOpportunityById(id: number | null) {
-    return this.odata.get(`/Opportunities(${id})`);
+    return this.odata.getById(`/Opportunities(${id})`, {  });
   }
 
   updateOpportunity(id: number | null, opportunity: models.Opportunity | null) {
-    return this.odata.patch(`/Opportunities(${id})`, opportunity, item => item.Id == id);
+    return this.odata.patch(`/Opportunities(${id})`, opportunity, item => item.Id == id, {  });
   }
 
   getOpportunityStatuses(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
@@ -61,7 +61,7 @@ export class CrmService {
   }
 
   createOpportunityStatus(opportunityStatus: models.OpportunityStatus | null) {
-    return this.odata.post(`/OpportunityStatuses`, opportunityStatus);
+    return this.odata.post(`/OpportunityStatuses`, opportunityStatus, {  });
   }
 
   deleteOpportunityStatus(id: number | null) {
@@ -69,11 +69,11 @@ export class CrmService {
   }
 
   getOpportunityStatusById(id: number | null) {
-    return this.odata.get(`/OpportunityStatuses(${id})`);
+    return this.odata.getById(`/OpportunityStatuses(${id})`, {  });
   }
 
   updateOpportunityStatus(id: number | null, opportunityStatus: models.OpportunityStatus | null) {
-    return this.odata.patch(`/OpportunityStatuses(${id})`, opportunityStatus, item => item.Id == id);
+    return this.odata.patch(`/OpportunityStatuses(${id})`, opportunityStatus, item => item.Id == id, {  });
   }
 
   getTasks(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
@@ -81,7 +81,7 @@ export class CrmService {
   }
 
   createTask(task: models.Task | null) {
-    return this.odata.post(`/Tasks`, task);
+    return this.odata.post(`/Tasks`, task, {  });
   }
 
   deleteTask(id: number | null) {
@@ -89,11 +89,11 @@ export class CrmService {
   }
 
   getTaskById(id: number | null) {
-    return this.odata.get(`/Tasks(${id})`);
+    return this.odata.getById(`/Tasks(${id})`, {  });
   }
 
   updateTask(id: number | null, task: models.Task | null) {
-    return this.odata.patch(`/Tasks(${id})`, task, item => item.Id == id);
+    return this.odata.patch(`/Tasks(${id})`, task, item => item.Id == id, {  });
   }
 
   getTaskStatuses(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
@@ -101,7 +101,7 @@ export class CrmService {
   }
 
   createTaskStatus(taskStatus: models.TaskStatus | null) {
-    return this.odata.post(`/TaskStatuses`, taskStatus);
+    return this.odata.post(`/TaskStatuses`, taskStatus, {  });
   }
 
   deleteTaskStatus(id: number | null) {
@@ -109,11 +109,11 @@ export class CrmService {
   }
 
   getTaskStatusById(id: number | null) {
-    return this.odata.get(`/TaskStatuses(${id})`);
+    return this.odata.getById(`/TaskStatuses(${id})`, {  });
   }
 
   updateTaskStatus(id: number | null, taskStatus: models.TaskStatus | null) {
-    return this.odata.patch(`/TaskStatuses(${id})`, taskStatus, item => item.Id == id);
+    return this.odata.patch(`/TaskStatuses(${id})`, taskStatus, item => item.Id == id, {  });
   }
 
   getTaskTypes(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
@@ -121,7 +121,7 @@ export class CrmService {
   }
 
   createTaskType(taskType: models.TaskType | null) {
-    return this.odata.post(`/TaskTypes`, taskType);
+    return this.odata.post(`/TaskTypes`, taskType, {  });
   }
 
   deleteTaskType(id: number | null) {
@@ -129,10 +129,10 @@ export class CrmService {
   }
 
   getTaskTypeById(id: number | null) {
-    return this.odata.get(`/TaskTypes(${id})`);
+    return this.odata.getById(`/TaskTypes(${id})`, {  });
   }
 
   updateTaskType(id: number | null, taskType: models.TaskType | null) {
-    return this.odata.patch(`/TaskTypes(${id})`, taskType, item => item.Id == id);
+    return this.odata.patch(`/TaskTypes(${id})`, taskType, item => item.Id == id, {  });
   }
 }

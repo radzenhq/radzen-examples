@@ -21,6 +21,8 @@ import { SidebarComponent } from '@radzen/angular/dist/sidebar';
 import { PanelMenuComponent } from '@radzen/angular/dist/panelmenu';
 import { FooterComponent } from '@radzen/angular/dist/footer';
 
+import { ConfigService } from '../config.service';
+
 import { SecurityService } from '../security.service';
 
 export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
@@ -45,6 +47,8 @@ export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   notificationService: NotificationService;
 
+  configService: ConfigService;
+
   dialogService: DialogService;
 
   dialogRef: DialogRef;
@@ -66,6 +70,8 @@ export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 
@@ -104,7 +110,8 @@ export class MainLayoutGenerated implements AfterViewInit, OnInit, OnDestroy {
 
 
   load() {
-    this.httpClient.request('get', 'http://localhost:5000/api/ServerMethods/UserPersonalData', {
+    this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/UserPersonalData`, {
+withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })

@@ -13,6 +13,8 @@ import { NotificationService } from '@radzen/angular/dist/notification';
 import { ContentComponent } from '@radzen/angular/dist/content';
 import { FormComponent } from '@radzen/angular/dist/form';
 
+import { ConfigService } from '../config.service';
+
 import { SecurityService } from '../security.service';
 
 export class AddApplicationUserGenerated implements AfterViewInit, OnInit, OnDestroy {
@@ -27,6 +29,8 @@ export class AddApplicationUserGenerated implements AfterViewInit, OnInit, OnDes
   route: ActivatedRoute;
 
   notificationService: NotificationService;
+
+  configService: ConfigService;
 
   dialogService: DialogService;
 
@@ -49,6 +53,8 @@ export class AddApplicationUserGenerated implements AfterViewInit, OnInit, OnDes
 
   ngOnInit() {
     this.notificationService = this.injector.get(NotificationService);
+
+    this.configService = this.injector.get(ConfigService);
 
     this.dialogService = this.injector.get(DialogService);
 

@@ -13,25 +13,25 @@
         </rz-grid-column>
         <rz-grid-column filterProperty="TaskStatus.Name" property="StatusId" sortProperty="TaskStatus.Name" title="Status" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-icon #icon3 icon="check_circle" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskStatus?.Name == 'Complete'">
+            <rz-icon #icon3 icon="check_circle" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.TaskStatus?.Name == 'Complete'">
             </rz-icon>
-            <rz-icon #icon4 icon="cancel" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskStatus?.Name == 'Not Started'">
+            <rz-icon #icon4 icon="cancel" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.TaskStatus?.Name == 'Not Started'">
             </rz-icon>
-            <rz-icon #icon5 icon="autorenew" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskStatus?.Name == 'In Progress'">
+            <rz-icon #icon5 icon="autorenew" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.TaskStatus?.Name == 'In Progress'">
             </rz-icon>
-            <rz-label #label1 [style]="{'verticalAlign':'middle'}" [text]="data?.TaskStatus?.Name">
+            <rz-label #label1 [style]="{'verticalAlign': 'middle'}" [text]="data?.TaskStatus?.Name">
             </rz-label>
           </ng-template>
         </rz-grid-column>
         <rz-grid-column filterProperty="TaskType.Name" property="TypeId" sortProperty="TaskType.Name" title="Type" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-icon #icon0 icon="settings_phone" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Call'">
+            <rz-icon #icon0 icon="settings_phone" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.TaskType?.Name == 'Call'">
             </rz-icon>
-            <rz-icon #icon1 icon="video_call" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Online Meeting'">
+            <rz-icon #icon1 icon="video_call" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.TaskType?.Name == 'Online Meeting'">
             </rz-icon>
-            <rz-icon #icon2 icon="email" [style]="{'verticalAlign':'middle'}" *ngIf="data?.TaskType?.Name == 'Email'">
+            <rz-icon #icon2 icon="email" [style]="{'verticalAlign': 'middle'}" *ngIf="data?.TaskType?.Name == 'Email'">
             </rz-icon>
-            <rz-label #label0 [style]="{'lineHeight':'24px','verticalAlign':'middle'}" [text]="data?.TaskType?.Name">
+            <rz-label #label0 [style]="{'lineHeight': '24px', 'verticalAlign': 'middle'}" [text]="data?.TaskType?.Name">
             </rz-label>
           </ng-template>
         </rz-grid-column>
@@ -42,7 +42,7 @@
         </rz-grid-column>
         <rz-grid-column title="Sales Representative" *ngIf="security?.user?.isInRole('Sales Manager')">
           <ng-template let-data gridColumnTemplate>
-            <rz-image #image0 [path]="data?.Opportunity?.User?.Picture" [style]="{'borderRadius':'15px','height':'30px','width':'30px'}">
+            <rz-image #image0 [path]="data?.Opportunity?.User?.Picture" [style]="{'borderRadius': '15px', 'height': '30px', 'width': '30px'}">
             </rz-image>
             <rz-label #label2 text="{{data?.Opportunity?.User?.FirstName}} {{data?.Opportunity?.User?.LastName}}">
             </rz-label>

@@ -12,7 +12,7 @@
         </rz-lookup-form-field>
         <rz-lookup-form-field [data]="getOpportunityStatusesResult" placeholder="Choose Status" property="StatusId" [required]="true" requiredText="is required" textProperty="Name" title="Status" valueProperty="Id" type="lookup">
           <ng-template let-data lookupFormFieldTemplate>
-            <rz-label #label1 [classList]="{'badge':true,'badge-danger':data?.Name == 'Lost','badge-light':data?.Name == 'Inactive','badge-secondary':data?.Name == 'Active','badge-success':data?.Name == 'Won'}" [text]="data?.Name">
+            <rz-label #label1 [classList]="{'badge': true, 'badge-danger': data?.Name == 'Lost', 'badge-light': data?.Name == 'Inactive', 'badge-secondary': data?.Name == 'Active', 'badge-success': data?.Name == 'Won'}" [text]="data?.Name">
             </rz-label>
           </ng-template>
         </rz-lookup-form-field>

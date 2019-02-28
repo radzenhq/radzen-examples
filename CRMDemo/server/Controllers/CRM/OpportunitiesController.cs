@@ -53,7 +53,7 @@ namespace Crm.Controllers.Crm
     partial void OnOpportunityDeleted(Models.Crm.Opportunity item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteOpportunity(int key) 
+    public IActionResult DeleteOpportunity(int key)
     {
         try
         {
@@ -71,7 +71,7 @@ namespace Crm.Controllers.Crm
             if (item == null)
             {
                 return BadRequest();
-            }                
+            }
 
             this.OnOpportunityDeleted(item);
             this.context.Opportunities.Remove(item);
@@ -79,7 +79,7 @@ namespace Crm.Controllers.Crm
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -89,6 +89,7 @@ namespace Crm.Controllers.Crm
     partial void OnOpportunityUpdated(Models.Crm.Opportunity item);
 
     [HttpPut("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PutOpportunity(int key, [FromBody]Models.Crm.Opportunity newItem)
     {
         try
@@ -107,22 +108,13 @@ namespace Crm.Controllers.Crm
             this.context.Opportunities.Update(newItem);
             this.context.SaveChanges();
 
-            var itemToReturn = this.context.Opportunities
-                .Where(i => i.Id == key)
-                .Include(i => i.Contact)
-                .Include(i => i.OpportunityStatus)
-                .FirstOrDefault();
+            var itemToReturn = this.context.Opportunities.Where(i => i.Id == key);
 
-            return new JsonResult(itemToReturn, new Newtonsoft.Json.JsonSerializerSettings
-            {
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc
-            })
-            {
-                StatusCode = 200
-            };
+            Request.QueryString = Request.QueryString.Add("$expand", "Contact,OpportunityStatus");
+
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -130,6 +122,7 @@ namespace Crm.Controllers.Crm
     }
 
     [HttpPatch("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult PatchOpportunity(int key, [FromBody]Delta<Models.Crm.Opportunity> patch)
     {
         try
@@ -139,8 +132,8 @@ namespace Crm.Controllers.Crm
                 return BadRequest(ModelState);
             }
 
-            var item = this.context.Opportunities.Where(i=>i.Id == key).FirstOrDefault();
-            
+            var item = this.context.Opportunities.Where(i => i.Id == key).FirstOrDefault();
+
             if (item == null)
             {
                 return BadRequest();
@@ -152,22 +145,13 @@ namespace Crm.Controllers.Crm
             this.context.Opportunities.Update(item);
             this.context.SaveChanges();
 
-            var itemToReturn = this.context.Opportunities
-                .Where(i => i.Id == key)
-                .Include(i => i.Contact)
-                .Include(i => i.OpportunityStatus)
-                .FirstOrDefault();
+            var itemToReturn = this.context.Opportunities.Where(i => i.Id == key);
 
-            return new JsonResult(itemToReturn, new Newtonsoft.Json.JsonSerializerSettings
-            {
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc
-            })
-            {
-                StatusCode = 200
-            };
+            Request.QueryString = Request.QueryString.Add("$expand", "Contact,OpportunityStatus");
+
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -177,6 +161,7 @@ namespace Crm.Controllers.Crm
     partial void OnOpportunityCreated(Models.Crm.Opportunity item);
 
     [HttpPost]
+    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     public IActionResult Post([FromBody] Models.Crm.Opportunity item)
     {
         try
@@ -196,22 +181,17 @@ namespace Crm.Controllers.Crm
             this.context.SaveChanges();
 
             var key = item.Id;
-            var itemToReturn = this.context.Opportunities
-                .Where(i => i.Id == key)
-                .Include(i => i.Contact)
-                .Include(i => i.OpportunityStatus)
-                .FirstOrDefault();
 
-            return new JsonResult(itemToReturn, new Newtonsoft.Json.JsonSerializerSettings
-            {
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc
-            })
+            var itemToReturn = this.context.Opportunities.Where(i => i.Id == key);
+
+            Request.QueryString = Request.QueryString.Add("$expand", "Contact,OpportunityStatus");
+
+            return new ObjectResult(SingleResult.Create(itemToReturn))
             {
                 StatusCode = 201
             };
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
