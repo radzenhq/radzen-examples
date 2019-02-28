@@ -1,0 +1,16 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Profile">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 submitText="Change password" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-password-form-field property="OldPassword" [required]="true" title="Old Password" requiredText="is required" type="password">
+        </rz-password-form-field>
+        <rz-password-form-field property="NewPassword" [required]="true" title="New Password" requiredText="is required" type="password">
+        </rz-password-form-field>
+        <rz-password-form-field property="ConfirmPassword" compare="NewPassword" [required]="true" title="Confirm password" requiredText="is required" type="password">
+        </rz-password-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

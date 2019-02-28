@@ -1,0 +1,87 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "fields": [
+                    {
+                      "property": "Email",
+                      "type": "string",
+                      "required": true,
+                      "title": "Email",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "type": "password",
+                      "property": "Password",
+                      "required": true,
+                      "title": "Password",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "type": "password",
+                      "property": "ConfirmPassword",
+                      "compare": "Password",
+                      "required": true,
+                      "title": "Confirm password",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot register user",
+                            "type": "notify"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "name": "Security.registerUser",
+                        "parameters": [
+                          {
+                            "name": "User",
+                            "value": "${event}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "submitText": "Register",
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "name": "Register Application User",
+  "layout": "Main"
+}

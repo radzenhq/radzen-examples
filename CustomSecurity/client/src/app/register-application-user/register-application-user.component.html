@@ -1,0 +1,14 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 submitText="Register" (submit)="form0Submit($event)" (cancel)="form0Cancel($event)">
+        <rz-string-form-field property="Email" [required]="true" title="Email" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-password-form-field property="Password" [required]="true" title="Password" requiredText="is required" type="password">
+        </rz-password-form-field>
+        <rz-password-form-field property="ConfirmPassword" compare="Password" [required]="true" title="Confirm password" requiredText="is required" type="password">
+        </rz-password-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>
