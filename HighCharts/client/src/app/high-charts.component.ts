@@ -41,6 +41,7 @@ export class HighChartsComponent {
         },
         series: [
           {
+            type: 'bar',
             colorByPoint: true,
             data: data
           }
