@@ -1,0 +1,79 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/inline.12d651d1316faaaf22c6.bundle.js",
+        "/main.fb24369edac88ff23861.bundle.js",
+        "/polyfills.60b22865f6de78c9c946.bundle.js",
+        "/styles.be4ede3bc25f95a60962.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/icon-128x128.png",
+        "/assets/icon-152x152.png",
+        "/assets/icon-256x256.png",
+        "/assets/icon-512x512.png",
+        "/assets/css/default.css",
+        "/assets/fonts/MaterialIcons-Regular.woff",
+        "/assets/fonts/SourceSansPro-Black.woff",
+        "/assets/fonts/SourceSansPro-BlackIt.woff",
+        "/assets/fonts/SourceSansPro-Bold.woff",
+        "/assets/fonts/SourceSansPro-BoldIt.woff",
+        "/assets/fonts/SourceSansPro-ExtraLight.woff",
+        "/assets/fonts/SourceSansPro-ExtraLightIt.woff",
+        "/assets/fonts/SourceSansPro-It.woff",
+        "/assets/fonts/SourceSansPro-Light.woff",
+        "/assets/fonts/SourceSansPro-LightIt.woff",
+        "/assets/fonts/SourceSansPro-Regular.woff",
+        "/assets/fonts/SourceSansPro-Semibold.woff",
+        "/assets/fonts/SourceSansPro-SemiboldIt.woff",
+        "/assets/fonts/roboto-v15-latin-300.woff",
+        "/assets/fonts/roboto-v15-latin-700.woff",
+        "/assets/fonts/roboto-v15-latin-regular.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/inline.12d651d1316faaaf22c6.bundle.js": "da2fa61a6d016f8b108b807f19e057499e399549",
+    "/assets/icon-128x128.png": "45868a9b16de3f1364f87eba8b4971481600e508",
+    "/main.fb24369edac88ff23861.bundle.js": "4c98e6a06a69160e456ada32176c42b85ac6881b",
+    "/assets/icon-152x152.png": "4925c0ae63746e49e8bdf0b1f33dd57e9ae3cd90",
+    "/polyfills.60b22865f6de78c9c946.bundle.js": "2a34c736038f51c97d9b4e1b602e6f8fdb0476f1",
+    "/assets/icon-256x256.png": "cacac2897a8933a7b35bfbde76ac7a8805755760",
+    "/styles.be4ede3bc25f95a60962.bundle.css": "e07e28f520681b151df064d58d1eae765b5a3aae",
+    "/assets/icon-512x512.png": "32d4842913cbe1f47145a9e35beb1bd90b4c709c",
+    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/assets/css/default.css": "3051e9e0f0f40da3e3fda26cb84425e1cb9393da",
+    "/index.html": "feb24c83bc5557eecfcb5c46e3275d33fdb83e6c",
+    "/assets/fonts/MaterialIcons-Regular.woff": "fc61fc1cc827ca98c4d59fe09b155884fd635969",
+    "/assets/fonts/SourceSansPro-Black.woff": "aa02dc9ed0ab8c2f14080db6967bfda798a1d36e",
+    "/assets/fonts/SourceSansPro-BlackIt.woff": "090123649291f34a7f457d87e69cf3d07eade6aa",
+    "/assets/fonts/SourceSansPro-Bold.woff": "59b47397b88aaec2c6a769004468a1b7c53fb950",
+    "/assets/fonts/SourceSansPro-BoldIt.woff": "3a3063698de21aa6d092cee0c205f4f708defd33",
+    "/assets/fonts/SourceSansPro-ExtraLight.woff": "680de19d242741d7d4818af7cdcf76b12a49f313",
+    "/assets/fonts/SourceSansPro-ExtraLightIt.woff": "686711c8a11e25a7f364f629c2ab590f29963595",
+    "/assets/fonts/SourceSansPro-It.woff": "8198b854bd9f52e6e2d932435ec99aa8d8a09224",
+    "/assets/fonts/SourceSansPro-Light.woff": "3a7a464b171b14c53b21128da9b2704e5995a158",
+    "/assets/fonts/SourceSansPro-LightIt.woff": "0a9431870a34614a60ae3c4ee76c8b1be2210651",
+    "/assets/fonts/SourceSansPro-Regular.woff": "62ce99357ccaec3bb0ac703eee4458a9aaddf99a",
+    "/assets/fonts/SourceSansPro-Semibold.woff": "56169c245f04180410e67adc391c0c149ece4dc4",
+    "/assets/fonts/SourceSansPro-SemiboldIt.woff": "6295ff0e23df04f6c43e3811f9a2b9a3e3a66cd6",
+    "/assets/fonts/roboto-v15-latin-300.woff": "27c056b9c70dcfd55c43e954a898eb5bf706f730",
+    "/assets/fonts/roboto-v15-latin-700.woff": "24f9df68c500f7bbd1cb1c632de59936aa85b2e0",
+    "/assets/fonts/roboto-v15-latin-regular.woff": "940b859e4f02bd3e7cf7b6ce245c197b5470302a"
+  }
+}

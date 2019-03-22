@@ -1,0 +1,95 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Profile"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "fields": [
+                    {
+                      "type": "password",
+                      "property": "OldPassword",
+                      "required": true,
+                      "title": "Old Password"
+                    },
+                    {
+                      "type": "password",
+                      "property": "NewPassword",
+                      "required": true,
+                      "title": "New Password"
+                    },
+                    {
+                      "type": "password",
+                      "property": "ConfirmPassword",
+                      "compare": "NewPassword",
+                      "required": true,
+                      "title": "Confirm password"
+                    }
+                  ],
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "${result.error.message}",
+                            "severity": "error",
+                            "summary": "Cannot change password",
+                            "type": "notify"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "detail": "Password has been changed.",
+                            "severity": "info",
+                            "summary": "Success",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Security.changePassword",
+                        "parameters": [
+                          {
+                            "name": "OldPassword",
+                            "value": "${event.OldPassword}"
+                          },
+                          {
+                            "name": "NewPassword",
+                            "value": "${event.NewPassword}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "submitText": "Change password",
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "name": "Profile",
+  "layout": "Main"
+}

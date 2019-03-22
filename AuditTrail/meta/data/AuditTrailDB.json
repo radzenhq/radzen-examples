@@ -1,0 +1,222 @@
+{
+  "info": {
+    "title": "AuditTrailDB",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 14
+  },
+  "definitions": {
+    "Category": {
+      "x-table": "dbo.Categories",
+      "resource": "Categories",
+      "required": [],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "type": "integer"
+        },
+        "CategoryName": {
+          "type": "string",
+          "length": 100
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "length": 100
+        },
+        "UpdatedBy": {
+          "type": "string",
+          "length": 100
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Categories": {
+      "get": {
+        "operationId": "getCategories",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Category"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCategory",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Categories({Id})": {
+      "delete": {
+        "operationId": "deleteCategory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCategoryById",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCategory",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/AuditTrailDB",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

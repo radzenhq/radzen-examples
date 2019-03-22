@@ -1,0 +1,10 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Login">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-login #login0 [allowResetPassword]="false" loginText="Login" registerText="Sign up" registerMessageText="Don't have an account yet?" userText="Username" userRequired="Username is required" passwordText="Password" passwordRequired="Password is required" (login)="login0Login($event)" (register)="login0Register($event)">
+      </rz-login>
+    </div>
+  </div>
+</rz-content>

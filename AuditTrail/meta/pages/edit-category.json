@@ -1,0 +1,164 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${category}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Category",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "AuditTrailDB.updateCategory",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "Category",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "maxLength": 100,
+                      "property": "CategoryName",
+                      "required": false,
+                      "requiredText": "is required",
+                      "title": "Category Name",
+                      "type": "string"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "name": "AuditTrailDB.getCategoryById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "category",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit Category"
+}
