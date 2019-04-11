@@ -1,0 +1,327 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${order}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
+                            "detail": "Unable to update Order",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Sample.updateOrder",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "Order",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "maxLength": 255,
+                      "property": "UserName",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "User Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "OrderDate",
+                      "required": true,
+                      "requiredText": "is required",
+                      "title": "Order Date",
+                      "type": "date"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "${canEdit}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        },
+        {
+          "addText": "Add",
+          "allowAdd": true,
+          "allowDelete": true,
+          "allowFiltering": true,
+          "allowMultiSorting": false,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "property": "Id",
+              "title": "Id",
+              "type": "integer"
+            },
+            {
+              "property": "Quantity",
+              "title": "Quantity",
+              "type": "integer"
+            },
+            {
+              "filterProperty": "Order.UserName",
+              "property": "OrderId",
+              "sortProperty": "Order.UserName",
+              "template": "${data.Order?.UserName}",
+              "title": "Order",
+              "type": "string"
+            },
+            {
+              "filterProperty": "Product.ProductName",
+              "property": "ProductId",
+              "sortProperty": "Product.ProductName",
+              "template": "${data.Product?.ProductName}",
+              "title": "Product",
+              "type": "string"
+            }
+          ],
+          "confirmDelete": true,
+          "confirmDeleteCancelText": "Cancel",
+          "confirmDeleteOkText": "Ok",
+          "confirmDeleteText": "Are you sure you want to delete this record?",
+          "confirmDeleteTitle": "Confirmation",
+          "count": "${getOrderDetailsCount}",
+          "data": "${getOrderDetailsResult}",
+          "emptyText": "No records to display.",
+          "events": {
+            "add": [
+              {
+                "path": "add-order-detail",
+                "type": "popup"
+              }
+            ],
+            "delete": [
+              {
+                "error": [
+                  {
+                    "detail": "Unable to delete OrderDetail",
+                    "severity": "error",
+                    "summary": "Error",
+                    "type": "notify"
+                  }
+                ],
+                "name": "Sample.deleteOrderDetail",
+                "parameters": [
+                  {
+                    "name": "Id",
+                    "value": "${event.Id}"
+                  }
+                ],
+                "then": [
+                  {
+                    "detail": "OrderDetail deleted!",
+                    "severity": "success",
+                    "summary": "Success",
+                    "type": "notify"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ],
+            "loadData": [
+              {
+                "name": "Sample.getOrderDetails",
+                "parameters": [
+                  {
+                    "name": "$top",
+                    "value": "event.top"
+                  },
+                  {
+                    "name": "$skip",
+                    "value": "event.skip"
+                  },
+                  {
+                    "name": "$count",
+                    "value": "event.top != null && event.skip != null"
+                  },
+                  {
+                    "name": "$filter",
+                    "operator": "and",
+                    "value": [
+                      {
+                        "value": "${event.filter}"
+                      },
+                      {
+                        "operation": "eq",
+                        "property": "OrderId",
+                        "type": "integer",
+                        "value": "${parameters.Id}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "$orderby",
+                    "value": [
+                      {
+                        "value": "${event.orderby}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "$expand",
+                    "value": "Order,Product"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getOrderDetailsResult",
+                    "type": "set",
+                    "value": "${result.value}"
+                  },
+                  {
+                    "name": "getOrderDetailsCount",
+                    "type": "set",
+                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ],
+            "rowSelect": [
+              {
+                "parameters": [
+                  {
+                    "name": "Id",
+                    "value": "${event.Id}"
+                  }
+                ],
+                "path": "edit-order-detail",
+                "type": "popup"
+              }
+            ]
+          },
+          "name": "grid0",
+          "title": "",
+          "type": "grid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "name": "Sample.getOrderById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "order",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "code": "this.grid0.load();",
+        "type": "execute"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit Order"
+}
