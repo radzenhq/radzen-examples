@@ -60,6 +60,16 @@
                   "events": {
                     "cancel": [
                       {
+                        "name": "Sample.deleteOrder",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          }
+                        ],
+                        "type": "invoke"
+                      },
+                      {
                         "type": "back"
                       }
                     ],
@@ -172,6 +182,12 @@
           "events": {
             "add": [
               {
+                "parameters": [
+                  {
+                    "name": "Id",
+                    "value": "${parameters.Id}"
+                  }
+                ],
                 "path": "add-order-detail",
                 "type": "popup"
               }
@@ -263,18 +279,7 @@
                 "type": "invoke"
               }
             ],
-            "rowSelect": [
-              {
-                "parameters": [
-                  {
-                    "name": "Id",
-                    "value": "${event.Id}"
-                  }
-                ],
-                "path": "edit-order-detail",
-                "type": "popup"
-              }
-            ]
+            "rowSelect": []
           },
           "name": "grid0",
           "title": "",

@@ -33,9 +33,7 @@ export { AppComponent } from './app.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
-import { OrderDetailsComponent } from './order-details/order-details.component';
 import { AddOrderDetailComponent } from './add-order-detail/add-order-detail.component';
-import { EditOrderDetailComponent } from './edit-order-detail/edit-order-detail.component';
 import { ProductsComponent } from './products/products.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
@@ -48,9 +46,7 @@ export const PageDeclarations = [
   OrdersComponent,
   AddOrderComponent,
   EditOrderComponent,
-  OrderDetailsComponent,
   AddOrderDetailComponent,
-  EditOrderDetailComponent,
   ProductsComponent,
   AddProductComponent,
   EditProductComponent,

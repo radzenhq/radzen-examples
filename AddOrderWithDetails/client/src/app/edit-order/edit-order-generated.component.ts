@@ -18,7 +18,6 @@ import { GridComponent } from '@radzen/angular/dist/grid';
 
 import { ConfigService } from '../config.service';
 import { AddOrderDetailComponent } from '../add-order-detail/add-order-detail.component';
-import { EditOrderDetailComponent } from '../edit-order-detail/edit-order-detail.component';
 
 import { SampleService } from '../sample.service';
 
@@ -125,6 +124,13 @@ export class EditOrderGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   form0Cancel(event: any) {
+    this.sample.deleteOrder(this.parameters.Id)
+    .subscribe((result: any) => {
+
+    }, (result: any) => {
+
+    });
+
     if (this.dialogRef) {
       this.dialogRef.close();
     } else {
@@ -148,7 +154,7 @@ export class EditOrderGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   grid0Add(event: any) {
-    this.dialogService.open(AddOrderDetailComponent, { parameters: {}, title: 'Add Order Detail' });
+    this.dialogService.open(AddOrderDetailComponent, { parameters: {Id: this.parameters.Id}, title: 'Add Order Detail' });
   }
 
   grid0Delete(event: any) {
@@ -169,9 +175,5 @@ export class EditOrderGenerated implements AfterViewInit, OnInit, OnDestroy {
     }, (result: any) => {
 
     });
-  }
-
-  grid0RowSelect(event: any) {
-    this.dialogService.open(EditOrderDetailComponent, { parameters: {Id: event.Id}, title: 'Edit Order Detail' });
   }
 }

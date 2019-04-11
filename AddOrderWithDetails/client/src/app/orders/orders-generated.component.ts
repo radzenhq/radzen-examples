@@ -101,7 +101,7 @@ export class OrdersGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   grid0Add(event: any) {
-    this.sample.createOrder(null, { UserName: 'test' })
+    this.sample.createOrder(null, <any>({UserName: 'test'}))
     .subscribe((result: any) => {
       this.dialogService.open(EditOrderComponent, { parameters: {Id: result.Id}, title: 'Edit Order' });
     }, (result: any) => {

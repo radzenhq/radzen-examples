@@ -120,10 +120,7 @@ export class AddOrderDetailGenerated implements AfterViewInit, OnInit, OnDestroy
   form0Submit(event: any) {
     this.sample.createOrderDetail(null, event)
     .subscribe((result: any) => {
-      if (this.dialogRef) {
-        this.dialogRef.close();
-      }
-      this.router.navigate(['order-details']);
+      this.dialogRef.close(null);
     }, (result: any) => {
       this.notificationService.notify({ severity: "error", summary: `Error`, detail: `Unable to create new OrderDetail!` });
     });

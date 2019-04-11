@@ -1,14 +1,10 @@
 {
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "row",
           "components": [
             {
-              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -38,8 +34,7 @@
                         ],
                         "then": [
                           {
-                            "path": "order-details",
-                            "type": "navigate"
+                            "type": "close-popup"
                           }
                         ],
                         "type": "invoke"
@@ -48,40 +43,51 @@
                   },
                   "fields": [
                     {
+                      "maxText": "cannot be more than",
+                      "minText": "cannot be less than",
                       "property": "Quantity",
                       "required": true,
+                      "requiredText": "is required",
                       "title": "Quantity",
                       "type": "integer"
                     },
                     {
                       "data": "${getOrdersResult}",
+                      "defaultValue": "${parameters.Id}",
+                      "disabled": true,
+                      "placeholder": "Choose Order",
                       "property": "OrderId",
                       "required": false,
+                      "requiredText": "is required",
                       "textProperty": "UserName",
                       "title": "Order",
                       "type": "lookup",
-                      "valueProperty": "Id",
-                      "placeholder": "Choose Order"
+                      "valueProperty": "Id"
                     },
                     {
                       "data": "${getProductsResult}",
+                      "placeholder": "Choose Product",
                       "property": "ProductId",
                       "required": false,
+                      "requiredText": "is required",
                       "textProperty": "ProductName",
                       "title": "Product",
                       "type": "lookup",
-                      "valueProperty": "Id",
-                      "placeholder": "Choose Product"
+                      "valueProperty": "Id"
                     }
                   ],
                   "name": "form0",
                   "type": "form"
                 }
-              ]
+              ],
+              "type": "col"
             }
-          ]
+          ],
+          "type": "row"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
@@ -112,6 +118,6 @@
       }
     ]
   },
-  "name": "Add Order Detail",
-  "layout": "Main"
+  "layout": "Main",
+  "name": "Add Order Detail"
 }
