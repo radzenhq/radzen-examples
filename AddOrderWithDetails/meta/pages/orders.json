@@ -55,7 +55,7 @@
                         "parameters": [
                           {
                             "name": "Order",
-                            "value": "${{UserName: 'test'}}"
+                            "value": "<any>({UserName: 'test'})"
                           }
                         ],
                         "then": [
