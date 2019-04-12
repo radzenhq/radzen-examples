@@ -16,7 +16,6 @@
   ],
   "pages": [
     "Orders",
-    "Add Order",
     "Edit Order",
     "Add Order Detail",
     "Products",

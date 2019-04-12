@@ -4,7 +4,6 @@ import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { OrdersComponent } from './orders/orders.component';
-import { AddOrderComponent } from './add-order/add-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
 import { AddOrderDetailComponent } from './add-order-detail/add-order-detail.component';
 import { ProductsComponent } from './products/products.component';
@@ -22,11 +21,7 @@ export const routes: Routes = [
         component: OrdersComponent
       },
       {
-        path: 'add-order',
-        component: AddOrderComponent
-      },
-      {
-        path: 'edit-order/:Id',
+        path: 'edit-order/:Id/:isAdd',
         component: EditOrderComponent
       },
       {

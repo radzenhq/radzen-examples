@@ -64,6 +64,10 @@
                               {
                                 "name": "Id",
                                 "value": "${result.Id}"
+                              },
+                              {
+                                "name": "isAdd",
+                                "value": "true"
                               }
                             ],
                             "path": "edit-order",
@@ -147,6 +151,10 @@
                           {
                             "name": "Id",
                             "value": "${event.Id}"
+                          },
+                          {
+                            "name": "isAdd",
+                            "value": "false"
                           }
                         ],
                         "path": "edit-order",

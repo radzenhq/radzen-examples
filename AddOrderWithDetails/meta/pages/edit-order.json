@@ -60,6 +60,7 @@
                   "events": {
                     "cancel": [
                       {
+                        "condition": "${parameters.isAdd}",
                         "name": "Sample.deleteOrder",
                         "parameters": [
                           {

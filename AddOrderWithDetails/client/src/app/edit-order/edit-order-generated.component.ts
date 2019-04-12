@@ -124,12 +124,14 @@ export class EditOrderGenerated implements AfterViewInit, OnInit, OnDestroy {
   }
 
   form0Cancel(event: any) {
-    this.sample.deleteOrder(this.parameters.Id)
-    .subscribe((result: any) => {
-
-    }, (result: any) => {
-
-    });
+    if (this.parameters.isAdd) {
+          this.sample.deleteOrder(this.parameters.Id)
+      .subscribe((result: any) => {
+    
+      }, (result: any) => {
+    
+      });
+    }
 
     if (this.dialogRef) {
       this.dialogRef.close();

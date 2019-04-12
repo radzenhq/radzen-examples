@@ -19,8 +19,8 @@ import { FooterModule } from '@radzen/angular/dist/footer';
 import { ContentModule } from '@radzen/angular/dist/content';
 import { HeadingModule } from '@radzen/angular/dist/heading';
 import { GridModule } from '@radzen/angular/dist/grid';
-import { FormModule } from '@radzen/angular/dist/form';
 import { ButtonModule } from '@radzen/angular/dist/button';
+import { FormModule } from '@radzen/angular/dist/form';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -31,7 +31,6 @@ import { AppComponent } from './app.component';
 import { CacheInterceptor } from './cache.interceptor';
 export { AppComponent } from './app.component';
 import { OrdersComponent } from './orders/orders.component';
-import { AddOrderComponent } from './add-order/add-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
 import { AddOrderDetailComponent } from './add-order-detail/add-order-detail.component';
 import { ProductsComponent } from './products/products.component';
@@ -44,7 +43,6 @@ import { SampleService } from './sample.service';
 
 export const PageDeclarations = [
   OrdersComponent,
-  AddOrderComponent,
   EditOrderComponent,
   AddOrderDetailComponent,
   ProductsComponent,
@@ -96,8 +94,8 @@ export const AppImports = [
   ContentModule,
   HeadingModule,
   GridModule,
-  FormModule,
   ButtonModule,
+  FormModule,
   SharedModule,
   NotificationModule,
   DialogModule,
