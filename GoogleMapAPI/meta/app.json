@@ -1,0 +1,26 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "maps",
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "port": "8001",
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": false,
+  "serverVersion": "1",
+  "startPage": "Home",
+  "theme": "default"
+}

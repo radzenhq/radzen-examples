@@ -1,0 +1,85 @@
+{
+  "access": [],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "upload0",
+          "type": "upload",
+          "url": "${server}upload"
+        },
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "name": "heading0",
+          "size": "H3",
+          "text": "${center | json}",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "code": "  \n  var flightPlanCoordinates = [\n          {lat: 37.772, lng: -122.214},\n          {lat: 21.291, lng: -157.821},\n          {lat: -18.142, lng: 178.431},\n          {lat: -27.467, lng: 153.027}\n        ];\n        var flightPath = new (<any>window).google.maps.Polyline({\n          path: flightPlanCoordinates,\n          geodesic: true,\n          strokeColor: '#FF0000',\n          strokeOpacity: 1.0,\n          strokeWeight: 2\n        });\n\n        flightPath.setMap(this.googlemap0.instance);",
+                "type": "execute"
+              }
+            ]
+          },
+          "name": "button1",
+          "text": "Draw Line",
+          "type": "button"
+        },
+        {
+          "apiKey": "AIzaSyAJLieBqU3cH3BA3OxUlKDYjpv7Bh6dHbY",
+          "center": {
+            "lat": "${center.lat}",
+            "lng": "${center.lng}"
+          },
+          "events": {
+            "mapClick": [],
+            "markerClick": [
+              {
+                "code": "${markers}.splice(${markers}.indexOf(${event.marker}), 1);",
+                "type": "execute"
+              }
+            ]
+          },
+          "markers": "${markers}",
+          "name": "googlemap0",
+          "style": {
+            "height": "357px"
+          },
+          "type": "googlemap",
+          "zoom": "${zoom}"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "markers",
+        "type": "set",
+        "value": "[{position:{lat: 47.642232, lng: -122.13679100000002}}]"
+      },
+      {
+        "name": "center",
+        "type": "set",
+        "value": "{lat:0, lng: 0}"
+      },
+      {
+        "name": "zoom",
+        "type": "set",
+        "value": "1"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Home"
+}

@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <rz-upload #upload0 url="{{server}}upload">
+  </rz-upload>
+  <rz-heading #pageTitle size="H1" text="Home">
+  </rz-heading>
+  <rz-heading #heading0 size="H3" [text]="center | json">
+  </rz-heading>
+  <rz-button #button1 text="Draw Line" (click)="button1Click($event)">
+  </rz-button>
+  <rz-googlemap #googlemap0 apiKey="AIzaSyAJLieBqU3cH3BA3OxUlKDYjpv7Bh6dHbY" [center]="{'lat': center?.lat, 'lng': center?.lng}" [markers]="markers" [style]="{'height': '357px'}" [zoom]="zoom" (markerClick)="googlemap0MarkerClick($event)">
+  </rz-googlemap>
+</rz-content>

@@ -1,0 +1,710 @@
+{
+  "info": {
+    "title": "Sample",
+    "x-withCredentials": false,
+    "x-type": "odata"
+  },
+  "host": "services.radzen.com",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/odata/",
+  "definitions": {
+    "Error": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Sample.Models.Sample.Order": {
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "OrderDetails",
+              "type": "Sample.Models.Sample.OrderDetail"
+            }
+          ]
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "OrderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "Id",
+        "OrderDate"
+      ]
+    },
+    "Sample.Models.Sample.OrderDetail": {
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": []
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "OrderId": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Orders",
+            "parentEntityType": "Sample.Models.Sample.Order",
+            "type": "Order",
+            "principalKey": "Id",
+            "name": "Order",
+            "textProperty": "UserName"
+          }
+        },
+        "ProductId": {
+          "type": "integer",
+          "format": "int32",
+          "x-foreignKey": {
+            "parentTable": "Products",
+            "parentEntityType": "Sample.Models.Sample.Product",
+            "type": "Product",
+            "principalKey": "Id",
+            "name": "Product",
+            "textProperty": "ProductName"
+          }
+        },
+        "Order": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Sample.Order",
+          "x-ref": {
+            "name": "Order",
+            "constraints": [
+              {
+                "property": "OrderId",
+                "refProperty": "Id"
+              }
+            ]
+          }
+        },
+        "Product": {
+          "type": "object",
+          "$ref": "#/definitions/Sample.Models.Sample.Product",
+          "x-ref": {
+            "name": "Product",
+            "constraints": [
+              {
+                "property": "ProductId",
+                "refProperty": "Id"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "Id",
+        "Quantity"
+      ]
+    },
+    "Sample.Models.Sample.Product": {
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int32",
+          "x-key": true,
+          "x-navigation": [
+            {
+              "name": "OrderDetails",
+              "type": "Sample.Models.Sample.OrderDetail"
+            }
+          ]
+        },
+        "ProductName": {
+          "type": "string"
+        },
+        "ProductPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "ProductPicture": {
+          "type": "string"
+        },
+        "OrderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "Id",
+        "ProductPrice"
+      ]
+    }
+  },
+  "paths": {
+    "/Orders": {
+      "get": {
+        "operationId": "getOrders",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Order",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Sample.Order"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrder",
+        "parameters": [
+          {
+            "name": "Order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Order"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Order"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Orders({Id})": {
+      "get": {
+        "operationId": "getOrderById",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Order.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Order"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteOrder",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateOrder",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Order.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Order"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OrderDetails": {
+      "get": {
+        "operationId": "getOrderDetails",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of OrderDetail",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrderDetail",
+        "parameters": [
+          {
+            "name": "OrderDetail",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OrderDetails({Id})": {
+      "get": {
+        "operationId": "getOrderDetailById",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A OrderDetail.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteOrderDetail",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateOrderDetail",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "OrderDetail",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A OrderDetail.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.OrderDetail"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Products": {
+      "get": {
+        "operationId": "getProducts",
+        "parameters": [
+          {
+            "name": "$filter",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$top",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$skip",
+            "type": "integer",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$orderby",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$expand",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "$count",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Product",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sample.Models.Sample.Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createProduct",
+        "parameters": [
+          {
+            "name": "Product",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Product"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Products({Id})": {
+      "get": {
+        "operationId": "getProductById",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Product.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateProduct",
+        "parameters": [
+          {
+            "name": "Id",
+            "required": true,
+            "in": "path",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Product",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Product.",
+            "schema": {
+              "$ref": "#/definitions/Sample.Models.Sample.Product"
+            }
+          },
+          "204": {
+            "description": "Empty response."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
