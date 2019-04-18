@@ -1,0 +1,284 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Orders",
+          "type": "heading"
+        },
+        {
+          "addText": "Add",
+          "allowFiltering": true,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "property": "OrderID",
+              "title": "Order ID",
+              "type": "integer"
+            },
+            {
+              "filterProperty": "Customer.CompanyName",
+              "property": "CustomerID",
+              "sortProperty": "Customer.CompanyName",
+              "template": "${data.Customer?.CompanyName}",
+              "title": "Customer",
+              "type": "string"
+            },
+            {
+              "filterProperty": "Employee.LastName",
+              "property": "EmployeeID",
+              "sortProperty": "Employee.LastName",
+              "template": "${data.Employee?.LastName}",
+              "title": "Employee",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "property": "OrderDate",
+              "template": "${data.OrderDate | utcDate}",
+              "title": "Order Date",
+              "type": "string"
+            },
+            {
+              "format": "decimal",
+              "property": "Freight",
+              "title": "Freight",
+              "type": "number"
+            }
+          ],
+          "confirmDeleteCancelText": "Cancel",
+          "confirmDeleteOkText": "Ok",
+          "confirmDeleteText": "Are you sure you want to delete this record?",
+          "confirmDeleteTitle": "Confirmation",
+          "count": "${getOrdersCount}",
+          "data": "${getOrdersResult}",
+          "emptyText": "No records to display.",
+          "events": {
+            "loadData": [
+              {
+                "name": "Northwind.getOrders",
+                "parameters": [
+                  {
+                    "name": "$top",
+                    "value": "event.top"
+                  },
+                  {
+                    "name": "$skip",
+                    "value": "event.skip"
+                  },
+                  {
+                    "name": "$count",
+                    "value": "event.top != null && event.skip != null"
+                  },
+                  {
+                    "name": "$filter",
+                    "value": "${event.filter}"
+                  },
+                  {
+                    "name": "$orderby",
+                    "value": "${event.orderby}"
+                  },
+                  {
+                    "name": "$expand",
+                    "value": "Customer,Employee,Shipper"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getOrdersResult",
+                    "type": "set",
+                    "value": "${result.value}"
+                  },
+                  {
+                    "name": "getOrdersCount",
+                    "type": "set",
+                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                  },
+                  {
+                    "code": "${this.grid0.onSelect(result.value[0])}",
+                    "type": "execute"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ],
+            "rowSelect": [
+              {
+                "name": "order",
+                "type": "set",
+                "value": "${event}"
+              }
+            ]
+          },
+          "name": "grid0",
+          "pageSize": 5,
+          "type": "grid"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "class": "col-md-3",
+                      "components": [
+                        {
+                          "name": "label8",
+                          "text": "OrderID:",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col8",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-9",
+                      "components": [
+                        {
+                          "name": "label9",
+                          "style": {
+                            "fontWeight": "bold"
+                          },
+                          "text": "${order.OrderID}",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col9",
+                      "type": "col"
+                    }
+                  ],
+                  "name": "row4",
+                  "type": "row"
+                },
+                {
+                  "components": [
+                    {
+                      "class": "col-md-3",
+                      "components": [
+                        {
+                          "name": "label0",
+                          "text": "Employee:",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col0",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-9",
+                      "components": [
+                        {
+                          "name": "label1",
+                          "style": {
+                            "fontWeight": "bold"
+                          },
+                          "text": "${order.Employee.FirstName} ${order.Employee.LastName}",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col1",
+                      "type": "col"
+                    }
+                  ],
+                  "name": "row0",
+                  "type": "row"
+                },
+                {
+                  "components": [
+                    {
+                      "class": "col-md-3",
+                      "components": [
+                        {
+                          "name": "label2",
+                          "text": "Order Date: ",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col2",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-9",
+                      "components": [
+                        {
+                          "name": "label3",
+                          "style": {
+                            "fontWeight": "bold"
+                          },
+                          "text": "${order.OrderDate | utcDate : 'medium'}",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col3",
+                      "type": "col"
+                    }
+                  ],
+                  "name": "row1",
+                  "type": "row"
+                },
+                {
+                  "components": [
+                    {
+                      "class": "col-md-3",
+                      "components": [
+                        {
+                          "name": "label4",
+                          "text": "Freight:",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col4",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-9",
+                      "components": [
+                        {
+                          "name": "label5",
+                          "style": {
+                            "fontWeight": "bold"
+                          },
+                          "text": "${order.Freight | currency}",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col5",
+                      "type": "col"
+                    }
+                  ],
+                  "name": "row2",
+                  "type": "row"
+                }
+              ],
+              "name": "card0",
+              "type": "card",
+              "visible": true
+            }
+          ],
+          "name": "fieldset0",
+          "text": "Details",
+          "type": "fieldset"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "code": "this.grid0.load();",
+        "type": "execute"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Orders"
+}

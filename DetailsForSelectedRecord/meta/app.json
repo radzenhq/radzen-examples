@@ -1,0 +1,24 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "MyApp",
+  "navigation": [
+    "Orders"
+  ],
+  "pages": [
+    "Orders"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2.2",
+  "startPage": "Orders",
+  "theme": "default"
+}

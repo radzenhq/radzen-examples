@@ -1,0 +1,69 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Orders">
+  </rz-heading>
+  <rz-grid #grid0 addText="Add" [allowFiltering]="true" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getOrdersCount" [data]="getOrdersResult" emptyText="No records to display." [pageSize]="5" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+    <rz-grid-column property="OrderID" title="Order ID" type="integer">
+    </rz-grid-column>
+    <rz-grid-column filterProperty="Customer.CompanyName" property="CustomerID" sortProperty="Customer.CompanyName" title="Customer" type="string">
+      <ng-template let-data gridColumnTemplate>
+      {{data?.Customer?.CompanyName}}
+      </ng-template>
+    </rz-grid-column>
+    <rz-grid-column filterProperty="Employee.LastName" property="EmployeeID" sortProperty="Employee.LastName" title="Employee" type="string">
+      <ng-template let-data gridColumnTemplate>
+      {{data?.Employee?.LastName}}
+      </ng-template>
+    </rz-grid-column>
+    <rz-grid-column format="date-time" property="OrderDate" title="Order Date" type="string">
+      <ng-template let-data gridColumnTemplate>
+      {{data?.OrderDate | utcDate}}
+      </ng-template>
+    </rz-grid-column>
+    <rz-grid-column format="decimal" property="Freight" title="Freight" type="number">
+    </rz-grid-column>
+  </rz-grid>
+  <rz-fieldset #fieldset0 text="Details">
+    <rz-card #card0>
+      <div class="row">
+        <div class="col-md-3">
+          <rz-label #label8 text="OrderID:">
+          </rz-label>
+        </div>
+        <div class="col-md-9">
+          <rz-label #label9 [style]="{'fontWeight': 'bold'}" [text]="order?.OrderID">
+          </rz-label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <rz-label #label0 text="Employee:">
+          </rz-label>
+        </div>
+        <div class="col-md-9">
+          <rz-label #label1 [style]="{'fontWeight': 'bold'}" text="{{order?.Employee?.FirstName}} {{order?.Employee?.LastName}}">
+          </rz-label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <rz-label #label2 text="Order Date: ">
+          </rz-label>
+        </div>
+        <div class="col-md-9">
+          <rz-label #label3 [style]="{'fontWeight': 'bold'}" [text]="order?.OrderDate | utcDate:'medium'">
+          </rz-label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <rz-label #label4 text="Freight:">
+          </rz-label>
+        </div>
+        <div class="col-md-9">
+          <rz-label #label5 [style]="{'fontWeight': 'bold'}" [text]="order?.Freight | currency">
+          </rz-label>
+        </div>
+      </div>
+    </rz-card>
+  </rz-fieldset>
+</rz-content>
