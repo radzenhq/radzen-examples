@@ -1,0 +1,27 @@
+{
+  "dataSources": [],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "ignore": [
+    "*angular-cli.json"
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "editor",
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "port": 8000,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": false,
+  "serverVersion": "2",
+  "startPage": "Home",
+  "theme": "default"
+}

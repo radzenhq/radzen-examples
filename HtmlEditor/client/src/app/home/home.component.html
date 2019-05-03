@@ -1,0 +1,10 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Home">
+  </rz-heading>
+  <rz-html #html0 [style]="{'height': '262px'}">
+    <p-editor [(ngModel)]="editorValue" [style]="{'height': '200px'}"></p-editor>
+  </rz-html>
+  <rz-html #html1>
+    <pre>{{editorValue}}</pre>
+  </rz-html>
+</rz-content>

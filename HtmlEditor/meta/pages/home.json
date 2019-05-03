@@ -1,0 +1,41 @@
+{
+  "access": [],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "content": "<p-editor [(ngModel)]=\"editorValue\" [style]=\"{'height': '200px'}\"></p-editor>",
+          "name": "html0",
+          "style": {
+            "height": "262px"
+          },
+          "type": "html"
+        },
+        {
+          "content": "<pre>${editorValue}</pre>",
+          "name": "html1",
+          "type": "html"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "editorValue",
+        "type": "set",
+        "value": "'<strong>Hello world</strong>'"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Home"
+}
