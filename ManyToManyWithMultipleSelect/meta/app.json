@@ -1,0 +1,30 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "Sample",
+  "navigation": [
+    "Orders",
+    "Products"
+  ],
+  "pages": [
+    "Orders",
+    "Edit Order",
+    "Add Order Detail",
+    "Products",
+    "Add Product",
+    "Edit Product"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2.2",
+  "startPage": "Orders",
+  "theme": "default"
+}

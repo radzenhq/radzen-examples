@@ -1,0 +1,60 @@
+<rz-content #content1 container="main">
+  <div [ngStyle]="{}" class="row">
+    <div class="col-md-9">
+      <rz-label #closeLabel [style]="{'fontWeight': 'bold'}" text="Item no longer available." *ngIf="!canEdit">
+      </rz-label>
+    </div>
+    <div class="col-md-3">
+      <rz-button #closeButton buttonStyle="secondary" [style]="{'marginBottom': '20px'}" text="Close" *ngIf="!canEdit" (click)="closeButtonClick($event)">
+      </rz-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-template-form #form0 (submit)="form0Submit($event)">
+        <div [ngStyle]="{'marginBottom': '1rem'}" class="row">
+          <div class="col-md-3">
+            <rz-label #label2 component="UserName" [style]="{'width': '100%'}" text="User Name">
+            </rz-label>
+          </div>
+          <div class="col-md-9">
+            <rz-textbox #userName [maxLength]="255" [style]="{'display': 'block', 'width': '100%'}" [(ngModel)]="order && order.UserName" name="UserName">
+            </rz-textbox>
+            <rz-required-validator #userNameRequiredValidator [component]="userName" [style]="{'position': 'absolute'}" text="UserName is required">
+            </rz-required-validator>
+          </div>
+        </div>
+        <div [ngStyle]="{'marginBottom': '1rem'}" class="row">
+          <div class="col-md-3">
+            <rz-label #label3 component="OrderDate" [style]="{'width': '100%'}" text="Order Date">
+            </rz-label>
+          </div>
+          <div class="col-md-9">
+            <rz-datepicker #orderDate [style]="{'display': 'block', 'width': '100%'}" [(ngModel)]="order && order.OrderDate" name="OrderDate">
+            </rz-datepicker>
+            <rz-required-validator #orderDateRequiredValidator [component]="orderDate" [style]="{'position': 'absolute'}" text="OrderDate is required">
+            </rz-required-validator>
+          </div>
+        </div>
+        <div [ngStyle]="{'marginBottom': '1rem'}" class="row">
+          <div class="col-md-3">
+            <rz-label #label4 component="OrderDetails" [style]="{'width': '100%'}" text="Products">
+            </rz-label>
+          </div>
+          <div class="col-md-9">
+            <rz-dropdown #orderDetails [allowClear]="true" [allowFiltering]="false" [data]="allProducts" [disabled]="false" [multiple]="true" [style]="{'width': '100%'}" textProperty="ProductName" [(ngModel)]="currentProducts" name="OrderDetails">
+            </rz-dropdown>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col offset-sm-3">
+            <rz-button #button2 buttonStyle="primary" buttonType="submit" icon="save" text="Save">
+            </rz-button>
+            <rz-button #button3 buttonStyle="light" text="Cancel" (click)="button3Click($event)">
+            </rz-button>
+          </div>
+        </div>
+      </rz-template-form>
+    </div>
+  </div>
+</rz-content>
