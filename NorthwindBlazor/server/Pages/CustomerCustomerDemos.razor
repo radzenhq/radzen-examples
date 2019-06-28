@@ -1,0 +1,39 @@
+﻿@page "/customer-customer-demos"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.CustomerCustomerDemosComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Customer Customer Demos">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCustomerCustomerDemosResult)" TItem="CustomerCustomerDemo" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="CustomerCustomerDemo" Context="data" Property="CustomerID" SortProperty="Customer.CompanyName" Title="Customer" Type="string">
+              <Template Context="data">
+              @data.Customer?.CompanyName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CustomerCustomerDemo" Context="data" Property="CustomerTypeID" SortProperty="CustomerDemographic.CustomerDesc" Title="Customer Demographic" Type="string">
+              <Template Context="data">
+              @data.CustomerDemographic?.CustomerDesc
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CustomerCustomerDemo" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="data">
+                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

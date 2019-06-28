@@ -1,0 +1,61 @@
+﻿@page "/edit-employee-territory/{EmployeeID}/{TerritoryID}"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.EditEmployeeTerritoryComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <div style="null" class="row">
+      <div class="col-md-9">
+        <RadzenLabel @ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@(!canEdit)">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+        <RadzenButton @ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm @ref="form0" Data="@(employeeterritory)" Visible="@(employeeterritory != null && canEdit)" TItem="EmployeeTerritory" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label2" Text="Employee" Component="EmployeeID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown @ref="employeeId" Data="@(getEmployeesResult)" TextProperty="LastName" ValueProperty="EmployeeID" Placeholder="Choose Employee" style="display: block; width: 100%;" Name="EmployeeID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator @ref="employeeIdRequiredValidator" Component="EmployeeID" Text="EmployeeID is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label3" Text="Territory" Component="TerritoryID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown @ref="territoryId" Data="@(getTerritoriesResult)" TextProperty="TerritoryDescription" ValueProperty="TerritoryID" Placeholder="Choose Territory" style="display: block; width: 100%;" Name="TerritoryID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator @ref="territoryIdRequiredValidator" Component="TerritoryID" Text="TerritoryID is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton @ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton @ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

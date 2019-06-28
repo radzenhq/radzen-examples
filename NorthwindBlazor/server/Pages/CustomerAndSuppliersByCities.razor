@@ -1,0 +1,29 @@
+﻿@page "/customer-and-suppliers-by-cities"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.CustomerAndSuppliersByCitiesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Customer And Suppliers By Cities">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCustomerAndSuppliersByCitiesResult)" TItem="CustomerAndSuppliersByCity">
+          <Columns>
+            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="City" Title="City" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="CompanyName" Title="Company Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="ContactName" Title="Contact Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="Relationship" Title="Relationship" Type="string">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

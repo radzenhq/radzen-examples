@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-order-detail",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getOrderDetailsCount}",
                   "data": "${getOrderDetailsResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getOrderDetails",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Order,Product"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Order,Product"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getOrderDetailsResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<OrderDetail>"
-                          },
-                          {
-                            "name": "getOrderDetailsCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -100,8 +61,14 @@
                           }
                         ],
                         "path": "edit-order-detail",
-                        "type": "navigate",
-                        "argType": "OrderDetail"
+                        "type": "popup",
+                        "argType": "OrderDetail",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -110,35 +77,32 @@
                     {
                       "property": "OrderID",
                       "sortProperty": "Order.CustomerID",
-                      "template": "@data.Order?.CustomerID",
+                      "template": "${data.Order?.CustomerID}",
                       "title": "Order",
                       "type": "string"
                     },
                     {
                       "property": "ProductID",
                       "sortProperty": "Product.ProductName",
-                      "template": "@data.Product?.ProductName",
+                      "template": "${data.Product?.ProductName}",
                       "title": "Product",
                       "type": "string"
                     },
                     {
                       "format": "decimal",
                       "property": "UnitPrice",
-                      "template": "@data.UnitPrice",
                       "title": "Unit Price",
                       "type": "number"
                     },
                     {
                       "format": "int16",
                       "property": "Quantity",
-                      "template": "@data.Quantity",
                       "title": "Quantity",
                       "type": "integer"
                     },
                     {
                       "format": "float",
                       "property": "Discount",
-                      "template": "@data.Discount",
                       "title": "Discount",
                       "type": "number"
                     },
@@ -180,7 +144,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -204,7 +168,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getOrderDetails",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOrderDetailsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<OrderDetail>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Order Details",
   "layout": "Main"

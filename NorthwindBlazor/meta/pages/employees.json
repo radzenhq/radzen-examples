@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-employee",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getEmployeesCount}",
                   "data": "${getEmployeesResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getEmployees",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Employee1"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Employee1"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getEmployeesResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Employee>"
-                          },
-                          {
-                            "name": "getEmployeesCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -96,8 +57,14 @@
                           }
                         ],
                         "path": "edit-employee",
-                        "type": "navigate",
-                        "argType": "Employee"
+                        "type": "popup",
+                        "argType": "Employee",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -105,113 +72,98 @@
                   "columns": [
                     {
                       "property": "EmployeeID",
-                      "template": "@data.EmployeeID",
                       "title": "Employee ID",
                       "type": "integer"
                     },
                     {
                       "property": "LastName",
-                      "template": "@data.LastName",
                       "title": "Last Name",
                       "type": "string"
                     },
                     {
                       "property": "FirstName",
-                      "template": "@data.FirstName",
                       "title": "First Name",
                       "type": "string"
                     },
                     {
                       "property": "Title",
-                      "template": "@data.Title",
                       "title": "Title",
                       "type": "string"
                     },
                     {
                       "property": "TitleOfCourtesy",
-                      "template": "@data.TitleOfCourtesy",
                       "title": "Title Of Courtesy",
                       "type": "string"
                     },
                     {
                       "format": "date-time",
                       "property": "BirthDate",
-                      "template": "@String.Format(\"{0:d}\", data.BirthDate)",
+                      "formatString": "{0:d}",
                       "title": "Birth Date",
                       "type": "string"
                     },
                     {
                       "format": "date-time",
                       "property": "HireDate",
-                      "template": "@String.Format(\"{0:d}\", data.HireDate)",
+                      "formatString": "{0:d}",
                       "title": "Hire Date",
                       "type": "string"
                     },
                     {
                       "property": "Address",
-                      "template": "@data.Address",
                       "title": "Address",
                       "type": "string"
                     },
                     {
                       "property": "City",
-                      "template": "@data.City",
                       "title": "City",
                       "type": "string"
                     },
                     {
                       "property": "Region",
-                      "template": "@data.Region",
                       "title": "Region",
                       "type": "string"
                     },
                     {
                       "property": "PostalCode",
-                      "template": "@data.PostalCode",
                       "title": "Postal Code",
                       "type": "string"
                     },
                     {
                       "property": "Country",
-                      "template": "@data.Country",
                       "title": "Country",
                       "type": "string"
                     },
                     {
                       "property": "HomePhone",
-                      "template": "@data.HomePhone",
                       "title": "Home Phone",
                       "type": "string"
                     },
                     {
                       "property": "Extension",
-                      "template": "@data.Extension",
                       "title": "Extension",
                       "type": "string"
                     },
                     {
                       "format": "binary",
                       "property": "Photo",
-                      "template": "@data.Photo",
                       "title": "Photo",
                       "type": "string"
                     },
                     {
                       "property": "Notes",
-                      "template": "@data.Notes",
                       "title": "Notes",
                       "type": "string"
                     },
                     {
                       "property": "ReportsTo",
                       "sortProperty": "Employee1.LastName",
-                      "template": "@data.Employee1?.LastName",
+                      "template": "${data.Employee1?.LastName}",
                       "title": "Employee",
                       "type": "string"
                     },
                     {
                       "property": "PhotoPath",
-                      "template": "@data.PhotoPath",
                       "title": "Photo Path",
                       "type": "string"
                     },
@@ -249,7 +201,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -273,7 +225,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Employee>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Employees",
   "layout": "Main"

@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Territory"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -46,6 +40,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 20,
                               "type": "textbox",
                               "name": "TerritoryID",
@@ -92,6 +87,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 50,
                               "type": "textbox",
                               "name": "TerritoryDescription",
@@ -183,8 +179,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "territories",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -214,8 +209,8 @@
                         ],
                         "then": [
                           {
-                            "path": "territories",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${territory}"
                           }
                         ],
                         "type": "invoke",

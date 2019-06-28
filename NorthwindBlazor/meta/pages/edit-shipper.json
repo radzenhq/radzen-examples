@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Edit Shipper"
-        },
-        {
           "components": [
             {
               "class": "col-md-9",
@@ -36,8 +30,7 @@
                   "events": {
                     "click": [
                       {
-                        "path": "shippers",
-                        "type": "navigate"
+                        "type": "close-popup"
                       }
                     ]
                   },
@@ -95,6 +88,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 40,
                               "type": "textbox",
                               "name": "CompanyName",
@@ -141,6 +135,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 24,
                               "type": "textbox",
                               "name": "Phone",
@@ -173,8 +168,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "shippers",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -214,8 +208,8 @@
                         ],
                         "then": [
                           {
-                            "path": "shippers",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${shipper}"
                           }
                         ],
                         "type": "invoke",

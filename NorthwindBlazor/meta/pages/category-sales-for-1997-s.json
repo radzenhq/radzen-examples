@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Category Sales For 1997 S"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getCategorySalesFor1997sResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CategoryName",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "CategorySales",
+                      "title": "Category Sales",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "CategorySalesFor1997"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCategorySalesFor1997s",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCategorySalesFor1997sResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<CategorySalesFor1997>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Category Sales For 1997 S",
+  "layout": "Main"
+}

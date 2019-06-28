@@ -1,0 +1,168 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Orders Qries"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getOrdersQriesResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CustomerID",
+                      "title": "Customer ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "EmployeeID",
+                      "title": "Employee ID",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "OrderDate",
+                      "formatString": "{0:d}",
+                      "title": "Order Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "RequiredDate",
+                      "formatString": "{0:d}",
+                      "title": "Required Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "formatString": "{0:d}",
+                      "title": "Shipped Date",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipVia",
+                      "title": "Ship Via",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "Freight",
+                      "title": "Freight",
+                      "type": "number"
+                    },
+                    {
+                      "property": "ShipName",
+                      "title": "Ship Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipAddress",
+                      "title": "Ship Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCity",
+                      "title": "Ship City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipRegion",
+                      "title": "Ship Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipPostalCode",
+                      "title": "Ship Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "title": "Ship Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Address",
+                      "title": "Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Region",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "title": "Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "OrdersQry"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getOrdersQries",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOrdersQriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<OrdersQry>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Orders Qries",
+  "layout": "Main"
+}

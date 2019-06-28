@@ -1,0 +1,202 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Invoices"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getInvoicesResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "ShipName",
+                      "title": "Ship Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipAddress",
+                      "title": "Ship Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCity",
+                      "title": "Ship City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipRegion",
+                      "title": "Ship Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipPostalCode",
+                      "title": "Ship Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipCountry",
+                      "title": "Ship Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CustomerID",
+                      "title": "Customer ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CustomerName",
+                      "title": "Customer Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Address",
+                      "title": "Address",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Region",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    {
+                      "property": "PostalCode",
+                      "title": "Postal Code",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Salesperson",
+                      "title": "Salesperson",
+                      "type": "string"
+                    },
+                    {
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "OrderDate",
+                      "formatString": "{0:d}",
+                      "title": "Order Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "RequiredDate",
+                      "formatString": "{0:d}",
+                      "title": "Required Date",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "formatString": "{0:d}",
+                      "title": "Shipped Date",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ShipperName",
+                      "title": "Shipper Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ProductID",
+                      "title": "Product ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "UnitPrice",
+                      "title": "Unit Price",
+                      "type": "number"
+                    },
+                    {
+                      "format": "int16",
+                      "property": "Quantity",
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "float",
+                      "property": "Discount",
+                      "title": "Discount",
+                      "type": "number"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "ExtendedPrice",
+                      "title": "Extended Price",
+                      "type": "number"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "Freight",
+                      "title": "Freight",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "Invoice"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getInvoices",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getInvoicesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Invoice>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Invoices",
+  "layout": "Main"
+}

@@ -1,0 +1,100 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Order Details Extendeds"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getOrderDetailsExtendedsResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "ProductID",
+                      "title": "Product ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "UnitPrice",
+                      "title": "Unit Price",
+                      "type": "number"
+                    },
+                    {
+                      "format": "int16",
+                      "property": "Quantity",
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "float",
+                      "property": "Discount",
+                      "title": "Discount",
+                      "type": "number"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "ExtendedPrice",
+                      "title": "Extended Price",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "OrderDetailsExtended"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getOrderDetailsExtendeds",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOrderDetailsExtendedsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<OrderDetailsExtended>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Order Details Extendeds",
+  "layout": "Main"
+}

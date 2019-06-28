@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Region"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -46,6 +40,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "integer",
                               "type": "numeric",
                               "name": "RegionID",
                               "style": {
@@ -91,6 +86,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 50,
                               "type": "textbox",
                               "name": "RegionDescription",
@@ -133,8 +129,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "regions",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -164,8 +159,8 @@
                         ],
                         "then": [
                           {
-                            "path": "regions",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${region}"
                           }
                         ],
                         "type": "invoke",

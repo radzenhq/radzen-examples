@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Edit Product"
-        },
-        {
           "components": [
             {
               "class": "col-md-9",
@@ -36,8 +30,7 @@
                   "events": {
                     "click": [
                       {
-                        "path": "products",
-                        "type": "navigate"
+                        "type": "close-popup"
                       }
                     ]
                   },
@@ -95,6 +88,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 40,
                               "type": "textbox",
                               "name": "ProductName",
@@ -219,6 +213,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 20,
                               "type": "textbox",
                               "name": "QuantityPerUnit",
@@ -255,6 +250,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "number",
+                              "valueFormat": "decimal",
                               "type": "numeric",
                               "name": "UnitPrice",
                               "style": {
@@ -290,6 +287,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "integer",
+                              "valueFormat": "int16",
                               "type": "numeric",
                               "name": "UnitsInStock",
                               "style": {
@@ -325,6 +324,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "integer",
+                              "valueFormat": "int16",
                               "type": "numeric",
                               "name": "UnitsOnOrder",
                               "style": {
@@ -360,6 +361,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "integer",
+                              "valueFormat": "int16",
                               "type": "numeric",
                               "name": "ReorderLevel",
                               "style": {
@@ -395,6 +398,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "boolean",
                               "type": "checkbox",
                               "name": "Discontinued",
                               "triState": true
@@ -424,8 +428,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "products",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -465,8 +468,8 @@
                         ],
                         "then": [
                           {
-                            "path": "products",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${product}"
                           }
                         ],
                         "type": "invoke",

@@ -29,60 +29,25 @@
                     "click": [
                       {
                         "path": "add-customer",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getCustomersCount}",
                   "data": "${getCustomersResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getCustomers",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getCustomersResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Customer>"
-                          },
-                          {
-                            "name": "getCustomersCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -92,8 +57,14 @@
                           }
                         ],
                         "path": "edit-customer",
-                        "type": "navigate",
-                        "argType": "Customer"
+                        "type": "popup",
+                        "argType": "Customer",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -101,67 +72,56 @@
                   "columns": [
                     {
                       "property": "CustomerID",
-                      "template": "@data.CustomerID",
                       "title": "Customer ID",
                       "type": "string"
                     },
                     {
                       "property": "CompanyName",
-                      "template": "@data.CompanyName",
                       "title": "Company Name",
                       "type": "string"
                     },
                     {
                       "property": "ContactName",
-                      "template": "@data.ContactName",
                       "title": "Contact Name",
                       "type": "string"
                     },
                     {
                       "property": "ContactTitle",
-                      "template": "@data.ContactTitle",
                       "title": "Contact Title",
                       "type": "string"
                     },
                     {
                       "property": "Address",
-                      "template": "@data.Address",
                       "title": "Address",
                       "type": "string"
                     },
                     {
                       "property": "City",
-                      "template": "@data.City",
                       "title": "City",
                       "type": "string"
                     },
                     {
                       "property": "Region",
-                      "template": "@data.Region",
                       "title": "Region",
                       "type": "string"
                     },
                     {
                       "property": "PostalCode",
-                      "template": "@data.PostalCode",
                       "title": "Postal Code",
                       "type": "string"
                     },
                     {
                       "property": "Country",
-                      "template": "@data.Country",
                       "title": "Country",
                       "type": "string"
                     },
                     {
                       "property": "Phone",
-                      "template": "@data.Phone",
                       "title": "Phone",
                       "type": "string"
                     },
                     {
                       "property": "Fax",
-                      "template": "@data.Fax",
                       "title": "Fax",
                       "type": "string"
                     },
@@ -199,7 +159,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -223,7 +183,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getCustomers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomersResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Customer>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Customers",
   "layout": "Main"

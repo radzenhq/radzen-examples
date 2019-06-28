@@ -1,0 +1,68 @@
+﻿@page "/employees"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.EmployeesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Employees">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getEmployeesResult)" TItem="Employee" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="EmployeeID" Title="Employee ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="LastName" Title="Last Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="FirstName" Title="First Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Title" Title="Title" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="TitleOfCourtesy" Title="Title Of Courtesy" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Format="date-time" Property="BirthDate" FormatString="{0:d}" Title="Birth Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Format="date-time" Property="HireDate" FormatString="{0:d}" Title="Hire Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Address" Title="Address" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="City" Title="City" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Region" Title="Region" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="PostalCode" Title="Postal Code" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Country" Title="Country" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="HomePhone" Title="Home Phone" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Extension" Title="Extension" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Format="binary" Property="Photo" Title="Photo" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="Notes" Title="Notes" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="ReportsTo" SortProperty="Employee1.LastName" Title="Employee" Type="string">
+              <Template Context="data">
+              @data.Employee1?.LastName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Property="PhotoPath" Title="Photo Path" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Employee" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="data">
+                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

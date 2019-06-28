@@ -1,0 +1,27 @@
+﻿@page "/summary-of-sales-by-years"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.SummaryOfSalesByYearsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Summary Of Sales By Years">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getSummaryOfSalesByYearsResult)" TItem="SummaryOfSalesByYear">
+          <Columns>
+            <RadzenGridColumn TItem="SummaryOfSalesByYear" Context="data" Format="date-time" Property="ShippedDate" FormatString="{0:d}" Title="Shipped Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="SummaryOfSalesByYear" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="SummaryOfSalesByYear" Context="data" Format="decimal" Property="Subtotal" Title="Subtotal" Type="number">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

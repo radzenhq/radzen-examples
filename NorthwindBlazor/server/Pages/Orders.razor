@@ -1,0 +1,66 @@
+﻿@page "/orders"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.OrdersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Orders">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrdersResult)" TItem="Order" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="Order" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="CustomerID" SortProperty="Customer.CompanyName" Title="Customer" Type="string">
+              <Template Context="data">
+              @data.Customer?.CompanyName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="EmployeeID" SortProperty="Employee.LastName" Title="Employee" Type="string">
+              <Template Context="data">
+              @data.Employee?.LastName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Format="date-time" Property="OrderDate" FormatString="{0:d}" Title="Order Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Format="date-time" Property="RequiredDate" FormatString="{0:d}" Title="Required Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Format="date-time" Property="ShippedDate" FormatString="{0:d}" Title="Shipped Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipVia" SortProperty="Shipper.CompanyName" Title="Shipper" Type="string">
+              <Template Context="data">
+              @data.Shipper?.CompanyName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Format="decimal" Property="Freight" Title="Freight" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipName" Title="Ship Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipAddress" Title="Ship Address" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipCity" Title="Ship City" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipRegion" Title="Ship Region" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipPostalCode" Title="Ship Postal Code" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Property="ShipCountry" Title="Ship Country" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Order" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="data">
+                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

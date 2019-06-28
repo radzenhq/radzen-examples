@@ -1,0 +1,41 @@
+﻿@page "/"
+@namespace NorthwindBlazor.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Radzen
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        NorthwindBlazor
+    </title>
+    <base href="~/" />
+    <link href="assets/css/default.css" rel="stylesheet" />
+</head>
+<body>
+    <app>@(await Html.RenderComponentAsync<App>())</app>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script>
+        window.readFileAsBase64 = (fileInput) => {
+            const readAsDataURL = (fileInput) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onerror = () => {
+                        reader.abort();
+                        reject(new Error("Error reading file."));
+                    };
+                    reader.addEventListener("load", () => {
+                        resolve(reader.result);
+                    }, false);
+                    reader.readAsDataURL(fileInput.files[0]);
+                });
+            };
+
+            return readAsDataURL(fileInput);
+        };
+    </script>
+</body>
+</html>

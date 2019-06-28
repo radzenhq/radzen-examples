@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Customer Demographic"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -46,6 +40,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 10,
                               "type": "textbox",
                               "name": "CustomerTypeID",
@@ -92,6 +87,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "type": "textbox",
                               "name": "CustomerDesc",
                               "style": {
@@ -123,8 +119,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "customer-demographics",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -154,8 +149,8 @@
                         ],
                         "then": [
                           {
-                            "path": "customer-demographics",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${customerdemographic}"
                           }
                         ],
                         "type": "invoke",

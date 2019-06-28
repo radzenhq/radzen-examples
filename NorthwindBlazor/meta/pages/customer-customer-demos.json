@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-customer-customer-demo",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getCustomerCustomerDemosCount}",
                   "data": "${getCustomerCustomerDemosResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getCustomerCustomerDemos",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Customer,CustomerDemographic"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Customer,CustomerDemographic"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getCustomerCustomerDemosResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<CustomerCustomerDemo>"
-                          },
-                          {
-                            "name": "getCustomerCustomerDemosCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -100,8 +61,14 @@
                           }
                         ],
                         "path": "edit-customer-customer-demo",
-                        "type": "navigate",
-                        "argType": "CustomerCustomerDemo"
+                        "type": "popup",
+                        "argType": "CustomerCustomerDemo",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -110,14 +77,14 @@
                     {
                       "property": "CustomerID",
                       "sortProperty": "Customer.CompanyName",
-                      "template": "@data.Customer?.CompanyName",
+                      "template": "${data.Customer?.CompanyName}",
                       "title": "Customer",
                       "type": "string"
                     },
                     {
                       "property": "CustomerTypeID",
                       "sortProperty": "CustomerDemographic.CustomerDesc",
-                      "template": "@data.CustomerDemographic?.CustomerDesc",
+                      "template": "${data.CustomerDemographic?.CustomerDesc}",
                       "title": "Customer Demographic",
                       "type": "string"
                     },
@@ -159,7 +126,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -183,7 +150,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getCustomerCustomerDemos",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomerCustomerDemosResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<CustomerCustomerDemo>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Customer Customer Demos",
   "layout": "Main"

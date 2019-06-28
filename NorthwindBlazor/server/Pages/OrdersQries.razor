@@ -1,0 +1,61 @@
+﻿@page "/orders-qries"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.OrdersQriesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Orders Qries">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrdersQriesResult)" TItem="OrdersQry">
+          <Columns>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="CustomerID" Title="Customer ID" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="EmployeeID" Title="Employee ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Format="date-time" Property="OrderDate" FormatString="{0:d}" Title="Order Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Format="date-time" Property="RequiredDate" FormatString="{0:d}" Title="Required Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Format="date-time" Property="ShippedDate" FormatString="{0:d}" Title="Shipped Date" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipVia" Title="Ship Via" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Format="decimal" Property="Freight" Title="Freight" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipName" Title="Ship Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipAddress" Title="Ship Address" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipCity" Title="Ship City" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipRegion" Title="Ship Region" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipPostalCode" Title="Ship Postal Code" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="ShipCountry" Title="Ship Country" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="CompanyName" Title="Company Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="Address" Title="Address" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="City" Title="City" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="Region" Title="Region" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="PostalCode" Title="Postal Code" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrdersQry" Context="data" Property="Country" Title="Country" Type="string">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

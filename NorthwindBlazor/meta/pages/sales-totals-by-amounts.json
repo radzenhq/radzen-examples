@@ -1,0 +1,84 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Sales Totals By Amounts"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getSalesTotalsByAmountsResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "format": "decimal",
+                      "property": "SaleAmount",
+                      "title": "Sale Amount",
+                      "type": "number"
+                    },
+                    {
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "formatString": "{0:d}",
+                      "title": "Shipped Date",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "SalesTotalsByAmount"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getSalesTotalsByAmounts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSalesTotalsByAmountsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<SalesTotalsByAmount>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Sales Totals By Amounts",
+  "layout": "Main"
+}

@@ -1,0 +1,43 @@
+﻿@page "/alphabetical-list-of-products"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.AlphabeticalListOfProductsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Alphabetical List Of Products">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getAlphabeticalListOfProductsResult)" TItem="AlphabeticalListOfProduct">
+          <Columns>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="ProductID" Title="Product ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="SupplierID" Title="Supplier ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="CategoryID" Title="Category ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="QuantityPerUnit" Title="Quantity Per Unit" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="int16" Property="UnitsInStock" Title="Units In Stock" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="int16" Property="UnitsOnOrder" Title="Units On Order" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="int16" Property="ReorderLevel" Title="Reorder Level" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="Discontinued" Title="Discontinued" Type="boolean">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="CategoryName" Title="Category Name" Type="string">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

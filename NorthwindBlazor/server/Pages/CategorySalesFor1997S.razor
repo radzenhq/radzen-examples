@@ -1,0 +1,25 @@
+﻿@page "/category-sales-for-1997-s"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.CategorySalesFor1997SComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Category Sales For 1997 S">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCategorySalesFor1997sResult)" TItem="CategorySalesFor1997">
+          <Columns>
+            <RadzenGridColumn TItem="CategorySalesFor1997" Context="data" Property="CategoryName" Title="Category Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CategorySalesFor1997" Context="data" Format="decimal" Property="CategorySales" Title="Category Sales" Type="number">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

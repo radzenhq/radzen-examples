@@ -1,0 +1,87 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Products By Categories"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getProductsByCategoriesResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CategoryName",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "QuantityPerUnit",
+                      "title": "Quantity Per Unit",
+                      "type": "string"
+                    },
+                    {
+                      "format": "int16",
+                      "property": "UnitsInStock",
+                      "title": "Units In Stock",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "Discontinued",
+                      "title": "Discontinued",
+                      "type": "boolean"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "ProductsByCategory"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getProductsByCategories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getProductsByCategoriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<ProductsByCategory>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Products By Categories",
+  "layout": "Main"
+}

@@ -1,0 +1,23 @@
+﻿@inherits NorthwindBlazor.Layouts.LoginLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+
+<RadzenDialog />
+
+<RadzenBody @ref="body0" style="null">
+  <ChildContent>
+    <div class="row justify-content-center">
+      <div class="justify-content-center col-xl-5 col-md-7">
+        <RadzenCard @ref="card0" style="margin-top: 8rem;">
+          <ChildContent>
+            <RadzenContentContainer @ref="main" Name="main">
+            @Body
+            </RadzenContentContainer>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenBody>

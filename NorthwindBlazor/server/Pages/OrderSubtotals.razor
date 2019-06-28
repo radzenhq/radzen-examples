@@ -1,0 +1,25 @@
+﻿@page "/order-subtotals"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.OrderSubtotalsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Order Subtotals">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrderSubtotalsResult)" TItem="OrderSubtotal">
+          <Columns>
+            <RadzenGridColumn TItem="OrderSubtotal" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderSubtotal" Context="data" Format="decimal" Property="Subtotal" Title="Subtotal" Type="number">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

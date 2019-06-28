@@ -1,0 +1,103 @@
+﻿@inherits NorthwindBlazor.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+
+<RadzenDialog />
+
+<RadzenHeader @ref="header0">
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-md-6 d-flex align-items-center">
+        <RadzenSidebarToggle @ref="sidebarToggle0" Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel @ref="label0" Text="NorthwindBlazor">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-6 text-lg-right">
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+  <ChildContent>
+    <RadzenContentContainer @ref="main" Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu @ref="panelmenu0" style="height: 100%;">
+      <ChildContent>
+        <RadzenPanelmenuItem Text="Categories" Path="categories">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Customers" Path="customers">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Customer Customer Demos" Path="customer-customer-demos">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Customer Demographics" Path="customer-demographics">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Employees" Path="employees">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Employee Territories" Path="employee-territories">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Orders" Path="orders">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Order Details" Path="order-details">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Products" Path="products">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Regions" Path="regions">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Role Permissions" Path="role-permissions">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Shippers" Path="shippers">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Suppliers" Path="suppliers">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Territories" Path="territories">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Alphabetical List Of Products" Path="alphabetical-list-of-products">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Category Sales For 1997 S" Path="category-sales-for-1997-s">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Current Product Lists" Path="current-product-lists">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Customer And Suppliers By Cities" Path="customer-and-suppliers-by-cities">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Invoices" Path="invoices">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Order Details Extendeds" Path="order-details-extendeds">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Order Subtotals" Path="order-subtotals">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Orders Qries" Path="orders-qries">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Product Sales For 1997 S" Path="product-sales-for-1997-s">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Products Above Average Prices" Path="products-above-average-prices">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Products By Categories" Path="products-by-categories">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Quarterly Orders" Path="quarterly-orders">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Sales By Categories" Path="sales-by-categories">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Sales Totals By Amounts" Path="sales-totals-by-amounts">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Summary Of Sales By Quarters" Path="summary-of-sales-by-quarters">
+        </RadzenPanelmenuItem>
+        <RadzenPanelmenuItem Text="Summary Of Sales By Years" Path="summary-of-sales-by-years">
+        </RadzenPanelmenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter @ref="footer0">
+  <ChildContent>
+    <RadzenLabel @ref="footerText" Text="NorthwindBlazor, Copyright &copy; 2019">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

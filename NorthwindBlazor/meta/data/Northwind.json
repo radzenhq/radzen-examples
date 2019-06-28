@@ -6,6 +6,60 @@
     "x-connector-version": 14
   },
   "definitions": {
+    "AlphabeticalListOfProduct": {
+      "x-view": true,
+      "x-table": "dbo.Alphabetical list of products",
+      "resource": "AlphabeticalListOfProducts",
+      "required": [
+        "ProductID",
+        "ProductName",
+        "Discontinued",
+        "CategoryName"
+      ],
+      "properties": {
+        "ProductID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        },
+        "SupplierID": {
+          "type": "integer"
+        },
+        "CategoryID": {
+          "type": "integer"
+        },
+        "QuantityPerUnit": {
+          "type": "string",
+          "length": 20
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "UnitsInStock": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "UnitsOnOrder": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "ReorderLevel": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discontinued": {
+          "type": "boolean"
+        },
+        "CategoryName": {
+          "type": "string",
+          "length": 15
+        }
+      }
+    },
     "Category": {
       "x-table": "dbo.Categories",
       "resource": "Categories",
@@ -16,6 +70,7 @@
         "CategoryID": {
           "x-key": true,
           "x-identity": true,
+          "x-nullable": false,
           "type": "integer",
           "x-navigation": [
             {
@@ -26,16 +81,13 @@
           ]
         },
         "CategoryName": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "Description": {
-          "x-key": false,
           "type": "string"
         },
         "Picture": {
-          "x-key": false,
           "type": "string",
           "format": "binary"
         },
@@ -44,6 +96,143 @@
           "items": {
             "$ref": "#/definitions/Product"
           }
+        }
+      }
+    },
+    "CategorySalesFor1997": {
+      "x-view": true,
+      "x-table": "dbo.Category Sales for 1997",
+      "resource": "CategorySalesFor1997s",
+      "required": [
+        "CategoryName"
+      ],
+      "properties": {
+        "CategoryName": {
+          "type": "string",
+          "length": 15,
+          "x-key": true
+        },
+        "CategorySales": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "CurrentProductList": {
+      "x-view": true,
+      "x-table": "dbo.Current Product List",
+      "resource": "CurrentProductLists",
+      "required": [
+        "ProductID",
+        "ProductName"
+      ],
+      "properties": {
+        "ProductID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        }
+      }
+    },
+    "CustOrderHist": {
+      "x-view": "sp",
+      "x-table": "dbo.CustOrderHist",
+      "x-parameters": [
+        {
+          "name": "CustomerID",
+          "type": "string",
+          "size": 10
+        }
+      ],
+      "resource": "CustOrderHists",
+      "required": [
+        "ProductName"
+      ],
+      "properties": {
+        "ProductName": {
+          "type": "string",
+          "length": 80,
+          "x-key": true
+        },
+        "Total": {
+          "type": "integer"
+        }
+      }
+    },
+    "CustOrdersDetail": {
+      "x-view": "sp",
+      "x-table": "dbo.CustOrdersDetail",
+      "x-parameters": [
+        {
+          "name": "OrderID",
+          "type": "integer"
+        }
+      ],
+      "resource": "CustOrdersDetails",
+      "required": [
+        "ProductName",
+        "Quantity"
+      ],
+      "properties": {
+        "ProductName": {
+          "type": "string",
+          "length": 80,
+          "x-key": true
+        },
+        "UnitPrice": {
+          "x-computed": true,
+          "x-nullable": false,
+          "type": "number",
+          "format": "decimal"
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discount": {
+          "x-computed": true,
+          "type": "integer"
+        },
+        "ExtendedPrice": {
+          "x-computed": true,
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "CustOrdersOrder": {
+      "x-view": "sp",
+      "x-table": "dbo.CustOrdersOrders",
+      "x-parameters": [
+        {
+          "name": "CustomerID",
+          "type": "string",
+          "size": 10
+        }
+      ],
+      "resource": "CustOrdersOrders",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "OrderID": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "OrderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "RequiredDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -73,52 +262,42 @@
           ]
         },
         "CompanyName": {
-          "x-key": false,
           "type": "string",
           "length": 40
         },
         "ContactName": {
-          "x-key": false,
           "type": "string",
           "length": 30
         },
         "ContactTitle": {
-          "x-key": false,
           "type": "string",
           "length": 30
         },
         "Address": {
-          "x-key": false,
           "type": "string",
           "length": 60
         },
         "City": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "Region": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "PostalCode": {
-          "x-key": false,
           "type": "string",
           "length": 10
         },
         "Country": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "Phone": {
-          "x-key": false,
           "type": "string",
           "length": 24
         },
         "Fax": {
-          "x-key": false,
           "type": "string",
           "length": 24
         },
@@ -136,20 +315,50 @@
         }
       }
     },
+    "CustomerAndSuppliersByCity": {
+      "x-view": true,
+      "x-table": "dbo.Customer and Suppliers by City",
+      "resource": "CustomerAndSuppliersByCities",
+      "required": [
+        "CompanyName",
+        "Relationship"
+      ],
+      "properties": {
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "CompanyName": {
+          "type": "string",
+          "length": 40,
+          "x-key": true
+        },
+        "ContactName": {
+          "type": "string",
+          "length": 30
+        },
+        "Relationship": {
+          "type": "string",
+          "length": 9
+        }
+      }
+    },
     "CustomerCustomerDemo": {
       "x-table": "dbo.CustomerCustomerDemo",
       "resource": "CustomerCustomerDemos",
       "required": [
         "CustomerID",
-        "CustomerID",
-        "CustomerTypeID",
         "CustomerTypeID"
       ],
       "properties": {
+        "Customer": {
+          "type": "object",
+          "$ref": "#/definitions/Customer"
+        },
         "CustomerID": {
-          "x-key": true,
           "type": "string",
           "length": 5,
+          "x-key": true,
           "x-foreignKey": {
             "parentTable": "Customers",
             "parentEntityType": "Customer",
@@ -160,10 +369,14 @@
             "navigationProperty": "CustomerCustomerDemos"
           }
         },
+        "CustomerDemographic": {
+          "type": "object",
+          "$ref": "#/definitions/CustomerDemographic"
+        },
         "CustomerTypeID": {
-          "x-key": true,
           "type": "string",
           "length": 10,
+          "x-key": true,
           "x-foreignKey": {
             "parentTable": "CustomerDemographics",
             "parentEntityType": "CustomerDemographic",
@@ -196,7 +409,6 @@
           ]
         },
         "CustomerDesc": {
-          "x-key": false,
           "type": "string"
         },
         "CustomerCustomerDemos": {
@@ -218,6 +430,7 @@
         "EmployeeID": {
           "x-key": true,
           "x-identity": true,
+          "x-nullable": false,
           "type": "integer",
           "x-navigation": [
             {
@@ -238,81 +451,69 @@
           ]
         },
         "LastName": {
-          "x-key": false,
           "type": "string",
           "length": 20
         },
         "FirstName": {
-          "x-key": false,
           "type": "string",
           "length": 10
         },
         "Title": {
-          "x-key": false,
           "type": "string",
           "length": 30
         },
         "TitleOfCourtesy": {
-          "x-key": false,
           "type": "string",
           "length": 25
         },
         "BirthDate": {
-          "x-key": false,
           "type": "string",
           "format": "date-time"
         },
         "HireDate": {
-          "x-key": false,
           "type": "string",
           "format": "date-time"
         },
         "Address": {
-          "x-key": false,
           "type": "string",
           "length": 60
         },
         "City": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "Region": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "PostalCode": {
-          "x-key": false,
           "type": "string",
           "length": 10
         },
         "Country": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "HomePhone": {
-          "x-key": false,
           "type": "string",
           "length": 24
         },
         "Extension": {
-          "x-key": false,
           "type": "string",
           "length": 4
         },
         "Photo": {
-          "x-key": false,
           "type": "string",
           "format": "binary"
         },
         "Notes": {
-          "x-key": false,
           "type": "string"
         },
+        "Employee1": {
+          "type": "object",
+          "$ref": "#/definitions/Employee"
+        },
         "ReportsTo": {
-          "x-key": false,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Employees",
@@ -325,7 +526,6 @@
           }
         },
         "PhotoPath": {
-          "x-key": false,
           "type": "string",
           "length": 255
         },
@@ -349,19 +549,72 @@
         }
       }
     },
+    "EmployeeSalesByCountry": {
+      "x-view": "sp",
+      "x-table": "dbo.Employee Sales by Country",
+      "x-parameters": [
+        {
+          "name": "Beginning_Date",
+          "type": "string",
+          "format": "date-time",
+          "size": 8
+        },
+        {
+          "name": "Ending_Date",
+          "type": "string",
+          "format": "date-time",
+          "size": 8
+        }
+      ],
+      "resource": "EmployeeSalesByCountries",
+      "required": [
+        "LastName",
+        "FirstName",
+        "OrderID"
+      ],
+      "properties": {
+        "Country": {
+          "type": "string",
+          "length": 30
+        },
+        "LastName": {
+          "type": "string",
+          "length": 40,
+          "x-key": true
+        },
+        "FirstName": {
+          "type": "string",
+          "length": 20
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderID": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "SaleAmount": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
     "EmployeeTerritory": {
       "x-table": "dbo.EmployeeTerritories",
       "resource": "EmployeeTerritories",
       "required": [
         "EmployeeID",
-        "EmployeeID",
-        "TerritoryID",
         "TerritoryID"
       ],
       "properties": {
+        "Employee": {
+          "type": "object",
+          "$ref": "#/definitions/Employee"
+        },
         "EmployeeID": {
-          "x-key": true,
           "type": "integer",
+          "x-key": true,
           "x-foreignKey": {
             "parentTable": "Employees",
             "parentEntityType": "Employee",
@@ -372,10 +625,14 @@
             "navigationProperty": "EmployeeTerritories"
           }
         },
+        "Territory": {
+          "type": "object",
+          "$ref": "#/definitions/Territory"
+        },
         "TerritoryID": {
-          "x-key": true,
           "type": "string",
           "length": 20,
+          "x-key": true,
           "x-foreignKey": {
             "parentTable": "Territories",
             "parentEntityType": "Territory",
@@ -388,6 +645,157 @@
         }
       }
     },
+    "GetProductDetail": {
+      "x-view": "sp",
+      "x-table": "dbo.GetProductDetails",
+      "x-parameters": [
+        {
+          "name": "ProductId",
+          "type": "integer"
+        },
+        {
+          "name": "ProductName",
+          "type": "string",
+          "output": true,
+          "size": 100
+        },
+        {
+          "name": "UnitPrice",
+          "type": "number",
+          "format": "decimal",
+          "output": true
+        },
+        {
+          "name": "QuantityPerUnit",
+          "type": "string",
+          "output": true,
+          "size": 20
+        }
+      ],
+      "resource": "GetProductDetails",
+      "properties": {}
+    },
+    "Invoice": {
+      "x-view": true,
+      "x-table": "dbo.Invoices",
+      "resource": "Invoices",
+      "required": [
+        "CustomerName",
+        "Salesperson",
+        "OrderID",
+        "ShipperName",
+        "ProductID",
+        "ProductName",
+        "UnitPrice",
+        "Quantity",
+        "Discount"
+      ],
+      "properties": {
+        "ShipName": {
+          "type": "string",
+          "length": 40
+        },
+        "ShipAddress": {
+          "type": "string",
+          "length": 60
+        },
+        "ShipCity": {
+          "type": "string",
+          "length": 15
+        },
+        "ShipRegion": {
+          "type": "string",
+          "length": 15
+        },
+        "ShipPostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "ShipCountry": {
+          "type": "string",
+          "length": 15
+        },
+        "CustomerID": {
+          "type": "string",
+          "length": 5
+        },
+        "CustomerName": {
+          "type": "string",
+          "length": 40,
+          "x-key": true
+        },
+        "Address": {
+          "type": "string",
+          "length": 60
+        },
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "Region": {
+          "type": "string",
+          "length": 15
+        },
+        "PostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "Country": {
+          "type": "string",
+          "length": 15
+        },
+        "Salesperson": {
+          "type": "string",
+          "length": 31
+        },
+        "OrderID": {
+          "type": "integer"
+        },
+        "OrderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "RequiredDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShipperName": {
+          "type": "string",
+          "length": 40
+        },
+        "ProductID": {
+          "type": "integer"
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discount": {
+          "type": "number",
+          "format": "float"
+        },
+        "ExtendedPrice": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "Freight": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
     "Order": {
       "x-table": "dbo.Orders",
       "resource": "Orders",
@@ -396,6 +804,7 @@
         "OrderID": {
           "x-key": true,
           "x-identity": true,
+          "x-nullable": false,
           "type": "integer",
           "x-navigation": [
             {
@@ -405,8 +814,11 @@
             }
           ]
         },
+        "Customer": {
+          "type": "object",
+          "$ref": "#/definitions/Customer"
+        },
         "CustomerID": {
-          "x-key": false,
           "type": "string",
           "length": 5,
           "x-foreignKey": {
@@ -419,8 +831,11 @@
             "navigationProperty": "Orders"
           }
         },
+        "Employee": {
+          "type": "object",
+          "$ref": "#/definitions/Employee"
+        },
         "EmployeeID": {
-          "x-key": false,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Employees",
@@ -433,22 +848,22 @@
           }
         },
         "OrderDate": {
-          "x-key": false,
           "type": "string",
           "format": "date-time"
         },
         "RequiredDate": {
-          "x-key": false,
           "type": "string",
           "format": "date-time"
         },
         "ShippedDate": {
-          "x-key": false,
           "type": "string",
           "format": "date-time"
         },
+        "Shipper": {
+          "type": "object",
+          "$ref": "#/definitions/Shipper"
+        },
         "ShipVia": {
-          "x-key": false,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Shippers",
@@ -461,38 +876,31 @@
           }
         },
         "Freight": {
-          "x-key": false,
           "x-default-sql": "((0))",
           "type": "number",
           "format": "decimal"
         },
         "ShipName": {
-          "x-key": false,
           "type": "string",
           "length": 40
         },
         "ShipAddress": {
-          "x-key": false,
           "type": "string",
           "length": 60
         },
         "ShipCity": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "ShipRegion": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "ShipPostalCode": {
-          "x-key": false,
           "type": "string",
           "length": 10
         },
         "ShipCountry": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
@@ -509,14 +917,16 @@
       "resource": "OrderDetails",
       "required": [
         "OrderID",
-        "OrderID",
-        "ProductID",
         "ProductID"
       ],
       "properties": {
+        "Order": {
+          "type": "object",
+          "$ref": "#/definitions/Order"
+        },
         "OrderID": {
-          "x-key": true,
           "type": "integer",
+          "x-key": true,
           "x-foreignKey": {
             "parentTable": "Orders",
             "parentEntityType": "Order",
@@ -527,9 +937,13 @@
             "navigationProperty": "OrderDetails"
           }
         },
+        "Product": {
+          "type": "object",
+          "$ref": "#/definitions/Product"
+        },
         "ProductID": {
-          "x-key": true,
           "type": "integer",
+          "x-key": true,
           "x-foreignKey": {
             "parentTable": "Products",
             "parentEntityType": "Product",
@@ -541,22 +955,171 @@
           }
         },
         "UnitPrice": {
-          "x-key": false,
           "x-default-sql": "((0))",
+          "x-nullable": false,
           "type": "number",
           "format": "decimal"
         },
         "Quantity": {
-          "x-key": false,
           "x-default-sql": "((1))",
+          "x-nullable": false,
           "type": "integer",
           "format": "int16"
         },
         "Discount": {
-          "x-key": false,
           "x-default-sql": "((0))",
+          "x-nullable": false,
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "OrderDetailsExtended": {
+      "x-view": true,
+      "x-table": "dbo.Order Details Extended",
+      "resource": "OrderDetailsExtendeds",
+      "required": [
+        "OrderID",
+        "ProductID",
+        "ProductName",
+        "UnitPrice",
+        "Quantity",
+        "Discount"
+      ],
+      "properties": {
+        "OrderID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "ProductID": {
+          "type": "integer"
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discount": {
+          "type": "number",
+          "format": "float"
+        },
+        "ExtendedPrice": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "OrderSubtotal": {
+      "x-view": true,
+      "x-table": "dbo.Order Subtotals",
+      "resource": "OrderSubtotals",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "OrderID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "Subtotal": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "OrdersQry": {
+      "x-view": true,
+      "x-table": "dbo.Orders Qry",
+      "resource": "OrdersQries",
+      "required": [
+        "OrderID",
+        "CompanyName"
+      ],
+      "properties": {
+        "OrderID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "CustomerID": {
+          "type": "string",
+          "length": 5
+        },
+        "EmployeeID": {
+          "type": "integer"
+        },
+        "OrderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "RequiredDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ShipVia": {
+          "type": "integer"
+        },
+        "Freight": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "ShipName": {
+          "type": "string",
+          "length": 40
+        },
+        "ShipAddress": {
+          "type": "string",
+          "length": 60
+        },
+        "ShipCity": {
+          "type": "string",
+          "length": 15
+        },
+        "ShipRegion": {
+          "type": "string",
+          "length": 15
+        },
+        "ShipPostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "ShipCountry": {
+          "type": "string",
+          "length": 15
+        },
+        "CompanyName": {
+          "type": "string",
+          "length": 40
+        },
+        "Address": {
+          "type": "string",
+          "length": 60
+        },
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "Region": {
+          "type": "string",
+          "length": 15
+        },
+        "PostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "Country": {
+          "type": "string",
+          "length": 15
         }
       }
     },
@@ -570,6 +1133,7 @@
         "ProductID": {
           "x-key": true,
           "x-identity": true,
+          "x-nullable": false,
           "type": "integer",
           "x-navigation": [
             {
@@ -580,12 +1144,14 @@
           ]
         },
         "ProductName": {
-          "x-key": false,
           "type": "string",
           "length": 40
         },
+        "Supplier": {
+          "type": "object",
+          "$ref": "#/definitions/Supplier"
+        },
         "SupplierID": {
-          "x-key": false,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Suppliers",
@@ -597,8 +1163,11 @@
             "navigationProperty": "Products"
           }
         },
+        "Category": {
+          "type": "object",
+          "$ref": "#/definitions/Category"
+        },
         "CategoryID": {
-          "x-key": false,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Categories",
@@ -611,37 +1180,32 @@
           }
         },
         "QuantityPerUnit": {
-          "x-key": false,
           "type": "string",
           "length": 20
         },
         "UnitPrice": {
-          "x-key": false,
           "x-default-sql": "((0))",
           "type": "number",
           "format": "decimal"
         },
         "UnitsInStock": {
-          "x-key": false,
           "x-default-sql": "((0))",
           "type": "integer",
           "format": "int16"
         },
         "UnitsOnOrder": {
-          "x-key": false,
           "x-default-sql": "((0))",
           "type": "integer",
           "format": "int16"
         },
         "ReorderLevel": {
-          "x-key": false,
           "x-default-sql": "((0))",
           "type": "integer",
           "format": "int16"
         },
         "Discontinued": {
-          "x-key": false,
           "x-default-sql": "((0))",
+          "x-nullable": false,
           "type": "boolean"
         },
         "OrderDetails": {
@@ -649,6 +1213,106 @@
           "items": {
             "$ref": "#/definitions/OrderDetail"
           }
+        }
+      }
+    },
+    "ProductSalesFor1997": {
+      "x-view": true,
+      "x-table": "dbo.Product Sales for 1997",
+      "resource": "ProductSalesFor1997s",
+      "required": [
+        "CategoryName",
+        "ProductName"
+      ],
+      "properties": {
+        "CategoryName": {
+          "type": "string",
+          "length": 15,
+          "x-key": true
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        },
+        "ProductSales": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "ProductsAboveAveragePrice": {
+      "x-view": true,
+      "x-table": "dbo.Products Above Average Price",
+      "resource": "ProductsAboveAveragePrices",
+      "required": [
+        "ProductName"
+      ],
+      "properties": {
+        "ProductName": {
+          "type": "string",
+          "length": 40,
+          "x-key": true
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "ProductsByCategory": {
+      "x-view": true,
+      "x-table": "dbo.Products by Category",
+      "resource": "ProductsByCategories",
+      "required": [
+        "CategoryName",
+        "ProductName",
+        "Discontinued"
+      ],
+      "properties": {
+        "CategoryName": {
+          "type": "string",
+          "length": 15,
+          "x-key": true
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        },
+        "QuantityPerUnit": {
+          "type": "string",
+          "length": 20
+        },
+        "UnitsInStock": {
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discontinued": {
+          "type": "boolean"
+        }
+      }
+    },
+    "QuarterlyOrder": {
+      "x-view": true,
+      "x-table": "dbo.Quarterly Orders",
+      "resource": "QuarterlyOrders",
+      "required": [],
+      "properties": {
+        "CustomerID": {
+          "type": "string",
+          "length": 5,
+          "x-key": true
+        },
+        "CompanyName": {
+          "type": "string",
+          "length": 40
+        },
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "Country": {
+          "type": "string",
+          "length": 15
         }
       }
     },
@@ -672,7 +1336,6 @@
           ]
         },
         "RegionDescription": {
-          "x-key": false,
           "type": "string",
           "length": 50
         },
@@ -681,6 +1344,154 @@
           "items": {
             "$ref": "#/definitions/Territory"
           }
+        }
+      }
+    },
+    "RolePermission": {
+      "x-table": "dbo.RolePermissions",
+      "resource": "RolePermissions",
+      "required": [
+        "RoleName",
+        "PermissionId"
+      ],
+      "properties": {
+        "RoleName": {
+          "x-key": true,
+          "type": "string",
+          "length": 128
+        },
+        "PermissionId": {
+          "x-key": true,
+          "type": "string",
+          "length": 322
+        }
+      }
+    },
+    "SalesByCategory": {
+      "x-view": true,
+      "x-table": "dbo.Sales by Category",
+      "resource": "SalesByCategories",
+      "required": [
+        "CategoryID",
+        "CategoryName",
+        "ProductName"
+      ],
+      "properties": {
+        "CategoryID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "CategoryName": {
+          "type": "string",
+          "length": 15
+        },
+        "ProductName": {
+          "type": "string",
+          "length": 40
+        },
+        "ProductSales": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "SalesByCategory1": {
+      "x-view": "sp",
+      "x-table": "dbo.SalesByCategory",
+      "x-parameters": [
+        {
+          "name": "CategoryName",
+          "type": "string",
+          "size": 30
+        },
+        {
+          "name": "OrdYear",
+          "type": "string",
+          "size": 8
+        }
+      ],
+      "resource": "SalesByCategory1s",
+      "required": [
+        "ProductName"
+      ],
+      "properties": {
+        "ProductName": {
+          "type": "string",
+          "length": 80,
+          "x-key": true
+        },
+        "TotalPurchase": {
+          "x-computed": true,
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "SalesByYear": {
+      "x-view": "sp",
+      "x-table": "dbo.Sales by Year",
+      "x-parameters": [
+        {
+          "name": "Beginning_Date",
+          "type": "string",
+          "format": "date-time",
+          "size": 8
+        },
+        {
+          "name": "Ending_Date",
+          "type": "string",
+          "format": "date-time",
+          "size": 8
+        }
+      ],
+      "resource": "SalesByYears",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderID": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "Subtotal": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "Year": {
+          "x-computed": true,
+          "type": "string",
+          "length": 60
+        }
+      }
+    },
+    "SalesTotalsByAmount": {
+      "x-view": true,
+      "x-table": "dbo.Sales Totals by Amount",
+      "resource": "SalesTotalsByAmounts",
+      "required": [
+        "OrderID",
+        "CompanyName"
+      ],
+      "properties": {
+        "SaleAmount": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "OrderID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "CompanyName": {
+          "type": "string",
+          "length": 40
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -694,6 +1505,7 @@
         "ShipperID": {
           "x-key": true,
           "x-identity": true,
+          "x-nullable": false,
           "type": "integer",
           "x-navigation": [
             {
@@ -704,12 +1516,10 @@
           ]
         },
         "CompanyName": {
-          "x-key": false,
           "type": "string",
           "length": 40
         },
         "Phone": {
-          "x-key": false,
           "type": "string",
           "length": 24
         },
@@ -718,6 +1528,50 @@
           "items": {
             "$ref": "#/definitions/Order"
           }
+        }
+      }
+    },
+    "SummaryOfSalesByQuarter": {
+      "x-view": true,
+      "x-table": "dbo.Summary of Sales by Quarter",
+      "resource": "SummaryOfSalesByQuarters",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "Subtotal": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "SummaryOfSalesByYear": {
+      "x-view": true,
+      "x-table": "dbo.Summary of Sales by Year",
+      "resource": "SummaryOfSalesByYears",
+      "required": [
+        "OrderID"
+      ],
+      "properties": {
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrderID": {
+          "type": "integer",
+          "x-key": true
+        },
+        "Subtotal": {
+          "type": "number",
+          "format": "decimal"
         }
       }
     },
@@ -731,6 +1585,7 @@
         "SupplierID": {
           "x-key": true,
           "x-identity": true,
+          "x-nullable": false,
           "type": "integer",
           "x-navigation": [
             {
@@ -741,57 +1596,46 @@
           ]
         },
         "CompanyName": {
-          "x-key": false,
           "type": "string",
           "length": 40
         },
         "ContactName": {
-          "x-key": false,
           "type": "string",
           "length": 30
         },
         "ContactTitle": {
-          "x-key": false,
           "type": "string",
           "length": 30
         },
         "Address": {
-          "x-key": false,
           "type": "string",
           "length": 60
         },
         "City": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "Region": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "PostalCode": {
-          "x-key": false,
           "type": "string",
           "length": 10
         },
         "Country": {
-          "x-key": false,
           "type": "string",
           "length": 15
         },
         "Phone": {
-          "x-key": false,
           "type": "string",
           "length": 24
         },
         "Fax": {
-          "x-key": false,
           "type": "string",
           "length": 24
         },
         "HomePage": {
-          "x-key": false,
           "type": "string"
         },
         "Products": {
@@ -799,6 +1643,25 @@
           "items": {
             "$ref": "#/definitions/Product"
           }
+        }
+      }
+    },
+    "TenMostExpensiveProduct": {
+      "x-view": "sp",
+      "x-table": "dbo.Ten Most Expensive Products",
+      "resource": "TenMostExpensiveProducts",
+      "required": [
+        "TenMostExpensiveProducts"
+      ],
+      "properties": {
+        "TenMostExpensiveProducts": {
+          "type": "string",
+          "length": 80,
+          "x-key": true
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "decimal"
         }
       }
     },
@@ -824,15 +1687,17 @@
           ]
         },
         "TerritoryDescription": {
-          "x-key": false,
           "type": "string",
           "length": 50
         },
+        "Region": {
+          "type": "object",
+          "$ref": "#/definitions/Region"
+        },
         "RegionID": {
-          "x-key": false,
           "type": "integer",
           "x-foreignKey": {
-            "parentTable": "Regions",
+            "parentTable": "Region",
             "parentEntityType": "Region",
             "type": "Region",
             "principalKey": "RegionID",
@@ -851,51 +1716,36 @@
     }
   },
   "paths": {
+    "/AlphabeticalListOfProducts": {
+      "get": {
+        "operationId": "getAlphabeticalListOfProducts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/AlphabeticalListOfProduct"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Categories": {
       "get": {
         "operationId": "getCategories",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -942,51 +1792,158 @@
         }
       }
     },
-    "/Customers": {
+    "/CategorySalesFor1997s": {
       "get": {
-        "operationId": "getCustomers",
+        "operationId": "getCategorySalesFor1997s",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CategorySalesFor1997"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CurrentProductLists": {
+      "get": {
+        "operationId": "getCurrentProductLists",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CurrentProductList"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustOrderHistsFunc(CustomerID='{CustomerID}')": {
+      "get": {
+        "operationId": "getCustOrderHists",
         "parameters": [
           {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
+            "in": "path",
+            "name": "CustomerID",
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustOrderHist"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustOrdersDetailsFunc(OrderID={OrderID})": {
+      "get": {
+        "operationId": "getCustOrdersDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustOrdersDetail"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustOrdersOrdersFunc(CustomerID='{CustomerID}')": {
+      "get": {
+        "operationId": "getCustOrdersOrders",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustOrdersOrder"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Customers": {
+      "get": {
+        "operationId": "getCustomers",
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1033,51 +1990,36 @@
         }
       }
     },
+    "/CustomerAndSuppliersByCities": {
+      "get": {
+        "operationId": "getCustomerAndSuppliersByCities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustomerAndSuppliersByCity"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/CustomerCustomerDemos": {
       "get": {
         "operationId": "getCustomerCustomerDemos",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1127,48 +2069,7 @@
     "/CustomerDemographics": {
       "get": {
         "operationId": "getCustomerDemographics",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1218,48 +2119,7 @@
     "/Employees": {
       "get": {
         "operationId": "getEmployees",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1306,51 +2166,47 @@
         }
       }
     },
-    "/EmployeeTerritories": {
+    "/EmployeeSalesByCountriesFunc(Beginning_Date='{Beginning_Date}',Ending_Date='{Ending_Date}')": {
       "get": {
-        "operationId": "getEmployeeTerritories",
+        "operationId": "getEmployeeSalesByCountries",
         "parameters": [
           {
-            "in": "query",
-            "name": "$filter",
+            "in": "path",
+            "name": "Beginning_Date",
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
+            "in": "path",
+            "name": "Ending_Date",
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/EmployeeSalesByCountry"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeTerritories": {
+      "get": {
+        "operationId": "getEmployeeTerritories",
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1397,51 +2253,68 @@
         }
       }
     },
+    "/GetProductDetailsFunc(ProductId={ProductId})": {
+      "get": {
+        "operationId": "GetProductDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ProductId",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/GetProductDetail"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Invoices": {
+      "get": {
+        "operationId": "getInvoices",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Invoice"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Orders": {
       "get": {
         "operationId": "getOrders",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1491,48 +2364,7 @@
     "/OrderDetails": {
       "get": {
         "operationId": "getOrderDetails",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1579,51 +2411,88 @@
         }
       }
     },
+    "/OrderDetailsExtendeds": {
+      "get": {
+        "operationId": "getOrderDetailsExtendeds",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/OrderDetailsExtended"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OrderSubtotals": {
+      "get": {
+        "operationId": "getOrderSubtotals",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/OrderSubtotal"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OrdersQries": {
+      "get": {
+        "operationId": "getOrdersQries",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/OrdersQry"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Products": {
       "get": {
         "operationId": "getProducts",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1670,51 +2539,114 @@
         }
       }
     },
+    "/ProductSalesFor1997s": {
+      "get": {
+        "operationId": "getProductSalesFor1997s",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/ProductSalesFor1997"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/ProductsAboveAveragePrices": {
+      "get": {
+        "operationId": "getProductsAboveAveragePrices",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/ProductsAboveAveragePrice"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/ProductsByCategories": {
+      "get": {
+        "operationId": "getProductsByCategories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/ProductsByCategory"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/QuarterlyOrders": {
+      "get": {
+        "operationId": "getQuarterlyOrders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/QuarterlyOrder"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Regions": {
       "get": {
         "operationId": "getRegions",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1761,51 +2693,186 @@
         }
       }
     },
-    "/Shippers": {
+    "/RolePermissions": {
       "get": {
-        "operationId": "getShippers",
+        "operationId": "getRolePermissions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/RolePermission"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRolePermission",
         "parameters": [
           {
-            "in": "query",
-            "name": "$filter",
+            "in": "body",
+            "name": "RolePermission",
+            "schema": {
+              "$ref": "#/definitions/RolePermission"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/RolePermission"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SalesByCategories": {
+      "get": {
+        "operationId": "getSalesByCategories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SalesByCategory"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SalesByCategory1sFunc(CategoryName='{CategoryName}',OrdYear='{OrdYear}')": {
+      "get": {
+        "operationId": "getSalesByCategory1s",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CategoryName",
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
+            "in": "path",
+            "name": "OrdYear",
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SalesByCategory1"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SalesByYearsFunc(Beginning_Date='{Beginning_Date}',Ending_Date='{Ending_Date}')": {
+      "get": {
+        "operationId": "getSalesByYears",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Beginning_Date",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "Ending_Date",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SalesByYear"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SalesTotalsByAmounts": {
+      "get": {
+        "operationId": "getSalesTotalsByAmounts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SalesTotalsByAmount"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Shippers": {
+      "get": {
+        "operationId": "getShippers",
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1852,51 +2919,62 @@
         }
       }
     },
+    "/SummaryOfSalesByQuarters": {
+      "get": {
+        "operationId": "getSummaryOfSalesByQuarters",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SummaryOfSalesByQuarter"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SummaryOfSalesByYears": {
+      "get": {
+        "operationId": "getSummaryOfSalesByYears",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SummaryOfSalesByYear"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Suppliers": {
       "get": {
         "operationId": "getSuppliers",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -1943,51 +3021,36 @@
         }
       }
     },
+    "/TenMostExpensiveProductsFunc()": {
+      "get": {
+        "operationId": "getTenMostExpensiveProducts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/TenMostExpensiveProduct"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Territories": {
       "get": {
         "operationId": "getTerritories",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -2736,6 +3799,88 @@
             "name": "Region",
             "schema": {
               "$ref": "#/definitions/Region"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/RolePermissions(RoleName='{RoleName}',PermissionId='{PermissionId}')": {
+      "delete": {
+        "operationId": "deleteRolePermission",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RoleName",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "PermissionId",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getRolePermissionByRoleNameAndPermissionId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RoleName",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "PermissionId",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/RolePermission"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateRolePermission",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RoleName",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "PermissionId",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "RolePermission",
+            "schema": {
+              "$ref": "#/definitions/RolePermission"
             }
           }
         ],

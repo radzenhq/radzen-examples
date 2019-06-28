@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Edit Employee Territory"
-        },
-        {
           "components": [
             {
               "class": "col-md-9",
@@ -36,8 +30,7 @@
                   "events": {
                     "click": [
                       {
-                        "path": "employee-territories",
-                        "type": "navigate"
+                        "type": "close-popup"
                       }
                     ]
                   },
@@ -189,8 +182,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "employee-territories",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -234,8 +226,8 @@
                         ],
                         "then": [
                           {
-                            "path": "employee-territories",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${employeeterritory}"
                           }
                         ],
                         "type": "invoke",

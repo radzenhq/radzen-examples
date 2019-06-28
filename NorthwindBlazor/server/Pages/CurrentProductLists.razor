@@ -1,0 +1,25 @@
+﻿@page "/current-product-lists"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.CurrentProductListsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Current Product Lists">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCurrentProductListsResult)" TItem="CurrentProductList">
+          <Columns>
+            <RadzenGridColumn TItem="CurrentProductList" Context="data" Property="ProductID" Title="Product ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CurrentProductList" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

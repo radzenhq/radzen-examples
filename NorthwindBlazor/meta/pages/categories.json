@@ -29,60 +29,25 @@
                     "click": [
                       {
                         "path": "add-category",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getCategoriesCount}",
                   "data": "${getCategoriesResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getCategories",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getCategoriesResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Category>"
-                          },
-                          {
-                            "name": "getCategoriesCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -92,8 +57,14 @@
                           }
                         ],
                         "path": "edit-category",
-                        "type": "navigate",
-                        "argType": "Category"
+                        "type": "popup",
+                        "argType": "Category",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -101,26 +72,22 @@
                   "columns": [
                     {
                       "property": "CategoryID",
-                      "template": "@data.CategoryID",
                       "title": "Category ID",
                       "type": "integer"
                     },
                     {
                       "property": "CategoryName",
-                      "template": "@data.CategoryName",
                       "title": "Category Name",
                       "type": "string"
                     },
                     {
                       "property": "Description",
-                      "template": "@data.Description",
                       "title": "Description",
                       "type": "string"
                     },
                     {
                       "format": "binary",
                       "property": "Picture",
-                      "template": "@data.Picture",
                       "title": "Picture",
                       "type": "string"
                     },
@@ -158,7 +125,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -182,7 +149,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getCategories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Category>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Categories",
   "layout": "Main"

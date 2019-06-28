@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Employee"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -46,6 +40,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 20,
                               "type": "textbox",
                               "name": "LastName",
@@ -92,6 +87,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 10,
                               "type": "textbox",
                               "name": "FirstName",
@@ -138,6 +134,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 30,
                               "type": "textbox",
                               "name": "Title",
@@ -174,6 +171,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 25,
                               "type": "textbox",
                               "name": "TitleOfCourtesy",
@@ -210,6 +208,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "date-time",
                               "type": "datepicker",
                               "name": "BirthDate",
                               "style": {
@@ -245,6 +245,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "date-time",
                               "type": "datepicker",
                               "name": "HireDate",
                               "style": {
@@ -280,6 +282,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 60,
                               "type": "textbox",
                               "name": "Address",
@@ -316,6 +319,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "City",
@@ -352,6 +356,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "Region",
@@ -388,6 +393,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 10,
                               "type": "textbox",
                               "name": "PostalCode",
@@ -424,6 +430,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "Country",
@@ -460,6 +467,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 24,
                               "type": "textbox",
                               "name": "HomePhone",
@@ -496,6 +504,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 4,
                               "type": "textbox",
                               "name": "Extension",
@@ -532,6 +541,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "binary",
                               "type": "textbox",
                               "name": "Photo",
                               "style": {
@@ -567,6 +578,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "type": "textbox",
                               "name": "Notes",
                               "style": {
@@ -641,6 +653,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 255,
                               "type": "textbox",
                               "name": "PhotoPath",
@@ -673,8 +686,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "employees",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -704,8 +716,8 @@
                         ],
                         "then": [
                           {
-                            "path": "employees",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${employee}"
                           }
                         ],
                         "type": "invoke",

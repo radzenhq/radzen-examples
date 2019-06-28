@@ -1,0 +1,120 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Alphabetical List Of Products"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getAlphabeticalListOfProductsResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "ProductID",
+                      "title": "Product ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "SupplierID",
+                      "title": "Supplier ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CategoryID",
+                      "title": "Category ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "QuantityPerUnit",
+                      "title": "Quantity Per Unit",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "UnitPrice",
+                      "title": "Unit Price",
+                      "type": "number"
+                    },
+                    {
+                      "format": "int16",
+                      "property": "UnitsInStock",
+                      "title": "Units In Stock",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "int16",
+                      "property": "UnitsOnOrder",
+                      "title": "Units On Order",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "int16",
+                      "property": "ReorderLevel",
+                      "title": "Reorder Level",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "Discontinued",
+                      "title": "Discontinued",
+                      "type": "boolean"
+                    },
+                    {
+                      "property": "CategoryName",
+                      "title": "Category Name",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "AlphabeticalListOfProduct"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getAlphabeticalListOfProducts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getAlphabeticalListOfProductsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<AlphabeticalListOfProduct>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Alphabetical List Of Products",
+  "layout": "Main"
+}

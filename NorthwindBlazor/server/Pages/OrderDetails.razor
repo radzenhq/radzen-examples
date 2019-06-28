@@ -1,0 +1,45 @@
+﻿@page "/order-details"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.OrderDetailsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Order Details">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrderDetailsResult)" TItem="OrderDetail" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="OrderDetail" Context="data" Property="OrderID" SortProperty="Order.CustomerID" Title="Order" Type="string">
+              <Template Context="data">
+              @data.Order?.CustomerID
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetail" Context="data" Property="ProductID" SortProperty="Product.ProductName" Title="Product" Type="string">
+              <Template Context="data">
+              @data.Product?.ProductName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetail" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetail" Context="data" Format="int16" Property="Quantity" Title="Quantity" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetail" Context="data" Format="float" Property="Discount" Title="Discount" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetail" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="data">
+                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

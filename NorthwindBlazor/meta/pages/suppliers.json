@@ -29,60 +29,25 @@
                     "click": [
                       {
                         "path": "add-supplier",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getSuppliersCount}",
                   "data": "${getSuppliersResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getSuppliers",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getSuppliersResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Supplier>"
-                          },
-                          {
-                            "name": "getSuppliersCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -92,8 +57,14 @@
                           }
                         ],
                         "path": "edit-supplier",
-                        "type": "navigate",
-                        "argType": "Supplier"
+                        "type": "popup",
+                        "argType": "Supplier",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -101,73 +72,61 @@
                   "columns": [
                     {
                       "property": "SupplierID",
-                      "template": "@data.SupplierID",
                       "title": "Supplier ID",
                       "type": "integer"
                     },
                     {
                       "property": "CompanyName",
-                      "template": "@data.CompanyName",
                       "title": "Company Name",
                       "type": "string"
                     },
                     {
                       "property": "ContactName",
-                      "template": "@data.ContactName",
                       "title": "Contact Name",
                       "type": "string"
                     },
                     {
                       "property": "ContactTitle",
-                      "template": "@data.ContactTitle",
                       "title": "Contact Title",
                       "type": "string"
                     },
                     {
                       "property": "Address",
-                      "template": "@data.Address",
                       "title": "Address",
                       "type": "string"
                     },
                     {
                       "property": "City",
-                      "template": "@data.City",
                       "title": "City",
                       "type": "string"
                     },
                     {
                       "property": "Region",
-                      "template": "@data.Region",
                       "title": "Region",
                       "type": "string"
                     },
                     {
                       "property": "PostalCode",
-                      "template": "@data.PostalCode",
                       "title": "Postal Code",
                       "type": "string"
                     },
                     {
                       "property": "Country",
-                      "template": "@data.Country",
                       "title": "Country",
                       "type": "string"
                     },
                     {
                       "property": "Phone",
-                      "template": "@data.Phone",
                       "title": "Phone",
                       "type": "string"
                     },
                     {
                       "property": "Fax",
-                      "template": "@data.Fax",
                       "title": "Fax",
                       "type": "string"
                     },
                     {
                       "property": "HomePage",
-                      "template": "@data.HomePage",
                       "title": "Home Page",
                       "type": "string"
                     },
@@ -205,7 +164,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -229,7 +188,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getSuppliers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSuppliersResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Supplier>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Suppliers",
   "layout": "Main"

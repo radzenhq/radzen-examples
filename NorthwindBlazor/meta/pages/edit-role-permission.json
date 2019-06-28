@@ -1,0 +1,287 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "close-popup"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Role Name",
+                              "component": "RoleName",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 128,
+                              "type": "textbox",
+                              "name": "RoleName",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              }
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "RoleNameRequiredValidator",
+                              "component": "RoleName",
+                              "text": "RoleName is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Permission Id",
+                              "component": "PermissionId",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 322,
+                              "type": "textbox",
+                              "name": "PermissionId",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              }
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "PermissionIdRequiredValidator",
+                              "component": "PermissionId",
+                              "text": "PermissionId is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)",
+                            "valueType": "bool"
+                          },
+                          {
+                            "detail": "Unable to update RolePermission",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Northwind.updateRolePermission",
+                        "parameters": [
+                          {
+                            "name": "RoleName",
+                            "value": "${parameters.RoleName}"
+                          },
+                          {
+                            "name": "PermissionId",
+                            "value": "${parameters.PermissionId}"
+                          },
+                          {
+                            "name": "RolePermission",
+                            "value": "${rolepermission}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${rolepermission}"
+                          }
+                        ],
+                        "type": "invoke",
+                        "argType": "RolePermission"
+                      }
+                    ]
+                  },
+                  "data": "${rolepermission}",
+                  "visible": "${rolepermission != null && canEdit}",
+                  "itemType": "RolePermission"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true",
+        "valueType": "bool"
+      },
+      {
+        "name": "Northwind.getRolePermissionByRoleNameAndPermissionId",
+        "parameters": [
+          {
+            "name": "RoleName",
+            "value": "${parameters.RoleName}"
+          },
+          {
+            "name": "PermissionId",
+            "value": "${parameters.PermissionId}"
+          }
+        ],
+        "then": [
+          {
+            "name": "rolepermission",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "RolePermission"
+          }
+        ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)",
+            "valueType": "bool"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Role Permission",
+  "layout": "Main"
+}

@@ -1,0 +1,29 @@
+﻿@page "/sales-by-categories"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.SalesByCategoriesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Sales By Categories">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getSalesByCategoriesResult)" TItem="SalesByCategory">
+          <Columns>
+            <RadzenGridColumn TItem="SalesByCategory" Context="data" Property="CategoryID" Title="Category ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="SalesByCategory" Context="data" Property="CategoryName" Title="Category Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="SalesByCategory" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="SalesByCategory" Context="data" Format="decimal" Property="ProductSales" Title="Product Sales" Type="number">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

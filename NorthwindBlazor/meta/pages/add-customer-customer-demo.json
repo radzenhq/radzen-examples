@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Customer Customer Demo"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -140,8 +134,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "customer-customer-demos",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -171,8 +164,8 @@
                         ],
                         "then": [
                           {
-                            "path": "customer-customer-demos",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${customercustomerdemo}"
                           }
                         ],
                         "type": "invoke",

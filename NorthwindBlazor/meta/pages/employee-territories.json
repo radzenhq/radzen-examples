@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-employee-territory",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getEmployeeTerritoriesCount}",
                   "data": "${getEmployeeTerritoriesResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getEmployeeTerritories",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Employee,Territory"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Employee,Territory"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getEmployeeTerritoriesResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<EmployeeTerritory>"
-                          },
-                          {
-                            "name": "getEmployeeTerritoriesCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -100,8 +61,14 @@
                           }
                         ],
                         "path": "edit-employee-territory",
-                        "type": "navigate",
-                        "argType": "EmployeeTerritory"
+                        "type": "popup",
+                        "argType": "EmployeeTerritory",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -110,14 +77,14 @@
                     {
                       "property": "EmployeeID",
                       "sortProperty": "Employee.LastName",
-                      "template": "@data.Employee?.LastName",
+                      "template": "${data.Employee?.LastName}",
                       "title": "Employee",
                       "type": "string"
                     },
                     {
                       "property": "TerritoryID",
                       "sortProperty": "Territory.TerritoryDescription",
-                      "template": "@data.Territory?.TerritoryDescription",
+                      "template": "${data.Territory?.TerritoryDescription}",
                       "title": "Territory",
                       "type": "string"
                     },
@@ -159,7 +126,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -183,7 +150,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getEmployeeTerritories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getEmployeeTerritoriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<EmployeeTerritory>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Employee Territories",
   "layout": "Main"

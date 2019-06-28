@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-order",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getOrdersCount}",
                   "data": "${getOrdersResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getOrders",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Customer,Employee,Shipper"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Customer,Employee,Shipper"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getOrdersResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Order>"
-                          },
-                          {
-                            "name": "getOrdersCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -96,8 +57,14 @@
                           }
                         ],
                         "path": "edit-order",
-                        "type": "navigate",
-                        "argType": "Order"
+                        "type": "popup",
+                        "argType": "Order",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -105,92 +72,84 @@
                   "columns": [
                     {
                       "property": "OrderID",
-                      "template": "@data.OrderID",
                       "title": "Order ID",
                       "type": "integer"
                     },
                     {
                       "property": "CustomerID",
                       "sortProperty": "Customer.CompanyName",
-                      "template": "@data.Customer?.CompanyName",
+                      "template": "${data.Customer?.CompanyName}",
                       "title": "Customer",
                       "type": "string"
                     },
                     {
                       "property": "EmployeeID",
                       "sortProperty": "Employee.LastName",
-                      "template": "@data.Employee?.LastName",
+                      "template": "${data.Employee?.LastName}",
                       "title": "Employee",
                       "type": "string"
                     },
                     {
                       "format": "date-time",
                       "property": "OrderDate",
-                      "template": "@String.Format(\"{0:d}\", data.OrderDate)",
+                      "formatString": "{0:d}",
                       "title": "Order Date",
                       "type": "string"
                     },
                     {
                       "format": "date-time",
                       "property": "RequiredDate",
-                      "template": "@String.Format(\"{0:d}\", data.RequiredDate)",
+                      "formatString": "{0:d}",
                       "title": "Required Date",
                       "type": "string"
                     },
                     {
                       "format": "date-time",
                       "property": "ShippedDate",
-                      "template": "@String.Format(\"{0:d}\", data.ShippedDate)",
+                      "formatString": "{0:d}",
                       "title": "Shipped Date",
                       "type": "string"
                     },
                     {
                       "property": "ShipVia",
                       "sortProperty": "Shipper.CompanyName",
-                      "template": "@data.Shipper?.CompanyName",
+                      "template": "${data.Shipper?.CompanyName}",
                       "title": "Shipper",
                       "type": "string"
                     },
                     {
                       "format": "decimal",
                       "property": "Freight",
-                      "template": "@data.Freight",
                       "title": "Freight",
                       "type": "number"
                     },
                     {
                       "property": "ShipName",
-                      "template": "@data.ShipName",
                       "title": "Ship Name",
                       "type": "string"
                     },
                     {
                       "property": "ShipAddress",
-                      "template": "@data.ShipAddress",
                       "title": "Ship Address",
                       "type": "string"
                     },
                     {
                       "property": "ShipCity",
-                      "template": "@data.ShipCity",
                       "title": "Ship City",
                       "type": "string"
                     },
                     {
                       "property": "ShipRegion",
-                      "template": "@data.ShipRegion",
                       "title": "Ship Region",
                       "type": "string"
                     },
                     {
                       "property": "ShipPostalCode",
-                      "template": "@data.ShipPostalCode",
                       "title": "Ship Postal Code",
                       "type": "string"
                     },
                     {
                       "property": "ShipCountry",
-                      "template": "@data.ShipCountry",
                       "title": "Ship Country",
                       "type": "string"
                     },
@@ -228,7 +187,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -252,7 +211,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getOrders",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOrdersResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Order>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Orders",
   "layout": "Main"

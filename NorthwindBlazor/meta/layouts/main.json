@@ -10,7 +10,19 @@
               "components": [
                 {
                   "name": "sidebar-toggle0",
-                  "type": "sidebar-toggle"
+                  "type": "sidebar-toggle",
+                  "events": {
+                    "click": [
+                      {
+                        "code": "sidebar0.Toggle();",
+                        "type": "execute"
+                      },
+                      {
+                        "code": "body0.Toggle();",
+                        "type": "execute"
+                      }
+                    ]
+                  }
                 },
                 {
                   "name": "label0",
@@ -61,7 +73,7 @@
       "components": [
         {
           "name": "footerText",
-          "text": "NorthwindBlazor, Copyright &copy; 2018",
+          "text": "NorthwindBlazor, Copyright &copy; 2019",
           "type": "label"
         }
       ],

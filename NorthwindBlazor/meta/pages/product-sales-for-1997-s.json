@@ -1,0 +1,77 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Product Sales For 1997 S"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getProductSalesFor1997sResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CategoryName",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "ProductSales",
+                      "title": "Product Sales",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "ProductSalesFor1997"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getProductSalesFor1997s",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getProductSalesFor1997sResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<ProductSalesFor1997>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Product Sales For 1997 S",
+  "layout": "Main"
+}

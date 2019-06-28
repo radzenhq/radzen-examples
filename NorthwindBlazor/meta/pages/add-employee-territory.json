@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Employee Territory"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -140,8 +134,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "employee-territories",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -171,8 +164,8 @@
                         ],
                         "then": [
                           {
-                            "path": "employee-territories",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${employeeterritory}"
                           }
                         ],
                         "type": "invoke",

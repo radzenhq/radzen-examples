@@ -1,0 +1,81 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Quarterly Orders"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getQuarterlyOrdersResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CustomerID",
+                      "title": "Customer ID",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Country",
+                      "title": "Country",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "QuarterlyOrder"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getQuarterlyOrders",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getQuarterlyOrdersResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<QuarterlyOrder>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Quarterly Orders",
+  "layout": "Main"
+}

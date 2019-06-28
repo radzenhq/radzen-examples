@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Products Above Average Prices"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getProductsAboveAveragePricesResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "UnitPrice",
+                      "title": "Unit Price",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "ProductsAboveAveragePrice"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getProductsAboveAveragePrices",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getProductsAboveAveragePricesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<ProductsAboveAveragePrice>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Products Above Average Prices",
+  "layout": "Main"
+}

@@ -1,0 +1,61 @@
+﻿@page "/edit-customer-customer-demo/{CustomerID}/{CustomerTypeID}"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.EditCustomerCustomerDemoComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <div style="null" class="row">
+      <div class="col-md-9">
+        <RadzenLabel @ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@(!canEdit)">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+        <RadzenButton @ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm @ref="form0" Data="@(customercustomerdemo)" Visible="@(customercustomerdemo != null && canEdit)" TItem="CustomerCustomerDemo" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label2" Text="Customer" Component="CustomerID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown @ref="customerId" Data="@(getCustomersResult)" TextProperty="CompanyName" ValueProperty="CustomerID" Placeholder="Choose Customer" style="display: block; width: 100%;" Name="CustomerID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator @ref="customerIdRequiredValidator" Component="CustomerID" Text="CustomerID is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label3" Text="Customer Demographic" Component="CustomerTypeID" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown @ref="customerTypeId" Data="@(getCustomerDemographicsResult)" TextProperty="CustomerDesc" ValueProperty="CustomerTypeID" Placeholder="Choose CustomerDemographic" style="display: block; width: 100%;" Name="CustomerTypeID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator @ref="customerTypeIdRequiredValidator" Component="CustomerTypeID" Text="CustomerTypeID is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton @ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton @ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

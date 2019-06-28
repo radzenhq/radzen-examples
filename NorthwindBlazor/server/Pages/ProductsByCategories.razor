@@ -1,0 +1,31 @@
+﻿@page "/products-by-categories"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.ProductsByCategoriesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Products By Categories">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductsByCategoriesResult)" TItem="ProductsByCategory">
+          <Columns>
+            <RadzenGridColumn TItem="ProductsByCategory" Context="data" Property="CategoryName" Title="Category Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductsByCategory" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductsByCategory" Context="data" Property="QuantityPerUnit" Title="Quantity Per Unit" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductsByCategory" Context="data" Format="int16" Property="UnitsInStock" Title="Units In Stock" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductsByCategory" Context="data" Property="Discontinued" Title="Discontinued" Type="boolean">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

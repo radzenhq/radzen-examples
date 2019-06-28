@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-product",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getProductsCount}",
                   "data": "${getProductsResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getProducts",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Supplier,Category"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Supplier,Category"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getProductsResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Product>"
-                          },
-                          {
-                            "name": "getProductsCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -96,8 +57,14 @@
                           }
                         ],
                         "path": "edit-product",
-                        "type": "navigate",
-                        "argType": "Product"
+                        "type": "popup",
+                        "argType": "Product",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -105,67 +72,59 @@
                   "columns": [
                     {
                       "property": "ProductID",
-                      "template": "@data.ProductID",
                       "title": "Product ID",
                       "type": "integer"
                     },
                     {
                       "property": "ProductName",
-                      "template": "@data.ProductName",
                       "title": "Product Name",
                       "type": "string"
                     },
                     {
                       "property": "SupplierID",
                       "sortProperty": "Supplier.CompanyName",
-                      "template": "@data.Supplier?.CompanyName",
+                      "template": "${data.Supplier?.CompanyName}",
                       "title": "Supplier",
                       "type": "string"
                     },
                     {
                       "property": "CategoryID",
                       "sortProperty": "Category.CategoryName",
-                      "template": "@data.Category?.CategoryName",
+                      "template": "${data.Category?.CategoryName}",
                       "title": "Category",
                       "type": "string"
                     },
                     {
                       "property": "QuantityPerUnit",
-                      "template": "@data.QuantityPerUnit",
                       "title": "Quantity Per Unit",
                       "type": "string"
                     },
                     {
                       "format": "decimal",
                       "property": "UnitPrice",
-                      "template": "@data.UnitPrice",
                       "title": "Unit Price",
                       "type": "number"
                     },
                     {
                       "format": "int16",
                       "property": "UnitsInStock",
-                      "template": "@data.UnitsInStock",
                       "title": "Units In Stock",
                       "type": "integer"
                     },
                     {
                       "format": "int16",
                       "property": "UnitsOnOrder",
-                      "template": "@data.UnitsOnOrder",
                       "title": "Units On Order",
                       "type": "integer"
                     },
                     {
                       "format": "int16",
                       "property": "ReorderLevel",
-                      "template": "@data.ReorderLevel",
                       "title": "Reorder Level",
                       "type": "integer"
                     },
                     {
                       "property": "Discontinued",
-                      "template": "@data.Discontinued",
                       "title": "Discontinued",
                       "type": "boolean"
                     },
@@ -203,7 +162,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -227,7 +186,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getProducts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getProductsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Product>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Products",
   "layout": "Main"

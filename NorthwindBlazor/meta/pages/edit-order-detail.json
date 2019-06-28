@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Edit Order Detail"
-        },
-        {
           "components": [
             {
               "class": "col-md-9",
@@ -36,8 +30,7 @@
                   "events": {
                     "click": [
                       {
-                        "path": "order-details",
-                        "type": "navigate"
+                        "type": "close-popup"
                       }
                     ]
                   },
@@ -193,6 +186,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "number",
+                              "valueFormat": "decimal",
                               "type": "numeric",
                               "name": "UnitPrice",
                               "style": {
@@ -228,6 +223,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "integer",
+                              "valueFormat": "int16",
                               "type": "numeric",
                               "name": "Quantity",
                               "style": {
@@ -263,6 +260,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "number",
+                              "valueFormat": "float",
                               "type": "numeric",
                               "name": "Discount",
                               "style": {
@@ -294,8 +293,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "order-details",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -339,8 +337,8 @@
                         ],
                         "then": [
                           {
-                            "path": "order-details",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${orderdetail}"
                           }
                         ],
                         "type": "invoke",

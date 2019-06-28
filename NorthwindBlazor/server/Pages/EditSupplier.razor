@@ -1,0 +1,149 @@
+﻿@page "/edit-supplier/{SupplierID}"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.EditSupplierComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <div style="null" class="row">
+      <div class="col-md-9">
+        <RadzenLabel @ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@(!canEdit)">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+        <RadzenButton @ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm @ref="form0" Data="@(supplier)" Visible="@(supplier != null && canEdit)" TItem="Supplier" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label2" Text="Company Name" Component="CompanyName" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="companyName" MaxLength="40" style="display: block; width: 100%;" Name="CompanyName">
+                </RadzenTextBox>
+                <RadzenRequiredValidator @ref="companyNameRequiredValidator" Component="CompanyName" Text="CompanyName is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label3" Text="Contact Name" Component="ContactName" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="contactName" MaxLength="30" style="width: 100%;" Name="ContactName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label4" Text="Contact Title" Component="ContactTitle" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="contactTitle" MaxLength="30" style="width: 100%;" Name="ContactTitle">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label5" Text="Address" Component="Address" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="address" MaxLength="60" style="width: 100%;" Name="Address">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label6" Text="City" Component="City" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="city" MaxLength="15" style="width: 100%;" Name="City">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label7" Text="Region" Component="Region" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="region" MaxLength="15" style="width: 100%;" Name="Region">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label8" Text="Postal Code" Component="PostalCode" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="postalCode" MaxLength="10" style="width: 100%;" Name="PostalCode">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label9" Text="Country" Component="Country" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="country" MaxLength="15" style="width: 100%;" Name="Country">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label10" Text="Phone" Component="Phone" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="phone" MaxLength="24" style="width: 100%;" Name="Phone">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label11" Text="Fax" Component="Fax" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="fax" MaxLength="24" style="width: 100%;" Name="Fax">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label12" Text="Home Page" Component="HomePage" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="homePage" style="width: 100%;" Name="HomePage">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton @ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton @ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

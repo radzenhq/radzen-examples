@@ -29,60 +29,25 @@
                     "click": [
                       {
                         "path": "add-customer-demographic",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getCustomerDemographicsCount}",
                   "data": "${getCustomerDemographicsResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getCustomerDemographics",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getCustomerDemographicsResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<CustomerDemographic>"
-                          },
-                          {
-                            "name": "getCustomerDemographicsCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -92,8 +57,14 @@
                           }
                         ],
                         "path": "edit-customer-demographic",
-                        "type": "navigate",
-                        "argType": "CustomerDemographic"
+                        "type": "popup",
+                        "argType": "CustomerDemographic",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -101,13 +72,11 @@
                   "columns": [
                     {
                       "property": "CustomerTypeID",
-                      "template": "@data.CustomerTypeID",
                       "title": "Customer Type ID",
                       "type": "string"
                     },
                     {
                       "property": "CustomerDesc",
-                      "template": "@data.CustomerDesc",
                       "title": "Customer Desc",
                       "type": "string"
                     },
@@ -145,7 +114,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -169,7 +138,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getCustomerDemographics",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomerDemographicsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<CustomerDemographic>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Customer Demographics",
   "layout": "Main"

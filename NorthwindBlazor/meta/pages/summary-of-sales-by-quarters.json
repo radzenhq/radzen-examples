@@ -1,0 +1,79 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Summary Of Sales By Quarters"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getSummaryOfSalesByQuartersResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "format": "date-time",
+                      "property": "ShippedDate",
+                      "formatString": "{0:d}",
+                      "title": "Shipped Date",
+                      "type": "string"
+                    },
+                    {
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "Subtotal",
+                      "title": "Subtotal",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "SummaryOfSalesByQuarter"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getSummaryOfSalesByQuarters",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSummaryOfSalesByQuartersResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<SummaryOfSalesByQuarter>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Summary Of Sales By Quarters",
+  "layout": "Main"
+}

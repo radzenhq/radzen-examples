@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Edit Supplier"
-        },
-        {
           "components": [
             {
               "class": "col-md-9",
@@ -36,8 +30,7 @@
                   "events": {
                     "click": [
                       {
-                        "path": "suppliers",
-                        "type": "navigate"
+                        "type": "close-popup"
                       }
                     ]
                   },
@@ -95,6 +88,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 40,
                               "type": "textbox",
                               "name": "CompanyName",
@@ -141,6 +135,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 30,
                               "type": "textbox",
                               "name": "ContactName",
@@ -177,6 +172,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 30,
                               "type": "textbox",
                               "name": "ContactTitle",
@@ -213,6 +209,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 60,
                               "type": "textbox",
                               "name": "Address",
@@ -249,6 +246,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "City",
@@ -285,6 +283,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "Region",
@@ -321,6 +320,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 10,
                               "type": "textbox",
                               "name": "PostalCode",
@@ -357,6 +357,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "Country",
@@ -393,6 +394,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 24,
                               "type": "textbox",
                               "name": "Phone",
@@ -429,6 +431,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 24,
                               "type": "textbox",
                               "name": "Fax",
@@ -465,6 +468,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "type": "textbox",
                               "name": "HomePage",
                               "style": {
@@ -496,8 +500,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "suppliers",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -537,8 +540,8 @@
                         ],
                         "then": [
                           {
-                            "path": "suppliers",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${supplier}"
                           }
                         ],
                         "type": "invoke",

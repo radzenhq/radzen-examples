@@ -1,0 +1,71 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Current Product Lists"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getCurrentProductListsResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "ProductID",
+                      "title": "Product ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "CurrentProductList"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCurrentProductLists",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCurrentProductListsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<CurrentProductList>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Current Product Lists",
+  "layout": "Main"
+}

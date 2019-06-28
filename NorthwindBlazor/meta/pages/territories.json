@@ -29,64 +29,25 @@
                     "click": [
                       {
                         "path": "add-territory",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getTerritoriesCount}",
                   "data": "${getTerritoriesResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getTerritories",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Region"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Region"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getTerritoriesResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Territory>"
-                          },
-                          {
-                            "name": "getTerritoriesCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -96,8 +57,14 @@
                           }
                         ],
                         "path": "edit-territory",
-                        "type": "navigate",
-                        "argType": "Territory"
+                        "type": "popup",
+                        "argType": "Territory",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -105,20 +72,18 @@
                   "columns": [
                     {
                       "property": "TerritoryID",
-                      "template": "@data.TerritoryID",
                       "title": "Territory ID",
                       "type": "string"
                     },
                     {
                       "property": "TerritoryDescription",
-                      "template": "@data.TerritoryDescription",
                       "title": "Territory Description",
                       "type": "string"
                     },
                     {
                       "property": "RegionID",
                       "sortProperty": "Region.RegionDescription",
-                      "template": "@data.Region?.RegionDescription",
+                      "template": "${data.Region?.RegionDescription}",
                       "title": "Region",
                       "type": "string"
                     },
@@ -156,7 +121,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -180,7 +145,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getTerritories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getTerritoriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Territory>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Territories",
   "layout": "Main"

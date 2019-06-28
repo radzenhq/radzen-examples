@@ -1,0 +1,35 @@
+﻿@page "/order-details-extendeds"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.OrderDetailsExtendedsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Order Details Extendeds">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrderDetailsExtendedsResult)" TItem="OrderDetailsExtended">
+          <Columns>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Property="ProductID" Title="Product ID" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Format="int16" Property="Quantity" Title="Quantity" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Format="float" Property="Discount" Title="Discount" Type="number">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="OrderDetailsExtended" Context="data" Format="decimal" Property="ExtendedPrice" Title="Extended Price" Type="number">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

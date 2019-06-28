@@ -1,0 +1,29 @@
+﻿@page "/quarterly-orders"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.QuarterlyOrdersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="Quarterly Orders">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getQuarterlyOrdersResult)" TItem="QuarterlyOrder">
+          <Columns>
+            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="CustomerID" Title="Customer ID" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="CompanyName" Title="Company Name" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="City" Title="City" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="Country" Title="Country" Type="string">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

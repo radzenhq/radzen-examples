@@ -65,7 +65,7 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-    public bool? Discontinued
+    public bool Discontinued
     {
       get;
       set;

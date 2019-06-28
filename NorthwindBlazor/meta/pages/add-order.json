@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Add Order"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -124,6 +118,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "date-time",
                               "type": "datepicker",
                               "name": "OrderDate",
                               "style": {
@@ -159,6 +155,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "date-time",
                               "type": "datepicker",
                               "name": "RequiredDate",
                               "style": {
@@ -194,6 +192,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "date-time",
                               "type": "datepicker",
                               "name": "ShippedDate",
                               "style": {
@@ -268,6 +268,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "number",
+                              "valueFormat": "decimal",
                               "type": "numeric",
                               "name": "Freight",
                               "style": {
@@ -303,6 +305,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 40,
                               "type": "textbox",
                               "name": "ShipName",
@@ -339,6 +342,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 60,
                               "type": "textbox",
                               "name": "ShipAddress",
@@ -375,6 +379,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "ShipCity",
@@ -411,6 +416,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "ShipRegion",
@@ -447,6 +453,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 10,
                               "type": "textbox",
                               "name": "ShipPostalCode",
@@ -483,6 +490,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "ShipCountry",
@@ -515,8 +523,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "orders",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -546,8 +553,8 @@
                         ],
                         "then": [
                           {
-                            "path": "orders",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${order}"
                           }
                         ],
                         "type": "invoke",

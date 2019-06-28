@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Order Subtotals"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getOrderSubtotalsResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "OrderID",
+                      "title": "Order ID",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "Subtotal",
+                      "title": "Subtotal",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "OrderSubtotal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getOrderSubtotals",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOrderSubtotalsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<OrderSubtotal>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Order Subtotals",
+  "layout": "Main"
+}

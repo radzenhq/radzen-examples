@@ -1,0 +1,82 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Sales By Categories"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getSalesByCategoriesResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "CategoryID",
+                      "title": "Category ID",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "CategoryName",
+                      "title": "Category Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ProductName",
+                      "title": "Product Name",
+                      "type": "string"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "ProductSales",
+                      "title": "Product Sales",
+                      "type": "number"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "SalesByCategory"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getSalesByCategories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSalesByCategoriesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<SalesByCategory>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Sales By Categories",
+  "layout": "Main"
+}

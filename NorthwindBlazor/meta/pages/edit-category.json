@@ -5,12 +5,6 @@
       "container": "main",
       "components": [
         {
-          "type": "heading",
-          "name": "pageTitle",
-          "size": "H1",
-          "text": "Edit Category"
-        },
-        {
           "components": [
             {
               "class": "col-md-9",
@@ -36,8 +30,7 @@
                   "events": {
                     "click": [
                       {
-                        "path": "categories",
-                        "type": "navigate"
+                        "type": "close-popup"
                       }
                     ]
                   },
@@ -95,6 +88,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 15,
                               "type": "textbox",
                               "name": "CategoryName",
@@ -141,6 +135,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "type": "textbox",
                               "name": "Description",
                               "style": {
@@ -176,6 +171,8 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
+                              "valueFormat": "binary",
                               "type": "textbox",
                               "name": "Picture",
                               "style": {
@@ -207,8 +204,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "path": "categories",
-                                    "type": "navigate"
+                                    "type": "close-popup"
                                   }
                                 ]
                               }
@@ -248,8 +244,8 @@
                         ],
                         "then": [
                           {
-                            "path": "categories",
-                            "type": "navigate"
+                            "type": "close-popup",
+                            "result": "${category}"
                           }
                         ],
                         "type": "invoke",

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 
 using NorthwindBlazor.Models.Northwind;
 
@@ -28,11 +29,17 @@ namespace NorthwindBlazor.Data
         builder.Entity<NorthwindBlazor.Models.Northwind.CustomerCustomerDemo>().HasKey(table => new {
           table.CustomerID, table.CustomerTypeID
         });
+        builder.Entity<NorthwindBlazor.Models.Northwind.EmployeeSalesByCountry>().HasKey(table => new {
+          table.LastName, table.OrderID
+        });
         builder.Entity<NorthwindBlazor.Models.Northwind.EmployeeTerritory>().HasKey(table => new {
           table.EmployeeID, table.TerritoryID
         });
         builder.Entity<NorthwindBlazor.Models.Northwind.OrderDetail>().HasKey(table => new {
           table.OrderID, table.ProductID
+        });
+        builder.Entity<NorthwindBlazor.Models.Northwind.RolePermission>().HasKey(table => new {
+          table.RoleName, table.PermissionId
         });
         builder.Entity<NorthwindBlazor.Models.Northwind.CustomerCustomerDemo>()
               .HasOne(i => i.Customer)
@@ -140,13 +147,55 @@ namespace NorthwindBlazor.Data
     }
 
 
+    public DbSet<NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct> AlphabeticalListOfProducts
+    {
+      get;
+      set;
+    }
+
     public DbSet<NorthwindBlazor.Models.Northwind.Category> Categories
     {
       get;
       set;
     }
 
+    public DbSet<NorthwindBlazor.Models.Northwind.CategorySalesFor1997> CategorySalesFor1997s
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.CurrentProductList> CurrentProductLists
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.CustOrderHist> CustOrderHists
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.CustOrdersDetail> CustOrdersDetails
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.CustOrdersOrder> CustOrdersOrders
+    {
+      get;
+      set;
+    }
+
     public DbSet<NorthwindBlazor.Models.Northwind.Customer> Customers
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity> CustomerAndSuppliersByCities
     {
       get;
       set;
@@ -170,7 +219,19 @@ namespace NorthwindBlazor.Data
       set;
     }
 
+    public DbSet<NorthwindBlazor.Models.Northwind.EmployeeSalesByCountry> EmployeeSalesByCountries
+    {
+      get;
+      set;
+    }
+
     public DbSet<NorthwindBlazor.Models.Northwind.EmployeeTerritory> EmployeeTerritories
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.Invoice> Invoices
     {
       get;
       set;
@@ -188,7 +249,49 @@ namespace NorthwindBlazor.Data
       set;
     }
 
+    public DbSet<NorthwindBlazor.Models.Northwind.OrderDetailsExtended> OrderDetailsExtendeds
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.OrderSubtotal> OrderSubtotals
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.OrdersQry> OrdersQries
+    {
+      get;
+      set;
+    }
+
     public DbSet<NorthwindBlazor.Models.Northwind.Product> Products
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.ProductSalesFor1997> ProductSalesFor1997s
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice> ProductsAboveAveragePrices
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.ProductsByCategory> ProductsByCategories
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.QuarterlyOrder> QuarterlyOrders
     {
       get;
       set;
@@ -200,13 +303,61 @@ namespace NorthwindBlazor.Data
       set;
     }
 
+    public DbSet<NorthwindBlazor.Models.Northwind.RolePermission> RolePermissions
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.SalesByCategory> SalesByCategories
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.SalesByCategory1> SalesByCategory1s
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.SalesByYear> SalesByYears
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount> SalesTotalsByAmounts
+    {
+      get;
+      set;
+    }
+
     public DbSet<NorthwindBlazor.Models.Northwind.Shipper> Shippers
     {
       get;
       set;
     }
 
+    public DbSet<NorthwindBlazor.Models.Northwind.SummaryOfSalesByQuarter> SummaryOfSalesByQuarters
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear> SummaryOfSalesByYears
+    {
+      get;
+      set;
+    }
+
     public DbSet<NorthwindBlazor.Models.Northwind.Supplier> Suppliers
+    {
+      get;
+      set;
+    }
+
+    public DbSet<NorthwindBlazor.Models.Northwind.TenMostExpensiveProduct> TenMostExpensiveProducts
     {
       get;
       set;

@@ -29,60 +29,25 @@
                     "click": [
                       {
                         "path": "add-region",
-                        "type": "navigate"
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   }
                 },
                 {
                   "name": "grid0",
+                  "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
-                  "count": "${getRegionsCount}",
                   "data": "${getRegionsResult}",
                   "events": {
-                    "loadData": [
-                      {
-                        "name": "Northwind.getRegions",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getRegionsResult",
-                            "type": "set",
-                            "value": "${result.value}",
-                            "valueType": "IEnumerable<Region>"
-                          },
-                          {
-                            "name": "getRegionsCount",
-                            "type": "set",
-                            "value": "result.Count",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
+                    "loadData": [],
                     "rowSelect": [
                       {
                         "parameters": [
@@ -92,8 +57,14 @@
                           }
                         ],
                         "path": "edit-region",
-                        "type": "navigate",
-                        "argType": "Region"
+                        "type": "popup",
+                        "argType": "Region",
+                        "then": [
+                          {
+                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -101,13 +72,11 @@
                   "columns": [
                     {
                       "property": "RegionID",
-                      "template": "@data.RegionID",
                       "title": "Region ID",
                       "type": "integer"
                     },
                     {
                       "property": "RegionDescription",
-                      "template": "@data.RegionDescription",
                       "title": "Region Description",
                       "type": "string"
                     },
@@ -145,7 +114,7 @@
                                 "then": [
                                   {
                                     "code": "grid0.Reload();",
-                                    "condition": "result.IsSuccessStatusCode",
+                                    "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
@@ -169,7 +138,21 @@
     }
   ],
   "events": {
-    "load": []
+    "load": [
+      {
+        "name": "Northwind.getRegions",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getRegionsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<Region>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
   },
   "name": "Regions",
   "layout": "Main"

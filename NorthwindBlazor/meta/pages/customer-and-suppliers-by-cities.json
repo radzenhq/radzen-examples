@@ -1,0 +1,81 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Customer And Suppliers By Cities"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getCustomerAndSuppliersByCitiesResult}",
+                  "events": {
+                    "loadData": []
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "City",
+                      "title": "City",
+                      "type": "string"
+                    },
+                    {
+                      "property": "CompanyName",
+                      "title": "Company Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "ContactName",
+                      "title": "Contact Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Relationship",
+                      "title": "Relationship",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid",
+                  "itemType": "CustomerAndSuppliersByCity"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCustomerAndSuppliersByCities",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCustomerAndSuppliersByCitiesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<CustomerAndSuppliersByCity>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Customer And Suppliers By Cities",
+  "layout": "Main"
+}

@@ -1,0 +1,59 @@
+﻿@page "/add-category"
+@layout MainLayout
+@inherits NorthwindBlazor.Pages.AddCategoryComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using NorthwindBlazor.Models.Northwind
+<RadzenContent @ref="content1" Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm @ref="form0" Data="@(category)" Visible="@(category != null)" TItem="Category" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label1" Text="Category Name" Component="CategoryName" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="categoryName" MaxLength="15" style="display: block; width: 100%;" Name="CategoryName">
+                </RadzenTextBox>
+                <RadzenRequiredValidator @ref="categoryNameRequiredValidator" Component="CategoryName" Text="CategoryName is required" style="position: absolute;">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label2" Text="Description" Component="Description" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="description" style="width: 100%;" Name="Description">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;" class="row">
+              <div class="col-md-3">
+                <RadzenLabel @ref="label3" Text="Picture" Component="Picture" style="width: 100%;">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="picture" style="width: 100%;" Name="Picture">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton @ref="button1" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                </RadzenButton>
+                <RadzenButton @ref="button2" ButtonStyle="light" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
