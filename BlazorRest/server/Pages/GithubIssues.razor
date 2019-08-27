@@ -1,0 +1,23 @@
+﻿@page "/"
+@page "/github-issues"
+@layout MainLayout
+@inherits Blazor.Pages.GithubIssuesComponent
+
+@using Radzen
+@using Radzen.Blazor
+<RadzenContent @ref="content1" @ref:suppressField Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" @ref:suppressField Size="H1" Text="GithubIssues">
+    </RadzenHeading>
+    <RadzenGrid @ref="grid0" @ref:suppressField AllowPaging="false" AllowSorting="true" Data="@(githubIssues)" TItem="GitHubIssue">
+      <Columns>
+        <RadzenGridColumn TItem="GitHubIssue" Context="gitHubIssue" Property="Url" Title="Url" Type="string">
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="GitHubIssue" Context="gitHubIssue" Property="Title" Title="Title" Type="string">
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="GitHubIssue" Context="gitHubIssue" Format="date-time" FormatString="{0:d}" Property="Created" Title="Created" Type="string">
+        </RadzenGridColumn>
+      </Columns>
+    </RadzenGrid>
+  </ChildContent>
+</RadzenContent>

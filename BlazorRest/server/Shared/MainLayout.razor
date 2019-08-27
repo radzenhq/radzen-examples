@@ -1,0 +1,45 @@
+﻿@inherits Blazor.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+
+<RadzenDialog />
+<RadzenNotification />
+
+<RadzenHeader @ref="header0" @ref:suppressField>
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-md-6 d-flex align-items-center">
+        <RadzenSidebarToggle @ref="sidebarToggle0" @ref:suppressField Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel @ref="label0" @ref:suppressField Text="Blazor">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-6 text-lg-right">
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0" @ref:suppressField>
+  <ChildContent>
+    <RadzenContentContainer @ref="main" @ref:suppressField Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0" @ref:suppressField>
+  <ChildContent>
+    <RadzenPanelMenu @ref="panelmenu0" @ref:suppressField style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Text="GithubIssues" Path="github-issues">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter @ref="footer0" @ref:suppressField>
+  <ChildContent>
+    <RadzenLabel @ref="footerText" @ref:suppressField Text="Blazor, Copyright &copy; 2019">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

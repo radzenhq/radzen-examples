@@ -1,0 +1,85 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "GithubIssues",
+          "type": "heading"
+        },
+        {
+          "allowPaging": false,
+          "allowSorting": true,
+          "columns": [
+            {
+              "property": "Url",
+              "template": "",
+              "title": "Url",
+              "type": "string"
+            },
+            {
+              "property": "Title",
+              "template": "",
+              "title": "Title",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "formatString": "{0:d}",
+              "property": "Created",
+              "title": "Created",
+              "type": "string"
+            }
+          ],
+          "data": "${githubIssues}",
+          "events": {
+            "loadData": []
+          },
+          "itemType": "GitHubIssue",
+          "name": "grid0",
+          "type": "grid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "GetIssues",
+        "parameters": [
+          {
+            "name": "repo",
+            "type": "string",
+            "value": "aspnet/AspNetCore"
+          }
+        ],
+        "schema": {
+          "async": true,
+          "dotnetType": "System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Blazor.Pages.GitHubIssue>>",
+          "items": {
+            "$ref": "#/definitions/GitHubIssue",
+            "dotnetType": "Blazor.Pages.GitHubIssue"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "githubIssues",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<GitHubIssue>"
+          }
+        ],
+        "type": "invoke-method"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "GithubIssues"
+}

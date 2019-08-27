@@ -1,0 +1,22 @@
+{
+  "dataSources": [],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "Blazor",
+  "navigation": [
+    "GithubIssues"
+  ],
+  "pages": [
+    "GithubIssues"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "3",
+  "startPage": "GithubIssues",
+  "theme": "default"
+}
