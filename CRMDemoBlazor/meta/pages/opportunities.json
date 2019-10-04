@@ -1,0 +1,213 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Opportunities",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-opportunity",
+                        "then": [
+                          {
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button"
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "Id",
+                      "title": "Id",
+                      "type": "integer"
+                    },
+                    {
+                      "format": "decimal",
+                      "property": "Amount",
+                      "title": "Amount",
+                      "type": "number"
+                    },
+                    {
+                      "property": "UserId",
+                      "template": [
+                        {
+                          "name": "label0",
+                          "text": "${data.User.FirstName}",
+                          "type": "label"
+                        },
+                        {
+                          "name": "label1",
+                          "text": "${data.User.LastName}",
+                          "type": "label"
+                        }
+                      ],
+                      "title": "User Id",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "Contact.Email",
+                      "property": "ContactId",
+                      "sortProperty": "Contact.Email",
+                      "template": "${data.Contact?.Email}",
+                      "title": "Contact",
+                      "type": "string"
+                    },
+                    {
+                      "filterProperty": "OpportunityStatus.Name",
+                      "property": "StatusId",
+                      "sortProperty": "OpportunityStatus.Name",
+                      "template": "${data.OpportunityStatus?.Name}",
+                      "title": "Opportunity Status",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "property": "CloseDate",
+                      "title": "Close Date",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Name",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    {
+                      "bubble": false,
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "events": {
+                            "click": [
+                              {
+                                "argType": "RadzenCrm.Models.Crm.Opportunity",
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Opportunity",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "CRM.deleteOpportunity",
+                                "parameters": [
+                                  {
+                                    "name": "Id",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "size": "sm",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "textAlign": "center",
+                      "width": "70px"
+                    }
+                  ],
+                  "data": "${getOpportunitiesResult}",
+                  "events": {
+                    "loadData": [],
+                    "rowSelect": [
+                      {
+                        "argType": "RadzenCrm.Models.Crm.Opportunity",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-opportunity",
+                        "then": [
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "itemType": "RadzenCrm.Models.Crm.Opportunity",
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getOpportunities",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOpportunitiesResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<RadzenCrm.Models.Crm.Opportunity>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Opportunities"
+}

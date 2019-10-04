@@ -1,0 +1,247 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Contacts",
+          "type": "heading"
+        },
+        {
+          "name": "textbox0",
+          "placeholder": "",
+          "type": "textbox",
+          "value": "${contactFilter}"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "name": "CRM.getContacts",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "operator": "or",
+                    "value": [
+                      {
+                        "operation": "contains",
+                        "property": "Email",
+                        "type": "string",
+                        "value": "\"${contactFilter}\""
+                      },
+                      {
+                        "operation": "contains",
+                        "property": "Company",
+                        "type": "string",
+                        "value": "\"${contactFilter}\""
+                      },
+                      {
+                        "operation": "contains",
+                        "property": "FirstName",
+                        "type": "string",
+                        "value": "\"${contactFilter}\""
+                      },
+                      {
+                        "operation": "contains",
+                        "property": "LastName",
+                        "type": "string",
+                        "value": "\"${contactFilter}\""
+                      }
+                    ]
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getContactsResult",
+                    "type": "set",
+                    "value": "${result}",
+                    "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "button1",
+          "text": "Search",
+          "type": "button"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-contact",
+                        "then": [
+                          {
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button"
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "Email",
+                      "title": "Email",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Company",
+                      "title": "Company",
+                      "type": "string"
+                    },
+                    {
+                      "property": "LastName",
+                      "title": "Last Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "FirstName",
+                      "title": "First Name",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Phone",
+                      "title": "Phone",
+                      "type": "string"
+                    },
+                    {
+                      "bubble": false,
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "buttonStyle": "danger",
+                          "events": {
+                            "click": [
+                              {
+                                "argType": "RadzenCrm.Models.Crm.Contact",
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Contact",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "CRM.deleteContact",
+                                "parameters": [
+                                  {
+                                    "name": "Id",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "size": "sm",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "textAlign": "center",
+                      "width": "70px"
+                    }
+                  ],
+                  "data": "${getContactsResult}",
+                  "events": {
+                    "loadData": [],
+                    "rowSelect": [
+                      {
+                        "argType": "RadzenCrm.Models.Crm.Contact",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-contact",
+                        "then": [
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "itemType": "RadzenCrm.Models.Crm.Contact",
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getContacts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getContactsResult",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "contactFilter",
+        "type": "set",
+        "value": "\"\"",
+        "valueType": "String"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Contacts"
+}

@@ -1,0 +1,85 @@
+﻿@page "/add-contact"
+@layout MainLayout
+@inherits RadzenCrm.Pages.AddContactComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddContact> L
+<RadzenContent @ref="content0" Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm @ref="form0" Data="@(contact)" Visible="@(contact != null)" TItem="RadzenCrm.Models.Crm.Contact" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="@L["undefined.Text"]" Component="Email" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="email" MaxLength="256" style="display: block; width: 100%" Name="Email">
+                </RadzenTextBox>
+                <RadzenRequiredValidator @ref="emailRequiredValidator" Component="Email" Text="@L["EmailRequiredValidator.Text"]" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="@L["undefined.Text"]" Component="Company" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="company" MaxLength="256" style="width: 100%" Name="Company">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="@L["undefined.Text"]" Component="LastName" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="lastName" MaxLength="256" style="width: 100%" Name="LastName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="@L["undefined.Text"]" Component="FirstName" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="firstName" MaxLength="256" style="width: 100%" Name="FirstName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="@L["undefined.Text"]" Component="Phone" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox @ref="phone" MaxLength="256" style="width: 100%" Name="Phone">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="@L["undefined.Text"]" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["undefined.Text"]" Click="@UndefinedClick">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,39 @@
+﻿@page "/task-statuses"
+@layout MainLayout
+@inherits RadzenCrm.Pages.TaskStatusesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TaskStatuses> L
+<RadzenContent @ref="content0" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getTaskStatusesResult)" TItem="RadzenCrm.Models.Crm.TaskStatus" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Id" Title="@L["grid0.Id.Title"]" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Name" Title="@L["grid0.Name.Title"]" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="radzenCrmModelsCrmTaskStatus">
+                <RadzenButton @ref="gridDeleteButton" ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmTaskStatus))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

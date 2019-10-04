@@ -1,0 +1,163 @@
+﻿@page "/home"
+@layout MainLayout
+@inherits RadzenCrm.Pages.HomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Home> L
+<RadzenContent @ref="content0" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12 col-xl-3 col-lg-6">
+        <RadzenCard @ref="card0" style="margin-bottom: 16px">
+          <ChildContent>
+            <div class="row">
+              <div class="col-4 align-items-center d-flex">
+                <RadzenIcon @ref="icon0" Icon="attach_money" style="background-color: #68d5c8; font-size: 48px; height: 64px; width: 64px">
+                </RadzenIcon>
+              </div>
+              <div class="col-sm-8">
+                <RadzenHeading @ref="heading0" Size="H4" style="margin-bottom: 0px; text-align: right" Text="@L["heading0.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading1" Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@L["heading1.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading2" Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.Revenue.ToString("C"))">
+                </RadzenHeading>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+      <div class="col-md-12 col-xl-3 col-lg-6">
+        <RadzenCard @ref="card1" style="margin-bottom: 16px">
+          <ChildContent>
+            <div class="row">
+              <div class="col-4 align-items-center d-flex">
+                <RadzenIcon @ref="icon1" Icon="shopping_cart" style="background-color: #f9777f; font-size: 48px; height: 64px; width: 64px">
+                </RadzenIcon>
+              </div>
+              <div class="col-sm-8">
+                <RadzenHeading @ref="heading3" Size="H4" style="margin-bottom: 0px; text-align: right" Text="@L["heading3.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading4" Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@L["heading4.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading5" Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.Opportunities.ToString())">
+                </RadzenHeading>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+      <div class="col-md-12 col-xl-3 col-lg-6">
+        <RadzenCard @ref="card3" style="margin-bottom: 16px">
+          <ChildContent>
+            <div class="row">
+              <div class="col-4 align-items-center d-flex">
+                <RadzenIcon @ref="icon3" Icon="account_balance_wallet" style="background-color: #ff6d41; font-size: 48px; height: 64px; width: 64px">
+                </RadzenIcon>
+              </div>
+              <div class="col-sm-8">
+                <RadzenHeading @ref="heading9" Size="H4" style="margin-bottom: 0px; text-align: right" Text="@L["heading9.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading10" Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@L["heading10.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading11" Size="H4" style="color: #ff6d41; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.AverageDealSize.ToString())">
+                </RadzenHeading>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+      <div class="col-md-12 col-xl-3 col-lg-6">
+        <RadzenCard @ref="card2" style="margin-bottom: 16px">
+          <ChildContent>
+            <div class="row">
+              <div class="col-4 align-items-center d-flex">
+                <RadzenIcon @ref="icon2" Icon="thumb_up" style="background-color: #479cc8; font-size: 48px; height: 64px; width: 64px">
+                </RadzenIcon>
+              </div>
+              <div class="col-sm-8">
+                <RadzenHeading @ref="heading6" Size="H4" style="margin-bottom: 0px; text-align: right" Text="@L["heading6.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading7" Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@L["heading7.Text"]">
+                </RadzenHeading>
+                <RadzenHeading @ref="heading8" Size="H4" style="color: #479cc8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.Ratio.ToString("P"))">
+                </RadzenHeading>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-xl-6">
+        <RadzenCard @ref="card4">
+          <ChildContent>
+            <RadzenHeading @ref="heading12" Size="H3">
+            </RadzenHeading>
+            <RadzenGrid @ref="grid0" AllowSorting="true" Data="@(getOpportunitiesResult)" TItem="Opportunity">
+              <Columns>
+                <RadzenGridColumn TItem="Opportunity" Context="opportunity" SortProperty="Contact.FirstName" Title="@L["grid0..Title"]">
+                  <Template Context="data">
+                  @data.Contact.FirstName @data.Contact.LastName
+                  </Template>
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="Opportunity" Context="opportunity" Property="Amount" Title="@L["grid0.Amount.Title"]">
+                  <Template Context="data">
+                  @data.Amount.ToString("C")
+                  </Template>
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="Opportunity" Context="opportunity" Property="OpportunityStatus.Name" Title="@L["grid0.OpportunityStatus.Name.Title"]">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="Opportunity" Context="opportunity" Format="date-time" FormatString="{0:d}" Property="CloseDate" Title="@L["grid0.CloseDate.Title"]" Type="string">
+                </RadzenGridColumn>
+              </Columns>
+            </RadzenGrid>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+      <div class="col-md-12 col-xl-6">
+        <RadzenCard @ref="card5">
+          <ChildContent>
+            <RadzenHeading @ref="heading13" Size="H3">
+            </RadzenHeading>
+            <RadzenGrid @ref="grid1" Data="@(getTasksResult)" TItem="RadzenCrm.Models.Crm.Task">
+              <Columns>
+                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" SortProperty="Opportunity.User.FirstName" Title="@L["grid1..Title"]">
+                  <Template Context="radzenCrmModelsCrmTask">
+                    <RadzenImage @ref="image0" Path=@(radzenCrmModelsCrmTask.Opportunity.User.Picture) style="border-radius: 15px; height: 30px; width: 30px">
+                    </RadzenImage>
+                    <RadzenLabel @ref="label0" Text="@(radzenCrmModelsCrmTask.Opportunity.User.FirstName)">
+                    </RadzenLabel>
+                    <RadzenLabel @ref="label1" Text="@(radzenCrmModelsCrmTask.Opportunity.User.LastName)">
+                    </RadzenLabel>
+                  </Template>
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Property="Title" Title="@L["grid1.Title.Title"]">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" SortProperty="Opportunity.Name">
+                  <Template Context="radzenCrmModelsCrmTask">
+                    <RadzenLabel @ref="label2" style="display: block" Text="@(radzenCrmModelsCrmTask.Opportunity.Name)">
+                    </RadzenLabel>
+                    <RadzenLabel @ref="label3" Text="@(radzenCrmModelsCrmTask.Opportunity.Contact.FirstName)">
+                    </RadzenLabel>
+                    <RadzenLabel @ref="label4" Text="@(radzenCrmModelsCrmTask.Opportunity.Contact.LastName)">
+                    </RadzenLabel>
+                  </Template>
+                </RadzenGridColumn>
+              </Columns>
+            </RadzenGrid>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,26 @@
+﻿@inherits RadzenCrm.Layouts.LoginLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<LoginLayout> L
+<RadzenDialog />
+<RadzenNotification />
+
+<RadzenBody @ref="body0" style="">
+  <ChildContent>
+    <div class="row justify-content-center">
+      <div class="justify-content-center col-xl-5 col-md-7">
+        <RadzenCard @ref="card0" style="margin-top: 8rem">
+          <ChildContent>
+            <RadzenContentContainer @ref="main" Name="main">
+            @Body
+            </RadzenContentContainer>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenBody>

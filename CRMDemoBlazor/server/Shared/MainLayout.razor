@@ -1,0 +1,76 @@
+﻿@inherits RadzenCrm.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> L
+<RadzenDialog />
+<RadzenNotification />
+
+<RadzenHeader @ref="header0">
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-md-6 d-flex align-items-center">
+        <RadzenSidebarToggle @ref="sidebarToggle0" Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel @ref="label0" Text="@L["label0.Text"]">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-6 text-lg-right">
+        <RadzenProfileMenu @ref="profilemenu0" Visible="@(Security.IsAuthenticated())" Click="@Profilemenu0Click">
+          <ChildContent>
+            <RadzenProfileMenuItem Path="profile" Icon="settings" Text="@L["profilemenu0.profile.Text"]" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+            </RadzenProfileMenuItem>
+            <RadzenProfileMenuItem Path="application-users" Icon="person" Text="@L["profilemenu0.users.Text"]" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+            </RadzenProfileMenuItem>
+            <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="@L["profilemenu0.roles.Text"]" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+            </RadzenProfileMenuItem>
+            <RadzenProfileMenuItem Text="@L["profilemenu0.logout.Text"]" Icon="power_settings_new">
+            </RadzenProfileMenuItem>
+          </ChildContent>
+          <Template>
+            <RadzenGravatar Email="@(Security.User?.Name)">
+            </RadzenGravatar>
+          </Template>
+        </RadzenProfileMenu>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+  <ChildContent>
+    <RadzenContentContainer @ref="main" Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu @ref="panelmenu0" style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.contacts.Text"]" Path="contacts" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.opportunities.Text"]" Path="opportunities" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.opportunity-statuses.Text"]" Path="opportunity-statuses" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.tasks.Text"]" Path="tasks" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.task-statuses.Text"]" Path="task-statuses" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.task-types.Text"]" Path="task-types" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="@L["panelmenu0.home.Text"]" Path="home" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter @ref="footer0">
+  <ChildContent>
+    <RadzenLabel @ref="footerText" Text="@L["footerText.Text"]">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

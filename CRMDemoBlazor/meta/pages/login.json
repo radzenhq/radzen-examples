@@ -1,0 +1,59 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Login"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "login": [],
+                    "register": [
+                      {
+                        "path": "register-application-user",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "allowResetPassword": false,
+                  "name": "login0",
+                  "type": "login"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "type": "execute",
+        "code": "var error = System.Web.HttpUtility.ParseQueryString(new Uri(UriHelper.ToAbsoluteUri(UriHelper.Uri).ToString()).Query).Get(\"error\");"
+      },
+      {
+        "detail": "${error}",
+        "severity": "error",
+        "summary": "Error",
+        "condition": "!string.IsNullOrEmpty(error)",
+        "type": "notify"
+      }
+    ]
+  },
+  "name": "Login",
+  "layout": "Login"
+}

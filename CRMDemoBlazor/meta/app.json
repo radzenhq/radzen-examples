@@ -1,0 +1,89 @@
+{
+  "dataSources": [
+    "CRM"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "ignore": [
+    ""
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "localization": {
+    "cultures": [
+      {
+        "text": "English - United States",
+        "value": "en-US"
+      }
+    ],
+    "defaultCulture": {
+      "text": "English - United States",
+      "value": "en-US"
+    }
+  },
+  "logo": "",
+  "name": "RadzenCRM",
+  "navigation": [
+    "Contacts",
+    "Opportunities",
+    "Opportunity Statuses",
+    "Tasks",
+    "Task Statuses",
+    "Task Types",
+    "Home"
+  ],
+  "pages": [
+    "Contacts",
+    "Add Contact",
+    "Edit Contact",
+    "Opportunities",
+    "Add Opportunity",
+    "Edit Opportunity",
+    "Opportunity Statuses",
+    "Add Opportunity Status",
+    "Edit Opportunity Status",
+    "Tasks",
+    "Add Task",
+    "Edit Task",
+    "Task Statuses",
+    "Add Task Status",
+    "Edit Task Status",
+    "Task Types",
+    "Add Task Type",
+    "Edit Task Type",
+    "Application Roles",
+    "Register Application User",
+    "Add Application Role",
+    "Add Application User",
+    "Edit Application User",
+    "Unauthorized",
+    "Profile",
+    "Login",
+    "Application Users",
+    "Home"
+  ],
+  "port": 8000,
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "CRM",
+    "duration": 5,
+    "emailConfirmation": false,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "loginPage": "Login",
+    "provider": "default",
+    "smtpFrom": "",
+    "smtpPassword": "",
+    "smtpSSL": false,
+    "smtpServer": "",
+    "smtpUser": ""
+  },
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "3",
+  "startPage": "Contacts",
+  "theme": "dark"
+}

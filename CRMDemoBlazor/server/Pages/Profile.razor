@@ -1,0 +1,71 @@
+﻿@page "/profile"
+@layout MainLayout
+@inherits RadzenCrm.Pages.ProfileComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> L
+<RadzenContent @ref="content0" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm @ref="form0" Method="post" Action="/account/changepassword" TItem="ApplicationUser" Data="@(user)" Visible="@(user != null)">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="OldPassword" style="width: 100%" Text="@L["undefined.Text"]">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenPassword @ref="oldPassword" style="display: block; width: 100%" Name="OldPassword">
+                </RadzenPassword>
+                <RadzenRequiredValidator @ref="oldPasswordRequiredValidator" Component="OldPassword" style="position: absolute" Text="@L["OldPasswordRequiredValidator.Text"]">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="NewPassword" style="width: 100%" Text="@L["undefined.Text"]">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenPassword @ref="newPassword" style="display: block; width: 100%" Name="NewPassword">
+                </RadzenPassword>
+                <RadzenRequiredValidator @ref="newPasswordRequiredValidator" Component="NewPassword" style="position: absolute" Text="@L["NewPasswordRequiredValidator.Text"]">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="@L["undefined.Text"]">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenPassword @ref="confirmPassword" style="display: block; width: 100%" Name="ConfirmPassword">
+                </RadzenPassword>
+                <RadzenRequiredValidator @ref="confirmPasswordRequiredValidator" Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["undefined.Text"]">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["undefined.Text"]" Click="@UndefinedClick">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

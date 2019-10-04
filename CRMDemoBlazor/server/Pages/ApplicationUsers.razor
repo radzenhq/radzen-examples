@@ -1,0 +1,49 @@
+﻿@page "/application-users"
+@layout MainLayout
+@inherits RadzenCrm.Pages.ApplicationUsersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<ApplicationUsers> L
+<RadzenContent @ref="content0" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(users)" TItem="ApplicationUser" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="UserName" Title="@L["grid0.UserName.Title"]">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="Email" Title="@L["grid0.Email.Title"]">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="FirstName" Title="@L["grid0.FirstName.Title"]" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="LastName" Title="@L["grid0.LastName.Title"]" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Title="@L["grid0..Title"]">
+              <Template Context="applicationUser">
+                <RadzenImage @ref="image0" Path=@(applicationUser.Picture) style="height: 30px; width: 30px">
+                </RadzenImage>
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Bubble="false" Filterable="false" Sortable="false" Width="70px">
+              <Template Context="applicationUser">
+                <RadzenButton @ref="gridDeleteButton" ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, applicationUser))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

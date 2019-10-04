@@ -1,0 +1,30 @@
+﻿@page "/login"
+@layout LoginLayout
+@inherits RadzenCrm.Pages.LoginComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using RadzenCrm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using RadzenCrm.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IHttpContextAccessor Http
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
+<form method="post" action="/account/login">    
+<RadzenContent @ref="content0" Container="main">
+  <ChildContent>
+    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenLogin @ref="login0" AllowResetPassword="false" LoginText="@L["login0.LoginText"]" RegisterText="@L["login0.RegisterText"]" RegisterMessageText="@L["login0.RegisterMessageText"]" ResetPasswordText="@L["login0.ResetPasswordText"]" UserText="@L["login0.UserText"]" UserRequired="@L["login0.UserRequired"]" PasswordText="@L["login0.PasswordText"]" PasswordRequired="@L["login0.PasswordRequired"]" Register="@Login0Register">
+        </RadzenLogin>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
+</form>

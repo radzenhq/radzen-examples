@@ -1,0 +1,156 @@
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>@data.Opportunity.Contact.FirstName</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>${data.Opportunity.</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>@data.Opportunity.Name</value>
+  </data>
+  <data name="grid1.Title.Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>@data.Opportunity.User.FirstName</value>
+  </data>
+  <data name="label0.Text" xml:space="preserve">
+    <value>@data.Opportunity.User.FirstName</value>
+  </data>
+  <data name="grid1..Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="grid1.Amount.Title" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="grid1.OpportunityStatus.Name.Title" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="grid1.CloseDate.Title" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="grid0.OpportunityStatus.Name.Title" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="grid0.Id.Title" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="grid0.Amount.Title" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="grid0.UserId.Title" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="grid0.ContactId.Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="grid0.StatusId.Title" xml:space="preserve">
+    <value>Opportunity Status</value>
+  </data>
+  <data name="grid0.CloseDate.Title" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="grid0.Name.Title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="pageTitle.Text" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="heading0.Text" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
+  <data name="heading1.Text" xml:space="preserve">
+    <value>LAST MONTH</value>
+  </data>
+  <data name="heading2.Text" xml:space="preserve">
+    <value>@monthlyStats.Revenue.ToString("C")</value>
+  </data>
+  <data name="heading3.Text" xml:space="preserve">
+    <value>Opportunities2</value>
+  </data>
+  <data name="heading4.Text" xml:space="preserve">
+    <value>LAST MONTH</value>
+  </data>
+  <data name="heading5.Text" xml:space="preserve">
+    <value>@monthlyStats.Opportunities.ToString()</value>
+  </data>
+  <data name="heading9.Text" xml:space="preserve">
+    <value>Average deal size</value>
+  </data>
+  <data name="heading10.Text" xml:space="preserve">
+    <value>LAST MONTH</value>
+  </data>
+  <data name="heading11.Text" xml:space="preserve">
+    <value>@monthlyStats.AverageDealSize.ToString()</value>
+  </data>
+  <data name="heading6.Text" xml:space="preserve">
+    <value>Win Rate</value>
+  </data>
+  <data name="heading7.Text" xml:space="preserve">
+    <value>LAST MONTH</value>
+  </data>
+  <data name="heading8.Text" xml:space="preserve">
+    <value>@monthlyStats.Ratio.ToString("P")</value>
+  </data>
+  <data name="grid0..Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+</root>
