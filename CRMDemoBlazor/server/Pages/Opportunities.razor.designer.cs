@@ -30,19 +30,7 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenButton button0;
-
         protected RadzenGrid<RadzenCrm.Models.Crm.Opportunity> grid0;
-
-        protected RadzenLabel label0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenButton gridDeleteButton;
 
         IEnumerable<RadzenCrm.Models.Crm.Opportunity> _getOpportunitiesResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Opportunity> getOpportunitiesResult

@@ -30,30 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<RadzenCrm.Models.Crm.Opportunity> form0;
-
-        protected dynamic amount;
-
-        protected RadzenRequiredValidator amountRequiredValidator;
-
-        protected RadzenDropDown contactId;
-
-        protected RadzenRequiredValidator contactIdRequiredValidator;
-
-        protected RadzenDropDown statusId;
-
-        protected RadzenRequiredValidator statusIdRequiredValidator;
-
-        protected RadzenDatePicker closeDate;
-
-        protected RadzenRequiredValidator closeDateRequiredValidator;
-
-        protected RadzenTextBox name;
-
-        protected RadzenRequiredValidator nameRequiredValidator;
-
         IEnumerable<RadzenCrm.Models.Crm.Contact> _getContactsResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Contact> getContactsResult
         {
@@ -142,7 +118,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

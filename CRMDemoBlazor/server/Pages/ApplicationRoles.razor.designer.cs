@@ -30,15 +30,7 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenButton button0;
-
         protected RadzenGrid<IdentityRole> grid0;
-
-        protected RadzenButton gridDeleteButton;
 
         IEnumerable<IdentityRole> _roles;
         protected IEnumerable<IdentityRole> roles

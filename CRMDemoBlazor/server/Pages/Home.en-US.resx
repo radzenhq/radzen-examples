@@ -57,60 +57,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label4.Text" xml:space="preserve">
-    <value>@data.Opportunity.Contact.FirstName</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>${data.Opportunity.</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>@data.Opportunity.Name</value>
-  </data>
-  <data name="grid1.Title.Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>@data.Opportunity.User.FirstName</value>
-  </data>
-  <data name="label0.Text" xml:space="preserve">
-    <value>@data.Opportunity.User.FirstName</value>
-  </data>
-  <data name="grid1..Title" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="grid1.Amount.Title" xml:space="preserve">
-    <value>Amount</value>
-  </data>
-  <data name="grid1.OpportunityStatus.Name.Title" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="grid1.CloseDate.Title" xml:space="preserve">
-    <value>Close Date</value>
-  </data>
-  <data name="grid0.OpportunityStatus.Name.Title" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="grid0.Id.Title" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="grid0.Amount.Title" xml:space="preserve">
-    <value>Amount</value>
-  </data>
-  <data name="grid0.UserId.Title" xml:space="preserve">
-    <value>User Id</value>
-  </data>
-  <data name="grid0.ContactId.Title" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="grid0.StatusId.Title" xml:space="preserve">
-    <value>Opportunity Status</value>
-  </data>
-  <data name="grid0.CloseDate.Title" xml:space="preserve">
-    <value>Close Date</value>
-  </data>
-  <data name="grid0.Name.Title" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="pageTitle.Text" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -152,5 +98,35 @@
   </data>
   <data name="grid0..Title" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="grid0.Amount.Title" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="grid0.OpportunityStatus.Name.Title" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="grid0.CloseDate.Title" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="grid1..Title" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="label0.Text" xml:space="preserve">
+    <value>@data.Opportunity.User.FirstName</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>@data.Opportunity.User.LastName</value>
+  </data>
+  <data name="grid1.Title.Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>@data.Opportunity.Name</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>@data.Opportunity.Contact.FirstName</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>@data.Opportunity.Contact.LastName</value>
   </data>
 </root>

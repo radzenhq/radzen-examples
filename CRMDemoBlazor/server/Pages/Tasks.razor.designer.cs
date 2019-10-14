@@ -30,31 +30,7 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenButton button0;
-
         protected RadzenGrid<RadzenCrm.Models.Crm.Task> grid0;
-
-        protected RadzenIcon icon1;
-
-        protected RadzenIcon icon3;
-
-        protected RadzenIcon icon2;
-
-        protected RadzenLabel label1;
-
-        protected RadzenIcon icon0;
-
-        protected RadzenIcon icon4;
-
-        protected RadzenIcon icon5;
-
-        protected RadzenLabel label0;
-
-        protected RadzenButton gridDeleteButton;
 
         IEnumerable<RadzenCrm.Models.Crm.Task> _getTasksResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Task> getTasksResult

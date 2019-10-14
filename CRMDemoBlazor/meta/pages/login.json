@@ -2,58 +2,88 @@
   "access": "Everybody",
   "components": [
     {
-      "type": "content",
-      "container": "main",
       "components": [
         {
-          "type": "heading",
           "name": "pageTitle",
           "size": "H1",
-          "text": "Login"
+          "text": "Login",
+          "type": "heading"
         },
         {
-          "type": "row",
+          "action": "/Account/Login",
           "components": [
             {
-              "type": "col",
-              "class": "col-md-12",
-              "components": [
-                {
-                  "events": {
-                    "login": [],
-                    "register": [
-                      {
-                        "path": "register-application-user",
-                        "type": "popup"
-                      }
-                    ]
-                  },
-                  "allowResetPassword": false,
-                  "name": "login0",
-                  "type": "login"
-                }
-              ]
+              "component": "Username",
+              "name": "label0",
+              "style": {
+                "display": "block",
+                "marginTop": "16px"
+              },
+              "text": "Username",
+              "type": "label"
+            },
+            {
+              "name": "Username",
+              "style": {
+                "width": "100%"
+              },
+              "type": "textbox",
+              "value": ""
+            },
+            {
+              "component": "Password",
+              "name": "label1",
+              "style": {
+                "display": "block",
+                "marginTop": "16px"
+              },
+              "text": "Password",
+              "type": "label"
+            },
+            {
+              "name": "Password",
+              "style": {
+                "width": "100%"
+              },
+              "type": "password",
+              "value": ""
+            },
+            {
+              "buttonType": "submit",
+              "name": "button0",
+              "style": {
+                "display": "block",
+                "marginTop": "16px",
+                "width": "100%"
+              },
+              "text": "Login",
+              "type": "button"
             }
-          ]
+          ],
+          "method": "post",
+          "name": "templateForm0",
+          "type": "template-form"
         }
-      ]
+      ],
+      "container": "main",
+      "type": "content"
     }
   ],
   "events": {
     "load": [
       {
-        "type": "execute",
-        "code": "var error = System.Web.HttpUtility.ParseQueryString(new Uri(UriHelper.ToAbsoluteUri(UriHelper.Uri).ToString()).Query).Get(\"error\");"
+        "code": "var error = System.Web.HttpUtility.ParseQueryString(new Uri(UriHelper.ToAbsoluteUri(UriHelper.Uri).ToString()).Query).Get(\"error\");",
+        "type": "execute"
       },
       {
+        "condition": "!string.IsNullOrEmpty(error)",
         "detail": "${error}",
         "severity": "error",
         "summary": "Error",
-        "condition": "!string.IsNullOrEmpty(error)",
         "type": "notify"
       }
     ]
   },
-  "name": "Login",
-  "layout": "Login"
+  "layout": "Login",
+  "name": "Login"
 }

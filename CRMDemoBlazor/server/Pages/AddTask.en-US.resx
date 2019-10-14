@@ -57,10 +57,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="TitleLabel.Text" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="OpportunityIdLabel.Text" xml:space="preserve">
+    <value>Opportunity</value>
+  </data>
+  <data name="DueDateLabel.Text" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="TypeIdLabel.Text" xml:space="preserve">
+    <value>Task Type</value>
+  </data>
+  <data name="StatusIdLabel.Text" xml:space="preserve">
+    <value>Task Status</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
     <value>Opportunity</value>
   </data>
   <data name="OpportunityId.Placeholder" xml:space="preserve">
@@ -69,13 +84,13 @@
   <data name="OpportunityIdRequiredValidator.Text" xml:space="preserve">
     <value>OpportunityId is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label3.Text" xml:space="preserve">
     <value>Due Date</value>
   </data>
   <data name="DueDateRequiredValidator.Text" xml:space="preserve">
     <value>DueDate is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label4.Text" xml:space="preserve">
     <value>Task Type</value>
   </data>
   <data name="TypeId.Placeholder" xml:space="preserve">
@@ -84,16 +99,16 @@
   <data name="TypeIdRequiredValidator.Text" xml:space="preserve">
     <value>TypeId is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label5.Text" xml:space="preserve">
     <value>Task Status</value>
   </data>
   <data name="StatusId.Placeholder" xml:space="preserve">
     <value>Choose TaskStatus</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button1.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button2.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
 </root>

@@ -10,13 +10,13 @@
 @using Microsoft.AspNetCore.Authorization
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Unauthorized> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenHtml @ref="html0">
+        <RadzenHtml>
           The current user is not authorized to see this page.
         </RadzenHtml>
       </div>

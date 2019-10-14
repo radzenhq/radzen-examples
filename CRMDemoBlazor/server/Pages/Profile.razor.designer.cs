@@ -30,24 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenTemplateForm<ApplicationUser> form0;
-
-        protected RadzenPassword oldPassword;
-
-        protected RadzenRequiredValidator oldPasswordRequiredValidator;
-
-        protected RadzenPassword newPassword;
-
-        protected RadzenRequiredValidator newPasswordRequiredValidator;
-
-        protected RadzenPassword confirmPassword;
-
-        protected RadzenRequiredValidator confirmPasswordRequiredValidator;
-
         ApplicationUser _user;
         protected ApplicationUser user
         {
@@ -87,7 +69,13 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void TemplateForm0Submit(RadzenCrm.Models.ApplicationUser args)
+        {
+            var securityUpdateUserResult = await Security.UpdateUser($"{Security.User.Id}", user);
+                NotificationService.Notify(NotificationSeverity.Success, $"Success", $"Personal data updated successfully!");
+        }
+
+        protected async void Button1Click(MouseEventArgs args)
         {
             DialogService.Close();
         }

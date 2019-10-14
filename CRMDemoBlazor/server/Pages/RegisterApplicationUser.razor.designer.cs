@@ -30,22 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<ApplicationUser> form0;
-
-        protected RadzenTextBox userName;
-
-        protected RadzenRequiredValidator emailRequiredValidator;
-
-        protected RadzenPassword password;
-
-        protected RadzenRequiredValidator passwordRequiredValidator;
-
-        protected RadzenPassword confirmPassword;
-
-        protected RadzenRequiredValidator confirmPasswordRequiredValidator;
-
         ApplicationUser _user;
         protected ApplicationUser user
         {
@@ -73,12 +57,12 @@ namespace RadzenCrm.Pages
             user = new ApplicationUser();;
         }
 
-        protected async void Form0Submit(dynamic args)
+        protected async void Form0Submit(ApplicationUser args)
         {
             DialogService.Close();
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close();
         }

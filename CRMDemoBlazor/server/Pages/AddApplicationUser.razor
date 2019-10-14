@@ -11,99 +11,63 @@
 @attribute [Authorize]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddApplicationUser> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(user)" TItem="ApplicationUser" Visible="@(user != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="ApplicationUser" Data="@(user)" Visible="@(user != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Email" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="email" style="display: block; width: 100%" Name="Email">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.Email)" Name="Email">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="emailRequiredValidator" Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label0" Component="FirstName" style="width: 100%" Text="@L["label0.Text"]">
+                <RadzenLabel Component="RoleNames" style="width: 100%" Text="Roles">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="firstName" style="display: block; width: 100%" Name="FirstName">
-                </RadzenTextBox>
-                <RadzenRequiredValidator @ref="requiredValidator0" Component="FirstName" style="position: absolute" Text="@L["requiredValidator0.Text"]">
-                </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel @ref="label13" Component="LastName" style="width: 100%" Text="@L["label13.Text"]">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenTextBox @ref="lastName" style="display: block; width: 100%" Name="LastName">
-                </RadzenTextBox>
-                <RadzenRequiredValidator @ref="requiredValidator1" Component="LastName" style="position: absolute" Text="@L["requiredValidator1.Text"]">
-                </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel @ref="label2" Component="LastName" style="width: 100%" Text="@L["label2.Text"]">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenFileInput @ref="picture" style="display: block" Name="Picture">
-                </RadzenFileInput>
-                <RadzenRequiredValidator @ref="requiredValidator2" Component="Picture" style="position: absolute" Text="@L["requiredValidator2.Text"]">
-                </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Component="RoleNames" style="width: 100%" Text="@L["undefined.Text"]">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenDropDown @ref="roleNames" Data="@(roles)" Multiple="true" style="width: 100%" TextProperty="Name" ValueProperty="Name" Name="RoleNames">
+                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" @bind-Value="@(user.RoleNames)" TextProperty="Name" ValueProperty="Name" Name="RoleNames">
                 </RadzenDropDown>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Password" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="Password" style="width: 100%" Text="Password">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword @ref="password" style="display: block; width: 100%" Name="Password">
+                <RadzenPassword style="display: block; width: 100%" @bind-Value="@(user.Password)" Name="Password">
                 </RadzenPassword>
-                <RadzenRequiredValidator @ref="passwordRequiredValidator" Component="Password" style="position: absolute" Text="@L["PasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Password" style="position: absolute" Text="@L["PasswordRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="Confirm password">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword @ref="confirmPassword" style="display: block; width: 100%" Name="ConfirmPassword">
+                <RadzenPassword style="display: block; width: 100%" @bind-Value="@(user.ConfirmPassword)" Name="ConfirmPassword">
                 </RadzenPassword>
-                <RadzenRequiredValidator @ref="confirmPasswordRequiredValidator" Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["undefined.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["undefined.Text"]" Click="@UndefinedClick">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

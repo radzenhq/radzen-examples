@@ -1,5 +1,4 @@
-﻿@page "/"
-@page "/contacts"
+﻿@page "/contacts"
 @layout MainLayout
 @inherits RadzenCrm.Pages.ContactsComponent
 
@@ -12,17 +11,17 @@
 @attribute [Authorize]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Contacts> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
     </RadzenHeading>
-    <RadzenTextBox @ref="textbox0" @bind-Value="@(contactFilter)" Name="Textbox0">
+    <RadzenTextBox @bind-Value="@(contactFilter)" Name="Textbox0">
     </RadzenTextBox>
-    <RadzenButton @ref="button1" Text="@L["button1.Text"]" Click="@Button1Click">
+    <RadzenButton Text="@L["button1.Text"]" Click="@Button1Click">
     </RadzenButton>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getContactsResult)" TItem="RadzenCrm.Models.Crm.Contact" RowSelect="@Grid0RowSelect">
           <Columns>
@@ -38,7 +37,7 @@
             </RadzenGridColumn>
             <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Contact" Context="radzenCrmModelsCrmContact" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
               <Template Context="radzenCrmModelsCrmContact">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmContact))">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmContact))">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

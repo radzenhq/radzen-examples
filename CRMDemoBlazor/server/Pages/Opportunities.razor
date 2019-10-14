@@ -11,13 +11,13 @@
 @attribute [Authorize]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Opportunities> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOpportunitiesResult)" TItem="RadzenCrm.Models.Crm.Opportunity" RowSelect="@Grid0RowSelect">
           <Columns>
@@ -27,9 +27,9 @@
             </RadzenGridColumn>
             <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Context="radzenCrmModelsCrmOpportunity" Property="UserId" Title="@L["grid0.UserId.Title"]" Type="string">
               <Template Context="radzenCrmModelsCrmOpportunity">
-                <RadzenLabel @ref="label0" Text="@(radzenCrmModelsCrmOpportunity.User.FirstName)">
+                <RadzenLabel Text="@($"{radzenCrmModelsCrmOpportunity.User.FirstName}")">
                 </RadzenLabel>
-                <RadzenLabel @ref="label1" Text="@(radzenCrmModelsCrmOpportunity.User.LastName)">
+                <RadzenLabel Text="@($"{radzenCrmModelsCrmOpportunity.User.LastName}")">
                 </RadzenLabel>
               </Template>
             </RadzenGridColumn>
@@ -49,7 +49,7 @@
             </RadzenGridColumn>
             <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Context="radzenCrmModelsCrmOpportunity" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
               <Template Context="radzenCrmModelsCrmOpportunity">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmOpportunity))">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmOpportunity))">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

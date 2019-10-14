@@ -30,12 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenHtml html0;
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
         }

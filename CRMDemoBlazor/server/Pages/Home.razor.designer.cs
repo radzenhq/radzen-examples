@@ -30,73 +30,9 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenCard card0;
-
-        protected RadzenIcon icon0;
-
-        protected RadzenHeading heading0;
-
-        protected RadzenHeading heading1;
-
-        protected RadzenHeading heading2;
-
-        protected RadzenCard card1;
-
-        protected RadzenIcon icon1;
-
-        protected RadzenHeading heading3;
-
-        protected RadzenHeading heading4;
-
-        protected RadzenHeading heading5;
-
-        protected RadzenCard card3;
-
-        protected RadzenIcon icon3;
-
-        protected RadzenHeading heading9;
-
-        protected RadzenHeading heading10;
-
-        protected RadzenHeading heading11;
-
-        protected RadzenCard card2;
-
-        protected RadzenIcon icon2;
-
-        protected RadzenHeading heading6;
-
-        protected RadzenHeading heading7;
-
-        protected RadzenHeading heading8;
-
-        protected RadzenCard card4;
-
-        protected RadzenHeading heading12;
-
         protected RadzenGrid<Opportunity> grid0;
 
-        protected RadzenCard card5;
-
-        protected RadzenHeading heading13;
-
         protected RadzenGrid<RadzenCrm.Models.Crm.Task> grid1;
-
-        protected RadzenImage image0;
-
-        protected RadzenLabel label0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenLabel label2;
-
-        protected RadzenLabel label3;
-
-        protected RadzenLabel label4;
 
         RadzenCrm.Pages.Stats _monthlyStats;
         protected RadzenCrm.Pages.Stats monthlyStats
@@ -167,10 +103,10 @@ namespace RadzenCrm.Pages
             var monthlyStatsResult = MonthlyStats();
             monthlyStats = monthlyStatsResult;
 
-            var crmGetOpportunitiesResult = await Crm.GetOpportunities("CloseDate desc");
+            var crmGetOpportunitiesResult = await Crm.GetOpportunities(new Query() { OrderBy = "CloseDate desc" });
             getOpportunitiesResult = crmGetOpportunitiesResult;
 
-            var crmGetTasksResult = await Crm.GetTasks("DueDate desc");
+            var crmGetTasksResult = await Crm.GetTasks(new Query() { OrderBy = "DueDate desc" });
             getTasksResult = crmGetTasksResult;
         }
     }

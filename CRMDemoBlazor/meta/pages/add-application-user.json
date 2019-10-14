@@ -37,6 +37,7 @@
                                 "display": "block",
                                 "width": "100%"
                               },
+                              "value": "${user.Email}",
                               "type": "textbox"
                             },
                             {
@@ -52,153 +53,6 @@
                           "type": "col"
                         }
                       ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "FirstName",
-                              "name": "label0",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "First Name",
-                              "type": "label"
-                            }
-                          ],
-                          "name": "col0",
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "name": "FirstName",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "textbox"
-                            },
-                            {
-                              "component": "FirstName",
-                              "name": "requiredValidator0",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "First Name is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "name": "col1",
-                          "type": "col"
-                        }
-                      ],
-                      "name": "row0",
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "LastName",
-                              "name": "label13",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Last Name",
-                              "type": "label"
-                            }
-                          ],
-                          "name": "col2",
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "name": "LastName",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "textbox"
-                            },
-                            {
-                              "component": "LastName",
-                              "name": "requiredValidator1",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "Last Name is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "name": "col3",
-                          "type": "col"
-                        }
-                      ],
-                      "name": "row1",
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "LastName",
-                              "name": "label2",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Picture",
-                              "type": "label"
-                            }
-                          ],
-                          "name": "col4",
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "name": "Picture",
-                              "style": {
-                                "display": "block"
-                              },
-                              "type": "file-input",
-                              "value": ""
-                            },
-                            {
-                              "component": "Picture",
-                              "name": "requiredValidator2",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "Picture is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "name": "col5",
-                          "type": "col"
-                        }
-                      ],
-                      "name": "row2",
                       "style": {
                         "marginBottom": "1rem"
                       },
@@ -230,6 +84,7 @@
                               "style": {
                                 "width": "100%"
                               },
+                              "value": "${user.RoleNames}",
                               "textProperty": "Name",
                               "type": "dropdown",
                               "valueProperty": "Name"
@@ -268,6 +123,7 @@
                                 "display": "block",
                                 "width": "100%"
                               },
+                              "value": "${user.Password}",
                               "type": "password"
                             },
                             {
@@ -313,6 +169,7 @@
                                 "display": "block",
                                 "width": "100%"
                               },
+                              "value": "${user.ConfirmPassword}",
                               "type": "password"
                             },
                             {
@@ -364,7 +221,6 @@
                       "type": "row"
                     }
                   ],
-                  "data": "${user}",
                   "events": {
                     "submit": [
                       {
@@ -392,9 +248,10 @@
                       }
                     ]
                   },
-                  "itemType": "ApplicationUser",
                   "name": "form0",
                   "type": "template-form",
+                  "itemType": "ApplicationUser",
+                  "data": "${user}",
                   "visible": "${user != null}"
                 }
               ],

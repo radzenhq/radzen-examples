@@ -30,26 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<RadzenCrm.Models.Crm.Task> form0;
-
-        protected RadzenTextBox title;
-
-        protected RadzenDropDown opportunityId;
-
-        protected RadzenRequiredValidator opportunityIdRequiredValidator;
-
-        protected RadzenDatePicker dueDate;
-
-        protected RadzenRequiredValidator dueDateRequiredValidator;
-
-        protected RadzenDropDown typeId;
-
-        protected RadzenRequiredValidator typeIdRequiredValidator;
-
-        protected RadzenDropDown statusId;
-
         IEnumerable<RadzenCrm.Models.Crm.Opportunity> _getOpportunitiesResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Opportunity> getOpportunitiesResult
         {
@@ -158,7 +138,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

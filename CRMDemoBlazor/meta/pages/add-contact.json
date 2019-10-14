@@ -40,14 +40,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "Email",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${contact.Email}"
                             },
                             {
                               "type": "required-validator",
@@ -87,13 +87,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "Company",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${contact.Company}"
                             }
                           ]
                         }
@@ -124,13 +124,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "LastName",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${contact.LastName}"
                             }
                           ]
                         }
@@ -161,13 +161,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "FirstName",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${contact.FirstName}"
                             }
                           ]
                         }
@@ -198,13 +198,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "Phone",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${contact.Phone}"
                             }
                           ]
                         }

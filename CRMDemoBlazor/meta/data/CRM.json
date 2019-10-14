@@ -59,11 +59,11 @@
       "resource": "Opportunities",
       "required": [
         "Amount",
+        "Name",
         "UserId",
         "ContactId",
         "StatusId",
-        "CloseDate",
-        "Name"
+        "CloseDate"
       ],
       "properties": {
         "Id": {
@@ -82,6 +82,10 @@
         "Amount": {
           "type": "number",
           "format": "decimal"
+        },
+        "Name": {
+          "type": "string",
+          "length": 256
         },
         "UserId": {
           "type": "string",
@@ -123,10 +127,6 @@
           "type": "string",
           "format": "date-time",
           "x-datetime": "datetime"
-        },
-        "Name": {
-          "type": "string",
-          "length": 256
         },
         "Tasks": {
           "type": "array",
@@ -196,7 +196,7 @@
             "type": "Opportunity",
             "principalKey": "Id",
             "name": "Opportunity",
-            "textProperty": "UserId",
+            "textProperty": "Name",
             "navigationProperty": "Tasks"
           }
         },
@@ -313,6 +313,21 @@
             "in": "query",
             "name": "$orderby",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -374,6 +389,21 @@
             "in": "query",
             "name": "$orderby",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -435,6 +465,21 @@
             "in": "query",
             "name": "$orderby",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -496,6 +541,21 @@
             "in": "query",
             "name": "$orderby",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -557,6 +617,21 @@
             "in": "query",
             "name": "$orderby",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -618,6 +693,21 @@
             "in": "query",
             "name": "$orderby",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
           }
         ],
         "responses": {

@@ -57,13 +57,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="AmountLabel.Text" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="NameLabel.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="UserIdLabel.Text" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="UserIdRequiredValidator.Text" xml:space="preserve">
+    <value>UserId is required</value>
+  </data>
+  <data name="ContactIdLabel.Text" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="StatusIdLabel.Text" xml:space="preserve">
+    <value>Opportunity Status</value>
+  </data>
+  <data name="CloseDateLabel.Text" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
     <value>Amount</value>
   </data>
   <data name="AmountRequiredValidator.Text" xml:space="preserve">
     <value>Amount is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label2.Text" xml:space="preserve">
     <value>Contact</value>
   </data>
   <data name="ContactId.Placeholder" xml:space="preserve">
@@ -72,7 +93,7 @@
   <data name="ContactIdRequiredValidator.Text" xml:space="preserve">
     <value>ContactId is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label3.Text" xml:space="preserve">
     <value>Opportunity Status</value>
   </data>
   <data name="StatusId.Placeholder" xml:space="preserve">
@@ -81,22 +102,22 @@
   <data name="StatusIdRequiredValidator.Text" xml:space="preserve">
     <value>StatusId is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label4.Text" xml:space="preserve">
     <value>Close Date</value>
   </data>
   <data name="CloseDateRequiredValidator.Text" xml:space="preserve">
     <value>CloseDate is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label5.Text" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NameRequiredValidator.Text" xml:space="preserve">
     <value>Name is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button1.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button2.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
 </root>

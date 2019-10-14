@@ -43,31 +43,16 @@ namespace RadzenCrm
 
             if (httpContextAccessor.HttpContext != null)
             {
-                _principal = httpContextAccessor.HttpContext.User;
-                _user = context.Users.FirstOrDefault(u => u.Email == Principal.Identity.Name);
+                Principal = httpContextAccessor.HttpContext.User;
+                User = context.Users.FirstOrDefault(u => u.Email == Principal.Identity.Name);
             }
-
         }
 
         public ApplicationIdentityDbContext context { get; set; }
 
-        ApplicationUser _user;
-        public ApplicationUser User
-        {
-            get
-            {
-                return _user;
-            }
-        }
+        public ApplicationUser User { get; private set; }
 
-        ClaimsPrincipal _principal = null;
-        public ClaimsPrincipal Principal
-        {
-            get
-            {
-                return _principal;
-            }
-        }
+        public ClaimsPrincipal Principal { get; private set; }
 
         public bool IsInRole(params string[] roles)
         {
@@ -94,14 +79,13 @@ namespace RadzenCrm
 
         public bool IsAuthenticated()
         {
-            return _principal.Identity.IsAuthenticated;
+            return Principal.Identity.IsAuthenticated;
         }
 
         public async void Logout()
         {
             uriHelper.NavigateTo("/Account/Logout", true);
         }
-
 
         public async Task<bool> Login(string userName, string password)
         {
@@ -114,62 +98,47 @@ namespace RadzenCrm
 
                 roleManager.Roles.ToList().ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
 
-                _principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Basic"));
+                Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Basic"));
 
-                return await Task.FromResult(true);
+                return true;
             }
 
             var user = await userManager.FindByNameAsync(userName);
 
-            if(user == null)
+            if (user == null)
             {
-                return await Task.FromResult(false);
+                return false;
             }
 
             var validPassword = await userManager.CheckPasswordAsync(user, password);
 
-            if(!validPassword)
+            if (!validPassword)
             {
-                return await Task.FromResult(false);
+                return false;
             }
 
-            _principal = await signInManager.CreateUserPrincipalAsync(user);
+            Principal = await signInManager.CreateUserPrincipalAsync(user);
 
-            if(_principal == null)
+            if (Principal == null)
             {
-                return await Task.FromResult(false);
+                return false;
             }
 
-            _user = user;
+            User = user;
 
-            return await Task.FromResult(true);
-        }
-
-        public async Task<bool> ChangePassword(string oldPassword, string newPassword)
-        {
-            return await Task.FromResult(false);
-        }
-
-        public async Task<bool> RegisterUser(dynamic data)
-        {
-            return await Task.FromResult(false);
+            return true;
         }
 
         public async Task<IEnumerable<IdentityRole>> GetRoles()
         {
-            return await Task.FromResult(
-              roleManager.Roles
-            );
+            return await Task.FromResult(roleManager.Roles);
         }
 
         public async Task<IdentityRole> CreateRole(IdentityRole role)
         {
             var result = await roleManager.CreateAsync(role);
 
-            if (!result.Succeeded)
-            {
-                return null;
-            }
+            EnsureSucceeded(result);
 
             return role;
         }
@@ -193,9 +162,7 @@ namespace RadzenCrm
 
         public async Task<IEnumerable<ApplicationUser>> GetUsers()
         {
-            return await Task.FromResult(
-              context.Users
-            );
+            return await Task.FromResult(context.Users);
         }
 
         public async Task<ApplicationUser> CreateUser(ApplicationUser user)
@@ -204,28 +171,19 @@ namespace RadzenCrm
 
             var result = await userManager.CreateAsync(user, user.Password);
 
-            if (result.Succeeded)
+            EnsureSucceeded(result);
+
+            var roles = user.RoleNames;
+
+            if (roles != null && roles.Any())
             {
-                var roles = user.RoleNames;
-
-                if (roles != null && roles.Any())
-                {
-                    result = await userManager.AddToRolesAsync(user, roles);
-
-                    if (!result.Succeeded)
-                    {
-                        return null;
-                    }
-                }
-
-                user.RoleNames = roles;
-
-                return user;
+                result = await userManager.AddToRolesAsync(user, roles);
+                EnsureSucceeded(result);
             }
-            else
-            {
-                return null;
-            }
+
+            user.RoleNames = roles;
+
+            return user;
         }
 
         public async Task<ApplicationUser> DeleteUser(string id)
@@ -242,67 +200,57 @@ namespace RadzenCrm
 
         public async Task<ApplicationUser> GetUserById(string id)
         {
-            var user = context.Users.Where(i => i.Id == id).FirstOrDefault();
+            var user = await userManager.FindByIdAsync(id);
+
             if (user != null)
             {
                 user.RoleNames = await userManager.GetRolesAsync(user);
             }
+
             return await Task.FromResult(user);
         }
 
-        public async Task<ApplicationUser> UpdateUser(string id, ApplicationUser userData)
+        public async Task<ApplicationUser> UpdateUser(string id, ApplicationUser user)
         {
-            var user = await userManager.FindByIdAsync(id);
+            var roles = user.RoleNames.ToArray();
 
-            IdentityResult result = null;
-            var roles = userData.RoleNames.ToList();
-            if (roles != null)
+            var result = await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
+
+            EnsureSucceeded(result);
+
+            if (roles.Any())
             {
-                result = await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
+                result = await userManager.AddToRolesAsync(user, roles);
 
-                if (!result.Succeeded)
-                {
-                    return null;
-                }
+                EnsureSucceeded(result);
+            }
 
-                if (roles.Any())
-                {
-                    result = await userManager.AddToRolesAsync(user, roles);
-                }
+            result = await userManager.UpdateAsync(user);
 
-                if (!result.Succeeded)
-                {
-                    return null;
-                }
+            EnsureSucceeded(result);
 
-                var password = userData.Password;
+            if (!String.IsNullOrEmpty(user.Password) && user.Password == user.ConfirmPassword)
+            {
+                result = await userManager.RemovePasswordAsync(user);
 
-                if (password != null)
-                {
-                    result = await userManager.RemovePasswordAsync(user);
+                EnsureSucceeded(result);
 
-                    if (!result.Succeeded)
-                    {
-                        return null;
-                    }
+                result = await userManager.AddPasswordAsync(user, user.Password);
 
-                    result = await userManager.AddPasswordAsync(user, password);
-
-                    if (!result.Succeeded)
-                    {
-                        return null;
-                    }
-                }
-
-                result = await userManager.UpdateAsync(user);
-
-                if (!result.Succeeded)
-                {
-                    return null;
-                }
+                EnsureSucceeded(result);
             }
 
             return user;
+        }
+
+        private void EnsureSucceeded(IdentityResult result)
+        {
+            if (!result.Succeeded)
+            {
+                var message = string.Join(", ", result.Errors.Select(error => error.Description));
+
+                throw new ApplicationException(message);
+            }
         }
     }
 }

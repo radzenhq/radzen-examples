@@ -38,7 +38,7 @@ namespace RadzenCrm
 
     partial void OnTasksRead(ref IQueryable<Task> items)
     {
-      items = items.Include(item => item.Opportunity.User);
+      items = items.Include(item => item.Opportunity.User).Include(item => item.Opportunity.Contact);
     }
   }
 }

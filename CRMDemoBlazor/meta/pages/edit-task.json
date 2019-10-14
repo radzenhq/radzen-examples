@@ -86,8 +86,7 @@
                                 "width": "100%"
                               },
                               "type": "textbox",
-                              "value": "${task.Title}",
-                              "valueType": "string"
+                              "value": "${task.Title}"
                             }
                           ],
                           "type": "col"
@@ -175,8 +174,7 @@
                                 "width": "100%"
                               },
                               "type": "datepicker",
-                              "value": "${task.DueDate}",
-                              "valueType": "DateTime?"
+                              "value": "${task.DueDate}"
                             },
                             {
                               "component": "DueDate",

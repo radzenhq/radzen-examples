@@ -40,13 +40,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "Name",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${taskstatus.Name}"
                             }
                           ]
                         }

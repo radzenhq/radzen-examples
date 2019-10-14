@@ -30,12 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenLogin login0;
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             Load();
@@ -49,11 +43,6 @@ namespace RadzenCrm.Pages
             {
                 NotificationService.Notify(NotificationSeverity.Error, $"Error", $"{error}");
             }
-        }
-
-        protected async void Login0Register()
-        {
-            DialogService.Open<RegisterApplicationUser>("Register Application User", null);
         }
     }
 }

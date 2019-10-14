@@ -11,79 +11,79 @@
 @attribute [Authorize]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditContact> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div style="" class="row">
       <div class="col-md-9">
-        <RadzenLabel @ref="closeLabel" style="font-weight: bold" Text="@L["closeLabel.Text"]" Visible="@(!canEdit)">
+        <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
         </RadzenLabel>
       </div>
       <div class="col-md-3">
-        <RadzenButton @ref="closeButton" ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="@L["closeButton.Text"]" Visible="@(!canEdit)" Click="@CloseButtonClick">
+        <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="@L["closeButton.Text"]" Visible="@(!canEdit)" Click="@CloseButtonClick">
         </RadzenButton>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" TItem="RadzenCrm.Models.Crm.Contact" Data="@(contact)" Visible="@(contact != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@(contact)" TItem="RadzenCrm.Models.Crm.Contact" Visible="@(contact != null && canEdit)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="@L["undefined.Text"]" Component="Email" style="width: 100%">
+                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="email" MaxLength="256" style="display: block; width: 100%" @bind-Value="@(contact.Email)" Name="Email">
+                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@(contact.Email)" Name="Email">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="emailRequiredValidator" Component="Email" Text="@L["EmailRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="@L["undefined.Text"]" Component="Company" style="width: 100%">
+                <RadzenLabel Component="Company" style="width: 100%" Text="Company">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="company" MaxLength="256" style="width: 100%" @bind-Value="@(contact.Company)" Name="Company">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.Company)" Name="Company">
                 </RadzenTextBox>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="@L["undefined.Text"]" Component="LastName" style="width: 100%">
+                <RadzenLabel Component="LastName" style="width: 100%" Text="Last Name">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="lastName" MaxLength="256" style="width: 100%" @bind-Value="@(contact.LastName)" Name="LastName">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.LastName)" Name="LastName">
                 </RadzenTextBox>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="@L["undefined.Text"]" Component="FirstName" style="width: 100%">
+                <RadzenLabel Component="FirstName" style="width: 100%" Text="First Name">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="firstName" MaxLength="256" style="width: 100%" @bind-Value="@(contact.FirstName)" Name="FirstName">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.FirstName)" Name="FirstName">
                 </RadzenTextBox>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="@L["undefined.Text"]" Component="Phone" style="width: 100%">
+                <RadzenLabel Component="Phone" style="width: 100%" Text="Phone">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="phone" MaxLength="256" style="width: 100%" @bind-Value="@(contact.Phone)" Name="Phone">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.Phone)" Name="Phone">
                 </RadzenTextBox>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="@L["undefined.Text"]" ButtonStyle="ButtonStyle.Primary">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button2.Text"]">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["undefined.Text"]" Click="@UndefinedClick">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button3.Text"]" Click="@Button3Click">
                 </RadzenButton>
               </div>
             </div>

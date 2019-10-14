@@ -30,19 +30,7 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenTextBox textbox0;
-
-        protected RadzenButton button1;
-
-        protected RadzenButton button0;
-
         protected RadzenGrid<RadzenCrm.Models.Crm.Contact> grid0;
-
-        protected RadzenButton gridDeleteButton;
 
         IEnumerable<RadzenCrm.Models.Crm.Contact> _getContactsResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Contact> getContactsResult
@@ -101,7 +89,7 @@ namespace RadzenCrm.Pages
 
         protected async void Button1Click(MouseEventArgs args)
         {
-            var crmGetContactsResult = await Crm.GetContacts($@"i => i.Email.Contains(""{contactFilter}"") || i.Company.Contains(""{contactFilter}"") || i.FirstName.Contains(""{contactFilter}"") || i.LastName.Contains(""{contactFilter}"")");
+            var crmGetContactsResult = await Crm.GetContacts(new Query() { Filter = $@"i => i.Email.Contains(""{contactFilter}"") || i.Company.Contains(""{contactFilter}"") || i.FirstName.Contains(""{contactFilter}"") || i.LastName.Contains(""{contactFilter}"")" });
             getContactsResult = crmGetContactsResult;
         }
 

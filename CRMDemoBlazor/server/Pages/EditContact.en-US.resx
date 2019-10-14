@@ -63,28 +63,28 @@
   <data name="closeButton.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label2.Text" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="EmailRequiredValidator.Text" xml:space="preserve">
     <value>Email is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label3.Text" xml:space="preserve">
     <value>Company</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label4.Text" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label5.Text" xml:space="preserve">
     <value>First Name</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label6.Text" xml:space="preserve">
     <value>Phone</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button2.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
 </root>

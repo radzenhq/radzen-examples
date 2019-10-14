@@ -30,14 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<IdentityRole> form0;
-
-        protected RadzenTextBox name;
-
-        protected RadzenRequiredValidator nameRequiredValidator;
-
         IdentityRole _role;
         protected IdentityRole role
         {
@@ -73,7 +65,7 @@ namespace RadzenCrm.Pages
             role = new IdentityRole();
         }
 
-        protected async void Form0Submit(dynamic args)
+        protected async void Form0Submit(IdentityRole args)
         {
             try
             {
@@ -86,7 +78,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close();
         }

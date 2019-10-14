@@ -1,292 +1,347 @@
 {
-  "access": [
-    "Authenticated"
-  ],
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
+          "type": "row",
           "components": [
             {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
+                  "type": "template-form",
+                  "name": "form0",
                   "components": [
                     {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
+                              "type": "label",
+                              "text": "Amount",
                               "component": "Amount",
+                              "name": "AmountLabel",
                               "style": {
                                 "width": "100%"
-                              },
-                              "text": "Amount",
-                              "type": "label"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
+                              "type": "numeric",
                               "name": "Amount",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "numeric",
-                              "valueType": "decimal?"
+                              "value": "${opportunity.Amount}"
                             },
                             {
-                              "component": "Amount",
+                              "type": "required-validator",
                               "name": "AmountRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
+                              "component": "Amount",
                               "text": "Amount is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "ContactId",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Contact",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "data": "${getContactsResult}",
-                              "name": "ContactId",
-                              "placeholder": "Choose Contact",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "textProperty": "Email",
-                              "type": "dropdown",
-                              "valueProperty": "Id"
-                            },
-                            {
-                              "component": "ContactId",
-                              "name": "ContactIdRequiredValidator",
                               "style": {
                                 "position": "absolute"
-                              },
-                              "text": "ContactId is required",
-                              "type": "required-validator"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
+                      ]
+                    },
+                    {
+                      "type": "row",
                       "style": {
                         "marginBottom": "1rem"
                       },
-                      "type": "row"
-                    },
-                    {
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
-                              "component": "StatusId",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Opportunity Status",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "data": "${getOpportunityStatusesResult}",
-                              "name": "StatusId",
-                              "placeholder": "Choose OpportunityStatus",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "textProperty": "Name",
-                              "type": "dropdown",
-                              "valueProperty": "Id"
-                            },
-                            {
-                              "component": "StatusId",
-                              "name": "StatusIdRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "StatusId is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "CloseDate",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Close Date",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "dateFormat": "MM/dd/yyyy",
-                              "name": "CloseDate",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "datepicker",
-                              "value": "DateTime.Now",
-                              "valueType": "DateTime?"
-                            },
-                            {
-                              "component": "CloseDate",
-                              "name": "CloseDateRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "CloseDate is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "Name",
-                              "style": {
-                                "width": "100%"
-                              },
+                              "type": "label",
                               "text": "Name",
-                              "type": "label"
+                              "component": "Name",
+                              "name": "NameLabel",
+                              "style": {
+                                "width": "100%"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
                               "maxLength": 256,
+                              "type": "textbox",
                               "name": "Name",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox",
-                              "valueType": "string"
+                              "value": "${opportunity.Name}"
                             },
                             {
-                              "component": "Name",
+                              "type": "required-validator",
                               "name": "NameRequiredValidator",
+                              "component": "Name",
+                              "text": "Name is required",
                               "style": {
                                 "position": "absolute"
-                              },
-                              "text": "Name is required",
-                              "type": "required-validator"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
+                      ]
+                    },
+                    {
+                      "type": "row",
                       "style": {
                         "marginBottom": "1rem"
                       },
-                      "type": "row"
-                    },
-                    {
                       "components": [
                         {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "User Id",
+                              "component": "UserId",
+                              "name": "UserIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 450,
+                              "type": "textbox",
+                              "name": "UserId",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${opportunity.UserId}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "UserIdRequiredValidator",
+                              "component": "UserId",
+                              "text": "UserId is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Contact",
+                              "component": "ContactId",
+                              "name": "ContactIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getContactsResult}",
+                              "textProperty": "Email",
+                              "valueProperty": "Id",
+                              "placeholder": "Choose Contact",
+                              "type": "dropdown",
+                              "name": "ContactId",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${opportunity.ContactId}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "ContactIdRequiredValidator",
+                              "component": "ContactId",
+                              "text": "ContactId is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Opportunity Status",
+                              "component": "StatusId",
+                              "name": "StatusIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getOpportunityStatusesResult}",
+                              "textProperty": "Name",
+                              "valueProperty": "Id",
+                              "placeholder": "Choose OpportunityStatus",
+                              "type": "dropdown",
+                              "name": "StatusId",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${opportunity.StatusId}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "StatusIdRequiredValidator",
+                              "component": "StatusId",
+                              "text": "StatusId is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Close Date",
+                              "component": "CloseDate",
+                              "name": "CloseDateLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "dateFormat": "MM/dd/yyyy",
+                              "type": "datepicker",
+                              "name": "CloseDate",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${opportunity.CloseDate}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "CloseDateRequiredValidator",
+                              "component": "CloseDate",
+                              "text": "CloseDate is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
                           "class": "col offset-sm-3",
                           "components": [
                             {
-                              "buttonStyle": "primary",
+                              "type": "button",
                               "buttonType": "submit",
                               "icon": "save",
                               "text": "Save",
-                              "type": "button"
+                              "buttonStyle": "primary"
                             },
                             {
+                              "type": "button",
                               "buttonStyle": "light",
+                              "text": "Cancel",
                               "events": {
                                 "click": [
                                   {
                                     "type": "close-popup"
                                   }
                                 ]
-                              },
-                              "text": "Cancel",
-                              "type": "button"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
-                      "type": "row"
+                      ]
                     }
                   ],
-                  "data": "${opportunity}",
                   "events": {
                     "submit": [
                       {
-                        "argType": "RadzenCrm.Models.Crm.Opportunity",
                         "error": [
                           {
                             "detail": "Unable to create new Opportunity!",
@@ -304,28 +359,23 @@
                         ],
                         "then": [
                           {
-                            "result": "${opportunity}",
-                            "type": "close-popup"
+                            "type": "close-popup",
+                            "result": "${opportunity}"
                           }
                         ],
                         "type": "invoke"
                       }
                     ]
                   },
-                  "itemType": "RadzenCrm.Models.Crm.Opportunity",
-                  "name": "form0",
-                  "type": "template-form",
-                  "visible": "${opportunity != null}"
+                  "data": "${opportunity}",
+                  "visible": "${opportunity != null}",
+                  "itemType": "RadzenCrm.Models.Crm.Opportunity"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
@@ -364,6 +414,9 @@
       }
     ]
   },
-  "layout": "Main",
-  "name": "Add Opportunity"
+  "name": "Add Opportunity",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
 }

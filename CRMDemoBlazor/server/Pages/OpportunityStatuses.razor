@@ -11,13 +11,13 @@
 @attribute [Authorize]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<OpportunityStatuses> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOpportunityStatusesResult)" TItem="RadzenCrm.Models.Crm.OpportunityStatus" RowSelect="@Grid0RowSelect">
           <Columns>
@@ -27,7 +27,7 @@
             </RadzenGridColumn>
             <RadzenGridColumn TItem="RadzenCrm.Models.Crm.OpportunityStatus" Context="radzenCrmModelsCrmOpportunityStatus" Filterable="false" Sortable="false" Bubble="false" Width="70px">
               <Template Context="radzenCrmModelsCrmOpportunityStatus">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmOpportunityStatus))">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmOpportunityStatus))">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

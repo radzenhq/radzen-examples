@@ -30,12 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<RadzenCrm.Models.Crm.TaskType> form0;
-
-        protected RadzenTextBox name;
-
         RadzenCrm.Models.Crm.TaskType _tasktype;
         protected RadzenCrm.Models.Crm.TaskType tasktype
         {
@@ -84,7 +78,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

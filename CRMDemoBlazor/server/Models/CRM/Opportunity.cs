@@ -24,6 +24,11 @@ namespace RadzenCrm.Models.Crm
       get;
       set;
     }
+    public string Name
+    {
+      get;
+      set;
+    }
     public string UserId
     {
       get;
@@ -46,11 +51,6 @@ namespace RadzenCrm.Models.Crm
     [ForeignKey("StatusId")]
     public OpportunityStatus OpportunityStatus { get; set; }
     public DateTime CloseDate
-    {
-      get;
-      set;
-    }
-    public string Name
     {
       get;
       set;

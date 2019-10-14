@@ -63,13 +63,13 @@
   <data name="closeButton.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label2.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button2.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
 </root>

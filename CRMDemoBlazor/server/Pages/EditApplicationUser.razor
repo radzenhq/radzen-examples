@@ -11,67 +11,67 @@
 @attribute [Authorize]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditApplicationUser> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" TItem="ApplicationUser" Data="@(user)" Visible="@(user != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="ApplicationUser" Data="@(user)" Visible="@(user != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="UserName" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="UserName" style="width: 100%" Text="User Name">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="userName" Disabled="true" style="width: 100%" @bind-Value="@(user.UserName)" Name="UserName">
+                <RadzenTextBox Disabled="true" style="width: 100%" @bind-Value="@(user.UserName)" Name="UserName">
                 </RadzenTextBox>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Email" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="email" style="width: 100%" @bind-Value="@(user.Email)" Name="Email">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(user.Email)" Name="Email">
                 </RadzenTextBox>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="RoleNames" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="RoleNames" style="width: 100%" Text="Roles">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown @ref="roleNames" Data="@(roles)" Multiple="true" style="width: 100%" TextProperty="Name" @bind-Value="@(user.RoleNames)" ValueProperty="Name" Name="RoleNames">
+                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" TextProperty="Name" @bind-Value="@(user.RoleNames)" ValueProperty="Name" Name="RoleNames">
                 </RadzenDropDown>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Password" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="Password" style="width: 100%" Text="Password">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword @ref="password" style="width: 100%" @bind-Value="@(user.Password)" Name="Password">
+                <RadzenPassword style="width: 100%" @bind-Value="@(user.Password)" Name="Password">
                 </RadzenPassword>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="Confirm password">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword @ref="confirmPassword" style="width: 100%" @bind-Value="@(user.ConfirmPassword)" Name="ConfirmPassword">
+                <RadzenPassword style="width: 100%" @bind-Value="@(user.ConfirmPassword)" Name="ConfirmPassword">
                 </RadzenPassword>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["undefined.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["undefined.Text"]" Click="@UndefinedClick">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

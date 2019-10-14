@@ -15,16 +15,24 @@
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
 <form method="post" action="/account/login">    
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
     </RadzenHeading>
-    <div class="row">
-      <div class="col-md-12">
-        <RadzenLogin @ref="login0" AllowResetPassword="false" LoginText="@L["login0.LoginText"]" RegisterText="@L["login0.RegisterText"]" RegisterMessageText="@L["login0.RegisterMessageText"]" ResetPasswordText="@L["login0.ResetPasswordText"]" UserText="@L["login0.UserText"]" UserRequired="@L["login0.UserRequired"]" PasswordText="@L["login0.PasswordText"]" PasswordRequired="@L["login0.PasswordRequired"]" Register="@Login0Register">
-        </RadzenLogin>
-      </div>
-    </div>
+    <RadzenTemplateForm Action="/Account/Login" Method="post" TItem="dynamic">
+      <ChildContent>
+        <RadzenLabel Component="Username" style="display: block; margin-top: 16px" Text="Username">
+        </RadzenLabel>
+        <RadzenTextBox style="width: 100%" Name="Username">
+        </RadzenTextBox>
+        <RadzenLabel Component="Password" style="display: block; margin-top: 16px" Text="Password">
+        </RadzenLabel>
+        <RadzenPassword style="width: 100%" Name="Password">
+        </RadzenPassword>
+        <RadzenButton ButtonType="ButtonType.Submit" style="display: block; margin-top: 16px; width: 100%" Text="@L["button0.Text"]">
+        </RadzenButton>
+      </ChildContent>
+    </RadzenTemplateForm>
   </ChildContent>
 </RadzenContent>
 </form>

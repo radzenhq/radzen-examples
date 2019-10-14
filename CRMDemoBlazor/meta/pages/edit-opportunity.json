@@ -77,6 +77,7 @@
                               "type": "label",
                               "text": "Amount",
                               "component": "Amount",
+                              "name": "AmountLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -88,7 +89,6 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "decimal?",
                               "type": "numeric",
                               "name": "Amount",
                               "style": {
@@ -122,8 +122,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "User Id",
-                              "component": "UserId",
+                              "text": "Name",
+                              "component": "Name",
+                              "name": "NameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -135,7 +136,54 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
+                              "maxLength": 256,
+                              "type": "textbox",
+                              "name": "Name",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${opportunity.Name}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "NameRequiredValidator",
+                              "component": "Name",
+                              "text": "Name is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "User Id",
+                              "component": "UserId",
+                              "name": "UserIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
                               "maxLength": 450,
                               "type": "textbox",
                               "name": "UserId",
@@ -172,6 +220,7 @@
                               "type": "label",
                               "text": "Contact",
                               "component": "ContactId",
+                              "name": "ContactIdLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -222,6 +271,7 @@
                               "type": "label",
                               "text": "Opportunity Status",
                               "component": "StatusId",
+                              "name": "StatusIdLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -272,6 +322,7 @@
                               "type": "label",
                               "text": "Close Date",
                               "component": "CloseDate",
+                              "name": "CloseDateLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -283,7 +334,6 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "DateTime?",
                               "dateFormat": "MM/dd/yyyy",
                               "type": "datepicker",
                               "name": "CloseDate",
@@ -298,54 +348,6 @@
                               "name": "CloseDateRequiredValidator",
                               "component": "CloseDate",
                               "text": "CloseDate is required",
-                              "style": {
-                                "position": "absolute"
-                              }
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "row",
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "components": [
-                        {
-                          "type": "col",
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "type": "label",
-                              "text": "Name",
-                              "component": "Name",
-                              "style": {
-                                "width": "100%"
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "type": "col",
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "valueType": "string",
-                              "maxLength": 256,
-                              "type": "textbox",
-                              "name": "Name",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "value": "${opportunity.Name}"
-                            },
-                            {
-                              "type": "required-validator",
-                              "name": "NameRequiredValidator",
-                              "component": "Name",
-                              "text": "Name is required",
                               "style": {
                                 "position": "absolute"
                               }
@@ -413,8 +415,7 @@
                             "result": "${opportunity}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "RadzenCrm.Models.Crm.Opportunity"
+                        "type": "invoke"
                       }
                     ]
                   },
@@ -485,8 +486,8 @@
     ]
   },
   "name": "Edit Opportunity",
-  "layout": "Main",
   "access": [
     "Authenticated"
-  ]
+  ],
+  "layout": "Main"
 }

@@ -84,6 +84,6 @@
   "serverPort": 5000,
   "serverProject": true,
   "serverVersion": "3",
-  "startPage": "Contacts",
+  "startPage": "Home",
   "theme": "dark"
 }

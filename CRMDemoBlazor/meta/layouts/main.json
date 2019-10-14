@@ -40,8 +40,24 @@
                   "name": "profilemenu0",
                   "template": [
                     {
-                      "email": "${Security.User?.Name}",
-                      "type": "gravatar"
+                      "name": "label1",
+                      "text": "${Security.User.FirstName}",
+                      "type": "label"
+                    },
+                    {
+                      "name": "label2",
+                      "text": "${Security.User.LastName}",
+                      "type": "label"
+                    },
+                    {
+                      "name": "image0",
+                      "path": "${Security.User.Picture}",
+                      "style": {
+                        "borderRadius": "16px",
+                        "height": "32px",
+                        "width": "32px"
+                      },
+                      "type": "image"
                     }
                   ],
                   "type": "profilemenu",
@@ -72,6 +88,47 @@
     {
       "components": [
         {
+          "items": [
+            {
+              "icon": "home",
+              "path": "home",
+              "text": "Dashboard"
+            },
+            {
+              "icon": "perm_contact_calendar",
+              "path": "contacts",
+              "text": "Contacts"
+            },
+            {
+              "icon": "work",
+              "path": "tasks",
+              "text": "Tasks"
+            },
+            {
+              "icon": "shopping_cart",
+              "path": "opportunities",
+              "text": "Opportunities"
+            },
+            {
+              "icon": "settings",
+              "items": [
+                {
+                  "path": "opportunity-statuses",
+                  "text": "Opportunity Statuses"
+                },
+                {
+                  "path": "task-types",
+                  "text": "Task Types"
+                },
+                {
+                  "path": "task-statuses",
+                  "text": "Task Statuses"
+                }
+              ],
+              "text": "Settings",
+              "visible": "${Security.IsInRole(\"Sales Manager\")}"
+            }
+          ],
           "name": "panelmenu0",
           "style": {
             "height": "100%"

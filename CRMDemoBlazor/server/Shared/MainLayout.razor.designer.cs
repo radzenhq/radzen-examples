@@ -33,25 +33,9 @@ namespace RadzenCrm.Layouts
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenHeader header0;
-
-        protected RadzenSidebarToggle sidebarToggle0;
-
-        protected RadzenLabel label0;
-
-        protected RadzenProfileMenu profilemenu0;
-
         protected RadzenBody body0;
 
-        protected RadzenContentContainer main;
-
         protected RadzenSidebar sidebar0;
-
-        protected RadzenPanelMenu panelmenu0;
-
-        protected RadzenFooter footer0;
-
-        protected RadzenLabel footerText;
 
         string _Culture;
         protected string Culture

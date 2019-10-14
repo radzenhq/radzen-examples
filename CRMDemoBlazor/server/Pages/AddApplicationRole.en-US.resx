@@ -57,16 +57,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="label1.Text" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NameRequiredValidator.Text" xml:space="preserve">
     <value>Name is required</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button1.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="undefined.Text" xml:space="preserve">
+  <data name="button2.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
 </root>

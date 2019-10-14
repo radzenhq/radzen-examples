@@ -33,30 +33,6 @@ namespace RadzenCrm.Pages
         [Parameter]
         public string Id { get; set; }
 
-        protected RadzenContent content0;
-
-        protected RadzenLabel closeLabel;
-
-        protected RadzenButton closeButton;
-
-        protected RadzenTemplateForm<RadzenCrm.Models.Crm.Task> form0;
-
-        protected RadzenTextBox title;
-
-        protected RadzenDropDown opportunityId;
-
-        protected RadzenRequiredValidator opportunityIdRequiredValidator;
-
-        protected RadzenDatePicker dueDate;
-
-        protected RadzenRequiredValidator dueDateRequiredValidator;
-
-        protected RadzenDropDown typeId;
-
-        protected RadzenRequiredValidator typeIdRequiredValidator;
-
-        protected RadzenDropDown statusId;
-
         bool _canEdit;
         protected bool canEdit
         {
@@ -190,7 +166,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button3Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

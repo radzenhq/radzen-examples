@@ -88,7 +88,6 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
                               "type": "textbox",
                               "name": "Name",
                               "style": {

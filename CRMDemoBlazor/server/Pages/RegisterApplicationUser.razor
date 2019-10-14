@@ -10,53 +10,53 @@
 @using Microsoft.AspNetCore.Authorization
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RegisterApplicationUser> L
-<RadzenContent @ref="content0" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Method="post" Action="/account/register" Data="@(user)" TItem="ApplicationUser" Visible="@(user != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm Method="post" Action="/account/register" Data="@(user)" TItem="ApplicationUser" Visible="@(user != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Email" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="userName" style="display: block; width: 100%" Name="UserName">
+                <RadzenTextBox style="display: block; width: 100%" Name="UserName">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="emailRequiredValidator" Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Password" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="Password" style="width: 100%" Text="Password">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword @ref="password" style="display: block; width: 100%" Name="Password">
+                <RadzenPassword style="display: block; width: 100%" Name="Password">
                 </RadzenPassword>
-                <RadzenRequiredValidator @ref="passwordRequiredValidator" Component="Password" style="position: absolute" Text="@L["PasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Password" style="position: absolute" Text="@L["PasswordRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="@L["undefined.Text"]">
+                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="Confirm password">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword @ref="confirmPassword" style="display: block; width: 100%" Name="ConfirmPassword">
+                <RadzenPassword style="display: block; width: 100%" Name="ConfirmPassword">
                 </RadzenPassword>
-                <RadzenRequiredValidator @ref="confirmPasswordRequiredValidator" Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["undefined.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["undefined.Text"]" Click="@UndefinedClick">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

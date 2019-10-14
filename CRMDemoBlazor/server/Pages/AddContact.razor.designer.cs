@@ -30,22 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<RadzenCrm.Models.Crm.Contact> form0;
-
-        protected RadzenTextBox email;
-
-        protected RadzenRequiredValidator emailRequiredValidator;
-
-        protected RadzenTextBox company;
-
-        protected RadzenTextBox lastName;
-
-        protected RadzenTextBox firstName;
-
-        protected RadzenTextBox phone;
-
         RadzenCrm.Models.Crm.Contact _contact;
         protected RadzenCrm.Models.Crm.Contact contact
         {
@@ -94,7 +78,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

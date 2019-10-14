@@ -3,13 +3,41 @@
     {
       "components": [
         {
-          "class": "justify-content-center",
+          "name": "image0",
+          "path": "/assets/images/login-background.png",
+          "style": {
+            "bottom": "0",
+            "height": "100%",
+            "left": "0",
+            "position": "absolute",
+            "right": "0",
+            "top": "0",
+            "width": "100%"
+          },
+          "type": "image"
+        },
+        {
+          "class": "justify-content-center align-items-center",
           "components": [
             {
-              "class": "justify-content-center col-xl-5 col-md-7",
+              "class": "col-xl-3 col-lg-4 col-md-5 col-sm-8",
               "components": [
                 {
                   "components": [
+                    {
+                      "name": "image1",
+                      "path": "/assets/images/logo.png",
+                      "style": {
+                        "borderRadius": "64px",
+                        "display": "block",
+                        "height": "128px",
+                        "marginLeft": "auto",
+                        "marginRight": "auto",
+                        "marginTop": "-72px",
+                        "width": "128px"
+                      },
+                      "type": "image"
+                    },
                     {
                       "name": "main",
                       "type": "content-container"
@@ -17,21 +45,34 @@
                   ],
                   "name": "card0",
                   "style": {
-                    "marginTop": "8rem"
+                    "marginTop": "0"
                   },
                   "type": "card"
                 }
               ],
               "name": "col0",
+              "style": {
+                "paddingLeft": "0",
+                "paddingRight": "0"
+              },
               "type": "col"
             }
           ],
           "name": "row0",
+          "style": {
+            "bottom": "0",
+            "left": "0",
+            "marginLeft": "0",
+            "marginRight": "0",
+            "position": "absolute",
+            "right": "0",
+            "top": "0"
+          },
           "type": "row"
         }
       ],
-      "style": {},
       "name": "body0",
+      "style": {},
       "type": "body"
     }
   ],

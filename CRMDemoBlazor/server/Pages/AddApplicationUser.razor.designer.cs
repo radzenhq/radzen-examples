@@ -30,42 +30,6 @@ namespace RadzenCrm.Pages
         protected CrmService Crm { get; set; }
 
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<ApplicationUser> form0;
-
-        protected RadzenTextBox email;
-
-        protected RadzenRequiredValidator emailRequiredValidator;
-
-        protected RadzenLabel label0;
-
-        protected RadzenTextBox firstName;
-
-        protected RadzenRequiredValidator requiredValidator0;
-
-        protected RadzenLabel label13;
-
-        protected RadzenTextBox lastName;
-
-        protected RadzenRequiredValidator requiredValidator1;
-
-        protected RadzenLabel label2;
-
-        protected RadzenFileInput picture;
-
-        protected RadzenRequiredValidator requiredValidator2;
-
-        protected RadzenDropDown roleNames;
-
-        protected RadzenPassword password;
-
-        protected RadzenRequiredValidator passwordRequiredValidator;
-
-        protected RadzenPassword confirmPassword;
-
-        protected RadzenRequiredValidator confirmPasswordRequiredValidator;
-
         ApplicationUser _user;
         protected ApplicationUser user
         {
@@ -121,7 +85,7 @@ namespace RadzenCrm.Pages
             roles = securityGetRolesResult;
         }
 
-        protected async void Form0Submit(dynamic args)
+        protected async void Form0Submit(ApplicationUser args)
         {
             try
             {
@@ -134,7 +98,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close();
         }

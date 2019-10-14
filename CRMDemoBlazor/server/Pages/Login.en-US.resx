@@ -57,6 +57,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label0.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="requiredValidator1.Text" xml:space="preserve">
+    <value>textBox1 is required</value>
+  </data>
+  <data name="button0.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="pageTitle.Text" xml:space="preserve">
     <value>Login</value>
   </data>

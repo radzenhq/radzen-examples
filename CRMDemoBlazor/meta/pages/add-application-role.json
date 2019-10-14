@@ -37,7 +37,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox"
+                              "type": "textbox",
+                              "value": "${role.Name}"
                             },
                             {
                               "component": "Name",

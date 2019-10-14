@@ -33,20 +33,6 @@ namespace RadzenCrm.Pages
         [Parameter]
         public string Id { get; set; }
 
-        protected RadzenContent content0;
-
-        protected RadzenTemplateForm<ApplicationUser> form0;
-
-        protected RadzenTextBox userName;
-
-        protected RadzenTextBox email;
-
-        protected RadzenDropDown roleNames;
-
-        protected RadzenPassword password;
-
-        protected RadzenPassword confirmPassword;
-
         ApplicationUser _user;
         protected ApplicationUser user
         {
@@ -103,7 +89,7 @@ namespace RadzenCrm.Pages
             roles = securityGetRolesResult;
         }
 
-        protected async void Form0Submit(dynamic args)
+        protected async void Form0Submit(ApplicationUser args)
         {
             try
             {
@@ -116,7 +102,7 @@ namespace RadzenCrm.Pages
             }
         }
 
-        protected async void UndefinedClick(MouseEventArgs args)
+        protected async void Button2Click(MouseEventArgs args)
         {
             DialogService.Close();
         }

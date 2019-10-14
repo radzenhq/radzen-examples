@@ -57,6 +57,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="panelmenu0.settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="opportunity-statuses.Text" xml:space="preserve">
+    <value>Opportunity Statuses</value>
+  </data>
+  <data name="task-types.Text" xml:space="preserve">
+    <value>Task Types</value>
+  </data>
+  <data name="task-statuses.Text" xml:space="preserve">
+    <value>Task Statuses</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>@Security.User.FirstName</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>@Security.User.LastName</value>
+  </data>
   <data name="label0.Text" xml:space="preserve">
     <value>RadzenCRM</value>
   </data>
@@ -72,26 +90,29 @@
   <data name="profilemenu0.logout.Text" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="panelmenu0.home.Text" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
   <data name="panelmenu0.contacts.Text" xml:space="preserve">
     <value>Contacts</value>
-  </data>
-  <data name="panelmenu0.opportunities.Text" xml:space="preserve">
-    <value>Opportunities</value>
-  </data>
-  <data name="panelmenu0.opportunity-statuses.Text" xml:space="preserve">
-    <value>Opportunity Statuses</value>
   </data>
   <data name="panelmenu0.tasks.Text" xml:space="preserve">
     <value>Tasks</value>
   </data>
-  <data name="panelmenu0.task-statuses.Text" xml:space="preserve">
-    <value>Task Statuses</value>
+  <data name="panelmenu0.opportunities.Text" xml:space="preserve">
+    <value>Opportunities</value>
   </data>
-  <data name="panelmenu0.task-types.Text" xml:space="preserve">
+  <data name="panelmenu0..Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="undefined.opportunity-statuses.Text" xml:space="preserve">
+    <value>Opportunity Statuses</value>
+  </data>
+  <data name="undefined.task-types.Text" xml:space="preserve">
     <value>Task Types</value>
   </data>
-  <data name="panelmenu0.home.Text" xml:space="preserve">
-    <value>Home</value>
+  <data name="undefined.task-statuses.Text" xml:space="preserve">
+    <value>Task Statuses</value>
   </data>
   <data name="footerText.Text" xml:space="preserve">
     <value>RadzenCRM, Copyright &amp;copy; 2019</value>
