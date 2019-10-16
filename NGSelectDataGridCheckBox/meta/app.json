@@ -1,0 +1,24 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "NGSelectDataGridCheckBox",
+  "navigation": [
+    "MainPage"
+  ],
+  "pages": [
+    "MainPage"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "2.2",
+  "startPage": "MainPage",
+  "theme": "default"
+}

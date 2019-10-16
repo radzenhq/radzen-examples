@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": "",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es6", "dom"],
+    "mapRoot": "./",
+    "module": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5",
+    "types": [],
+    "paths": {
+      "@angular/*": ["../node_modules/@angular/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "preserveWhitespaces": true
+  }
+}

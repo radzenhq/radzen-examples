@@ -1,0 +1,143 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "name": "ServerMethodsController.DoSomething",
+                "parameters": [
+                  {
+                    "in": "body",
+                    "name": "selectedIds",
+                    "type": "object",
+                    "value": "${this.grid0.data.filter(i => i.checked).map(i => i.Id)}"
+                  }
+                ],
+                "path": "api/ServerMethods/DoSomething",
+                "type": "invoke-method",
+                "verb": "post"
+              }
+            ]
+          },
+          "name": "button0",
+          "text": "Submit checked",
+          "tooltip": "",
+          "type": "button"
+        },
+        {
+          "allowFiltering": true,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "filterable": false,
+              "sortable": false,
+              "template": [
+                {
+                  "name": "checkbox0",
+                  "type": "checkbox",
+                  "value": "${data.checked}"
+                }
+              ],
+              "visible": true,
+              "width": "50px"
+            },
+            {
+              "property": "Id",
+              "title": "Id",
+              "type": "integer"
+            },
+            {
+              "property": "UserName",
+              "title": "User Name",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "formatString": "medium",
+              "property": "OrderDate",
+              "title": "Order Date",
+              "type": "string"
+            }
+          ],
+          "count": "${getOrdersCount}",
+          "data": "${getOrdersResult}",
+          "events": {
+            "loadData": [
+              {
+                "name": "Sample.getOrders",
+                "parameters": [
+                  {
+                    "name": "$top",
+                    "value": "event.top"
+                  },
+                  {
+                    "name": "$skip",
+                    "value": "event.skip"
+                  },
+                  {
+                    "name": "$count",
+                    "value": "event.top != null && event.skip != null"
+                  },
+                  {
+                    "name": "$filter",
+                    "value": "${event.filter}"
+                  },
+                  {
+                    "name": "$orderby",
+                    "value": "${event.orderby}"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getOrdersResult",
+                    "type": "set",
+                    "value": "${result.value}"
+                  },
+                  {
+                    "name": "getOrdersCount",
+                    "type": "set",
+                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "grid0",
+          "pageSize": 10,
+          "type": "grid",
+          "confirmDeleteText": "Are you sure you want to delete this record?",
+          "confirmDeleteTitle": "Confirmation",
+          "confirmDeleteOkText": "Ok",
+          "confirmDeleteCancelText": "Cancel",
+          "emptyText": "No records to display.",
+          "addText": "Add"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "code": "this.grid0.load();",
+        "type": "execute"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}
