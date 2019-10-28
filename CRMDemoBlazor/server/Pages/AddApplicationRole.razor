@@ -23,17 +23,17 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(role.Name)" Name="Name">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@((role.Name))" Name="Name">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="@L["NameRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="Name is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

@@ -13,23 +13,23 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<ApplicationUsers> L
 <RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="Users">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(users)" TItem="ApplicationUser" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="UserName" Title="@L["grid0.UserName.Title"]">
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="UserName" Title="User Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="Email" Title="@L["grid0.Email.Title"]">
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="Email" Title="Email">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="FirstName" Title="@L["grid0.FirstName.Title"]" Type="string">
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="FirstName" Title="First Name" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="LastName" Title="@L["grid0.LastName.Title"]" Type="string">
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="LastName" Title="Last Name" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Title="@L["grid0..Title"]">
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Title="Picture">
               <Template Context="applicationUser">
                 <RadzenImage Path=@(applicationUser.Picture) style="height: 30px; width: 30px">
                 </RadzenImage>

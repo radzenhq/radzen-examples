@@ -1,3 +1,4 @@
+using Radzen;
 using System;
 using System.Web;
 using System.Linq;
@@ -15,13 +16,25 @@ namespace RadzenCrm
 {
     public partial class CrmService
     {
-        public CrmService(CrmContext context)
+        private readonly CrmContext context;
+        private readonly NavigationManager navigationManager;
+        
+        public CrmService(CrmContext context, NavigationManager navigationManager)
         {
             this.context = context;
+            this.navigationManager = navigationManager;
         }
 
-        public CrmContext context { get; set; }
-        
+                public async Task ExportContactsToExcel(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/contacts/excel") : "/export/crm/contacts/excel", true);
+        }
+
+        public async Task ExportContactsToCSV(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/contacts/csv") : "/export/crm/contacts/csv", true);
+        }
+
         partial void OnContactsRead(ref IQueryable<Models.Crm.Contact> items);
 
         public async Task<IQueryable<Models.Crm.Contact>> GetContacts(Query query = null)
@@ -76,7 +89,16 @@ namespace RadzenCrm
 
             return contact;
         }
-    
+            public async Task ExportOpportunitiesToExcel(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunities/excel") : "/export/crm/opportunities/excel", true);
+        }
+
+        public async Task ExportOpportunitiesToCSV(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunities/csv") : "/export/crm/opportunities/csv", true);
+        }
+
         partial void OnOpportunitiesRead(ref IQueryable<Models.Crm.Opportunity> items);
 
         public async Task<IQueryable<Models.Crm.Opportunity>> GetOpportunities(Query query = null)
@@ -135,7 +157,16 @@ namespace RadzenCrm
 
             return opportunity;
         }
-    
+            public async Task ExportOpportunityStatusesToExcel(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunitystatuses/excel") : "/export/crm/opportunitystatuses/excel", true);
+        }
+
+        public async Task ExportOpportunityStatusesToCSV(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunitystatuses/csv") : "/export/crm/opportunitystatuses/csv", true);
+        }
+
         partial void OnOpportunityStatusesRead(ref IQueryable<Models.Crm.OpportunityStatus> items);
 
         public async Task<IQueryable<Models.Crm.OpportunityStatus>> GetOpportunityStatuses(Query query = null)
@@ -190,7 +221,16 @@ namespace RadzenCrm
 
             return opportunityStatus;
         }
-    
+            public async Task ExportTasksToExcel(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasks/excel") : "/export/crm/tasks/excel", true);
+        }
+
+        public async Task ExportTasksToCSV(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasks/csv") : "/export/crm/tasks/csv", true);
+        }
+
         partial void OnTasksRead(ref IQueryable<Models.Crm.Task> items);
 
         public async Task<IQueryable<Models.Crm.Task>> GetTasks(Query query = null)
@@ -251,7 +291,16 @@ namespace RadzenCrm
 
             return task;
         }
-    
+            public async Task ExportTaskStatusesToExcel(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/taskstatuses/excel") : "/export/crm/taskstatuses/excel", true);
+        }
+
+        public async Task ExportTaskStatusesToCSV(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/taskstatuses/csv") : "/export/crm/taskstatuses/csv", true);
+        }
+
         partial void OnTaskStatusesRead(ref IQueryable<Models.Crm.TaskStatus> items);
 
         public async Task<IQueryable<Models.Crm.TaskStatus>> GetTaskStatuses(Query query = null)
@@ -306,7 +355,16 @@ namespace RadzenCrm
 
             return taskStatus;
         }
-    
+            public async Task ExportTaskTypesToExcel(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasktypes/excel") : "/export/crm/tasktypes/excel", true);
+        }
+
+        public async Task ExportTaskTypesToCSV(Query query = null)
+        {
+            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasktypes/csv") : "/export/crm/tasktypes/csv", true);
+        }
+
         partial void OnTaskTypesRead(ref IQueryable<Models.Crm.TaskType> items);
 
         public async Task<IQueryable<Models.Crm.TaskType>> GetTaskTypes(Query query = null)
@@ -393,6 +451,15 @@ namespace RadzenCrm
             return await Task.FromResult(item);
         }
 
+        public async Task<Models.Crm.Contact> CancelContactChanges(Models.Crm.Contact item)
+        {
+            var entity = context.Entry(item);
+            entity.CurrentValues.SetValues(entity.OriginalValues);
+            entity.State = EntityState.Unchanged;
+
+            return item;
+        }
+
         partial void OnContactUpdated(Models.Crm.Contact item);
 
         public async Task<Models.Crm.Contact> UpdateContact(int? id, Models.Crm.Contact contact)
@@ -439,6 +506,15 @@ namespace RadzenCrm
             OnOpportunityGet(item);
 
             return await Task.FromResult(item);
+        }
+
+        public async Task<Models.Crm.Opportunity> CancelOpportunityChanges(Models.Crm.Opportunity item)
+        {
+            var entity = context.Entry(item);
+            entity.CurrentValues.SetValues(entity.OriginalValues);
+            entity.State = EntityState.Unchanged;
+
+            return item;
         }
 
         partial void OnOpportunityUpdated(Models.Crm.Opportunity item);
@@ -489,6 +565,15 @@ namespace RadzenCrm
             return await Task.FromResult(item);
         }
 
+        public async Task<Models.Crm.OpportunityStatus> CancelOpportunityStatusChanges(Models.Crm.OpportunityStatus item)
+        {
+            var entity = context.Entry(item);
+            entity.CurrentValues.SetValues(entity.OriginalValues);
+            entity.State = EntityState.Unchanged;
+
+            return item;
+        }
+
         partial void OnOpportunityStatusUpdated(Models.Crm.OpportunityStatus item);
 
         public async Task<Models.Crm.OpportunityStatus> UpdateOpportunityStatus(int? id, Models.Crm.OpportunityStatus opportunityStatus)
@@ -534,6 +619,15 @@ namespace RadzenCrm
             OnTaskGet(item);
 
             return await Task.FromResult(item);
+        }
+
+        public async Task<Models.Crm.Task> CancelTaskChanges(Models.Crm.Task item)
+        {
+            var entity = context.Entry(item);
+            entity.CurrentValues.SetValues(entity.OriginalValues);
+            entity.State = EntityState.Unchanged;
+
+            return item;
         }
 
         partial void OnTaskUpdated(Models.Crm.Task item);
@@ -584,6 +678,15 @@ namespace RadzenCrm
             return await Task.FromResult(item);
         }
 
+        public async Task<Models.Crm.TaskStatus> CancelTaskStatusChanges(Models.Crm.TaskStatus item)
+        {
+            var entity = context.Entry(item);
+            entity.CurrentValues.SetValues(entity.OriginalValues);
+            entity.State = EntityState.Unchanged;
+
+            return item;
+        }
+
         partial void OnTaskStatusUpdated(Models.Crm.TaskStatus item);
 
         public async Task<Models.Crm.TaskStatus> UpdateTaskStatus(int? id, Models.Crm.TaskStatus taskStatus)
@@ -630,6 +733,15 @@ namespace RadzenCrm
             OnTaskTypeGet(item);
 
             return await Task.FromResult(item);
+        }
+
+        public async Task<Models.Crm.TaskType> CancelTaskTypeChanges(Models.Crm.TaskType item)
+        {
+            var entity = context.Entry(item);
+            entity.CurrentValues.SetValues(entity.OriginalValues);
+            entity.State = EntityState.Unchanged;
+
+            return item;
         }
 
         partial void OnTaskTypeUpdated(Models.Crm.TaskType item);

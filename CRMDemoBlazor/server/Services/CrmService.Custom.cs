@@ -3,6 +3,7 @@ using System.Linq.Dynamic.Core;
 using RadzenCrm.Data;
 using RadzenCrm.Models.Crm;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components;
 
 namespace RadzenCrm
 {
@@ -10,7 +11,7 @@ namespace RadzenCrm
   {
     private readonly SecurityService security;
 
-    public CrmService(CrmContext context, SecurityService security) : this(context)
+    public CrmService(CrmContext context, NavigationManager navigationManager, SecurityService security) : this(context, navigationManager)
     {
       this.security = security;
     }

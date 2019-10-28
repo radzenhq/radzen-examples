@@ -17,7 +17,6 @@ namespace RadzenCrm.Models.Crm
     }
 
 
-    [InverseProperty("Opportunity")]
     public ICollection<Task> Tasks { get; set; }
     public decimal Amount
     {
@@ -39,16 +38,12 @@ namespace RadzenCrm.Models.Crm
       get;
       set;
     }
-
-    [ForeignKey("ContactId")]
     public Contact Contact { get; set; }
     public int StatusId
     {
       get;
       set;
     }
-
-    [ForeignKey("StatusId")]
     public OpportunityStatus OpportunityStatus { get; set; }
     public DateTime CloseDate
     {

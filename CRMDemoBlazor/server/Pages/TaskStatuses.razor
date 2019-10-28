@@ -13,17 +13,17 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<TaskStatuses> L
 <RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="Task Statuses">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getTaskStatusesResult)" TItem="RadzenCrm.Models.Crm.TaskStatus" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Id" Title="@L["grid0.Id.Title"]" Type="integer">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Id" Title="Id" Type="integer">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Name" Title="@L["grid0.Name.Title"]" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Name" Title="Name" Type="string">
             </RadzenGridColumn>
             <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Filterable="false" Sortable="false" Bubble="false" Width="70px">
               <Template Context="radzenCrmModelsCrmTaskStatus">

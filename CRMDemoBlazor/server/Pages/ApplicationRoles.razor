@@ -13,15 +13,15 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<ApplicationRoles> L
 <RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="Roles">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(roles)" TItem="IdentityRole">
           <Columns>
-            <RadzenGridColumn TItem="IdentityRole" Context="identityRole" Property="Name" Title="@L["grid0.Name.Title"]">
+            <RadzenGridColumn TItem="IdentityRole" Context="identityRole" Property="Name" Title="Name">
             </RadzenGridColumn>
             <RadzenGridColumn TItem="IdentityRole" Context="identityRole" Filterable="false" Sortable="false" Bubble="false" Width="70px">
               <Template Context="identityRole">

@@ -13,23 +13,23 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Tasks> L
 <RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading Size="H1" Text="@L["pageTitle.Text"]">
+    <RadzenHeading Size="H1" Text="Tasks">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@L["button0.Text"]" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getTasksResult)" TItem="RadzenCrm.Models.Crm.Task" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Property="Id" Title="@L["grid0.Id.Title"]" Type="integer">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Property="Id" Title="Id" Type="integer">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Property="Title" Title="@L["grid0.Title.Title"]" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Property="Title" Title="Title" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" FilterProperty="Opportunity.Name" Property="Opportunity.Name" SortProperty="Opportunity.Name" Title="@L["grid0.Opportunity.Name.Title"]" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" FilterProperty="Opportunity.Name" Property="Opportunity.Name" SortProperty="Opportunity.Name" Title="Opportunity Name" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Format="date-time" FormatString="{0:MM/dd/yyyy}" Property="DueDate" Title="@L["grid0.DueDate.Title"]" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Format="date-time" FormatString="{0:MM/dd/yyyy}" Property="DueDate" Title="Due Date" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" FilterProperty="TaskType.Name" Property="TypeId" SortProperty="TaskType.Name" Title="@L["grid0.TypeId.Title"]" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" FilterProperty="TaskType.Name" Property="TypeId" SortProperty="TaskType.Name" Title="Task Type" Type="string">
               <Template Context="radzenCrmModelsCrmTask">
                 <RadzenIcon Icon="video_call" style="vertical-align: middle" Visible="@(radzenCrmModelsCrmTask.TaskType.Name == "Online Meeting")">
                 </RadzenIcon>
@@ -37,11 +37,11 @@
                 </RadzenIcon>
                 <RadzenIcon Icon="settings_phone" style="vertical-align: middle" Visible="@(radzenCrmModelsCrmTask.TaskType.Name == "Call")">
                 </RadzenIcon>
-                <RadzenLabel Text="@($"{radzenCrmModelsCrmTask.TaskType.Name}")">
+                <RadzenLabel Text="@($"{(radzenCrmModelsCrmTask.TaskType.Name)}")">
                 </RadzenLabel>
               </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" FilterProperty="TaskStatus.Name" Property="StatusId" SortProperty="TaskStatus.Name" Title="@L["grid0.StatusId.Title"]" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" FilterProperty="TaskStatus.Name" Property="StatusId" SortProperty="TaskStatus.Name" Title="Task Status" Type="string">
               <Template Context="radzenCrmModelsCrmTask">
                 <RadzenIcon Icon="check_circle" style="vertical-align: middle" Visible="@(radzenCrmModelsCrmTask.TaskStatus.Name == "Complete")">
                 </RadzenIcon>
@@ -49,7 +49,7 @@
                 </RadzenIcon>
                 <RadzenIcon Icon="autorenew" style="vertical-align: middle" Visible="@(radzenCrmModelsCrmTask.TaskStatus.Name == "In Progress")">
                 </RadzenIcon>
-                <RadzenLabel Text="@($"{radzenCrmModelsCrmTask.TaskStatus.Name}")">
+                <RadzenLabel Text="@($"{(radzenCrmModelsCrmTask.TaskStatus.Name)}")">
                 </RadzenLabel>
               </Template>
             </RadzenGridColumn>

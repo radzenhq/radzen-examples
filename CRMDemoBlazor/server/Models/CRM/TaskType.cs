@@ -17,7 +17,6 @@ namespace RadzenCrm.Models.Crm
     }
 
 
-    [InverseProperty("TaskType")]
     public ICollection<Task> Tasks { get; set; }
     public string Name
     {

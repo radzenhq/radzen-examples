@@ -15,69 +15,71 @@
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@(task)" Visible="@(task != null)" TItem="RadzenCrm.Models.Crm.Task" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@(task)" TItem="RadzenCrm.Models.Crm.Task" Visible="@(task != null)" Submit="@Form0Submit">
           <ChildContent>
+            <RadzenTextBox AutoComplete="false" MaxLength="256" style="width: 100%" @bind-Value="@((task.Title))" Name="Textbox0">
+            </RadzenTextBox>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Title" Component="Title" style="width: 100%">
+                <RadzenLabel Component="Title" style="width: 100%" Text="Title">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(task.Title)" Name="Title">
+                <RadzenTextBox AutoComplete="false" MaxLength="256" style="width: 100%" @bind-Value="@((task.Title))" Name="Title">
                 </RadzenTextBox>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Opportunity" Component="OpportunityId" style="width: 100%">
+                <RadzenLabel Component="OpportunityId" style="width: 100%" Text="Opportunity">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getOpportunitiesResult)" TextProperty="Name" ValueProperty="Id" Placeholder="@L["OpportunityId.Placeholder"]" style="display: block; width: 100%" @bind-Value="@(task.OpportunityId)" Name="OpportunityId">
+                <RadzenDropDown Data="@(getOpportunitiesResult)" Placeholder="Choose Opportunity" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((task.OpportunityId))" ValueProperty="Id" Name="OpportunityId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="OpportunityId" Text="@L["OpportunityIdRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="OpportunityId" style="position: absolute" Text="OpportunityId is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Due Date" Component="DueDate" style="width: 100%">
+                <RadzenLabel Component="DueDate" style="width: 100%" Text="Due Date">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(task.DueDate)" Name="DueDate">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@((task.DueDate))" Name="DueDate">
                 </RadzenDatePicker>
-                <RadzenRequiredValidator Component="DueDate" Text="@L["DueDateRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="DueDate" style="position: absolute" Text="DueDate is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Task Type" Component="TypeId" style="width: 100%">
+                <RadzenLabel Component="TypeId" style="width: 100%" Text="Task Type">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getTaskTypesResult)" TextProperty="Name" ValueProperty="Id" Placeholder="@L["TypeId.Placeholder"]" style="display: block; width: 100%" @bind-Value="@(task.TypeId)" Name="TypeId">
+                <RadzenDropDown Data="@(getTaskTypesResult)" Placeholder="Choose TaskType" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((task.TypeId))" ValueProperty="Id" Name="TypeId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="TypeId" Text="@L["TypeIdRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="TypeId" style="position: absolute" Text="TypeId is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Task Status" Component="StatusId" style="width: 100%">
+                <RadzenLabel Component="StatusId" style="width: 100%" Text="Task Status">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getTaskStatusesResult)" TextProperty="Name" ValueProperty="Id" Placeholder="@L["StatusId.Placeholder"]" style="width: 100%" @bind-Value="@(task.StatusId)" Name="StatusId">
+                <RadzenDropDown Data="@(getTaskStatusesResult)" Placeholder="Choose TaskStatus" style="width: 100%" TextProperty="Name" @bind-Value="@((task.StatusId))" ValueProperty="Id" Name="StatusId">
                 </RadzenDropDown>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]" ButtonStyle="ButtonStyle.Primary">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

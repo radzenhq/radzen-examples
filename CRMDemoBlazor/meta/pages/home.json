@@ -8,7 +8,7 @@
         {
           "name": "pageTitle",
           "size": "H1",
-          "text": "Home",
+          "text": "Blazor CRM Dashboard",
           "type": "heading"
         },
         {
@@ -359,6 +359,7 @@
                     {
                       "name": "heading12",
                       "size": "H3",
+                      "text": "Recent Opportunities",
                       "type": "heading"
                     },
                     {
@@ -409,6 +410,7 @@
                     {
                       "name": "heading13",
                       "size": "H3",
+                      "text": "Active Tasks",
                       "type": "heading"
                     },
                     {
@@ -465,7 +467,8 @@
                               "text": "${data.Opportunity.Contact.LastName}",
                               "type": "label"
                             }
-                          ]
+                          ],
+                          "title": "Opportunity"
                         }
                       ],
                       "data": "${getTasksResult}",

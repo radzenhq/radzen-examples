@@ -23,9 +23,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(opportunity.Amount)" Name="Amount">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@((opportunity.Amount))" Name="Amount">
                 </RadzenNumeric>
-                <RadzenRequiredValidator Component="Amount" Text="@L["AmountRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="Amount" Text="Amount is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -35,9 +35,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@(opportunity.Name)" Name="Name">
+                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@((opportunity.Name))" Name="Name">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Name" Text="@L["NameRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="Name" Text="Name is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -47,9 +47,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="450" style="display: block; width: 100%" @bind-Value="@(opportunity.UserId)" Name="UserId">
+                <RadzenTextBox MaxLength="450" style="display: block; width: 100%" @bind-Value="@((opportunity.UserId))" Name="UserId">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="UserId" Text="@L["UserIdRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -59,9 +59,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getContactsResult)" TextProperty="Email" ValueProperty="Id" Placeholder="@L["ContactId.Placeholder"]" style="display: block; width: 100%" @bind-Value="@(opportunity.ContactId)" Name="ContactId">
+                <RadzenDropDown Data="@(getContactsResult)" TextProperty="Email" ValueProperty="Id" Placeholder="Choose Contact" style="display: block; width: 100%" @bind-Value="@((opportunity.ContactId))" Name="ContactId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="ContactId" Text="@L["ContactIdRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="ContactId" Text="ContactId is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -71,9 +71,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getOpportunityStatusesResult)" TextProperty="Name" ValueProperty="Id" Placeholder="@L["StatusId.Placeholder"]" style="display: block; width: 100%" @bind-Value="@(opportunity.StatusId)" Name="StatusId">
+                <RadzenDropDown Data="@(getOpportunityStatusesResult)" TextProperty="Name" ValueProperty="Id" Placeholder="Choose OpportunityStatus" style="display: block; width: 100%" @bind-Value="@((opportunity.StatusId))" Name="StatusId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="StatusId" Text="@L["StatusIdRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="StatusId" Text="StatusId is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -83,17 +83,17 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(opportunity.CloseDate)" Name="CloseDate">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@((opportunity.CloseDate))" Name="CloseDate">
                 </RadzenDatePicker>
-                <RadzenRequiredValidator Component="CloseDate" Text="@L["CloseDateRequiredValidator.Text"]" style="position: absolute">
+                <RadzenRequiredValidator Component="CloseDate" Text="CloseDate is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]" ButtonStyle="ButtonStyle.Primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

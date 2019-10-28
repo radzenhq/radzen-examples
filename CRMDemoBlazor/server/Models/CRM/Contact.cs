@@ -17,7 +17,6 @@ namespace RadzenCrm.Models.Crm
     }
 
 
-    [InverseProperty("Contact")]
     public ICollection<Opportunity> Opportunities { get; set; }
     public string Email
     {

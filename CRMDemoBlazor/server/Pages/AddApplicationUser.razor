@@ -23,9 +23,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.Email)" Name="Email">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@((user.Email))" Name="Email">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="Email is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -35,7 +35,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" @bind-Value="@(user.RoleNames)" TextProperty="Name" ValueProperty="Name" Name="RoleNames">
+                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" @bind-Value="@((user.RoleNames))" TextProperty="Name" ValueProperty="Name" Name="RoleNames">
                 </RadzenDropDown>
               </div>
             </div>
@@ -45,9 +45,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword style="display: block; width: 100%" @bind-Value="@(user.Password)" Name="Password">
+                <RadzenPassword style="display: block; width: 100%" @bind-Value="@((user.Password))" Name="Password">
                 </RadzenPassword>
-                <RadzenRequiredValidator Component="Password" style="position: absolute" Text="@L["PasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Password" style="position: absolute" Text="Password is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -57,17 +57,17 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword style="display: block; width: 100%" @bind-Value="@(user.ConfirmPassword)" Name="ConfirmPassword">
+                <RadzenPassword style="display: block; width: 100%" @bind-Value="@((user.ConfirmPassword))" Name="ConfirmPassword">
                 </RadzenPassword>
-                <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="ConfirmPassword is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

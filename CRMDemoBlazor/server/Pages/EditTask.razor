@@ -19,7 +19,7 @@
         </RadzenLabel>
       </div>
       <div class="col-md-3">
-        <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="@L["closeButton.Text"]" Visible="@(!canEdit)" Click="@CloseButtonClick">
+        <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
         </RadzenButton>
       </div>
     </div>
@@ -33,7 +33,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(task.Title)" Name="Title">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@((task.Title))" Name="Title">
                 </RadzenTextBox>
               </div>
             </div>
@@ -43,9 +43,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getOpportunitiesResult)" Placeholder="@L["OpportunityId.Placeholder"]" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(task.OpportunityId)" ValueProperty="Id" Name="OpportunityId">
+                <RadzenDropDown Data="@(getOpportunitiesResult)" Placeholder="Choose Opportunity" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((task.OpportunityId))" ValueProperty="Id" Name="OpportunityId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="OpportunityId" style="position: absolute" Text="@L["OpportunityIdRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="OpportunityId" style="position: absolute" Text="OpportunityId is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -55,9 +55,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(task.DueDate)" Name="DueDate">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@((task.DueDate))" Name="DueDate">
                 </RadzenDatePicker>
-                <RadzenRequiredValidator Component="DueDate" style="position: absolute" Text="@L["DueDateRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="DueDate" style="position: absolute" Text="DueDate is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -67,9 +67,9 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getTaskTypesResult)" Placeholder="@L["TypeId.Placeholder"]" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(task.TypeId)" ValueProperty="Id" Name="TypeId">
+                <RadzenDropDown Data="@(getTaskTypesResult)" Placeholder="Choose TaskType" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((task.TypeId))" ValueProperty="Id" Name="TypeId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="TypeId" style="position: absolute" Text="@L["TypeIdRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="TypeId" style="position: absolute" Text="TypeId is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -79,15 +79,15 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getTaskStatusesResult)" Placeholder="@L["StatusId.Placeholder"]" style="width: 100%" TextProperty="Name" @bind-Value="@(task.StatusId)" ValueProperty="Id" Name="StatusId">
+                <RadzenDropDown Data="@(getTaskStatusesResult)" Placeholder="Choose TaskStatus" style="width: 100%" TextProperty="Name" @bind-Value="@((task.StatusId))" ValueProperty="Id" Name="StatusId">
                 </RadzenDropDown>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button2.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button3.Text"]" Click="@Button3Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button3Click">
                 </RadzenButton>
               </div>
             </div>

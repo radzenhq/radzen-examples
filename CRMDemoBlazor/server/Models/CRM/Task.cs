@@ -24,8 +24,6 @@ namespace RadzenCrm.Models.Crm
       get;
       set;
     }
-
-    [ForeignKey("OpportunityId")]
     public Opportunity Opportunity { get; set; }
     public DateTime DueDate
     {
@@ -37,16 +35,12 @@ namespace RadzenCrm.Models.Crm
       get;
       set;
     }
-
-    [ForeignKey("TypeId")]
     public TaskType TaskType { get; set; }
     public int? StatusId
     {
       get;
       set;
     }
-
-    [ForeignKey("StatusId")]
     public TaskStatus TaskStatus { get; set; }
   }
 }

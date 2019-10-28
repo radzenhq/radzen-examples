@@ -23,7 +23,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox Disabled="true" style="width: 100%" @bind-Value="@(user.UserName)" Name="UserName">
+                <RadzenTextBox Disabled="true" style="width: 100%" @bind-Value="@((user.UserName))" Name="UserName">
                 </RadzenTextBox>
               </div>
             </div>
@@ -33,7 +33,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="width: 100%" @bind-Value="@(user.Email)" Name="Email">
+                <RadzenTextBox style="width: 100%" @bind-Value="@((user.Email))" Name="Email">
                 </RadzenTextBox>
               </div>
             </div>
@@ -43,7 +43,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" TextProperty="Name" @bind-Value="@(user.RoleNames)" ValueProperty="Name" Name="RoleNames">
+                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" TextProperty="Name" @bind-Value="@((user.RoleNames))" ValueProperty="Name" Name="RoleNames">
                 </RadzenDropDown>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword style="width: 100%" @bind-Value="@(user.Password)" Name="Password">
+                <RadzenPassword style="width: 100%" @bind-Value="@((user.Password))" Name="Password">
                 </RadzenPassword>
               </div>
             </div>
@@ -63,15 +63,15 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword style="width: 100%" @bind-Value="@(user.ConfirmPassword)" Name="ConfirmPassword">
+                <RadzenPassword style="width: 100%" @bind-Value="@((user.ConfirmPassword))" Name="ConfirmPassword">
                 </RadzenPassword>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

@@ -17,7 +17,6 @@ namespace RadzenCrm.Models.Crm
     }
 
 
-    [InverseProperty("OpportunityStatus")]
     public ICollection<Opportunity> Opportunities { get; set; }
     public string Name
     {

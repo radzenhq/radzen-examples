@@ -76,7 +76,7 @@ namespace RadzenCrm.Layouts
 
         protected async void Profilemenu0Click(dynamic args)
         {
-            if (args.Text == "Logout") {
+            if (args.Value == "Logout") {
                 Security.Logout();
 }
         }

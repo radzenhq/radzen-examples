@@ -24,7 +24,7 @@
               <div class="col-md-9">
                 <RadzenTextBox style="display: block; width: 100%" Name="UserName">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="@L["EmailRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="Email is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <div class="col-md-9">
                 <RadzenPassword style="display: block; width: 100%" Name="Password">
                 </RadzenPassword>
-                <RadzenRequiredValidator Component="Password" style="position: absolute" Text="@L["PasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="Password" style="position: absolute" Text="Password is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -48,15 +48,15 @@
               <div class="col-md-9">
                 <RadzenPassword style="display: block; width: 100%" Name="ConfirmPassword">
                 </RadzenPassword>
-                <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="@L["ConfirmPasswordRequiredValidator.Text"]">
+                <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="ConfirmPassword is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["button1.Text"]">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Register">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["button2.Text"]" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

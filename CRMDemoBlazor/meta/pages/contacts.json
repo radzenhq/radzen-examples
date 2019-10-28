@@ -12,63 +12,85 @@
           "type": "heading"
         },
         {
-          "name": "textbox0",
-          "placeholder": "",
-          "type": "textbox",
-          "value": "${contactFilter}"
-        },
-        {
-          "events": {
-            "click": [
-              {
-                "name": "CRM.getContacts",
-                "parameters": [
-                  {
-                    "name": "$filter",
-                    "operator": "or",
-                    "value": [
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "textbox0",
+                  "placeholder": "",
+                  "style": {
+                    "width": "234px"
+                  },
+                  "type": "textbox",
+                  "value": "${contactFilter}"
+                },
+                {
+                  "events": {
+                    "click": [
                       {
-                        "operation": "contains",
-                        "property": "Email",
-                        "type": "string",
-                        "value": "\"${contactFilter}\""
-                      },
-                      {
-                        "operation": "contains",
-                        "property": "Company",
-                        "type": "string",
-                        "value": "\"${contactFilter}\""
-                      },
-                      {
-                        "operation": "contains",
-                        "property": "FirstName",
-                        "type": "string",
-                        "value": "\"${contactFilter}\""
-                      },
-                      {
-                        "operation": "contains",
-                        "property": "LastName",
-                        "type": "string",
-                        "value": "\"${contactFilter}\""
+                        "name": "CRM.getContacts",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "operator": "or",
+                            "value": [
+                              {
+                                "operation": "contains",
+                                "property": "Email",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              },
+                              {
+                                "operation": "contains",
+                                "property": "Company",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              },
+                              {
+                                "operation": "contains",
+                                "property": "FirstName",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              },
+                              {
+                                "operation": "contains",
+                                "property": "LastName",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              }
+                            ]
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getContactsResult",
+                            "type": "set",
+                            "value": "${result}",
+                            "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
+                          }
+                        ],
+                        "type": "invoke"
                       }
                     ]
-                  }
-                ],
-                "then": [
-                  {
-                    "name": "getContactsResult",
-                    "type": "set",
-                    "value": "${result}",
-                    "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
-                  }
-                ],
-                "type": "invoke"
-              }
-            ]
-          },
-          "name": "button1",
-          "text": "Search",
-          "type": "button"
+                  },
+                  "name": "button1",
+                  "style": {
+                    "marginLeft": "16px"
+                  },
+                  "text": "Search",
+                  "type": "button"
+                }
+              ],
+              "name": "col0",
+              "style": {
+                "textAlign": "right"
+              },
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
         },
         {
           "components": [
@@ -180,6 +202,7 @@
                       "width": "70px"
                     }
                   ],
+                  "count": "",
                   "data": "${getContactsResult}",
                   "events": {
                     "loadData": [],
