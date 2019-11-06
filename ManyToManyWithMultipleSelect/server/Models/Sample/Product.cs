@@ -17,7 +17,6 @@ namespace Sample.Models.Sample
     }
 
 
-    [InverseProperty("Product")]
     public ICollection<OrderDetail> OrderDetails { get; set; }
     public string ProductName
     {

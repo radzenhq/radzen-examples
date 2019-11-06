@@ -25,7 +25,6 @@ namespace Sample.Models.Sample
       set;
     }
 
-    [ForeignKey("OrderId")]
     public Order Order { get; set; }
     public int? ProductId
     {
@@ -33,7 +32,6 @@ namespace Sample.Models.Sample
       set;
     }
 
-    [ForeignKey("ProductId")]
     public Product Product { get; set; }
   }
 }

@@ -82,7 +82,7 @@ namespace Sample.Data
                     foreach (var column in columns)
                     {
                         var value = OutputFormatter.GetValue(item, column.Key);
-                        var stringValue = value.ToString();
+                        var stringValue = $"{value}";
 
                         var cell = new Cell();
 

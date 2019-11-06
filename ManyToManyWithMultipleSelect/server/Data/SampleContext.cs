@@ -41,6 +41,11 @@ namespace Sample.Data
                   .HasForeignKey(i => i.ProductId)
                   .HasPrincipalKey(i => i.Id);
 
+
+            builder.Entity<Sample.Models.Sample.Order>()
+                  .Property(p => p.OrderDate)
+                  .HasColumnType("date");
+
             this.OnModelBuilding(builder);
         }
 

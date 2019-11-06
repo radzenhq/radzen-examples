@@ -48,8 +48,13 @@ namespace Sample.Controllers.Sample
     public SingleResult<Product> GetProduct(int key)
     {
         var items = this.context.Products.Where(i=>i.Id == key);
+        this.OnProductsGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnProductsGet(ref IQueryable<Models.Sample.Product> items);
+
     partial void OnProductDeleted(Models.Sample.Product item);
 
     [HttpDelete("{Id}")]

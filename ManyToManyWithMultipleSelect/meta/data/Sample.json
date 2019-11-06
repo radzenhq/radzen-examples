@@ -28,12 +28,15 @@
           ]
         },
         "UserName": {
+          "x-nullable": false,
           "type": "string",
           "length": 255
         },
         "OrderDate": {
+          "x-nullable": false,
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-datetime": "date"
         },
         "OrderDetails": {
           "type": "array",
@@ -57,6 +60,7 @@
           "type": "integer"
         },
         "Quantity": {
+          "x-nullable": false,
           "type": "integer"
         },
         "Order": {
@@ -116,14 +120,17 @@
           ]
         },
         "ProductName": {
+          "x-nullable": false,
           "type": "string",
           "length": 255
         },
         "ProductPrice": {
+          "x-nullable": false,
           "type": "number",
           "format": "decimal"
         },
         "ProductPicture": {
+          "x-nullable": false,
           "type": "string"
         },
         "OrderDetails": {

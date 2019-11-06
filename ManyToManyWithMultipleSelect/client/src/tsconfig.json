@@ -4,10 +4,7 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "mapRoot": "./",
     "module": "es6",
     "moduleResolution": "node",
@@ -15,9 +12,10 @@
     "target": "es5",
     "types": [],
     "paths": {
-      "@angular/*": [
-        "../node_modules/@angular/*"
-      ]
+      "@angular/*": ["../node_modules/@angular/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "preserveWhitespaces": true
   }
 }

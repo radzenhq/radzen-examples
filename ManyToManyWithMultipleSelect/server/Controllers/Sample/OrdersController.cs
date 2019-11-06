@@ -48,8 +48,13 @@ namespace Sample.Controllers.Sample
     public SingleResult<Order> GetOrder(int key)
     {
         var items = this.context.Orders.Where(i=>i.Id == key);
+        this.OnOrdersGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnOrdersGet(ref IQueryable<Models.Sample.Order> items);
+
     partial void OnOrderDeleted(Models.Sample.Order item);
 
     [HttpDelete("{Id}")]
