@@ -1,0 +1,48 @@
+﻿@page "/order-details"
+@layout MainLayout
+@inherits BlazorMultiTenant.Pages.OrderDetailsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Order Details">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrderDetailsResult)" TItem="BlazorMultiTenant.Models.Sample.OrderDetail" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.OrderDetail" Context="blazorMultiTenantModelsSampleOrderDetail" Property="Id" Title="Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.OrderDetail" Context="blazorMultiTenantModelsSampleOrderDetail" Property="Quantity" Title="Quantity">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.OrderDetail" Context="blazorMultiTenantModelsSampleOrderDetail" Property="OrderId" SortProperty="Order.UserName" FilterProperty="Order.UserName" Title="Order">
+              <Template Context="data">
+              @data.Order?.UserName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.OrderDetail" Context="blazorMultiTenantModelsSampleOrderDetail" Property="ProductId" SortProperty="Product.ProductName" FilterProperty="Product.ProductName" Title="Product">
+              <Template Context="data">
+              @data.Product?.ProductName
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.OrderDetail" Context="blazorMultiTenantModelsSampleOrderDetail" Filterable="false" Sortable="false" Bubble="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="blazorMultiTenantModelsSampleOrderDetail">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, blazorMultiTenantModelsSampleOrderDetail))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

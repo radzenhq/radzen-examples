@@ -1,0 +1,29 @@
+﻿@page "/login"
+@layout LoginLayout
+@inherits BlazorMultiTenant.Pages.LoginComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IHttpContextAccessor Http
+
+<form method="post" action="/account/login">
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Login">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenLogin AllowResetPassword="false" Register="@Login0Register">
+        </RadzenLogin>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
+</form>

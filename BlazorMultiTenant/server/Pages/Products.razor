@@ -1,0 +1,45 @@
+﻿@page "/products"
+@layout MainLayout
+@inherits BlazorMultiTenant.Pages.ProductsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Products">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductsResult)" TItem="BlazorMultiTenant.Models.Sample.Product" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Product" Context="blazorMultiTenantModelsSampleProduct" Property="Id" Title="Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Product" Context="blazorMultiTenantModelsSampleProduct" Property="ProductName" Title="Product Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Product" Context="blazorMultiTenantModelsSampleProduct" Property="ProductPrice" FormatString="{0:C}" Title="Product Price">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Product" Context="blazorMultiTenantModelsSampleProduct" Property="ProductPicture" Title="Product Picture" Sortable="false" Filterable="false">
+              <Template Context="data">
+              <img src="@data.ProductPicture" width="50%" height="50%" />
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Product" Context="blazorMultiTenantModelsSampleProduct" Filterable="false" Sortable="false" Bubble="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="blazorMultiTenantModelsSampleProduct">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, blazorMultiTenantModelsSampleProduct))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,41 @@
+﻿@page "/"
+@page "/orders"
+@layout MainLayout
+@inherits BlazorMultiTenant.Pages.OrdersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Orders">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrdersResult)" TItem="BlazorMultiTenant.Models.Sample.Order" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Order" Context="blazorMultiTenantModelsSampleOrder" Property="Id" Title="Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Order" Context="blazorMultiTenantModelsSampleOrder" Property="UserName" Title="User Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Order" Context="blazorMultiTenantModelsSampleOrder" Property="OrderDate" FormatString="{0:MM/dd/yyyy}" Title="Order Date">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorMultiTenant.Models.Sample.Order" Context="blazorMultiTenantModelsSampleOrder" Filterable="false" Sortable="false" Bubble="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="blazorMultiTenantModelsSampleOrder">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, blazorMultiTenantModelsSampleOrder))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

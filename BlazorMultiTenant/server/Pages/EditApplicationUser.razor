@@ -1,0 +1,82 @@
+﻿@page "/edit-application-user/{Id}"
+@layout MainLayout
+@inherits BlazorMultiTenant.Pages.EditApplicationUserComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm TItem="ApplicationUser" Data="@(user)" Visible="@(user != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="UserName" style="width: 100%" Text="User Name">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox Disabled="true" style="width: 100%" @bind-Value="@((user.UserName))" Name="UserName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="width: 100%" @bind-Value="@((user.Email))" Name="Email">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="RoleNames" style="width: 100%" Text="Roles">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@(roles)" Multiple="true" style="width: 100%" TextProperty="Name" @bind-Value="@((user.RoleNames))" ValueProperty="Name" Name="RoleNames">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Password" style="width: 100%" Text="Password">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenPassword style="width: 100%" @bind-Value="@((user.Password))" Name="Password">
+                </RadzenPassword>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="Confirm password">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenPassword style="width: 100%" @bind-Value="@((user.ConfirmPassword))" Name="ConfirmPassword">
+                </RadzenPassword>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

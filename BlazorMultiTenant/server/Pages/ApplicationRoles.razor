@@ -1,0 +1,36 @@
+﻿@page "/application-roles"
+@layout MainLayout
+@inherits BlazorMultiTenant.Pages.ApplicationRolesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Roles">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(roles)" TItem="IdentityRole">
+          <Columns>
+            <RadzenGridColumn TItem="IdentityRole" Context="identityRole" Property="Name" Title="Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="IdentityRole" Context="identityRole" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="identityRole">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, identityRole))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

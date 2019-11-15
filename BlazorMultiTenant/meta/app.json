@@ -1,0 +1,63 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "ignore": [
+    "server\\Program.cs"
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "BlazorMultiTenant",
+  "navigation": [
+    "Orders",
+    "Order Details",
+    "Products"
+  ],
+  "pages": [
+    "Orders",
+    "Add Order",
+    "Edit Order",
+    "Order Details",
+    "Add Order Detail",
+    "Edit Order Detail",
+    "Products",
+    "Add Product",
+    "Edit Product",
+    "Login",
+    "Application Users",
+    "Register Application User",
+    "Application Roles",
+    "Add Application User",
+    "Add Application Role",
+    "Profile",
+    "Edit Application User",
+    "Unauthorized"
+  ],
+  "port": 8000,
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "Sample",
+    "duration": 5,
+    "emailConfirmation": false,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "provider": "default",
+    "smtpFrom": "",
+    "smtpPassword": "",
+    "smtpSSL": false,
+    "smtpServer": "",
+    "smtpUser": "",
+    "loginPage": "Login"
+  },
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "3",
+  "startPage": "Orders",
+  "theme": "default"
+}

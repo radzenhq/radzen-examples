@@ -1,0 +1,38 @@
+﻿@page "/application-users"
+@layout MainLayout
+@inherits BlazorMultiTenant.Pages.ApplicationUsersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorMultiTenant.Models.Sample
+@using Microsoft.AspNetCore.Identity
+@using BlazorMultiTenant.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Users">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(users)" TItem="ApplicationUser" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="UserName" Title="User Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Property="Email" Title="Email">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ApplicationUser" Context="applicationUser" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+              <Template Context="applicationUser">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, applicationUser))">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
