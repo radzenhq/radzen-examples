@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
@@ -14,6 +15,12 @@ namespace RadzenCrm.Pages
 {
     public partial class EditContactComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         protected NavigationManager UriHelper { get; set; }
 
@@ -31,7 +38,7 @@ namespace RadzenCrm.Pages
 
 
         [Parameter]
-        public string Id { get; set; }
+        public dynamic Id { get; set; }
 
         bool _canEdit;
         protected bool canEdit
@@ -84,7 +91,7 @@ namespace RadzenCrm.Pages
         {
             canEdit = true;
 
-            var crmGetContactByIdResult = await Crm.GetContactById(int.Parse(Id));
+            var crmGetContactByIdResult = await Crm.GetContactById(int.Parse($"{Id}"));
             contact = crmGetContactByIdResult;
         }
 
@@ -97,7 +104,7 @@ namespace RadzenCrm.Pages
         {
             try
             {
-                var crmUpdateContactResult = await Crm.UpdateContact(int.Parse(Id), contact);
+                var crmUpdateContactResult = await Crm.UpdateContact(int.Parse($"{Id}"), contact);
                 DialogService.Close(contact);
             }
             catch (Exception crmUpdateContactException)

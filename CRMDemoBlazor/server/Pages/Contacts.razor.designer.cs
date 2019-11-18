@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
@@ -14,6 +15,12 @@ namespace RadzenCrm.Pages
 {
     public partial class ContactsComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         protected NavigationManager UriHelper { get; set; }
 
@@ -103,7 +110,7 @@ namespace RadzenCrm.Pages
 
         protected async void Grid0RowSelect(RadzenCrm.Models.Crm.Contact args)
         {
-            var result = await DialogService.OpenAsync<EditContact>("Edit Contact", new Dictionary<string, object>() { {"Id", $"{args.Id}"} });
+            var result = await DialogService.OpenAsync<EditContact>("Edit Contact", new Dictionary<string, object>() { {"Id", args.Id} });
               await InvokeAsync(() => { StateHasChanged(); });
         }
 

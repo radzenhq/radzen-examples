@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
@@ -14,6 +15,12 @@ namespace RadzenCrm.Pages
 {
     public partial class EditTaskComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         protected NavigationManager UriHelper { get; set; }
 
@@ -31,7 +38,7 @@ namespace RadzenCrm.Pages
 
 
         [Parameter]
-        public string Id { get; set; }
+        public dynamic Id { get; set; }
 
         bool _canEdit;
         protected bool canEdit
@@ -135,7 +142,7 @@ namespace RadzenCrm.Pages
         {
             canEdit = true;
 
-            var crmGetTaskByIdResult = await Crm.GetTaskById(int.Parse(Id));
+            var crmGetTaskByIdResult = await Crm.GetTaskById(int.Parse($"{Id}"));
             task = crmGetTaskByIdResult;
 
             var crmGetOpportunitiesResult = await Crm.GetOpportunities();
@@ -157,7 +164,7 @@ namespace RadzenCrm.Pages
         {
             try
             {
-                var crmUpdateTaskResult = await Crm.UpdateTask(int.Parse(Id), task);
+                var crmUpdateTaskResult = await Crm.UpdateTask(int.Parse($"{Id}"), task);
                 DialogService.Close(task);
             }
             catch (Exception crmUpdateTaskException)

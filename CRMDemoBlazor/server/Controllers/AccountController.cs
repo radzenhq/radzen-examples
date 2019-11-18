@@ -16,12 +16,14 @@ namespace RadzenCrm
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IWebHostEnvironment env;
 
-        public AccountController(IWebHostEnvironment env, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(IWebHostEnvironment env, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.roleManager = roleManager;
             this.env = env;
         }
 
@@ -30,7 +32,13 @@ namespace RadzenCrm
         {
             if (env.EnvironmentName == "Development" && userName == "admin" && password == "admin")
             {
-                await signInManager.SignInAsync(new ApplicationUser { UserName = userName, Email = userName }, isPersistent: false);
+              var claims = new List<Claim>() {
+                        new Claim(ClaimTypes.Name, "admin"),
+                        new Claim(ClaimTypes.Email, "admin")
+                      };
+
+                roleManager.Roles.ToList().ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
+                await signInManager.SignInWithClaimsAsync(new ApplicationUser { UserName = userName, Email = userName }, isPersistent: false, claims);
 
                 return Redirect("~/");
             }

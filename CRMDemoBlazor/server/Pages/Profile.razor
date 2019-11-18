@@ -17,7 +17,7 @@
     </RadzenHeading>
     <RadzenTabs>
       <Tabs>
-        <RadzenTabsItem Selected="true" Text="Personal">
+        <RadzenTabsItem Text="Personal">
           <ChildContent>
             <RadzenTemplateForm Data="@(user)" TItem="RadzenCrm.Models.ApplicationUser" Visible="@(user != null)" Submit="@TemplateForm0Submit">
               <ChildContent>
@@ -67,7 +67,7 @@
             </RadzenTemplateForm>
           </ChildContent>
         </RadzenTabsItem>
-        <RadzenTabsItem Selected="false" Text="Password">
+        <RadzenTabsItem Text="Password">
           <ChildContent>
             <RadzenTemplateForm Action="/account/changepassword" Data="@(user)" TItem="ApplicationUser" Method="post" Visible="@(user != null)">
               <ChildContent>

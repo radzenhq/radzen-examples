@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
@@ -14,6 +15,12 @@ namespace RadzenCrm.Pages
 {
     public partial class EditOpportunityComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         protected NavigationManager UriHelper { get; set; }
 
@@ -31,7 +38,7 @@ namespace RadzenCrm.Pages
 
 
         [Parameter]
-        public string Id { get; set; }
+        public dynamic Id { get; set; }
 
         bool _canEdit;
         protected bool canEdit
@@ -118,7 +125,7 @@ namespace RadzenCrm.Pages
         {
             canEdit = true;
 
-            var crmGetOpportunityByIdResult = await Crm.GetOpportunityById(int.Parse(Id));
+            var crmGetOpportunityByIdResult = await Crm.GetOpportunityById(int.Parse($"{Id}"));
             opportunity = crmGetOpportunityByIdResult;
 
             var crmGetContactsResult = await Crm.GetContacts();
@@ -137,7 +144,7 @@ namespace RadzenCrm.Pages
         {
             try
             {
-                var crmUpdateOpportunityResult = await Crm.UpdateOpportunity(int.Parse(Id), opportunity);
+                var crmUpdateOpportunityResult = await Crm.UpdateOpportunity(int.Parse($"{Id}"), opportunity);
                 DialogService.Close(opportunity);
             }
             catch (Exception crmUpdateOpportunityException)
