@@ -11,7 +11,7 @@ namespace Blazor.Layouts
     public partial class MenuLayoutComponent : LayoutComponentBase
     {
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }

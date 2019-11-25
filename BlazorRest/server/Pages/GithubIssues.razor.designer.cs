@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
@@ -10,18 +12,20 @@ namespace Blazor.Pages
 {
     public partial class GithubIssuesComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
-
-        protected RadzenContent content1;
-
-        protected RadzenHeading pageTitle;
 
         protected RadzenGrid<GitHubIssue> grid0;
 
@@ -42,7 +46,7 @@ namespace Blazor.Pages
             }
         }
 
-        protected override async Task OnInitializedAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             Load();
         }

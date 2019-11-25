@@ -5,11 +5,11 @@
 
 @using Radzen
 @using Radzen.Blazor
-<RadzenContent @ref="content1" @ref:suppressField Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" @ref:suppressField Size="H1" Text="GithubIssues">
+    <RadzenHeading Size="H1" Text="GithubIssues">
     </RadzenHeading>
-    <RadzenGrid @ref="grid0" @ref:suppressField AllowPaging="false" AllowSorting="true" Data="@(githubIssues)" TItem="GitHubIssue">
+    <RadzenGrid @ref="grid0" AllowPaging="false" AllowSorting="true" Data="@(githubIssues)" TItem="GitHubIssue">
       <Columns>
         <RadzenGridColumn TItem="GitHubIssue" Context="gitHubIssue" Property="Url" Title="Url" Type="string">
         </RadzenGridColumn>

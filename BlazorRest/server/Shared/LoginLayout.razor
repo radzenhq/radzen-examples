@@ -2,17 +2,16 @@
 
 @using Radzen
 @using Radzen.Blazor
-
 <RadzenDialog />
 <RadzenNotification />
 
-<RadzenBody @ref="body0" @ref:suppressField style="">
+<RadzenBody @ref="body0" style="">
   <ChildContent>
     <div class="row justify-content-center">
       <div class="justify-content-center col-xl-5 col-md-7">
-        <RadzenCard @ref="card0" @ref:suppressField style="margin-top: 8rem">
+        <RadzenCard style="margin-top: 8rem">
           <ChildContent>
-            <RadzenContentContainer @ref="main" @ref:suppressField Name="main">
+            <RadzenContentContainer Name="main">
             @Body
             </RadzenContentContainer>
           </ChildContent>
