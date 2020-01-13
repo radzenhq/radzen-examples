@@ -12,15 +12,29 @@
           "type": "heading"
         },
         {
-          "content": "<my-component text=\"Label\" (navigate)=\"onNavigate()\"></my-component>",
+          "content": "<my-component text=\"${labelValue}\" (navigate)=\"onNavigate()\"></my-component>",
           "name": "html0",
           "type": "html"
+        },
+        {
+          "name": "textbox0",
+          "type": "textbox",
+          "value": "${labelValue}"
         }
       ],
       "container": "main",
       "type": "content"
     }
   ],
+  "events": {
+    "load": [
+      {
+        "name": "labelValue",
+        "type": "set",
+        "value": "\"labelValue\""
+      }
+    ]
+  },
   "layout": "Main",
   "name": "MainPage"
 }

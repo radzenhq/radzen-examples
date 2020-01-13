@@ -2,6 +2,8 @@
   <rz-heading #pageTitle size="H1" text="MainPage">
   </rz-heading>
   <rz-html #html0>
-    <my-component text="Label" (navigate)="onNavigate()"></my-component>
+    <my-component text="{{labelValue}}" (navigate)="onNavigate()"></my-component>
   </rz-html>
+  <rz-textbox #textbox0 [(ngModel)]="labelValue" name="textbox0">
+  </rz-textbox>
 </rz-content>

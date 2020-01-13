@@ -19,6 +19,7 @@ import { FooterModule } from '@radzen/angular/dist/footer';
 import { ContentModule } from '@radzen/angular/dist/content';
 import { HeadingModule } from '@radzen/angular/dist/heading';
 import { HtmlModule } from '@radzen/angular/dist/html';
+import { TextBoxModule } from '@radzen/angular/dist/textbox';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -26,7 +27,6 @@ import { DialogModule } from '@radzen/angular/dist/dialog';
 import { ConfigService, configServiceFactory } from './config.service';
 import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
-import { CacheInterceptor } from './cache.interceptor';
 export { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
@@ -49,11 +49,6 @@ export const AppDeclarations = [
 ];
 
 export const AppProviders = [
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: CacheInterceptor,
-    multi: true
-  },
   ConfigService,
   {
     provide: APP_INITIALIZER,
@@ -80,6 +75,7 @@ export const AppImports = [
   ContentModule,
   HeadingModule,
   HtmlModule,
+  TextBoxModule,
   SharedModule,
   NotificationModule,
   DialogModule,
