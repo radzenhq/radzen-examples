@@ -1,7 +1,7 @@
 export const environment = {
-  serverMethodsUrl: 'http://localhost:5000/',
-  crm: 'http://localhost:5000/odata/CRM',
+  serverMethodsUrl: 'https://crm.radzen.com/',
+  crm: 'https://crm.radzen.com/odata/CRM',
 
-  securityUrl: 'http://localhost:5000/auth',
+  securityUrl: 'https://crm.radzen.com/auth',
   production: true
 };

@@ -92,7 +92,7 @@ namespace Crm.Controllers
 
             EntityPatch.Apply(user, data);
 
-            var roles = data.GetValue("RoleNames").ToObject<IEnumerable<string>>();
+            var roles = data.GetValue("RoleNames");
 
             OnUserUpdated(user);
 
@@ -100,6 +100,8 @@ namespace Crm.Controllers
 
             if (roles != null)
             {
+                var rolesData = roles.ToObject<IEnumerable<string>>();
+
                 result = await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
 
                 if (!result.Succeeded)
@@ -107,9 +109,9 @@ namespace Crm.Controllers
                     return IdentityError(result);
                 }
 
-                if(roles.Any()) 
+                if(rolesData.Any()) 
                 {
-                    result = await userManager.AddToRolesAsync(user, roles);
+                    result = await userManager.AddToRolesAsync(user, rolesData);
                 }
 
                 if (!result.Succeeded)
@@ -118,7 +120,7 @@ namespace Crm.Controllers
                 }
             }
 
-            var password = data.GetValue("Password", StringComparison.OrdinalIgnoreCase).ToObject<string>();
+            var password = data.GetValue("Password", StringComparison.OrdinalIgnoreCase);
 
             if (password != null)
             {
@@ -129,7 +131,7 @@ namespace Crm.Controllers
                     return IdentityError(result);
                 }
 
-                result = await userManager.AddPasswordAsync(user, password);
+                result = await userManager.AddPasswordAsync(user, password.ToObject<string>());
 
                 if (!result.Succeeded)
                 {
@@ -152,10 +154,15 @@ namespace Crm.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]JObject data)
         {
-            var email = data.GetValue("Email", StringComparison.OrdinalIgnoreCase).ToObject<string>();
-            var password = data.GetValue("Password", StringComparison.OrdinalIgnoreCase).ToObject<string>();
+            var email = data.GetValue("Email", StringComparison.OrdinalIgnoreCase);
+            var password = data.GetValue("Password", StringComparison.OrdinalIgnoreCase);
 
-            var user = new ApplicationUser { UserName = email, Email = email };
+            if (email == null || password == null)
+            {
+                return Error("Invalid email or password.");
+            }
+
+            var user = new ApplicationUser { UserName = email.ToObject<string>(), Email = email.ToObject<string>() };
 
             EntityPatch.Apply(user, data);
 
@@ -163,23 +170,28 @@ namespace Crm.Controllers
 
             IdentityResult result = null;
 
-            result = await userManager.CreateAsync(user, password);
+            result = await userManager.CreateAsync(user, password.ToObject<string>());
 
             if (result.Succeeded)
             {
-                var roles = data.GetValue("RoleNames").ToObject<IEnumerable<string>>();
+                var roles = data.GetValue("RoleNames");
 
-                if (roles != null && roles.Any())
+                if (roles != null)
                 {
-                    result = await userManager.AddToRolesAsync(user, roles);
-
-                    if (!result.Succeeded)
+                    var rolesData = roles.ToObject<IEnumerable<string>>();
+                    if (rolesData.Any())
                     {
-                        return IdentityError(result);
-                    }
-                }
+                        result = await userManager.AddToRolesAsync(user, rolesData);
 
-                user.RoleNames = roles;
+                        if (!result.Succeeded)
+                        {
+                            return IdentityError(result);
+                        }
+                    }
+                    
+                    user.RoleNames = rolesData;
+                }
+                
                 return Created($"auth/Users('{user.Id}')", user);
             }
             else
@@ -192,6 +204,11 @@ namespace Crm.Controllers
         {
             var message = string.Join(", ", result.Errors.Select(error => error.Description));
 
+            return BadRequest(new { error = new { message } });
+        }
+
+        private IActionResult Error(string message)
+        {
             return BadRequest(new { error = new { message } });
         }
     }

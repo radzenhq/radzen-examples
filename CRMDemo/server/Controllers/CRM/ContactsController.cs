@@ -45,15 +45,20 @@ namespace Crm.Controllers.Crm
 
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{Id}")]
-    public SingleResult<Contact> GetContact(int key)
+    public SingleResult<Contact> GetContact(int? key)
     {
         var items = this.context.Contacts.Where(i=>i.Id == key);
+        this.OnContactsGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnContactsGet(ref IQueryable<Models.Crm.Contact> items);
+
     partial void OnContactDeleted(Models.Crm.Contact item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteContact(int key)
+    public IActionResult DeleteContact(int? key)
     {
         try
         {
@@ -90,7 +95,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPut("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutContact(int key, [FromBody]Models.Crm.Contact newItem)
+    public IActionResult PutContact(int? key, [FromBody]Models.Crm.Contact newItem)
     {
         try
         {
@@ -108,7 +113,8 @@ namespace Crm.Controllers.Crm
             this.context.Contacts.Update(newItem);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.Contacts.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {
@@ -119,7 +125,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPatch("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchContact(int key, [FromBody]Delta<Models.Crm.Contact> patch)
+    public IActionResult PatchContact(int? key, [FromBody]Delta<Models.Crm.Contact> patch)
     {
         try
         {
@@ -141,7 +147,8 @@ namespace Crm.Controllers.Crm
             this.context.Contacts.Update(item);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.Contacts.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {

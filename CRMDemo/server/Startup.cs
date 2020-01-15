@@ -38,8 +38,6 @@ namespace Crm
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddOptions();
-      services.AddCors();
-
       services.AddMvc(options =>
       {
           options.FormatterMappings.SetMediaTypeMappingForFormat("csv", "text/csv");
@@ -50,7 +48,7 @@ namespace Crm
       services.AddAuthorization();
       services.AddOData();
       services.AddODataQueryFilter();
-
+      services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
 
       var tokenValidationParameters = new TokenValidationParameters
       {
@@ -74,7 +72,6 @@ namespace Crm
           options.TokenValidationParameters = tokenValidationParameters;
           options.SaveToken = true;
       });
-
       services.AddDbContext<ApplicationIdentityDbContext>(options =>
       {
          options.UseSqlServer(Configuration.GetConnectionString("CRMConnection"));
@@ -95,15 +92,15 @@ namespace Crm
     }
 
     partial void OnConfigure(IApplicationBuilder app);
+    partial void OnConfigure(IApplicationBuilder app, IHostingEnvironment env);
     partial void OnConfigureOData(ODataConventionModelBuilder builder);
-   
+
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
       loggerFactory.AddConsole(Configuration.GetSection("Logging"));
       loggerFactory.AddDebug();
 
       IServiceProvider provider = app.ApplicationServices.GetRequiredService<IServiceProvider>();
-
       app.UseCors(builder =>
         builder.WithOrigins("*")
                .AllowAnyHeader()
@@ -111,7 +108,6 @@ namespace Crm
                .AllowCredentials()
                .AllowAnyOrigin()
       );
-
       app.Use(async (context, next) => {
           if (context.Request.Path.Value == "/__ssrsreport" || context.Request.Path.Value == "/ssrsproxy") {
             await next();
@@ -186,6 +182,7 @@ namespace Crm
       }
 
       OnConfigure(app);
+      OnConfigure(app, env);
     }
   }
 }

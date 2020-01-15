@@ -45,15 +45,20 @@ namespace Crm.Controllers.Crm
 
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{Id}")]
-    public SingleResult<TaskType> GetTaskType(int key)
+    public SingleResult<TaskType> GetTaskType(int? key)
     {
         var items = this.context.TaskTypes.Where(i=>i.Id == key);
+        this.OnTaskTypesGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnTaskTypesGet(ref IQueryable<Models.Crm.TaskType> items);
+
     partial void OnTaskTypeDeleted(Models.Crm.TaskType item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteTaskType(int key)
+    public IActionResult DeleteTaskType(int? key)
     {
         try
         {
@@ -90,7 +95,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPut("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutTaskType(int key, [FromBody]Models.Crm.TaskType newItem)
+    public IActionResult PutTaskType(int? key, [FromBody]Models.Crm.TaskType newItem)
     {
         try
         {
@@ -108,7 +113,8 @@ namespace Crm.Controllers.Crm
             this.context.TaskTypes.Update(newItem);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.TaskTypes.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {
@@ -119,7 +125,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPatch("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchTaskType(int key, [FromBody]Delta<Models.Crm.TaskType> patch)
+    public IActionResult PatchTaskType(int? key, [FromBody]Delta<Models.Crm.TaskType> patch)
     {
         try
         {
@@ -141,7 +147,8 @@ namespace Crm.Controllers.Crm
             this.context.TaskTypes.Update(item);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.TaskTypes.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {

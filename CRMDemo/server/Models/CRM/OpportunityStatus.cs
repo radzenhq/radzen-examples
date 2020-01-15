@@ -10,14 +10,13 @@ namespace Crm.Models.Crm
   {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public int? Id
     {
       get;
       set;
     }
 
 
-    [InverseProperty("OpportunityStatus")]
     public ICollection<Opportunity> Opportunities { get; set; }
     public string Name
     {

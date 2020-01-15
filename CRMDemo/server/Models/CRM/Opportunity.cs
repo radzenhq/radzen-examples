@@ -10,14 +10,13 @@ namespace Crm.Models.Crm
   {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public int? Id
     {
       get;
       set;
     }
 
 
-    [InverseProperty("Opportunity")]
     public ICollection<Task> Tasks { get; set; }
     public decimal Amount
     {
@@ -35,7 +34,6 @@ namespace Crm.Models.Crm
       set;
     }
 
-    [ForeignKey("ContactId")]
     public Contact Contact { get; set; }
     public int StatusId
     {
@@ -43,7 +41,6 @@ namespace Crm.Models.Crm
       set;
     }
 
-    [ForeignKey("StatusId")]
     public OpportunityStatus OpportunityStatus { get; set; }
     public DateTime CloseDate
     {

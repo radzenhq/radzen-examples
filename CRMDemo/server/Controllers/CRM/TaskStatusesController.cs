@@ -45,15 +45,20 @@ namespace Crm.Controllers.Crm
 
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{Id}")]
-    public SingleResult<TaskStatus> GetTaskStatus(int key)
+    public SingleResult<TaskStatus> GetTaskStatus(int? key)
     {
         var items = this.context.TaskStatuses.Where(i=>i.Id == key);
+        this.OnTaskStatusesGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnTaskStatusesGet(ref IQueryable<Models.Crm.TaskStatus> items);
+
     partial void OnTaskStatusDeleted(Models.Crm.TaskStatus item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteTaskStatus(int key)
+    public IActionResult DeleteTaskStatus(int? key)
     {
         try
         {
@@ -90,7 +95,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPut("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutTaskStatus(int key, [FromBody]Models.Crm.TaskStatus newItem)
+    public IActionResult PutTaskStatus(int? key, [FromBody]Models.Crm.TaskStatus newItem)
     {
         try
         {
@@ -108,7 +113,8 @@ namespace Crm.Controllers.Crm
             this.context.TaskStatuses.Update(newItem);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.TaskStatuses.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {
@@ -119,7 +125,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPatch("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchTaskStatus(int key, [FromBody]Delta<Models.Crm.TaskStatus> patch)
+    public IActionResult PatchTaskStatus(int? key, [FromBody]Delta<Models.Crm.TaskStatus> patch)
     {
         try
         {
@@ -141,7 +147,8 @@ namespace Crm.Controllers.Crm
             this.context.TaskStatuses.Update(item);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.TaskStatuses.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {

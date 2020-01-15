@@ -22,11 +22,13 @@ namespace Crm.Controllers
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IHostingEnvironment env;
-        public AuthController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHostingEnvironment env)
+        public AuthController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostingEnvironment env)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.roleManager = roleManager;
             this.env = env;
         }
 
@@ -62,7 +64,7 @@ namespace Crm.Controllers
 
             if (oldPassword == null || newPassword == null)
             {
-                return Error("Invalid old or new or password.");
+                return Error("Invalid old or new password.");
             }
 
             var id = this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -84,6 +86,7 @@ namespace Crm.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]JObject data)
         {
             var username = data.GetValue("UserName", StringComparison.OrdinalIgnoreCase);
@@ -96,10 +99,14 @@ namespace Crm.Controllers
 
             if (env.EnvironmentName == "Development" && username.ToObject<string>() == "admin" && password.ToObject<string>() == "admin")
             {
-                return Jwt(new List<Claim>() {
-                  new Claim(ClaimTypes.Name, "admin"),
-                  new Claim(ClaimTypes.Email, "admin")
-                });
+                var claims = new List<Claim>() {
+                        new Claim(ClaimTypes.Name, "admin"),
+                        new Claim(ClaimTypes.Email, "admin")
+                      };
+
+                this.roleManager.Roles.ToList().ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
+
+                return Jwt(claims);
             }
 
             var user = await userManager.FindByNameAsync(username.ToObject<string>());

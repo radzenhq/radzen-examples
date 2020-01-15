@@ -5,7 +5,7 @@
   "generator": "@radzen/angular-generator",
   "https": false,
   "ignore": [
-    ""
+    "client\\src\\app\\security.service.ts"
   ],
   "layouts": [
     "Login",

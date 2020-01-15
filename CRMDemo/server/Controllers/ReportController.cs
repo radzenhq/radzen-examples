@@ -37,6 +37,10 @@ namespace Crm.Controllers
             var urlToReplace = String.Format("{0}://{1}{2}/{3}/", Request.Scheme, Request.Host.Value, Request.PathBase, "ssrsproxy");
             var requestedUrl = Request.GetDisplayUrl().Replace(urlToReplace, "", StringComparison.InvariantCultureIgnoreCase);
             var reportServerIndex = requestedUrl.IndexOf("/ReportServer");
+            if(reportServerIndex == -1) 
+            {
+                reportServerIndex = requestedUrl.IndexOf("/Reports");
+            }
             var reportUrlParts = requestedUrl.Substring(0, reportServerIndex).Split('/');
 
             var url = String.Format("{0}://{1}:{2}{3}", reportUrlParts[0], reportUrlParts[1], reportUrlParts[2],
@@ -74,6 +78,11 @@ namespace Crm.Controllers
         private HttpClient CreateHttpClient()
         {
             var httpClientHandler = new HttpClientHandler();
+
+            if(httpClientHandler.SupportsAutomaticDecompression)
+            {
+                httpClientHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            }
 
             OnHttpClientHandlerCreate(ref httpClientHandler);
 
@@ -137,6 +146,8 @@ namespace Crm.Controllers
         {
             var result = await responseMessage.Content.ReadAsStringAsync();
 
+            var ReportServer = url.Contains("/ReportServer/") ? "ReportServer" : "Reports";
+
             var reportUri = new Uri(url);
             var proxyUrl = String.Format("{0}://{1}{2}/ssrsproxy/{3}/{4}/{5}", currentReqest.Scheme, currentReqest.Host.Value, currentReqest.PathBase,
                 reportUri.Scheme, reportUri.Host, reportUri.Port);
@@ -185,13 +196,13 @@ namespace Crm.Controllers
                     }
                     index++;
 
-                    content = content.Replace("/ReportServer/", String.Format("{0}/ReportServer/", proxyUrl), StringComparison.InvariantCultureIgnoreCase);
+                    content = content.Replace($"/{ReportServer}/", $"{proxyUrl}/{ReportServer}/", StringComparison.InvariantCultureIgnoreCase);
                     if(content.Contains("./ReportViewer.aspx")) 
                     {
-                        content = content.Replace("./ReportViewer.aspx", String.Format("{0}/ReportServer/Pages/ReportViewer.aspx", proxyUrl), StringComparison.InvariantCultureIgnoreCase);
+                        content = content.Replace("./ReportViewer.aspx", $"{proxyUrl}/{ReportServer}/Pages/ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase);
                     } else 
                     {
-                        content = content.Replace("ReportViewer.aspx", String.Format("{0}/ReportServer/Pages/ReportViewer.aspx", proxyUrl), StringComparison.InvariantCultureIgnoreCase);
+                        content = content.Replace("ReportViewer.aspx", $"{proxyUrl}/{ReportServer}/Pages/ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase);
                     }
 
                     builder.Append(String.Format("{0}|{1}|{2}|{3}|", content.Length, type, id, content));
@@ -199,14 +210,14 @@ namespace Crm.Controllers
 
                 result = builder.ToString();
             } else {
-                result = result.Replace("/ReportServer/", String.Format("{0}/ReportServer/", proxyUrl), StringComparison.InvariantCultureIgnoreCase);
+                result = result.Replace($"/{ReportServer}/",$"{proxyUrl}/{ReportServer}/", StringComparison.InvariantCultureIgnoreCase);
                 
                 if(result.Contains("./ReportViewer.aspx"))
                 {
-                    result = result.Replace("./ReportViewer.aspx", String.Format("{0}/ReportServer/Pages/ReportViewer.aspx", proxyUrl), StringComparison.InvariantCultureIgnoreCase);
+                    result = result.Replace("./ReportViewer.aspx", $"{proxyUrl}/{ReportServer}/Pages/ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase);
                 } else 
                 {
-                    result = result.Replace("ReportViewer.aspx", String.Format("{0}/ReportServer/Pages/ReportViewer.aspx", proxyUrl), StringComparison.InvariantCultureIgnoreCase);
+                    result = result.Replace("ReportViewer.aspx", $"{proxyUrl}/{ReportServer}/Pages/ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase);
                 }
             }
 

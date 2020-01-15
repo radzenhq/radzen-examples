@@ -45,15 +45,20 @@ namespace Crm.Controllers.Crm
 
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{Id}")]
-    public SingleResult<OpportunityStatus> GetOpportunityStatus(int key)
+    public SingleResult<OpportunityStatus> GetOpportunityStatus(int? key)
     {
         var items = this.context.OpportunityStatuses.Where(i=>i.Id == key);
+        this.OnOpportunityStatusesGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnOpportunityStatusesGet(ref IQueryable<Models.Crm.OpportunityStatus> items);
+
     partial void OnOpportunityStatusDeleted(Models.Crm.OpportunityStatus item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteOpportunityStatus(int key)
+    public IActionResult DeleteOpportunityStatus(int? key)
     {
         try
         {
@@ -90,7 +95,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPut("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutOpportunityStatus(int key, [FromBody]Models.Crm.OpportunityStatus newItem)
+    public IActionResult PutOpportunityStatus(int? key, [FromBody]Models.Crm.OpportunityStatus newItem)
     {
         try
         {
@@ -108,7 +113,8 @@ namespace Crm.Controllers.Crm
             this.context.OpportunityStatuses.Update(newItem);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.OpportunityStatuses.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {
@@ -119,7 +125,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPatch("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchOpportunityStatus(int key, [FromBody]Delta<Models.Crm.OpportunityStatus> patch)
+    public IActionResult PatchOpportunityStatus(int? key, [FromBody]Delta<Models.Crm.OpportunityStatus> patch)
     {
         try
         {
@@ -141,7 +147,8 @@ namespace Crm.Controllers.Crm
             this.context.OpportunityStatuses.Update(item);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.OpportunityStatuses.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
         {

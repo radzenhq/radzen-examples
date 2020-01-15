@@ -45,15 +45,20 @@ namespace Crm.Controllers.Crm
 
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{Id}")]
-    public SingleResult<Task> GetTask(int key)
+    public SingleResult<Task> GetTask(int? key)
     {
         var items = this.context.Tasks.Where(i=>i.Id == key);
+        this.OnTasksGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnTasksGet(ref IQueryable<Models.Crm.Task> items);
+
     partial void OnTaskDeleted(Models.Crm.Task item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteTask(int key)
+    public IActionResult DeleteTask(int? key)
     {
         try
         {
@@ -89,7 +94,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPut("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutTask(int key, [FromBody]Models.Crm.Task newItem)
+    public IActionResult PutTask(int? key, [FromBody]Models.Crm.Task newItem)
     {
         try
         {
@@ -108,9 +113,7 @@ namespace Crm.Controllers.Crm
             this.context.SaveChanges();
 
             var itemToReturn = this.context.Tasks.Where(i => i.Id == key);
-
             Request.QueryString = Request.QueryString.Add("$expand", "Opportunity,TaskType,TaskStatus");
-
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -122,7 +125,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPatch("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchTask(int key, [FromBody]Delta<Models.Crm.Task> patch)
+    public IActionResult PatchTask(int? key, [FromBody]Delta<Models.Crm.Task> patch)
     {
         try
         {
@@ -145,9 +148,7 @@ namespace Crm.Controllers.Crm
             this.context.SaveChanges();
 
             var itemToReturn = this.context.Tasks.Where(i => i.Id == key);
-
             Request.QueryString = Request.QueryString.Add("$expand", "Opportunity,TaskType,TaskStatus");
-
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)

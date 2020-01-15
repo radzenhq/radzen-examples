@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 
 import { ConfigService } from './config.service';
 import { ODataClient } from './odata-client';
@@ -16,123 +17,123 @@ export class CrmService {
     this.odata = new ODataClient(this.http, this.basePath, { legacy: false, withCredentials: true });
   }
 
-  getContacts(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
+  getContacts(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) : Observable<any> {
     return this.odata.get(`/Contacts`, { filter, top, skip, orderby, count, expand, format, select });
   }
 
-  createContact(contact: models.Contact | null) {
-    return this.odata.post(`/Contacts`, contact, {  });
+  createContact(contact: models.Contact | null) : Observable<any> {
+    return this.odata.post(`/Contacts`, contact, {  }, []);
   }
 
-  deleteContact(id: number | null) {
+  deleteContact(id: number | null) : Observable<any> {
     return this.odata.delete(`/Contacts(${id})`, item => !(item.Id == id));
   }
 
-  getContactById(id: number | null) {
+  getContactById(id: number | null) : Observable<any> {
     return this.odata.getById(`/Contacts(${id})`, {  });
   }
 
-  updateContact(id: number | null, contact: models.Contact | null) {
-    return this.odata.patch(`/Contacts(${id})`, contact, item => item.Id == id, {  });
+  updateContact(id: number | null, contact: models.Contact | null) : Observable<any> {
+    return this.odata.patch(`/Contacts(${id})`, contact, item => item.Id == id, {  }, []);
   }
 
-  getOpportunities(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
+  getOpportunities(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) : Observable<any> {
     return this.odata.get(`/Opportunities`, { filter, top, skip, orderby, count, expand, format, select });
   }
 
-  createOpportunity(opportunity: models.Opportunity | null) {
-    return this.odata.post(`/Opportunities`, opportunity, {  });
+  createOpportunity(opportunity: models.Opportunity | null) : Observable<any> {
+    return this.odata.post(`/Opportunities`, opportunity, {  }, ['Contact', 'OpportunityStatus']);
   }
 
-  deleteOpportunity(id: number | null) {
+  deleteOpportunity(id: number | null) : Observable<any> {
     return this.odata.delete(`/Opportunities(${id})`, item => !(item.Id == id));
   }
 
-  getOpportunityById(id: number | null) {
+  getOpportunityById(id: number | null) : Observable<any> {
     return this.odata.getById(`/Opportunities(${id})`, {  });
   }
 
-  updateOpportunity(id: number | null, opportunity: models.Opportunity | null) {
-    return this.odata.patch(`/Opportunities(${id})`, opportunity, item => item.Id == id, {  });
+  updateOpportunity(id: number | null, opportunity: models.Opportunity | null) : Observable<any> {
+    return this.odata.patch(`/Opportunities(${id})`, opportunity, item => item.Id == id, {  }, ['Contact','OpportunityStatus']);
   }
 
-  getOpportunityStatuses(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
+  getOpportunityStatuses(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) : Observable<any> {
     return this.odata.get(`/OpportunityStatuses`, { filter, top, skip, orderby, count, expand, format, select });
   }
 
-  createOpportunityStatus(opportunityStatus: models.OpportunityStatus | null) {
-    return this.odata.post(`/OpportunityStatuses`, opportunityStatus, {  });
+  createOpportunityStatus(opportunityStatus: models.OpportunityStatus | null) : Observable<any> {
+    return this.odata.post(`/OpportunityStatuses`, opportunityStatus, {  }, []);
   }
 
-  deleteOpportunityStatus(id: number | null) {
+  deleteOpportunityStatus(id: number | null) : Observable<any> {
     return this.odata.delete(`/OpportunityStatuses(${id})`, item => !(item.Id == id));
   }
 
-  getOpportunityStatusById(id: number | null) {
+  getOpportunityStatusById(id: number | null) : Observable<any> {
     return this.odata.getById(`/OpportunityStatuses(${id})`, {  });
   }
 
-  updateOpportunityStatus(id: number | null, opportunityStatus: models.OpportunityStatus | null) {
-    return this.odata.patch(`/OpportunityStatuses(${id})`, opportunityStatus, item => item.Id == id, {  });
+  updateOpportunityStatus(id: number | null, opportunityStatus: models.OpportunityStatus | null) : Observable<any> {
+    return this.odata.patch(`/OpportunityStatuses(${id})`, opportunityStatus, item => item.Id == id, {  }, []);
   }
 
-  getTasks(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
+  getTasks(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) : Observable<any> {
     return this.odata.get(`/Tasks`, { filter, top, skip, orderby, count, expand, format, select });
   }
 
-  createTask(task: models.Task | null) {
-    return this.odata.post(`/Tasks`, task, {  });
+  createTask(task: models.Task | null) : Observable<any> {
+    return this.odata.post(`/Tasks`, task, {  }, ['Opportunity', 'TaskType', 'TaskStatus']);
   }
 
-  deleteTask(id: number | null) {
+  deleteTask(id: number | null) : Observable<any> {
     return this.odata.delete(`/Tasks(${id})`, item => !(item.Id == id));
   }
 
-  getTaskById(id: number | null) {
+  getTaskById(id: number | null) : Observable<any> {
     return this.odata.getById(`/Tasks(${id})`, {  });
   }
 
-  updateTask(id: number | null, task: models.Task | null) {
-    return this.odata.patch(`/Tasks(${id})`, task, item => item.Id == id, {  });
+  updateTask(id: number | null, task: models.Task | null) : Observable<any> {
+    return this.odata.patch(`/Tasks(${id})`, task, item => item.Id == id, {  }, ['Opportunity','TaskType','TaskStatus']);
   }
 
-  getTaskStatuses(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
+  getTaskStatuses(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) : Observable<any> {
     return this.odata.get(`/TaskStatuses`, { filter, top, skip, orderby, count, expand, format, select });
   }
 
-  createTaskStatus(taskStatus: models.TaskStatus | null) {
-    return this.odata.post(`/TaskStatuses`, taskStatus, {  });
+  createTaskStatus(taskStatus: models.TaskStatus | null) : Observable<any> {
+    return this.odata.post(`/TaskStatuses`, taskStatus, {  }, []);
   }
 
-  deleteTaskStatus(id: number | null) {
+  deleteTaskStatus(id: number | null) : Observable<any> {
     return this.odata.delete(`/TaskStatuses(${id})`, item => !(item.Id == id));
   }
 
-  getTaskStatusById(id: number | null) {
+  getTaskStatusById(id: number | null) : Observable<any> {
     return this.odata.getById(`/TaskStatuses(${id})`, {  });
   }
 
-  updateTaskStatus(id: number | null, taskStatus: models.TaskStatus | null) {
-    return this.odata.patch(`/TaskStatuses(${id})`, taskStatus, item => item.Id == id, {  });
+  updateTaskStatus(id: number | null, taskStatus: models.TaskStatus | null) : Observable<any> {
+    return this.odata.patch(`/TaskStatuses(${id})`, taskStatus, item => item.Id == id, {  }, []);
   }
 
-  getTaskTypes(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) {
+  getTaskTypes(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null, format: string | null, select: string | null) : Observable<any> {
     return this.odata.get(`/TaskTypes`, { filter, top, skip, orderby, count, expand, format, select });
   }
 
-  createTaskType(taskType: models.TaskType | null) {
-    return this.odata.post(`/TaskTypes`, taskType, {  });
+  createTaskType(taskType: models.TaskType | null) : Observable<any> {
+    return this.odata.post(`/TaskTypes`, taskType, {  }, []);
   }
 
-  deleteTaskType(id: number | null) {
+  deleteTaskType(id: number | null) : Observable<any> {
     return this.odata.delete(`/TaskTypes(${id})`, item => !(item.Id == id));
   }
 
-  getTaskTypeById(id: number | null) {
+  getTaskTypeById(id: number | null) : Observable<any> {
     return this.odata.getById(`/TaskTypes(${id})`, {  });
   }
 
-  updateTaskType(id: number | null, taskType: models.TaskType | null) {
-    return this.odata.patch(`/TaskTypes(${id})`, taskType, item => item.Id == id, {  });
+  updateTaskType(id: number | null, taskType: models.TaskType | null) : Observable<any> {
+    return this.odata.patch(`/TaskTypes(${id})`, taskType, item => item.Id == id, {  }, []);
   }
 }

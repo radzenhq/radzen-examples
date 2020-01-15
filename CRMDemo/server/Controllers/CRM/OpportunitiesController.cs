@@ -45,15 +45,20 @@ namespace Crm.Controllers.Crm
 
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{Id}")]
-    public SingleResult<Opportunity> GetOpportunity(int key)
+    public SingleResult<Opportunity> GetOpportunity(int? key)
     {
         var items = this.context.Opportunities.Where(i=>i.Id == key);
+        this.OnOpportunitiesGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnOpportunitiesGet(ref IQueryable<Models.Crm.Opportunity> items);
+
     partial void OnOpportunityDeleted(Models.Crm.Opportunity item);
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteOpportunity(int key)
+    public IActionResult DeleteOpportunity(int? key)
     {
         try
         {
@@ -90,7 +95,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPut("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutOpportunity(int key, [FromBody]Models.Crm.Opportunity newItem)
+    public IActionResult PutOpportunity(int? key, [FromBody]Models.Crm.Opportunity newItem)
     {
         try
         {
@@ -109,9 +114,7 @@ namespace Crm.Controllers.Crm
             this.context.SaveChanges();
 
             var itemToReturn = this.context.Opportunities.Where(i => i.Id == key);
-
             Request.QueryString = Request.QueryString.Add("$expand", "Contact,OpportunityStatus");
-
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -123,7 +126,7 @@ namespace Crm.Controllers.Crm
 
     [HttpPatch("{Id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchOpportunity(int key, [FromBody]Delta<Models.Crm.Opportunity> patch)
+    public IActionResult PatchOpportunity(int? key, [FromBody]Delta<Models.Crm.Opportunity> patch)
     {
         try
         {
@@ -146,9 +149,7 @@ namespace Crm.Controllers.Crm
             this.context.SaveChanges();
 
             var itemToReturn = this.context.Opportunities.Where(i => i.Id == key);
-
             Request.QueryString = Request.QueryString.Add("$expand", "Contact,OpportunityStatus");
-
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)

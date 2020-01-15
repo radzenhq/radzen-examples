@@ -1,0 +1,15 @@
+{
+  "name": "radzen-crm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^7.1.8",
+    "electron-builder": "^21.2.0"
+  }
+}

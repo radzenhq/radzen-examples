@@ -9,7 +9,7 @@ namespace Crm.Models.Crm
   {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public int? Id
     {
       get;
       set;
@@ -25,7 +25,6 @@ namespace Crm.Models.Crm
       set;
     }
 
-    [ForeignKey("OpportunityId")]
     public Opportunity Opportunity { get; set; }
     public DateTime DueDate
     {
@@ -38,7 +37,6 @@ namespace Crm.Models.Crm
       set;
     }
 
-    [ForeignKey("TypeId")]
     public TaskType TaskType { get; set; }
     public int? StatusId
     {
@@ -46,7 +44,6 @@ namespace Crm.Models.Crm
       set;
     }
 
-    [ForeignKey("StatusId")]
     public TaskStatus TaskStatus { get; set; }
   }
 }

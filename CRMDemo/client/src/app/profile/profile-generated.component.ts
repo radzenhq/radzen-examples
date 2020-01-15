@@ -6,7 +6,7 @@ import { LOCALE_ID, ChangeDetectorRef, ViewChild, AfterViewInit, Injector, OnIni
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { DialogService, DIALOG_PARAMETERS, DialogRef } from '@radzen/angular/dist/dialog';
 import { NotificationService } from '@radzen/angular/dist/notification';
@@ -101,7 +101,7 @@ export class ProfileGenerated implements AfterViewInit, OnInit, OnDestroy {
 
   load() {
     this.httpClient.request('get', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/UserPersonalData`, {
-withCredentials: true,
+      withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       })
@@ -127,7 +127,7 @@ withCredentials: true,
     formData.append('lastName', `${event.LastName}`);
     formData.append('picture', `${event.Picture}`);
     this.httpClient.request('post', `${this.configService.get('serverMethodsUrl')}api/ServerMethods/UpdatePersonalData`, {
-withCredentials: true,
+      withCredentials: true,
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.security.token}`
       }),
