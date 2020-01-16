@@ -3,7 +3,7 @@
     <div class="col-md-6 d-flex align-items-center">
       <rz-sidebar-toggle #sidebarToggle0>
       </rz-sidebar-toggle>
-      <rz-heading #heading0 size="H3" [style]="{'marginBottom':'0px'}" text="Radzen Showcase Demo">
+      <rz-heading #heading0 size="H3" [style]="{'marginBottom': '0px'}" text="Radzen Showcase Demo">
       </rz-heading>
     </div>
     <div class="col-md-6 text-lg-right">
@@ -29,7 +29,7 @@
   </rz-content-container>
 </rz-body>
 <rz-sidebar #sidebar0 [stretch]="true">
-  <rz-image #image0 path="/assets/images/radzen-logo-white.svg" [style]="{'marginBottom':'20px','marginLeft':'20px','marginRight':'20px','marginTop':'20px','width':'200px'}">
+  <rz-image #image0 path="assets/images/radzen-logo-white.svg" [style]="{'marginBottom': '20px', 'marginLeft': '20px', 'marginRight': '20px', 'marginTop': '20px', 'width': '200px'}">
   </rz-image>
   <rz-panelmenu #panelmenu0 [style]="{}">
     <rz-panelmenu-item icon="dashboard" path="dashboard" text="Dashboard" *ngIf="security?.isInRole(['Everybody'])">

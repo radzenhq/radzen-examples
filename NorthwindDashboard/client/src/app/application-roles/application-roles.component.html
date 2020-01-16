@@ -3,7 +3,7 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [data]="getRolesResult" emptyText="No records to display." addText="Add" (delete)="grid0Delete($event)" (add)="grid0Add($event)">
+      <rz-grid #grid0 [allowDelete]="true" [allowAdd]="true" [data]="getRolesResult" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" emptyText="No records to display." addText="Add" (delete)="grid0Delete($event)" (add)="grid0Add($event)">
         <rz-grid-column property="Name" title="Name">
         </rz-grid-column>
       </rz-grid>

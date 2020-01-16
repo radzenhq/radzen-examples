@@ -35,7 +35,8 @@
                       "property": "Email",
                       "type": "string",
                       "required": true,
-                      "title": "Email"
+                      "title": "Email",
+                      "requiredText": "is required"
                     },
                     {
                       "title": "Roles",
@@ -44,20 +45,23 @@
                       "data": "${roles}",
                       "multiple": true,
                       "textProperty": "Name",
-                      "valueProperty": "Name"
+                      "valueProperty": "Name",
+                      "requiredText": "is required"
                     },
                     {
                       "type": "password",
                       "property": "Password",
                       "required": true,
-                      "title": "Password"
+                      "title": "Password",
+                      "requiredText": "is required"
                     },
                     {
                       "type": "password",
                       "property": "ConfirmPassword",
                       "compare": "Password",
                       "required": true,
-                      "title": "Confirm password"
+                      "title": "Confirm password",
+                      "requiredText": "is required"
                     }
                   ],
                   "events": {

@@ -1,11 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/throw';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
 
 export interface ODataQueryParams {
   top?: number;
@@ -53,43 +49,77 @@ function updateCount(result, amount) {
   }
 }
 
+function errorResponse(response) {
+  if (response.status == 0) {
+    return { ...response, error: { message: response.statusText } };
+  } else {
+    return { ...response, ...response.error };
+  }
+}
+
+function toHttpParams(odataParams: ODataQueryParams | null, legacy: boolean): HttpParams | null {
+  if (odataParams == null) {
+    return null;
+  }
+
+  return Object.keys(odataParams).reduce((params, key) => {
+    let value = odataParams[key];
+
+    if (value == null || value === '') {
+      return params;
+    }
+
+    if (key == 'filter') {
+      if (legacy) {
+        value = toLegacyFilter(value);
+      }
+
+      if (value.startsWith(' and ') || value.endsWith(' and ')) {
+        value = value.split(' and ').filter(v => v).join(' and ');
+      }
+    }
+
+    return params.set(`$${key}`, value.toString());
+  }, new HttpParams());
+}
+
 export class ODataClient {
   cache: { [resource: string]: { result: BehaviorSubject<any> } } = {};
 
   constructor(private http: HttpClient, private basePath: string, private options: { legacy: boolean, withCredentials: boolean }) {
   }
 
-  get(path: string, odataParams?: ODataQueryParams) {
-    if (!odataParams) {
-      return this.request('get', path)
-      .map(response => {
+  getById(path: string, odataParams?: ODataQueryParams) {
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('get', path, params)
+      .pipe(map(response => {
         switch (response.status) {
           case 200:
             return this.filterResponseBody(response.body);
         }
-      });
+      }));
+  }
+
+  get(path: string, odataParams?: ODataQueryParams) {
+    if (!odataParams) {
+      return this.request('get', path)
+      .pipe(map(response => {
+        switch (response.status) {
+          case 200:
+            return this.filterResponseBody(response.body);
+        }
+      }));
     }
 
     if (odataParams.format == 'csv' || odataParams.format == 'xlsx') {
       return this.export(path, odataParams);
     }
 
-    const params = Object.keys(odataParams).reduce((params, key) => {
-      let value = odataParams[key];
-
-      if (value == null || value === '') {
-        return params;
-      }
-
-      if (key == 'filter' && this.options.legacy) {
-        value = toLegacyFilter(value);
-      }
-
-      return params.set(`$${key}`, value.toString());
-    }, new HttpParams());
+    const params = toHttpParams(odataParams, this.options.legacy);
 
     return this.request('get', path, params)
-    .map(response => {
+    .pipe(map(response => {
       switch (response.status) {
         case 200: {
           const key = cacheKey(path);
@@ -102,13 +132,12 @@ export class ODataClient {
           return result;
         }
       }
-    })
-    .switchMap(result => result);
+    }), switchMap(result => result));
   }
 
   delete(path: string, filterByKeys: (item: any) => boolean) {
     return this.request('delete', path)
-    .map(response => {
+    .pipe(map(response => {
       switch (response.status) {
         case 204: {
           const cache = this.cache[cacheKey(path)];
@@ -125,25 +154,27 @@ export class ODataClient {
           return {};
         }
       }
-    });
+    }));
   }
 
   invoke(path: string, body?: any) {
     return this.request('post', path, null, body)
-    .map(response => {
+    .pipe(map(response => {
       switch (response.status) {
         case 200: {
           return response.body;
         }
       }
-    });
+    }));
   }
 
-  post(path: string, body: any) {
+  post(path: string, body: any, odataParams?: ODataQueryParams, navigationProperties?: string[]) {
     const cache = this.cache[cacheKey(path)];
 
-    return this.request('post', path, null, body)
-    .map(response => {
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('post', path, params, body)
+    .pipe(map(response => {
       switch (response.status) {
         case 201: {
           const { body } = response;
@@ -160,14 +191,16 @@ export class ODataClient {
           return body;
         }
       }
-    });
+    }));
   }
 
-  put(path: string, body: any, findByKeys: (item: any) => boolean) {
+  put(path: string, body: any, findByKeys: (item: any) => boolean, odataParams?: ODataQueryParams, navigationProperties?: string[]) {
     const cache = this.cache[cacheKey(path)];
 
-    return this.request('put', path, null, body)
-    .map(response => {
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('put', path, params, body)
+    .pipe(map(response => {
       switch (response.status) {
         case 200:
         case 204: {
@@ -185,26 +218,28 @@ export class ODataClient {
           return body;
         }
       }
-    });
+    }));
   }
 
   upload(path: string, file: any) {
     return this.uploadFile('put', path, file)
-    .map(response => {
+    .pipe(map(response => {
       switch (response.status) {
         case 200:
         case 204: {
           return file;
         }
       }
-    });
+    }));
   }
 
-  patch(path: string, body: any, findByKeys: (item: any) => boolean) {
+  patch(path: string, body: any, findByKeys: (item: any) => boolean, odataParams?: ODataQueryParams, navigationProperties?: string[]) {
     const cache = this.cache[cacheKey(path)];
 
-    return this.request('patch', path, null, body)
-    .map(response => {
+    const params = toHttpParams(odataParams, this.options.legacy);
+
+    return this.request('patch', path, params, body, navigationProperties)
+    .pipe(map(response => {
       switch (response.status) {
         case 200:
         case 204: {
@@ -222,7 +257,7 @@ export class ODataClient {
           return body;
         }
       }
-    });
+    }));
   }
 
   export(path: string, odataParams?: ODataQueryParams) {
@@ -241,8 +276,14 @@ export class ODataClient {
         return params;
       }
 
-      if (key == 'filter' && this.options.legacy) {
-        value = toLegacyFilter(value);
+      if (key == 'filter') {
+        if(this.options.legacy) {
+          value = toLegacyFilter(value);
+        }
+
+        if(value.startsWith(' and ') || value.endsWith(' and ')) {
+          value = value.split(' and ').filter(v => v).join(' and ');
+        }
       }
 
       return params.set(`$${key}`, value.toString());
@@ -254,15 +295,15 @@ export class ODataClient {
       params: odataParams ? params : undefined,
       headers,
       withCredentials: this.options.withCredentials
-    }).map(response => {
+    }).pipe(map(response => {
       this.downloadFile(response, `Export.${odataParams.format}`)
-    })
-    .catch(response => {
-      return Observable.throw(response);
-    });
+    }))
+    .pipe(catchError(response => {
+      return throwError(errorResponse(response));
+    }));
   }
 
-  private request(method: string, path: string, params?: HttpParams, body?: any) {
+  private request(method: string, path: string, params?: HttpParams, body?: any, navigationProperties?: string[]) {
     let headers = new HttpHeaders();
 
     headers = headers.set('Accept', 'application/json');
@@ -275,20 +316,20 @@ export class ODataClient {
       headers = headers.set('If-Match', '*');
     }
 
-    if (body && '@odata.etag' in body) {
+    if (body && typeof body === 'object' && '@odata.etag' in body) {
       headers = headers.set('If-Match', body['@odata.etag']);
     }
 
-    return this.http.request(method, Location.joinWithSlash(this.basePath, path), {
+    return this.http.request(method, Location.joinWithSlash(this.basePath, path.replace(/'null'/g, 'null')), {
       observe: 'response',
-      body: body ? JSON.stringify(this.filterRequestBody(body)) : undefined,
+      body: body ? JSON.stringify(this.filterRequestBody(body, navigationProperties)) : undefined,
       params,
       headers,
       withCredentials: this.options.withCredentials
     })
-    .catch(response => {
-      return Observable.throw(response);
-    });
+    .pipe(catchError(response => {
+      return throwError(errorResponse(response));
+    }));
   }
 
   private uploadFile(method: string, path: string, file: any) {
@@ -322,9 +363,9 @@ export class ODataClient {
     }
   }
 
-  private filterRequestBody(body) {
+  private filterRequestBody(body, navigationProperties) {
     return Object.keys(body)
-      .filter(key => key == 'RoleNames' || (!Array.isArray(body[key]) && !(Object.prototype.toString.call(body[key]) === '[object Object]')))
+      .filter(key => key == 'RoleNames' || ((navigationProperties || []).indexOf(key) == -1 && !Array.isArray(body[key]) && !(Object.prototype.toString.call(body[key]) === '[object Object]')))
       .reduce((obj, key) => {
         return {
           ...obj,

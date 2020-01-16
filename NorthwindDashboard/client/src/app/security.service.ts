@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 import { ODataClient } from './odata-client';
@@ -16,13 +16,14 @@ export class UserService {
   name: string;
   roles: string[];
   profile: any;
+  jwt = new JwtHelperService();
 
   constructor() {
     this.init();
   }
 
   isAuthenticated() {
-    const notExpired = tokenNotExpired(TOKEN);
+    const notExpired = !this.jwt.isTokenExpired(localStorage.getItem(TOKEN));
 
     if(localStorage.getItem(TOKEN) && !notExpired) {
       this.logout();
@@ -62,9 +63,7 @@ export class UserService {
     };
 
     if (this.isAuthenticated()) {
-      const jwt = new JwtHelper();
-
-      profile = jwt.decodeToken(localStorage.getItem(TOKEN));
+      profile = this.jwt.decodeToken(localStorage.getItem(TOKEN));
     }
 
     this.profile = profile;
@@ -143,13 +142,13 @@ export class SecurityService {
     }
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string) : Observable<any> {
     return this.http.post(`${this.basePath}/login`, JSON.stringify({ username, password }),
       {
         observe: 'response',
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       })
-      .map((result: any) => {
+      .pipe(map((result: any) => {
         if (result.status == 200) {
           const { access_token } = result.body;
 
@@ -161,90 +160,90 @@ export class SecurityService {
 
           this.router.navigateByUrl(redirectUrl);
         }
-      })
-      .catch(response => {
-        return Observable.throw(response.error);
-      });
+      }))
+      .pipe(catchError(response => {
+        return throwError(response.error);
+      }));
   }
 
-  resetPassword(username: string) {
+  resetPassword(username: string) : Observable<any> {
     return this.http.post(`${this.basePath}/reset-password`, JSON.stringify({ username }),
       {
         observe: 'response',
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       })
-      .map((result: any) => {
+      .pipe(map((result: any) => {
         if (result.status == 200) {
           const { redirectUrl = '/' } = this.router.routerState.snapshot.root.queryParams;
 
           this.router.navigateByUrl(redirectUrl);
         }
-      })
-      .catch(response => {
-        return Observable.throw(response.error);
-      });
+      }))
+      .pipe(catchError(response => {
+        return throwError(response.error);
+      }));
   }
 
-  registerUser(user: any) {
+  registerUser(user: any) : Observable<any> {
     return this.http.post(`${this.basePath}/register`, JSON.stringify(user),
       {
         observe: 'response',
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       })
-      .catch(response => {
-        return Observable.throw(response.error);
-      });
+      .pipe(catchError(response => {
+        return throwError(response.error);
+      }));
   }
 
-  changePassword(oldPassword: string, newPassword: string) {
+  changePassword(oldPassword: string, newPassword: string) : Observable<any> {
     return this.http.post( `${this.basePath}/change-password`, JSON.stringify({ oldPassword, newPassword }),
       {
         observe: 'response',
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       })
-      .catch(response => {
-        return Observable.throw(response.error);
-      });
+      .pipe(catchError(response => {
+        return throwError(response.error);
+      }));
   }
 
 
-  getRoleById(id: string) {
+  getRoleById(id: string) : Observable<any> {
     return this.odata.get(`/ApplicationRoles('${id}')`);
   }
 
-  getRoles(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null) {
+  getRoles(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null) : Observable<any> {
     return this.odata.get('/ApplicationRoles', { filter, top, skip, orderby, count, expand });
   }
 
-  createRole(role: any) {
+  createRole(role: any) : Observable<any> {
     return this.odata.post('/ApplicationRoles', role);
   }
 
-  updateRole(id: string, role: any) {
+  updateRole(id: string, role: any) : Observable<any> {
     return this.odata.patch(`/ApplicationRoles('${id}')`, role, role => role.Id == id);
   }
 
-  deleteRole(id: string) {
+  deleteRole(id: string) : Observable<any> {
     return this.odata.delete(`/ApplicationRoles('${id}')`, role => role.Id != id);
   }
 
-  getUserById(id: string) {
+  getUserById(id: string) : Observable<any> {
     return this.odata.get(`/ApplicationUsers('${id}')`);
   }
 
-  createUser(user: any) {
+  createUser(user: any) : Observable<any> {
     return this.odata.post('/ApplicationUsers', user);
   }
 
-  getUsers(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null) {
+  getUsers(filter: string | null, top: number | null, skip: number | null, orderby: string | null, count: boolean | null, expand: string | null) : Observable<any> {
     return this.odata.get('/ApplicationUsers', { filter, top, skip, orderby, count, expand });
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: string) : Observable<any> {
     return this.odata.delete(`/ApplicationUsers('${id}')`, user => user.Id != id);
   }
 
-  updateUser(id: string, user: any) {
+  updateUser(id: string, user: any) : Observable<any> {
     return this.odata.patch(`/ApplicationUsers('${id}')`, user, user => user.Id == id);
   }
 }

@@ -180,7 +180,11 @@
                   },
                   "name": "grid0",
                   "title": "",
-                  "type": "grid"
+                  "type": "grid",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteCancelText": "Cancel"
                 }
               ],
               "type": "col"

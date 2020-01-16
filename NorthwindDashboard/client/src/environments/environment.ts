@@ -3,8 +3,9 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
 export const environment = {
-  northwind: 'https://services.radzen.com/odata/Northwind',
+  serverMethodsUrl: 'http://localhost:5000/',
+  northwind: 'http://localhost:5000/odata/Northwind',
 
-  securityUrl: 'https://services.radzen.com/auth',
+  securityUrl: 'http://localhost:5000/auth',
   production: false,
 };

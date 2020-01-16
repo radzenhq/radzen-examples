@@ -3,10 +3,10 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrderDetailsCount" [data]="getNorthwindOrderDetailsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)">
-        <rz-grid-column filterProperty="NorthwindOrder.Customer.CompanyName" [filterable]="false" property="CustomerID" sortProperty="NorthwindOrder.Customer.CompanyName" [sortable]="false" title="Customer" width="360px" type="string">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getOrderDetailsCount" [data]="getOrderDetailsResult" emptyText="No records to display." [pageSize]="10" (add)="grid0Add($event)" (loadData)="grid0LoadData($event)">
+        <rz-grid-column filterProperty="Order.Customer.CompanyName" [filterable]="false" property="CustomerID" sortProperty="Order.Customer.CompanyName" [sortable]="false" title="Customer" width="360px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link0 icon="credit_card" [parameters]="[{'name':'CustomerID','value':data?.NorthwindOrder?.CustomerID}]" path="customers-by-customer-id" [text]="data?.NorthwindOrder?.Customer?.CompanyName">
+            <rz-link #link0 icon="credit_card" [parameters]="[{'name': 'CustomerID', 'value': data?.Order?.CustomerID}]" path="customers-by-customer-id" [text]="data?.Order?.Customer?.CompanyName">
             </rz-link>
           </ng-template>
         </rz-grid-column>

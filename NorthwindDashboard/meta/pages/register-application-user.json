@@ -1,5 +1,7 @@
 {
-  "access": "Everybody",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "type": "content",
@@ -18,20 +20,23 @@
                       "property": "Email",
                       "type": "string",
                       "required": true,
-                      "title": "Email"
+                      "title": "Email",
+                      "requiredText": "is required"
                     },
                     {
                       "type": "password",
                       "property": "Password",
                       "required": true,
-                      "title": "Password"
+                      "title": "Password",
+                      "requiredText": "is required"
                     },
                     {
                       "type": "password",
                       "property": "ConfirmPassword",
                       "compare": "Password",
                       "required": true,
-                      "title": "Confirm password"
+                      "title": "Confirm password",
+                      "requiredText": "is required"
                     }
                   ],
                   "events": {

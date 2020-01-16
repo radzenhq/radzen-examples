@@ -1,6 +1,7 @@
 export const environment = {
-  northwind: 'https://services.radzen.com/odata/Northwind',
+  serverMethodsUrl: 'http://localhost:5000/',
+  northwind: 'http://localhost:5000/odata/Northwind',
 
-  securityUrl: 'https://services.radzen.com/auth',
+  securityUrl: 'http://localhost:5000/auth',
   production: true
 };

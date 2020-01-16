@@ -1,5 +1,4 @@
 {
-  "access": "Everybody",
   "components": [
     {
       "type": "content",
@@ -30,97 +29,16 @@
                             "type": "notify"
                           }
                         ],
-                        "name": "Northwind.createNorthwindOrderDetail",
+                        "name": "Northwind.createOrderDetail",
                         "parameters": [
                           {
-                            "name": "NorthwindOrderDetail",
+                            "name": "OrderDetail",
                             "value": "${event}"
                           }
                         ],
                         "then": [
                           {
-                            "path": "order-details",
-                            "type": "navigate"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "loadData": [
-                      {
-                        "name": "Northwind.getNorthwindOrders",
-                        "condition": "event.property == 'OrderID'",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "${event.top}"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "${event.skip}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "true"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getNorthwindOrdersResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getNorthwindOrdersCount",
-                            "type": "set",
-                            "value": "result['@odata.count']"
-                          }
-                        ],
-                        "type": "invoke"
-                      },
-                      {
-                        "name": "Northwind.getNorthwindProducts",
-                        "condition": "event.property == 'ProductID'",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "${event.top}"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "${event.skip}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "true"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getProductsResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getProductsCount",
-                            "type": "set",
-                            "value": "result['@odata.count']"
+                            "type": "back"
                           }
                         ],
                         "type": "invoke"
@@ -130,48 +48,52 @@
                   "fields": [
                     {
                       "data": "${getOrdersResult}",
-                      "count": "${getOrdersCount}",
                       "property": "OrderID",
                       "required": true,
                       "textProperty": "CustomerID",
                       "title": "Order",
-                      "type": "lookuppopup",
+                      "type": "lookup",
                       "valueProperty": "OrderID",
                       "placeholder": "Choose Order",
                       "requiredText": "is required"
                     },
                     {
                       "data": "${getProductsResult}",
-                      "count": "${getProductsCount}",
                       "property": "ProductID",
                       "required": true,
                       "textProperty": "ProductName",
                       "title": "Product",
-                      "type": "lookuppopup",
+                      "type": "lookup",
                       "valueProperty": "ProductID",
                       "placeholder": "Choose Product",
                       "requiredText": "is required"
                     },
                     {
                       "property": "UnitPrice",
-                      "required": [],
+                      "required": false,
                       "title": "Unit Price",
                       "type": "number",
-                      "requiredText": "is required"
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     },
                     {
                       "property": "Quantity",
-                      "required": [],
+                      "required": false,
                       "title": "Quantity",
                       "type": "integer",
-                      "requiredText": "is required"
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     },
                     {
                       "property": "Discount",
-                      "required": [],
+                      "required": false,
                       "title": "Discount",
                       "type": "number",
-                      "requiredText": "is required"
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     }
                   ],
                   "name": "form0",
@@ -187,61 +109,25 @@
   "events": {
     "load": [
       {
-        "name": "Northwind.getNorthwindOrders",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'OrderID')).pageSize"
-          },
-          {
-            "name": "$skip",
-            "value": "0"
-          },
-          {
-            "name": "$count",
-            "value": "true"
-          }
-        ],
+        "name": "Northwind.getOrders",
+        "parameters": [],
         "then": [
           {
             "name": "getOrdersResult",
             "type": "set",
             "value": "${result.value}"
-          },
-          {
-            "name": "getOrdersCount",
-            "type": "set",
-            "value": "result['@odata.count']"
           }
         ],
         "type": "invoke"
       },
       {
-        "name": "Northwind.getNorthwindProducts",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'ProductID')).pageSize"
-          },
-          {
-            "name": "$skip",
-            "value": "0"
-          },
-          {
-            "name": "$count",
-            "value": "true"
-          }
-        ],
+        "name": "Northwind.getProducts",
+        "parameters": [],
         "then": [
           {
             "name": "getProductsResult",
             "type": "set",
             "value": "${result.value}"
-          },
-          {
-            "name": "getProductsCount",
-            "type": "set",
-            "value": "result['@odata.count']"
           }
         ],
         "type": "invoke"
@@ -249,5 +135,8 @@
     ]
   },
   "name": "Add Order Detail",
+  "access": [
+    "Authenticated"
+  ],
   "layout": "Main"
 }

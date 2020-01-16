@@ -3,18 +3,18 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindProductsCount" [data]="getNorthwindProductsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getProductsCount" [data]="getProductsResult" emptyText="No records to display." [pageSize]="10" (add)="grid0Add($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column property="ProductName" title="Product Name" width="200px" type="string">
         </rz-grid-column>
         <rz-grid-column filterProperty="Supplier.CompanyName" format="int32" sortProperty="Supplier.CompanyName" title="Supplier" width="300px" type="integer">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link0 icon="motorcycle" [parameters]="[{'name':'SupplierID','value':data?.SupplierID}]" path="suppliers-by-supplier-id" [text]="data?.Supplier?.CompanyName">
+            <rz-link #link0 icon="motorcycle" [parameters]="[{'name': 'SupplierID', 'value': data?.SupplierID}]" path="suppliers-by-supplier-id" [text]="data?.Supplier?.CompanyName">
             </rz-link>
           </ng-template>
         </rz-grid-column>
         <rz-grid-column filterProperty="Category.CategoryName" sortProperty="Category.CategoryName" title="Category" width="200px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link1 icon="folder" [parameters]="[{'name':'CategoryID','value':data?.CategoryID}]" path="categories-by-category-id" [text]="data?.Category?.CategoryName">
+            <rz-link #link1 icon="folder" [parameters]="[{'name': 'CategoryID', 'value': data?.CategoryID}]" path="categories-by-category-id" [text]="data?.Category?.CategoryName">
             </rz-link>
           </ng-template>
         </rz-grid-column>
@@ -34,7 +34,7 @@
         </rz-grid-column>
         <rz-grid-column [filterable]="false" [sortable]="true" title="Orders" width="140px" type="array">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link2 icon="shopping_cart" [parameters]="[{'name':'ProductID','value':data?.ProductID}]" path="orders-by-product-id" text="Orders">
+            <rz-link #link2 icon="shopping_cart" [parameters]="[{'name': 'ProductID', 'value': data?.ProductID}]" path="orders-by-product-id" text="Orders">
             </rz-link>
           </ng-template>
         </rz-grid-column>

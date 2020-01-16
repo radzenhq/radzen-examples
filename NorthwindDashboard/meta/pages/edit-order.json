@@ -1,10 +1,57 @@
 {
-  "access": "Everybody",
   "components": [
     {
       "type": "content",
       "container": "main",
       "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
         {
           "type": "row",
           "components": [
@@ -13,7 +60,7 @@
               "class": "col-md-12",
               "components": [
                 {
-                  "data": "${northwindorder}",
+                  "data": "${order}",
                   "events": {
                     "cancel": [
                       {
@@ -24,106 +71,31 @@
                       {
                         "error": [
                           {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
+                          {
                             "detail": "Unable to update Order",
                             "severity": "error",
                             "summary": "Error",
                             "type": "notify"
                           }
                         ],
-                        "name": "Northwind.updateNorthwindOrder",
+                        "name": "Northwind.updateOrder",
                         "parameters": [
                           {
                             "name": "OrderID",
                             "value": "${parameters.OrderID}"
                           },
                           {
-                            "name": "NorthwindOrder",
+                            "name": "Order",
                             "value": "${event}"
                           }
                         ],
                         "then": [
                           {
                             "type": "back"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
-                    "loadData": [
-                      {
-                        "name": "Northwind.getCustomers",
-                        "condition": "event.property == 'CustomerID'",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "${event.top}"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "${event.skip}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "true"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getCustomersResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getCustomersCount",
-                            "type": "set",
-                            "value": "result['@odata.count']"
-                          }
-                        ],
-                        "type": "invoke"
-                      },
-                      {
-                        "name": "Northwind.getEmployees",
-                        "condition": "event.property == 'EmployeeID'",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "${event.top}"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "${event.skip}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "true"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getEmployeesResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getEmployeesCount",
-                            "type": "set",
-                            "value": "result['@odata.count']"
                           }
                         ],
                         "type": "invoke"
@@ -137,10 +109,9 @@
                       "required": false,
                       "textProperty": "CompanyName",
                       "title": "Customer",
-                      "type": "lookuppopup",
+                      "type": "lookup",
                       "valueProperty": "CustomerID",
                       "placeholder": "Choose Customer",
-                      "count": "${getCustomersCount}",
                       "requiredText": "is required"
                     },
                     {
@@ -149,10 +120,9 @@
                       "required": false,
                       "textProperty": "LastName",
                       "title": "Employee",
-                      "type": "lookuppopup",
+                      "type": "lookup",
                       "valueProperty": "EmployeeID",
                       "placeholder": "Choose Employee",
-                      "count": "${getEmployeesCount}",
                       "requiredText": "is required"
                     },
                     {
@@ -177,17 +147,31 @@
                       "requiredText": "is required"
                     },
                     {
+                      "data": "${getShippersResult}",
+                      "property": "ShipVia",
+                      "required": false,
+                      "textProperty": "CompanyName",
+                      "title": "Shipper",
+                      "type": "lookup",
+                      "valueProperty": "ShipperID",
+                      "placeholder": "Choose Shipper",
+                      "requiredText": "is required"
+                    },
+                    {
                       "property": "Freight",
                       "required": false,
                       "title": "Freight",
                       "type": "number",
-                      "requiredText": "is required"
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     },
                     {
                       "property": "ShipName",
                       "required": false,
                       "title": "Ship Name",
                       "type": "string",
+                      "maxLength": 40,
                       "requiredText": "is required"
                     },
                     {
@@ -195,6 +179,7 @@
                       "required": false,
                       "title": "Ship Address",
                       "type": "string",
+                      "maxLength": 60,
                       "requiredText": "is required"
                     },
                     {
@@ -202,6 +187,7 @@
                       "required": false,
                       "title": "Ship City",
                       "type": "string",
+                      "maxLength": 15,
                       "requiredText": "is required"
                     },
                     {
@@ -209,6 +195,7 @@
                       "required": false,
                       "title": "Ship Region",
                       "type": "string",
+                      "maxLength": 15,
                       "requiredText": "is required"
                     },
                     {
@@ -216,6 +203,7 @@
                       "required": false,
                       "title": "Ship Postal Code",
                       "type": "string",
+                      "maxLength": 10,
                       "requiredText": "is required"
                     },
                     {
@@ -223,11 +211,13 @@
                       "required": false,
                       "title": "Ship Country",
                       "type": "string",
+                      "maxLength": 15,
                       "requiredText": "is required"
                     }
                   ],
                   "name": "form0",
-                  "type": "form"
+                  "type": "form",
+                  "visible": "${canEdit}"
                 }
               ]
             }
@@ -239,7 +229,12 @@
   "events": {
     "load": [
       {
-        "name": "Northwind.getNorthwindOrderById",
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getOrderByOrderID",
         "parameters": [
           {
             "name": "OrderID",
@@ -248,69 +243,52 @@
         ],
         "then": [
           {
-            "name": "northwindorder",
+            "name": "order",
             "type": "set",
             "value": "${result}"
+          }
+        ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
           }
         ],
         "type": "invoke"
       },
       {
         "name": "Northwind.getCustomers",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'CustomerID')).pageSize"
-          },
-          {
-            "name": "$skip",
-            "value": "0"
-          },
-          {
-            "name": "$count",
-            "value": "true"
-          }
-        ],
+        "parameters": [],
         "then": [
           {
             "name": "getCustomersResult",
             "type": "set",
             "value": "${result.value}"
-          },
-          {
-            "name": "getCustomersCount",
-            "type": "set",
-            "value": "result['@odata.count']"
           }
         ],
         "type": "invoke"
       },
       {
         "name": "Northwind.getEmployees",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'EmployeeID')).pageSize"
-          },
-          {
-            "name": "$skip",
-            "value": "0"
-          },
-          {
-            "name": "$count",
-            "value": "true"
-          }
-        ],
+        "parameters": [],
         "then": [
           {
             "name": "getEmployeesResult",
             "type": "set",
             "value": "${result.value}"
-          },
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getShippers",
+        "parameters": [],
+        "then": [
           {
-            "name": "getEmployeesCount",
+            "name": "getShippersResult",
             "type": "set",
-            "value": "result['@odata.count']"
+            "value": "${result.value}"
           }
         ],
         "type": "invoke"
@@ -318,5 +296,8 @@
     ]
   },
   "name": "Edit Order",
+  "access": [
+    "Authenticated"
+  ],
   "layout": "Main"
 }

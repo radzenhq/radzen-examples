@@ -4,6 +4,9 @@
   ],
   "generator": "@radzen/angular-generator",
   "https": false,
+  "ignore": [
+    ""
+  ],
   "layouts": [
     "Login",
     "Main"
@@ -13,16 +16,11 @@
   "navigation": [
     "Categories",
     "Customers",
-    "Customer Customer Demos",
-    "Customer Demographics",
     "Employees",
-    "Employee Territories",
     "Orders",
     "Order Details",
     "Products",
-    "Regions",
     "Suppliers",
-    "Territories",
     "Dashboard"
   ],
   "pages": [
@@ -32,18 +30,9 @@
     "Customers",
     "Add Customer",
     "Edit Customer",
-    "Customer Customer Demos",
-    "Add Customer Customer Demo",
-    "Edit Customer Customer Demo",
-    "Customer Demographics",
-    "Add Customer Demographic",
-    "Edit Customer Demographic",
     "Employees",
     "Add Employee",
     "Edit Employee",
-    "Employee Territories",
-    "Add Employee Territory",
-    "Edit Employee Territory",
     "Orders",
     "Add Order",
     "Edit Order",
@@ -53,15 +42,9 @@
     "Products",
     "Add Product",
     "Edit Product",
-    "Regions",
-    "Add Region",
-    "Edit Region",
     "Suppliers",
     "Add Supplier",
     "Edit Supplier",
-    "Territories",
-    "Add Territory",
-    "Edit Territory",
     "Order Details by OrderID",
     "Orders by OrderID",
     "Orders by CustomerID",
@@ -73,8 +56,6 @@
     "Products by ProductID",
     "Suppliers by SupplierID",
     "Products by SupplierID",
-    "Regions by RegionID",
-    "Territories by RegionID",
     "Login",
     "Add Application Role",
     "Add Application User",
@@ -87,6 +68,7 @@
     "Dashboard",
     "Orders by ProductID"
   ],
+  "port": 8000,
   "security": {
     "autoGeneratePages": true,
     "dataSource": "Northwind",
@@ -96,6 +78,10 @@
     "loginPage": "Login",
     "provider": "default"
   },
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "2",
   "startPage": "Dashboard",
   "theme": "default"
 }

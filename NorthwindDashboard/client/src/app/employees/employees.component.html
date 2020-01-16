@@ -3,12 +3,7 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
-        <rz-grid-column [filterable]="false" format="base64" property="Photo" [sortable]="false" title="Photo" width="120px" type="string">
-          <ng-template let-data gridColumnTemplate>
-          <img width='100%' height='100%' src='{{data?.Photo}}' />
-          </ng-template>
-        </rz-grid-column>
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getEmployeesCount" [data]="getEmployeesResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column property="FirstName" title="First Name" type="string">
         </rz-grid-column>
         <rz-grid-column property="LastName" title="Last Name" type="string">
@@ -31,7 +26,7 @@
         </rz-grid-column>
         <rz-grid-column property="Country" title="Country" width="150px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-image #image0 path="/assets/images/{{data?.Country?.toLowerCase()}}.png" [style]="{'height':'20px','width':'40px'}">
+            <rz-image #image0 path="assets/images/{{data?.Country?.toLowerCase()}}.png" [style]="{'height': '20px', 'width': '40px'}">
             </rz-image>
             <rz-label #label0 [text]="data?.Country">
             </rz-label>
@@ -39,7 +34,7 @@
         </rz-grid-column>
         <rz-grid-column [filterable]="false" [sortable]="false" title="Orders" width="140px">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link0 icon="shopping_cart" [parameters]="[{'name':'EmployeeID','value':data?.EmployeeID}]" path="orders-by-employee-id" text="Orders">
+            <rz-link #link0 icon="shopping_cart" [parameters]="[{'name': 'EmployeeID', 'value': data?.EmployeeID}]" path="orders-by-employee-id" text="Orders">
             </rz-link>
           </ng-template>
         </rz-grid-column>

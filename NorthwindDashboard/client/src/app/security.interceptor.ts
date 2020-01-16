@@ -1,7 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { SecurityService } from './security.service';
 import { environment } from '../environments/environment';
@@ -14,7 +15,7 @@ export class SecurityInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const auth = this.injector.get(SecurityService);
 
-    if (request.url.indexOf(environment.securityUrl) != 0) {
+    if (request.url.indexOf(environment.northwind) != 0 && request.url.indexOf(environment.securityUrl) != 0) {
       return next.handle(request);
     }
 
@@ -26,7 +27,7 @@ export class SecurityInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request).catch((response: any) => {
+    return next.handle(request).pipe(catchError((response: any) => {
       if (response.status === 401) {
         const redirectUrl = this.router.url;
 
@@ -37,7 +38,7 @@ export class SecurityInterceptor implements HttpInterceptor {
         response.error = {error: {message: 'Session expired.'}};
       }
 
-      return Observable.throw(response);
-    });
+      return throwError(response);
+    }));
   }
 }

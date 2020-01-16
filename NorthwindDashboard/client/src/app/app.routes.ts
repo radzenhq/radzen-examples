@@ -9,18 +9,9 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { CustomersComponent } from './customers/customers.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import { CustomerCustomerDemosComponent } from './customer-customer-demos/customer-customer-demos.component';
-import { AddCustomerCustomerDemoComponent } from './add-customer-customer-demo/add-customer-customer-demo.component';
-import { EditCustomerCustomerDemoComponent } from './edit-customer-customer-demo/edit-customer-customer-demo.component';
-import { CustomerDemographicsComponent } from './customer-demographics/customer-demographics.component';
-import { AddCustomerDemographicComponent } from './add-customer-demographic/add-customer-demographic.component';
-import { EditCustomerDemographicComponent } from './edit-customer-demographic/edit-customer-demographic.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
-import { EmployeeTerritoriesComponent } from './employee-territories/employee-territories.component';
-import { AddEmployeeTerritoryComponent } from './add-employee-territory/add-employee-territory.component';
-import { EditEmployeeTerritoryComponent } from './edit-employee-territory/edit-employee-territory.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
@@ -30,15 +21,9 @@ import { EditOrderDetailComponent } from './edit-order-detail/edit-order-detail.
 import { ProductsComponent } from './products/products.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
-import { RegionsComponent } from './regions/regions.component';
-import { AddRegionComponent } from './add-region/add-region.component';
-import { EditRegionComponent } from './edit-region/edit-region.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { EditSupplierComponent } from './edit-supplier/edit-supplier.component';
-import { TerritoriesComponent } from './territories/territories.component';
-import { AddTerritoryComponent } from './add-territory/add-territory.component';
-import { EditTerritoryComponent } from './edit-territory/edit-territory.component';
 import { OrderDetailsByOrderIdComponent } from './order-details-by-order-id/order-details-by-order-id.component';
 import { OrdersByOrderIdComponent } from './orders-by-order-id/orders-by-order-id.component';
 import { OrdersByCustomerIdComponent } from './orders-by-customer-id/orders-by-customer-id.component';
@@ -50,8 +35,6 @@ import { EmployeesByEmployeeIdComponent } from './employees-by-employee-id/emplo
 import { ProductsByProductIdComponent } from './products-by-product-id/products-by-product-id.component';
 import { SuppliersBySupplierIdComponent } from './suppliers-by-supplier-id/suppliers-by-supplier-id.component';
 import { ProductsBySupplierIdComponent } from './products-by-supplier-id/products-by-supplier-id.component';
-import { RegionsByRegionIdComponent } from './regions-by-region-id/regions-by-region-id.component';
-import { TerritoriesByRegionIdComponent } from './territories-by-region-id/territories-by-region-id.component';
 import { LoginComponent } from './login/login.component';
 import { AddApplicationRoleComponent } from './add-application-role/add-application-role.component';
 import { AddApplicationUserComponent } from './add-application-user/add-application-user.component';
@@ -81,15 +64,17 @@ export const routes: Routes = [
       },
       {
         path: 'add-category',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddCategoryComponent
       },
       {
         path: 'edit-category/:CategoryID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditCategoryComponent
       },
@@ -102,59 +87,19 @@ export const routes: Routes = [
       },
       {
         path: 'add-customer',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddCustomerComponent
       },
       {
         path: 'edit-customer/:CustomerID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditCustomerComponent
-      },
-      {
-        path: 'customer-customer-demos',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: CustomerCustomerDemosComponent
-      },
-      {
-        path: 'add-customer-customer-demo',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: AddCustomerCustomerDemoComponent
-      },
-      {
-        path: 'edit-customer-customer-demo/:CustomerID/:CustomerTypeID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: EditCustomerCustomerDemoComponent
-      },
-      {
-        path: 'customer-demographics',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: CustomerDemographicsComponent
-      },
-      {
-        path: 'add-customer-demographic',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: AddCustomerDemographicComponent
-      },
-      {
-        path: 'edit-customer-demographic/:CustomerTypeID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: EditCustomerDemographicComponent
       },
       {
         path: 'employees',
@@ -165,38 +110,19 @@ export const routes: Routes = [
       },
       {
         path: 'add-employee',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddEmployeeComponent
       },
       {
         path: 'edit-employee/:EmployeeID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditEmployeeComponent
-      },
-      {
-        path: 'employee-territories',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: EmployeeTerritoriesComponent
-      },
-      {
-        path: 'add-employee-territory',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: AddEmployeeTerritoryComponent
-      },
-      {
-        path: 'edit-employee-territory/:EmployeeID/:TerritoryID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: EditEmployeeTerritoryComponent
       },
       {
         path: 'orders',
@@ -207,15 +133,17 @@ export const routes: Routes = [
       },
       {
         path: 'add-order',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddOrderComponent
       },
       {
         path: 'edit-order/:OrderID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditOrderComponent
       },
@@ -228,15 +156,17 @@ export const routes: Routes = [
       },
       {
         path: 'add-order-detail',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddOrderDetailComponent
       },
       {
         path: 'edit-order-detail/:OrderID/:ProductID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditOrderDetailComponent
       },
@@ -249,38 +179,19 @@ export const routes: Routes = [
       },
       {
         path: 'add-product',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddProductComponent
       },
       {
         path: 'edit-product/:ProductID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditProductComponent
-      },
-      {
-        path: 'regions',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: RegionsComponent
-      },
-      {
-        path: 'add-region',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: AddRegionComponent
-      },
-      {
-        path: 'edit-region/:RegionID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: EditRegionComponent
       },
       {
         path: 'suppliers',
@@ -291,38 +202,19 @@ export const routes: Routes = [
       },
       {
         path: 'add-supplier',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: AddSupplierComponent
       },
       {
         path: 'edit-supplier/:SupplierID',
+        canActivate: [AuthGuard],
         data: {
-          roles: ['Everybody'],
+          roles: ['Authenticated'],
         },
         component: EditSupplierComponent
-      },
-      {
-        path: 'territories',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: TerritoriesComponent
-      },
-      {
-        path: 'add-territory',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: AddTerritoryComponent
-      },
-      {
-        path: 'edit-territory/:TerritoryID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: EditTerritoryComponent
       },
       {
         path: 'order-details-by-order-id/:OrderID',
@@ -400,20 +292,6 @@ export const routes: Routes = [
           roles: ['Everybody'],
         },
         component: ProductsBySupplierIdComponent
-      },
-      {
-        path: 'regions-by-region-id/:RegionID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: RegionsByRegionIdComponent
-      },
-      {
-        path: 'territories-by-region-id/:RegionID',
-        data: {
-          roles: ['Everybody'],
-        },
-        component: TerritoriesByRegionIdComponent
       },
       {
         path: 'add-application-role',

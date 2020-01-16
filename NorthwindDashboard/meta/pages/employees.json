@@ -26,16 +26,6 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "filterable": false,
-                      "format": "base64",
-                      "property": "Photo",
-                      "sortable": false,
-                      "template": "<img width='100%' height='100%' src='${data.Photo}' />",
-                      "title": "Photo",
-                      "type": "string",
-                      "width": "120px"
-                    },
-                    {
                       "property": "FirstName",
                       "title": "First Name",
                       "type": "string"
@@ -118,6 +108,10 @@
                       "width": "140px"
                     }
                   ],
+                  "confirmDeleteCancelText": "Cancel",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
                   "count": "${getEmployeesCount}",
                   "data": "${getEmployeesResult}",
                   "emptyText": "No records to display.",

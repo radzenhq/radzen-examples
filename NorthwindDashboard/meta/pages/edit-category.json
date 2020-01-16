@@ -1,13 +1,62 @@
 {
-  "access": [
-    "Everybody"
-  ],
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
           "components": [
             {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -18,10 +67,14 @@
                         "type": "back"
                       }
                     ],
-                    "loadData": [],
                     "submit": [
                       {
                         "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
                           {
                             "detail": "Unable to update Category",
                             "severity": "error",
@@ -53,36 +106,47 @@
                     {
                       "property": "CategoryName",
                       "required": true,
-                      "requiredText": "is required",
                       "title": "Category Name",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Description",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Description",
-                      "type": "string"
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Picture",
+                      "required": false,
+                      "title": "Picture",
+                      "type": "file",
+                      "requiredText": "is required",
+                      "chooseText": "Choose"
                     }
                   ],
                   "name": "form0",
-                  "type": "form"
+                  "type": "form",
+                  "visible": "${canEdit}"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
     "load": [
       {
-        "name": "Northwind.getCategoryById",
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getCategoryByCategoryID",
         "parameters": [
           {
             "name": "CategoryID",
@@ -96,10 +160,20 @@
             "value": "${result}"
           }
         ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
         "type": "invoke"
       }
     ]
   },
-  "layout": "Main",
-  "name": "Edit Category"
+  "name": "Edit Category",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
 }

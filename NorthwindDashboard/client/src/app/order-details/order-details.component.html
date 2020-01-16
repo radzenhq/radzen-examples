@@ -3,16 +3,16 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrderDetailsCount" [data]="getNorthwindOrderDetailsResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getOrderDetailsCount" [data]="getOrderDetailsResult" emptyText="No records to display." [pageSize]="10" (add)="grid0Add($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column format="int32" property="OrderID" title="Order" width="140px" type="integer">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link0 icon="shopping_cart" [parameters]="[{'name':'OrderID','value':data?.OrderID}]" path="orders-by-order-id" [text]="data?.OrderID">
+            <rz-link #link0 icon="shopping_cart" [parameters]="[{'name': 'OrderID', 'value': data?.OrderID}]" path="orders-by-order-id" [text]="data?.OrderID">
             </rz-link>
           </ng-template>
         </rz-grid-column>
-        <rz-grid-column filterProperty="NorthwindProduct.ProductName" sortProperty="NorthwindProduct.ProductName" title="Product" width="360px" type="string">
+        <rz-grid-column filterProperty="Product.ProductName" sortProperty="Product.ProductName" title="Product" width="360px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link1 icon="add_shopping_cart" [parameters]="[{'name':'ProductID','value':data?.ProductID}]" path="products-by-product-id" [text]="data?.NorthwindProduct?.ProductName">
+            <rz-link #link1 icon="add_shopping_cart" [parameters]="[{'name': 'ProductID', 'value': data?.ProductID}]" path="products-by-product-id" [text]="data?.Product?.ProductName">
             </rz-link>
           </ng-template>
         </rz-grid-column>

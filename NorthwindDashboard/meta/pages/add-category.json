@@ -1,13 +1,14 @@
 {
-  "access": [
-    "Everybody"
-  ],
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
+          "type": "row",
           "components": [
             {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -18,7 +19,6 @@
                         "type": "back"
                       }
                     ],
-                    "loadData": [],
                     "submit": [
                       {
                         "error": [
@@ -38,8 +38,7 @@
                         ],
                         "then": [
                           {
-                            "path": "categories",
-                            "type": "navigate"
+                            "type": "back"
                           }
                         ],
                         "type": "invoke"
@@ -50,35 +49,43 @@
                     {
                       "property": "CategoryName",
                       "required": true,
-                      "requiredText": "is required",
                       "title": "Category Name",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Description",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Description",
-                      "type": "string"
+                      "type": "string",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Picture",
+                      "required": false,
+                      "title": "Picture",
+                      "type": "file",
+                      "requiredText": "is required",
+                      "chooseText": "Choose"
                     }
                   ],
                   "name": "form0",
                   "type": "form"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
     "load": []
   },
-  "layout": "Main",
-  "name": "Add Category"
+  "name": "Add Category",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
 }

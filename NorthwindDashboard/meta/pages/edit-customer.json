@@ -1,11 +1,62 @@
 {
-  "access": "Everybody",
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
           "components": [
             {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
@@ -16,10 +67,14 @@
                         "type": "back"
                       }
                     ],
-                    "loadData": [],
                     "submit": [
                       {
                         "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
                           {
                             "detail": "Unable to update Customer",
                             "severity": "error",
@@ -49,94 +104,114 @@
                   },
                   "fields": [
                     {
+                      "property": "CustomerID",
+                      "required": true,
+                      "title": "Customer Id",
+                      "type": "string",
+                      "maxLength": 5,
+                      "requiredText": "is required"
+                    },
+                    {
                       "property": "CompanyName",
                       "required": true,
-                      "requiredText": "is required",
                       "title": "Company Name",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 40,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "ContactName",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Contact Name",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 30,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "ContactTitle",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Contact Title",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 30,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Address",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Address",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 60,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "City",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "City",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Region",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Region",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "PostalCode",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Postal Code",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 10,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Country",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Country",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Phone",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Phone",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 24,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Fax",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Fax",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 24,
+                      "requiredText": "is required"
                     }
                   ],
                   "name": "form0",
-                  "type": "form"
+                  "type": "form",
+                  "visible": "${canEdit}"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
     "load": [
       {
-        "name": "Northwind.getCustomerById",
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getCustomerByCustomerID",
         "parameters": [
           {
             "name": "CustomerID",
@@ -150,10 +225,20 @@
             "value": "${result}"
           }
         ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
         "type": "invoke"
       }
     ]
   },
-  "layout": "Main",
-  "name": "Edit Customer"
+  "name": "Edit Customer",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
 }

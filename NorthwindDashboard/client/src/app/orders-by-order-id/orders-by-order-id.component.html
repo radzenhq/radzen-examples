@@ -3,10 +3,10 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getNorthwindOrdersCount" [data]="getNorthwindOrdersResult" emptyText="No records to display." (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+      <rz-grid #grid0 addText="Add" [allowAdd]="false" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getOrdersCount" [data]="getOrdersResult" emptyText="No records to display." [pageSize]="10" (add)="grid0Add($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column filterProperty="Customer.CompanyName" property="CustomerID" sortProperty="Customer.CompanyName" title="Customer" width="360px" type="string">
           <ng-template let-data gridColumnTemplate>
-            <rz-button #customersButton [style]="{'width':'340px'}" [text]="data?.Customer?.CompanyName" (click)="customersButtonClick($event, data)">
+            <rz-button #customersButton [style]="{'width': '340px'}" [text]="data?.Customer?.CompanyName" (click)="customersButtonClick($event, data)">
             </rz-button>
           </ng-template>
         </rz-grid-column>

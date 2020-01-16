@@ -1,104 +1,80 @@
 {
-  "access": "Everybody",
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
           "components": [
             {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "data": "${northwindorderdetail}",
+                  "data": "${orderdetail}",
                   "events": {
                     "cancel": [
                       {
                         "type": "back"
                       }
                     ],
-                    "loadData": [
-                      {
-                        "condition": "event.property == 'OrderID'",
-                        "name": "Northwind.getNorthwindOrders",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "${event.top}"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "${event.skip}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "true"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getOrdersResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getOrdersCount",
-                            "type": "set",
-                            "value": "result['@odata.count']"
-                          }
-                        ],
-                        "type": "invoke"
-                      },
-                      {
-                        "condition": "event.property == 'ProductID'",
-                        "name": "Northwind.getNorthwindProducts",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "${event.top}"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "${event.skip}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "true"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getProductsResult",
-                            "type": "set",
-                            "value": "${result.value}"
-                          },
-                          {
-                            "name": "getProductsCount",
-                            "type": "set",
-                            "value": "result['@odata.count']"
-                          }
-                        ],
-                        "type": "invoke"
-                      }
-                    ],
                     "submit": [
                       {
                         "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
                           {
                             "detail": "Unable to update OrderDetail",
                             "severity": "error",
@@ -106,7 +82,7 @@
                             "type": "notify"
                           }
                         ],
-                        "name": "Northwind.updateNorthwindOrderDetail",
+                        "name": "Northwind.updateOrderDetail",
                         "parameters": [
                           {
                             "name": "OrderID",
@@ -117,7 +93,7 @@
                             "value": "${parameters.ProductID}"
                           },
                           {
-                            "name": "NorthwindOrderDetail",
+                            "name": "OrderDetail",
                             "value": "${event}"
                           }
                         ],
@@ -132,71 +108,75 @@
                   },
                   "fields": [
                     {
-                      "count": "${getOrdersCount}",
                       "data": "${getOrdersResult}",
-                      "disabled": true,
-                      "placeholder": "Choose Order",
                       "property": "OrderID",
                       "required": true,
-                      "requiredText": "is required",
                       "textProperty": "CustomerID",
                       "title": "Order",
-                      "type": "lookuppopup",
-                      "valueProperty": "OrderID"
+                      "type": "lookup",
+                      "valueProperty": "OrderID",
+                      "placeholder": "Choose Order",
+                      "requiredText": "is required"
                     },
                     {
-                      "count": "${getProductsCount}",
                       "data": "${getProductsResult}",
-                      "disabled": true,
-                      "placeholder": "Choose Product",
                       "property": "ProductID",
                       "required": true,
-                      "requiredText": "is required",
                       "textProperty": "ProductName",
                       "title": "Product",
-                      "type": "lookuppopup",
-                      "valueProperty": "ProductID"
+                      "type": "lookup",
+                      "valueProperty": "ProductID",
+                      "placeholder": "Choose Product",
+                      "requiredText": "is required"
                     },
                     {
                       "property": "UnitPrice",
-                      "required": [],
-                      "requiredText": "is required",
+                      "required": false,
                       "title": "Unit Price",
-                      "type": "number"
+                      "type": "number",
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     },
                     {
                       "property": "Quantity",
-                      "required": [],
-                      "requiredText": "is required",
+                      "required": false,
                       "title": "Quantity",
-                      "type": "integer"
+                      "type": "integer",
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     },
                     {
                       "property": "Discount",
-                      "required": [],
-                      "requiredText": "is required",
+                      "required": false,
                       "title": "Discount",
-                      "type": "number"
+                      "type": "number",
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
                     }
                   ],
                   "name": "form0",
-                  "type": "form"
+                  "type": "form",
+                  "visible": "${canEdit}"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
     "load": [
       {
-        "name": "Northwind.getNorthwindOrderDetailById",
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getOrderDetailByOrderIDAndProductID",
         "parameters": [
           {
             "name": "OrderID",
@@ -209,75 +189,49 @@
         ],
         "then": [
           {
-            "name": "northwindorderdetail",
+            "name": "orderdetail",
             "type": "set",
             "value": "${result}"
+          }
+        ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
           }
         ],
         "type": "invoke"
       },
       {
-        "name": "Northwind.getNorthwindOrders",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'OrderID')).pageSize"
-          },
-          {
-            "name": "$skip",
-            "value": "0"
-          },
-          {
-            "name": "$count",
-            "value": "true"
-          }
-        ],
+        "name": "Northwind.getOrders",
+        "parameters": [],
         "then": [
           {
             "name": "getOrdersResult",
             "type": "set",
             "value": "${result.value}"
-          },
-          {
-            "name": "getOrdersCount",
-            "type": "set",
-            "value": "result['@odata.count']"
           }
         ],
         "type": "invoke"
       },
       {
-        "name": "Northwind.getNorthwindProducts",
-        "parameters": [
-          {
-            "name": "$top",
-            "value": "(<any>this.form0.fields.find(f => f.property == 'ProductID')).pageSize"
-          },
-          {
-            "name": "$skip",
-            "value": "0"
-          },
-          {
-            "name": "$count",
-            "value": "true"
-          }
-        ],
+        "name": "Northwind.getProducts",
+        "parameters": [],
         "then": [
           {
             "name": "getProductsResult",
             "type": "set",
             "value": "${result.value}"
-          },
-          {
-            "name": "getProductsCount",
-            "type": "set",
-            "value": "result['@odata.count']"
           }
         ],
         "type": "invoke"
       }
     ]
   },
-  "layout": "Main",
-  "name": "Edit Order Detail"
+  "name": "Edit Order Detail",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
 }

@@ -1,5 +1,7 @@
 {
-  "access": "Everybody",
+  "access": [
+    "Everybody"
+  ],
   "components": [
     {
       "type": "content",

@@ -1,15 +1,65 @@
 {
-  "access": "Everybody",
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
           "components": [
             {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "back"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
-                  "columns": 2,
                   "data": "${employee}",
                   "events": {
                     "cancel": [
@@ -17,10 +67,14 @@
                         "type": "back"
                       }
                     ],
-                    "loadData": [],
                     "submit": [
                       {
                         "error": [
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "value": "!(result.status == 400)"
+                          },
                           {
                             "detail": "Unable to update Employee",
                             "severity": "error",
@@ -52,126 +106,160 @@
                     {
                       "property": "LastName",
                       "required": true,
-                      "requiredText": "is required",
                       "title": "Last Name",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 20,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "FirstName",
                       "required": true,
-                      "requiredText": "is required",
                       "title": "First Name",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 10,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Title",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Title",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 30,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "TitleOfCourtesy",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Title Of Courtesy",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 25,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "BirthDate",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Birth Date",
-                      "type": "date"
+                      "type": "date",
+                      "requiredText": "is required"
                     },
                     {
                       "property": "HireDate",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Hire Date",
-                      "type": "date"
+                      "type": "date",
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Address",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Address",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 60,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "City",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "City",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Region",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Region",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "PostalCode",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Postal Code",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 10,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Country",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Country",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 15,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "HomePhone",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Home Phone",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 24,
+                      "requiredText": "is required"
                     },
                     {
                       "property": "Extension",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Extension",
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 4,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "Photo",
+                      "required": false,
+                      "title": "Photo",
+                      "type": "file",
+                      "requiredText": "is required",
+                      "chooseText": "Choose"
                     },
                     {
                       "property": "Notes",
                       "required": false,
-                      "requiredText": "is required",
                       "title": "Notes",
-                      "type": "text"
+                      "type": "string",
+                      "requiredText": "is required"
                     },
                     {
-                      "property": "Photo",
-                      "requiredText": "is required",
-                      "title": "Photo",
-                      "type": "file"
+                      "data": "${getEmployeesResult}",
+                      "property": "ReportsTo",
+                      "required": false,
+                      "textProperty": "LastName",
+                      "title": "Employee",
+                      "type": "lookup",
+                      "valueProperty": "EmployeeID",
+                      "placeholder": "Choose Employee",
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "PhotoPath",
+                      "required": false,
+                      "title": "Photo Path",
+                      "type": "string",
+                      "maxLength": 255,
+                      "requiredText": "is required"
                     }
                   ],
                   "name": "form0",
-                  "type": "form"
+                  "type": "form",
+                  "visible": "${canEdit}"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
     "load": [
       {
-        "name": "Northwind.getEmployeeById",
+        "name": "canEdit",
+        "type": "set",
+        "value": "true"
+      },
+      {
+        "name": "Northwind.getEmployeeByEmployeeID",
         "parameters": [
           {
             "name": "EmployeeID",
@@ -185,10 +273,32 @@
             "value": "${result}"
           }
         ],
+        "error": [
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "!(result.status == 400)"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "Northwind.getEmployees",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getEmployeesResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
         "type": "invoke"
       }
     ]
   },
-  "layout": "Main",
-  "name": "Edit Employee"
+  "name": "Edit Employee",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main"
 }

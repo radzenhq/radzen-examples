@@ -54,7 +54,8 @@
                       "property": "Name",
                       "required": true,
                       "title": "Name",
-                      "type": "string"
+                      "type": "string",
+                      "requiredText": "is required"
                     }
                   ],
                   "name": "form0",

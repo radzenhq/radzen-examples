@@ -98,7 +98,8 @@
                   },
                   "type": "login",
                   "userRequired": "Username is required",
-                  "userText": "Username"
+                  "userText": "Username",
+                  "resetPasswordText": "Forgot password"
                 }
               ],
               "type": "col"

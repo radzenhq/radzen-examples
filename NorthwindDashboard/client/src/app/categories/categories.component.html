@@ -3,14 +3,14 @@
   </rz-heading>
   <div class="row">
     <div class="col-md-12">
-      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="false" [allowSorting]="true" [count]="getCategoriesCount" [data]="getCategoriesResult" emptyText="No records to display." filterDateFormat="mm/dd/yy" [isLoading]="false" [pageSize]="10" [style]="{}" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="false" [allowSorting]="true" [count]="getCategoriesCount" [data]="getCategoriesResult" emptyText="No records to display." filterDateFormat="mm/dd/yy" [isLoading]="false" [pageSize]="10" [style]="{}" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
         <rz-grid-column property="CategoryName" title="Category Name" type="string">
         </rz-grid-column>
         <rz-grid-column property="Description" title="Description" type="string">
         </rz-grid-column>
         <rz-grid-column [filterable]="false" [sortable]="false" title="Products" width="160px">
           <ng-template let-data gridColumnTemplate>
-            <rz-link #link0 icon="add_shopping_cart" [parameters]="[{'name':'CategoryID','value':data?.CategoryID}]" path="products-by-category-id" text="Products">
+            <rz-link #link0 icon="add_shopping_cart" [parameters]="[{'name': 'CategoryID', 'value': data?.CategoryID}]" path="products-by-category-id" text="Products">
             </rz-link>
           </ng-template>
         </rz-grid-column>

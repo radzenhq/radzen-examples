@@ -1,30 +1,42 @@
 <rz-content #content1 container="main">
+  <div [ngStyle]="{}" class="row">
+    <div class="col-md-9">
+      <rz-label #closeLabel [style]="{'fontWeight': 'bold'}" text="Item no longer available." *ngIf="!canEdit">
+      </rz-label>
+    </div>
+    <div class="col-md-3">
+      <rz-button #closeButton buttonStyle="secondary" [style]="{'marginBottom': '20px'}" text="Close" *ngIf="!canEdit" (click)="closeButtonClick($event)">
+      </rz-button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
-      <rz-form #form0 [data]="northwindorder" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)" (loadData)="form0LoadData($event)">
-        <rz-lookuppopup-form-field [data]="getCustomersResult" property="CustomerID" [required]="false" textProperty="CompanyName" title="Customer" valueProperty="CustomerID" placeholder="Choose Customer" [count]="getCustomersCount" requiredText="is required" type="lookuppopup">
-        </rz-lookuppopup-form-field>
-        <rz-lookuppopup-form-field [data]="getEmployeesResult" property="EmployeeID" [required]="false" textProperty="LastName" title="Employee" valueProperty="EmployeeID" placeholder="Choose Employee" [count]="getEmployeesCount" requiredText="is required" type="lookuppopup">
-        </rz-lookuppopup-form-field>
+      <rz-form #form0 [data]="order" *ngIf="canEdit" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-lookup-form-field [data]="getCustomersResult" property="CustomerID" [required]="false" textProperty="CompanyName" title="Customer" valueProperty="CustomerID" placeholder="Choose Customer" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-lookup-form-field [data]="getEmployeesResult" property="EmployeeID" [required]="false" textProperty="LastName" title="Employee" valueProperty="EmployeeID" placeholder="Choose Employee" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
         <rz-date-form-field property="OrderDate" [required]="false" title="Order Date" requiredText="is required" type="date">
         </rz-date-form-field>
         <rz-date-form-field property="RequiredDate" [required]="false" title="Required Date" requiredText="is required" type="date">
         </rz-date-form-field>
         <rz-date-form-field property="ShippedDate" [required]="false" title="Shipped Date" requiredText="is required" type="date">
         </rz-date-form-field>
-        <rz-number-form-field property="Freight" [required]="false" title="Freight" requiredText="is required" type="number">
+        <rz-lookup-form-field [data]="getShippersResult" property="ShipVia" [required]="false" textProperty="CompanyName" title="Shipper" valueProperty="ShipperID" placeholder="Choose Shipper" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+        <rz-number-form-field property="Freight" [required]="false" title="Freight" requiredText="is required" minText="cannot be less than" maxText="cannot be more than" type="number">
         </rz-number-form-field>
-        <rz-string-form-field property="ShipName" [required]="false" title="Ship Name" requiredText="is required" type="string">
+        <rz-string-form-field property="ShipName" [required]="false" title="Ship Name" [maxLength]="40" requiredText="is required" type="string">
         </rz-string-form-field>
-        <rz-string-form-field property="ShipAddress" [required]="false" title="Ship Address" requiredText="is required" type="string">
+        <rz-string-form-field property="ShipAddress" [required]="false" title="Ship Address" [maxLength]="60" requiredText="is required" type="string">
         </rz-string-form-field>
-        <rz-string-form-field property="ShipCity" [required]="false" title="Ship City" requiredText="is required" type="string">
+        <rz-string-form-field property="ShipCity" [required]="false" title="Ship City" [maxLength]="15" requiredText="is required" type="string">
         </rz-string-form-field>
-        <rz-string-form-field property="ShipRegion" [required]="false" title="Ship Region" requiredText="is required" type="string">
+        <rz-string-form-field property="ShipRegion" [required]="false" title="Ship Region" [maxLength]="15" requiredText="is required" type="string">
         </rz-string-form-field>
-        <rz-string-form-field property="ShipPostalCode" [required]="false" title="Ship Postal Code" requiredText="is required" type="string">
+        <rz-string-form-field property="ShipPostalCode" [required]="false" title="Ship Postal Code" [maxLength]="10" requiredText="is required" type="string">
         </rz-string-form-field>
-        <rz-string-form-field property="ShipCountry" [required]="false" title="Ship Country" requiredText="is required" type="string">
+        <rz-string-form-field property="ShipCountry" [required]="false" title="Ship Country" [maxLength]="15" requiredText="is required" type="string">
         </rz-string-form-field>
       </rz-form>
     </div>
