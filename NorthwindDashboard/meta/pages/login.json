@@ -29,7 +29,7 @@
                   "type": "heading"
                 },
                 {
-                  "content": "<i>(username: admin@example.com password: @Admin123)</i>",
+                  "content": "<i>(username: admin password: admin)</i>",
                   "name": "html0",
                   "type": "html"
                 }
@@ -92,14 +92,14 @@
                   "passwordText": "Password",
                   "registerMessageText": "Don't have an account yet?",
                   "registerText": "Sign up",
+                  "resetPasswordText": "Forgot password",
                   "style": {
                     "paddingLeft": "16px",
                     "paddingRight": "16px"
                   },
                   "type": "login",
                   "userRequired": "Username is required",
-                  "userText": "Username",
-                  "resetPasswordText": "Forgot password"
+                  "userText": "Username"
                 }
               ],
               "type": "col"
