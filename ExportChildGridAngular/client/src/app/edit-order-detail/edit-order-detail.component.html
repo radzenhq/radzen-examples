@@ -1,0 +1,22 @@
+<rz-content #content1 container="main">
+  <div [ngStyle]="{}" class="row">
+    <div class="col-md-9">
+      <rz-label #closeLabel [style]="{'fontWeight': 'bold'}" text="Item no longer available." *ngIf="!canEdit">
+      </rz-label>
+    </div>
+    <div class="col-md-3">
+      <rz-button #closeButton buttonStyle="secondary" [style]="{'marginBottom': '20px'}" text="Close" *ngIf="!canEdit" (click)="closeButtonClick($event)">
+      </rz-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="orderdetail" *ngIf="canEdit" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-integer-form-field property="Quantity" [required]="true" title="Quantity" requiredText="is required" minText="cannot be less than" maxText="cannot be more than" type="integer">
+        </rz-integer-form-field>
+        <rz-lookup-form-field [data]="getProductsResult" property="ProductId" [required]="false" textProperty="ProductName" title="Product" valueProperty="Id" placeholder="Choose Product" requiredText="is required" type="lookup">
+        </rz-lookup-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

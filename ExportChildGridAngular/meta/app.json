@@ -1,0 +1,34 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/angular-generator",
+  "https": false,
+  "ignore": [
+    ""
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "Sample",
+  "navigation": [
+    "Order"
+  ],
+  "pages": [
+    "Order",
+    "Add Order Detail",
+    "Add Order",
+    "Edit Order",
+    "Edit Order Detail"
+  ],
+  "port": 8000,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "3",
+  "startPage": "Orders",
+  "theme": "default",
+  "themeSettings": null
+}

@@ -1,0 +1,30 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Order">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [confirmDelete]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [count]="getOrdersCount" [data]="getOrdersResult" emptyText="No records to display." [(value)]="master" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowDoubleClick)="grid0RowDoubleClick($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="Id" title="Id" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="UserName" title="User Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column format="date-time" formatString="medium" property="OrderDate" title="Order Date" type="string">
+        </rz-grid-column>
+      </rz-grid>
+      <rz-heading #heading1 size="H1" text="OrderDetails">
+      </rz-heading>
+      <rz-button #button0 text="Export" (click)="button0Click($event)">
+      </rz-button>
+      <rz-grid #grid1 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" [data]="OrderDetails" emptyText="No records to display." (add)="grid1Add($event)" (delete)="grid1Delete($event)" (loadData)="grid1LoadData($event)" (rowSelect)="grid1RowSelect($event)">
+        <rz-grid-column property="Id" title="Id" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="Quantity" title="Quantity" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="OrderId" title="Order Id" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="ProductId" title="Product Id" type="integer">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

@@ -1,0 +1,94 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new OrderDetail!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Sample.createOrderDetail",
+                        "parameters": [
+                          {
+                            "name": "OrderDetail",
+                            "value": "${Object.assign(event, {OrderId: this.parameters.OrderId})}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "Quantity",
+                      "required": true,
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    {
+                      "data": "${getProductsResult}",
+                      "property": "ProductId",
+                      "required": false,
+                      "textProperty": "ProductName",
+                      "title": "Product",
+                      "type": "lookup",
+                      "valueProperty": "Id",
+                      "placeholder": "Choose Product"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Sample.getProducts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getProductsResult",
+            "type": "set",
+            "value": "${result.value}"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Add Order Detail",
+  "layout": "Main"
+}

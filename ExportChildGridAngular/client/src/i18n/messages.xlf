@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="4fcb6dbd1b656de4f606e061af0ed606d3fdc547" datatype="html">
+        <source>User Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="948f42e83ecda5f9f219c6f8b9513ef3ebd02ca9" datatype="html">
+        <source>is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8f01b293637f2084fccc10e652bcdb985727ada0" datatype="html">
+        <source>string</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="05b572a51f020eadc24db65248056d924defbb92" datatype="html">
+        <source>Order Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1feb210f447e10eb214f2e184264d6e05b282959" datatype="html">
+        <source>date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f3578e9c1ea17536d2785a133fe4b2beaf568e40" datatype="html">
+        <source>col-md-12</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a0258910dfebe5419d5b96b8d7d738b509879513" datatype="html">
+        <source>row</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fa435cc2ba3810dadfff46449224129c7a6fbdd" datatype="html">
+        <source>main</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order/add-order.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-layout/login-layout.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="db5feaff8ae91c2563b8e0c20ffc1137fb1d7a06" datatype="html">
+        <source>Item no longer available.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dfaf2dd439654c679c006558f74ad29e4b678d08" datatype="html">
+        <source>col-md-9</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d71f8be8ce8ea687594f60743e85fc779970876b" datatype="html">
+        <source>secondary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6f5d32d9e888601466a7eec42926ff03028fa2cb" datatype="html">
+        <source>col-md-3</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order/edit-order.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="05565da7278cb7a0a8fee30179151d3b7981ca5b" datatype="html">
+        <source>H1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4e7f5f07ae8e67878f35b34bcee10e39300ff41a" datatype="html">
+        <source>Orders</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2798cc1e152b1ec07fd8daf94a2a073d1ba1ebcc" datatype="html">
+        <source>Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33cb05c064f4256bf21675cd0feb3be66004e030" datatype="html">
+        <source>integer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c611dbfd81ae6fd4d7e5332f85ee78f9740fe000" datatype="html">
+        <source>medium</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ba1aee00a419540fc444f357fb4758043a99c335" datatype="html">
+        <source>date-time</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0295e37c88ba1f28e569a35e3c6871b90529f8fa" datatype="html">
+        <source>Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
+        <source>Ok</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed1af2c82d627c92c9bae241ef1aa5b11602f859" datatype="html">
+        <source>No records to display.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/orders/orders.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ca30c1aa79fb5ab487fbd2caa4ca01f2f6691d70" datatype="html">
+        <source>Quantity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2861c1c58f58707dc095bf881e49c59c3f3c36a0" datatype="html">
+        <source>cannot be less than</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="804de98f5fd592325a16decc1c4bab4afeecaed4" datatype="html">
+        <source>cannot be more than</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="108d7d104f08920d4c40f2fce7cc1795d0d38f2b" datatype="html">
+        <source>UserName</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5704ec2049d007c5f5fb495a5d8b607e68d58081" datatype="html">
+        <source>Order</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="76cbb675fc576ab45c4afdafb3378a2cb11a5739" datatype="html">
+        <source>Choose Order</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1573daf266eecdd5ba41c5e4ffb99747a51c6078" datatype="html">
+        <source>lookup</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62c77704d6533a821e075a4eb43cea2fcd9ac07f" datatype="html">
+        <source>ProductName</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d3cbff754f1c148f3fec696edd246993aea35b01" datatype="html">
+        <source>Product</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cf63139b73511046b46edbeddee4bb944e7cf975" datatype="html">
+        <source>Choose Product</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-order-detail/add-order-detail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-order-detail/edit-order-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="363a247747cca480409f226ceec7432965b967e4" datatype="html">
+        <source>Order Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6de7bea4ea91132ca4aeef510e3833f369dfc170" datatype="html">
+        <source>Order Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="80ca20031107f18e4cb566281d5131263a5ddfcd" datatype="html">
+        <source>Product Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/order-details/order-details.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5787fcac03eda5b96436527a54e60cfbb7c30d95" datatype="html">
+        <source>Product Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="563324e74be3476197c931760ed7341b2ee988fc" datatype="html">
+        <source>Product Price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d938d9f8530928e981811cabd72b0c58a8bc8171" datatype="html">
+        <source>number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="213473f99650613b3d38ca4af796431ff5a45729" datatype="html">
+        <source>Product Picture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33eec25ee2129b1a381e4cfbd2e71d392c599983" datatype="html">
+        <source>file</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/add-product/add-product.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="988ede98bbbc3fc4b333605ec0e948a6c4ef7761" datatype="html">
+        <source>ProductName is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4ef50af9810d0a77792690eecbb5f1326834bbad" datatype="html">
+        <source>ProductPrice</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dba69876ed8778bb19d058ff46bd640810fc7ef5" datatype="html">
+        <source>ProductPrice is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d4a2cee1705ffa33846cf0bd4021517dbb54430" datatype="html">
+        <source>ProductPicture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f27b58b0eb4ddfcb5ecfddf15e0a34e1f89d0a66" datatype="html">
+        <source>Choose Image</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="993d7baac8b0ed17bcbf581b5990df00c4479a41" datatype="html">
+        <source>ProductPicture is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="15671184234f834e314c40d34c3c0eb5c1e33e99" datatype="html">
+        <source>primary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c98077fe229df56d1df276acd22818bd2885eddc" datatype="html">
+        <source>submit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c5f70aede841190815dace56a93d364bf8f447f4" datatype="html">
+        <source>save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9c8783d708e50b5fd6a09c34125bbef9b6d46624" datatype="html">
+        <source>light</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b5cd35005d01bdbcc8c1f45c1f1a7e673caeab5c" datatype="html">
+        <source>col offset-sm-3</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-product/edit-product.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="48dfb134cb8d324bb45f2f9f3bd7d7afc49bc3f8" datatype="html">
+        <source>Products</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="03ac318c05f87396a782ec31928d97d0feddf7a4" datatype="html">
+        <source>currency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b57d3b44e84a0c5dde49dd8fdf35a2b431967798" datatype="html">
+        <source>decimal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="642f831662cff932daaaec34d111f40116036a29" datatype="html">
+        <source>base64</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/products/products.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ee73c7d778699f4f36ef9a9c9ee1d56577bec587" datatype="html">
+        <source>MainPage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="940e9af57a2597d8ce39ee18d1713254b193c6f7" datatype="html">
+        <source>numeric0</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c1f1340c111b93970a715a7c0b5df637f2c4d85c" datatype="html">
+        <source>justify-content-center col-xl-5 col-md-7</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-layout/login-layout.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7fbcb43dbf9714376db1fd1c6cd0599ca2fecde0" datatype="html">
+        <source>row justify-content-center</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-layout/login-layout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="86bd4c895bf70b35a58305b7d107a2f1b67b141c" datatype="html">
+        <source>Sample</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d2bd2528e9007416b38aa8cda13dc4a1153edbd0" datatype="html">
+        <source>col-md-6 d-flex align-items-center</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2ed81dcd798d6431ae1452d9c900fabf1fdcd48a" datatype="html">
+        <source>Spanish - Spain</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c004d456a2d403d55d8bf1c2b0ebfb5ae4b9aa8a" datatype="html">
+        <source>es-ES</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="43ca82027ed5c93f36a74dddee5c6a8a22a9cac6" datatype="html">
+        <source>English - United States</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="01a5390c0f08e5f1e9c880336a67e8e606806144" datatype="html">
+        <source>en-US</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="747b264ce75a4e689979afaef77fc9ce1b1e846a" datatype="html">
+        <source>col-md-6 text-lg-right</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0d2c067182f5d83f1e7ea628313e71955bbffb2b" datatype="html">
+        <source>row justify-content-start align-items-center</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b905a37153679489cc469273430507fc6d1b573c" datatype="html">
+        <source>orders</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6422521eb5706cad704ab327743fdd23e4ab7fe7" datatype="html">
+        <source>order-details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="280c4c6b891bf31e24f52ea2b17195ea2a1aea43" datatype="html">
+        <source>products</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb1ab21e340e86b23f48dab7ad402ea6e4082d2c" datatype="html">
+        <source>main-page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="96753b4353633ddfd948a5c2842e1eb04d91e089" datatype="html">
+        <source>Sample, Copyright © 2019</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
