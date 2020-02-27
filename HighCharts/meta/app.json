@@ -16,6 +16,6 @@
   "pages": [
     "Home"
   ],
-  "startPage": null,
+  "startPage": "Home",
   "theme": "default"
 }

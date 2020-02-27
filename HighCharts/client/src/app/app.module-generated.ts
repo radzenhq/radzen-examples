@@ -26,7 +26,6 @@ import { DialogModule } from '@radzen/angular/dist/dialog';
 import { ConfigService, configServiceFactory } from './config.service';
 import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
-import { CacheInterceptor } from './cache.interceptor';
 export { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
@@ -50,11 +49,6 @@ export const AppDeclarations = [
 ];
 
 export const AppProviders = [
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: CacheInterceptor,
-    multi: true
-  },
   SampleService,
   ConfigService,
   {
