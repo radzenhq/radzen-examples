@@ -5,17 +5,17 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Order Subtotals">
+    <RadzenHeading Size="H1" Text="Order Subtotals">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrderSubtotalsResult)" TItem="OrderSubtotal">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getOrderSubtotalsResult" TItem="NorthwindBlazor.Models.Northwind.OrderSubtotal">
           <Columns>
-            <RadzenGridColumn TItem="OrderSubtotal" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderSubtotal" Property="OrderID" Title="Order ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="OrderSubtotal" Context="data" Format="decimal" Property="Subtotal" Title="Subtotal" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderSubtotal" Property="Subtotal" Title="Subtotal">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

@@ -16,7 +16,6 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("CustomerDemographic")]
     public ICollection<CustomerCustomerDemo> CustomerCustomerDemos { get; set; }
     public string CustomerDesc
     {

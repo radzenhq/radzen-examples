@@ -2,110 +2,41 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class EditOrderComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
         [Parameter]
-        protected string OrderID { get; set; }
+        public dynamic OrderID { get; set; }
 
-        protected RadzenContent content1;
-
-        protected RadzenLabel closeLabel;
-
-        protected RadzenButton closeButton;
-
-        protected RadzenTemplateForm<Order> form0;
-
-        protected RadzenLabel label2;
-
-        protected RadzenDropDown customerId;
-
-        protected RadzenLabel label3;
-
-        protected RadzenDropDown employeeId;
-
-        protected RadzenLabel label4;
-
-        protected RadzenDatePicker orderDate;
-
-        protected RadzenLabel label5;
-
-        protected RadzenDatePicker requiredDate;
-
-        protected RadzenLabel label6;
-
-        protected RadzenDatePicker shippedDate;
-
-        protected RadzenLabel label7;
-
-        protected RadzenDropDown shipVia;
-
-        protected RadzenLabel label8;
-
-        protected dynamic freight;
-
-        protected RadzenLabel label9;
-
-        protected RadzenTextBox shipName;
-
-        protected RadzenLabel label10;
-
-        protected RadzenTextBox shipAddress;
-
-        protected RadzenLabel label11;
-
-        protected RadzenTextBox shipCity;
-
-        protected RadzenLabel label12;
-
-        protected RadzenTextBox shipRegion;
-
-        protected RadzenLabel label13;
-
-        protected RadzenTextBox shipPostalCode;
-
-        protected RadzenLabel label14;
-
-        protected RadzenTextBox shipCountry;
-
-        protected RadzenButton button2;
-
-        protected RadzenButton button3;
-
-        bool _canEdit;
-        protected bool canEdit
-        {
-            get
-            {
-                return _canEdit;
-            }
-            set
-            {
-                if(_canEdit != value)
-                {
-                    _canEdit = value;
-                    Invoke(() => { StateHasChanged(); });
-                }
-            }
-        }
-
-        Order _order;
-        protected Order order
+        NorthwindBlazor.Models.Northwind.Order _order;
+        protected NorthwindBlazor.Models.Northwind.Order order
         {
             get
             {
@@ -113,16 +44,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_order != value)
+                if(!object.Equals(_order, value))
                 {
                     _order = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Customer> _getCustomersResult;
-        protected IEnumerable<Customer> getCustomersResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Customer> _getCustomersResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Customer> getCustomersResult
         {
             get
             {
@@ -130,16 +61,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getCustomersResult != value)
+                if(!object.Equals(_getCustomersResult, value))
                 {
                     _getCustomersResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Employee> _getEmployeesResult;
-        protected IEnumerable<Employee> getEmployeesResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Employee> _getEmployeesResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Employee> getEmployeesResult
         {
             get
             {
@@ -147,16 +78,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getEmployeesResult != value)
+                if(!object.Equals(_getEmployeesResult, value))
                 {
                     _getEmployeesResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Shipper> _getShippersResult;
-        protected IEnumerable<Shipper> getShippersResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Shipper> _getShippersResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Shipper> getShippersResult
         {
             get
             {
@@ -164,48 +95,47 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getShippersResult != value)
+                if(!object.Equals(_getShippersResult, value))
                 {
                     _getShippersResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
-            canEdit = true;
-
-            var northwindGetOrderByOrderIdResult = await Northwind.GetOrderByOrderId(int.Parse(OrderID));
-                order = northwindGetOrderByOrderIdResult;
+            var northwindGetOrderByOrderIdResult = await Northwind.GetOrderByOrderId(int.Parse($"{OrderID}"));
+            order = northwindGetOrderByOrderIdResult;
 
             var northwindGetCustomersResult = await Northwind.GetCustomers();
-                getCustomersResult = northwindGetCustomersResult;
+            getCustomersResult = northwindGetCustomersResult;
 
             var northwindGetEmployeesResult = await Northwind.GetEmployees();
-                getEmployeesResult = northwindGetEmployeesResult;
+            getEmployeesResult = northwindGetEmployeesResult;
 
             var northwindGetShippersResult = await Northwind.GetShippers();
-                getShippersResult = northwindGetShippersResult;
+            getShippersResult = northwindGetShippersResult;
         }
 
-        protected async void CloseButtonClick(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.Order args)
         {
-            DialogService.Close(null);
-        }
-
-        protected async void Form0Submit(Order args)
-        {
-            var northwindUpdateOrderResult = await Northwind.UpdateOrder(int.Parse(OrderID), order);
+            try
+            {
+                var northwindUpdateOrderResult = await Northwind.UpdateOrder(int.Parse($"{OrderID}"), order);
                 DialogService.Close(order);
+            }
+            catch (Exception northwindUpdateOrderException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Order");
+            }
         }
 
-        protected async void Button3Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

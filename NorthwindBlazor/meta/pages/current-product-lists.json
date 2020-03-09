@@ -30,17 +30,15 @@
                   "columns": [
                     {
                       "property": "ProductID",
-                      "title": "Product ID",
-                      "type": "integer"
+                      "title": "Product ID"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "CurrentProductList"
+                  "itemType": "NorthwindBlazor.Models.Northwind.CurrentProductList"
                 }
               ]
             }
@@ -58,8 +56,8 @@
           {
             "name": "getCurrentProductListsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<CurrentProductList>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.CurrentProductList>"
           }
         ],
         "type": "invoke"

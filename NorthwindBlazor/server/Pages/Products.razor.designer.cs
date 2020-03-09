@@ -2,36 +2,40 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class ProductsComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
+        protected RadzenGrid<NorthwindBlazor.Models.Northwind.Product> grid0;
 
-        protected RadzenContent content1;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenButton button0;
-
-        protected RadzenGrid<Product> grid0;
-
-        protected RadzenButton gridDeleteButton;
-
-        IEnumerable<Product> _getProductsResult;
-        protected IEnumerable<Product> getProductsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Product> _getProductsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Product> getProductsResult
         {
             get
             {
@@ -39,43 +43,51 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getProductsResult != value)
+                if(!object.Equals(_getProductsResult, value))
                 {
                     _getProductsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetProductsResult = await Northwind.GetProducts();
-                getProductsResult = northwindGetProductsResult;
+            getProductsResult = northwindGetProductsResult;
         }
 
-        protected async void Button0Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button0Click(MouseEventArgs args)
         {
             var result = await DialogService.OpenAsync<AddProduct>("Add Product", null);
-              await Invoke(() => { StateHasChanged(); });
+              grid0.Reload();
+
+              await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async void Grid0RowSelect(Product args)
+        protected async System.Threading.Tasks.Task Grid0RowSelect(NorthwindBlazor.Models.Northwind.Product args)
         {
-            var result = await DialogService.OpenAsync<EditProduct>("Edit Product", new Dictionary<string, object>() { {"ProductID", $"{args.ProductID}"} });
-              await Invoke(() => { StateHasChanged(); });
+            var result = await DialogService.OpenAsync<EditProduct>("Edit Product", new Dictionary<string, object>() { {"ProductID", args.ProductID} });
+              await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async void GridDeleteButtonClick(UIMouseEventArgs args, Product data)
+        protected async System.Threading.Tasks.Task GridDeleteButtonClick(MouseEventArgs args, dynamic data)
         {
-            var northwindDeleteProductResult = await Northwind.DeleteProduct(data.ProductID);
+            try
+            {
+                var northwindDeleteProductResult = await Northwind.DeleteProduct(data.ProductID);
                 if (northwindDeleteProductResult != null) {
                     grid0.Reload();
 }
+            }
+            catch (Exception northwindDeleteProductException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Product");
+            }
         }
     }
 }

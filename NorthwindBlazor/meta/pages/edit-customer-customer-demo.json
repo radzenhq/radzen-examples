@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Customer",
                               "component": "CustomerID",
+                              "name": "CustomerIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -92,12 +45,14 @@
                               "textProperty": "CompanyName",
                               "valueProperty": "CustomerID",
                               "placeholder": "Choose Customer",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "CustomerID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customercustomerdemo.CustomerID}"
                             },
                             {
                               "type": "required-validator",
@@ -126,6 +81,7 @@
                               "type": "label",
                               "text": "Customer Demographic",
                               "component": "CustomerTypeID",
+                              "name": "CustomerTypeIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -141,12 +97,14 @@
                               "textProperty": "CustomerDesc",
                               "valueProperty": "CustomerTypeID",
                               "placeholder": "Choose CustomerDemographic",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "CustomerTypeID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customercustomerdemo.CustomerTypeID}"
                             },
                             {
                               "type": "required-validator",
@@ -197,12 +155,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update CustomerCustomerDemo",
                             "severity": "error",
                             "summary": "Error",
@@ -230,14 +182,13 @@
                             "result": "${customercustomerdemo}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "CustomerCustomerDemo"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.CustomerCustomerDemo",
                   "data": "${customercustomerdemo}",
-                  "visible": "${customercustomerdemo != null && canEdit}",
-                  "itemType": "CustomerCustomerDemo"
+                  "visible": "${customercustomerdemo != null}"
                 }
               ]
             }
@@ -248,12 +199,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getCustomerCustomerDemoByCustomerIDAndCustomerTypeID",
         "parameters": [
@@ -271,17 +216,10 @@
             "name": "customercustomerdemo",
             "type": "set",
             "value": "${result}",
-            "valueType": "CustomerCustomerDemo"
+            "valueType": "NorthwindBlazor.Models.Northwind.CustomerCustomerDemo"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       },
       {
@@ -291,8 +229,8 @@
           {
             "name": "getCustomersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Customer>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Customer>"
           }
         ],
         "type": "invoke"
@@ -304,8 +242,8 @@
           {
             "name": "getCustomerDemographicsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<CustomerDemographic>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.CustomerDemographic>"
           }
         ],
         "type": "invoke"

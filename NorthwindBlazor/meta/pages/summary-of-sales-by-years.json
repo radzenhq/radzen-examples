@@ -29,26 +29,21 @@
                   "title": "",
                   "columns": [
                     {
-                      "format": "date-time",
                       "property": "ShippedDate",
-                      "formatString": "{0:d}",
-                      "title": "Shipped Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Shipped Date"
                     },
                     {
                       "property": "OrderID",
-                      "title": "Order ID",
-                      "type": "integer"
+                      "title": "Order ID"
                     },
                     {
-                      "format": "decimal",
                       "property": "Subtotal",
-                      "title": "Subtotal",
-                      "type": "number"
+                      "title": "Subtotal"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "SummaryOfSalesByYear"
+                  "itemType": "NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear"
                 }
               ]
             }
@@ -66,8 +61,8 @@
           {
             "name": "getSummaryOfSalesByYearsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<SummaryOfSalesByYear>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear>"
           }
         ],
         "type": "invoke"

@@ -42,7 +42,6 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-    [Key]
     public string CustomerName
     {
       get;

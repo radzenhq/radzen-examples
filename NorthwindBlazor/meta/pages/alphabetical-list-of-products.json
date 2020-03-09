@@ -30,66 +30,51 @@
                   "columns": [
                     {
                       "property": "ProductID",
-                      "title": "Product ID",
-                      "type": "integer"
+                      "title": "Product ID"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
                       "property": "SupplierID",
-                      "title": "Supplier ID",
-                      "type": "integer"
+                      "title": "Supplier ID"
                     },
                     {
                       "property": "CategoryID",
-                      "title": "Category ID",
-                      "type": "integer"
+                      "title": "Category ID"
                     },
                     {
                       "property": "QuantityPerUnit",
-                      "title": "Quantity Per Unit",
-                      "type": "string"
+                      "title": "Quantity Per Unit"
                     },
                     {
-                      "format": "decimal",
                       "property": "UnitPrice",
-                      "title": "Unit Price",
-                      "type": "number"
+                      "title": "Unit Price"
                     },
                     {
-                      "format": "int16",
                       "property": "UnitsInStock",
-                      "title": "Units In Stock",
-                      "type": "integer"
+                      "title": "Units In Stock"
                     },
                     {
-                      "format": "int16",
                       "property": "UnitsOnOrder",
-                      "title": "Units On Order",
-                      "type": "integer"
+                      "title": "Units On Order"
                     },
                     {
-                      "format": "int16",
                       "property": "ReorderLevel",
-                      "title": "Reorder Level",
-                      "type": "integer"
+                      "title": "Reorder Level"
                     },
                     {
                       "property": "Discontinued",
-                      "title": "Discontinued",
-                      "type": "boolean"
+                      "title": "Discontinued"
                     },
                     {
                       "property": "CategoryName",
-                      "title": "Category Name",
-                      "type": "string"
+                      "title": "Category Name"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "AlphabeticalListOfProduct"
+                  "itemType": "NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct"
                 }
               ]
             }
@@ -107,8 +92,8 @@
           {
             "name": "getAlphabeticalListOfProductsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<AlphabeticalListOfProduct>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct>"
           }
         ],
         "type": "invoke"

@@ -2,44 +2,38 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class AddCustomerDemographicComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
-        protected RadzenContent content1;
-
-        protected RadzenTemplateForm<CustomerDemographic> form0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenTextBox customerTypeId;
-
-        protected RadzenRequiredValidator customerTypeIdRequiredValidator;
-
-        protected RadzenLabel label2;
-
-        protected RadzenTextBox customerDesc;
-
-        protected RadzenButton button1;
-
-        protected RadzenButton button2;
-
-        CustomerDemographic _customerdemographic;
-        protected CustomerDemographic customerdemographic
+        NorthwindBlazor.Models.Northwind.CustomerDemographic _customerdemographic;
+        protected NorthwindBlazor.Models.Northwind.CustomerDemographic customerdemographic
         {
             get
             {
@@ -47,31 +41,37 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_customerdemographic != value)
+                if(!object.Equals(_customerdemographic, value))
                 {
                     _customerdemographic = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
+        }
+        protected async System.Threading.Tasks.Task Load()
+        {
+            customerdemographic = new NorthwindBlazor.Models.Northwind.CustomerDemographic();
         }
 
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.CustomerDemographic args)
         {
-            customerdemographic = new CustomerDemographic();
-        }
-
-        protected async void Form0Submit(CustomerDemographic args)
-        {
-            var northwindCreateCustomerDemographicResult = await Northwind.CreateCustomerDemographic(customerdemographic);
+            try
+            {
+                var northwindCreateCustomerDemographicResult = await Northwind.CreateCustomerDemographic(customerdemographic);
                 DialogService.Close(customerdemographic);
+            }
+            catch (Exception northwindCreateCustomerDemographicException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new CustomerDemographic!");
+            }
         }
 
-        protected async void Button2Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

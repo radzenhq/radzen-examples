@@ -27,8 +27,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "Customer Type ID",
+                              "text": "Customer Type Id",
                               "component": "CustomerTypeID",
+                              "name": "CustomerTypeIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customerdemographic.CustomerTypeID}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Customer Desc",
                               "component": "CustomerDesc",
+                              "name": "CustomerDescLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -92,7 +95,8 @@
                               "name": "CustomerDesc",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customerdemographic.CustomerDesc}"
                             }
                           ]
                         }
@@ -153,14 +157,13 @@
                             "result": "${customerdemographic}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "CustomerDemographic"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${customerdemographic}",
                   "visible": "${customerdemographic != null}",
-                  "itemType": "CustomerDemographic"
+                  "itemType": "NorthwindBlazor.Models.Northwind.CustomerDemographic"
                 }
               ]
             }
@@ -174,8 +177,8 @@
       {
         "name": "customerdemographic",
         "type": "set",
-        "value": "new CustomerDemographic()",
-        "valueType": "CustomerDemographic"
+        "value": "new NorthwindBlazor.Models.Northwind.CustomerDemographic()",
+        "valueType": "NorthwindBlazor.Models.Northwind.CustomerDemographic"
       }
     ]
   },

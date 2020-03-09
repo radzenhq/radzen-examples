@@ -5,35 +5,35 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Alphabetical List Of Products">
+    <RadzenHeading Size="H1" Text="Alphabetical List Of Products">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getAlphabeticalListOfProductsResult)" TItem="AlphabeticalListOfProduct">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getAlphabeticalListOfProductsResult" TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct">
           <Columns>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="ProductID" Title="Product ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="ProductID" Title="Product ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="ProductName" Title="Product Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="SupplierID" Title="Supplier ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="SupplierID" Title="Supplier ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="CategoryID" Title="Category ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="CategoryID" Title="Category ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="QuantityPerUnit" Title="Quantity Per Unit" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="QuantityPerUnit" Title="Quantity Per Unit">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="UnitPrice" Title="Unit Price">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="int16" Property="UnitsInStock" Title="Units In Stock" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="UnitsInStock" Title="Units In Stock">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="int16" Property="UnitsOnOrder" Title="Units On Order" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="UnitsOnOrder" Title="Units On Order">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Format="int16" Property="ReorderLevel" Title="Reorder Level" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="ReorderLevel" Title="Reorder Level">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="Discontinued" Title="Discontinued" Type="boolean">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="Discontinued" Title="Discontinued">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="AlphabeticalListOfProduct" Context="data" Property="CategoryName" Title="Category Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct" Property="CategoryName" Title="Category Name">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

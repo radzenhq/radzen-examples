@@ -7,7 +7,6 @@ namespace NorthwindBlazor.Models.Northwind
   [Table("Products by Category", Schema = "dbo")]
   public partial class ProductsByCategory
   {
-    [Key]
     public string CategoryName
     {
       get;

@@ -7,7 +7,6 @@ namespace NorthwindBlazor.Models.Northwind
   [Table("Ten Most Expensive Products", Schema = "dbo")]
   public partial class TenMostExpensiveProduct
   {
-    [Key]
     public string TenMostExpensiveProducts
     {
       get;

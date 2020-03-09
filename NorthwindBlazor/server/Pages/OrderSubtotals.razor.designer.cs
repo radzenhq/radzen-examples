@@ -2,32 +2,40 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class OrderSubtotalsComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
+        protected RadzenGrid<NorthwindBlazor.Models.Northwind.OrderSubtotal> grid0;
 
-        protected RadzenContent content1;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenGrid<OrderSubtotal> grid0;
-
-        IEnumerable<OrderSubtotal> _getOrderSubtotalsResult;
-        protected IEnumerable<OrderSubtotal> getOrderSubtotalsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.OrderSubtotal> _getOrderSubtotalsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.OrderSubtotal> getOrderSubtotalsResult
         {
             get
             {
@@ -35,23 +43,22 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getOrderSubtotalsResult != value)
+                if(!object.Equals(_getOrderSubtotalsResult, value))
                 {
                     _getOrderSubtotalsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetOrderSubtotalsResult = await Northwind.GetOrderSubtotals();
-                getOrderSubtotalsResult = northwindGetOrderSubtotalsResult;
+            getOrderSubtotalsResult = northwindGetOrderSubtotalsResult;
         }
     }
 }

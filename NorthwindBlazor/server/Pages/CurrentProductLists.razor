@@ -5,17 +5,17 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Current Product Lists">
+    <RadzenHeading Size="H1" Text="Current Product Lists">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCurrentProductListsResult)" TItem="CurrentProductList">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getCurrentProductListsResult" TItem="NorthwindBlazor.Models.Northwind.CurrentProductList">
           <Columns>
-            <RadzenGridColumn TItem="CurrentProductList" Context="data" Property="ProductID" Title="Product ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.CurrentProductList" Property="ProductID" Title="Product ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CurrentProductList" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.CurrentProductList" Property="ProductName" Title="Product Name">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

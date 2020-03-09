@@ -2,85 +2,44 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class EditOrderDetailComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
+        [Parameter]
+        public dynamic OrderID { get; set; }
 
         [Parameter]
-        protected string OrderID { get; set; }
+        public dynamic ProductID { get; set; }
 
-        [Parameter]
-        protected string ProductID { get; set; }
-
-        protected RadzenContent content1;
-
-        protected RadzenLabel closeLabel;
-
-        protected RadzenButton closeButton;
-
-        protected RadzenTemplateForm<OrderDetail> form0;
-
-        protected RadzenLabel label2;
-
-        protected RadzenDropDown orderId;
-
-        protected RadzenRequiredValidator orderIdRequiredValidator;
-
-        protected RadzenLabel label3;
-
-        protected RadzenDropDown productId;
-
-        protected RadzenRequiredValidator productIdRequiredValidator;
-
-        protected RadzenLabel label4;
-
-        protected dynamic unitPrice;
-
-        protected RadzenLabel label5;
-
-        protected dynamic quantity;
-
-        protected RadzenLabel label6;
-
-        protected dynamic discount;
-
-        protected RadzenButton button2;
-
-        protected RadzenButton button3;
-
-        bool _canEdit;
-        protected bool canEdit
-        {
-            get
-            {
-                return _canEdit;
-            }
-            set
-            {
-                if(_canEdit != value)
-                {
-                    _canEdit = value;
-                    Invoke(() => { StateHasChanged(); });
-                }
-            }
-        }
-
-        OrderDetail _orderdetail;
-        protected OrderDetail orderdetail
+        NorthwindBlazor.Models.Northwind.OrderDetail _orderdetail;
+        protected NorthwindBlazor.Models.Northwind.OrderDetail orderdetail
         {
             get
             {
@@ -88,16 +47,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_orderdetail != value)
+                if(!object.Equals(_orderdetail, value))
                 {
                     _orderdetail = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Order> _getOrdersResult;
-        protected IEnumerable<Order> getOrdersResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Order> _getOrdersResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Order> getOrdersResult
         {
             get
             {
@@ -105,16 +64,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getOrdersResult != value)
+                if(!object.Equals(_getOrdersResult, value))
                 {
                     _getOrdersResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Product> _getProductsResult;
-        protected IEnumerable<Product> getProductsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Product> _getProductsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Product> getProductsResult
         {
             get
             {
@@ -122,45 +81,44 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getProductsResult != value)
+                if(!object.Equals(_getProductsResult, value))
                 {
                     _getProductsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
-            canEdit = true;
-
-            var northwindGetOrderDetailByOrderIdAndProductIdResult = await Northwind.GetOrderDetailByOrderIdAndProductId(int.Parse(OrderID), int.Parse(ProductID));
-                orderdetail = northwindGetOrderDetailByOrderIdAndProductIdResult;
+            var northwindGetOrderDetailByOrderIdAndProductIdResult = await Northwind.GetOrderDetailByOrderIdAndProductId(int.Parse($"{OrderID}"), int.Parse($"{ProductID}"));
+            orderdetail = northwindGetOrderDetailByOrderIdAndProductIdResult;
 
             var northwindGetOrdersResult = await Northwind.GetOrders();
-                getOrdersResult = northwindGetOrdersResult;
+            getOrdersResult = northwindGetOrdersResult;
 
             var northwindGetProductsResult = await Northwind.GetProducts();
-                getProductsResult = northwindGetProductsResult;
+            getProductsResult = northwindGetProductsResult;
         }
 
-        protected async void CloseButtonClick(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.OrderDetail args)
         {
-            DialogService.Close(null);
-        }
-
-        protected async void Form0Submit(OrderDetail args)
-        {
-            var northwindUpdateOrderDetailResult = await Northwind.UpdateOrderDetail(int.Parse(OrderID), int.Parse(ProductID), orderdetail);
+            try
+            {
+                var northwindUpdateOrderDetailResult = await Northwind.UpdateOrderDetail(int.Parse($"{OrderID}"), int.Parse($"{ProductID}"), orderdetail);
                 DialogService.Close(orderdetail);
+            }
+            catch (Exception northwindUpdateOrderDetailException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update OrderDetail");
+            }
         }
 
-        protected async void Button3Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

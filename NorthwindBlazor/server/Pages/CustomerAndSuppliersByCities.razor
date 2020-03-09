@@ -5,21 +5,21 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Customer And Suppliers By Cities">
+    <RadzenHeading Size="H1" Text="Customer And Suppliers By Cities">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCustomerAndSuppliersByCitiesResult)" TItem="CustomerAndSuppliersByCity">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getCustomerAndSuppliersByCitiesResult" TItem="NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity">
           <Columns>
-            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="City" Title="City" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity" Property="City" Title="City">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="CompanyName" Title="Company Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity" Property="CompanyName" Title="Company Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="ContactName" Title="Contact Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity" Property="ContactName" Title="Contact Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CustomerAndSuppliersByCity" Context="data" Property="Relationship" Title="Relationship" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity" Property="Relationship" Title="Relationship">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

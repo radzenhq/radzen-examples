@@ -5,41 +5,41 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(employeeterritory)" Visible="@(employeeterritory != null)" TItem="EmployeeTerritory" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@employeeterritory" Visible="@(employeeterritory != null)" TItem="NorthwindBlazor.Models.Northwind.EmployeeTerritory" Submit="@Form0Submit">
           <ChildContent>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label1" Text="Employee" Component="EmployeeID" style="width: 100%;">
+                <RadzenLabel Text="Employee" Component="EmployeeID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown @ref="employeeId" Data="@(getEmployeesResult)" TextProperty="LastName" ValueProperty="EmployeeID" Placeholder="Choose Employee" style="display: block; width: 100%;" Name="EmployeeID">
+                <RadzenDropDown Data="@getEmployeesResult" TextProperty="LastName" ValueProperty="EmployeeID" Placeholder="Choose Employee" style="display: block; width: 100%" @bind-Value="@(employeeterritory.EmployeeID)" Name="EmployeeID">
                 </RadzenDropDown>
-                <RadzenRequiredValidator @ref="employeeIdRequiredValidator" Component="EmployeeID" Text="EmployeeID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="EmployeeID" Text="EmployeeID is required" style="position: absolute" DefaultValue="0">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label2" Text="Territory" Component="TerritoryID" style="width: 100%;">
+                <RadzenLabel Text="Territory" Component="TerritoryID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown @ref="territoryId" Data="@(getTerritoriesResult)" TextProperty="TerritoryDescription" ValueProperty="TerritoryID" Placeholder="Choose Territory" style="display: block; width: 100%;" Name="TerritoryID">
+                <RadzenDropDown Data="@getTerritoriesResult" TextProperty="TerritoryDescription" ValueProperty="TerritoryID" Placeholder="Choose Territory" style="display: block; width: 100%" @bind-Value="@(employeeterritory.TerritoryID)" Name="TerritoryID">
                 </RadzenDropDown>
-                <RadzenRequiredValidator @ref="territoryIdRequiredValidator" Component="TerritoryID" Text="TerritoryID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="TerritoryID" Text="TerritoryID is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton @ref="button1" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton @ref="button2" ButtonStyle="light" Text="Cancel" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

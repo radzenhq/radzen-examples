@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Customer",
                               "component": "CustomerID",
+                              "name": "CustomerIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -44,12 +45,14 @@
                               "textProperty": "CompanyName",
                               "valueProperty": "CustomerID",
                               "placeholder": "Choose Customer",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "CustomerID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customercustomerdemo.CustomerID}"
                             },
                             {
                               "type": "required-validator",
@@ -78,6 +81,7 @@
                               "type": "label",
                               "text": "Customer Demographic",
                               "component": "CustomerTypeID",
+                              "name": "CustomerTypeIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -93,12 +97,14 @@
                               "textProperty": "CustomerDesc",
                               "valueProperty": "CustomerTypeID",
                               "placeholder": "Choose CustomerDemographic",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "CustomerTypeID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customercustomerdemo.CustomerTypeID}"
                             },
                             {
                               "type": "required-validator",
@@ -168,14 +174,13 @@
                             "result": "${customercustomerdemo}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "CustomerCustomerDemo"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${customercustomerdemo}",
                   "visible": "${customercustomerdemo != null}",
-                  "itemType": "CustomerCustomerDemo"
+                  "itemType": "NorthwindBlazor.Models.Northwind.CustomerCustomerDemo"
                 }
               ]
             }
@@ -193,8 +198,8 @@
           {
             "name": "getCustomersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Customer>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Customer>"
           }
         ],
         "type": "invoke"
@@ -206,8 +211,8 @@
           {
             "name": "getCustomerDemographicsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<CustomerDemographic>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.CustomerDemographic>"
           }
         ],
         "type": "invoke"
@@ -215,8 +220,8 @@
       {
         "name": "customercustomerdemo",
         "type": "set",
-        "value": "new CustomerCustomerDemo()",
-        "valueType": "CustomerCustomerDemo"
+        "value": "new NorthwindBlazor.Models.Northwind.CustomerCustomerDemo()",
+        "valueType": "NorthwindBlazor.Models.Northwind.CustomerCustomerDemo"
       }
     ]
   },

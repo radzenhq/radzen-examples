@@ -17,7 +17,6 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Category")]
     public ICollection<Product> Products { get; set; }
     public string CategoryName
     {

@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -75,8 +27,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "Customer ID",
+                              "text": "Customer Id",
                               "component": "CustomerID",
+                              "name": "CustomerIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -95,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.CustomerID}"
                             },
                             {
                               "type": "required-validator",
@@ -124,6 +78,7 @@
                               "type": "label",
                               "text": "Company Name",
                               "component": "CompanyName",
+                              "name": "CompanyNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -142,7 +97,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.CompanyName}"
                             },
                             {
                               "type": "required-validator",
@@ -171,6 +127,7 @@
                               "type": "label",
                               "text": "Contact Name",
                               "component": "ContactName",
+                              "name": "ContactNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -188,7 +145,8 @@
                               "name": "ContactName",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.ContactName}"
                             }
                           ]
                         }
@@ -208,6 +166,7 @@
                               "type": "label",
                               "text": "Contact Title",
                               "component": "ContactTitle",
+                              "name": "ContactTitleLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -225,7 +184,8 @@
                               "name": "ContactTitle",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.ContactTitle}"
                             }
                           ]
                         }
@@ -245,6 +205,7 @@
                               "type": "label",
                               "text": "Address",
                               "component": "Address",
+                              "name": "AddressLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -262,7 +223,8 @@
                               "name": "Address",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.Address}"
                             }
                           ]
                         }
@@ -282,6 +244,7 @@
                               "type": "label",
                               "text": "City",
                               "component": "City",
+                              "name": "CityLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -299,7 +262,8 @@
                               "name": "City",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.City}"
                             }
                           ]
                         }
@@ -319,6 +283,7 @@
                               "type": "label",
                               "text": "Region",
                               "component": "Region",
+                              "name": "RegionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -336,7 +301,8 @@
                               "name": "Region",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.Region}"
                             }
                           ]
                         }
@@ -356,6 +322,7 @@
                               "type": "label",
                               "text": "Postal Code",
                               "component": "PostalCode",
+                              "name": "PostalCodeLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -373,7 +340,8 @@
                               "name": "PostalCode",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.PostalCode}"
                             }
                           ]
                         }
@@ -393,6 +361,7 @@
                               "type": "label",
                               "text": "Country",
                               "component": "Country",
+                              "name": "CountryLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -410,7 +379,8 @@
                               "name": "Country",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.Country}"
                             }
                           ]
                         }
@@ -430,6 +400,7 @@
                               "type": "label",
                               "text": "Phone",
                               "component": "Phone",
+                              "name": "PhoneLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -447,7 +418,8 @@
                               "name": "Phone",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.Phone}"
                             }
                           ]
                         }
@@ -467,6 +439,7 @@
                               "type": "label",
                               "text": "Fax",
                               "component": "Fax",
+                              "name": "FaxLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -484,7 +457,8 @@
                               "name": "Fax",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${customer.Fax}"
                             }
                           ]
                         }
@@ -526,12 +500,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update Customer",
                             "severity": "error",
                             "summary": "Error",
@@ -555,14 +523,13 @@
                             "result": "${customer}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Customer"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.Customer",
                   "data": "${customer}",
-                  "visible": "${customer != null && canEdit}",
-                  "itemType": "Customer"
+                  "visible": "${customer != null}"
                 }
               ]
             }
@@ -573,12 +540,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getCustomerByCustomerID",
         "parameters": [
@@ -592,17 +553,10 @@
             "name": "customer",
             "type": "set",
             "value": "${result}",
-            "valueType": "Customer"
+            "valueType": "NorthwindBlazor.Models.Northwind.Customer"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       }
     ]

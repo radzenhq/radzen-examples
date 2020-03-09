@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Company Name",
                               "component": "CompanyName",
+                              "name": "CompanyNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${shipper.CompanyName}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Phone",
                               "component": "Phone",
+                              "name": "PhoneLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -93,7 +96,8 @@
                               "name": "Phone",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${shipper.Phone}"
                             }
                           ]
                         }
@@ -154,14 +158,13 @@
                             "result": "${shipper}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Shipper"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${shipper}",
                   "visible": "${shipper != null}",
-                  "itemType": "Shipper"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Shipper"
                 }
               ]
             }
@@ -175,8 +178,8 @@
       {
         "name": "shipper",
         "type": "set",
-        "value": "new Shipper()",
-        "valueType": "Shipper"
+        "value": "new NorthwindBlazor.Models.Northwind.Shipper()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Shipper"
       }
     ]
   },

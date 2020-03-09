@@ -13,16 +13,13 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("EmployeeID")]
     public Employee Employee { get; set; }
+    [Key]
     public string TerritoryID
     {
       get;
       set;
     }
-
-    [ForeignKey("TerritoryID")]
     public Territory Territory { get; set; }
   }
 }

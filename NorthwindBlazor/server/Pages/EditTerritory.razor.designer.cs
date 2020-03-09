@@ -2,76 +2,41 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class EditTerritoryComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
         [Parameter]
-        protected string TerritoryID { get; set; }
+        public dynamic TerritoryID { get; set; }
 
-        protected RadzenContent content1;
-
-        protected RadzenLabel closeLabel;
-
-        protected RadzenButton closeButton;
-
-        protected RadzenTemplateForm<Territory> form0;
-
-        protected RadzenLabel label2;
-
-        protected RadzenTextBox territoryId;
-
-        protected RadzenRequiredValidator territoryIdRequiredValidator;
-
-        protected RadzenLabel label3;
-
-        protected RadzenTextBox territoryDescription;
-
-        protected RadzenRequiredValidator territoryDescriptionRequiredValidator;
-
-        protected RadzenLabel label4;
-
-        protected RadzenDropDown regionId;
-
-        protected RadzenRequiredValidator regionIdRequiredValidator;
-
-        protected RadzenButton button2;
-
-        protected RadzenButton button3;
-
-        bool _canEdit;
-        protected bool canEdit
-        {
-            get
-            {
-                return _canEdit;
-            }
-            set
-            {
-                if(_canEdit != value)
-                {
-                    _canEdit = value;
-                    Invoke(() => { StateHasChanged(); });
-                }
-            }
-        }
-
-        Territory _territory;
-        protected Territory territory
+        NorthwindBlazor.Models.Northwind.Territory _territory;
+        protected NorthwindBlazor.Models.Northwind.Territory territory
         {
             get
             {
@@ -79,16 +44,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_territory != value)
+                if(!object.Equals(_territory, value))
                 {
                     _territory = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Region> _getRegionsResult;
-        protected IEnumerable<Region> getRegionsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Region> _getRegionsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Region> getRegionsResult
         {
             get
             {
@@ -96,42 +61,41 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getRegionsResult != value)
+                if(!object.Equals(_getRegionsResult, value))
                 {
                     _getRegionsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
-            canEdit = true;
-
             var northwindGetTerritoryByTerritoryIdResult = await Northwind.GetTerritoryByTerritoryId($"{TerritoryID}");
-                territory = northwindGetTerritoryByTerritoryIdResult;
+            territory = northwindGetTerritoryByTerritoryIdResult;
 
             var northwindGetRegionsResult = await Northwind.GetRegions();
-                getRegionsResult = northwindGetRegionsResult;
+            getRegionsResult = northwindGetRegionsResult;
         }
 
-        protected async void CloseButtonClick(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.Territory args)
         {
-            DialogService.Close(null);
-        }
-
-        protected async void Form0Submit(Territory args)
-        {
-            var northwindUpdateTerritoryResult = await Northwind.UpdateTerritory($"{TerritoryID}", territory);
+            try
+            {
+                var northwindUpdateTerritoryResult = await Northwind.UpdateTerritory($"{TerritoryID}", territory);
                 DialogService.Close(territory);
+            }
+            catch (Exception northwindUpdateTerritoryException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Territory");
+            }
         }
 
-        protected async void Button3Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

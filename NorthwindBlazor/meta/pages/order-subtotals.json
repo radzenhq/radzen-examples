@@ -30,18 +30,15 @@
                   "columns": [
                     {
                       "property": "OrderID",
-                      "title": "Order ID",
-                      "type": "integer"
+                      "title": "Order ID"
                     },
                     {
-                      "format": "decimal",
                       "property": "Subtotal",
-                      "title": "Subtotal",
-                      "type": "number"
+                      "title": "Subtotal"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "OrderSubtotal"
+                  "itemType": "NorthwindBlazor.Models.Northwind.OrderSubtotal"
                 }
               ]
             }
@@ -59,8 +56,8 @@
           {
             "name": "getOrderSubtotalsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<OrderSubtotal>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.OrderSubtotal>"
           }
         ],
         "type": "invoke"

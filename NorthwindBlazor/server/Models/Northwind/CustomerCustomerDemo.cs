@@ -13,16 +13,13 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("CustomerID")]
     public Customer Customer { get; set; }
+    [Key]
     public string CustomerTypeID
     {
       get;
       set;
     }
-
-    [ForeignKey("CustomerTypeID")]
     public CustomerDemographic CustomerDemographic { get; set; }
   }
 }

@@ -27,8 +27,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "Region ID",
+                              "text": "Region Id",
                               "component": "RegionID",
+                              "name": "RegionIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -40,13 +41,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "integer",
+                              "valueType": "int",
                               "type": "numeric",
                               "name": "RegionID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${region.RegionID}"
                             },
                             {
                               "type": "required-validator",
@@ -75,6 +77,7 @@
                               "type": "label",
                               "text": "Region Description",
                               "component": "RegionDescription",
+                              "name": "RegionDescriptionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -93,7 +96,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${region.RegionDescription}"
                             },
                             {
                               "type": "required-validator",
@@ -163,14 +167,13 @@
                             "result": "${region}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Region"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${region}",
                   "visible": "${region != null}",
-                  "itemType": "Region"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Region"
                 }
               ]
             }
@@ -184,8 +187,8 @@
       {
         "name": "region",
         "type": "set",
-        "value": "new Region()",
-        "valueType": "Region"
+        "value": "new NorthwindBlazor.Models.Northwind.Region()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Region"
       }
     ]
   },

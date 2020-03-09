@@ -30,28 +30,23 @@
                   "columns": [
                     {
                       "property": "CategoryID",
-                      "title": "Category ID",
-                      "type": "integer"
+                      "title": "Category ID"
                     },
                     {
                       "property": "CategoryName",
-                      "title": "Category Name",
-                      "type": "string"
+                      "title": "Category Name"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
-                      "format": "decimal",
                       "property": "ProductSales",
-                      "title": "Product Sales",
-                      "type": "number"
+                      "title": "Product Sales"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "SalesByCategory"
+                  "itemType": "NorthwindBlazor.Models.Northwind.SalesByCategory"
                 }
               ]
             }
@@ -69,8 +64,8 @@
           {
             "name": "getSalesByCategoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<SalesByCategory>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.SalesByCategory>"
           }
         ],
         "type": "invoke"

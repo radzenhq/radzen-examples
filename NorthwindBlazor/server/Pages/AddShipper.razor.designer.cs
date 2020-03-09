@@ -2,44 +2,38 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class AddShipperComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
-        protected RadzenContent content1;
-
-        protected RadzenTemplateForm<Shipper> form0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenTextBox companyName;
-
-        protected RadzenRequiredValidator companyNameRequiredValidator;
-
-        protected RadzenLabel label2;
-
-        protected RadzenTextBox phone;
-
-        protected RadzenButton button1;
-
-        protected RadzenButton button2;
-
-        Shipper _shipper;
-        protected Shipper shipper
+        NorthwindBlazor.Models.Northwind.Shipper _shipper;
+        protected NorthwindBlazor.Models.Northwind.Shipper shipper
         {
             get
             {
@@ -47,31 +41,37 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_shipper != value)
+                if(!object.Equals(_shipper, value))
                 {
                     _shipper = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
+        }
+        protected async System.Threading.Tasks.Task Load()
+        {
+            shipper = new NorthwindBlazor.Models.Northwind.Shipper();
         }
 
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.Shipper args)
         {
-            shipper = new Shipper();
-        }
-
-        protected async void Form0Submit(Shipper args)
-        {
-            var northwindCreateShipperResult = await Northwind.CreateShipper(shipper);
+            try
+            {
+                var northwindCreateShipperResult = await Northwind.CreateShipper(shipper);
                 DialogService.Close(shipper);
+            }
+            catch (Exception northwindCreateShipperException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Shipper!");
+            }
         }
 
-        protected async void Button2Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

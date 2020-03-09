@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Role Name",
                               "component": "RoleName",
+                              "name": "RoleNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -95,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${rolepermission.RoleName}"
                             },
                             {
                               "type": "required-validator",
@@ -124,6 +78,7 @@
                               "type": "label",
                               "text": "Permission Id",
                               "component": "PermissionId",
+                              "name": "PermissionIdLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -142,7 +97,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${rolepermission.PermissionId}"
                             },
                             {
                               "type": "required-validator",
@@ -193,12 +149,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update RolePermission",
                             "severity": "error",
                             "summary": "Error",
@@ -226,14 +176,13 @@
                             "result": "${rolepermission}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "RolePermission"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.RolePermission",
                   "data": "${rolepermission}",
-                  "visible": "${rolepermission != null && canEdit}",
-                  "itemType": "RolePermission"
+                  "visible": "${rolepermission != null}"
                 }
               ]
             }
@@ -244,12 +193,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getRolePermissionByRoleNameAndPermissionId",
         "parameters": [
@@ -267,17 +210,10 @@
             "name": "rolepermission",
             "type": "set",
             "value": "${result}",
-            "valueType": "RolePermission"
+            "valueType": "NorthwindBlazor.Models.Northwind.RolePermission"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       }
     ]

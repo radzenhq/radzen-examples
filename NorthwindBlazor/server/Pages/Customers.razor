@@ -5,41 +5,41 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Customers">
+    <RadzenHeading Size="H1" Text="Customers">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getCustomersResult)" TItem="Customer" RowSelect="@Grid0RowSelect">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getCustomersResult" TItem="NorthwindBlazor.Models.Northwind.Customer" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="CustomerID" Title="Customer ID" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="CustomerID" Title="Customer ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="CompanyName" Title="Company Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="CompanyName" Title="Company Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="ContactName" Title="Contact Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="ContactName" Title="Contact Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="ContactTitle" Title="Contact Title" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="ContactTitle" Title="Contact Title">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="Address" Title="Address" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="Address" Title="Address">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="City" Title="City" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="City" Title="City">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="Region" Title="Region" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="Region" Title="Region">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="PostalCode" Title="Postal Code" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="PostalCode" Title="Postal Code">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="Country" Title="Country" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="Country" Title="Country">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="Phone" Title="Phone" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="Phone" Title="Phone">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Property="Fax" Title="Fax" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Property="Fax" Title="Fax">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Customer" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-              <Template Context="data">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Customer" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="northwindBlazorModelsNorthwindCustomer">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, northwindBlazorModelsNorthwindCustomer))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

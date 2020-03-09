@@ -12,7 +12,6 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-    [Key]
     public string CompanyName
     {
       get;

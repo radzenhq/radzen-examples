@@ -5,19 +5,19 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Product Sales For 1997 S">
+    <RadzenHeading Size="H1" Text="Product Sales For 1997 S">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductSalesFor1997sResult)" TItem="ProductSalesFor1997">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getProductSalesFor1997sResult" TItem="NorthwindBlazor.Models.Northwind.ProductSalesFor1997">
           <Columns>
-            <RadzenGridColumn TItem="ProductSalesFor1997" Context="data" Property="CategoryName" Title="Category Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.ProductSalesFor1997" Property="CategoryName" Title="Category Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ProductSalesFor1997" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.ProductSalesFor1997" Property="ProductName" Title="Product Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ProductSalesFor1997" Context="data" Format="decimal" Property="ProductSales" Title="Product Sales" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.ProductSalesFor1997" Property="ProductSales" Title="Product Sales">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

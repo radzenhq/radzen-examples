@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -58,10 +62,9 @@
                         ],
                         "path": "edit-shipper",
                         "type": "popup",
-                        "argType": "Shipper",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -72,26 +75,29 @@
                   "columns": [
                     {
                       "property": "ShipperID",
-                      "title": "Shipper ID",
-                      "type": "integer"
+                      "title": "Shipper ID"
                     },
                     {
                       "property": "CompanyName",
-                      "title": "Company Name",
-                      "type": "string"
+                      "title": "Company Name"
                     },
                     {
                       "property": "Phone",
-                      "title": "Phone",
-                      "type": "string"
+                      "title": "Phone"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -123,8 +129,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "Shipper"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -133,7 +138,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "Shipper"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Shipper"
                 }
               ]
             }
@@ -151,8 +156,8 @@
           {
             "name": "getShippersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Shipper>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Shipper>"
           }
         ],
         "type": "invoke"

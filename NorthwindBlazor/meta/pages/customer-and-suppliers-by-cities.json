@@ -30,27 +30,23 @@
                   "columns": [
                     {
                       "property": "City",
-                      "title": "City",
-                      "type": "string"
+                      "title": "City"
                     },
                     {
                       "property": "CompanyName",
-                      "title": "Company Name",
-                      "type": "string"
+                      "title": "Company Name"
                     },
                     {
                       "property": "ContactName",
-                      "title": "Contact Name",
-                      "type": "string"
+                      "title": "Contact Name"
                     },
                     {
                       "property": "Relationship",
-                      "title": "Relationship",
-                      "type": "string"
+                      "title": "Relationship"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "CustomerAndSuppliersByCity"
+                  "itemType": "NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity"
                 }
               ]
             }
@@ -68,8 +64,8 @@
           {
             "name": "getCustomerAndSuppliersByCitiesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<CustomerAndSuppliersByCity>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity>"
           }
         ],
         "type": "invoke"

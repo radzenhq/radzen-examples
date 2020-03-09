@@ -2,52 +2,38 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class AddTerritoryComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
-        protected RadzenContent content1;
-
-        protected RadzenTemplateForm<Territory> form0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenTextBox territoryId;
-
-        protected RadzenRequiredValidator territoryIdRequiredValidator;
-
-        protected RadzenLabel label2;
-
-        protected RadzenTextBox territoryDescription;
-
-        protected RadzenRequiredValidator territoryDescriptionRequiredValidator;
-
-        protected RadzenLabel label3;
-
-        protected RadzenDropDown regionId;
-
-        protected RadzenRequiredValidator regionIdRequiredValidator;
-
-        protected RadzenButton button1;
-
-        protected RadzenButton button2;
-
-        IEnumerable<Region> _getRegionsResult;
-        protected IEnumerable<Region> getRegionsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Region> _getRegionsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Region> getRegionsResult
         {
             get
             {
@@ -55,16 +41,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getRegionsResult != value)
+                if(!object.Equals(_getRegionsResult, value))
                 {
                     _getRegionsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        Territory _territory;
-        protected Territory territory
+        NorthwindBlazor.Models.Northwind.Territory _territory;
+        protected NorthwindBlazor.Models.Northwind.Territory territory
         {
             get
             {
@@ -72,34 +58,40 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_territory != value)
+                if(!object.Equals(_territory, value))
                 {
                     _territory = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetRegionsResult = await Northwind.GetRegions();
-                getRegionsResult = northwindGetRegionsResult;
+            getRegionsResult = northwindGetRegionsResult;
 
-            territory = new Territory();
+            territory = new NorthwindBlazor.Models.Northwind.Territory();
         }
 
-        protected async void Form0Submit(Territory args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.Territory args)
         {
-            var northwindCreateTerritoryResult = await Northwind.CreateTerritory(territory);
+            try
+            {
+                var northwindCreateTerritoryResult = await Northwind.CreateTerritory(territory);
                 DialogService.Close(territory);
+            }
+            catch (Exception northwindCreateTerritoryException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Territory!");
+            }
         }
 
-        protected async void Button2Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

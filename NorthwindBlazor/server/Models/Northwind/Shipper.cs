@@ -17,7 +17,6 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Shipper")]
     public ICollection<Order> Orders { get; set; }
     public string CompanyName
     {

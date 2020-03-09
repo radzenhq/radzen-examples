@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Role Name",
                               "component": "RoleName",
+                              "name": "RoleNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${rolepermission.RoleName}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Permission Id",
                               "component": "PermissionId",
+                              "name": "PermissionIdLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -94,7 +97,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${rolepermission.PermissionId}"
                             },
                             {
                               "type": "required-validator",
@@ -164,14 +168,13 @@
                             "result": "${rolepermission}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "RolePermission"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${rolepermission}",
                   "visible": "${rolepermission != null}",
-                  "itemType": "RolePermission"
+                  "itemType": "NorthwindBlazor.Models.Northwind.RolePermission"
                 }
               ]
             }
@@ -185,8 +188,8 @@
       {
         "name": "rolepermission",
         "type": "set",
-        "value": "new RolePermission()",
-        "valueType": "RolePermission"
+        "value": "new NorthwindBlazor.Models.Northwind.RolePermission()",
+        "valueType": "NorthwindBlazor.Models.Northwind.RolePermission"
       }
     ]
   },

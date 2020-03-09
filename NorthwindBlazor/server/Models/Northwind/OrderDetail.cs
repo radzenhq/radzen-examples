@@ -13,16 +13,13 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("OrderID")]
     public Order Order { get; set; }
+    [Key]
     public int ProductID
     {
       get;
       set;
     }
-
-    [ForeignKey("ProductID")]
     public Product Product { get; set; }
     public decimal UnitPrice
     {

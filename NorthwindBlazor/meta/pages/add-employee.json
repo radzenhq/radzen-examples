@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Last Name",
                               "component": "LastName",
+                              "name": "LastNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.LastName}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "First Name",
                               "component": "FirstName",
+                              "name": "FirstNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -94,7 +97,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.FirstName}"
                             },
                             {
                               "type": "required-validator",
@@ -123,6 +127,7 @@
                               "type": "label",
                               "text": "Title",
                               "component": "Title",
+                              "name": "TitleLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -140,7 +145,8 @@
                               "name": "Title",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.Title}"
                             }
                           ]
                         }
@@ -160,6 +166,7 @@
                               "type": "label",
                               "text": "Title Of Courtesy",
                               "component": "TitleOfCourtesy",
+                              "name": "TitleOfCourtesyLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -177,7 +184,8 @@
                               "name": "TitleOfCourtesy",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.TitleOfCourtesy}"
                             }
                           ]
                         }
@@ -197,6 +205,7 @@
                               "type": "label",
                               "text": "Birth Date",
                               "component": "BirthDate",
+                              "name": "BirthDateLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -208,13 +217,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "date-time",
+                              "valueType": "DateTime?",
+                              "dateFormat": "MM/dd/yyyy",
                               "type": "datepicker",
                               "name": "BirthDate",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.BirthDate}"
                             }
                           ]
                         }
@@ -234,6 +244,7 @@
                               "type": "label",
                               "text": "Hire Date",
                               "component": "HireDate",
+                              "name": "HireDateLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -245,13 +256,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "date-time",
+                              "valueType": "DateTime?",
+                              "dateFormat": "MM/dd/yyyy",
                               "type": "datepicker",
                               "name": "HireDate",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.HireDate}"
                             }
                           ]
                         }
@@ -271,6 +283,7 @@
                               "type": "label",
                               "text": "Address",
                               "component": "Address",
+                              "name": "AddressLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -288,7 +301,8 @@
                               "name": "Address",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.Address}"
                             }
                           ]
                         }
@@ -308,6 +322,7 @@
                               "type": "label",
                               "text": "City",
                               "component": "City",
+                              "name": "CityLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -325,7 +340,8 @@
                               "name": "City",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.City}"
                             }
                           ]
                         }
@@ -345,6 +361,7 @@
                               "type": "label",
                               "text": "Region",
                               "component": "Region",
+                              "name": "RegionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -362,7 +379,8 @@
                               "name": "Region",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.Region}"
                             }
                           ]
                         }
@@ -382,6 +400,7 @@
                               "type": "label",
                               "text": "Postal Code",
                               "component": "PostalCode",
+                              "name": "PostalCodeLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -399,7 +418,8 @@
                               "name": "PostalCode",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.PostalCode}"
                             }
                           ]
                         }
@@ -419,6 +439,7 @@
                               "type": "label",
                               "text": "Country",
                               "component": "Country",
+                              "name": "CountryLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -436,7 +457,8 @@
                               "name": "Country",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.Country}"
                             }
                           ]
                         }
@@ -456,6 +478,7 @@
                               "type": "label",
                               "text": "Home Phone",
                               "component": "HomePhone",
+                              "name": "HomePhoneLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -473,7 +496,8 @@
                               "name": "HomePhone",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.HomePhone}"
                             }
                           ]
                         }
@@ -493,6 +517,7 @@
                               "type": "label",
                               "text": "Extension",
                               "component": "Extension",
+                              "name": "ExtensionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -510,7 +535,8 @@
                               "name": "Extension",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.Extension}"
                             }
                           ]
                         }
@@ -530,6 +556,7 @@
                               "type": "label",
                               "text": "Photo",
                               "component": "Photo",
+                              "name": "PhotoLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -541,13 +568,10 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "binary",
-                              "type": "textbox",
+                              "valueType": "Byte[]",
+                              "type": "file-input",
                               "name": "Photo",
-                              "style": {
-                                "width": "100%"
-                              }
+                              "value": "${employee.Photo}"
                             }
                           ]
                         }
@@ -567,6 +591,7 @@
                               "type": "label",
                               "text": "Notes",
                               "component": "Notes",
+                              "name": "NotesLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -583,7 +608,8 @@
                               "name": "Notes",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.Notes}"
                             }
                           ]
                         }
@@ -603,6 +629,7 @@
                               "type": "label",
                               "text": "Employee",
                               "component": "ReportsTo",
+                              "name": "ReportsToLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -618,11 +645,13 @@
                               "textProperty": "LastName",
                               "valueProperty": "EmployeeID",
                               "placeholder": "Choose Employee",
+                              "valueType": "int?",
                               "type": "dropdown",
                               "name": "ReportsTo",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.ReportsTo}"
                             }
                           ]
                         }
@@ -642,6 +671,7 @@
                               "type": "label",
                               "text": "Photo Path",
                               "component": "PhotoPath",
+                              "name": "PhotoPathLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -659,7 +689,8 @@
                               "name": "PhotoPath",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employee.PhotoPath}"
                             }
                           ]
                         }
@@ -720,14 +751,13 @@
                             "result": "${employee}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Employee"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${employee}",
                   "visible": "${employee != null}",
-                  "itemType": "Employee"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Employee"
                 }
               ]
             }
@@ -745,8 +775,8 @@
           {
             "name": "getEmployeesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Employee>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Employee>"
           }
         ],
         "type": "invoke"
@@ -754,8 +784,8 @@
       {
         "name": "employee",
         "type": "set",
-        "value": "new Employee()",
-        "valueType": "Employee"
+        "value": "new NorthwindBlazor.Models.Northwind.Employee()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Employee"
       }
     ]
   },

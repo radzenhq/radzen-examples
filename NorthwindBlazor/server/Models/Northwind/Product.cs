@@ -17,7 +17,6 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Product")]
     public ICollection<OrderDetail> OrderDetails { get; set; }
     public string ProductName
     {
@@ -29,16 +28,12 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("SupplierID")]
     public Supplier Supplier { get; set; }
     public int? CategoryID
     {
       get;
       set;
     }
-
-    [ForeignKey("CategoryID")]
     public Category Category { get; set; }
     public string QuantityPerUnit
     {

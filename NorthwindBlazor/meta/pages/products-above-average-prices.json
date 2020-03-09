@@ -30,18 +30,15 @@
                   "columns": [
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
-                      "format": "decimal",
                       "property": "UnitPrice",
-                      "title": "Unit Price",
-                      "type": "number"
+                      "title": "Unit Price"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "ProductsAboveAveragePrice"
+                  "itemType": "NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice"
                 }
               ]
             }
@@ -59,8 +56,8 @@
           {
             "name": "getProductsAboveAveragePricesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<ProductsAboveAveragePrice>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice>"
           }
         ],
         "type": "invoke"

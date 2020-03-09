@@ -12,7 +12,6 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-    [Key]
     public string LastName
     {
       get;
@@ -28,6 +27,7 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
+    [Key]
     public int OrderID
     {
       get;

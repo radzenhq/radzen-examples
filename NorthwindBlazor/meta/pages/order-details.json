@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -62,10 +66,9 @@
                         ],
                         "path": "edit-order-detail",
                         "type": "popup",
-                        "argType": "OrderDetail",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -77,42 +80,42 @@
                     {
                       "property": "OrderID",
                       "sortProperty": "Order.CustomerID",
+                      "filterProperty": "Order.CustomerID",
                       "template": "${data.Order?.CustomerID}",
-                      "title": "Order",
-                      "type": "string"
+                      "title": "Order"
                     },
                     {
                       "property": "ProductID",
                       "sortProperty": "Product.ProductName",
+                      "filterProperty": "Product.ProductName",
                       "template": "${data.Product?.ProductName}",
-                      "title": "Product",
-                      "type": "string"
+                      "title": "Product"
                     },
                     {
-                      "format": "decimal",
                       "property": "UnitPrice",
-                      "title": "Unit Price",
-                      "type": "number"
+                      "title": "Unit Price"
                     },
                     {
-                      "format": "int16",
                       "property": "Quantity",
-                      "title": "Quantity",
-                      "type": "integer"
+                      "title": "Quantity"
                     },
                     {
-                      "format": "float",
                       "property": "Discount",
-                      "title": "Discount",
-                      "type": "number"
+                      "title": "Discount"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -148,8 +151,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "OrderDetail"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -158,7 +160,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "OrderDetail"
+                  "itemType": "NorthwindBlazor.Models.Northwind.OrderDetail"
                 }
               ]
             }
@@ -176,8 +178,8 @@
           {
             "name": "getOrderDetailsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<OrderDetail>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.OrderDetail>"
           }
         ],
         "type": "invoke"

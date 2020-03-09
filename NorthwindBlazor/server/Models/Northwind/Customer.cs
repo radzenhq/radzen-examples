@@ -16,10 +16,8 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Customer")]
     public ICollection<Order> Orders { get; set; }
 
-    [InverseProperty("Customer")]
     public ICollection<CustomerCustomerDemo> CustomerCustomerDemos { get; set; }
     public string CompanyName
     {

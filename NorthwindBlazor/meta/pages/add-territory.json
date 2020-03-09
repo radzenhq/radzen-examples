@@ -27,8 +27,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "Territory ID",
+                              "text": "Territory Id",
                               "component": "TerritoryID",
+                              "name": "TerritoryIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${territory.TerritoryID}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Territory Description",
                               "component": "TerritoryDescription",
+                              "name": "TerritoryDescriptionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -94,7 +97,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${territory.TerritoryDescription}"
                             },
                             {
                               "type": "required-validator",
@@ -123,6 +127,7 @@
                               "type": "label",
                               "text": "Region",
                               "component": "RegionID",
+                              "name": "RegionIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -138,12 +143,14 @@
                               "textProperty": "RegionDescription",
                               "valueProperty": "RegionID",
                               "placeholder": "Choose Region",
+                              "valueType": "int",
                               "type": "dropdown",
                               "name": "RegionID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${territory.RegionID}"
                             },
                             {
                               "type": "required-validator",
@@ -152,7 +159,8 @@
                               "text": "RegionID is required",
                               "style": {
                                 "position": "absolute"
-                              }
+                              },
+                              "defaultValue": "0"
                             }
                           ]
                         }
@@ -213,14 +221,13 @@
                             "result": "${territory}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Territory"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${territory}",
                   "visible": "${territory != null}",
-                  "itemType": "Territory"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Territory"
                 }
               ]
             }
@@ -238,8 +245,8 @@
           {
             "name": "getRegionsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Region>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Region>"
           }
         ],
         "type": "invoke"
@@ -247,8 +254,8 @@
       {
         "name": "territory",
         "type": "set",
-        "value": "new Territory()",
-        "valueType": "Territory"
+        "value": "new NorthwindBlazor.Models.Northwind.Territory()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Territory"
       }
     ]
   },

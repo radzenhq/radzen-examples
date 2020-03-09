@@ -5,28 +5,28 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Territories">
+    <RadzenHeading Size="H1" Text="Territories">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getTerritoriesResult)" TItem="Territory" RowSelect="@Grid0RowSelect">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getTerritoriesResult" TItem="NorthwindBlazor.Models.Northwind.Territory" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="Territory" Context="data" Property="TerritoryID" Title="Territory ID" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Territory" Property="TerritoryID" Title="Territory ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Territory" Context="data" Property="TerritoryDescription" Title="Territory Description" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Territory" Property="TerritoryDescription" Title="Territory Description">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Territory" Context="data" Property="RegionID" SortProperty="Region.RegionDescription" Title="Region" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Territory" Property="RegionID" SortProperty="Region.RegionDescription" FilterProperty="Region.RegionDescription" Title="Region">
               <Template Context="data">
-              @data.Region?.RegionDescription
+              @(data.Region?.RegionDescription)
               </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Territory" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-              <Template Context="data">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Territory" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="northwindBlazorModelsNorthwindTerritory">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, northwindBlazorModelsNorthwindTerritory))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

@@ -16,7 +16,6 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Region")]
     public ICollection<Territory> Territories { get; set; }
     public string RegionDescription
     {

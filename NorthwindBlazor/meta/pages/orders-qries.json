@@ -30,114 +30,90 @@
                   "columns": [
                     {
                       "property": "OrderID",
-                      "title": "Order ID",
-                      "type": "integer"
+                      "title": "Order ID"
                     },
                     {
                       "property": "CustomerID",
-                      "title": "Customer ID",
-                      "type": "string"
+                      "title": "Customer ID"
                     },
                     {
                       "property": "EmployeeID",
-                      "title": "Employee ID",
-                      "type": "integer"
+                      "title": "Employee ID"
                     },
                     {
-                      "format": "date-time",
                       "property": "OrderDate",
-                      "formatString": "{0:d}",
-                      "title": "Order Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Order Date"
                     },
                     {
-                      "format": "date-time",
                       "property": "RequiredDate",
-                      "formatString": "{0:d}",
-                      "title": "Required Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Required Date"
                     },
                     {
-                      "format": "date-time",
                       "property": "ShippedDate",
-                      "formatString": "{0:d}",
-                      "title": "Shipped Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Shipped Date"
                     },
                     {
                       "property": "ShipVia",
-                      "title": "Ship Via",
-                      "type": "integer"
+                      "title": "Ship Via"
                     },
                     {
-                      "format": "decimal",
                       "property": "Freight",
-                      "title": "Freight",
-                      "type": "number"
+                      "title": "Freight"
                     },
                     {
                       "property": "ShipName",
-                      "title": "Ship Name",
-                      "type": "string"
+                      "title": "Ship Name"
                     },
                     {
                       "property": "ShipAddress",
-                      "title": "Ship Address",
-                      "type": "string"
+                      "title": "Ship Address"
                     },
                     {
                       "property": "ShipCity",
-                      "title": "Ship City",
-                      "type": "string"
+                      "title": "Ship City"
                     },
                     {
                       "property": "ShipRegion",
-                      "title": "Ship Region",
-                      "type": "string"
+                      "title": "Ship Region"
                     },
                     {
                       "property": "ShipPostalCode",
-                      "title": "Ship Postal Code",
-                      "type": "string"
+                      "title": "Ship Postal Code"
                     },
                     {
                       "property": "ShipCountry",
-                      "title": "Ship Country",
-                      "type": "string"
+                      "title": "Ship Country"
                     },
                     {
                       "property": "CompanyName",
-                      "title": "Company Name",
-                      "type": "string"
+                      "title": "Company Name"
                     },
                     {
                       "property": "Address",
-                      "title": "Address",
-                      "type": "string"
+                      "title": "Address"
                     },
                     {
                       "property": "City",
-                      "title": "City",
-                      "type": "string"
+                      "title": "City"
                     },
                     {
                       "property": "Region",
-                      "title": "Region",
-                      "type": "string"
+                      "title": "Region"
                     },
                     {
                       "property": "PostalCode",
-                      "title": "Postal Code",
-                      "type": "string"
+                      "title": "Postal Code"
                     },
                     {
                       "property": "Country",
-                      "title": "Country",
-                      "type": "string"
+                      "title": "Country"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "OrdersQry"
+                  "itemType": "NorthwindBlazor.Models.Northwind.OrdersQry"
                 }
               ]
             }
@@ -155,8 +131,8 @@
           {
             "name": "getOrdersQriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<OrdersQry>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.OrdersQry>"
           }
         ],
         "type": "invoke"

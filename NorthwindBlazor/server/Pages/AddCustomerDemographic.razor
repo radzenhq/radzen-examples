@@ -5,39 +5,39 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(customerdemographic)" Visible="@(customerdemographic != null)" TItem="CustomerDemographic" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@customerdemographic" Visible="@(customerdemographic != null)" TItem="NorthwindBlazor.Models.Northwind.CustomerDemographic" Submit="@Form0Submit">
           <ChildContent>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label1" Text="Customer Type ID" Component="CustomerTypeID" style="width: 100%;">
+                <RadzenLabel Text="Customer Type Id" Component="CustomerTypeID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="customerTypeId" MaxLength="10" style="display: block; width: 100%;" Name="CustomerTypeID">
+                <RadzenTextBox MaxLength="10" style="display: block; width: 100%" @bind-Value="@(customerdemographic.CustomerTypeID)" Name="CustomerTypeID">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="customerTypeIdRequiredValidator" Component="CustomerTypeID" Text="CustomerTypeID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="CustomerTypeID" Text="CustomerTypeID is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label2" Text="Customer Desc" Component="CustomerDesc" style="width: 100%;">
+                <RadzenLabel Text="Customer Desc" Component="CustomerDesc" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="customerDesc" style="width: 100%;" Name="CustomerDesc">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(customerdemographic.CustomerDesc)" Name="CustomerDesc">
                 </RadzenTextBox>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton @ref="button1" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton @ref="button2" ButtonStyle="light" Text="Cancel" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

@@ -30,23 +30,19 @@
                   "columns": [
                     {
                       "property": "CategoryName",
-                      "title": "Category Name",
-                      "type": "string"
+                      "title": "Category Name"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
-                      "format": "decimal",
                       "property": "ProductSales",
-                      "title": "Product Sales",
-                      "type": "number"
+                      "title": "Product Sales"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "ProductSalesFor1997"
+                  "itemType": "NorthwindBlazor.Models.Northwind.ProductSalesFor1997"
                 }
               ]
             }
@@ -64,8 +60,8 @@
           {
             "name": "getProductSalesFor1997sResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<ProductSalesFor1997>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.ProductSalesFor1997>"
           }
         ],
         "type": "invoke"

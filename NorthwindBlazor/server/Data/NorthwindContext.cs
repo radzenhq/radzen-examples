@@ -26,11 +26,31 @@ namespace NorthwindBlazor.Data
     {
         base.OnModelCreating(builder);
 
+        builder.Entity<NorthwindBlazor.Models.Northwind.AlphabeticalListOfProduct>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.CategorySalesFor1997>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.CurrentProductList>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustOrderHist>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustOrdersDetail>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustOrdersOrder>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustomerAndSuppliersByCity>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.EmployeeSalesByCountry>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.Invoice>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.OrderDetailsExtended>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.OrderSubtotal>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.OrdersQry>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.ProductSalesFor1997>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.ProductsByCategory>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.QuarterlyOrder>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.SalesByCategory>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.SalesByCategory1>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.SalesByYear>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.SummaryOfSalesByQuarter>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear>().HasNoKey();
+        builder.Entity<NorthwindBlazor.Models.Northwind.TenMostExpensiveProduct>().HasNoKey();
         builder.Entity<NorthwindBlazor.Models.Northwind.CustomerCustomerDemo>().HasKey(table => new {
           table.CustomerID, table.CustomerTypeID
-        });
-        builder.Entity<NorthwindBlazor.Models.Northwind.EmployeeSalesByCountry>().HasKey(table => new {
-          table.LastName, table.OrderID
         });
         builder.Entity<NorthwindBlazor.Models.Northwind.EmployeeTerritory>().HasKey(table => new {
           table.EmployeeID, table.TerritoryID
@@ -142,6 +162,83 @@ namespace NorthwindBlazor.Data
         builder.Entity<NorthwindBlazor.Models.Northwind.Product>()
               .Property(p => p.Discontinued)
               .HasDefaultValueSql("((0))");
+
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustOrdersOrder>()
+              .Property(p => p.OrderDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustOrdersOrder>()
+              .Property(p => p.RequiredDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.CustOrdersOrder>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Employee>()
+              .Property(p => p.BirthDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Employee>()
+              .Property(p => p.HireDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.EmployeeSalesByCountry>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Invoice>()
+              .Property(p => p.OrderDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Invoice>()
+              .Property(p => p.RequiredDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Invoice>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Order>()
+              .Property(p => p.OrderDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Order>()
+              .Property(p => p.RequiredDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.Order>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.OrdersQry>()
+              .Property(p => p.OrderDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.OrdersQry>()
+              .Property(p => p.RequiredDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.OrdersQry>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.SalesByYear>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.SummaryOfSalesByQuarter>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
+
+        builder.Entity<NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear>()
+              .Property(p => p.ShippedDate)
+              .HasColumnType("datetime");
 
         this.OnModelBuilding(builder);
     }

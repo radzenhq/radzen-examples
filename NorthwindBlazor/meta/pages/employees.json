@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -58,10 +62,9 @@
                         ],
                         "path": "edit-employee",
                         "type": "popup",
-                        "argType": "Employee",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -72,108 +75,94 @@
                   "columns": [
                     {
                       "property": "EmployeeID",
-                      "title": "Employee ID",
-                      "type": "integer"
+                      "title": "Employee ID"
                     },
                     {
                       "property": "LastName",
-                      "title": "Last Name",
-                      "type": "string"
+                      "title": "Last Name"
                     },
                     {
                       "property": "FirstName",
-                      "title": "First Name",
-                      "type": "string"
+                      "title": "First Name"
                     },
                     {
                       "property": "Title",
-                      "title": "Title",
-                      "type": "string"
+                      "title": "Title"
                     },
                     {
                       "property": "TitleOfCourtesy",
-                      "title": "Title Of Courtesy",
-                      "type": "string"
+                      "title": "Title Of Courtesy"
                     },
                     {
-                      "format": "date-time",
                       "property": "BirthDate",
-                      "formatString": "{0:d}",
-                      "title": "Birth Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Birth Date"
                     },
                     {
-                      "format": "date-time",
                       "property": "HireDate",
-                      "formatString": "{0:d}",
-                      "title": "Hire Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Hire Date"
                     },
                     {
                       "property": "Address",
-                      "title": "Address",
-                      "type": "string"
+                      "title": "Address"
                     },
                     {
                       "property": "City",
-                      "title": "City",
-                      "type": "string"
+                      "title": "City"
                     },
                     {
                       "property": "Region",
-                      "title": "Region",
-                      "type": "string"
+                      "title": "Region"
                     },
                     {
                       "property": "PostalCode",
-                      "title": "Postal Code",
-                      "type": "string"
+                      "title": "Postal Code"
                     },
                     {
                       "property": "Country",
-                      "title": "Country",
-                      "type": "string"
+                      "title": "Country"
                     },
                     {
                       "property": "HomePhone",
-                      "title": "Home Phone",
-                      "type": "string"
+                      "title": "Home Phone"
                     },
                     {
                       "property": "Extension",
-                      "title": "Extension",
-                      "type": "string"
+                      "title": "Extension"
                     },
                     {
-                      "format": "binary",
                       "property": "Photo",
-                      "title": "Photo",
-                      "type": "string"
+                      "title": "Photo"
                     },
                     {
                       "property": "Notes",
-                      "title": "Notes",
-                      "type": "string"
+                      "title": "Notes"
                     },
                     {
                       "property": "ReportsTo",
                       "sortProperty": "Employee1.LastName",
+                      "filterProperty": "Employee1.LastName",
                       "template": "${data.Employee1?.LastName}",
-                      "title": "Employee",
-                      "type": "string"
+                      "title": "Employee"
                     },
                     {
                       "property": "PhotoPath",
-                      "title": "Photo Path",
-                      "type": "string"
+                      "title": "Photo Path"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -205,8 +194,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "Employee"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -215,7 +203,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "Employee"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Employee"
                 }
               ]
             }
@@ -233,8 +221,8 @@
           {
             "name": "getEmployeesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Employee>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Employee>"
           }
         ],
         "type": "invoke"

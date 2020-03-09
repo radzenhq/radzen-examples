@@ -2,32 +2,40 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class SalesTotalsByAmountsComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
+        protected RadzenGrid<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount> grid0;
 
-        protected RadzenContent content1;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenGrid<SalesTotalsByAmount> grid0;
-
-        IEnumerable<SalesTotalsByAmount> _getSalesTotalsByAmountsResult;
-        protected IEnumerable<SalesTotalsByAmount> getSalesTotalsByAmountsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount> _getSalesTotalsByAmountsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount> getSalesTotalsByAmountsResult
         {
             get
             {
@@ -35,23 +43,22 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getSalesTotalsByAmountsResult != value)
+                if(!object.Equals(_getSalesTotalsByAmountsResult, value))
                 {
                     _getSalesTotalsByAmountsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetSalesTotalsByAmountsResult = await Northwind.GetSalesTotalsByAmounts();
-                getSalesTotalsByAmountsResult = northwindGetSalesTotalsByAmountsResult;
+            getSalesTotalsByAmountsResult = northwindGetSalesTotalsByAmountsResult;
         }
     }
 }

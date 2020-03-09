@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Order",
                               "component": "OrderID",
+                              "name": "OrderIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -92,12 +45,14 @@
                               "textProperty": "CustomerID",
                               "valueProperty": "OrderID",
                               "placeholder": "Choose Order",
+                              "valueType": "int",
                               "type": "dropdown",
                               "name": "OrderID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${orderdetail.OrderID}"
                             },
                             {
                               "type": "required-validator",
@@ -106,7 +61,8 @@
                               "text": "OrderID is required",
                               "style": {
                                 "position": "absolute"
-                              }
+                              },
+                              "defaultValue": "0"
                             }
                           ]
                         }
@@ -126,6 +82,7 @@
                               "type": "label",
                               "text": "Product",
                               "component": "ProductID",
+                              "name": "ProductIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -141,12 +98,14 @@
                               "textProperty": "ProductName",
                               "valueProperty": "ProductID",
                               "placeholder": "Choose Product",
+                              "valueType": "int",
                               "type": "dropdown",
                               "name": "ProductID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${orderdetail.ProductID}"
                             },
                             {
                               "type": "required-validator",
@@ -155,7 +114,8 @@
                               "text": "ProductID is required",
                               "style": {
                                 "position": "absolute"
-                              }
+                              },
+                              "defaultValue": "0"
                             }
                           ]
                         }
@@ -175,6 +135,7 @@
                               "type": "label",
                               "text": "Unit Price",
                               "component": "UnitPrice",
+                              "name": "UnitPriceLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -186,13 +147,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "number",
-                              "valueFormat": "decimal",
+                              "valueType": "decimal",
                               "type": "numeric",
                               "name": "UnitPrice",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${orderdetail.UnitPrice}"
                             }
                           ]
                         }
@@ -212,6 +173,7 @@
                               "type": "label",
                               "text": "Quantity",
                               "component": "Quantity",
+                              "name": "QuantityLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -223,13 +185,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "integer",
-                              "valueFormat": "int16",
+                              "valueType": "Int16",
                               "type": "numeric",
                               "name": "Quantity",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${orderdetail.Quantity}"
                             }
                           ]
                         }
@@ -249,6 +211,7 @@
                               "type": "label",
                               "text": "Discount",
                               "component": "Discount",
+                              "name": "DiscountLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -260,13 +223,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "number",
-                              "valueFormat": "float",
+                              "valueType": "float",
                               "type": "numeric",
                               "name": "Discount",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${orderdetail.Discount}"
                             }
                           ]
                         }
@@ -308,12 +271,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update OrderDetail",
                             "severity": "error",
                             "summary": "Error",
@@ -341,14 +298,13 @@
                             "result": "${orderdetail}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "OrderDetail"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.OrderDetail",
                   "data": "${orderdetail}",
-                  "visible": "${orderdetail != null && canEdit}",
-                  "itemType": "OrderDetail"
+                  "visible": "${orderdetail != null}"
                 }
               ]
             }
@@ -359,12 +315,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getOrderDetailByOrderIDAndProductID",
         "parameters": [
@@ -382,17 +332,10 @@
             "name": "orderdetail",
             "type": "set",
             "value": "${result}",
-            "valueType": "OrderDetail"
+            "valueType": "NorthwindBlazor.Models.Northwind.OrderDetail"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       },
       {
@@ -402,8 +345,8 @@
           {
             "name": "getOrdersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Order>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Order>"
           }
         ],
         "type": "invoke"
@@ -415,8 +358,8 @@
           {
             "name": "getProductsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Product>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Product>"
           }
         ],
         "type": "invoke"

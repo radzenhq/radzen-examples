@@ -17,23 +17,18 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Order")]
     public ICollection<OrderDetail> OrderDetails { get; set; }
     public string CustomerID
     {
       get;
       set;
     }
-
-    [ForeignKey("CustomerID")]
     public Customer Customer { get; set; }
     public int? EmployeeID
     {
       get;
       set;
     }
-
-    [ForeignKey("EmployeeID")]
     public Employee Employee { get; set; }
     public DateTime? OrderDate
     {
@@ -55,8 +50,6 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("ShipVia")]
     public Shipper Shipper { get; set; }
     public decimal? Freight
     {

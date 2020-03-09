@@ -5,19 +5,19 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Summary Of Sales By Years">
+    <RadzenHeading Size="H1" Text="Summary Of Sales By Years">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getSummaryOfSalesByYearsResult)" TItem="SummaryOfSalesByYear">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getSummaryOfSalesByYearsResult" TItem="NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear">
           <Columns>
-            <RadzenGridColumn TItem="SummaryOfSalesByYear" Context="data" Format="date-time" Property="ShippedDate" FormatString="{0:d}" Title="Shipped Date" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear" Property="ShippedDate" FormatString="{0:MM/dd/yyyy}" Title="Shipped Date">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="SummaryOfSalesByYear" Context="data" Property="OrderID" Title="Order ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear" Property="OrderID" Title="Order ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="SummaryOfSalesByYear" Context="data" Format="decimal" Property="Subtotal" Title="Subtotal" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.SummaryOfSalesByYear" Property="Subtotal" Title="Subtotal">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

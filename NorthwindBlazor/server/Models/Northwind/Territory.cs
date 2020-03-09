@@ -16,7 +16,6 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Territory")]
     public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
     public string TerritoryDescription
     {
@@ -28,8 +27,6 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("RegionID")]
     public Region Region { get; set; }
   }
 }

@@ -2,73 +2,44 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class EditRolePermissionComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
+        [Parameter]
+        public dynamic RoleName { get; set; }
 
         [Parameter]
-        protected string RoleName { get; set; }
+        public dynamic PermissionId { get; set; }
 
-        [Parameter]
-        protected string PermissionId { get; set; }
-
-        protected RadzenContent content1;
-
-        protected RadzenLabel closeLabel;
-
-        protected RadzenButton closeButton;
-
-        protected RadzenTemplateForm<RolePermission> form0;
-
-        protected RadzenLabel label2;
-
-        protected RadzenTextBox roleName;
-
-        protected RadzenRequiredValidator roleNameRequiredValidator;
-
-        protected RadzenLabel label3;
-
-        protected RadzenTextBox permissionId;
-
-        protected RadzenRequiredValidator permissionIdRequiredValidator;
-
-        protected RadzenButton button2;
-
-        protected RadzenButton button3;
-
-        bool _canEdit;
-        protected bool canEdit
-        {
-            get
-            {
-                return _canEdit;
-            }
-            set
-            {
-                if(_canEdit != value)
-                {
-                    _canEdit = value;
-                    Invoke(() => { StateHasChanged(); });
-                }
-            }
-        }
-
-        RolePermission _rolepermission;
-        protected RolePermission rolepermission
+        NorthwindBlazor.Models.Northwind.RolePermission _rolepermission;
+        protected NorthwindBlazor.Models.Northwind.RolePermission rolepermission
         {
             get
             {
@@ -76,39 +47,38 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_rolepermission != value)
+                if(!object.Equals(_rolepermission, value))
                 {
                     _rolepermission = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
-            canEdit = true;
-
             var northwindGetRolePermissionByRoleNameAndPermissionIdResult = await Northwind.GetRolePermissionByRoleNameAndPermissionId($"{RoleName}", $"{PermissionId}");
-                rolepermission = northwindGetRolePermissionByRoleNameAndPermissionIdResult;
+            rolepermission = northwindGetRolePermissionByRoleNameAndPermissionIdResult;
         }
 
-        protected async void CloseButtonClick(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.RolePermission args)
         {
-            DialogService.Close(null);
-        }
-
-        protected async void Form0Submit(RolePermission args)
-        {
-            var northwindUpdateRolePermissionResult = await Northwind.UpdateRolePermission($"{RoleName}", $"{PermissionId}", rolepermission);
+            try
+            {
+                var northwindUpdateRolePermissionResult = await Northwind.UpdateRolePermission($"{RoleName}", $"{PermissionId}", rolepermission);
                 DialogService.Close(rolepermission);
+            }
+            catch (Exception northwindUpdateRolePermissionException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update RolePermission");
+            }
         }
 
-        protected async void Button3Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

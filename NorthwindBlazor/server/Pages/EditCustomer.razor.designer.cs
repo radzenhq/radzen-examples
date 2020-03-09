@@ -2,106 +2,41 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class EditCustomerComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
         [Parameter]
-        protected string CustomerID { get; set; }
+        public dynamic CustomerID { get; set; }
 
-        protected RadzenContent content1;
-
-        protected RadzenLabel closeLabel;
-
-        protected RadzenButton closeButton;
-
-        protected RadzenTemplateForm<Customer> form0;
-
-        protected RadzenLabel label2;
-
-        protected RadzenTextBox customerId;
-
-        protected RadzenRequiredValidator customerIdRequiredValidator;
-
-        protected RadzenLabel label3;
-
-        protected RadzenTextBox companyName;
-
-        protected RadzenRequiredValidator companyNameRequiredValidator;
-
-        protected RadzenLabel label4;
-
-        protected RadzenTextBox contactName;
-
-        protected RadzenLabel label5;
-
-        protected RadzenTextBox contactTitle;
-
-        protected RadzenLabel label6;
-
-        protected RadzenTextBox address;
-
-        protected RadzenLabel label7;
-
-        protected RadzenTextBox city;
-
-        protected RadzenLabel label8;
-
-        protected RadzenTextBox region;
-
-        protected RadzenLabel label9;
-
-        protected RadzenTextBox postalCode;
-
-        protected RadzenLabel label10;
-
-        protected RadzenTextBox country;
-
-        protected RadzenLabel label11;
-
-        protected RadzenTextBox phone;
-
-        protected RadzenLabel label12;
-
-        protected RadzenTextBox fax;
-
-        protected RadzenButton button2;
-
-        protected RadzenButton button3;
-
-        bool _canEdit;
-        protected bool canEdit
-        {
-            get
-            {
-                return _canEdit;
-            }
-            set
-            {
-                if(_canEdit != value)
-                {
-                    _canEdit = value;
-                    Invoke(() => { StateHasChanged(); });
-                }
-            }
-        }
-
-        Customer _customer;
-        protected Customer customer
+        NorthwindBlazor.Models.Northwind.Customer _customer;
+        protected NorthwindBlazor.Models.Northwind.Customer customer
         {
             get
             {
@@ -109,39 +44,38 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_customer != value)
+                if(!object.Equals(_customer, value))
                 {
                     _customer = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
-            canEdit = true;
-
             var northwindGetCustomerByCustomerIdResult = await Northwind.GetCustomerByCustomerId($"{CustomerID}");
-                customer = northwindGetCustomerByCustomerIdResult;
+            customer = northwindGetCustomerByCustomerIdResult;
         }
 
-        protected async void CloseButtonClick(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.Customer args)
         {
-            DialogService.Close(null);
-        }
-
-        protected async void Form0Submit(Customer args)
-        {
-            var northwindUpdateCustomerResult = await Northwind.UpdateCustomer($"{CustomerID}", customer);
+            try
+            {
+                var northwindUpdateCustomerResult = await Northwind.UpdateCustomer($"{CustomerID}", customer);
                 DialogService.Close(customer);
+            }
+            catch (Exception northwindUpdateCustomerException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Customer");
+            }
         }
 
-        protected async void Button3Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

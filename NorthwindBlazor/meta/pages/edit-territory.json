@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -75,8 +27,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "Territory ID",
+                              "text": "Territory Id",
                               "component": "TerritoryID",
+                              "name": "TerritoryIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -95,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${territory.TerritoryID}"
                             },
                             {
                               "type": "required-validator",
@@ -124,6 +78,7 @@
                               "type": "label",
                               "text": "Territory Description",
                               "component": "TerritoryDescription",
+                              "name": "TerritoryDescriptionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -142,7 +97,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${territory.TerritoryDescription}"
                             },
                             {
                               "type": "required-validator",
@@ -171,6 +127,7 @@
                               "type": "label",
                               "text": "Region",
                               "component": "RegionID",
+                              "name": "RegionIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -186,12 +143,14 @@
                               "textProperty": "RegionDescription",
                               "valueProperty": "RegionID",
                               "placeholder": "Choose Region",
+                              "valueType": "int",
                               "type": "dropdown",
                               "name": "RegionID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${territory.RegionID}"
                             },
                             {
                               "type": "required-validator",
@@ -200,7 +159,8 @@
                               "text": "RegionID is required",
                               "style": {
                                 "position": "absolute"
-                              }
+                              },
+                              "defaultValue": "0"
                             }
                           ]
                         }
@@ -242,12 +202,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update Territory",
                             "severity": "error",
                             "summary": "Error",
@@ -271,14 +225,13 @@
                             "result": "${territory}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Territory"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.Territory",
                   "data": "${territory}",
-                  "visible": "${territory != null && canEdit}",
-                  "itemType": "Territory"
+                  "visible": "${territory != null}"
                 }
               ]
             }
@@ -289,12 +242,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getTerritoryByTerritoryID",
         "parameters": [
@@ -308,17 +255,10 @@
             "name": "territory",
             "type": "set",
             "value": "${result}",
-            "valueType": "Territory"
+            "valueType": "NorthwindBlazor.Models.Northwind.Territory"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       },
       {
@@ -328,8 +268,8 @@
           {
             "name": "getRegionsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Region>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Region>"
           }
         ],
         "type": "invoke"

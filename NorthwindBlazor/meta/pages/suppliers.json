@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -58,10 +62,9 @@
                         ],
                         "path": "edit-supplier",
                         "type": "popup",
-                        "argType": "Supplier",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -72,71 +75,65 @@
                   "columns": [
                     {
                       "property": "SupplierID",
-                      "title": "Supplier ID",
-                      "type": "integer"
+                      "title": "Supplier ID"
                     },
                     {
                       "property": "CompanyName",
-                      "title": "Company Name",
-                      "type": "string"
+                      "title": "Company Name"
                     },
                     {
                       "property": "ContactName",
-                      "title": "Contact Name",
-                      "type": "string"
+                      "title": "Contact Name"
                     },
                     {
                       "property": "ContactTitle",
-                      "title": "Contact Title",
-                      "type": "string"
+                      "title": "Contact Title"
                     },
                     {
                       "property": "Address",
-                      "title": "Address",
-                      "type": "string"
+                      "title": "Address"
                     },
                     {
                       "property": "City",
-                      "title": "City",
-                      "type": "string"
+                      "title": "City"
                     },
                     {
                       "property": "Region",
-                      "title": "Region",
-                      "type": "string"
+                      "title": "Region"
                     },
                     {
                       "property": "PostalCode",
-                      "title": "Postal Code",
-                      "type": "string"
+                      "title": "Postal Code"
                     },
                     {
                       "property": "Country",
-                      "title": "Country",
-                      "type": "string"
+                      "title": "Country"
                     },
                     {
                       "property": "Phone",
-                      "title": "Phone",
-                      "type": "string"
+                      "title": "Phone"
                     },
                     {
                       "property": "Fax",
-                      "title": "Fax",
-                      "type": "string"
+                      "title": "Fax"
                     },
                     {
                       "property": "HomePage",
-                      "title": "Home Page",
-                      "type": "string"
+                      "title": "Home Page"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -168,8 +165,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "Supplier"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -178,7 +174,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "Supplier"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Supplier"
                 }
               ]
             }
@@ -196,8 +192,8 @@
           {
             "name": "getSuppliersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Supplier>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Supplier>"
           }
         ],
         "type": "invoke"

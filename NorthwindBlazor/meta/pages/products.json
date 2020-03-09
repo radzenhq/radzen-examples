@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -58,10 +62,9 @@
                         ],
                         "path": "edit-product",
                         "type": "popup",
-                        "argType": "Product",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -72,69 +75,63 @@
                   "columns": [
                     {
                       "property": "ProductID",
-                      "title": "Product ID",
-                      "type": "integer"
+                      "title": "Product ID"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
                       "property": "SupplierID",
                       "sortProperty": "Supplier.CompanyName",
+                      "filterProperty": "Supplier.CompanyName",
                       "template": "${data.Supplier?.CompanyName}",
-                      "title": "Supplier",
-                      "type": "string"
+                      "title": "Supplier"
                     },
                     {
                       "property": "CategoryID",
                       "sortProperty": "Category.CategoryName",
+                      "filterProperty": "Category.CategoryName",
                       "template": "${data.Category?.CategoryName}",
-                      "title": "Category",
-                      "type": "string"
+                      "title": "Category"
                     },
                     {
                       "property": "QuantityPerUnit",
-                      "title": "Quantity Per Unit",
-                      "type": "string"
+                      "title": "Quantity Per Unit"
                     },
                     {
-                      "format": "decimal",
                       "property": "UnitPrice",
-                      "title": "Unit Price",
-                      "type": "number"
+                      "title": "Unit Price"
                     },
                     {
-                      "format": "int16",
                       "property": "UnitsInStock",
-                      "title": "Units In Stock",
-                      "type": "integer"
+                      "title": "Units In Stock"
                     },
                     {
-                      "format": "int16",
                       "property": "UnitsOnOrder",
-                      "title": "Units On Order",
-                      "type": "integer"
+                      "title": "Units On Order"
                     },
                     {
-                      "format": "int16",
                       "property": "ReorderLevel",
-                      "title": "Reorder Level",
-                      "type": "integer"
+                      "title": "Reorder Level"
                     },
                     {
                       "property": "Discontinued",
-                      "title": "Discontinued",
-                      "type": "boolean"
+                      "title": "Discontinued"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -166,8 +163,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "Product"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -176,7 +172,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "Product"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Product"
                 }
               ]
             }
@@ -194,8 +190,8 @@
           {
             "name": "getProductsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Product>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Product>"
           }
         ],
         "type": "invoke"

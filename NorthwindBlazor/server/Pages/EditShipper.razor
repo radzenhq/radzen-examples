@@ -5,49 +5,39 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <div style="null" class="row">
-      <div class="col-md-9">
-        <RadzenLabel @ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@(!canEdit)">
-        </RadzenLabel>
-      </div>
-      <div class="col-md-3">
-        <RadzenButton @ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
-        </RadzenButton>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(shipper)" Visible="@(shipper != null && canEdit)" TItem="Shipper" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="NorthwindBlazor.Models.Northwind.Shipper" Data="@shipper" Visible="@(shipper != null)" Submit="@Form0Submit">
           <ChildContent>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label2" Text="Company Name" Component="CompanyName" style="width: 100%;">
+                <RadzenLabel Text="Company Name" Component="CompanyName" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="companyName" MaxLength="40" style="display: block; width: 100%;" Name="CompanyName">
+                <RadzenTextBox MaxLength="40" style="display: block; width: 100%" @bind-Value="@(shipper.CompanyName)" Name="CompanyName">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="companyNameRequiredValidator" Component="CompanyName" Text="CompanyName is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="CompanyName" Text="CompanyName is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label3" Text="Phone" Component="Phone" style="width: 100%;">
+                <RadzenLabel Text="Phone" Component="Phone" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="phone" MaxLength="24" style="width: 100%;" Name="Phone">
+                <RadzenTextBox MaxLength="24" style="width: 100%" @bind-Value="@(shipper.Phone)" Name="Phone">
                 </RadzenTextBox>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton @ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton @ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

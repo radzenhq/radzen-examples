@@ -2,72 +2,38 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class AddProductComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
-        protected RadzenContent content1;
-
-        protected RadzenTemplateForm<Product> form0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenTextBox productName;
-
-        protected RadzenRequiredValidator productNameRequiredValidator;
-
-        protected RadzenLabel label2;
-
-        protected RadzenDropDown supplierId;
-
-        protected RadzenLabel label3;
-
-        protected RadzenDropDown categoryId;
-
-        protected RadzenLabel label4;
-
-        protected RadzenTextBox quantityPerUnit;
-
-        protected RadzenLabel label5;
-
-        protected dynamic unitPrice;
-
-        protected RadzenLabel label6;
-
-        protected dynamic unitsInStock;
-
-        protected RadzenLabel label7;
-
-        protected dynamic unitsOnOrder;
-
-        protected RadzenLabel label8;
-
-        protected dynamic reorderLevel;
-
-        protected RadzenLabel label9;
-
-        protected RadzenCheckBox discontinued;
-
-        protected RadzenButton button1;
-
-        protected RadzenButton button2;
-
-        IEnumerable<Supplier> _getSuppliersResult;
-        protected IEnumerable<Supplier> getSuppliersResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Supplier> _getSuppliersResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Supplier> getSuppliersResult
         {
             get
             {
@@ -75,16 +41,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getSuppliersResult != value)
+                if(!object.Equals(_getSuppliersResult, value))
                 {
                     _getSuppliersResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<Category> _getCategoriesResult;
-        protected IEnumerable<Category> getCategoriesResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Category> _getCategoriesResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Category> getCategoriesResult
         {
             get
             {
@@ -92,16 +58,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getCategoriesResult != value)
+                if(!object.Equals(_getCategoriesResult, value))
                 {
                     _getCategoriesResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        Product _product;
-        protected Product product
+        NorthwindBlazor.Models.Northwind.Product _product;
+        protected NorthwindBlazor.Models.Northwind.Product product
         {
             get
             {
@@ -109,37 +75,43 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_product != value)
+                if(!object.Equals(_product, value))
                 {
                     _product = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetSuppliersResult = await Northwind.GetSuppliers();
-                getSuppliersResult = northwindGetSuppliersResult;
+            getSuppliersResult = northwindGetSuppliersResult;
 
             var northwindGetCategoriesResult = await Northwind.GetCategories();
-                getCategoriesResult = northwindGetCategoriesResult;
+            getCategoriesResult = northwindGetCategoriesResult;
 
-            product = new Product();
+            product = new NorthwindBlazor.Models.Northwind.Product();
         }
 
-        protected async void Form0Submit(Product args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.Product args)
         {
-            var northwindCreateProductResult = await Northwind.CreateProduct(product);
+            try
+            {
+                var northwindCreateProductResult = await Northwind.CreateProduct(product);
                 DialogService.Close(product);
+            }
+            catch (Exception northwindCreateProductException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Product!");
+            }
         }
 
-        protected async void Button2Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

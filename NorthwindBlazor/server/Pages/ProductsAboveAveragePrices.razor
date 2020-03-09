@@ -5,17 +5,17 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Products Above Average Prices">
+    <RadzenHeading Size="H1" Text="Products Above Average Prices">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductsAboveAveragePricesResult)" TItem="ProductsAboveAveragePrice">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getProductsAboveAveragePricesResult" TItem="NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice">
           <Columns>
-            <RadzenGridColumn TItem="ProductsAboveAveragePrice" Context="data" Property="ProductName" Title="Product Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice" Property="ProductName" Title="Product Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="ProductsAboveAveragePrice" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.ProductsAboveAveragePrice" Property="UnitPrice" Title="Unit Price">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

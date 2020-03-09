@@ -13,6 +13,7 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
+    [Key]
     public string PermissionId
     {
       get;

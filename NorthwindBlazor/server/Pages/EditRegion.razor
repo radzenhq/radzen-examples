@@ -5,51 +5,41 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <div style="null" class="row">
-      <div class="col-md-9">
-        <RadzenLabel @ref="closeLabel" style="font-weight: bold;" Text="Item no longer available." Visible="@(!canEdit)">
-        </RadzenLabel>
-      </div>
-      <div class="col-md-3">
-        <RadzenButton @ref="closeButton" ButtonStyle="secondary" style="margin-bottom: 20px;" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
-        </RadzenButton>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(region)" Visible="@(region != null && canEdit)" TItem="Region" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="NorthwindBlazor.Models.Northwind.Region" Data="@region" Visible="@(region != null)" Submit="@Form0Submit">
           <ChildContent>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label2" Text="Region ID" Component="RegionID" style="width: 100%;">
+                <RadzenLabel Text="Region Id" Component="RegionID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenNumeric @ref="regionId" style="display: block; width: 100%;" Name="RegionID" TItem="int">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(region.RegionID)" Name="RegionID">
                 </RadzenNumeric>
-                <RadzenRequiredValidator @ref="regionIdRequiredValidator" Component="RegionID" Text="RegionID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="RegionID" Text="RegionID is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label3" Text="Region Description" Component="RegionDescription" style="width: 100%;">
+                <RadzenLabel Text="Region Description" Component="RegionDescription" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="regionDescription" MaxLength="50" style="display: block; width: 100%;" Name="RegionDescription">
+                <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@(region.RegionDescription)" Name="RegionDescription">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="regionDescriptionRequiredValidator" Component="RegionDescription" Text="RegionDescription is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="RegionDescription" Text="RegionDescription is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton @ref="button2" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton @ref="button3" ButtonStyle="light" Text="Cancel" Click="@Button3Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Category Name",
                               "component": "CategoryName",
+                              "name": "CategoryNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -95,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${category.CategoryName}"
                             },
                             {
                               "type": "required-validator",
@@ -124,6 +78,7 @@
                               "type": "label",
                               "text": "Description",
                               "component": "Description",
+                              "name": "DescriptionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -140,7 +95,8 @@
                               "name": "Description",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${category.Description}"
                             }
                           ]
                         }
@@ -160,6 +116,7 @@
                               "type": "label",
                               "text": "Picture",
                               "component": "Picture",
+                              "name": "PictureLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -171,13 +128,10 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "binary",
-                              "type": "textbox",
+                              "valueType": "Byte[]",
+                              "type": "file-input",
                               "name": "Picture",
-                              "style": {
-                                "width": "100%"
-                              }
+                              "value": "${category.Picture}"
                             }
                           ]
                         }
@@ -219,12 +173,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update Category",
                             "severity": "error",
                             "summary": "Error",
@@ -248,14 +196,13 @@
                             "result": "${category}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Category"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.Category",
                   "data": "${category}",
-                  "visible": "${category != null && canEdit}",
-                  "itemType": "Category"
+                  "visible": "${category != null}"
                 }
               ]
             }
@@ -266,12 +213,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getCategoryByCategoryID",
         "parameters": [
@@ -285,17 +226,10 @@
             "name": "category",
             "type": "set",
             "value": "${result}",
-            "valueType": "Category"
+            "valueType": "NorthwindBlazor.Models.Northwind.Category"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       }
     ]

@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -58,10 +62,9 @@
                         ],
                         "path": "edit-territory",
                         "type": "popup",
-                        "argType": "Territory",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -72,28 +75,32 @@
                   "columns": [
                     {
                       "property": "TerritoryID",
-                      "title": "Territory ID",
-                      "type": "string"
+                      "title": "Territory ID"
                     },
                     {
                       "property": "TerritoryDescription",
-                      "title": "Territory Description",
-                      "type": "string"
+                      "title": "Territory Description"
                     },
                     {
                       "property": "RegionID",
                       "sortProperty": "Region.RegionDescription",
+                      "filterProperty": "Region.RegionDescription",
                       "template": "${data.Region?.RegionDescription}",
-                      "title": "Region",
-                      "type": "string"
+                      "title": "Region"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -125,8 +132,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "Territory"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -135,7 +141,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "Territory"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Territory"
                 }
               ]
             }
@@ -153,8 +159,8 @@
           {
             "name": "getTerritoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Territory>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Territory>"
           }
         ],
         "type": "invoke"

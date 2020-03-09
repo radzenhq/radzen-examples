@@ -7,7 +7,6 @@ namespace NorthwindBlazor.Models.Northwind
   [Table("Order Subtotals", Schema = "dbo")]
   public partial class OrderSubtotal
   {
-    [Key]
     public int OrderID
     {
       get;

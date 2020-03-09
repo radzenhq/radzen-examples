@@ -5,21 +5,21 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Quarterly Orders">
+    <RadzenHeading Size="H1" Text="Quarterly Orders">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getQuarterlyOrdersResult)" TItem="QuarterlyOrder">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getQuarterlyOrdersResult" TItem="NorthwindBlazor.Models.Northwind.QuarterlyOrder">
           <Columns>
-            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="CustomerID" Title="Customer ID" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.QuarterlyOrder" Property="CustomerID" Title="Customer ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="CompanyName" Title="Company Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.QuarterlyOrder" Property="CompanyName" Title="Company Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="City" Title="City" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.QuarterlyOrder" Property="City" Title="City">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="QuarterlyOrder" Context="data" Property="Country" Title="Country" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.QuarterlyOrder" Property="Country" Title="Country">
             </RadzenGridColumn>
           </Columns>
         </RadzenGrid>

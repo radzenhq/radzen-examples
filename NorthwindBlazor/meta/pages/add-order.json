@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Customer",
                               "component": "CustomerID",
+                              "name": "CustomerIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -44,11 +45,13 @@
                               "textProperty": "CompanyName",
                               "valueProperty": "CustomerID",
                               "placeholder": "Choose Customer",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "CustomerID",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.CustomerID}"
                             }
                           ]
                         }
@@ -68,6 +71,7 @@
                               "type": "label",
                               "text": "Employee",
                               "component": "EmployeeID",
+                              "name": "EmployeeIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -83,11 +87,13 @@
                               "textProperty": "LastName",
                               "valueProperty": "EmployeeID",
                               "placeholder": "Choose Employee",
+                              "valueType": "int?",
                               "type": "dropdown",
                               "name": "EmployeeID",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.EmployeeID}"
                             }
                           ]
                         }
@@ -107,6 +113,7 @@
                               "type": "label",
                               "text": "Order Date",
                               "component": "OrderDate",
+                              "name": "OrderDateLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -118,13 +125,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "date-time",
+                              "valueType": "DateTime?",
+                              "dateFormat": "MM/dd/yyyy",
                               "type": "datepicker",
                               "name": "OrderDate",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.OrderDate}"
                             }
                           ]
                         }
@@ -144,6 +152,7 @@
                               "type": "label",
                               "text": "Required Date",
                               "component": "RequiredDate",
+                              "name": "RequiredDateLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -155,13 +164,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "date-time",
+                              "valueType": "DateTime?",
+                              "dateFormat": "MM/dd/yyyy",
                               "type": "datepicker",
                               "name": "RequiredDate",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.RequiredDate}"
                             }
                           ]
                         }
@@ -181,6 +191,7 @@
                               "type": "label",
                               "text": "Shipped Date",
                               "component": "ShippedDate",
+                              "name": "ShippedDateLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -192,13 +203,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "date-time",
+                              "valueType": "DateTime?",
+                              "dateFormat": "MM/dd/yyyy",
                               "type": "datepicker",
                               "name": "ShippedDate",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShippedDate}"
                             }
                           ]
                         }
@@ -218,6 +230,7 @@
                               "type": "label",
                               "text": "Shipper",
                               "component": "ShipVia",
+                              "name": "ShipViaLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -233,11 +246,13 @@
                               "textProperty": "CompanyName",
                               "valueProperty": "ShipperID",
                               "placeholder": "Choose Shipper",
+                              "valueType": "int?",
                               "type": "dropdown",
                               "name": "ShipVia",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipVia}"
                             }
                           ]
                         }
@@ -257,6 +272,7 @@
                               "type": "label",
                               "text": "Freight",
                               "component": "Freight",
+                              "name": "FreightLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -268,13 +284,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "number",
-                              "valueFormat": "decimal",
+                              "valueType": "decimal?",
                               "type": "numeric",
                               "name": "Freight",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.Freight}"
                             }
                           ]
                         }
@@ -294,6 +310,7 @@
                               "type": "label",
                               "text": "Ship Name",
                               "component": "ShipName",
+                              "name": "ShipNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -311,7 +328,8 @@
                               "name": "ShipName",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipName}"
                             }
                           ]
                         }
@@ -331,6 +349,7 @@
                               "type": "label",
                               "text": "Ship Address",
                               "component": "ShipAddress",
+                              "name": "ShipAddressLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -348,7 +367,8 @@
                               "name": "ShipAddress",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipAddress}"
                             }
                           ]
                         }
@@ -368,6 +388,7 @@
                               "type": "label",
                               "text": "Ship City",
                               "component": "ShipCity",
+                              "name": "ShipCityLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -385,7 +406,8 @@
                               "name": "ShipCity",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipCity}"
                             }
                           ]
                         }
@@ -405,6 +427,7 @@
                               "type": "label",
                               "text": "Ship Region",
                               "component": "ShipRegion",
+                              "name": "ShipRegionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -422,7 +445,8 @@
                               "name": "ShipRegion",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipRegion}"
                             }
                           ]
                         }
@@ -442,6 +466,7 @@
                               "type": "label",
                               "text": "Ship Postal Code",
                               "component": "ShipPostalCode",
+                              "name": "ShipPostalCodeLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -459,7 +484,8 @@
                               "name": "ShipPostalCode",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipPostalCode}"
                             }
                           ]
                         }
@@ -479,6 +505,7 @@
                               "type": "label",
                               "text": "Ship Country",
                               "component": "ShipCountry",
+                              "name": "ShipCountryLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -496,7 +523,8 @@
                               "name": "ShipCountry",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${order.ShipCountry}"
                             }
                           ]
                         }
@@ -557,14 +585,13 @@
                             "result": "${order}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Order"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${order}",
                   "visible": "${order != null}",
-                  "itemType": "Order"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Order"
                 }
               ]
             }
@@ -582,8 +609,8 @@
           {
             "name": "getCustomersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Customer>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Customer>"
           }
         ],
         "type": "invoke"
@@ -595,8 +622,8 @@
           {
             "name": "getEmployeesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Employee>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Employee>"
           }
         ],
         "type": "invoke"
@@ -608,8 +635,8 @@
           {
             "name": "getShippersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Shipper>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Shipper>"
           }
         ],
         "type": "invoke"
@@ -617,8 +644,8 @@
       {
         "name": "order",
         "type": "set",
-        "value": "new Order()",
-        "valueType": "Order"
+        "value": "new NorthwindBlazor.Models.Northwind.Order()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Order"
       }
     ]
   },

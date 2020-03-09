@@ -30,33 +30,27 @@
                   "columns": [
                     {
                       "property": "CategoryName",
-                      "title": "Category Name",
-                      "type": "string"
+                      "title": "Category Name"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
                       "property": "QuantityPerUnit",
-                      "title": "Quantity Per Unit",
-                      "type": "string"
+                      "title": "Quantity Per Unit"
                     },
                     {
-                      "format": "int16",
                       "property": "UnitsInStock",
-                      "title": "Units In Stock",
-                      "type": "integer"
+                      "title": "Units In Stock"
                     },
                     {
                       "property": "Discontinued",
-                      "title": "Discontinued",
-                      "type": "boolean"
+                      "title": "Discontinued"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "ProductsByCategory"
+                  "itemType": "NorthwindBlazor.Models.Northwind.ProductsByCategory"
                 }
               ]
             }
@@ -74,8 +68,8 @@
           {
             "name": "getProductsByCategoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<ProductsByCategory>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.ProductsByCategory>"
           }
         ],
         "type": "invoke"

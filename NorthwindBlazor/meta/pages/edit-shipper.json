@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Company Name",
                               "component": "CompanyName",
+                              "name": "CompanyNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -95,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${shipper.CompanyName}"
                             },
                             {
                               "type": "required-validator",
@@ -124,6 +78,7 @@
                               "type": "label",
                               "text": "Phone",
                               "component": "Phone",
+                              "name": "PhoneLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -141,7 +96,8 @@
                               "name": "Phone",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${shipper.Phone}"
                             }
                           ]
                         }
@@ -183,12 +139,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update Shipper",
                             "severity": "error",
                             "summary": "Error",
@@ -212,14 +162,13 @@
                             "result": "${shipper}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Shipper"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.Shipper",
                   "data": "${shipper}",
-                  "visible": "${shipper != null && canEdit}",
-                  "itemType": "Shipper"
+                  "visible": "${shipper != null}"
                 }
               ]
             }
@@ -230,12 +179,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getShipperByShipperID",
         "parameters": [
@@ -249,17 +192,10 @@
             "name": "shipper",
             "type": "set",
             "value": "${result}",
-            "valueType": "Shipper"
+            "valueType": "NorthwindBlazor.Models.Northwind.Shipper"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       }
     ]

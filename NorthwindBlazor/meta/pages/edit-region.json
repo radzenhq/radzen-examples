@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -75,8 +27,9 @@
                           "components": [
                             {
                               "type": "label",
-                              "text": "Region ID",
+                              "text": "Region Id",
                               "component": "RegionID",
+                              "name": "RegionIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -88,13 +41,14 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "integer",
+                              "valueType": "int",
                               "type": "numeric",
                               "name": "RegionID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${region.RegionID}"
                             },
                             {
                               "type": "required-validator",
@@ -123,6 +77,7 @@
                               "type": "label",
                               "text": "Region Description",
                               "component": "RegionDescription",
+                              "name": "RegionDescriptionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -141,7 +96,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${region.RegionDescription}"
                             },
                             {
                               "type": "required-validator",
@@ -192,12 +148,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update Region",
                             "severity": "error",
                             "summary": "Error",
@@ -221,14 +171,13 @@
                             "result": "${region}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Region"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.Region",
                   "data": "${region}",
-                  "visible": "${region != null && canEdit}",
-                  "itemType": "Region"
+                  "visible": "${region != null}"
                 }
               ]
             }
@@ -239,12 +188,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getRegionByRegionID",
         "parameters": [
@@ -258,17 +201,10 @@
             "name": "region",
             "type": "set",
             "value": "${result}",
-            "valueType": "Region"
+            "valueType": "NorthwindBlazor.Models.Northwind.Region"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       }
     ]

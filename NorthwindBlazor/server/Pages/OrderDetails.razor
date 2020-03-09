@@ -5,35 +5,35 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Order Details">
+    <RadzenHeading Size="H1" Text="Order Details">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getOrderDetailsResult)" TItem="OrderDetail" RowSelect="@Grid0RowSelect">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getOrderDetailsResult" TItem="NorthwindBlazor.Models.Northwind.OrderDetail" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="OrderDetail" Context="data" Property="OrderID" SortProperty="Order.CustomerID" Title="Order" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Property="OrderID" SortProperty="Order.CustomerID" FilterProperty="Order.CustomerID" Title="Order">
               <Template Context="data">
-              @data.Order?.CustomerID
+              @(data.Order?.CustomerID)
               </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="OrderDetail" Context="data" Property="ProductID" SortProperty="Product.ProductName" Title="Product" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Property="ProductID" SortProperty="Product.ProductName" FilterProperty="Product.ProductName" Title="Product">
               <Template Context="data">
-              @data.Product?.ProductName
+              @(data.Product?.ProductName)
               </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="OrderDetail" Context="data" Format="decimal" Property="UnitPrice" Title="Unit Price" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Property="UnitPrice" Title="Unit Price">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="OrderDetail" Context="data" Format="int16" Property="Quantity" Title="Quantity" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Property="Quantity" Title="Quantity">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="OrderDetail" Context="data" Format="float" Property="Discount" Title="Discount" Type="number">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Property="Discount" Title="Discount">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="OrderDetail" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-              <Template Context="data">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="northwindBlazorModelsNorthwindOrderDetail">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, northwindBlazorModelsNorthwindOrderDetail))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

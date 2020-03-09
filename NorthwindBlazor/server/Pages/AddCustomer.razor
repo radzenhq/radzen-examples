@@ -5,131 +5,131 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(customer)" Visible="@(customer != null)" TItem="Customer" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@customer" Visible="@(customer != null)" TItem="NorthwindBlazor.Models.Northwind.Customer" Submit="@Form0Submit">
           <ChildContent>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label1" Text="Customer ID" Component="CustomerID" style="width: 100%;">
+                <RadzenLabel Text="Customer Id" Component="CustomerID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="customerId" MaxLength="5" style="display: block; width: 100%;" Name="CustomerID">
+                <RadzenTextBox MaxLength="5" style="display: block; width: 100%" @bind-Value="@(customer.CustomerID)" Name="CustomerID">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="customerIdRequiredValidator" Component="CustomerID" Text="CustomerID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="CustomerID" Text="CustomerID is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label2" Text="Company Name" Component="CompanyName" style="width: 100%;">
+                <RadzenLabel Text="Company Name" Component="CompanyName" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="companyName" MaxLength="40" style="display: block; width: 100%;" Name="CompanyName">
+                <RadzenTextBox MaxLength="40" style="display: block; width: 100%" @bind-Value="@(customer.CompanyName)" Name="CompanyName">
                 </RadzenTextBox>
-                <RadzenRequiredValidator @ref="companyNameRequiredValidator" Component="CompanyName" Text="CompanyName is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="CompanyName" Text="CompanyName is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label3" Text="Contact Name" Component="ContactName" style="width: 100%;">
+                <RadzenLabel Text="Contact Name" Component="ContactName" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="contactName" MaxLength="30" style="width: 100%;" Name="ContactName">
+                <RadzenTextBox MaxLength="30" style="width: 100%" @bind-Value="@(customer.ContactName)" Name="ContactName">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label4" Text="Contact Title" Component="ContactTitle" style="width: 100%;">
+                <RadzenLabel Text="Contact Title" Component="ContactTitle" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="contactTitle" MaxLength="30" style="width: 100%;" Name="ContactTitle">
+                <RadzenTextBox MaxLength="30" style="width: 100%" @bind-Value="@(customer.ContactTitle)" Name="ContactTitle">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label5" Text="Address" Component="Address" style="width: 100%;">
+                <RadzenLabel Text="Address" Component="Address" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="address" MaxLength="60" style="width: 100%;" Name="Address">
+                <RadzenTextBox MaxLength="60" style="width: 100%" @bind-Value="@(customer.Address)" Name="Address">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label6" Text="City" Component="City" style="width: 100%;">
+                <RadzenLabel Text="City" Component="City" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="city" MaxLength="15" style="width: 100%;" Name="City">
+                <RadzenTextBox MaxLength="15" style="width: 100%" @bind-Value="@(customer.City)" Name="City">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label7" Text="Region" Component="Region" style="width: 100%;">
+                <RadzenLabel Text="Region" Component="Region" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="region" MaxLength="15" style="width: 100%;" Name="Region">
+                <RadzenTextBox MaxLength="15" style="width: 100%" @bind-Value="@(customer.Region)" Name="Region">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label8" Text="Postal Code" Component="PostalCode" style="width: 100%;">
+                <RadzenLabel Text="Postal Code" Component="PostalCode" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="postalCode" MaxLength="10" style="width: 100%;" Name="PostalCode">
+                <RadzenTextBox MaxLength="10" style="width: 100%" @bind-Value="@(customer.PostalCode)" Name="PostalCode">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label9" Text="Country" Component="Country" style="width: 100%;">
+                <RadzenLabel Text="Country" Component="Country" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="country" MaxLength="15" style="width: 100%;" Name="Country">
+                <RadzenTextBox MaxLength="15" style="width: 100%" @bind-Value="@(customer.Country)" Name="Country">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label10" Text="Phone" Component="Phone" style="width: 100%;">
+                <RadzenLabel Text="Phone" Component="Phone" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="phone" MaxLength="24" style="width: 100%;" Name="Phone">
+                <RadzenTextBox MaxLength="24" style="width: 100%" @bind-Value="@(customer.Phone)" Name="Phone">
                 </RadzenTextBox>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label11" Text="Fax" Component="Fax" style="width: 100%;">
+                <RadzenLabel Text="Fax" Component="Fax" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox @ref="fax" MaxLength="24" style="width: 100%;" Name="Fax">
+                <RadzenTextBox MaxLength="24" style="width: 100%" @bind-Value="@(customer.Fax)" Name="Fax">
                 </RadzenTextBox>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton @ref="button1" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton @ref="button2" ButtonStyle="light" Text="Cancel" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

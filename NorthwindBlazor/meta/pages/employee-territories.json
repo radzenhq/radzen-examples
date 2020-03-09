@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -62,10 +66,9 @@
                         ],
                         "path": "edit-employee-territory",
                         "type": "popup",
-                        "argType": "EmployeeTerritory",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -77,24 +80,30 @@
                     {
                       "property": "EmployeeID",
                       "sortProperty": "Employee.LastName",
+                      "filterProperty": "Employee.LastName",
                       "template": "${data.Employee?.LastName}",
-                      "title": "Employee",
-                      "type": "string"
+                      "title": "Employee"
                     },
                     {
                       "property": "TerritoryID",
                       "sortProperty": "Territory.TerritoryDescription",
+                      "filterProperty": "Territory.TerritoryDescription",
                       "template": "${data.Territory?.TerritoryDescription}",
-                      "title": "Territory",
-                      "type": "string"
+                      "title": "Territory"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -130,8 +139,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "EmployeeTerritory"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -140,7 +148,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "EmployeeTerritory"
+                  "itemType": "NorthwindBlazor.Models.Northwind.EmployeeTerritory"
                 }
               ]
             }
@@ -158,8 +166,8 @@
           {
             "name": "getEmployeeTerritoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<EmployeeTerritory>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.EmployeeTerritory>"
           }
         ],
         "type": "invoke"

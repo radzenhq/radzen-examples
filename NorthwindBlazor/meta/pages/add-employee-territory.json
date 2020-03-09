@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Employee",
                               "component": "EmployeeID",
+                              "name": "EmployeeIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -44,12 +45,14 @@
                               "textProperty": "LastName",
                               "valueProperty": "EmployeeID",
                               "placeholder": "Choose Employee",
+                              "valueType": "int",
                               "type": "dropdown",
                               "name": "EmployeeID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employeeterritory.EmployeeID}"
                             },
                             {
                               "type": "required-validator",
@@ -58,7 +61,8 @@
                               "text": "EmployeeID is required",
                               "style": {
                                 "position": "absolute"
-                              }
+                              },
+                              "defaultValue": "0"
                             }
                           ]
                         }
@@ -78,6 +82,7 @@
                               "type": "label",
                               "text": "Territory",
                               "component": "TerritoryID",
+                              "name": "TerritoryIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -93,12 +98,14 @@
                               "textProperty": "TerritoryDescription",
                               "valueProperty": "TerritoryID",
                               "placeholder": "Choose Territory",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "TerritoryID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employeeterritory.TerritoryID}"
                             },
                             {
                               "type": "required-validator",
@@ -168,14 +175,13 @@
                             "result": "${employeeterritory}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "EmployeeTerritory"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${employeeterritory}",
                   "visible": "${employeeterritory != null}",
-                  "itemType": "EmployeeTerritory"
+                  "itemType": "NorthwindBlazor.Models.Northwind.EmployeeTerritory"
                 }
               ]
             }
@@ -193,8 +199,8 @@
           {
             "name": "getEmployeesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Employee>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Employee>"
           }
         ],
         "type": "invoke"
@@ -206,8 +212,8 @@
           {
             "name": "getTerritoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Territory>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Territory>"
           }
         ],
         "type": "invoke"
@@ -215,8 +221,8 @@
       {
         "name": "employeeterritory",
         "type": "set",
-        "value": "new EmployeeTerritory()",
-        "valueType": "EmployeeTerritory"
+        "value": "new NorthwindBlazor.Models.Northwind.EmployeeTerritory()",
+        "valueType": "NorthwindBlazor.Models.Northwind.EmployeeTerritory"
       }
     ]
   },

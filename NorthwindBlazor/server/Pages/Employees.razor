@@ -5,58 +5,58 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading @ref="pageTitle" Size="H1" Text="Employees">
+    <RadzenHeading Size="H1" Text="Employees">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px;" Text="Add" Click="@Button0Click">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getEmployeesResult)" TItem="Employee" RowSelect="@Grid0RowSelect">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getEmployeesResult" TItem="NorthwindBlazor.Models.Northwind.Employee" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="EmployeeID" Title="Employee ID" Type="integer">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="EmployeeID" Title="Employee ID">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="LastName" Title="Last Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="LastName" Title="Last Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="FirstName" Title="First Name" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="FirstName" Title="First Name">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="Title" Title="Title" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Title" Title="Title">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="TitleOfCourtesy" Title="Title Of Courtesy" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="TitleOfCourtesy" Title="Title Of Courtesy">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Format="date-time" Property="BirthDate" FormatString="{0:d}" Title="Birth Date" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="BirthDate" FormatString="{0:MM/dd/yyyy}" Title="Birth Date">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Format="date-time" Property="HireDate" FormatString="{0:d}" Title="Hire Date" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="HireDate" FormatString="{0:MM/dd/yyyy}" Title="Hire Date">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="Address" Title="Address" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Address" Title="Address">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="City" Title="City" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="City" Title="City">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="Region" Title="Region" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Region" Title="Region">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="PostalCode" Title="Postal Code" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="PostalCode" Title="Postal Code">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="Country" Title="Country" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Country" Title="Country">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="HomePhone" Title="Home Phone" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="HomePhone" Title="Home Phone">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="Extension" Title="Extension" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Extension" Title="Extension">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Format="binary" Property="Photo" Title="Photo" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Photo" Title="Photo">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="Notes" Title="Notes" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="Notes" Title="Notes">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="ReportsTo" SortProperty="Employee1.LastName" Title="Employee" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="ReportsTo" SortProperty="Employee1.LastName" FilterProperty="Employee1.LastName" Title="Employee">
               <Template Context="data">
-              @data.Employee1?.LastName
+              @(data.Employee1?.LastName)
               </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Property="PhotoPath" Title="Photo Path" Type="string">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Property="PhotoPath" Title="Photo Path">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="Employee" Context="data" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-              <Template Context="data">
-                <RadzenButton @ref="gridDeleteButton" ButtonStyle="danger" Icon="close" Size="sm" Click="@((args) =>GridDeleteButtonClick(args, data))">
+            <RadzenGridColumn TItem="NorthwindBlazor.Models.Northwind.Employee" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="northwindBlazorModelsNorthwindEmployee">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, northwindBlazorModelsNorthwindEmployee))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
             </RadzenGridColumn>

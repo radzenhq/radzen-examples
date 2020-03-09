@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Category Name",
                               "component": "CategoryName",
+                              "name": "CategoryNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${category.CategoryName}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Description",
                               "component": "Description",
+                              "name": "DescriptionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -92,7 +95,8 @@
                               "name": "Description",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${category.Description}"
                             }
                           ]
                         }
@@ -112,6 +116,7 @@
                               "type": "label",
                               "text": "Picture",
                               "component": "Picture",
+                              "name": "PictureLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -123,13 +128,10 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "string",
-                              "valueFormat": "binary",
-                              "type": "textbox",
+                              "valueType": "Byte[]",
+                              "type": "file-input",
                               "name": "Picture",
-                              "style": {
-                                "width": "100%"
-                              }
+                              "value": "${category.Picture}"
                             }
                           ]
                         }
@@ -190,14 +192,13 @@
                             "result": "${category}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Category"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${category}",
                   "visible": "${category != null}",
-                  "itemType": "Category"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Category"
                 }
               ]
             }
@@ -211,8 +212,8 @@
       {
         "name": "category",
         "type": "set",
-        "value": "new Category()",
-        "valueType": "Category"
+        "value": "new NorthwindBlazor.Models.Northwind.Category()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Category"
       }
     ]
   },

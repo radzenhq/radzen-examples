@@ -9,33 +9,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-        NorthwindBlazor
+      NorthwindBlazor
     </title>
     <base href="~/" />
-    <link href="assets/css/default.css" rel="stylesheet" />
+    <link href="assets/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <app>@(await Html.RenderComponentAsync<App>())</app>
+    <app>@(await Html.RenderComponentAsync<App>(RenderMode.Server))</app>
 
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
     <script src="_framework/blazor.server.js"></script>
-    <script>
-        window.readFileAsBase64 = (fileInput) => {
-            const readAsDataURL = (fileInput) => {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onerror = () => {
-                        reader.abort();
-                        reject(new Error("Error reading file."));
-                    };
-                    reader.addEventListener("load", () => {
-                        resolve(reader.result);
-                    }, false);
-                    reader.readAsDataURL(fileInput.files[0]);
-                });
-            };
-
-            return readAsDataURL(fileInput);
-        };
-    </script>
 </body>
 </html>

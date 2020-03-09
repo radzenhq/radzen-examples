@@ -30,27 +30,23 @@
                   "columns": [
                     {
                       "property": "CustomerID",
-                      "title": "Customer ID",
-                      "type": "string"
+                      "title": "Customer ID"
                     },
                     {
                       "property": "CompanyName",
-                      "title": "Company Name",
-                      "type": "string"
+                      "title": "Company Name"
                     },
                     {
                       "property": "City",
-                      "title": "City",
-                      "type": "string"
+                      "title": "City"
                     },
                     {
                       "property": "Country",
-                      "title": "Country",
-                      "type": "string"
+                      "title": "Country"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "QuarterlyOrder"
+                  "itemType": "NorthwindBlazor.Models.Northwind.QuarterlyOrder"
                 }
               ]
             }
@@ -68,8 +64,8 @@
           {
             "name": "getQuarterlyOrdersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<QuarterlyOrder>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.QuarterlyOrder>"
           }
         ],
         "type": "invoke"

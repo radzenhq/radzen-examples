@@ -2,46 +2,38 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class AddCustomerCustomerDemoComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
-
-        protected RadzenContent content1;
-
-        protected RadzenTemplateForm<CustomerCustomerDemo> form0;
-
-        protected RadzenLabel label1;
-
-        protected RadzenDropDown customerId;
-
-        protected RadzenRequiredValidator customerIdRequiredValidator;
-
-        protected RadzenLabel label2;
-
-        protected RadzenDropDown customerTypeId;
-
-        protected RadzenRequiredValidator customerTypeIdRequiredValidator;
-
-        protected RadzenButton button1;
-
-        protected RadzenButton button2;
-
-        IEnumerable<Customer> _getCustomersResult;
-        protected IEnumerable<Customer> getCustomersResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Customer> _getCustomersResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Customer> getCustomersResult
         {
             get
             {
@@ -49,16 +41,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getCustomersResult != value)
+                if(!object.Equals(_getCustomersResult, value))
                 {
                     _getCustomersResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        IEnumerable<CustomerDemographic> _getCustomerDemographicsResult;
-        protected IEnumerable<CustomerDemographic> getCustomerDemographicsResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.CustomerDemographic> _getCustomerDemographicsResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.CustomerDemographic> getCustomerDemographicsResult
         {
             get
             {
@@ -66,16 +58,16 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getCustomerDemographicsResult != value)
+                if(!object.Equals(_getCustomerDemographicsResult, value))
                 {
                     _getCustomerDemographicsResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        CustomerCustomerDemo _customercustomerdemo;
-        protected CustomerCustomerDemo customercustomerdemo
+        NorthwindBlazor.Models.Northwind.CustomerCustomerDemo _customercustomerdemo;
+        protected NorthwindBlazor.Models.Northwind.CustomerCustomerDemo customercustomerdemo
         {
             get
             {
@@ -83,37 +75,43 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_customercustomerdemo != value)
+                if(!object.Equals(_customercustomerdemo, value))
                 {
                     _customercustomerdemo = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetCustomersResult = await Northwind.GetCustomers();
-                getCustomersResult = northwindGetCustomersResult;
+            getCustomersResult = northwindGetCustomersResult;
 
             var northwindGetCustomerDemographicsResult = await Northwind.GetCustomerDemographics();
-                getCustomerDemographicsResult = northwindGetCustomerDemographicsResult;
+            getCustomerDemographicsResult = northwindGetCustomerDemographicsResult;
 
-            customercustomerdemo = new CustomerCustomerDemo();
+            customercustomerdemo = new NorthwindBlazor.Models.Northwind.CustomerCustomerDemo();
         }
 
-        protected async void Form0Submit(CustomerCustomerDemo args)
+        protected async System.Threading.Tasks.Task Form0Submit(NorthwindBlazor.Models.Northwind.CustomerCustomerDemo args)
         {
-            var northwindCreateCustomerCustomerDemoResult = await Northwind.CreateCustomerCustomerDemo(customercustomerdemo);
+            try
+            {
+                var northwindCreateCustomerCustomerDemoResult = await Northwind.CreateCustomerCustomerDemo(customercustomerdemo);
                 DialogService.Close(customercustomerdemo);
+            }
+            catch (Exception northwindCreateCustomerCustomerDemoException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new CustomerCustomerDemo!");
+            }
         }
 
-        protected async void Button2Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

@@ -30,46 +30,35 @@
                   "columns": [
                     {
                       "property": "OrderID",
-                      "title": "Order ID",
-                      "type": "integer"
+                      "title": "Order ID"
                     },
                     {
                       "property": "ProductID",
-                      "title": "Product ID",
-                      "type": "integer"
+                      "title": "Product ID"
                     },
                     {
                       "property": "ProductName",
-                      "title": "Product Name",
-                      "type": "string"
+                      "title": "Product Name"
                     },
                     {
-                      "format": "decimal",
                       "property": "UnitPrice",
-                      "title": "Unit Price",
-                      "type": "number"
+                      "title": "Unit Price"
                     },
                     {
-                      "format": "int16",
                       "property": "Quantity",
-                      "title": "Quantity",
-                      "type": "integer"
+                      "title": "Quantity"
                     },
                     {
-                      "format": "float",
                       "property": "Discount",
-                      "title": "Discount",
-                      "type": "number"
+                      "title": "Discount"
                     },
                     {
-                      "format": "decimal",
                       "property": "ExtendedPrice",
-                      "title": "Extended Price",
-                      "type": "number"
+                      "title": "Extended Price"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "OrderDetailsExtended"
+                  "itemType": "NorthwindBlazor.Models.Northwind.OrderDetailsExtended"
                 }
               ]
             }
@@ -87,8 +76,8 @@
           {
             "name": "getOrderDetailsExtendedsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<OrderDetailsExtended>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.OrderDetailsExtended>"
           }
         ],
         "type": "invoke"

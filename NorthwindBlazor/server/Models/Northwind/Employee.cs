@@ -17,13 +17,10 @@ namespace NorthwindBlazor.Models.Northwind
     }
 
 
-    [InverseProperty("Employee")]
     public ICollection<Order> Orders { get; set; }
 
-    [InverseProperty("Employee1")]
     public ICollection<Employee> Employees1 { get; set; }
 
-    [InverseProperty("Employee")]
     public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
     public string LastName
     {
@@ -105,8 +102,6 @@ namespace NorthwindBlazor.Models.Northwind
       get;
       set;
     }
-
-    [ForeignKey("ReportsTo")]
     public Employee Employee1 { get; set; }
     public string PhotoPath
     {

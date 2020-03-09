@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Company Name",
                               "component": "CompanyName",
+                              "name": "CompanyNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.CompanyName}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Contact Name",
                               "component": "ContactName",
+                              "name": "ContactNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -93,7 +96,8 @@
                               "name": "ContactName",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.ContactName}"
                             }
                           ]
                         }
@@ -113,6 +117,7 @@
                               "type": "label",
                               "text": "Contact Title",
                               "component": "ContactTitle",
+                              "name": "ContactTitleLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -130,7 +135,8 @@
                               "name": "ContactTitle",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.ContactTitle}"
                             }
                           ]
                         }
@@ -150,6 +156,7 @@
                               "type": "label",
                               "text": "Address",
                               "component": "Address",
+                              "name": "AddressLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -167,7 +174,8 @@
                               "name": "Address",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.Address}"
                             }
                           ]
                         }
@@ -187,6 +195,7 @@
                               "type": "label",
                               "text": "City",
                               "component": "City",
+                              "name": "CityLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -204,7 +213,8 @@
                               "name": "City",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.City}"
                             }
                           ]
                         }
@@ -224,6 +234,7 @@
                               "type": "label",
                               "text": "Region",
                               "component": "Region",
+                              "name": "RegionLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -241,7 +252,8 @@
                               "name": "Region",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.Region}"
                             }
                           ]
                         }
@@ -261,6 +273,7 @@
                               "type": "label",
                               "text": "Postal Code",
                               "component": "PostalCode",
+                              "name": "PostalCodeLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -278,7 +291,8 @@
                               "name": "PostalCode",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.PostalCode}"
                             }
                           ]
                         }
@@ -298,6 +312,7 @@
                               "type": "label",
                               "text": "Country",
                               "component": "Country",
+                              "name": "CountryLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -315,7 +330,8 @@
                               "name": "Country",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.Country}"
                             }
                           ]
                         }
@@ -335,6 +351,7 @@
                               "type": "label",
                               "text": "Phone",
                               "component": "Phone",
+                              "name": "PhoneLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -352,7 +369,8 @@
                               "name": "Phone",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.Phone}"
                             }
                           ]
                         }
@@ -372,6 +390,7 @@
                               "type": "label",
                               "text": "Fax",
                               "component": "Fax",
+                              "name": "FaxLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -389,7 +408,8 @@
                               "name": "Fax",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.Fax}"
                             }
                           ]
                         }
@@ -409,6 +429,7 @@
                               "type": "label",
                               "text": "Home Page",
                               "component": "HomePage",
+                              "name": "HomePageLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -425,7 +446,8 @@
                               "name": "HomePage",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${supplier.HomePage}"
                             }
                           ]
                         }
@@ -486,14 +508,13 @@
                             "result": "${supplier}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Supplier"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${supplier}",
                   "visible": "${supplier != null}",
-                  "itemType": "Supplier"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Supplier"
                 }
               ]
             }
@@ -507,8 +528,8 @@
       {
         "name": "supplier",
         "type": "set",
-        "value": "new Supplier()",
-        "valueType": "Supplier"
+        "value": "new NorthwindBlazor.Models.Northwind.Supplier()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Supplier"
       }
     ]
   },

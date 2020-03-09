@@ -7,7 +7,6 @@ namespace NorthwindBlazor.Models.Northwind
   [Table("Order Details Extended", Schema = "dbo")]
   public partial class OrderDetailsExtended
   {
-    [Key]
     public int OrderID
     {
       get;

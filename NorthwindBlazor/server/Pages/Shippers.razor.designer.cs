@@ -2,36 +2,40 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using NorthwindBlazor.Models.Northwind;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Pages
 {
     public partial class ShippersComponent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
         [Inject]
-        protected IUriHelper UriHelper { get; set; }
+        protected IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
+
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
+
         [Inject]
         protected NorthwindService Northwind { get; set; }
 
+        protected RadzenGrid<NorthwindBlazor.Models.Northwind.Shipper> grid0;
 
-        protected RadzenContent content1;
-
-        protected RadzenHeading pageTitle;
-
-        protected RadzenButton button0;
-
-        protected RadzenGrid<Shipper> grid0;
-
-        protected RadzenButton gridDeleteButton;
-
-        IEnumerable<Shipper> _getShippersResult;
-        protected IEnumerable<Shipper> getShippersResult
+        IEnumerable<NorthwindBlazor.Models.Northwind.Shipper> _getShippersResult;
+        protected IEnumerable<NorthwindBlazor.Models.Northwind.Shipper> getShippersResult
         {
             get
             {
@@ -39,43 +43,51 @@ namespace NorthwindBlazor.Pages
             }
             set
             {
-                if(_getShippersResult != value)
+                if(!object.Equals(_getShippersResult, value))
                 {
                     _getShippersResult = value;
-                    Invoke(() => { StateHasChanged(); });
+                    InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
 
-        protected override async Task OnInitAsync()
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            await Task.Run(Load);
+            await Load();
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var northwindGetShippersResult = await Northwind.GetShippers();
-                getShippersResult = northwindGetShippersResult;
+            getShippersResult = northwindGetShippersResult;
         }
 
-        protected async void Button0Click(UIMouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button0Click(MouseEventArgs args)
         {
             var result = await DialogService.OpenAsync<AddShipper>("Add Shipper", null);
-              await Invoke(() => { StateHasChanged(); });
+              grid0.Reload();
+
+              await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async void Grid0RowSelect(Shipper args)
+        protected async System.Threading.Tasks.Task Grid0RowSelect(NorthwindBlazor.Models.Northwind.Shipper args)
         {
-            var result = await DialogService.OpenAsync<EditShipper>("Edit Shipper", new Dictionary<string, object>() { {"ShipperID", $"{args.ShipperID}"} });
-              await Invoke(() => { StateHasChanged(); });
+            var result = await DialogService.OpenAsync<EditShipper>("Edit Shipper", new Dictionary<string, object>() { {"ShipperID", args.ShipperID} });
+              await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async void GridDeleteButtonClick(UIMouseEventArgs args, Shipper data)
+        protected async System.Threading.Tasks.Task GridDeleteButtonClick(MouseEventArgs args, dynamic data)
         {
-            var northwindDeleteShipperResult = await Northwind.DeleteShipper(data.ShipperID);
+            try
+            {
+                var northwindDeleteShipperResult = await Northwind.DeleteShipper(data.ShipperID);
                 if (northwindDeleteShipperResult != null) {
                     grid0.Reload();
 }
+            }
+            catch (Exception northwindDeleteShipperException)
+            {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Shipper");
+            }
         }
     }
 }

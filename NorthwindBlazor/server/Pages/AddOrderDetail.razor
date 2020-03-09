@@ -5,71 +5,71 @@
 @using Radzen
 @using Radzen.Blazor
 @using NorthwindBlazor.Models.Northwind
-<RadzenContent @ref="content1" Container="main">
+<RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm @ref="form0" Data="@(orderdetail)" Visible="@(orderdetail != null)" TItem="OrderDetail" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@orderdetail" Visible="@(orderdetail != null)" TItem="NorthwindBlazor.Models.Northwind.OrderDetail" Submit="@Form0Submit">
           <ChildContent>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label1" Text="Order" Component="OrderID" style="width: 100%;">
+                <RadzenLabel Text="Order" Component="OrderID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown @ref="orderId" Data="@(getOrdersResult)" TextProperty="CustomerID" ValueProperty="OrderID" Placeholder="Choose Order" style="display: block; width: 100%;" Name="OrderID">
+                <RadzenDropDown Data="@getOrdersResult" TextProperty="CustomerID" ValueProperty="OrderID" Placeholder="Choose Order" style="display: block; width: 100%" @bind-Value="@(orderdetail.OrderID)" Name="OrderID">
                 </RadzenDropDown>
-                <RadzenRequiredValidator @ref="orderIdRequiredValidator" Component="OrderID" Text="OrderID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="OrderID" Text="OrderID is required" style="position: absolute" DefaultValue="0">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label2" Text="Product" Component="ProductID" style="width: 100%;">
+                <RadzenLabel Text="Product" Component="ProductID" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown @ref="productId" Data="@(getProductsResult)" TextProperty="ProductName" ValueProperty="ProductID" Placeholder="Choose Product" style="display: block; width: 100%;" Name="ProductID">
+                <RadzenDropDown Data="@getProductsResult" TextProperty="ProductName" ValueProperty="ProductID" Placeholder="Choose Product" style="display: block; width: 100%" @bind-Value="@(orderdetail.ProductID)" Name="ProductID">
                 </RadzenDropDown>
-                <RadzenRequiredValidator @ref="productIdRequiredValidator" Component="ProductID" Text="ProductID is required" style="position: absolute;">
+                <RadzenRequiredValidator Component="ProductID" Text="ProductID is required" style="position: absolute" DefaultValue="0">
                 </RadzenRequiredValidator>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label3" Text="Unit Price" Component="UnitPrice" style="width: 100%;">
+                <RadzenLabel Text="Unit Price" Component="UnitPrice" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenNumeric @ref="unitPrice" style="width: 100%;" Name="UnitPrice" TItem="decimal">
+                <RadzenNumeric style="width: 100%" @bind-Value="@(orderdetail.UnitPrice)" Name="UnitPrice">
                 </RadzenNumeric>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label4" Text="Quantity" Component="Quantity" style="width: 100%;">
+                <RadzenLabel Text="Quantity" Component="Quantity" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenNumeric @ref="quantity" style="width: 100%;" Name="Quantity" TItem="Int16">
+                <RadzenNumeric style="width: 100%" @bind-Value="@(orderdetail.Quantity)" Name="Quantity">
                 </RadzenNumeric>
               </div>
             </div>
-            <div style="margin-bottom: 1rem;" class="row">
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel @ref="label5" Text="Discount" Component="Discount" style="width: 100%;">
+                <RadzenLabel Text="Discount" Component="Discount" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenNumeric @ref="discount" style="width: 100%;" Name="Discount" TItem="float">
+                <RadzenNumeric style="width: 100%" @bind-Value="@(orderdetail.Discount)" Name="Discount">
                 </RadzenNumeric>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton @ref="button1" ButtonType="submit" Icon="save" Text="Save" ButtonStyle="primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton @ref="button2" ButtonStyle="light" Text="Cancel" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Employee",
                               "component": "EmployeeID",
+                              "name": "EmployeeIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -92,12 +45,14 @@
                               "textProperty": "LastName",
                               "valueProperty": "EmployeeID",
                               "placeholder": "Choose Employee",
+                              "valueType": "int",
                               "type": "dropdown",
                               "name": "EmployeeID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employeeterritory.EmployeeID}"
                             },
                             {
                               "type": "required-validator",
@@ -106,7 +61,8 @@
                               "text": "EmployeeID is required",
                               "style": {
                                 "position": "absolute"
-                              }
+                              },
+                              "defaultValue": "0"
                             }
                           ]
                         }
@@ -126,6 +82,7 @@
                               "type": "label",
                               "text": "Territory",
                               "component": "TerritoryID",
+                              "name": "TerritoryIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -141,12 +98,14 @@
                               "textProperty": "TerritoryDescription",
                               "valueProperty": "TerritoryID",
                               "placeholder": "Choose Territory",
+                              "valueType": "string",
                               "type": "dropdown",
                               "name": "TerritoryID",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${employeeterritory.TerritoryID}"
                             },
                             {
                               "type": "required-validator",
@@ -197,12 +156,6 @@
                       {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)",
-                            "valueType": "bool"
-                          },
-                          {
                             "detail": "Unable to update EmployeeTerritory",
                             "severity": "error",
                             "summary": "Error",
@@ -230,14 +183,13 @@
                             "result": "${employeeterritory}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "EmployeeTerritory"
+                        "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "NorthwindBlazor.Models.Northwind.EmployeeTerritory",
                   "data": "${employeeterritory}",
-                  "visible": "${employeeterritory != null && canEdit}",
-                  "itemType": "EmployeeTerritory"
+                  "visible": "${employeeterritory != null}"
                 }
               ]
             }
@@ -248,12 +200,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "Northwind.getEmployeeTerritoryByEmployeeIDAndTerritoryID",
         "parameters": [
@@ -271,17 +217,10 @@
             "name": "employeeterritory",
             "type": "set",
             "value": "${result}",
-            "valueType": "EmployeeTerritory"
+            "valueType": "NorthwindBlazor.Models.Northwind.EmployeeTerritory"
           }
         ],
-        "error": [
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "!(result.status == 400)",
-            "valueType": "bool"
-          }
-        ],
+        "error": [],
         "type": "invoke"
       },
       {
@@ -291,8 +230,8 @@
           {
             "name": "getEmployeesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Employee>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Employee>"
           }
         ],
         "type": "invoke"
@@ -304,8 +243,8 @@
           {
             "name": "getTerritoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Territory>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Territory>"
           }
         ],
         "type": "invoke"

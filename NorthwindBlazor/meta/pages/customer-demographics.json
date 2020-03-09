@@ -32,7 +32,11 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -58,10 +62,9 @@
                         ],
                         "path": "edit-customer-demographic",
                         "type": "popup",
-                        "argType": "CustomerDemographic",
                         "then": [
                           {
-                            "code": "await Invoke(() => { StateHasChanged(); });",
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
                             "type": "execute"
                           }
                         ]
@@ -72,21 +75,25 @@
                   "columns": [
                     {
                       "property": "CustomerTypeID",
-                      "title": "Customer Type ID",
-                      "type": "string"
+                      "title": "Customer Type ID"
                     },
                     {
                       "property": "CustomerDesc",
-                      "title": "Customer Desc",
-                      "type": "string"
+                      "title": "Customer Desc"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -118,8 +125,7 @@
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "CustomerDemographic"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -128,7 +134,7 @@
                     }
                   ],
                   "type": "grid",
-                  "itemType": "CustomerDemographic"
+                  "itemType": "NorthwindBlazor.Models.Northwind.CustomerDemographic"
                 }
               ]
             }
@@ -146,8 +152,8 @@
           {
             "name": "getCustomerDemographicsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<CustomerDemographic>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.CustomerDemographic>"
           }
         ],
         "type": "invoke"

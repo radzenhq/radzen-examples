@@ -29,31 +29,25 @@
                   "title": "",
                   "columns": [
                     {
-                      "format": "decimal",
                       "property": "SaleAmount",
-                      "title": "Sale Amount",
-                      "type": "number"
+                      "title": "Sale Amount"
                     },
                     {
                       "property": "OrderID",
-                      "title": "Order ID",
-                      "type": "integer"
+                      "title": "Order ID"
                     },
                     {
                       "property": "CompanyName",
-                      "title": "Company Name",
-                      "type": "string"
+                      "title": "Company Name"
                     },
                     {
-                      "format": "date-time",
                       "property": "ShippedDate",
-                      "formatString": "{0:d}",
-                      "title": "Shipped Date",
-                      "type": "string"
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "title": "Shipped Date"
                     }
                   ],
                   "type": "grid",
-                  "itemType": "SalesTotalsByAmount"
+                  "itemType": "NorthwindBlazor.Models.Northwind.SalesTotalsByAmount"
                 }
               ]
             }
@@ -71,8 +65,8 @@
           {
             "name": "getSalesTotalsByAmountsResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<SalesTotalsByAmount>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.SalesTotalsByAmount>"
           }
         ],
         "type": "invoke"

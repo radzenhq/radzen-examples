@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Product Name",
                               "component": "ProductName",
+                              "name": "ProductNameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -47,7 +48,8 @@
                               "style": {
                                 "display": "block",
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.ProductName}"
                             },
                             {
                               "type": "required-validator",
@@ -76,6 +78,7 @@
                               "type": "label",
                               "text": "Supplier",
                               "component": "SupplierID",
+                              "name": "SupplierIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -91,11 +94,13 @@
                               "textProperty": "CompanyName",
                               "valueProperty": "SupplierID",
                               "placeholder": "Choose Supplier",
+                              "valueType": "int?",
                               "type": "dropdown",
                               "name": "SupplierID",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.SupplierID}"
                             }
                           ]
                         }
@@ -115,6 +120,7 @@
                               "type": "label",
                               "text": "Category",
                               "component": "CategoryID",
+                              "name": "CategoryIDLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -130,11 +136,13 @@
                               "textProperty": "CategoryName",
                               "valueProperty": "CategoryID",
                               "placeholder": "Choose Category",
+                              "valueType": "int?",
                               "type": "dropdown",
                               "name": "CategoryID",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.CategoryID}"
                             }
                           ]
                         }
@@ -154,6 +162,7 @@
                               "type": "label",
                               "text": "Quantity Per Unit",
                               "component": "QuantityPerUnit",
+                              "name": "QuantityPerUnitLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -171,7 +180,8 @@
                               "name": "QuantityPerUnit",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.QuantityPerUnit}"
                             }
                           ]
                         }
@@ -191,6 +201,7 @@
                               "type": "label",
                               "text": "Unit Price",
                               "component": "UnitPrice",
+                              "name": "UnitPriceLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -202,13 +213,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "number",
-                              "valueFormat": "decimal",
+                              "valueType": "decimal?",
                               "type": "numeric",
                               "name": "UnitPrice",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.UnitPrice}"
                             }
                           ]
                         }
@@ -228,6 +239,7 @@
                               "type": "label",
                               "text": "Units In Stock",
                               "component": "UnitsInStock",
+                              "name": "UnitsInStockLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -239,13 +251,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "integer",
-                              "valueFormat": "int16",
+                              "valueType": "Int16?",
                               "type": "numeric",
                               "name": "UnitsInStock",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.UnitsInStock}"
                             }
                           ]
                         }
@@ -265,6 +277,7 @@
                               "type": "label",
                               "text": "Units On Order",
                               "component": "UnitsOnOrder",
+                              "name": "UnitsOnOrderLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -276,13 +289,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "integer",
-                              "valueFormat": "int16",
+                              "valueType": "Int16?",
                               "type": "numeric",
                               "name": "UnitsOnOrder",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.UnitsOnOrder}"
                             }
                           ]
                         }
@@ -302,6 +315,7 @@
                               "type": "label",
                               "text": "Reorder Level",
                               "component": "ReorderLevel",
+                              "name": "ReorderLevelLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -313,13 +327,13 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "integer",
-                              "valueFormat": "int16",
+                              "valueType": "Int16?",
                               "type": "numeric",
                               "name": "ReorderLevel",
                               "style": {
                                 "width": "100%"
-                              }
+                              },
+                              "value": "${product.ReorderLevel}"
                             }
                           ]
                         }
@@ -339,6 +353,7 @@
                               "type": "label",
                               "text": "Discontinued",
                               "component": "Discontinued",
+                              "name": "DiscontinuedLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -350,10 +365,11 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "valueType": "boolean",
+                              "valueType": "bool",
                               "type": "checkbox",
                               "name": "Discontinued",
-                              "triState": true
+                              "triState": true,
+                              "value": "${product.Discontinued}"
                             }
                           ]
                         }
@@ -414,14 +430,13 @@
                             "result": "${product}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "Product"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "data": "${product}",
                   "visible": "${product != null}",
-                  "itemType": "Product"
+                  "itemType": "NorthwindBlazor.Models.Northwind.Product"
                 }
               ]
             }
@@ -439,8 +454,8 @@
           {
             "name": "getSuppliersResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Supplier>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Supplier>"
           }
         ],
         "type": "invoke"
@@ -452,8 +467,8 @@
           {
             "name": "getCategoriesResult",
             "type": "set",
-            "value": "${result.value}",
-            "valueType": "IEnumerable<Category>"
+            "value": "${result}",
+            "valueType": "IEnumerable<NorthwindBlazor.Models.Northwind.Category>"
           }
         ],
         "type": "invoke"
@@ -461,8 +476,8 @@
       {
         "name": "product",
         "type": "set",
-        "value": "new Product()",
-        "valueType": "Product"
+        "value": "new NorthwindBlazor.Models.Northwind.Product()",
+        "valueType": "NorthwindBlazor.Models.Northwind.Product"
       }
     ]
   },

@@ -2,14 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using NorthwindBlazor.Data;
 using Radzen;
 
@@ -28,17 +35,34 @@ namespace NorthwindBlazor
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddScoped<HttpClient>(serviceProvider =>
+            {
+
+              var uriHelper = serviceProvider.GetRequiredService<NavigationManager>();
+
+              return new HttpClient
+              {
+                BaseAddress = new Uri(uriHelper.BaseUri)
+              };
+            });
+
+            services.AddHttpClient();
 
             services.AddScoped<NorthwindService>();
-
 
             services.AddDbContext<NorthwindBlazor.Data.NorthwindContext>(options =>
             {
               options.UseSqlServer(Configuration.GetConnectionString("NorthwindConnection"));
             });
+
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor().AddHubOptions(o =>
+            {
+                o.MaximumReceiveMessageSize = 10 * 1024 * 1024;
+            });
             services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
 
             OnConfigureServices(services);
         }
@@ -49,6 +73,7 @@ namespace NorthwindBlazor
         {
             if (env.IsDevelopment())
             {
+                Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -58,20 +83,19 @@ namespace NorthwindBlazor
                     return next();
                 });
             }
-
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
 
-
             OnConfigure(app, env);
         }
     }
+
 }
