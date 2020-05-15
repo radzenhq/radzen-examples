@@ -1,0 +1,21 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Products">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="true" [confirmDelete]="true" [allowAdd]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getProductsCount" [data]="getProductsResult" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" emptyText="No records to display." addText="Add" clearFilterText="Clear" applyFilterText="Apply" equalsText="Equals" notEqualsText="Not equals" lessThanText="Less than" lessThanOrEqualsText="Less than or equals" greaterThanText="Greater than" greaterThanOrEqualsText="Greater than or equals" endsWithText="Ends with" containsText="Contains" startsWithText="Starts with" (loadData)="grid0LoadData($event)" (delete)="grid0Delete($event)" (add)="grid0Add($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="Id" title="Id" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="ProductName" title="Product Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="ProductPrice" formatString="currency" title="Product Price" format="decimal" type="number">
+        </rz-grid-column>
+        <rz-grid-column property="ProductPicture" title="Product Picture" [sortable]="false" [filterable]="false" format="base64" type="string">
+          <ng-template let-data gridColumnTemplate>
+          <img width='50%' height='50%' src='{{data?.ProductPicture}}' />
+          </ng-template>
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>

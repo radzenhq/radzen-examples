@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="05565da7278cb7a0a8fee30179151d3b7981ca5b" datatype="html">
+        <source>H1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ee73c7d778699f4f36ef9a9c9ee1d56577bec587" datatype="html">
+        <source>MainPage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52cb3a1dbc20365867f39819932e43d19542474d" datatype="html">
+        <source>Add new</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fa435cc2ba3810dadfff46449224129c7a6fbdd" datatype="html">
+        <source>main</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-page/main-page.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-layout/login-layout.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c1f1340c111b93970a715a7c0b5df637f2c4d85c" datatype="html">
+        <source>justify-content-center col-xl-5 col-md-7</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-layout/login-layout.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7fbcb43dbf9714376db1fd1c6cd0599ca2fecde0" datatype="html">
+        <source>row justify-content-center</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-layout/login-layout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="86bd4c895bf70b35a58305b7d107a2f1b67b141c" datatype="html">
+        <source>Sample</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d2bd2528e9007416b38aa8cda13dc4a1153edbd0" datatype="html">
+        <source>col-md-6 d-flex align-items-center</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="43ca82027ed5c93f36a74dddee5c6a8a22a9cac6" datatype="html">
+        <source>English - United States</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="01a5390c0f08e5f1e9c880336a67e8e606806144" datatype="html">
+        <source>en-US</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="50adff9319e4953b471b8a80b07cd572ca0d3a46" datatype="html">
+        <source>French - France</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="53244738d64cbc4228dd99b93593f19e69510c53" datatype="html">
+        <source>fr-FR</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="747b264ce75a4e689979afaef77fc9ce1b1e846a" datatype="html">
+        <source>col-md-6 text-lg-right</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0d2c067182f5d83f1e7ea628313e71955bbffb2b" datatype="html">
+        <source>row justify-content-start align-items-center</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb1ab21e340e86b23f48dab7ad402ea6e4082d2c" datatype="html">
+        <source>main-page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="96753b4353633ddfd948a5c2842e1eb04d91e089" datatype="html">
+        <source>Sample, Copyright © 2019</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

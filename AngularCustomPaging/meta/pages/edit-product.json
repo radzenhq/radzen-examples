@@ -1,0 +1,114 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${product}",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Product",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Sample.updateProduct",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "Product",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "ProductName",
+                      "required": true,
+                      "title": "Product Name",
+                      "type": "string",
+                      "maxLength": 255,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "ProductPrice",
+                      "required": true,
+                      "title": "Product Price",
+                      "type": "number",
+                      "requiredText": "is required",
+                      "minText": "cannot be less than",
+                      "maxText": "cannot be more than"
+                    },
+                    {
+                      "property": "ProductPicture",
+                      "required": true,
+                      "title": "Product Picture",
+                      "type": "file",
+                      "requiredText": "is required",
+                      "chooseText": "Choose"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form",
+                  "visible": "product"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Sample.getProductById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "product",
+            "type": "set",
+            "value": "${result}"
+          }
+        ],
+        "error": [],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Product",
+  "layout": "Main"
+}

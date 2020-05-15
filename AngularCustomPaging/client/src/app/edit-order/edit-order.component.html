@@ -1,0 +1,12 @@
+<rz-content #content1 container="main">
+  <div class="row">
+    <div class="col-md-12">
+      <rz-form #form0 [data]="order" *ngIf="order" (cancel)="form0Cancel($event)" (submit)="form0Submit($event)">
+        <rz-string-form-field property="UserName" [required]="true" title="User Name" [maxLength]="255" requiredText="is required" type="string">
+        </rz-string-form-field>
+        <rz-date-form-field property="OrderDate" [required]="true" title="Order Date" requiredText="is required" type="date">
+        </rz-date-form-field>
+      </rz-form>
+    </div>
+  </div>
+</rz-content>

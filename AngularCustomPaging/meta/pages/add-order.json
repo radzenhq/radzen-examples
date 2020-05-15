@@ -1,0 +1,80 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "",
+                  "events": {
+                    "cancel": [
+                      {
+                        "type": "back"
+                      }
+                    ],
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Order!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "Sample.createOrder",
+                        "parameters": [
+                          {
+                            "name": "Order",
+                            "value": "${event}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "back"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "fields": [
+                    {
+                      "property": "UserName",
+                      "required": true,
+                      "title": "User Name",
+                      "type": "string",
+                      "maxLength": 255,
+                      "requiredText": "is required"
+                    },
+                    {
+                      "property": "OrderDate",
+                      "required": true,
+                      "title": "Order Date",
+                      "type": "date",
+                      "requiredText": "is required"
+                    }
+                  ],
+                  "name": "form0",
+                  "type": "form"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "name": "Add Order",
+  "layout": "Main"
+}

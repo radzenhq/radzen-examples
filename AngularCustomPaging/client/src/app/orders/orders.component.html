@@ -1,0 +1,32 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="Orders">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 addText="Add" [allowAdd]="true" [allowDelete]="true" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="false" [allowSorting]="true" applyFilterText="Apply" clearFilterText="Clear" [confirmDelete]="true" confirmDeleteCancelText="Cancel" confirmDeleteOkText="Ok" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" containsText="Contains" [count]="getOrdersCount" [data]="getOrdersResult" emptyText="No records to display." endsWithText="Ends with" equalsText="Equals" greaterThanOrEqualsText="Greater than or equals" greaterThanText="Greater than" lessThanOrEqualsText="Less than or equals" lessThanText="Less than" notEqualsText="Not equals" [pageSize]="PageSize" startsWithText="Starts with" (add)="grid0Add($event)" (delete)="grid0Delete($event)" (loadData)="grid0LoadData($event)" (rowSelect)="grid0RowSelect($event)">
+        <rz-grid-column property="Id" title="Id" type="integer">
+        </rz-grid-column>
+        <rz-grid-column property="UserName" title="User Name" type="string">
+        </rz-grid-column>
+        <rz-grid-column format="date-time" formatString="medium" property="OrderDate" title="Order Date" type="string">
+        </rz-grid-column>
+      </rz-grid>
+      <div [ngStyle]="{'marginTop': '10px'}" class="row">
+        <div class="col-md-4">
+          <rz-button #button0 [disabled]="Start == 0" icon="skip_previous" (click)="button0Click($event)">
+          </rz-button>
+          <rz-button #button1 [disabled]="Start >= (getOrdersCount - PageSize)" icon="skip_next" [style]="{'marginLeft': '20px'}" (click)="button1Click($event)">
+          </rz-button>
+        </div>
+        <div class="col-md-4">
+          <rz-label #label0 text="Showing records from {{Start}} to {{Start + PageSize}} of {{getOrdersCount}}">
+          </rz-label>
+        </div>
+        <div class="col-md-4" [ngStyle]="{'verticalAlign': 'baseline'}">
+          <rz-dropdown #dropdown0 [data]="[10, 20, 30, 40, 50]" [style]="{'float': 'right', 'width': '60px'}" [(ngModel)]="PageSize" name="dropdown0" (change)="dropdown0Change($event)">
+          </rz-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</rz-content>
