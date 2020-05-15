@@ -1,0 +1,332 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Orders",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-order",
+                        "then": [
+                          {
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button"
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": false,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "Id",
+                      "title": "Id"
+                    },
+                    {
+                      "property": "UserName",
+                      "title": "User Name"
+                    },
+                    {
+                      "formatString": "{0:MM/dd/yyyy}",
+                      "property": "OrderDate",
+                      "title": "Order Date"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
+                          "buttonStyle": "danger",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Order",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Sample.deleteOrder",
+                                "parameters": [
+                                  {
+                                    "name": "Id",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "size": "sm",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "textAlign": "center",
+                      "width": "70px"
+                    }
+                  ],
+                  "count": "${Count}",
+                  "data": "${getOrdersResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "Sample.getOrders",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "${PageSize}"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "${Start}"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.Filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.OrderBy}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getOrdersResult",
+                            "type": "set",
+                            "value": "${result}",
+                            "valueType": "IEnumerable<BlazorCustomPaging.Models.Sample.Order>"
+                          }
+                        ],
+                        "type": "invoke"
+                      },
+                      {
+                        "condition": "",
+                        "name": "Sample.getOrders",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "${event.Filter}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "Count",
+                            "type": "set",
+                            "value": "${result.Count()}",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "render": [],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-order",
+                        "then": [
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "itemType": "BlazorCustomPaging.Models.Sample.Order",
+                  "name": "grid0",
+                  "pageSize": "${PageSize}",
+                  "title": "",
+                  "type": "grid"
+                },
+                {
+                  "components": [
+                    {
+                      "class": "col-md-4",
+                      "components": [
+                        {
+                          "disabled": "${this.Start == 0}",
+                          "events": {
+                            "click": [
+                              {
+                                "condition": "${this.Start - this.PageSize >= 0}",
+                                "name": "Start",
+                                "type": "set",
+                                "value": "${this.Start - this.PageSize}",
+                                "valueType": "int"
+                              },
+                              {
+                                "code": "${grid0.Reload()}",
+                                "type": "execute"
+                              }
+                            ]
+                          },
+                          "icon": "skip_previous",
+                          "name": "button1",
+                          "text": "",
+                          "type": "button"
+                        },
+                        {
+                          "disabled": "${this.Start >= this.Count - this.PageSize}",
+                          "events": {
+                            "click": [
+                              {
+                                "condition": "${this.Start + this.PageSize <= this.Count - this.PageSize}",
+                                "name": "Start",
+                                "type": "set",
+                                "value": "${this.Start + this.PageSize}",
+                                "valueType": "int"
+                              },
+                              {
+                                "code": "${grid0.Reload()}",
+                                "type": "execute"
+                              }
+                            ]
+                          },
+                          "icon": "skip_next",
+                          "name": "button2",
+                          "style": {
+                            "marginLeft": "20px"
+                          },
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "name": "col0",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-4",
+                      "components": [
+                        {
+                          "name": "label0",
+                          "text": "@($\"Showing records from {this.Start} to {this.Start + this.PageSize} of {this.Count}\")",
+                          "type": "label"
+                        }
+                      ],
+                      "name": "col1",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-4",
+                      "components": [
+                        {
+                          "data": "@(new int[]{10,20,30,40,50})",
+                          "events": {
+                            "change": [
+                              {
+                                "code": "${grid0.Reload()}",
+                                "type": "execute"
+                              }
+                            ]
+                          },
+                          "name": "dropdown0",
+                          "style": {
+                            "float": "right",
+                            "width": "60px"
+                          },
+                          "template": "",
+                          "type": "dropdown",
+                          "value": "${this.PageSize}"
+                        }
+                      ],
+                      "name": "col2",
+                      "style": {
+                        "verticalAlign": "baseline"
+                      },
+                      "type": "col"
+                    }
+                  ],
+                  "name": "row0",
+                  "style": {
+                    "marginTop": "10px"
+                  },
+                  "type": "row"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "PageSize",
+        "type": "set",
+        "value": "10",
+        "valueType": "int"
+      },
+      {
+        "name": "Start",
+        "type": "set",
+        "value": "0",
+        "valueType": "int"
+      },
+      {
+        "name": "Count",
+        "type": "set",
+        "value": "0",
+        "valueType": "int"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Orders"
+}

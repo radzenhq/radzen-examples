@@ -1,0 +1,34 @@
+{
+  "dataSources": [
+    "Sample"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "BlazorCustomPaging",
+  "navigation": [
+    "Orders",
+    "Order Details",
+    "Products"
+  ],
+  "pages": [
+    "Orders",
+    "Add Order",
+    "Edit Order",
+    "Order Details",
+    "Add Order Detail",
+    "Edit Order Detail",
+    "Products",
+    "Add Product",
+    "Edit Product"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "3",
+  "startPage": "Orders",
+  "theme": "default"
+}
