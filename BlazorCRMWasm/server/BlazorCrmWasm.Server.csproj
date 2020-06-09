@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <NoWarn>CS0168,CS1998,BL9993,CS0649,CS0436,0436</NoWarn>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.9.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\client\BlazorCrmWasm.Client.csproj" />
+  </ItemGroup>
+</Project>

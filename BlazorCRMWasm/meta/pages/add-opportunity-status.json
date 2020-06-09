@@ -1,0 +1,141 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Name",
+                              "component": "Name",
+                              "name": "NameLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "type": "textbox",
+                              "name": "Name",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${opportunitystatus.Name}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new OpportunityStatus!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createOpportunityStatus",
+                        "parameters": [
+                          {
+                            "name": "OpportunityStatus",
+                            "value": "${opportunitystatus}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${opportunitystatus}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "data": "${opportunitystatus}",
+                  "visible": "${opportunitystatus != null}",
+                  "itemType": "BlazorCrmWasm.Models.Crm.OpportunityStatus"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "opportunitystatus",
+        "type": "set",
+        "value": "new BlazorCrmWasm.Models.Crm.OpportunityStatus(){}",
+        "valueType": "BlazorCrmWasm.Models.Crm.OpportunityStatus"
+      }
+    ]
+  },
+  "name": "Add Opportunity Status",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

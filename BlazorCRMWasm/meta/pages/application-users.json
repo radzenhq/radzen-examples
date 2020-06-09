@@ -1,0 +1,200 @@
+{
+  "access": [
+    "Authenticated",
+    "Sales Manager"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Users",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-application-user",
+                        "then": [
+                          {
+                            "code": "await Load();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "${grid0.Reload()}",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button"
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "UserName",
+                      "title": "User Name"
+                    },
+                    {
+                      "property": "Email",
+                      "title": "Email"
+                    },
+                    {
+                      "property": "FirstName",
+                      "title": "FirstName"
+                    },
+                    {
+                      "property": "LastName",
+                      "title": "LastName"
+                    },
+                    {
+                      "property": "Picture",
+                      "template": [
+                        {
+                          "name": "image0",
+                          "path": "${data.Picture}",
+                          "style": {
+                            "height": "30px",
+                            "width": "30px"
+                          },
+                          "type": "image"
+                        }
+                      ]
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
+                          "buttonStyle": "danger",
+                          "events": {
+                            "click": [
+                              {
+                                "argType": "ApplicationUser",
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete user",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "Security.deleteUser",
+                                "parameters": [
+                                  {
+                                    "name": "id",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "await Load();",
+                                    "type": "execute"
+                                  },
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "size": "sm",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "width": "70px"
+                    }
+                  ],
+                  "data": "${users}",
+                  "events": {
+                    "loadData": [],
+                    "rowSelect": [
+                      {
+                        "argType": "ApplicationUser",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-application-user",
+                        "then": [
+                          {
+                            "code": "await Load();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "${grid0.Reload()}",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "itemType": "ApplicationUser",
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Security.getUsers",
+        "parameters": [],
+        "then": [
+          {
+            "name": "users",
+            "type": "set",
+            "value": "${result.value}",
+            "valueType": "IEnumerable<ApplicationUser>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Application Users"
+}

@@ -1,0 +1,395 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Title",
+                              "component": "Title",
+                              "name": "TitleLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 256,
+                              "type": "textbox",
+                              "name": "Title",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${task.Title}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Opportunity",
+                              "component": "OpportunityId",
+                              "name": "OpportunityIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getOpportunitiesResult}",
+                              "textProperty": "UserId",
+                              "valueProperty": "Id",
+                              "placeholder": "Choose Opportunity",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "OpportunityId",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${task.OpportunityId}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "OpportunityIdRequiredValidator",
+                              "component": "OpportunityId",
+                              "text": "OpportunityId is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Due Date",
+                              "component": "DueDate",
+                              "name": "DueDateLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "DateTime",
+                              "dateFormat": "MM/dd/yyyy",
+                              "type": "datepicker",
+                              "name": "DueDate",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${task.DueDate}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "DueDateRequiredValidator",
+                              "component": "DueDate",
+                              "text": "DueDate is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Task Type",
+                              "component": "TypeId",
+                              "name": "TypeIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getTaskTypesResult}",
+                              "textProperty": "Name",
+                              "valueProperty": "Id",
+                              "placeholder": "Choose TaskType",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "TypeId",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${task.TypeId}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "TypeIdRequiredValidator",
+                              "component": "TypeId",
+                              "text": "TypeId is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Task Status",
+                              "component": "StatusId",
+                              "name": "StatusIdLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getTaskStatusesResult}",
+                              "textProperty": "Name",
+                              "valueProperty": "Id",
+                              "placeholder": "Choose TaskStatus",
+                              "valueType": "int?",
+                              "type": "dropdown",
+                              "name": "StatusId",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${task.StatusId}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Task",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.updateTask",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "Task",
+                            "value": "${task}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${task}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "BlazorCrmWasm.Models.Crm.Task",
+                  "data": "${task}",
+                  "visible": "${task != null}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getTaskById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "task",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "BlazorCrmWasm.Models.Crm.Task"
+          }
+        ],
+        "error": [],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getOpportunities",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOpportunitiesResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.Opportunity>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getTaskTypes",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getTaskTypesResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.TaskType>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getTaskStatuses",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getTaskStatusesResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.TaskStatus>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Task",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

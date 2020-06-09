@@ -1,0 +1,29 @@
+﻿@inherits BlazorCrmWasm.Layouts.LoginLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+<RadzenDialog />
+<RadzenNotification />
+
+<RadzenImage Path="assets/images/login-background.png" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%">
+</RadzenImage>
+<RadzenBody @ref="body0"  Expanded="true">
+  <ChildContent>
+    <div class="row justify-content-center align-items-center" style="bottom: 0; left: 0; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; position: absolute; right: 0; top: 0; vertical-align: baseline">
+      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-8" style="padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">
+        <RadzenImage Path="assets/images/logo.png" style="border-radius: 64px; display: block; height: 128px; margin-left: auto; margin-right: auto; margin-top: -72px; width: 128px">
+        </RadzenImage>
+        <RadzenCard style="margin-top: 0px">
+          <ChildContent>
+            <RadzenContentContainer Name="main">
+            @Body
+            </RadzenContentContainer>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenBody>

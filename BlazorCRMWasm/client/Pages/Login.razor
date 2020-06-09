@@ -1,0 +1,33 @@
+﻿@page "/login"
+@layout LoginLayout
+@inherits BlazorCrmWasm.Pages.LoginComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+@using Microsoft.AspNetCore.Authorization
+
+<form method="post" action="account/login">
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Login">
+    </RadzenHeading>
+    <RadzenTemplateForm Action="/Account/Login" Method="post" TItem="dynamic">
+      <ChildContent>
+        <RadzenLabel Component="Username" style="display: block; margin-top: 16px" Text="Username">
+        </RadzenLabel>
+        <RadzenTextBox style="width: 100%" Name="Username">
+        </RadzenTextBox>
+        <RadzenLabel Component="Password" style="display: block; margin-top: 16px" Text="Password">
+        </RadzenLabel>
+        <RadzenPassword style="width: 100%" Name="Password">
+        </RadzenPassword>
+        <RadzenButton ButtonType="ButtonType.Submit" style="margin-top: 16px; width: 100%" Text="Login">
+        </RadzenButton>
+      </ChildContent>
+    </RadzenTemplateForm>
+  </ChildContent>
+</RadzenContent>
+</form>

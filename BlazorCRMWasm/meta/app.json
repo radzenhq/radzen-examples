@@ -1,0 +1,79 @@
+{
+  "dataSources": [
+    "CRM"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": true,
+  "ignore": [
+    ""
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "BlazorCRMWasm",
+  "navigation": [
+    "Contacts",
+    "Opportunities",
+    "Opportunity Statuses",
+    "Tasks",
+    "Task Statuses",
+    "Task Types",
+    "Home"
+  ],
+  "pages": [
+    "Contacts",
+    "Add Contact",
+    "Edit Contact",
+    "Opportunities",
+    "Add Opportunity",
+    "Edit Opportunity",
+    "Opportunity Statuses",
+    "Add Opportunity Status",
+    "Edit Opportunity Status",
+    "Tasks",
+    "Add Task",
+    "Edit Task",
+    "Task Statuses",
+    "Add Task Status",
+    "Edit Task Status",
+    "Task Types",
+    "Add Task Type",
+    "Edit Task Type",
+    "Login",
+    "Application Users",
+    "Add Application Role",
+    "Application Roles",
+    "Register Application User",
+    "Add Application User",
+    "Profile",
+    "Unauthorized",
+    "Edit Application User",
+    "Home"
+  ],
+  "port": 8000,
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "CRM",
+    "duration": 5,
+    "emailConfirmation": false,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "loginPage": "Login",
+    "provider": "default",
+    "smtpFrom": "",
+    "smtpPassword": "",
+    "smtpSSL": false,
+    "smtpServer": "",
+    "smtpUser": ""
+  },
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "3",
+  "startPage": "Home",
+  "theme": "dark",
+  "themeSettings": null,
+  "wasm": true
+}

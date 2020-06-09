@@ -1,0 +1,38 @@
+﻿@page "/opportunity-statuses"
+@layout MainLayout
+@inherits BlazorCrmWasm.Pages.OpportunityStatusesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Opportunity Statuses">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getOpportunityStatusesResult" Count="@getOpportunityStatusesCount" TItem="BlazorCrmWasm.Models.Crm.OpportunityStatus" LoadData="@Grid0LoadData" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="BlazorCrmWasm.Models.Crm.OpportunityStatus" Property="Id" Title="Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorCrmWasm.Models.Crm.OpportunityStatus" Property="Name" Title="Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlazorCrmWasm.Models.Crm.OpportunityStatus" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="blazorCrmWasmModelsCrmOpportunityStatus">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, blazorCrmWasmModelsCrmOpportunityStatus))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

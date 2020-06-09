@@ -1,0 +1,84 @@
+﻿@page "/edit-contact/{Id}"
+@layout MainLayout
+@inherits BlazorCrmWasm.Pages.EditContactComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm TItem="BlazorCrmWasm.Models.Crm.Contact" Data="@contact" Visible="@(contact != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Email" Component="Email" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@(contact.Email)" Name="Email">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Email" Text="Email is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Company" Component="Company" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.Company)" Name="Company">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Last Name" Component="LastName" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.LastName)" Name="LastName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="First Name" Component="FirstName" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.FirstName)" Name="FirstName">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Phone" Component="Phone" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.Phone)" Name="Phone">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

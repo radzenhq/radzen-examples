@@ -1,0 +1,276 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Contacts",
+          "type": "heading"
+        },
+        {
+          "name": "textbox0",
+          "type": "textbox",
+          "value": "${contactFilter}"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "code": "grid0.Reload()",
+                "type": "execute"
+              }
+            ]
+          },
+          "icon": "",
+          "name": "button1",
+          "text": "Search",
+          "type": "button"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-contact",
+                        "then": [
+                          {
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button"
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "Email",
+                      "title": "Email"
+                    },
+                    {
+                      "property": "Company",
+                      "title": "Company"
+                    },
+                    {
+                      "property": "LastName",
+                      "title": "Last Name"
+                    },
+                    {
+                      "property": "FirstName",
+                      "title": "First Name"
+                    },
+                    {
+                      "property": "Phone",
+                      "title": "Phone"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
+                          "buttonStyle": "danger",
+                          "events": {
+                            "click": [
+                              {
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete Contact",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "CRM.deleteContact",
+                                "parameters": [
+                                  {
+                                    "name": "Id",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "size": "sm",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "textAlign": "center",
+                      "width": "70px"
+                    }
+                  ],
+                  "count": "${getContactsCount}",
+                  "data": "${getContactsResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to load Contacts",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.getContacts",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "operator": "or",
+                            "value": [
+                              {
+                                "operation": "contains",
+                                "property": "Email",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              },
+                              {
+                                "operation": "contains",
+                                "property": "Company",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              },
+                              {
+                                "operation": "contains",
+                                "property": "FirstName",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              },
+                              {
+                                "operation": "contains",
+                                "property": "LastName",
+                                "type": "string",
+                                "value": "\"${contactFilter}\""
+                              }
+                            ]
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": [
+                              {
+                                "value": "${event.orderby}"
+                              }
+                            ]
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getContactsResult",
+                            "type": "set",
+                            "value": "${result.Value.AsODataEnumerable()}",
+                            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.Contact>"
+                          },
+                          {
+                            "name": "getContactsCount",
+                            "type": "set",
+                            "value": "${result.Count}",
+                            "valueType": "int"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-contact",
+                        "then": [
+                          {
+                            "code": "grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "itemType": "BlazorCrmWasm.Models.Crm.Contact",
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "contactFilter",
+        "type": "set",
+        "value": "\"\"",
+        "valueType": "string"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Contacts"
+}

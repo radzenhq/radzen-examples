@@ -1,0 +1,42 @@
+﻿@page "/edit-task-type/{Id}"
+@layout MainLayout
+@inherits BlazorCrmWasm.Pages.EditTaskTypeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm TItem="BlazorCrmWasm.Models.Crm.TaskType" Data="@tasktype" Visible="@(tasktype != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Name" Component="Name" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(tasktype.Name)" Name="Name">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

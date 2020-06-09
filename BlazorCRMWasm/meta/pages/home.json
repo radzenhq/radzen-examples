@@ -1,0 +1,567 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12 col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-12 col-4",
+                          "components": [
+                            {
+                              "icon": "attach_money",
+                              "name": "icon0",
+                              "style": {
+                                "color": "#68d5c8",
+                                "fontSize": "48px",
+                                "height": "64px",
+                                "width": "100%"
+                              },
+                              "type": "icon"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-12 col-8",
+                          "components": [
+                            {
+                              "name": "heading0",
+                              "size": "H4",
+                              "style": {
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading1",
+                              "size": "H4",
+                              "style": {
+                                "color": "#88989b",
+                                "fontSize": "12px",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "LAST MONTH",
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading2",
+                              "size": "H4",
+                              "style": {
+                                "color": "#68d5c8",
+                                "fontSize": "24px",
+                                "marginBottom": "0px",
+                                "marginTop": "13px",
+                                "textAlign": "right"
+                              },
+                              "text": "${monthlyStats?.Revenue.ToString(\"C\")}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row1",
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card0",
+                  "style": {
+                    "marginBottom": "16px"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-12 col-4",
+                          "components": [
+                            {
+                              "icon": "shopping_cart",
+                              "name": "icon1",
+                              "style": {
+                                "color": "#f9777f",
+                                "fontSize": "48px",
+                                "height": "64px",
+                                "width": "100%"
+                              },
+                              "type": "icon"
+                            }
+                          ],
+                          "name": "col4",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-12 col-8",
+                          "components": [
+                            {
+                              "name": "heading3",
+                              "size": "H4",
+                              "style": {
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading4",
+                              "size": "H4",
+                              "style": {
+                                "color": "#88989b",
+                                "fontSize": "12px",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "Opportunities",
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading5",
+                              "size": "H4",
+                              "style": {
+                                "color": "#f9777f",
+                                "fontSize": "24px",
+                                "marginBottom": "0px",
+                                "marginTop": "13px",
+                                "textAlign": "right"
+                              },
+                              "text": "${monthlyStats?.Opportunities.ToString()}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col5",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card1",
+                  "style": {
+                    "marginBottom": "16px"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col3",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-12 col-4",
+                          "components": [
+                            {
+                              "icon": "account_balance_wallet",
+                              "name": "icon2",
+                              "style": {
+                                "color": "#ff6d41",
+                                "fontSize": "48px",
+                                "height": "64px",
+                                "width": "100%"
+                              },
+                              "type": "icon"
+                            }
+                          ],
+                          "name": "col7",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-12 col-8",
+                          "components": [
+                            {
+                              "name": "heading6",
+                              "size": "H4",
+                              "style": {
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading7",
+                              "size": "H4",
+                              "style": {
+                                "color": "#88989b",
+                                "fontSize": "12px",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "Average Deal Size",
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading8",
+                              "size": "H4",
+                              "style": {
+                                "color": "#ff6d41",
+                                "fontSize": "24px",
+                                "marginBottom": "0px",
+                                "marginTop": "13px",
+                                "textAlign": "right"
+                              },
+                              "text": "${monthlyStats?.AverageDealSize.ToString()}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col8",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row3",
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card2",
+                  "style": {
+                    "marginBottom": "16px"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col6",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-xl-3 col-lg-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-12 col-4",
+                          "components": [
+                            {
+                              "icon": "thumb_up",
+                              "name": "icon3",
+                              "style": {
+                                "color": "#479cc8",
+                                "fontSize": "48px",
+                                "height": "64px",
+                                "width": "100%"
+                              },
+                              "type": "icon"
+                            }
+                          ],
+                          "name": "col10",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-12 col-8",
+                          "components": [
+                            {
+                              "name": "heading9",
+                              "size": "H4",
+                              "style": {
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading10",
+                              "size": "H4",
+                              "style": {
+                                "color": "#88989b",
+                                "fontSize": "12px",
+                                "marginBottom": "0px",
+                                "textAlign": "right"
+                              },
+                              "text": "Win Rate",
+                              "type": "heading"
+                            },
+                            {
+                              "name": "heading11",
+                              "size": "H4",
+                              "style": {
+                                "color": "#479cc8",
+                                "fontSize": "24px",
+                                "marginBottom": "0px",
+                                "marginTop": "13px",
+                                "textAlign": "right"
+                              },
+                              "text": "${monthlyStats?.Ratio.ToString(\"P\")}",
+                              "type": "heading"
+                            }
+                          ],
+                          "name": "col11",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row4",
+                      "type": "row"
+                    }
+                  ],
+                  "name": "card3",
+                  "style": {
+                    "marginBottom": "16px"
+                  },
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col9",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12 col-xl-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "name": "heading12",
+                      "size": "H3",
+                      "text": "Recent Opportunities",
+                      "type": "heading"
+                    },
+                    {
+                      "allowFiltering": false,
+                      "allowPaging": false,
+                      "allowSorting": true,
+                      "columns": [
+                        {
+                          "editTemplate": "",
+                          "template": "${data.Contact.FirstName} ${data.Contact.LastName}",
+                          "title": "Contact"
+                        },
+                        {
+                          "editTemplate": "",
+                          "template": "${data.Amount.ToString(\"C\")}",
+                          "title": "Amount"
+                        },
+                        {
+                          "property": "OpportunityStatus.Name",
+                          "title": "Status"
+                        },
+                        {
+                          "format": "date-time",
+                          "formatString": "{0:d}",
+                          "property": "CloseDate",
+                          "title": "Close Date",
+                          "type": "string"
+                        }
+                      ],
+                      "count": "",
+                      "data": "${getOpportunitiesResult}",
+                      "events": {
+                        "loadData": []
+                      },
+                      "itemType": "BlazorCrmWasm.Models.Crm.Opportunity",
+                      "name": "grid0",
+                      "pageSize": 10,
+                      "type": "grid"
+                    }
+                  ],
+                  "name": "card4",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col12",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-xl-6",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "name": "heading13",
+                      "size": "H3",
+                      "text": "Active Tasks",
+                      "type": "heading"
+                    },
+                    {
+                      "allowFiltering": false,
+                      "allowPaging": false,
+                      "allowSorting": true,
+                      "columns": [
+                        {
+                          "filterProperty": "",
+                          "sortProperty": "Opportunity.User.FirstName",
+                          "template": [
+                            {
+                              "name": "image0",
+                              "path": "${data.Opportunity.User.Picture}",
+                              "style": {
+                                "borderRadius": "15px",
+                                "height": "30px",
+                                "width": "30px"
+                              },
+                              "type": "image"
+                            },
+                            {
+                              "name": "label0",
+                              "text": "${data.Opportunity.User.LastName}",
+                              "type": "label"
+                            }
+                          ],
+                          "title": "Employee"
+                        },
+                        {
+                          "sortProperty": "Opportunity.Name",
+                          "template": [
+                            {
+                              "name": "label1",
+                              "style": {
+                                "display": "block"
+                              },
+                              "text": "${data.Opportunity.Name}",
+                              "type": "label"
+                            },
+                            {
+                              "name": "label2",
+                              "style": {},
+                              "text": "${data.Opportunity.Contact.LastName}",
+                              "type": "label"
+                            },
+                            {
+                              "name": "label3",
+                              "style": {},
+                              "text": "${data.Opportunity.Contact.FirstName}",
+                              "type": "label"
+                            }
+                          ],
+                          "title": "Title"
+                        },
+                        {
+                          "property": "DueDate"
+                        }
+                      ],
+                      "count": "",
+                      "data": "${getTasksResult}",
+                      "events": {
+                        "loadData": []
+                      },
+                      "itemType": "BlazorCrmWasm.Models.Crm.Task",
+                      "name": "grid1",
+                      "pageSize": 10,
+                      "type": "grid"
+                    }
+                  ],
+                  "name": "card5",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col13",
+              "type": "col"
+            }
+          ],
+          "name": "row5",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "monthlyStats",
+        "type": "set",
+        "value": "await MonthlyStats()",
+        "valueType": "Stats"
+      },
+      {
+        "name": "CRM.getOpportunities",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "desc",
+                "property": "CloseDate"
+              }
+            ]
+          },
+          {
+            "name": "$expand",
+            "value": "Contact,OpportunityStatus"
+          }
+        ],
+        "then": [
+          {
+            "name": "getOpportunitiesResult ",
+            "type": "set",
+            "value": "${result.Value}",
+            "valueType": "IEnumerable<Opportunity>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getTasks",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "desc",
+                "property": "DueDate"
+              }
+            ]
+          },
+          {
+            "name": "$expand",
+            "value": "Opportunity($expand=User,Contact)"
+          }
+        ],
+        "then": [
+          {
+            "name": "getTasksResult ",
+            "type": "set",
+            "value": "${result.Value}",
+            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.Task>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Home"
+}

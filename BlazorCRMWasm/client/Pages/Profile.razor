@@ -1,0 +1,124 @@
+﻿@page "/profile"
+@layout MainLayout
+@inherits BlazorCrmWasm.Pages.ProfileComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Profile">
+    </RadzenHeading>
+    <RadzenTabs>
+      <Tabs>
+        <RadzenTabsItem Selected="true" Text="Personal">
+          <ChildContent>
+            <RadzenTemplateForm Data="@user" TItem="ApplicationUser" Submit="@TemplateForm0Submit">
+              <ChildContent>
+                <div style="margin-bottom: 1rem" class="row">
+                  <div class="col-md-3">
+                    <RadzenLabel Component="textBox1" style="width: 100%" Text="First Name">
+                    </RadzenLabel>
+                  </div>
+                  <div class="col-md-9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.FirstName)" Name="TextBox1">
+                    </RadzenTextBox>
+                    <RadzenRequiredValidator Component="TextBox1" style="position: absolute" Text="First Name is required">
+                    </RadzenRequiredValidator>
+                  </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                  <div class="col-md-3">
+                    <RadzenLabel Component="textbox2" style="width: 100%" Text="Last Name">
+                    </RadzenLabel>
+                  </div>
+                  <div class="col-md-9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.LastName)" Name="Textbox2">
+                    </RadzenTextBox>
+                    <RadzenRequiredValidator Component="Textbox2" style="position: absolute" Text="Last Name is required">
+                    </RadzenRequiredValidator>
+                  </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                  <div class="col-md-3">
+                    <RadzenLabel Component="textBox1" style="width: 100%" Text="Picture">
+                    </RadzenLabel>
+                  </div>
+                  <div class="col-md-9">
+                    <RadzenFileInput @bind-Value="@(user.Picture)" Name="FileInput0">
+                    </RadzenFileInput>
+                    <RadzenRequiredValidator Component="FileInput0" style="position: absolute" Text="Picture is required">
+                    </RadzenRequiredValidator>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="offset-sm-3 col-md-9">
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                    </RadzenButton>
+                  </div>
+                </div>
+              </ChildContent>
+            </RadzenTemplateForm>
+          </ChildContent>
+        </RadzenTabsItem>
+        <RadzenTabsItem Selected="false" Text="Password">
+          <ChildContent>
+            <RadzenTemplateForm Action="account/changepassword" Data="@(user)" TItem="ApplicationUser" Method="post" Visible="@(user != null)">
+              <ChildContent>
+                <div style="margin-bottom: 1rem" class="row">
+                  <div class="col-md-3">
+                    <RadzenLabel Component="OldPassword" style="width: 100%" Text="Old Password">
+                    </RadzenLabel>
+                  </div>
+                  <div class="col-md-9">
+                    <RadzenPassword style="display: block; width: 100%" Name="OldPassword">
+                    </RadzenPassword>
+                    <RadzenRequiredValidator Component="OldPassword" style="position: absolute" Text="Password is required">
+                    </RadzenRequiredValidator>
+                  </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                  <div class="col-md-3">
+                    <RadzenLabel Component="NewPassword" style="width: 100%" Text="New Password">
+                    </RadzenLabel>
+                  </div>
+                  <div class="col-md-9">
+                    <RadzenPassword style="display: block; width: 100%" Name="NewPassword">
+                    </RadzenPassword>
+                    <RadzenRequiredValidator Component="NewPassword" style="position: absolute" Text="Password is required">
+                    </RadzenRequiredValidator>
+                  </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                  <div class="col-md-3">
+                    <RadzenLabel Component="ConfirmPassword" style="width: 100%" Text="Confirm password">
+                    </RadzenLabel>
+                  </div>
+                  <div class="col-md-9">
+                    <RadzenPassword style="display: block; width: 100%" Name="ConfirmPassword">
+                    </RadzenPassword>
+                    <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="ConfirmPassword is required">
+                    </RadzenRequiredValidator>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col offset-sm-3">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Change password">
+                    </RadzenButton>
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button1Click">
+                    </RadzenButton>
+                  </div>
+                </div>
+              </ChildContent>
+            </RadzenTemplateForm>
+          </ChildContent>
+        </RadzenTabsItem>
+      </Tabs>
+    </RadzenTabs>
+  </ChildContent>
+</RadzenContent>

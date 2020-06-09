@@ -1,0 +1,141 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Name",
+                              "component": "Name",
+                              "name": "NameLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "type": "textbox",
+                              "name": "Name",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${tasktype.Name}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new TaskType!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createTaskType",
+                        "parameters": [
+                          {
+                            "name": "TaskType",
+                            "value": "${tasktype}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${tasktype}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "data": "${tasktype}",
+                  "visible": "${tasktype != null}",
+                  "itemType": "BlazorCrmWasm.Models.Crm.TaskType"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "tasktype",
+        "type": "set",
+        "value": "new BlazorCrmWasm.Models.Crm.TaskType(){}",
+        "valueType": "BlazorCrmWasm.Models.Crm.TaskType"
+      }
+    ]
+  },
+  "name": "Add Task Type",
+  "layout": "Main",
+  "access": [
+    "Authenticated"
+  ]
+}

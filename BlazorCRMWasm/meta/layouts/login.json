@@ -1,0 +1,89 @@
+{
+  "components": [
+    {
+      "name": "image0",
+      "path": "/assets/images/login-background.png",
+      "style": {
+        "height": "100%",
+        "left": "0px",
+        "position": "absolute",
+        "top": "0px",
+        "width": "100%"
+      },
+      "type": "image"
+    },
+    {
+      "attributes": [
+        {
+          "name": "Expanded",
+          "value": "true"
+        }
+      ],
+      "components": [
+        {
+          "class": "justify-content-center align-items-center",
+          "components": [
+            {
+              "class": "col-xl-3 col-lg-4 col-md-5 col-sm-8",
+              "components": [
+                {
+                  "name": "image1",
+                  "path": "/assets/images/logo.png",
+                  "style": {
+                    "borderRadius": "64px",
+                    "display": "block",
+                    "height": "128px",
+                    "marginLeft": "auto",
+                    "marginRight": "auto",
+                    "marginTop": "-72px",
+                    "width": "128px"
+                  },
+                  "type": "image"
+                },
+                {
+                  "components": [
+                    {
+                      "name": "main",
+                      "type": "content-container"
+                    }
+                  ],
+                  "name": "card0",
+                  "style": {
+                    "marginTop": "0px"
+                  },
+                  "type": "card"
+                }
+              ],
+              "name": "col0",
+              "style": {
+                "paddingBottom": "0px",
+                "paddingLeft": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px"
+              },
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {
+            "bottom": "0",
+            "left": "0",
+            "marginBottom": "0",
+            "marginLeft": "0",
+            "marginRight": "0",
+            "marginTop": "0",
+            "position": "absolute",
+            "right": "0",
+            "top": "0",
+            "verticalAlign": "baseline"
+          },
+          "type": "row"
+        }
+      ],
+      "name": "body0",
+      "style": {},
+      "type": "body"
+    }
+  ],
+  "name": "Login"
+}

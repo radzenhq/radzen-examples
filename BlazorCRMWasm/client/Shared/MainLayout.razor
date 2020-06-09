@@ -1,0 +1,81 @@
+﻿@inherits BlazorCrmWasm.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlazorCrmWasm.Models.Crm
+@using Microsoft.AspNetCore.Identity
+@using BlazorCrmWasm.Models
+<RadzenDialog />
+<RadzenNotification />
+
+<RadzenHeader>
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-md-6 d-flex align-items-center">
+        <RadzenSidebarToggle Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel Text="BlazorCRMWasm">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-6 text-lg-right">
+        <RadzenProfileMenu Visible="@(Security.User != null)" Click="@Profilemenu0Click">
+          <ChildContent>
+            <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+            </RadzenProfileMenuItem>
+            <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="@Security.IsInRole(new string[]{"Authenticated", "Sales Manager"})">
+            </RadzenProfileMenuItem>
+            <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="@Security.IsInRole(new string[]{"Authenticated", "Sales Manager"})">
+            </RadzenProfileMenuItem>
+            <RadzenProfileMenuItem Text="Logout" Value="Logout" Icon="power_settings_new">
+            </RadzenProfileMenuItem>
+          </ChildContent>
+          <Template>
+            <RadzenLabel Text="@($"{(Security.User?.FirstName)}")">
+            </RadzenLabel>
+            <RadzenLabel Text="@($"{(Security.User?.LastName)}")">
+            </RadzenLabel>
+            <RadzenImage Path="@(Security.User?.Picture)" style="border-radius: 16px; height: 32px; width: 32px">
+            </RadzenImage>
+          </Template>
+        </RadzenProfileMenu>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+  <ChildContent>
+    <RadzenContentContainer Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Icon="home" Path="home" Text="Dashboard" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Icon="perm_contact_calendar" Path="contacts" Text="Contacts" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Icon="work" Path="tasks" Text="Tasks" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Icon="shopping_cart" Path="opportunities" Text="Opportunities" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Icon="settings" Text="Settings" Visible="@(Security.IsInRole("Sales Manager"))">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="opportunity-statuses" Text="Opportunity Statuses" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="task-types" Text="Task Types" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="task-statuses" Text="Task Statuses" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+  <ChildContent>
+    <RadzenLabel Text="BlazorCRMWasm, Copyright Ⓒ 2020">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

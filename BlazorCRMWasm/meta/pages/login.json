@@ -1,0 +1,89 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Login",
+          "type": "heading"
+        },
+        {
+          "action": "/Account/Login",
+          "components": [
+            {
+              "component": "Username",
+              "name": "label0",
+              "style": {
+                "display": "block",
+                "marginTop": "16px"
+              },
+              "text": "Username",
+              "type": "label"
+            },
+            {
+              "name": "Username",
+              "style": {
+                "width": "100%"
+              },
+              "type": "textbox",
+              "value": ""
+            },
+            {
+              "component": "Password",
+              "name": "label1",
+              "style": {
+                "display": "block",
+                "marginTop": "16px"
+              },
+              "text": "Password",
+              "type": "label"
+            },
+            {
+              "name": "Password",
+              "style": {
+                "width": "100%"
+              },
+              "type": "password",
+              "value": ""
+            },
+            {
+              "buttonType": "submit",
+              "icon": "",
+              "name": "button0",
+              "style": {
+                "marginTop": "16px",
+                "width": "100%"
+              },
+              "text": "Login",
+              "type": "button"
+            }
+          ],
+          "method": "post",
+          "name": "templateForm0",
+          "type": "template-form"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "code": "var error = System.Web.HttpUtility.ParseQueryString(new Uri(UriHelper.ToAbsoluteUri(UriHelper.Uri).ToString()).Query).Get(\"error\");",
+        "type": "execute"
+      },
+      {
+        "condition": "!string.IsNullOrEmpty(error)",
+        "detail": "${error}",
+        "severity": "error",
+        "summary": "Error",
+        "type": "notify"
+      }
+    ]
+  },
+  "layout": "Login",
+  "name": "Login"
+}

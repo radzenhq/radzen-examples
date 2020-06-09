@@ -1,0 +1,381 @@
+{
+  "access": [
+    "Authenticated"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Amount",
+                              "name": "AmountLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Amount",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "Amount",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${opportunity.Amount}",
+                              "valueType": "decimal"
+                            },
+                            {
+                              "component": "Amount",
+                              "name": "AmountRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "Amount is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "ContactId",
+                              "name": "ContactIdLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Contact",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getContactsResult}",
+                              "name": "ContactId",
+                              "placeholder": "Choose Contact",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "Email",
+                              "type": "dropdown",
+                              "value": "${opportunity.ContactId}",
+                              "valueProperty": "Id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "ContactId",
+                              "defaultValue": "0",
+                              "name": "ContactIdRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "ContactId is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "StatusId",
+                              "name": "StatusIdLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Opportunity Status",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getOpportunityStatusesResult}",
+                              "name": "StatusId",
+                              "placeholder": "Choose OpportunityStatus",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "Name",
+                              "type": "dropdown",
+                              "value": "${opportunity.StatusId}",
+                              "valueProperty": "Id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "StatusId",
+                              "defaultValue": "0",
+                              "name": "StatusIdRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "StatusId is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "CloseDate",
+                              "name": "CloseDateLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Close Date",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "dateFormat": "MM/dd/yyyy",
+                              "name": "CloseDate",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "datepicker",
+                              "value": "${opportunity.CloseDate}",
+                              "valueType": "DateTime"
+                            },
+                            {
+                              "component": "CloseDate",
+                              "name": "CloseDateRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "CloseDate is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Name",
+                              "name": "NameLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Name",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 256,
+                              "name": "Name",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${opportunity.Name}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "Name",
+                              "name": "NameRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "Name is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "text": "Cancel",
+                              "type": "button"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${opportunity}",
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Opportunity!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "CRM.createOpportunity",
+                        "parameters": [
+                          {
+                            "name": "Opportunity",
+                            "value": "${opportunity}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "result": "${opportunity}",
+                            "type": "close-popup"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "BlazorCrmWasm.Models.Crm.Opportunity",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${opportunity != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "CRM.getContacts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getContactsResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.Contact>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "CRM.getOpportunityStatuses",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getOpportunityStatusesResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<BlazorCrmWasm.Models.Crm.OpportunityStatus>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "opportunity",
+        "type": "set",
+        "value": "new BlazorCrmWasm.Models.Crm.Opportunity(){}",
+        "valueType": "BlazorCrmWasm.Models.Crm.Opportunity"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Opportunity"
+}
