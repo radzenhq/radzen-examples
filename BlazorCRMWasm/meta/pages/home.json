@@ -388,7 +388,7 @@
                       "events": {
                         "loadData": []
                       },
-                      "itemType": "BlazorCrmWasm.Models.Crm.Opportunity",
+                      "itemType": "dynamic",
                       "name": "grid0",
                       "pageSize": 10,
                       "type": "grid"
@@ -424,7 +424,7 @@
                           "template": [
                             {
                               "name": "image0",
-                              "path": "${data.Opportunity.User.Picture}",
+                              "path": "${data.Opportunity?.User?.Picture}",
                               "style": {
                                 "borderRadius": "15px",
                                 "height": "30px",
@@ -434,7 +434,7 @@
                             },
                             {
                               "name": "label0",
-                              "text": "${data.Opportunity.User.LastName}",
+                              "text": "${data.Opportunity?.User?.LastName}",
                               "type": "label"
                             }
                           ],
@@ -448,19 +448,19 @@
                               "style": {
                                 "display": "block"
                               },
-                              "text": "${data.Opportunity.Name}",
+                              "text": "${data.Opportunity?.Name}",
                               "type": "label"
                             },
                             {
                               "name": "label2",
                               "style": {},
-                              "text": "${data.Opportunity.Contact.LastName}",
+                              "text": "${data.Opportunity?.Contact?.LastName}",
                               "type": "label"
                             },
                             {
                               "name": "label3",
                               "style": {},
-                              "text": "${data.Opportunity.Contact.FirstName}",
+                              "text": "${data.Opportunity?.Contact?.FirstName}",
                               "type": "label"
                             }
                           ],
@@ -475,7 +475,7 @@
                       "events": {
                         "loadData": []
                       },
-                      "itemType": "BlazorCrmWasm.Models.Crm.Task",
+                      "itemType": "dynamic",
                       "name": "grid1",
                       "pageSize": 10,
                       "type": "grid"

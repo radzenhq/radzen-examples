@@ -38,9 +38,9 @@ namespace BlazorCrmWasm.Pages
         [Inject]
         protected CrmService Crm { get; set; }
 
-        protected RadzenGrid<BlazorCrmWasm.Models.Crm.Opportunity> grid0;
+        protected RadzenGrid<dynamic> grid0;
 
-        protected RadzenGrid<BlazorCrmWasm.Models.Crm.Task> grid1;
+        protected RadzenGrid<dynamic> grid1;
 
         Stats _monthlyStats;
         protected Stats monthlyStats
