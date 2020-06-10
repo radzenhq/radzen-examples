@@ -388,7 +388,7 @@
                       "events": {
                         "loadData": []
                       },
-                      "itemType": "dynamic",
+                      "itemType": "Opportunity",
                       "name": "grid0",
                       "pageSize": 10,
                       "type": "grid"
@@ -475,7 +475,7 @@
                       "events": {
                         "loadData": []
                       },
-                      "itemType": "dynamic",
+                      "itemType": "BlazorCrmWasm.Models.Crm.Task",
                       "name": "grid1",
                       "pageSize": 10,
                       "type": "grid"

@@ -103,21 +103,21 @@
           <ChildContent>
             <RadzenHeading Size="H3" Text="Recent Opportunities">
             </RadzenHeading>
-            <RadzenGrid @ref="grid0" AllowFiltering="false" AllowPaging="false" AllowSorting="true" Data="@getOpportunitiesResult" TItem="dynamic" PageSize="10">
+            <RadzenGrid @ref="grid0" AllowFiltering="false" AllowPaging="false" AllowSorting="true" Data="@getOpportunitiesResult" TItem="Opportunity" PageSize="10">
               <Columns>
-                <RadzenGridColumn TItem="dynamic" Title="Contact">
+                <RadzenGridColumn TItem="Opportunity" Title="Contact">
                   <Template Context="data">
                   @(data.Contact.FirstName) @(data.Contact.LastName)
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="dynamic" Title="Amount">
+                <RadzenGridColumn TItem="Opportunity" Title="Amount">
                   <Template Context="data">
                   @(data.Amount.ToString("C"))
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="dynamic" Property="OpportunityStatus.Name" Title="Status">
+                <RadzenGridColumn TItem="Opportunity" Property="OpportunityStatus.Name" Title="Status">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="dynamic" Format="date-time" FormatString="{0:d}" Property="CloseDate" Title="Close Date" Type="string">
+                <RadzenGridColumn TItem="Opportunity" Format="date-time" FormatString="{0:d}" Property="CloseDate" Title="Close Date" Type="string">
                 </RadzenGridColumn>
               </Columns>
             </RadzenGrid>
@@ -129,27 +129,27 @@
           <ChildContent>
             <RadzenHeading Size="H3" Text="Active Tasks">
             </RadzenHeading>
-            <RadzenGrid @ref="grid1" AllowFiltering="false" AllowPaging="false" AllowSorting="true" Data="@getTasksResult" TItem="dynamic" PageSize="10">
+            <RadzenGrid @ref="grid1" AllowFiltering="false" AllowPaging="false" AllowSorting="true" Data="@getTasksResult" TItem="BlazorCrmWasm.Models.Crm.Task" PageSize="10">
               <Columns>
-                <RadzenGridColumn TItem="dynamic" SortProperty="Opportunity.User.FirstName" Title="Employee">
-                  <Template Context="data">
-                    <RadzenImage Path="@(data.Opportunity?.User?.Picture)" style="border-radius: 15px; height: 30px; width: 30px">
+                <RadzenGridColumn TItem="BlazorCrmWasm.Models.Crm.Task" SortProperty="Opportunity.User.FirstName" Title="Employee">
+                  <Template Context="blazorCrmWasmModelsCrmTask">
+                    <RadzenImage Path="@(blazorCrmWasmModelsCrmTask.Opportunity?.User?.Picture)" style="border-radius: 15px; height: 30px; width: 30px">
                     </RadzenImage>
-                    <RadzenLabel Text="@($"{(data.Opportunity?.User?.LastName)}")">
+                    <RadzenLabel Text="@($"{(blazorCrmWasmModelsCrmTask.Opportunity?.User?.LastName)}")">
                     </RadzenLabel>
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="dynamic" SortProperty="Opportunity.Name" Title="Title">
-                  <Template Context="data">
-                    <RadzenLabel style="display: block" Text="@($"{(data.Opportunity?.Name)}")">
+                <RadzenGridColumn TItem="BlazorCrmWasm.Models.Crm.Task" SortProperty="Opportunity.Name" Title="Title">
+                  <Template Context="blazorCrmWasmModelsCrmTask">
+                    <RadzenLabel style="display: block" Text="@($"{(blazorCrmWasmModelsCrmTask.Opportunity?.Name)}")">
                     </RadzenLabel>
-                    <RadzenLabel  Text="@($"{(data.Opportunity?.Contact?.LastName)}")">
+                    <RadzenLabel  Text="@($"{(blazorCrmWasmModelsCrmTask.Opportunity?.Contact?.LastName)}")">
                     </RadzenLabel>
-                    <RadzenLabel  Text="@($"{(data.Opportunity?.Contact?.FirstName)}")">
+                    <RadzenLabel  Text="@($"{(blazorCrmWasmModelsCrmTask.Opportunity?.Contact?.FirstName)}")">
                     </RadzenLabel>
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="dynamic" Property="DueDate">
+                <RadzenGridColumn TItem="BlazorCrmWasm.Models.Crm.Task" Property="DueDate">
                 </RadzenGridColumn>
               </Columns>
             </RadzenGrid>

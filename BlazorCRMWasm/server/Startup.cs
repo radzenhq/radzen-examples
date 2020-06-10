@@ -113,7 +113,7 @@ namespace BlazorCrmWasm
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
-  
+
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthentication();
@@ -125,7 +125,7 @@ namespace BlazorCrmWasm
                 endpoints.MapControllerRoute(
                   name: "default",
                   pattern: "{controller=Home}/{action=Index}/{id?}");
-                  
+
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
@@ -147,11 +147,11 @@ namespace BlazorCrmWasm
                 var usersType = oDataBuilder.StructuralTypes.First(x => x.ClrType == typeof(ApplicationUser));
                 usersType.AddCollectionProperty(typeof(ApplicationUser).GetProperty("RoleNames"));
                 oDataBuilder.EntitySet<IdentityRole>("ApplicationRoles");
-      
+
                 var model = oDataBuilder.GetEdmModel();
-      
+
                 endpoints.MapODataRoute("odata", "odata/CRM", model);
-      
+
                 endpoints.MapODataRoute("auth", "auth", model);
             });
 
@@ -180,7 +180,7 @@ namespace BlazorCrmWasm
             var user = await userManager.GetUserAsync(context.Subject);
 
             var roles = user != null ? await userManager.GetRolesAsync(user) :
-                env.IsDevelopment() && context.Subject.Identity.Name == "admin" ? 
+                env.IsDevelopment() && context.Subject.Identity.Name == "admin" ?
                     roleManager.Roles.Select(r => r.Name) : Enumerable.Empty<string>();
 
             context.IssuedClaims.AddRange(roles.Select(r => new System.Security.Claims.Claim(IdentityModel.JwtClaimTypes.Role, r)));
