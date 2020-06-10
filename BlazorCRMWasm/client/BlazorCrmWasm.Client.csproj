@@ -5,7 +5,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Radzen.Blazor" Version="2.9.11" />
+    <PackageReference Include="Radzen.Blazor" Version="2.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
