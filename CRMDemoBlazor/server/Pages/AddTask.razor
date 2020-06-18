@@ -15,17 +15,15 @@
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@(task)" TItem="RadzenCrm.Models.Crm.Task" Visible="@(task != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@task" TItem="RadzenCrm.Models.Crm.Task" Visible="@(task != null)" Submit="@Form0Submit">
           <ChildContent>
-            <RadzenTextBox AutoComplete="false" MaxLength="256" style="width: 100%" @bind-Value="@((task.Title))" Name="Textbox0">
-            </RadzenTextBox>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Component="Title" style="width: 100%" Text="Title">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox AutoComplete="false" MaxLength="256" style="width: 100%" @bind-Value="@((task.Title))" Name="Title">
+                <RadzenTextBox AutoComplete="false" MaxLength="256" style="width: 100%" @bind-Value="@(task.Title)" Name="Title">
                 </RadzenTextBox>
               </div>
             </div>
@@ -35,7 +33,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getOpportunitiesResult)" Placeholder="Choose Opportunity" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((task.OpportunityId))" ValueProperty="Id" Name="OpportunityId">
+                <RadzenDropDown Data="@getOpportunitiesResult" Placeholder="Choose Opportunity" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(task.OpportunityId)" ValueProperty="Id" Name="OpportunityId">
                 </RadzenDropDown>
                 <RadzenRequiredValidator Component="OpportunityId" style="position: absolute" Text="OpportunityId is required">
                 </RadzenRequiredValidator>
@@ -47,7 +45,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@((task.DueDate))" Name="DueDate">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(task.DueDate)" Name="DueDate">
                 </RadzenDatePicker>
                 <RadzenRequiredValidator Component="DueDate" style="position: absolute" Text="DueDate is required">
                 </RadzenRequiredValidator>
@@ -59,7 +57,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getTaskTypesResult)" Placeholder="Choose TaskType" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((task.TypeId))" ValueProperty="Id" Name="TypeId">
+                <RadzenDropDown Data="@getTaskTypesResult" Placeholder="Choose TaskType" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(task.TypeId)" ValueProperty="Id" Name="TypeId">
                 </RadzenDropDown>
                 <RadzenRequiredValidator Component="TypeId" style="position: absolute" Text="TypeId is required">
                 </RadzenRequiredValidator>
@@ -71,7 +69,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getTaskStatusesResult)" Placeholder="Choose TaskStatus" style="width: 100%" TextProperty="Name" @bind-Value="@((task.StatusId))" ValueProperty="Id" Name="StatusId">
+                <RadzenDropDown Data="@getTaskStatusesResult" Placeholder="Choose TaskStatus" style="width: 100%" TextProperty="Name" @bind-Value="@(task.StatusId)" ValueProperty="Id" Name="StatusId">
                 </RadzenDropDown>
               </div>
             </div>

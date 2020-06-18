@@ -10,6 +10,7 @@ using RadzenCrm.Models.Crm;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 using Microsoft.JSInterop;
+
 namespace RadzenCrm.Layouts
 {
     public partial class MainLayoutComponent : LayoutComponentBase
@@ -46,7 +47,7 @@ namespace RadzenCrm.Layouts
             }
             set
             {
-                if(_Culture != value)
+                if(!object.Equals(_Culture, value))
                 {
                     _Culture = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -56,28 +57,26 @@ namespace RadzenCrm.Layouts
 
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
-            Load();
+            await Load();
         }
-
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             Culture = "";
 
             Culture = await JSRuntime.InvokeAsync<string>("Radzen.getCulture");
         }
 
-        protected async void SidebarToggle0Click(dynamic args)
+        protected async System.Threading.Tasks.Task SidebarToggle0Click(dynamic args)
         {
             sidebar0.Toggle();
 
             body0.Toggle();
         }
 
-        protected async void Profilemenu0Click(dynamic args)
+        protected async System.Threading.Tasks.Task Profilemenu0Click(dynamic args)
         {
             if (args.Value == "Logout") {
-                Security.Logout();
+                await Security.Logout();
 }
         }
     }

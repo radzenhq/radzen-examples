@@ -13,7 +13,11 @@
 
 <RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading Size="H1" Text="Home">
+    <RadzenIcon Icon="assessment">
+    </RadzenIcon>
+    <RadzenHeading Size="H1" style="display: inline-block" Text="Blazor CRM Dashboard">
+    </RadzenHeading>
+    <RadzenHeading Size="H2" Text="Monthly Stats">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12 col-xl-3 col-lg-6">
@@ -95,6 +99,60 @@
             </div>
           </ChildContent>
         </RadzenCard>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenHeading Size="H2" Text="Company Performance">
+        </RadzenHeading>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12 col-lg-6 col-xl-4">
+            <RadzenCard>
+              <ChildContent>
+                <RadzenChart ColorScheme="ColorScheme.Pastel">
+                  <ChildContent>
+                    <RadzenColumnSeries CategoryProperty="Company" Data="@revenueByCompany" ValueProperty="Revenue">
+                    </RadzenColumnSeries>
+                  </ChildContent>
+                </RadzenChart>
+              </ChildContent>
+            </RadzenCard>
+          </div>
+          <div class="col-md-12 col-lg-6 col-xl-4">
+            <RadzenCard>
+              <ChildContent>
+                <RadzenChart ColorScheme="ColorScheme.Pastel">
+                  <ChildContent>
+                    <RadzenLineSeries CategoryProperty="Month" Data="@revenueByMonth" ValueProperty="Revenue">
+                    </RadzenLineSeries>
+                  </ChildContent>
+                </RadzenChart>
+              </ChildContent>
+            </RadzenCard>
+          </div>
+          <div class="col-md-12 col-lg-6 col-xl-4">
+            <RadzenCard>
+              <ChildContent>
+                <RadzenChart ColorScheme="ColorScheme.Pastel">
+                  <ChildContent>
+                    <RadzenBarSeries CategoryProperty="Employee" Data="@revenueByEmployee" ValueProperty="Revenue">
+                    </RadzenBarSeries>
+                  </ChildContent>
+                </RadzenChart>
+              </ChildContent>
+            </RadzenCard>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenHeading Size="H2" Text="Pending Work">
+        </RadzenHeading>
       </div>
     </div>
     <div class="row">

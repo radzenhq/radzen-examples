@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -107,7 +108,7 @@ namespace BlazorCrmWasm.Pages
 
                 getTaskStatusesCount = crmGetTaskStatusesResult.Count;
             }
-            catch (Exception crmGetTaskStatusesException)
+            catch (System.Exception crmGetTaskStatusesException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to load TaskStatuses");
             }
@@ -130,7 +131,7 @@ namespace BlazorCrmWasm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception crmDeleteTaskStatusException)
+            catch (System.Exception crmDeleteTaskStatusException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete TaskStatus");
             }

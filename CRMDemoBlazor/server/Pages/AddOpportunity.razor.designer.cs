@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         IEnumerable<RadzenCrm.Models.Crm.Contact> _getContactsResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Contact> getContactsResult
@@ -46,7 +48,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getContactsResult != value)
+                if(!object.Equals(_getContactsResult, value))
                 {
                     _getContactsResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -63,7 +65,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getOpportunityStatusesResult != value)
+                if(!object.Equals(_getOpportunityStatusesResult, value))
                 {
                     _getOpportunityStatusesResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -80,14 +82,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_opportunity != value)
+                if(!object.Equals(_opportunity, value))
                 {
                     _opportunity = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -96,12 +97,11 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var crmGetContactsResult = await Crm.GetContacts();
             getContactsResult = crmGetContactsResult;
@@ -112,20 +112,20 @@ namespace RadzenCrm.Pages
             opportunity = new RadzenCrm.Models.Crm.Opportunity();
         }
 
-        protected async void Form0Submit(RadzenCrm.Models.Crm.Opportunity args)
+        protected async System.Threading.Tasks.Task Form0Submit(RadzenCrm.Models.Crm.Opportunity args)
         {
             try
             {
                 var crmCreateOpportunityResult = await Crm.CreateOpportunity(opportunity);
                 DialogService.Close(opportunity);
             }
-            catch (Exception crmCreateOpportunityException)
+            catch (System.Exception crmCreateOpportunityException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Opportunity!");
             }
         }
 
-        protected async void Button2Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

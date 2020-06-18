@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         [Parameter]
         public dynamic Id { get; set; }
@@ -49,7 +51,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_canEdit != value)
+                if(!object.Equals(_canEdit, value))
                 {
                     _canEdit = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -66,14 +68,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_contact != value)
+                if(!object.Equals(_contact, value))
                 {
                     _contact = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -82,38 +83,37 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             canEdit = true;
 
-            var crmGetContactByIdResult = await Crm.GetContactById(int.Parse($"{Id}"));
+            var crmGetContactByIdResult = await Crm.GetContactById(Id);
             contact = crmGetContactByIdResult;
         }
 
-        protected async void CloseButtonClick(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task CloseButtonClick(MouseEventArgs args)
         {
             DialogService.Close(null);
         }
 
-        protected async void Form0Submit(RadzenCrm.Models.Crm.Contact args)
+        protected async System.Threading.Tasks.Task Form0Submit(RadzenCrm.Models.Crm.Contact args)
         {
             try
             {
-                var crmUpdateContactResult = await Crm.UpdateContact(int.Parse($"{Id}"), contact);
+                var crmUpdateContactResult = await Crm.UpdateContact(Id, contact);
                 DialogService.Close(contact);
             }
-            catch (Exception crmUpdateContactException)
+            catch (System.Exception crmUpdateContactException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Contact");
             }
         }
 
-        protected async void Button3Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button3Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

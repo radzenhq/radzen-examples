@@ -6,9 +6,23 @@
     {
       "components": [
         {
+          "icon": "assessment",
+          "name": "icon4",
+          "type": "icon"
+        },
+        {
           "name": "pageTitle",
           "size": "H1",
+          "style": {
+            "display": "inline-block"
+          },
           "text": "Blazor CRM Dashboard",
+          "type": "heading"
+        },
+        {
+          "name": "heading14",
+          "size": "H2",
+          "text": "Monthly Stats",
           "type": "heading"
         },
         {
@@ -350,6 +364,108 @@
           "type": "row"
         },
         {
+          "name": "heading15",
+          "size": "H2",
+          "text": "Company Performance",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12 col-lg-6 col-xl-4",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "colorScheme": "ColorScheme.Pastel",
+                      "name": "chart0",
+                      "series": [
+                        {
+                          "categoryProperty": "Company",
+                          "data": "${revenueByCompany}",
+                          "type": "Column",
+                          "valueProperty": "Revenue"
+                        }
+                      ],
+                      "type": "chart",
+                      "visible": true
+                    }
+                  ],
+                  "name": "card6",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col14",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-lg-6 col-xl-4",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "colorScheme": "ColorScheme.Pastel",
+                      "name": "chart1",
+                      "series": [
+                        {
+                          "categoryProperty": "Month",
+                          "data": "${revenueByMonth}",
+                          "type": "Line",
+                          "valueProperty": "Revenue"
+                        }
+                      ],
+                      "type": "chart",
+                      "visible": true
+                    }
+                  ],
+                  "name": "card7",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col16",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12 col-lg-6 col-xl-4",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "colorScheme": "ColorScheme.Pastel",
+                      "name": "chart2",
+                      "series": [
+                        {
+                          "categoryProperty": "Employee",
+                          "data": "${revenueByEmployee}",
+                          "type": "Bar",
+                          "valueProperty": "Revenue"
+                        }
+                      ],
+                      "type": "chart",
+                      "visible": true
+                    }
+                  ],
+                  "name": "card8",
+                  "type": "card",
+                  "visible": true
+                }
+              ],
+              "name": "col15",
+              "type": "col"
+            }
+          ],
+          "name": "row6",
+          "type": "row"
+        },
+        {
+          "name": "heading16",
+          "size": "H2",
+          "text": "Pending Work",
+          "type": "heading"
+        },
+        {
           "components": [
             {
               "class": "col-md-12 col-xl-6",
@@ -509,6 +625,66 @@
             "type": "set",
             "value": "${result}",
             "valueType": "RadzenCrm.Pages.Stats"
+          }
+        ],
+        "type": "invoke-method"
+      },
+      {
+        "name": "RevenueByCompany",
+        "schema": {
+          "dotnetType": "System.Collections.Generic.IEnumerable<RadzenCrm.Pages.RevenueByCompany>",
+          "items": {
+            "$ref": "#/definitions/RevenueByCompany",
+            "dotnetType": "RadzenCrm.Pages.RevenueByCompany"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "revenueByCompany",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<RadzenCrm.Pages.RevenueByCompany>"
+          }
+        ],
+        "type": "invoke-method"
+      },
+      {
+        "name": "RevenueByEmployee",
+        "schema": {
+          "dotnetType": "System.Collections.Generic.IEnumerable<RadzenCrm.Pages.RevenueByEmployee>",
+          "items": {
+            "$ref": "#/definitions/RevenueByEmployee",
+            "dotnetType": "RadzenCrm.Pages.RevenueByEmployee"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "revenueByEmployee",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<RadzenCrm.Pages.RevenueByEmployee>"
+          }
+        ],
+        "type": "invoke-method"
+      },
+      {
+        "name": "RevenueByMonth",
+        "schema": {
+          "dotnetType": "System.Collections.Generic.IEnumerable<RadzenCrm.Pages.RevenueByMonth>",
+          "items": {
+            "$ref": "#/definitions/RevenueByMonth",
+            "dotnetType": "RadzenCrm.Pages.RevenueByMonth"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "revenueByMonth",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<RadzenCrm.Pages.RevenueByMonth>"
           }
         ],
         "type": "invoke-method"

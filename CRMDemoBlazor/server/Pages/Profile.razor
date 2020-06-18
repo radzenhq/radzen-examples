@@ -17,9 +17,9 @@
     </RadzenHeading>
     <RadzenTabs>
       <Tabs>
-        <RadzenTabsItem Text="Personal">
+        <RadzenTabsItem Selected="true" Text="Personal">
           <ChildContent>
-            <RadzenTemplateForm Data="@(user)" TItem="RadzenCrm.Models.ApplicationUser" Visible="@(user != null)" Submit="@TemplateForm0Submit">
+            <RadzenTemplateForm Data="@user" TItem="RadzenCrm.Models.ApplicationUser" Visible="@(user != null)" Submit="@TemplateForm0Submit">
               <ChildContent>
                 <div class="row">
                   <div class="col-md-3">
@@ -27,7 +27,7 @@
                     </RadzenLabel>
                   </div>
                   <div class="col-md-9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@((user.FirstName))" Name="TextBox1">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.FirstName)" Name="TextBox1">
                     </RadzenTextBox>
                     <RadzenRequiredValidator Component="TextBox1" style="position: absolute" Text="FirstName is required">
                     </RadzenRequiredValidator>
@@ -39,7 +39,7 @@
                     </RadzenLabel>
                   </div>
                   <div class="col-md-9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@((user.LastName))" Name="Textbox0">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.LastName)" Name="Textbox0">
                     </RadzenTextBox>
                     <RadzenRequiredValidator Component="Textbox0" style="position: absolute" Text="Last Name is required">
                     </RadzenRequiredValidator>
@@ -51,7 +51,7 @@
                     </RadzenLabel>
                   </div>
                   <div class="col-md-9">
-                    <RadzenFileInput style="display: block" @bind-Value="@((user.Picture))" Name="FileInput0">
+                    <RadzenFileInput style="display: block" @bind-Value="@(user.Picture)" Name="FileInput0">
                     </RadzenFileInput>
                     <RadzenRequiredValidator Component="FileInput0" style="position: absolute" Text="Picture is required">
                     </RadzenRequiredValidator>
@@ -67,7 +67,7 @@
             </RadzenTemplateForm>
           </ChildContent>
         </RadzenTabsItem>
-        <RadzenTabsItem Text="Password">
+        <RadzenTabsItem Selected="false" Text="Password">
           <ChildContent>
             <RadzenTemplateForm Action="/account/changepassword" Data="@(user)" TItem="ApplicationUser" Method="post" Visible="@(user != null)">
               <ChildContent>

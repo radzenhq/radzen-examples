@@ -4,9 +4,23 @@
     {
       "components": [
         {
-          "name": "pageTitle",
+          "icon": "assessment",
+          "name": "icon4",
+          "type": "icon"
+        },
+        {
+          "name": "heading14",
           "size": "H1",
-          "text": "Home",
+          "style": {
+            "display": "inline-block"
+          },
+          "text": "Blazor CRM Dashboard",
+          "type": "heading"
+        },
+        {
+          "name": "heading15",
+          "size": "H2",
+          "text": "Monthly Stats",
           "type": "heading"
         },
         {
@@ -346,6 +360,147 @@
         {
           "components": [
             {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "heading17",
+                  "size": "H2",
+                  "text": "Company Performance",
+                  "type": "heading"
+                }
+              ],
+              "name": "col15",
+              "type": "col"
+            }
+          ],
+          "name": "row7",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "class": "col-md-12 col-lg-6 col-xl-4",
+                      "components": [
+                        {
+                          "components": [
+                            {
+                              "colorScheme": "ColorScheme.Pastel",
+                              "name": "chart0",
+                              "series": [
+                                {
+                                  "categoryProperty": "Company",
+                                  "data": "${revenueByCompany}",
+                                  "type": "Column",
+                                  "valueProperty": "Revenue"
+                                }
+                              ],
+                              "type": "chart",
+                              "visible": true
+                            }
+                          ],
+                          "name": "card6",
+                          "type": "card",
+                          "visible": true
+                        }
+                      ],
+                      "name": "col16",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-12 col-lg-6 col-xl-4",
+                      "components": [
+                        {
+                          "components": [
+                            {
+                              "colorScheme": "ColorScheme.Pastel",
+                              "name": "chart1",
+                              "series": [
+                                {
+                                  "categoryProperty": "Month",
+                                  "data": "${revenueByMonth}",
+                                  "type": "Line",
+                                  "valueProperty": "Revenue"
+                                }
+                              ],
+                              "type": "chart",
+                              "visible": true
+                            }
+                          ],
+                          "name": "card7",
+                          "type": "card",
+                          "visible": true
+                        }
+                      ],
+                      "name": "col17",
+                      "type": "col"
+                    },
+                    {
+                      "class": "col-md-12 col-lg-6 col-xl-4",
+                      "components": [
+                        {
+                          "components": [
+                            {
+                              "colorScheme": "ColorScheme.Pastel",
+                              "name": "chart2",
+                              "series": [
+                                {
+                                  "categoryProperty": "Employee",
+                                  "data": "${revenueByEmployee}",
+                                  "type": "Bar",
+                                  "valueProperty": "Revenue"
+                                }
+                              ],
+                              "type": "chart",
+                              "visible": true
+                            }
+                          ],
+                          "name": "card8",
+                          "type": "card",
+                          "visible": true
+                        }
+                      ],
+                      "name": "col18",
+                      "type": "col"
+                    }
+                  ],
+                  "name": "row8",
+                  "type": "row"
+                }
+              ],
+              "name": "col14",
+              "type": "col"
+            }
+          ],
+          "name": "row6",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "heading16",
+                  "size": "H2",
+                  "text": "Pending Work",
+                  "type": "heading"
+                }
+              ],
+              "name": "col19",
+              "type": "col"
+            }
+          ],
+          "name": "row9",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
               "class": "col-md-12 col-xl-6",
               "components": [
                 {
@@ -505,6 +660,24 @@
         "type": "set",
         "value": "await MonthlyStats()",
         "valueType": "Stats"
+      },
+      {
+        "name": "revenueByCompany",
+        "type": "set",
+        "value": "await RevenueByCompany()",
+        "valueType": "IEnumerable<BlazorCrmWasm.Pages.RevenueByCompany>"
+      },
+      {
+        "name": "revenueByEmployee",
+        "type": "set",
+        "value": "await RevenueByEmployee()",
+        "valueType": "IEnumerable<BlazorCrmWasm.Pages.RevenueByEmployee>"
+      },
+      {
+        "name": "revenueByMonth",
+        "type": "set",
+        "value": "await RevenueByMonth()",
+        "valueType": "IEnumerable<BlazorCrmWasm.Pages.RevenueByMonth>"
       },
       {
         "name": "CRM.getOpportunities",

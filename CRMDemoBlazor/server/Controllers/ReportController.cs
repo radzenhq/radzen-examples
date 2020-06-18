@@ -26,7 +26,7 @@ namespace RadzenCrm.Controllers
 
                     CopyResponseHeaders(responseMessage, Response);
 
-                    WriteResponse(Request, url, responseMessage, Response, false);
+                    await WriteResponse(Request, url, responseMessage, Response, false);
                 }
             }
         }
@@ -36,10 +36,10 @@ namespace RadzenCrm.Controllers
         {
             var urlToReplace = String.Format("{0}://{1}{2}/{3}/", Request.Scheme, Request.Host.Value, Request.PathBase, "ssrsproxy");
             var requestedUrl = Request.GetDisplayUrl().Replace(urlToReplace, "", StringComparison.InvariantCultureIgnoreCase);
-            var reportServerIndex = requestedUrl.IndexOf("/ReportServer");
+            var reportServerIndex = requestedUrl.IndexOf("/ReportServer", StringComparison.InvariantCultureIgnoreCase);
             if (reportServerIndex == -1)
             {
-                reportServerIndex = requestedUrl.IndexOf("/Reports");
+                reportServerIndex = requestedUrl.IndexOf("/Reports", StringComparison.InvariantCultureIgnoreCase);
             }
             var reportUrlParts = requestedUrl.Substring(0, reportServerIndex).Split('/');
 
@@ -54,13 +54,13 @@ namespace RadzenCrm.Controllers
 
                 if (Request.Method == "POST")
                 {
-                    WriteResponse(Request, url, responseMessage, Response, true);
+                    await WriteResponse(Request, url, responseMessage, Response, true);
                 }
                 else
                 {
-                    if (responseMessage.Content.Headers.ContentType.MediaType == "text/html")
+                    if (responseMessage.Content.Headers.ContentType != null && responseMessage.Content.Headers.ContentType.MediaType == "text/html")
                     {
-                        WriteResponse(Request, url, responseMessage, Response, false);
+                        await WriteResponse(Request, url, responseMessage, Response, false);
                     }
                     else
                     {
@@ -145,11 +145,11 @@ namespace RadzenCrm.Controllers
             response.Headers.Remove("transfer-encoding");
         }
 
-        static async void WriteResponse(HttpRequest currentReqest, string url, HttpResponseMessage responseMessage, HttpResponse response, bool isAjax)
+        static async Task WriteResponse(HttpRequest currentReqest, string url, HttpResponseMessage responseMessage, HttpResponse response, bool isAjax)
         {
             var result = await responseMessage.Content.ReadAsStringAsync();
 
-            var ReportServer = url.Contains("/ReportServer/") ? "ReportServer" : "Reports";
+            var ReportServer = url.Contains("/ReportServer/", StringComparison.InvariantCultureIgnoreCase) ? "ReportServer" : "Reports";
 
             var reportUri = new Uri(url);
             var proxyUrl = String.Format("{0}://{1}{2}/ssrsproxy/{3}/{4}/{5}", currentReqest.Scheme, currentReqest.Host.Value, currentReqest.PathBase,
@@ -207,7 +207,7 @@ namespace RadzenCrm.Controllers
                     index++;
 
                     content = content.Replace($"/{ReportServer}/", $"{proxyUrl}/{ReportServer}/", StringComparison.InvariantCultureIgnoreCase);
-                    if (content.Contains("./ReportViewer.aspx"))
+                    if (content.Contains("./ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase))
                     {
                         content = content.Replace("./ReportViewer.aspx", $"{proxyUrl}/{ReportServer}/Pages/ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase);
                     }
@@ -225,7 +225,7 @@ namespace RadzenCrm.Controllers
             {
                 result = result.Replace($"/{ReportServer}/", $"{proxyUrl}/{ReportServer}/", StringComparison.InvariantCultureIgnoreCase);
 
-                if (result.Contains("./ReportViewer.aspx"))
+                if (result.Contains("./ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase))
                 {
                     result = result.Replace("./ReportViewer.aspx", $"{proxyUrl}/{ReportServer}/Pages/ReportViewer.aspx", StringComparison.InvariantCultureIgnoreCase);
                 }

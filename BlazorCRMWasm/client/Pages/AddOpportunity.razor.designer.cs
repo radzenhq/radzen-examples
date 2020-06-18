@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -118,7 +119,7 @@ namespace BlazorCrmWasm.Pages
                 var crmCreateOpportunityResult = await Crm.CreateOpportunity(opportunity:opportunity);
                 DialogService.Close(opportunity);
             }
-            catch (Exception crmCreateOpportunityException)
+            catch (System.Exception crmCreateOpportunityException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Opportunity!");
             }

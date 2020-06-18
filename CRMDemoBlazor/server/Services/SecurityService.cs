@@ -11,6 +11,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.Authorization;
 using RadzenCrm.Models;
 using RadzenCrm.Data;
 
@@ -24,6 +25,7 @@ namespace RadzenCrm
         private readonly IWebHostEnvironment env;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly NavigationManager uriHelper;
+        private readonly AuthenticationStateProvider authenticationStateProvider;
 
         public SecurityService(ApplicationIdentityDbContext context,
             IWebHostEnvironment env,
@@ -31,7 +33,8 @@ namespace RadzenCrm
             RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             IHttpContextAccessor httpContextAccessor,
-            NavigationManager uriHelper)
+            NavigationManager uriHelper,
+            AuthenticationStateProvider authenticationStateProvider)
         {
             this.context = context;
             this.userManager = userManager;
@@ -40,41 +43,59 @@ namespace RadzenCrm
             this.env = env;
             this.httpContextAccessor = httpContextAccessor;
             this.uriHelper = uriHelper;
-
-            if (httpContextAccessor.HttpContext != null)
-            {
-                Principal = httpContextAccessor.HttpContext.User;
-                User = context.Users.FirstOrDefault(u => u.Email == Principal.Identity.Name);
-            }
+            this.authenticationStateProvider = authenticationStateProvider;
         }
 
         public ApplicationIdentityDbContext context { get; set; }
 
-        public ApplicationUser User { get; private set; }
+        private ApplicationUser user;
 
-        public ClaimsPrincipal Principal { get; private set; }
+        public ApplicationUser User
+        {
+            get
+            {
+                var name = Principal.Identity.Name;
+
+                if (env.EnvironmentName == "Development" && name == "admin")
+                {
+                    return new ApplicationUser() { UserName = name };
+                }
+
+                if (user == null && name != null)
+                {
+                    user = userManager.FindByEmailAsync(name).Result;
+                }
+
+                return user;
+            }
+        }
+
+        public ClaimsPrincipal Principal
+        {
+            get
+            {
+                return authenticationStateProvider.GetAuthenticationStateAsync().Result.User;
+            }
+        }
 
         public bool IsInRole(params string[] roles)
         {
-            bool result = IsAuthenticated();
-
-            if (User != null)
+            if (roles.Contains("Everybody"))
             {
-                foreach (var roleName in roles.Where(r => r != "Authenticated"))
-                {
-                    var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
-                    if (role != null)
-                    {
-                        var userRole = context.UserRoles.FirstOrDefault(ur => ur.RoleId == role.Id && ur.UserId == User.Id);
-                        if (userRole == null)
-                        {
-                            result = false;
-                        }
-                    }
-                }
+                return true;
             }
 
-            return result;
+            if (!IsAuthenticated())
+            {
+                return false;
+            }
+
+            if (roles.Contains("Authenticated"))
+            {
+                return true;
+            }
+
+            return roles.Any(role => Principal.IsInRole(role));
         }
 
         public bool IsAuthenticated()
@@ -82,49 +103,14 @@ namespace RadzenCrm
             return Principal.Identity.IsAuthenticated;
         }
 
-        public async void Logout()
+        public async Task Logout()
         {
-            uriHelper.NavigateTo("/Account/Logout", true);
+            uriHelper.NavigateTo("Account/Logout", true);
         }
 
         public async Task<bool> Login(string userName, string password)
         {
-            if (env.EnvironmentName == "Development" && userName == "admin" && password == "admin")
-            {
-                var claims = new List<Claim>() {
-                        new Claim(ClaimTypes.Name, "admin"),
-                        new Claim(ClaimTypes.Email, "admin")
-                      };
-
-                roleManager.Roles.ToList().ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
-
-                Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Basic"));
-
-                return true;
-            }
-
-            var user = await userManager.FindByNameAsync(userName);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            var validPassword = await userManager.CheckPasswordAsync(user, password);
-
-            if (!validPassword)
-            {
-                return false;
-            }
-
-            Principal = await signInManager.CreateUserPrincipalAsync(user);
-
-            if (Principal == null)
-            {
-                return false;
-            }
-
-            User = user;
+            uriHelper.NavigateTo("Login", true);
 
             return true;
         }

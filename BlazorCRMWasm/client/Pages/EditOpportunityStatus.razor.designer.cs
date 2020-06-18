@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -82,7 +83,7 @@ namespace BlazorCrmWasm.Pages
                 var crmUpdateOpportunityStatusResult = await Crm.UpdateOpportunityStatus(id:Id, opportunityStatus:opportunitystatus);
                 DialogService.Close(opportunitystatus);
             }
-            catch (Exception crmUpdateOpportunityStatusException)
+            catch (System.Exception crmUpdateOpportunityStatusException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update OpportunityStatus");
             }

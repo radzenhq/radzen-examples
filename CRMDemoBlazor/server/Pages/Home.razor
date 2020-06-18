@@ -14,7 +14,11 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Home> L
 <RadzenContent Container="main">
   <ChildContent>
-    <RadzenHeading Size="H1" Text="Blazor CRM Dashboard">
+    <RadzenIcon Icon="assessment">
+    </RadzenIcon>
+    <RadzenHeading Size="H1" style="display: inline-block" Text="Blazor CRM Dashboard">
+    </RadzenHeading>
+    <RadzenHeading Size="H2" Text="Monthly Stats">
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12 col-xl-3 col-lg-6">
@@ -98,27 +102,69 @@
         </RadzenCard>
       </div>
     </div>
+    <RadzenHeading Size="H2" Text="Company Performance">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12 col-lg-6 col-xl-4">
+        <RadzenCard>
+          <ChildContent>
+            <RadzenChart ColorScheme="ColorScheme.Pastel">
+              <ChildContent>
+                <RadzenColumnSeries CategoryProperty="Company" Data="@revenueByCompany" ValueProperty="Revenue">
+                </RadzenColumnSeries>
+              </ChildContent>
+            </RadzenChart>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-4">
+        <RadzenCard>
+          <ChildContent>
+            <RadzenChart ColorScheme="ColorScheme.Pastel">
+              <ChildContent>
+                <RadzenLineSeries CategoryProperty="Month" Data="@revenueByMonth" ValueProperty="Revenue">
+                </RadzenLineSeries>
+              </ChildContent>
+            </RadzenChart>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-4">
+        <RadzenCard>
+          <ChildContent>
+            <RadzenChart ColorScheme="ColorScheme.Pastel">
+              <ChildContent>
+                <RadzenBarSeries CategoryProperty="Employee" Data="@revenueByEmployee" ValueProperty="Revenue">
+                </RadzenBarSeries>
+              </ChildContent>
+            </RadzenChart>
+          </ChildContent>
+        </RadzenCard>
+      </div>
+    </div>
+    <RadzenHeading Size="H2" Text="Pending Work">
+    </RadzenHeading>
     <div class="row">
       <div class="col-md-12 col-xl-6">
         <RadzenCard>
           <ChildContent>
             <RadzenHeading Size="H3" Text="Recent Opportunities">
             </RadzenHeading>
-            <RadzenGrid @ref="grid0" AllowSorting="true" Data="@(getOpportunitiesResult)" TItem="Opportunity">
+            <RadzenGrid @ref="grid0" AllowSorting="true" Data="@getOpportunitiesResult" TItem="Opportunity">
               <Columns>
-                <RadzenGridColumn TItem="Opportunity" Context="opportunity" SortProperty="Contact.FirstName" Title="Contact">
+                <RadzenGridColumn TItem="Opportunity" SortProperty="Contact.FirstName" Title="Contact">
                   <Template Context="data">
-                  @data.Contact.FirstName @data.Contact.LastName
+                  @(data.Contact.FirstName) @(data.Contact.LastName)
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="Opportunity" Context="opportunity" Property="Amount" Title="Amount">
+                <RadzenGridColumn TItem="Opportunity" Property="Amount" Title="Amount">
                   <Template Context="data">
-                  @data.Amount.ToString("C")
+                  @(data.Amount.ToString("C"))
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="Opportunity" Context="opportunity" Property="OpportunityStatus.Name" Title="Status">
+                <RadzenGridColumn TItem="Opportunity" Property="OpportunityStatus.Name" Title="Status">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="Opportunity" Context="opportunity" Format="date-time" FormatString="{0:d}" Property="CloseDate" Title="Close Date" Type="string">
+                <RadzenGridColumn TItem="Opportunity" Format="date-time" FormatString="{0:d}" Property="CloseDate" Title="Close Date" Type="string">
                 </RadzenGridColumn>
               </Columns>
             </RadzenGrid>
@@ -130,11 +176,11 @@
           <ChildContent>
             <RadzenHeading Size="H3" Text="Active Tasks">
             </RadzenHeading>
-            <RadzenGrid @ref="grid1" Data="@(getTasksResult)" TItem="RadzenCrm.Models.Crm.Task">
+            <RadzenGrid @ref="grid1" Data="@getTasksResult" TItem="RadzenCrm.Models.Crm.Task">
               <Columns>
-                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" SortProperty="Opportunity.User.FirstName" Title="Employee">
+                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" SortProperty="Opportunity.User.FirstName" Title="Employee">
                   <Template Context="radzenCrmModelsCrmTask">
-                    <RadzenImage Path=@(radzenCrmModelsCrmTask.Opportunity.User.Picture) style="border-radius: 15px; height: 30px; width: 30px">
+                    <RadzenImage Path="@(radzenCrmModelsCrmTask.Opportunity.User.Picture)" style="border-radius: 15px; height: 30px; width: 30px">
                     </RadzenImage>
                     <RadzenLabel Text="@($"{(radzenCrmModelsCrmTask.Opportunity.User.FirstName)}")">
                     </RadzenLabel>
@@ -142,9 +188,9 @@
                     </RadzenLabel>
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" Property="Title" Title="Title">
+                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Property="Title" Title="Title">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" Context="radzenCrmModelsCrmTask" SortProperty="Opportunity.Name" Title="Opportunity">
+                <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Task" SortProperty="Opportunity.Name" Title="Opportunity">
                   <Template Context="radzenCrmModelsCrmTask">
                     <RadzenLabel style="display: block" Text="@($"{(radzenCrmModelsCrmTask.Opportunity.Name)}")">
                     </RadzenLabel>

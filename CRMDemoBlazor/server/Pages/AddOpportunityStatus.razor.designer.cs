@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         RadzenCrm.Models.Crm.OpportunityStatus _opportunitystatus;
         protected RadzenCrm.Models.Crm.OpportunityStatus opportunitystatus
@@ -46,14 +48,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_opportunitystatus != value)
+                if(!object.Equals(_opportunitystatus, value))
                 {
                     _opportunitystatus = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -62,30 +63,29 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             opportunitystatus = new RadzenCrm.Models.Crm.OpportunityStatus();
         }
 
-        protected async void Form0Submit(RadzenCrm.Models.Crm.OpportunityStatus args)
+        protected async System.Threading.Tasks.Task Form0Submit(RadzenCrm.Models.Crm.OpportunityStatus args)
         {
             try
             {
                 var crmCreateOpportunityStatusResult = await Crm.CreateOpportunityStatus(opportunitystatus);
                 DialogService.Close(opportunitystatus);
             }
-            catch (Exception crmCreateOpportunityStatusException)
+            catch (System.Exception crmCreateOpportunityStatusException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new OpportunityStatus!");
             }
         }
 
-        protected async void Button2Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

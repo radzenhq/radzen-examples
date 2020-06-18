@@ -17,13 +17,13 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using RadzenCrm.Data;
 using RadzenCrm.Models;
 using RadzenCrm.Authentication;
 using Radzen;
-
 namespace RadzenCrm
 {
     public partial class Startup
@@ -37,8 +37,12 @@ namespace RadzenCrm
 
         partial void OnConfigureServices(IServiceCollection services);
 
+        partial void OnConfiguringServices(IServiceCollection services);
+
         public void ConfigureServices(IServiceCollection services)
         {
+            OnConfiguringServices(services);
+
             services.AddHttpContextAccessor();
             services.AddScoped<HttpClient>(serviceProvider =>
             {
@@ -52,7 +56,6 @@ namespace RadzenCrm
             });
 
             services.AddHttpClient();
-
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddDbContext<ApplicationIdentityDbContext>(options =>
@@ -65,9 +68,7 @@ namespace RadzenCrm
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
                   ApplicationPrincipalFactory>();
-
             services.AddScoped<SecurityService>();
-
             services.AddScoped<CrmService>();
 
             services.AddDbContext<RadzenCrm.Data.CrmContext>(options =>
@@ -81,9 +82,9 @@ namespace RadzenCrm
             {
                 o.MaximumReceiveMessageSize = 10 * 1024 * 1024;
             });
+
             services.AddScoped<DialogService>();
             services.AddScoped<NotificationService>();
-
             services.AddLocalization();
 
             var supportedCultures = new[]
@@ -102,9 +103,12 @@ namespace RadzenCrm
         }
 
         partial void OnConfigure(IApplicationBuilder app, IWebHostEnvironment env);
+        partial void OnConfiguring(IApplicationBuilder app, IWebHostEnvironment env);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationIdentityDbContext identityDbContext)
         {
+            OnConfiguring(app, env);
+
             var supportedCultures = new[]
             {
                 new System.Globalization.CultureInfo("en-US"),
@@ -119,6 +123,7 @@ namespace RadzenCrm
 
             if (env.IsDevelopment())
             {
+                Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -128,9 +133,7 @@ namespace RadzenCrm
                     return next();
                 });
             }
-
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -151,5 +154,6 @@ namespace RadzenCrm
             OnConfigure(app, env);
         }
     }
+
 
 }

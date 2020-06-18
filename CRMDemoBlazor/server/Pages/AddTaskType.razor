@@ -15,7 +15,7 @@
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@(tasktype)" Visible="@(tasktype != null)" TItem="RadzenCrm.Models.Crm.TaskType" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@tasktype" Visible="@(tasktype != null)" TItem="RadzenCrm.Models.Crm.TaskType" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -23,7 +23,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="width: 100%" @bind-Value="@((tasktype.Name))" Name="Name">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(tasktype.Name)" Name="Name">
                 </RadzenTextBox>
               </div>
             </div>

@@ -21,9 +21,10 @@ namespace RadzenCrm
         {
             if (query != null)
             {
-                if (query.ContainsKey("$filter"))
+                var filter = query.ContainsKey("$filter") ? query["$filter"].ToString().Replace("i =>", "") : null;
+                if (!string.IsNullOrEmpty(filter))
                 {
-                    items = items.Where(query["$filter"].ToString());
+                    items = items.Where(filter);
                 }
 
                 if (query.ContainsKey("$orderBy"))
@@ -33,7 +34,7 @@ namespace RadzenCrm
 
                 if (query.ContainsKey("$expand"))
                 {
-                    var propertiesToExpand = query["$orderBy"].ToString().Split(',');
+                    var propertiesToExpand = query["$expand"].ToString().Split(',');
                     foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p);
@@ -66,9 +67,7 @@ namespace RadzenCrm
 
                 foreach (var column in columns)
                 {
-                    var value = GetValue(item, column.Key);
-
-                    row.Add(value != null ? value.ToString() : "");
+                    row.Add($"{GetValue(item, column.Key)}".Trim());
                 }
 
                 sb.AppendLine(string.Join(",", row.ToArray()));
@@ -76,7 +75,7 @@ namespace RadzenCrm
 
 
             var result = new FileStreamResult(new MemoryStream(UTF8Encoding.Default.GetBytes($"{string.Join(",", columns.Select(c => c.Key))}{System.Environment.NewLine}{sb.ToString()}")), "text/csv");
-            result.FileDownloadName = $"{query.ElementType}.csv";
+            result.FileDownloadName = "Export.csv";
 
             return result;
         }
@@ -125,7 +124,7 @@ namespace RadzenCrm
                     foreach (var column in columns)
                     {
                         var value = GetValue(item, column.Key);
-                        var stringValue = $"{value}";
+                        var stringValue = $"{value}".Trim();
 
                         var cell = new Cell();
 
@@ -175,7 +174,7 @@ namespace RadzenCrm
             }
 
             var result = new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            result.FileDownloadName = $"{query.ElementType}.xls";
+            result.FileDownloadName = "Export.xlsx";
 
             return result;
         }

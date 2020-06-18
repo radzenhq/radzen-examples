@@ -32,10 +32,11 @@ namespace RadzenCrm
         {
             if (env.EnvironmentName == "Development" && userName == "admin" && password == "admin")
             {
-              var claims = new List<Claim>() {
+                var claims = new List<Claim>()
+                {
                         new Claim(ClaimTypes.Name, "admin"),
                         new Claim(ClaimTypes.Email, "admin")
-                      };
+                };
 
                 roleManager.Roles.ToList().ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
                 await signInManager.SignInWithClaimsAsync(new ApplicationUser { UserName = userName, Email = userName }, isPersistent: false, claims);
@@ -56,8 +57,8 @@ namespace RadzenCrm
 
             return Redirect("~/Login?error=Invalid user or password");
         }
-
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
@@ -81,6 +82,7 @@ namespace RadzenCrm
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword)
         {
             if (oldPassword == null || newPassword == null)

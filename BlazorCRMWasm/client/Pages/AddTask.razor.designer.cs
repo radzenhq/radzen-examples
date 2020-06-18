@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -138,7 +139,7 @@ namespace BlazorCrmWasm.Pages
                 var crmCreateTaskResult = await Crm.CreateTask(task:task);
                 DialogService.Close(task);
             }
-            catch (Exception crmCreateTaskException)
+            catch (System.Exception crmCreateTaskException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Task!");
             }

@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -142,7 +143,7 @@ namespace BlazorCrmWasm.Pages
                 var crmUpdateTaskResult = await Crm.UpdateTask(id:Id, task:task);
                 DialogService.Close(task);
             }
-            catch (Exception crmUpdateTaskException)
+            catch (System.Exception crmUpdateTaskException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Task");
             }

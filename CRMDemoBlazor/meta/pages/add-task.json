@@ -13,16 +13,6 @@
                 {
                   "components": [
                     {
-                      "autoComplete": false,
-                      "maxLength": 256,
-                      "name": "textbox0",
-                      "style": {
-                        "width": "100%"
-                      },
-                      "type": "textbox",
-                      "value": "${task.Title}"
-                    },
-                    {
                       "components": [
                         {
                           "class": "col-md-3",

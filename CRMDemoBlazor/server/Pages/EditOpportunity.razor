@@ -13,7 +13,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditOpportunity> L
 <RadzenContent Container="main">
   <ChildContent>
-    <div style="" class="row">
+    <div  class="row">
       <div class="col-md-9">
         <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
         </RadzenLabel>
@@ -25,7 +25,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@(opportunity)" TItem="RadzenCrm.Models.Crm.Opportunity" Visible="@(opportunity != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@opportunity" TItem="RadzenCrm.Models.Crm.Opportunity" Visible="@(opportunity != null && canEdit)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -33,7 +33,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@((opportunity.Amount))" Name="Amount">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(opportunity.Amount)" Name="Amount">
                 </RadzenNumeric>
                 <RadzenRequiredValidator Component="Amount" style="position: absolute" Text="Amount is required">
                 </RadzenRequiredValidator>
@@ -45,7 +45,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@((opportunity.Name))" Name="Name">
+                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@(opportunity.Name)" Name="Name">
                 </RadzenTextBox>
                 <RadzenRequiredValidator Component="Name" style="position: absolute" Text="Name is required">
                 </RadzenRequiredValidator>
@@ -57,7 +57,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getContactsResult)" Placeholder="Choose Contact" style="display: block; width: 100%" TextProperty="Email" @bind-Value="@((opportunity.ContactId))" ValueProperty="Id" Name="ContactId">
+                <RadzenDropDown Data="@getContactsResult" Placeholder="Choose Contact" style="display: block; width: 100%" TextProperty="Email" @bind-Value="@(opportunity.ContactId)" ValueProperty="Id" Name="ContactId">
                 </RadzenDropDown>
                 <RadzenRequiredValidator Component="ContactId" style="position: absolute" Text="ContactId is required">
                 </RadzenRequiredValidator>
@@ -69,7 +69,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDropDown Data="@(getOpportunityStatusesResult)" Placeholder="Choose OpportunityStatus" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@((opportunity.StatusId))" ValueProperty="Id" Name="StatusId">
+                <RadzenDropDown Data="@getOpportunityStatusesResult" Placeholder="Choose OpportunityStatus" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(opportunity.StatusId)" ValueProperty="Id" Name="StatusId">
                 </RadzenDropDown>
                 <RadzenRequiredValidator Component="StatusId" style="position: absolute" Text="StatusId is required">
                 </RadzenRequiredValidator>
@@ -81,7 +81,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@((opportunity.CloseDate))" Name="CloseDate">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(opportunity.CloseDate)" Name="CloseDate">
                 </RadzenDatePicker>
                 <RadzenRequiredValidator Component="CloseDate" style="position: absolute" Text="CloseDate is required">
                 </RadzenRequiredValidator>

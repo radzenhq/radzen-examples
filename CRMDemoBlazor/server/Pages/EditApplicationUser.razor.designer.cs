@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         [Parameter]
         public dynamic Id { get; set; }
@@ -49,7 +51,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_user != value)
+                if(!object.Equals(_user, value))
                 {
                     _user = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -66,14 +68,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_roles != value)
+                if(!object.Equals(_roles, value))
                 {
                     _roles = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -82,12 +83,11 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var securityGetUserByIdResult = await Security.GetUserById($"{Id}");
             user = securityGetUserByIdResult;
@@ -96,7 +96,7 @@ namespace RadzenCrm.Pages
             roles = securityGetRolesResult;
         }
 
-        protected async void Form0Submit(ApplicationUser args)
+        protected async System.Threading.Tasks.Task Form0Submit(ApplicationUser args)
         {
             try
             {
@@ -104,13 +104,13 @@ namespace RadzenCrm.Pages
                 DialogService.Close();
                 await JSRuntime.InvokeAsync<string>("window.history.back");
             }
-            catch (Exception securityUpdateUserException)
+            catch (System.Exception securityUpdateUserException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Cannot update user", $"{securityUpdateUserException.Message}");
             }
         }
 
-        protected async void Button2Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close();
             await JSRuntime.InvokeAsync<string>("window.history.back");

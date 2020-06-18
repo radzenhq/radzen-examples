@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -107,7 +108,7 @@ namespace BlazorCrmWasm.Pages
 
                 getOpportunitiesCount = crmGetOpportunitiesResult.Count;
             }
-            catch (Exception crmGetOpportunitiesException)
+            catch (System.Exception crmGetOpportunitiesException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to load Opportunities");
             }
@@ -130,7 +131,7 @@ namespace BlazorCrmWasm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception crmDeleteOpportunityException)
+            catch (System.Exception crmDeleteOpportunityException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Opportunity");
             }

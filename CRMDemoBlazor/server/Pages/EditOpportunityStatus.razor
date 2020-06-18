@@ -13,7 +13,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditOpportunityStatus> L
 <RadzenContent Container="main">
   <ChildContent>
-    <div style="" class="row">
+    <div  class="row">
       <div class="col-md-9">
         <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
         </RadzenLabel>
@@ -25,7 +25,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm TItem="RadzenCrm.Models.Crm.OpportunityStatus" Data="@(opportunitystatus)" Visible="@(opportunitystatus != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="RadzenCrm.Models.Crm.OpportunityStatus" Data="@opportunitystatus" Visible="@(opportunitystatus != null && canEdit)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -33,7 +33,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="width: 100%" @bind-Value="@((opportunitystatus.Name))" Name="Name">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(opportunitystatus.Name)" Name="Name">
                 </RadzenTextBox>
               </div>
             </div>

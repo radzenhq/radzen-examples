@@ -15,7 +15,7 @@
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm TItem="IdentityRole" Data="@(role)" Visible="@(role != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="IdentityRole" Data="@role" Visible="@(role != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -23,7 +23,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@((role.Name))" Name="Name">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(role.Name)" Name="Name">
                 </RadzenTextBox>
                 <RadzenRequiredValidator Component="Name" style="position: absolute" Text="Name is required">
                 </RadzenRequiredValidator>

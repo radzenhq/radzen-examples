@@ -10,6 +10,7 @@ using RadzenCrm.Models.Crm;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 using Microsoft.JSInterop;
+
 namespace RadzenCrm.Layouts
 {
     public partial class LoginLayoutComponent : LayoutComponentBase
@@ -34,10 +35,6 @@ namespace RadzenCrm.Layouts
 
 
         protected RadzenBody body0;
-
-        protected override async System.Threading.Tasks.Task OnInitializedAsync()
-        {
-        }
 
     }
 }

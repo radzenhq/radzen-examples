@@ -50,5 +50,56 @@ namespace BlazorCrmWasm.Controllers
                 PropertyNamingPolicy = null
             }));
         }
+
+        public IActionResult RevenueByCompany()
+        {
+            var result = context.Opportunities
+                                .Include(opportunity => opportunity.Contact)
+                                .GroupBy(opportunity => opportunity.Contact.Company)
+                                .Select(group => new {
+                                     Company = group.Key,
+                                     Revenue = group.Sum(opportunity => opportunity.Amount)
+                                 });
+
+            return Ok(JsonSerializer.Serialize(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = null
+            }));
+        }
+
+        public IActionResult RevenueByEmployee()
+        {
+            var result = context.Opportunities
+                                .Include(opportunity => opportunity.User)
+                                .GroupBy(opportunity => $"{opportunity.User.FirstName} {opportunity.User.LastName}")
+                                .Select(group => new {
+                                     Employee = group.Key,
+                                     Revenue = group.Sum(opportunity => opportunity.Amount)
+                                 });
+
+
+            return Ok(JsonSerializer.Serialize(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = null
+            }));
+        }
+
+        public IActionResult RevenueByMonth()
+        {
+            var result = context.Opportunities
+                                .Include(opportunity => opportunity.OpportunityStatus)
+                                .Where(opportunity => opportunity.OpportunityStatus.Name == "Won")
+                                .GroupBy(opportunity => new DateTime(opportunity.CloseDate.Year, opportunity.CloseDate.Month, 1))
+                                .Select(group => new {
+                                    Revenue = group.Sum(opportunity => opportunity.Amount),
+                                    Month = group.Key
+                                })
+                                .OrderBy(deals => deals.Month);
+            
+            return Ok(JsonSerializer.Serialize(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = null
+            }));
+        }
     }
 }

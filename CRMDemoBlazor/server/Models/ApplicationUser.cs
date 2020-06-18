@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RadzenCrm.Models
 {
@@ -22,8 +21,8 @@ namespace RadzenCrm.Models
         public string ConfirmPassword { get; set; }
 
         [IgnoreDataMember, NotMapped]
-        public string Name 
-        { 
+        public string Name
+        {
             get
             {
                 return UserName;
@@ -35,4 +34,3 @@ namespace RadzenCrm.Models
         }
     }
 }
-

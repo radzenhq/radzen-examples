@@ -7,7 +7,7 @@
     <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <RedirectToLogin />
+                    <RedirectToLogin IsAuthenticated="@context.User.Identity.IsAuthenticated" />
                 </NotAuthorized>
             </AuthorizeRouteView>
     </Found>

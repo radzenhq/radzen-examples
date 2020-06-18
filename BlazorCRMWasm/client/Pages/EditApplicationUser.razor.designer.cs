@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -102,7 +103,7 @@ namespace BlazorCrmWasm.Pages
                 var securityUpdateUserResult = await Security.UpdateUser($"{Id}", args);
                 DialogService.Close(null);
             }
-            catch (Exception securityUpdateUserException)
+            catch (System.Exception securityUpdateUserException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Cannot update user", $"{securityUpdateUserException.Message}");
             }

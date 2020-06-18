@@ -16,7 +16,6 @@ namespace RadzenCrm.Models.Crm
       set;
     }
 
-
     public ICollection<Opportunity> Opportunities { get; set; }
     public string Name
     {

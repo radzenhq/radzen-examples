@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         IdentityRole _role;
         protected IdentityRole role
@@ -46,14 +48,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_role != value)
+                if(!object.Equals(_role, value))
                 {
                     _role = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -62,30 +63,29 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             role = new IdentityRole();
         }
 
-        protected async void Form0Submit(IdentityRole args)
+        protected async System.Threading.Tasks.Task Form0Submit(IdentityRole args)
         {
             try
             {
                 var securityCreateRoleResult = await Security.CreateRole(args);
                 UriHelper.NavigateTo("application-roles");
             }
-            catch (Exception securityCreateRoleException)
+            catch (System.Exception securityCreateRoleException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Cannot create role", $"{securityCreateRoleException.Message}");
             }
         }
 
-        protected async void Button2Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close();
             await JSRuntime.InvokeAsync<string>("window.history.back");

@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -78,7 +79,7 @@ namespace BlazorCrmWasm.Pages
                 var crmCreateContactResult = await Crm.CreateContact(contact:contact);
                 DialogService.Close(contact);
             }
-            catch (Exception crmCreateContactException)
+            catch (System.Exception crmCreateContactException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Contact!");
             }

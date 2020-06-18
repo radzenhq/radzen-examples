@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         protected RadzenGrid<Opportunity> grid0;
 
@@ -50,9 +52,60 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_monthlyStats != value)
+                if(!object.Equals(_monthlyStats, value))
                 {
                     _monthlyStats = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+
+        IEnumerable<RadzenCrm.Pages.RevenueByCompany> _revenueByCompany;
+        protected IEnumerable<RadzenCrm.Pages.RevenueByCompany> revenueByCompany
+        {
+            get
+            {
+                return _revenueByCompany;
+            }
+            set
+            {
+                if(!object.Equals(_revenueByCompany, value))
+                {
+                    _revenueByCompany = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+
+        IEnumerable<RadzenCrm.Pages.RevenueByEmployee> _revenueByEmployee;
+        protected IEnumerable<RadzenCrm.Pages.RevenueByEmployee> revenueByEmployee
+        {
+            get
+            {
+                return _revenueByEmployee;
+            }
+            set
+            {
+                if(!object.Equals(_revenueByEmployee, value))
+                {
+                    _revenueByEmployee = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+
+        IEnumerable<RadzenCrm.Pages.RevenueByMonth> _revenueByMonth;
+        protected IEnumerable<RadzenCrm.Pages.RevenueByMonth> revenueByMonth
+        {
+            get
+            {
+                return _revenueByMonth;
+            }
+            set
+            {
+                if(!object.Equals(_revenueByMonth, value))
+                {
+                    _revenueByMonth = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
@@ -67,7 +120,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getOpportunitiesResult != value)
+                if(!object.Equals(_getOpportunitiesResult, value))
                 {
                     _getOpportunitiesResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -84,14 +137,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getTasksResult != value)
+                if(!object.Equals(_getTasksResult, value))
                 {
                     _getTasksResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -100,20 +152,28 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var monthlyStatsResult = MonthlyStats();
             monthlyStats = monthlyStatsResult;
 
-            var crmGetOpportunitiesResult = await Crm.GetOpportunities(new Query() { OrderBy = "CloseDate desc" });
+            var revenueByCompanyResult = RevenueByCompany();
+            revenueByCompany = revenueByCompanyResult;
+
+            var revenueByEmployeeResult = RevenueByEmployee();
+            revenueByEmployee = revenueByEmployeeResult;
+
+            var revenueByMonthResult = RevenueByMonth();
+            revenueByMonth = revenueByMonthResult;
+
+            var crmGetOpportunitiesResult = await Crm.GetOpportunities(new Query() { OrderBy = $"CloseDate desc" });
             getOpportunitiesResult = crmGetOpportunitiesResult;
 
-            var crmGetTasksResult = await Crm.GetTasks(new Query() { OrderBy = "DueDate desc" });
+            var crmGetTasksResult = await Crm.GetTasks(new Query() { OrderBy = $"DueDate desc" });
             getTasksResult = crmGetTasksResult;
         }
     }

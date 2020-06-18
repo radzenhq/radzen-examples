@@ -19,13 +19,13 @@
       <div class="col-md-12">
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getTaskStatusesResult)" TItem="RadzenCrm.Models.Crm.TaskStatus" RowSelect="@Grid0RowSelect">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getTaskStatusesResult" TItem="RadzenCrm.Models.Crm.TaskStatus" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Id" Title="Id" Type="integer">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Property="Id" Title="Id" Type="integer">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Property="Name" Title="Name" Type="string">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Property="Name" Title="Name" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Context="radzenCrmModelsCrmTaskStatus" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskStatus" Filterable="false" Sortable="false" Bubble="false" Width="70px">
               <Template Context="radzenCrmModelsCrmTaskStatus">
                 <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmTaskStatus))">
                 </RadzenButton>

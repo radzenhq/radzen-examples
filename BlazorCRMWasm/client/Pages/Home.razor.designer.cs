@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -54,6 +55,57 @@ namespace BlazorCrmWasm.Pages
                 if(!object.Equals(_monthlyStats, value))
                 {
                     _monthlyStats = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+
+        IEnumerable<BlazorCrmWasm.Pages.RevenueByCompany> _revenueByCompany;
+        protected IEnumerable<BlazorCrmWasm.Pages.RevenueByCompany> revenueByCompany
+        {
+            get
+            {
+                return _revenueByCompany;
+            }
+            set
+            {
+                if(!object.Equals(_revenueByCompany, value))
+                {
+                    _revenueByCompany = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+
+        IEnumerable<BlazorCrmWasm.Pages.RevenueByEmployee> _revenueByEmployee;
+        protected IEnumerable<BlazorCrmWasm.Pages.RevenueByEmployee> revenueByEmployee
+        {
+            get
+            {
+                return _revenueByEmployee;
+            }
+            set
+            {
+                if(!object.Equals(_revenueByEmployee, value))
+                {
+                    _revenueByEmployee = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+
+        IEnumerable<BlazorCrmWasm.Pages.RevenueByMonth> _revenueByMonth;
+        protected IEnumerable<BlazorCrmWasm.Pages.RevenueByMonth> revenueByMonth
+        {
+            get
+            {
+                return _revenueByMonth;
+            }
+            set
+            {
+                if(!object.Equals(_revenueByMonth, value))
+                {
+                    _revenueByMonth = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
@@ -107,6 +159,12 @@ namespace BlazorCrmWasm.Pages
         protected async System.Threading.Tasks.Task Load()
         {
             monthlyStats = await MonthlyStats();
+
+            revenueByCompany = await RevenueByCompany();
+
+            revenueByEmployee = await RevenueByEmployee();
+
+            revenueByMonth = await RevenueByMonth();
 
             var crmGetOpportunitiesResult = await Crm.GetOpportunities(orderby:$@"CloseDate desc", expand:$"Contact,OpportunityStatus");
             getOpportunitiesResult  = crmGetOpportunitiesResult.Value;

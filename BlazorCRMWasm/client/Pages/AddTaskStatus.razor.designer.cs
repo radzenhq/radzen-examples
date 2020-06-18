@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -78,7 +79,7 @@ namespace BlazorCrmWasm.Pages
                 var crmCreateTaskStatusResult = await Crm.CreateTaskStatus(taskStatus:taskstatus);
                 DialogService.Close(taskstatus);
             }
-            catch (Exception crmCreateTaskStatusException)
+            catch (System.Exception crmCreateTaskStatusException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new TaskStatus!");
             }

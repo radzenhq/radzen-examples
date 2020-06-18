@@ -13,7 +13,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditContact> L
 <RadzenContent Container="main">
   <ChildContent>
-    <div style="" class="row">
+    <div  class="row">
       <div class="col-md-9">
         <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
         </RadzenLabel>
@@ -25,7 +25,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@(contact)" TItem="RadzenCrm.Models.Crm.Contact" Visible="@(contact != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@contact" TItem="RadzenCrm.Models.Crm.Contact" Visible="@(contact != null && canEdit)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -33,7 +33,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@((contact.Email))" Name="Email">
+                <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@(contact.Email)" Name="Email">
                 </RadzenTextBox>
                 <RadzenRequiredValidator Component="Email" style="position: absolute" Text="Email is required">
                 </RadzenRequiredValidator>
@@ -45,7 +45,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@((contact.Company))" Name="Company">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.Company)" Name="Company">
                 </RadzenTextBox>
               </div>
             </div>
@@ -55,7 +55,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@((contact.LastName))" Name="LastName">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.LastName)" Name="LastName">
                 </RadzenTextBox>
               </div>
             </div>
@@ -65,7 +65,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@((contact.FirstName))" Name="FirstName">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.FirstName)" Name="FirstName">
                 </RadzenTextBox>
               </div>
             </div>
@@ -75,7 +75,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@((contact.Phone))" Name="Phone">
+                <RadzenTextBox MaxLength="256" style="width: 100%" @bind-Value="@(contact.Phone)" Name="Phone">
                 </RadzenTextBox>
               </div>
             </div>

@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -101,7 +102,7 @@ namespace BlazorCrmWasm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception securityDeleteUserException)
+            catch (System.Exception securityDeleteUserException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete user");
             }

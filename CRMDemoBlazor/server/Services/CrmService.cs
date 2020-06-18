@@ -4,7 +4,7 @@ using System.Web;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -18,21 +18,21 @@ namespace RadzenCrm
     {
         private readonly CrmContext context;
         private readonly NavigationManager navigationManager;
-        
+
         public CrmService(CrmContext context, NavigationManager navigationManager)
         {
             this.context = context;
             this.navigationManager = navigationManager;
         }
 
-                public async Task ExportContactsToExcel(Query query = null)
+        public async Task ExportContactsToExcel(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/contacts/excel") : "/export/crm/contacts/excel", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/contacts/excel") : "export/crm/contacts/excel", true);
         }
 
         public async Task ExportContactsToCSV(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/contacts/csv") : "/export/crm/contacts/csv", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/contacts/csv") : "export/crm/contacts/csv", true);
         }
 
         partial void OnContactsRead(ref IQueryable<Models.Crm.Contact> items);
@@ -89,14 +89,14 @@ namespace RadzenCrm
 
             return contact;
         }
-            public async Task ExportOpportunitiesToExcel(Query query = null)
+        public async Task ExportOpportunitiesToExcel(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunities/excel") : "/export/crm/opportunities/excel", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/opportunities/excel") : "export/crm/opportunities/excel", true);
         }
 
         public async Task ExportOpportunitiesToCSV(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunities/csv") : "/export/crm/opportunities/csv", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/opportunities/csv") : "export/crm/opportunities/csv", true);
         }
 
         partial void OnOpportunitiesRead(ref IQueryable<Models.Crm.Opportunity> items);
@@ -157,14 +157,14 @@ namespace RadzenCrm
 
             return opportunity;
         }
-            public async Task ExportOpportunityStatusesToExcel(Query query = null)
+        public async Task ExportOpportunityStatusesToExcel(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunitystatuses/excel") : "/export/crm/opportunitystatuses/excel", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/opportunitystatuses/excel") : "export/crm/opportunitystatuses/excel", true);
         }
 
         public async Task ExportOpportunityStatusesToCSV(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/opportunitystatuses/csv") : "/export/crm/opportunitystatuses/csv", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/opportunitystatuses/csv") : "export/crm/opportunitystatuses/csv", true);
         }
 
         partial void OnOpportunityStatusesRead(ref IQueryable<Models.Crm.OpportunityStatus> items);
@@ -221,14 +221,14 @@ namespace RadzenCrm
 
             return opportunityStatus;
         }
-            public async Task ExportTasksToExcel(Query query = null)
+        public async Task ExportTasksToExcel(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasks/excel") : "/export/crm/tasks/excel", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/tasks/excel") : "export/crm/tasks/excel", true);
         }
 
         public async Task ExportTasksToCSV(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasks/csv") : "/export/crm/tasks/csv", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/tasks/csv") : "export/crm/tasks/csv", true);
         }
 
         partial void OnTasksRead(ref IQueryable<Models.Crm.Task> items);
@@ -291,14 +291,14 @@ namespace RadzenCrm
 
             return task;
         }
-            public async Task ExportTaskStatusesToExcel(Query query = null)
+        public async Task ExportTaskStatusesToExcel(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/taskstatuses/excel") : "/export/crm/taskstatuses/excel", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/taskstatuses/excel") : "export/crm/taskstatuses/excel", true);
         }
 
         public async Task ExportTaskStatusesToCSV(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/taskstatuses/csv") : "/export/crm/taskstatuses/csv", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/taskstatuses/csv") : "export/crm/taskstatuses/csv", true);
         }
 
         partial void OnTaskStatusesRead(ref IQueryable<Models.Crm.TaskStatus> items);
@@ -355,14 +355,14 @@ namespace RadzenCrm
 
             return taskStatus;
         }
-            public async Task ExportTaskTypesToExcel(Query query = null)
+        public async Task ExportTaskTypesToExcel(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasktypes/excel") : "/export/crm/tasktypes/excel", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/tasktypes/excel") : "export/crm/tasktypes/excel", true);
         }
 
         public async Task ExportTaskTypesToCSV(Query query = null)
         {
-            navigationManager.NavigateTo(query != null ? query.ToUrl("/export/crm/tasktypes/csv") : "/export/crm/tasktypes/csv", true);
+            navigationManager.NavigateTo(query != null ? query.ToUrl("export/crm/tasktypes/csv") : "export/crm/tasktypes/csv", true);
         }
 
         partial void OnTaskTypesRead(ref IQueryable<Models.Crm.TaskType> items);
@@ -419,7 +419,7 @@ namespace RadzenCrm
 
             return taskType;
         }
-    
+
         partial void OnContactDeleted(Models.Crm.Contact item);
 
         public async Task<Models.Crm.Contact> DeleteContact(int? id)
@@ -429,10 +429,24 @@ namespace RadzenCrm
                               .Include(i => i.Opportunities)
                               .FirstOrDefault();
 
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
+
             OnContactDeleted(item);
 
             context.Contacts.Remove(item);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+                throw ex;
+            }
 
             return item;
         }
@@ -441,10 +455,11 @@ namespace RadzenCrm
 
         public async Task<Models.Crm.Contact> GetContactById(int? id)
         {
-            var item = context.Contacts
+            var items = context.Contacts
                               .AsNoTracking()
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                              .Where(i => i.Id == id);
+
+            var item = items.FirstOrDefault();
 
             OnContactGet(item);
 
@@ -468,7 +483,11 @@ namespace RadzenCrm
 
             var item = context.Contacts
                               .Where(i => i.Id == id)
-                              .First();
+                              .FirstOrDefault();
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
             var entry = context.Entry(item);
             entry.CurrentValues.SetValues(contact);
             entry.State = EntityState.Modified;
@@ -476,7 +495,7 @@ namespace RadzenCrm
 
             return contact;
         }
-    
+
         partial void OnOpportunityDeleted(Models.Crm.Opportunity item);
 
         public async Task<Models.Crm.Opportunity> DeleteOpportunity(int? id)
@@ -486,10 +505,24 @@ namespace RadzenCrm
                               .Include(i => i.Tasks)
                               .FirstOrDefault();
 
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
+
             OnOpportunityDeleted(item);
 
             context.Opportunities.Remove(item);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+                throw ex;
+            }
 
             return item;
         }
@@ -498,10 +531,15 @@ namespace RadzenCrm
 
         public async Task<Models.Crm.Opportunity> GetOpportunityById(int? id)
         {
-            var item = context.Opportunities
+            var items = context.Opportunities
                               .AsNoTracking()
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                              .Where(i => i.Id == id);
+
+            items = items.Include(i => i.Contact);
+
+            items = items.Include(i => i.OpportunityStatus);
+
+            var item = items.FirstOrDefault();
 
             OnOpportunityGet(item);
 
@@ -525,7 +563,11 @@ namespace RadzenCrm
 
             var item = context.Opportunities
                               .Where(i => i.Id == id)
-                              .First();
+                              .FirstOrDefault();
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
             var entry = context.Entry(item);
             entry.CurrentValues.SetValues(opportunity);
             entry.State = EntityState.Modified;
@@ -533,7 +575,7 @@ namespace RadzenCrm
 
             return opportunity;
         }
-    
+
         partial void OnOpportunityStatusDeleted(Models.Crm.OpportunityStatus item);
 
         public async Task<Models.Crm.OpportunityStatus> DeleteOpportunityStatus(int? id)
@@ -543,10 +585,24 @@ namespace RadzenCrm
                               .Include(i => i.Opportunities)
                               .FirstOrDefault();
 
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
+
             OnOpportunityStatusDeleted(item);
 
             context.OpportunityStatuses.Remove(item);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+                throw ex;
+            }
 
             return item;
         }
@@ -555,10 +611,11 @@ namespace RadzenCrm
 
         public async Task<Models.Crm.OpportunityStatus> GetOpportunityStatusById(int? id)
         {
-            var item = context.OpportunityStatuses
+            var items = context.OpportunityStatuses
                               .AsNoTracking()
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                              .Where(i => i.Id == id);
+
+            var item = items.FirstOrDefault();
 
             OnOpportunityStatusGet(item);
 
@@ -582,7 +639,11 @@ namespace RadzenCrm
 
             var item = context.OpportunityStatuses
                               .Where(i => i.Id == id)
-                              .First();
+                              .FirstOrDefault();
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
             var entry = context.Entry(item);
             entry.CurrentValues.SetValues(opportunityStatus);
             entry.State = EntityState.Modified;
@@ -590,7 +651,7 @@ namespace RadzenCrm
 
             return opportunityStatus;
         }
-    
+
         partial void OnTaskDeleted(Models.Crm.Task item);
 
         public async Task<Models.Crm.Task> DeleteTask(int? id)
@@ -599,10 +660,24 @@ namespace RadzenCrm
                               .Where(i => i.Id == id)
                               .FirstOrDefault();
 
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
+
             OnTaskDeleted(item);
 
             context.Tasks.Remove(item);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+                throw ex;
+            }
 
             return item;
         }
@@ -611,10 +686,17 @@ namespace RadzenCrm
 
         public async Task<Models.Crm.Task> GetTaskById(int? id)
         {
-            var item = context.Tasks
+            var items = context.Tasks
                               .AsNoTracking()
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                              .Where(i => i.Id == id);
+
+            items = items.Include(i => i.Opportunity);
+
+            items = items.Include(i => i.TaskType);
+
+            items = items.Include(i => i.TaskStatus);
+
+            var item = items.FirstOrDefault();
 
             OnTaskGet(item);
 
@@ -638,7 +720,11 @@ namespace RadzenCrm
 
             var item = context.Tasks
                               .Where(i => i.Id == id)
-                              .First();
+                              .FirstOrDefault();
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
             var entry = context.Entry(item);
             entry.CurrentValues.SetValues(task);
             entry.State = EntityState.Modified;
@@ -646,7 +732,7 @@ namespace RadzenCrm
 
             return task;
         }
-    
+
         partial void OnTaskStatusDeleted(Models.Crm.TaskStatus item);
 
         public async Task<Models.Crm.TaskStatus> DeleteTaskStatus(int? id)
@@ -656,10 +742,24 @@ namespace RadzenCrm
                               .Include(i => i.Tasks)
                               .FirstOrDefault();
 
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
+
             OnTaskStatusDeleted(item);
 
             context.TaskStatuses.Remove(item);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+                throw ex;
+            }
 
             return item;
         }
@@ -668,10 +768,11 @@ namespace RadzenCrm
 
         public async Task<Models.Crm.TaskStatus> GetTaskStatusById(int? id)
         {
-            var item = context.TaskStatuses
+            var items = context.TaskStatuses
                               .AsNoTracking()
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                              .Where(i => i.Id == id);
+
+            var item = items.FirstOrDefault();
 
             OnTaskStatusGet(item);
 
@@ -695,7 +796,11 @@ namespace RadzenCrm
 
             var item = context.TaskStatuses
                               .Where(i => i.Id == id)
-                              .First();
+                              .FirstOrDefault();
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
             var entry = context.Entry(item);
             entry.CurrentValues.SetValues(taskStatus);
             entry.State = EntityState.Modified;
@@ -703,7 +808,7 @@ namespace RadzenCrm
 
             return taskStatus;
         }
-    
+
         partial void OnTaskTypeDeleted(Models.Crm.TaskType item);
 
         public async Task<Models.Crm.TaskType> DeleteTaskType(int? id)
@@ -713,10 +818,24 @@ namespace RadzenCrm
                               .Include(i => i.Tasks)
                               .FirstOrDefault();
 
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
+
             OnTaskTypeDeleted(item);
 
             context.TaskTypes.Remove(item);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                context.Entry(item).State = EntityState.Unchanged;
+                throw ex;
+            }
 
             return item;
         }
@@ -725,10 +844,11 @@ namespace RadzenCrm
 
         public async Task<Models.Crm.TaskType> GetTaskTypeById(int? id)
         {
-            var item = context.TaskTypes
+            var items = context.TaskTypes
                               .AsNoTracking()
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                              .Where(i => i.Id == id);
+
+            var item = items.FirstOrDefault();
 
             OnTaskTypeGet(item);
 
@@ -752,7 +872,11 @@ namespace RadzenCrm
 
             var item = context.TaskTypes
                               .Where(i => i.Id == id)
-                              .First();
+                              .FirstOrDefault();
+            if (item == null)
+            {
+               throw new Exception("Item no longer available");
+            }
             var entry = context.Entry(item);
             entry.CurrentValues.SetValues(taskType);
             entry.State = EntityState.Modified;

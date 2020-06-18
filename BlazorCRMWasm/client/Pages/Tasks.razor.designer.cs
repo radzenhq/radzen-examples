@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -107,7 +108,7 @@ namespace BlazorCrmWasm.Pages
 
                 getTasksCount = crmGetTasksResult.Count;
             }
-            catch (Exception crmGetTasksException)
+            catch (System.Exception crmGetTasksException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to load Tasks");
             }
@@ -130,7 +131,7 @@ namespace BlazorCrmWasm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception crmDeleteTaskException)
+            catch (System.Exception crmDeleteTaskException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Task");
             }

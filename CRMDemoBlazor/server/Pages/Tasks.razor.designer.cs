@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         protected RadzenGrid<RadzenCrm.Models.Crm.Task> grid0;
 
@@ -48,14 +50,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getTasksResult != value)
+                if(!object.Equals(_getTasksResult, value))
                 {
                     _getTasksResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -64,32 +65,31 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             var crmGetTasksResult = await Crm.GetTasks();
             getTasksResult = crmGetTasksResult;
         }
 
-        protected async void Button0Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button0Click(MouseEventArgs args)
         {
-            var result = await DialogService.OpenAsync<AddTask>("Add Task", null);
-              grid0.Reload();
+            var dialogResult = await DialogService.OpenAsync<AddTask>("Add Task", null);
+            grid0.Reload();
 
-              await InvokeAsync(() => { StateHasChanged(); });
+            await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async void Grid0RowSelect(RadzenCrm.Models.Crm.Task args)
+        protected async System.Threading.Tasks.Task Grid0RowSelect(RadzenCrm.Models.Crm.Task args)
         {
-            var result = await DialogService.OpenAsync<EditTask>("Edit Task", new Dictionary<string, object>() { {"Id", args.Id} });
-              await InvokeAsync(() => { StateHasChanged(); });
+            var dialogResult = await DialogService.OpenAsync<EditTask>("Edit Task", new Dictionary<string, object>() { {"Id", args.Id} });
+            await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async void GridDeleteButtonClick(MouseEventArgs args, RadzenCrm.Models.Crm.Task data)
+        protected async System.Threading.Tasks.Task GridDeleteButtonClick(MouseEventArgs args, RadzenCrm.Models.Crm.Task data)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace RadzenCrm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception crmDeleteTaskException)
+            catch (System.Exception crmDeleteTaskException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Task");
             }

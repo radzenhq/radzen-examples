@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -107,7 +108,7 @@ namespace BlazorCrmWasm.Pages
 
                 getTaskTypesCount = crmGetTaskTypesResult.Count;
             }
-            catch (Exception crmGetTaskTypesException)
+            catch (System.Exception crmGetTaskTypesException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to load TaskTypes");
             }
@@ -130,7 +131,7 @@ namespace BlazorCrmWasm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception crmDeleteTaskTypeException)
+            catch (System.Exception crmDeleteTaskTypeException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete TaskType");
             }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         [Parameter]
         public dynamic Id { get; set; }
@@ -49,7 +51,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_canEdit != value)
+                if(!object.Equals(_canEdit, value))
                 {
                     _canEdit = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -66,7 +68,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_opportunity != value)
+                if(!object.Equals(_opportunity, value))
                 {
                     _opportunity = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -83,7 +85,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getContactsResult != value)
+                if(!object.Equals(_getContactsResult, value))
                 {
                     _getContactsResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -100,14 +102,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_getOpportunityStatusesResult != value)
+                if(!object.Equals(_getOpportunityStatusesResult, value))
                 {
                     _getOpportunityStatusesResult = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -116,16 +117,15 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             canEdit = true;
 
-            var crmGetOpportunityByIdResult = await Crm.GetOpportunityById(int.Parse($"{Id}"));
+            var crmGetOpportunityByIdResult = await Crm.GetOpportunityById(Id);
             opportunity = crmGetOpportunityByIdResult;
 
             var crmGetContactsResult = await Crm.GetContacts();
@@ -135,25 +135,25 @@ namespace RadzenCrm.Pages
             getOpportunityStatusesResult = crmGetOpportunityStatusesResult;
         }
 
-        protected async void CloseButtonClick(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task CloseButtonClick(MouseEventArgs args)
         {
             DialogService.Close(null);
         }
 
-        protected async void Form0Submit(RadzenCrm.Models.Crm.Opportunity args)
+        protected async System.Threading.Tasks.Task Form0Submit(RadzenCrm.Models.Crm.Opportunity args)
         {
             try
             {
-                var crmUpdateOpportunityResult = await Crm.UpdateOpportunity(int.Parse($"{Id}"), opportunity);
+                var crmUpdateOpportunityResult = await Crm.UpdateOpportunity(Id, opportunity);
                 DialogService.Close(opportunity);
             }
-            catch (Exception crmUpdateOpportunityException)
+            catch (System.Exception crmUpdateOpportunityException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Opportunity");
             }
         }
 
-        protected async void Button3Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button3Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

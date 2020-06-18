@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -98,7 +99,7 @@ namespace BlazorCrmWasm.Pages
                 var securityCreateUserResult = await Security.CreateUser(args);
                 DialogService.Close(null);
             }
-            catch (Exception securityCreateUserException)
+            catch (System.Exception securityCreateUserException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Cannot add user", $"{securityCreateUserException.Message}");
             }

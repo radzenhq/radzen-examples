@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -82,7 +83,7 @@ namespace BlazorCrmWasm.Pages
                 var crmUpdateContactResult = await Crm.UpdateContact(id:Id, contact:contact);
                 DialogService.Close(contact);
             }
-            catch (Exception crmUpdateContactException)
+            catch (System.Exception crmUpdateContactException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update Contact");
             }

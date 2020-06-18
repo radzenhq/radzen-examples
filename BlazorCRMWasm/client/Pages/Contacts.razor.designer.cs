@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -129,7 +130,7 @@ namespace BlazorCrmWasm.Pages
 
                 getContactsCount = crmGetContactsResult.Count;
             }
-            catch (Exception crmGetContactsException)
+            catch (System.Exception crmGetContactsException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to load Contacts");
             }
@@ -152,7 +153,7 @@ namespace BlazorCrmWasm.Pages
                     grid0.Reload();
 }
             }
-            catch (Exception crmDeleteContactException)
+            catch (System.Exception crmDeleteContactException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Contact");
             }

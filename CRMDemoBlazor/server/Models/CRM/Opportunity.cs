@@ -16,7 +16,6 @@ namespace RadzenCrm.Models.Crm
       set;
     }
 
-
     public ICollection<Task> Tasks { get; set; }
     public decimal Amount
     {

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         RadzenCrm.Models.Crm.Contact _contact;
         protected RadzenCrm.Models.Crm.Contact contact
@@ -46,14 +48,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_contact != value)
+                if(!object.Equals(_contact, value))
                 {
                     _contact = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -62,30 +63,29 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             contact = new RadzenCrm.Models.Crm.Contact();
         }
 
-        protected async void Form0Submit(RadzenCrm.Models.Crm.Contact args)
+        protected async System.Threading.Tasks.Task Form0Submit(RadzenCrm.Models.Crm.Contact args)
         {
             try
             {
                 var crmCreateContactResult = await Crm.CreateContact(contact);
                 DialogService.Close(contact);
             }
-            catch (Exception crmCreateContactException)
+            catch (System.Exception crmCreateContactException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new Contact!");
             }
         }
 
-        protected async void Button2Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

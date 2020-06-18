@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using RadzenCrm.Models.Crm;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using RadzenCrm.Models;
 
@@ -17,6 +18,7 @@ namespace RadzenCrm.Pages
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
+
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +35,9 @@ namespace RadzenCrm.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+
         [Inject]
         protected CrmService Crm { get; set; }
-
 
         [Parameter]
         public dynamic Id { get; set; }
@@ -49,7 +51,7 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_canEdit != value)
+                if(!object.Equals(_canEdit, value))
                 {
                     _canEdit = value;
                     InvokeAsync(() => { StateHasChanged(); });
@@ -66,14 +68,13 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(_tasktype != value)
+                if(!object.Equals(_tasktype, value))
                 {
                     _tasktype = value;
                     InvokeAsync(() => { StateHasChanged(); });
                 }
             }
         }
-
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             if (!Security.IsAuthenticated())
@@ -82,38 +83,37 @@ namespace RadzenCrm.Pages
             }
             else
             {
-                Load();
+                await Load();
             }
 
         }
-
-        protected async void Load()
+        protected async System.Threading.Tasks.Task Load()
         {
             canEdit = true;
 
-            var crmGetTaskTypeByIdResult = await Crm.GetTaskTypeById(int.Parse($"{Id}"));
+            var crmGetTaskTypeByIdResult = await Crm.GetTaskTypeById(Id);
             tasktype = crmGetTaskTypeByIdResult;
         }
 
-        protected async void CloseButtonClick(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task CloseButtonClick(MouseEventArgs args)
         {
             DialogService.Close(null);
         }
 
-        protected async void Form0Submit(RadzenCrm.Models.Crm.TaskType args)
+        protected async System.Threading.Tasks.Task Form0Submit(RadzenCrm.Models.Crm.TaskType args)
         {
             try
             {
-                var crmUpdateTaskTypeResult = await Crm.UpdateTaskType(int.Parse($"{Id}"), tasktype);
+                var crmUpdateTaskTypeResult = await Crm.UpdateTaskType(Id, tasktype);
                 DialogService.Close(tasktype);
             }
-            catch (Exception crmUpdateTaskTypeException)
+            catch (System.Exception crmUpdateTaskTypeException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to update TaskType");
             }
         }
 
-        protected async void Button3Click(MouseEventArgs args)
+        protected async System.Threading.Tasks.Task Button3Click(MouseEventArgs args)
         {
             DialogService.Close(null);
         }

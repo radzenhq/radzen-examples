@@ -19,6 +19,7 @@ namespace BlazorCrmWasm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
@@ -78,7 +79,7 @@ namespace BlazorCrmWasm.Pages
                 var crmCreateTaskTypeResult = await Crm.CreateTaskType(taskType:tasktype);
                 DialogService.Close(tasktype);
             }
-            catch (Exception crmCreateTaskTypeException)
+            catch (System.Exception crmCreateTaskTypeException)
             {
                     NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new TaskType!");
             }

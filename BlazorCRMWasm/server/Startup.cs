@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using BlazorCrmWasm.Data;
@@ -60,8 +61,9 @@ namespace BlazorCrmWasm
             services.AddODataQueryFilter();
 
             services.AddDbContext<ApplicationIdentityDbContext>(options =>
-              options.UseSqlServer(
-                  Configuration.GetConnectionString("CRMConnection")));
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("CRMConnection"));
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
@@ -129,7 +131,6 @@ namespace BlazorCrmWasm
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
-
                 endpoints.Count().Filter().OrderBy().Expand().Select().MaxTop(null).SetTimeZoneInfo(TimeZoneInfo.Utc);
 
                 var oDataBuilder = new ODataConventionModelBuilder(provider);

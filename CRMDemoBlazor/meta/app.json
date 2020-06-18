@@ -85,5 +85,6 @@
   "serverProject": true,
   "serverVersion": "3",
   "startPage": "Home",
-  "theme": "dark"
+  "theme": "dark",
+  "themeSettings": null
 }
