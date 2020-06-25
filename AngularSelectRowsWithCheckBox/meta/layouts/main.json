@@ -1,0 +1,74 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "class": "justify-content-start align-items-center",
+          "components": [
+            {
+              "class": "col-md-6 d-flex align-items-center",
+              "components": [
+                {
+                  "name": "sidebar-toggle0",
+                  "type": "sidebar-toggle"
+                },
+                {
+                  "name": "label0",
+                  "text": "Sample",
+                  "type": "label"
+                }
+              ],
+              "name": "leftCol",
+              "type": "col"
+            },
+            {
+              "class": "col-md-6 text-lg-right",
+              "name": "rightCol",
+              "type": "col",
+              "components": []
+            }
+          ],
+          "name": "headerRow",
+          "type": "row"
+        }
+      ],
+      "name": "header0",
+      "type": "header"
+    },
+    {
+      "components": [
+        {
+          "name": "main",
+          "type": "content-container"
+        }
+      ],
+      "name": "body0",
+      "type": "body"
+    },
+    {
+      "components": [
+        {
+          "name": "panelmenu0",
+          "style": {
+            "height": "100%"
+          },
+          "type": "panelmenu"
+        }
+      ],
+      "name": "sidebar0",
+      "type": "sidebar"
+    },
+    {
+      "components": [
+        {
+          "name": "footerText",
+          "text": "Sample, Copyright &copy; 2020",
+          "type": "label"
+        }
+      ],
+      "name": "footer0",
+      "type": "footer"
+    }
+  ],
+  "name": "Main"
+}

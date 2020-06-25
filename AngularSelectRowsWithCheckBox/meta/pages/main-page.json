@@ -1,0 +1,172 @@
+{
+  "access": [
+    "Everybody"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "MainPage",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "code": "${alert(this.grid0.data.filter(d => d.checked).map(d => d.Id).join(','))}",
+                "type": "execute"
+              }
+            ]
+          },
+          "name": "button0",
+          "text": "Get selected Ids",
+          "tooltip": "",
+          "type": "button"
+        },
+        {
+          "allowFiltering": true,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "filterable": false,
+              "headerTemplate": [
+                {
+                  "events": {
+                    "change": [
+                      {
+                        "code": "${this.grid0.data.forEach(d => d.checked = event)}",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "name": "checkbox1",
+                  "type": "checkbox",
+                  "value": "${allChecked}"
+                }
+              ],
+              "sortable": false,
+              "template": [
+                {
+                  "events": {
+                    "change": [
+                      {
+                        "name": "allChecked",
+                        "type": "set",
+                        "value": "${this.grid0.data.filter(d => d.checked).length == this.grid0.data.length}"
+                      }
+                    ]
+                  },
+                  "name": "checkbox0",
+                  "type": "checkbox",
+                  "value": "${data.checked}"
+                }
+              ],
+              "width": "40px"
+            },
+            {
+              "property": "Id",
+              "title": "Id",
+              "type": "integer"
+            },
+            {
+              "property": "UserName",
+              "title": "User Name",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "formatString": "medium",
+              "property": "OrderDate",
+              "title": "Order Date",
+              "type": "string"
+            }
+          ],
+          "count": "${getOrdersCount}",
+          "data": "${getOrdersResult}",
+          "events": {
+            "loadData": [
+              {
+                "name": "Sample.getOrders",
+                "parameters": [
+                  {
+                    "name": "$top",
+                    "value": "event.top"
+                  },
+                  {
+                    "name": "$skip",
+                    "value": "event.skip"
+                  },
+                  {
+                    "name": "$count",
+                    "value": "event.top != null && event.skip != null"
+                  },
+                  {
+                    "name": "$filter",
+                    "value": "${event.filter}"
+                  },
+                  {
+                    "name": "$orderby",
+                    "value": "${event.orderby}"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getOrdersResult",
+                    "type": "set",
+                    "value": "${result.value}"
+                  },
+                  {
+                    "name": "getOrdersCount",
+                    "type": "set",
+                    "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "name": "grid0",
+          "pageSize": 10,
+          "type": "grid",
+          "confirmDeleteText": "Are you sure you want to delete this record?",
+          "confirmDeleteTitle": "Confirmation",
+          "confirmDeleteOkText": "Ok",
+          "confirmDeleteCancelText": "Cancel",
+          "emptyText": "No records to display.",
+          "addText": "Add",
+          "clearFilterText": "Clear",
+          "applyFilterText": "Apply",
+          "equalsText": "Equals",
+          "notEqualsText": "Not equals",
+          "lessThanText": "Less than",
+          "lessThanOrEqualsText": "Less than or equals",
+          "greaterThanText": "Greater than",
+          "greaterThanOrEqualsText": "Greater than or equals",
+          "endsWithText": "Ends with",
+          "containsText": "Contains",
+          "startsWithText": "Starts with"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "code": "this.grid0.load();",
+        "type": "execute"
+      },
+      {
+        "name": "allChecked",
+        "type": "set",
+        "value": "false"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MainPage"
+}
