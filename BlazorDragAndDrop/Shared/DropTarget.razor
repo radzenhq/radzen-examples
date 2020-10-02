@@ -1,0 +1,24 @@
+@using BlazorDragAndDrop.Data
+@inject DragAndDropService DragAndDropService
+@typeparam T
+<div ondragover="event.preventDefault()" @ondrop="@OnDrop">
+    @ChildContent
+</div>
+@functions {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Zone { get; set; }
+
+    [Parameter]
+    public Action<T> Drop { get; set; }
+
+    void OnDrop()
+    {
+        if (Drop != null && DragAndDropService.Accepts(Zone))
+        {
+            Drop((T)DragAndDropService.Data);
+        }
+    }
+}
