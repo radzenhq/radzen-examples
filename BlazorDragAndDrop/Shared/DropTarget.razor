@@ -4,7 +4,7 @@
 <div ondragover="event.preventDefault()" @ondrop="@OnDrop">
     @ChildContent
 </div>
-@functions {
+@code {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

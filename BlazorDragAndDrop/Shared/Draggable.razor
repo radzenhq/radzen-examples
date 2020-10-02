@@ -4,7 +4,7 @@
 <div draggable="true" @ondragstart="@OnDragStart">
     @ChildContent
 </div>
-@functions {
+@code {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
