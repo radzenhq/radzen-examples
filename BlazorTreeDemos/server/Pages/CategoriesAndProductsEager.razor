@@ -1,0 +1,22 @@
+﻿@page "/"
+@page "/categories-and-products-eager"
+@layout MainLayout
+@inherits TreeDemos.Pages.CategoriesAndProductsEagerComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using TreeDemos.Models.Northwind
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Home">
+    </RadzenHeading>
+    <RadzenTree Data="@categories">
+      <ChildContent>
+        <RadzenTreeLevel ChildrenProperty="Products" TextProperty="CategoryName">
+        </RadzenTreeLevel>
+        <RadzenTreeLevel HasChildren="(product) => false" TextProperty="ProductName">
+        </RadzenTreeLevel>
+      </ChildContent>
+    </RadzenTree>
+  </ChildContent>
+</RadzenContent>

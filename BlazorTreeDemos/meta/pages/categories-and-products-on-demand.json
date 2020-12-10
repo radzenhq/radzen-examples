@@ -1,0 +1,83 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "data": "${categories}",
+          "events": {
+            "expand": [
+              {
+                "name": "Northwind.getProducts",
+                "parameters": [
+                  {},
+                  {
+                    "name": "$filter",
+                    "operator": "and",
+                    "value": [
+                      {
+                        "operation": "eq",
+                        "property": "CategoryID",
+                        "type": "integer",
+                        "value": "${(event.Value as Category).CategoryID}"
+                      }
+                    ]
+                  }
+                ],
+                "then": [
+                  {
+                    "code": "${event.Children.Data} = ${result}",
+                    "type": "execute"
+                  }
+                ],
+                "type": "invoke"
+              },
+              {
+                "code": "${event.Children.TextProperty} = \"ProductName\"",
+                "type": "execute"
+              },
+              {
+                "code": "${event.Children.HasChildren} = (product) => false;",
+                "type": "execute"
+              }
+            ]
+          },
+          "levels": [
+            {
+              "schema": "Category",
+              "textProperty": "CategoryName"
+            }
+          ],
+          "name": "tree0",
+          "type": "tree"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCategories",
+        "then": [
+          {
+            "name": "categories",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<TreeDemos.Models.Northwind.Category>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": " CategoriesAndProductsOnDemand"
+}

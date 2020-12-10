@@ -1,0 +1,3098 @@
+{
+  "info": {
+    "title": "Northwind",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15
+  },
+  "definitions": {
+    "Category": {
+      "x-table": "dbo.Categories",
+      "resource": "Categories",
+      "required": [
+        "CategoryName"
+      ],
+      "properties": {
+        "CategoryID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Category",
+              "name": "Products",
+              "type": "Product"
+            }
+          ]
+        },
+        "CategoryName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 15
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Picture": {
+          "type": "string",
+          "format": "binary"
+        },
+        "Products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    },
+    "Customer": {
+      "x-table": "dbo.Customers",
+      "resource": "Customers",
+      "required": [
+        "CustomerID",
+        "CompanyName"
+      ],
+      "properties": {
+        "CustomerID": {
+          "x-key": true,
+          "x-nullable": false,
+          "type": "string",
+          "length": 5,
+          "x-navigation": [
+            {
+              "inversePropertyName": "Customer",
+              "name": "Orders",
+              "type": "Order"
+            },
+            {
+              "inversePropertyName": "Customer",
+              "name": "CustomerCustomerDemos",
+              "type": "CustomerCustomerDemo"
+            }
+          ]
+        },
+        "CompanyName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 40
+        },
+        "ContactName": {
+          "type": "string",
+          "length": 30
+        },
+        "ContactTitle": {
+          "type": "string",
+          "length": 30
+        },
+        "Address": {
+          "type": "string",
+          "length": 60
+        },
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "Region": {
+          "type": "string",
+          "length": 15
+        },
+        "PostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "Country": {
+          "type": "string",
+          "length": 15
+        },
+        "Phone": {
+          "type": "string",
+          "length": 24
+        },
+        "Fax": {
+          "type": "string",
+          "length": 24
+        },
+        "Orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "CustomerCustomerDemos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerCustomerDemo"
+          }
+        }
+      }
+    },
+    "CustomerCustomerDemo": {
+      "x-table": "dbo.CustomerCustomerDemo",
+      "resource": "CustomerCustomerDemos",
+      "required": [
+        "CustomerID",
+        "CustomerTypeID"
+      ],
+      "properties": {
+        "Customer": {
+          "type": "object",
+          "$ref": "#/definitions/Customer"
+        },
+        "CustomerID": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 5,
+          "x-key": true,
+          "x-foreignKey": {
+            "parentTable": "Customers",
+            "parentEntityType": "Customer",
+            "type": "Customer",
+            "principalKey": "CustomerID",
+            "name": "Customer",
+            "textProperty": "CompanyName",
+            "navigationProperty": "CustomerCustomerDemos"
+          }
+        },
+        "CustomerDemographic": {
+          "type": "object",
+          "$ref": "#/definitions/CustomerDemographic"
+        },
+        "CustomerTypeID": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 10,
+          "x-key": true,
+          "x-foreignKey": {
+            "parentTable": "CustomerDemographics",
+            "parentEntityType": "CustomerDemographic",
+            "type": "CustomerDemographic",
+            "principalKey": "CustomerTypeID",
+            "name": "CustomerDemographic",
+            "textProperty": "CustomerDesc",
+            "navigationProperty": "CustomerCustomerDemos"
+          }
+        }
+      }
+    },
+    "CustomerDemographic": {
+      "x-table": "dbo.CustomerDemographics",
+      "resource": "CustomerDemographics",
+      "required": [
+        "CustomerTypeID"
+      ],
+      "properties": {
+        "CustomerTypeID": {
+          "x-key": true,
+          "x-nullable": false,
+          "type": "string",
+          "length": 10,
+          "x-navigation": [
+            {
+              "inversePropertyName": "CustomerDemographic",
+              "name": "CustomerCustomerDemos",
+              "type": "CustomerCustomerDemo"
+            }
+          ]
+        },
+        "CustomerDesc": {
+          "type": "string"
+        },
+        "CustomerCustomerDemos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerCustomerDemo"
+          }
+        }
+      }
+    },
+    "Employee": {
+      "x-table": "dbo.Employees",
+      "resource": "Employees",
+      "required": [
+        "LastName",
+        "FirstName"
+      ],
+      "properties": {
+        "EmployeeID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Employee1",
+              "name": "Employees1",
+              "type": "Employee"
+            },
+            {
+              "inversePropertyName": "Employee",
+              "name": "Orders",
+              "type": "Order"
+            },
+            {
+              "inversePropertyName": "Employee",
+              "name": "EmployeeTerritories",
+              "type": "EmployeeTerritory"
+            }
+          ]
+        },
+        "LastName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 20
+        },
+        "FirstName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 10
+        },
+        "Title": {
+          "type": "string",
+          "length": 30
+        },
+        "TitleOfCourtesy": {
+          "type": "string",
+          "length": 25
+        },
+        "BirthDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "datetime"
+        },
+        "HireDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "datetime"
+        },
+        "Address": {
+          "type": "string",
+          "length": 60
+        },
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "Region": {
+          "type": "string",
+          "length": 15
+        },
+        "PostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "Country": {
+          "type": "string",
+          "length": 15
+        },
+        "HomePhone": {
+          "type": "string",
+          "length": 24
+        },
+        "Extension": {
+          "type": "string",
+          "length": 4
+        },
+        "Photo": {
+          "type": "string",
+          "format": "binary"
+        },
+        "Notes": {
+          "type": "string"
+        },
+        "Employee1": {
+          "type": "object",
+          "$ref": "#/definitions/Employee"
+        },
+        "ReportsTo": {
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Employees",
+            "parentEntityType": "Employee",
+            "type": "Employee",
+            "principalKey": "EmployeeID",
+            "name": "Employee1",
+            "textProperty": "LastName",
+            "navigationProperty": "Employees1"
+          }
+        },
+        "PhotoPath": {
+          "type": "string",
+          "length": 255
+        },
+        "Employees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Employee"
+          }
+        },
+        "Orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "EmployeeTerritories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeTerritory"
+          }
+        }
+      }
+    },
+    "EmployeeTerritory": {
+      "x-table": "dbo.EmployeeTerritories",
+      "resource": "EmployeeTerritories",
+      "required": [
+        "EmployeeID",
+        "TerritoryID"
+      ],
+      "properties": {
+        "Employee": {
+          "type": "object",
+          "$ref": "#/definitions/Employee"
+        },
+        "EmployeeID": {
+          "x-nullable": false,
+          "type": "integer",
+          "x-key": true,
+          "x-foreignKey": {
+            "parentTable": "Employees",
+            "parentEntityType": "Employee",
+            "type": "Employee",
+            "principalKey": "EmployeeID",
+            "name": "Employee",
+            "textProperty": "LastName",
+            "navigationProperty": "EmployeeTerritories"
+          }
+        },
+        "Territory": {
+          "type": "object",
+          "$ref": "#/definitions/Territory"
+        },
+        "TerritoryID": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 20,
+          "x-key": true,
+          "x-foreignKey": {
+            "parentTable": "Territories",
+            "parentEntityType": "Territory",
+            "type": "Territory",
+            "principalKey": "TerritoryID",
+            "name": "Territory",
+            "textProperty": "TerritoryDescription",
+            "navigationProperty": "EmployeeTerritories"
+          }
+        }
+      }
+    },
+    "Order": {
+      "x-table": "dbo.Orders",
+      "resource": "Orders",
+      "required": [],
+      "properties": {
+        "OrderID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Order",
+              "name": "OrderDetails",
+              "type": "OrderDetail"
+            }
+          ]
+        },
+        "Customer": {
+          "type": "object",
+          "$ref": "#/definitions/Customer"
+        },
+        "CustomerID": {
+          "type": "string",
+          "length": 5,
+          "x-foreignKey": {
+            "parentTable": "Customers",
+            "parentEntityType": "Customer",
+            "type": "Customer",
+            "principalKey": "CustomerID",
+            "name": "Customer",
+            "textProperty": "CompanyName",
+            "navigationProperty": "Orders"
+          }
+        },
+        "Employee": {
+          "type": "object",
+          "$ref": "#/definitions/Employee"
+        },
+        "EmployeeID": {
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Employees",
+            "parentEntityType": "Employee",
+            "type": "Employee",
+            "principalKey": "EmployeeID",
+            "name": "Employee",
+            "textProperty": "LastName",
+            "navigationProperty": "Orders"
+          }
+        },
+        "OrderDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "datetime"
+        },
+        "RequiredDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "datetime"
+        },
+        "ShippedDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "datetime"
+        },
+        "Shipper": {
+          "type": "object",
+          "$ref": "#/definitions/Shipper"
+        },
+        "ShipVia": {
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Shippers",
+            "parentEntityType": "Shipper",
+            "type": "Shipper",
+            "principalKey": "ShipperID",
+            "name": "Shipper",
+            "textProperty": "CompanyName",
+            "navigationProperty": "Orders"
+          }
+        },
+        "Freight": {
+          "x-default-sql": "((0))",
+          "type": "number",
+          "format": "decimal"
+        },
+        "ShipName": {
+          "type": "string",
+          "length": 40
+        },
+        "ShipAddress": {
+          "type": "string",
+          "length": 60
+        },
+        "ShipCity": {
+          "type": "string",
+          "length": 15
+        },
+        "ShipRegion": {
+          "type": "string",
+          "length": 15
+        },
+        "ShipPostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "ShipCountry": {
+          "type": "string",
+          "length": 15
+        },
+        "OrderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDetail"
+          }
+        }
+      }
+    },
+    "OrderDetail": {
+      "x-table": "dbo.Order Details",
+      "resource": "OrderDetails",
+      "required": [
+        "OrderID",
+        "ProductID"
+      ],
+      "properties": {
+        "Order": {
+          "type": "object",
+          "$ref": "#/definitions/Order"
+        },
+        "OrderID": {
+          "x-nullable": false,
+          "type": "integer",
+          "x-key": true,
+          "x-foreignKey": {
+            "parentTable": "Orders",
+            "parentEntityType": "Order",
+            "type": "Order",
+            "principalKey": "OrderID",
+            "name": "Order",
+            "textProperty": "CustomerID",
+            "navigationProperty": "OrderDetails"
+          }
+        },
+        "Product": {
+          "type": "object",
+          "$ref": "#/definitions/Product"
+        },
+        "ProductID": {
+          "x-nullable": false,
+          "type": "integer",
+          "x-key": true,
+          "x-foreignKey": {
+            "parentTable": "Products",
+            "parentEntityType": "Product",
+            "type": "Product",
+            "principalKey": "ProductID",
+            "name": "Product",
+            "textProperty": "ProductName",
+            "navigationProperty": "OrderDetails"
+          }
+        },
+        "UnitPrice": {
+          "x-default-sql": "((0))",
+          "x-nullable": false,
+          "type": "number",
+          "format": "decimal"
+        },
+        "Quantity": {
+          "x-default-sql": "((1))",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discount": {
+          "x-default-sql": "((0))",
+          "x-nullable": false,
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "Product": {
+      "x-table": "dbo.Products",
+      "resource": "Products",
+      "required": [
+        "ProductName"
+      ],
+      "properties": {
+        "ProductID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Product",
+              "name": "OrderDetails",
+              "type": "OrderDetail"
+            }
+          ]
+        },
+        "ProductName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 40
+        },
+        "Supplier": {
+          "type": "object",
+          "$ref": "#/definitions/Supplier"
+        },
+        "SupplierID": {
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Suppliers",
+            "parentEntityType": "Supplier",
+            "type": "Supplier",
+            "principalKey": "SupplierID",
+            "name": "Supplier",
+            "textProperty": "CompanyName",
+            "navigationProperty": "Products"
+          }
+        },
+        "Category": {
+          "type": "object",
+          "$ref": "#/definitions/Category"
+        },
+        "CategoryID": {
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Categories",
+            "parentEntityType": "Category",
+            "type": "Category",
+            "principalKey": "CategoryID",
+            "name": "Category",
+            "textProperty": "CategoryName",
+            "navigationProperty": "Products"
+          }
+        },
+        "QuantityPerUnit": {
+          "type": "string",
+          "length": 20
+        },
+        "UnitPrice": {
+          "x-default-sql": "((0))",
+          "type": "number",
+          "format": "decimal"
+        },
+        "UnitsInStock": {
+          "x-default-sql": "((0))",
+          "type": "integer",
+          "format": "int16"
+        },
+        "UnitsOnOrder": {
+          "x-default-sql": "((0))",
+          "type": "integer",
+          "format": "int16"
+        },
+        "ReorderLevel": {
+          "x-default-sql": "((0))",
+          "type": "integer",
+          "format": "int16"
+        },
+        "Discontinued": {
+          "x-default-sql": "((0))",
+          "x-nullable": false,
+          "type": "boolean"
+        },
+        "OrderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDetail"
+          }
+        }
+      }
+    },
+    "Region": {
+      "x-table": "dbo.Region",
+      "resource": "Regions",
+      "required": [
+        "RegionID",
+        "RegionDescription"
+      ],
+      "properties": {
+        "RegionID": {
+          "x-key": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Region",
+              "name": "Territories",
+              "type": "Territory"
+            }
+          ]
+        },
+        "RegionDescription": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "Territories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Territory"
+          }
+        }
+      }
+    },
+    "Shipper": {
+      "x-table": "dbo.Shippers",
+      "resource": "Shippers",
+      "required": [
+        "CompanyName"
+      ],
+      "properties": {
+        "ShipperID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Shipper",
+              "name": "Orders",
+              "type": "Order"
+            }
+          ]
+        },
+        "CompanyName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 40
+        },
+        "Phone": {
+          "type": "string",
+          "length": 24
+        },
+        "Orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      }
+    },
+    "Supplier": {
+      "x-table": "dbo.Suppliers",
+      "resource": "Suppliers",
+      "required": [
+        "CompanyName"
+      ],
+      "properties": {
+        "SupplierID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Supplier",
+              "name": "Products",
+              "type": "Product"
+            }
+          ]
+        },
+        "CompanyName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 40
+        },
+        "ContactName": {
+          "type": "string",
+          "length": 30
+        },
+        "ContactTitle": {
+          "type": "string",
+          "length": 30
+        },
+        "Address": {
+          "type": "string",
+          "length": 60
+        },
+        "City": {
+          "type": "string",
+          "length": 15
+        },
+        "Region": {
+          "type": "string",
+          "length": 15
+        },
+        "PostalCode": {
+          "type": "string",
+          "length": 10
+        },
+        "Country": {
+          "type": "string",
+          "length": 15
+        },
+        "Phone": {
+          "type": "string",
+          "length": 24
+        },
+        "Fax": {
+          "type": "string",
+          "length": 24
+        },
+        "HomePage": {
+          "type": "string"
+        },
+        "Products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    },
+    "Territory": {
+      "x-table": "dbo.Territories",
+      "resource": "Territories",
+      "required": [
+        "TerritoryID",
+        "TerritoryDescription",
+        "RegionID"
+      ],
+      "properties": {
+        "TerritoryID": {
+          "x-key": true,
+          "x-nullable": false,
+          "type": "string",
+          "length": 20,
+          "x-navigation": [
+            {
+              "inversePropertyName": "Territory",
+              "name": "EmployeeTerritories",
+              "type": "EmployeeTerritory"
+            }
+          ]
+        },
+        "TerritoryDescription": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "Region": {
+          "type": "object",
+          "$ref": "#/definitions/Region"
+        },
+        "RegionID": {
+          "x-nullable": false,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Region",
+            "parentEntityType": "Region",
+            "type": "Region",
+            "principalKey": "RegionID",
+            "name": "Region",
+            "textProperty": "RegionDescription",
+            "navigationProperty": "Territories"
+          }
+        },
+        "EmployeeTerritories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeTerritory"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Categories": {
+      "get": {
+        "operationId": "getCategories",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Category"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCategory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Customers": {
+      "get": {
+        "operationId": "getCustomers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Customer"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomer",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Customer",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerCustomerDemos": {
+      "get": {
+        "operationId": "getCustomerCustomerDemos",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustomerCustomerDemo"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomerCustomerDemo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CustomerCustomerDemo",
+            "schema": {
+              "$ref": "#/definitions/CustomerCustomerDemo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/CustomerCustomerDemo"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerDemographics": {
+      "get": {
+        "operationId": "getCustomerDemographics",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustomerDemographic"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomerDemographic",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CustomerDemographic",
+            "schema": {
+              "$ref": "#/definitions/CustomerDemographic"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/CustomerDemographic"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Employees": {
+      "get": {
+        "operationId": "getEmployees",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Employee"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEmployee",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Employee",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeTerritories": {
+      "get": {
+        "operationId": "getEmployeeTerritories",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/EmployeeTerritory"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEmployeeTerritory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "EmployeeTerritory",
+            "schema": {
+              "$ref": "#/definitions/EmployeeTerritory"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/EmployeeTerritory"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Orders": {
+      "get": {
+        "operationId": "getOrders",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Order"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrder",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Order",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OrderDetails": {
+      "get": {
+        "operationId": "getOrderDetails",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/OrderDetail"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrderDetail",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "OrderDetail",
+            "schema": {
+              "$ref": "#/definitions/OrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/OrderDetail"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Products": {
+      "get": {
+        "operationId": "getProducts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Product"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createProduct",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Product",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Regions": {
+      "get": {
+        "operationId": "getRegions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Region"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRegion",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Region",
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Shippers": {
+      "get": {
+        "operationId": "getShippers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Shipper"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createShipper",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Shipper",
+            "schema": {
+              "$ref": "#/definitions/Shipper"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Shipper"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Suppliers": {
+      "get": {
+        "operationId": "getSuppliers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Supplier"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSupplier",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Supplier",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Territories": {
+      "get": {
+        "operationId": "getTerritories",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Territory"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTerritory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Territory",
+            "schema": {
+              "$ref": "#/definitions/Territory"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Territory"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Categories({CategoryID})": {
+      "delete": {
+        "operationId": "deleteCategory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CategoryID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCategoryByCategoryID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CategoryID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCategory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CategoryID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCategoryChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Customers('{CustomerID}')": {
+      "delete": {
+        "operationId": "deleteCustomer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCustomerByCustomerID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Customer",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCustomerChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Customer",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerCustomerDemos(CustomerID='{CustomerID}',CustomerTypeID='{CustomerTypeID}')": {
+      "delete": {
+        "operationId": "deleteCustomerCustomerDemo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "CustomerTypeID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCustomerCustomerDemoByCustomerIDAndCustomerTypeID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "CustomerTypeID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CustomerCustomerDemo"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomerCustomerDemo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "CustomerTypeID",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "CustomerCustomerDemo",
+            "schema": {
+              "$ref": "#/definitions/CustomerCustomerDemo"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCustomerCustomerDemoChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CustomerCustomerDemo",
+            "schema": {
+              "$ref": "#/definitions/CustomerCustomerDemo"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomerDemographics('{CustomerTypeID}')": {
+      "delete": {
+        "operationId": "deleteCustomerDemographic",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerTypeID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCustomerDemographicByCustomerTypeID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerTypeID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CustomerDemographic"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomerDemographic",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerTypeID",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "CustomerDemographic",
+            "schema": {
+              "$ref": "#/definitions/CustomerDemographic"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCustomerDemographicChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CustomerDemographic",
+            "schema": {
+              "$ref": "#/definitions/CustomerDemographic"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Employees({EmployeeID})": {
+      "delete": {
+        "operationId": "deleteEmployee",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "EmployeeID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getEmployeeByEmployeeID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "EmployeeID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateEmployee",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "EmployeeID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Employee",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelEmployeeChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Employee",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeTerritories(EmployeeID={EmployeeID},TerritoryID='{TerritoryID}')": {
+      "delete": {
+        "operationId": "deleteEmployeeTerritory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "EmployeeID",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "TerritoryID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getEmployeeTerritoryByEmployeeIDAndTerritoryID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "EmployeeID",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "TerritoryID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/EmployeeTerritory"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateEmployeeTerritory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "EmployeeID",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "TerritoryID",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "EmployeeTerritory",
+            "schema": {
+              "$ref": "#/definitions/EmployeeTerritory"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelEmployeeTerritoryChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "EmployeeTerritory",
+            "schema": {
+              "$ref": "#/definitions/EmployeeTerritory"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Orders({OrderID})": {
+      "delete": {
+        "operationId": "deleteOrder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getOrderByOrderID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateOrder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Order",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelOrderChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Order",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/OrderDetails(OrderID={OrderID},ProductID={ProductID})": {
+      "delete": {
+        "operationId": "deleteOrderDetail",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "ProductID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getOrderDetailByOrderIDAndProductID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "ProductID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/OrderDetail"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateOrderDetail",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "OrderID",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "ProductID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "OrderDetail",
+            "schema": {
+              "$ref": "#/definitions/OrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelOrderDetailChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "OrderDetail",
+            "schema": {
+              "$ref": "#/definitions/OrderDetail"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Products({ProductID})": {
+      "delete": {
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ProductID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getProductByProductID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ProductID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateProduct",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ProductID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Product",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelProductChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Product",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Regions({RegionID})": {
+      "delete": {
+        "operationId": "deleteRegion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RegionID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getRegionByRegionID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RegionID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateRegion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RegionID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Region",
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelRegionChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Region",
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Shippers({ShipperID})": {
+      "delete": {
+        "operationId": "deleteShipper",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ShipperID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getShipperByShipperID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ShipperID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Shipper"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateShipper",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ShipperID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Shipper",
+            "schema": {
+              "$ref": "#/definitions/Shipper"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelShipperChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Shipper",
+            "schema": {
+              "$ref": "#/definitions/Shipper"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Suppliers({SupplierID})": {
+      "delete": {
+        "operationId": "deleteSupplier",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "SupplierID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSupplierBySupplierID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "SupplierID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSupplier",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "SupplierID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Supplier",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelSupplierChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Supplier",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Territories('{TerritoryID}')": {
+      "delete": {
+        "operationId": "deleteTerritory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TerritoryID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getTerritoryByTerritoryID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TerritoryID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Territory"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateTerritory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TerritoryID",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Territory",
+            "schema": {
+              "$ref": "#/definitions/Territory"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelTerritoryChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Territory",
+            "schema": {
+              "$ref": "#/definitions/Territory"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/Northwind",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

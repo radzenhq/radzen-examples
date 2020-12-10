@@ -1,0 +1,19 @@
+﻿@page "/categories-and-products-on-demand"
+@layout MainLayout
+@inherits TreeDemos.Pages.CategoriesAndProductsOnDemandComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using TreeDemos.Models.Northwind
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Home">
+    </RadzenHeading>
+    <RadzenTree Data="@categories" Expand="@Tree0Expand">
+      <ChildContent>
+        <RadzenTreeLevel TextProperty="CategoryName">
+        </RadzenTreeLevel>
+      </ChildContent>
+    </RadzenTree>
+  </ChildContent>
+</RadzenContent>

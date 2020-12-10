@@ -1,0 +1,53 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "data": "${categories}",
+          "levels": [
+            {
+              "childrenProperty": "Products",
+              "schema": "Category",
+              "textProperty": "CategoryName"
+            },
+            {
+              "expanded": "",
+              "hasChildren": "(product) => false",
+              "schema": "Product",
+              "textProperty": "ProductName"
+            }
+          ],
+          "name": "tree0",
+          "type": "tree"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Northwind.getCategories",
+        "then": [
+          {
+            "name": "categories",
+            "type": "set",
+            "value": "${result.Include(c => c.Products)}",
+            "valueType": "IEnumerable<TreeDemos.Models.Northwind.Category>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "CategoriesAndProductsEager"
+}

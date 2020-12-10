@@ -1,0 +1,26 @@
+{
+  "dataSources": [
+    "Northwind"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "TreeDemos",
+  "navigation": [
+    "CategoriesAndProductsEager",
+    " CategoriesAndProductsOnDemand"
+  ],
+  "pages": [
+    "CategoriesAndProductsEager",
+    " CategoriesAndProductsOnDemand"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": "CategoriesAndProductsEager",
+  "theme": "default"
+}
