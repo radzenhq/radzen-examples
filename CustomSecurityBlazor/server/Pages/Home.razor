@@ -1,0 +1,20 @@
+﻿@page "/"
+@page "/home"
+@layout MainLayout
+@inherits CustomSecurity.Pages.HomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CustomSecurity.Models.CustomSecurityDb
+@using Microsoft.AspNetCore.Identity;
+@using CustomSecurity.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Home">
+    </RadzenHeading>
+  </ChildContent>
+</RadzenContent>

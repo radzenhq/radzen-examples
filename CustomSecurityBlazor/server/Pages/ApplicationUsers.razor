@@ -1,0 +1,39 @@
+﻿@page "/application-users"
+@layout MainLayout
+@inherits CustomSecurity.Pages.ApplicationUsersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CustomSecurity.Models.CustomSecurityDb
+@using Microsoft.AspNetCore.Identity;
+@using CustomSecurity.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Users">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@users" TItem="ApplicationUser" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="ApplicationUser" Property="UserName" Title="User Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ApplicationUser" Property="Email" Title="Email">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ApplicationUser" Filterable="false" Sortable="false" Width="70px">
+              <Template Context="applicationUser">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, applicationUser))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,21 @@
+{
+  "name": "Home",
+  "access": [
+    "Authenticated"
+  ],
+  "layout": "Main",
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "size": "H1",
+          "name": "pageTitle",
+          "text": "Home"
+        }
+      ]
+    }
+  ]
+}

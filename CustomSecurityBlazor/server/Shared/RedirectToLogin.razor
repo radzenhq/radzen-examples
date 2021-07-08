@@ -1,0 +1,18 @@
+﻿@inject NavigationManager UriHelper
+
+@code {
+    [Parameter]
+    public bool IsAuthenticated { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (!IsAuthenticated)
+        {
+            UriHelper.NavigateTo("Login", true);
+        }
+        else
+        {
+            UriHelper.NavigateTo("Unauthorized", true);
+        }
+    }
+}

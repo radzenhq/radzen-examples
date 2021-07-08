@@ -1,0 +1,60 @@
+{
+  "cssFiles": [],
+  "dataSources": [
+    "CustomSecurityDB"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "ignore": [
+    "server\\Data\\Migrations",
+    "server\\Services\\SecurityService.cs"
+  ],
+  "javaScriptFiles": [],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "CustomSecurity",
+  "namespaces": [],
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home",
+    "Login",
+    "Add Application Role",
+    "Application Users",
+    "Application Roles",
+    "Edit Application User",
+    "Register Application User",
+    "Profile",
+    "Unauthorized",
+    "Add Application User"
+  ],
+  "port": 8000,
+  "security": {
+    "autoGeneratePages": true,
+    "dataSource": "CustomSecurityDB",
+    "duration": 5,
+    "emailConfirmation": false,
+    "layout": "Main",
+    "loginLayout": "Login",
+    "overwriteExistingPages": true,
+    "provider": "default",
+    "sessionRefresh": false,
+    "smtpFrom": "",
+    "smtpPassword": "",
+    "smtpSSL": false,
+    "smtpServer": "",
+    "smtpUser": "",
+    "loginPage": "Login"
+  },
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": null,
+  "theme": "default",
+  "title": "CustomSecurity"
+}

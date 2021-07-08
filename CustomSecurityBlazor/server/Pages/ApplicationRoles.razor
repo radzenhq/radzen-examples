@@ -1,0 +1,37 @@
+﻿@page "/application-roles"
+@layout MainLayout
+@inherits CustomSecurity.Pages.ApplicationRolesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CustomSecurity.Models.CustomSecurityDb
+@using Microsoft.AspNetCore.Identity;
+@using CustomSecurity.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Roles">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@roles" TItem="IdentityRole">
+          <Columns>
+            <RadzenDataGridColumn TItem="IdentityRole" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="IdentityRole" Filterable="false" Sortable="false" Width="70px">
+              <Template Context="identityRole">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, identityRole))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
