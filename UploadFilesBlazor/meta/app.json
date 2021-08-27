@@ -1,0 +1,24 @@
+{
+  "dataSources": [
+    "UploadDB"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "UploadFilesBlazor",
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": null,
+  "theme": "default"
+}

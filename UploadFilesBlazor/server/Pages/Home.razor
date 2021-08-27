@@ -1,0 +1,38 @@
+﻿@page "/"
+@page "/home"
+@layout MainLayout
+@inherits UploadFilesBlazor.Pages.HomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using UploadFilesBlazor.Models.UploadDb
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Home">
+    </RadzenHeading>
+    <RadzenUpload Multiple="true" Url="upload/multiple" Complete="@Upload0Complete">
+    </RadzenUpload>
+    <RadzenDataGrid @ref="datagrid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getFilesResult" TItem="UploadFilesBlazor.Models.UploadDb.File" PageSize="10">
+      <Columns>
+        <RadzenDataGridColumn TItem="UploadFilesBlazor.Models.UploadDb.File" Property="Id" Title="Id">
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="UploadFilesBlazor.Models.UploadDb.File" Property="Name" Title="Name">
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="UploadFilesBlazor.Models.UploadDb.File" Property="Path" Title="Path">
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="UploadFilesBlazor.Models.UploadDb.File" Title="Download">
+          <Template Context="uploadFilesBlazorModelsUploadDbFile">
+            <RadzenLink Path="@($"{uploadFilesBlazorModelsUploadDbFile.Path}")" Target="_blank" Text="Download">
+            </RadzenLink>
+          </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="UploadFilesBlazor.Models.UploadDb.File" TextAlign="TextAlign.Center" Title="Delete">
+          <Template Context="uploadFilesBlazorModelsUploadDbFile">
+            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small" Click="@((args) =>Button0Click(args, uploadFilesBlazorModelsUploadDbFile))">
+            </RadzenButton>
+          </Template>
+        </RadzenDataGridColumn>
+      </Columns>
+    </RadzenDataGrid>
+  </ChildContent>
+</RadzenContent>

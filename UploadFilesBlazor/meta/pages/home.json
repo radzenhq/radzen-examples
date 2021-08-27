@@ -1,0 +1,137 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "events": {
+            "complete": [
+              {
+                "code": "await this.datagrid0.Reload()",
+                "type": "execute"
+              }
+            ]
+          },
+          "multiple": true,
+          "name": "upload0",
+          "type": "upload",
+          "url": "upload/multiple"
+        },
+        {
+          "allowFiltering": true,
+          "allowPaging": true,
+          "allowSorting": true,
+          "columns": [
+            {
+              "property": "Id",
+              "title": "Id"
+            },
+            {
+              "property": "Name",
+              "title": "Name"
+            },
+            {
+              "property": "Path",
+              "title": "Path"
+            },
+            {
+              "filterTemplate": "",
+              "template": [
+                {
+                  "icon": "",
+                  "name": "link0",
+                  "path": "${data.Path}",
+                  "target": "_blank",
+                  "text": "Download",
+                  "type": "link"
+                }
+              ],
+              "title": "Download"
+            },
+            {
+              "template": [
+                {
+                  "buttonStyle": "danger",
+                  "events": {
+                    "click": [
+                      {
+                        "name": "UploadDB.deleteFile",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${data.Id}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "DeleteFile",
+                            "parameters": [
+                              {
+                                "name": "name",
+                                "type": "string",
+                                "value": "${data.Name}"
+                              }
+                            ],
+                            "schema": {
+                              "$ref": "#/definitions/Void",
+                              "dotnetType": "void"
+                            },
+                            "type": "invoke-method"
+                          },
+                          {
+                            "code": "await this.datagrid0.Reload()",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "icon": "delete",
+                  "name": "button0",
+                  "size": "sm",
+                  "text": "",
+                  "type": "button"
+                }
+              ],
+              "textAlign": "center",
+              "title": "Delete"
+            }
+          ],
+          "data": "${getFilesResult}",
+          "itemType": "UploadFilesBlazor.Models.UploadDb.File",
+          "name": "datagrid0",
+          "pageSize": 10,
+          "type": "datagrid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "UploadDB.getFiles",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getFilesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<UploadFilesBlazor.Models.UploadDb.File>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Home"
+}
