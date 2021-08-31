@@ -5,54 +5,6 @@
       "container": "main",
       "components": [
         {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
           "type": "row",
           "components": [
             {
@@ -77,6 +29,7 @@
                               "type": "label",
                               "text": "Name",
                               "component": "Name",
+                              "name": "NameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -88,6 +41,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "Name",
@@ -117,6 +71,9 @@
                             {
                               "type": "button",
                               "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
                               "text": "Cancel",
                               "events": {
                                 "click": [
@@ -156,17 +113,17 @@
                         "then": [
                           {
                             "type": "close-popup",
-                            "result": "${taskstatus}"
+                            "result": "${taskstatus}",
+                            "condition": ""
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "RadzenCrm.Models.Crm.TaskStatus"
+                        "type": "invoke"
                       }
                     ]
                   },
                   "itemType": "RadzenCrm.Models.Crm.TaskStatus",
                   "data": "${taskstatus}",
-                  "visible": "${taskstatus != null && canEdit}"
+                  "visible": "${taskstatus != null}"
                 }
               ]
             }
@@ -177,12 +134,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "name": "CRM.getTaskStatusById",
         "parameters": [

@@ -1,6 +1,6 @@
 {
   "access": [
-    "Authenticated"
+    "Sales Manager"
   ],
   "components": [
     {
@@ -37,8 +37,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox",
-                              "value": "${role.Name}"
+                              "value": "${role.Name}",
+                              "type": "textbox"
                             },
                             {
                               "component": "Name",
@@ -75,7 +75,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "type": "back"
+                                    "type": "close-popup"
                                   }
                                 ]
                               },

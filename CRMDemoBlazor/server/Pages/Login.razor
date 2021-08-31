@@ -5,16 +5,12 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Http
-@inject UserManager<ApplicationUser> UserManager
-@inject SignInManager<ApplicationUser> SignInManager
-@inject IHttpContextAccessor Http
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
-<form method="post" action="account/login">
 <RadzenContent Container="main">
   <ChildContent>
     <RadzenHeading Size="H1" Text="Login">
@@ -35,4 +31,3 @@
     </RadzenTemplateForm>
   </ChildContent>
 </RadzenContent>
-</form>

@@ -23,7 +23,7 @@
                         "path": "add-opportunity",
                         "then": [
                           {
-                            "code": "grid0.Reload();",
+                            "code": "await grid0.Reload();",
                             "type": "execute"
                           },
                           {
@@ -50,17 +50,22 @@
                   "columns": [
                     {
                       "property": "Id",
-                      "title": "Id",
-                      "type": "integer"
+                      "title": "Id"
                     },
                     {
-                      "format": "decimal",
                       "property": "Amount",
-                      "title": "Amount",
-                      "type": "number"
+                      "title": "Amount"
                     },
                     {
+                      "property": "Name",
+                      "title": "Name"
+                    },
+                    {
+                      "filterProperty": "User.FirstName",
+                      "filterValue": "",
+                      "groupProperty": "",
                       "property": "UserId",
+                      "sortProperty": "User.FirstName",
                       "template": [
                         {
                           "name": "label0",
@@ -73,48 +78,45 @@
                           "type": "label"
                         }
                       ],
-                      "title": "User Id",
-                      "type": "string"
+                      "title": "User Id"
                     },
                     {
                       "filterProperty": "Contact.Email",
+                      "groupProperty": "Contact.Email",
                       "property": "ContactId",
                       "sortProperty": "Contact.Email",
                       "template": "${data.Contact?.Email}",
-                      "title": "Contact",
-                      "type": "string"
+                      "title": "Contact"
                     },
                     {
                       "filterProperty": "OpportunityStatus.Name",
+                      "groupProperty": "OpportunityStatus.Name",
                       "property": "StatusId",
                       "sortProperty": "OpportunityStatus.Name",
                       "template": "${data.OpportunityStatus?.Name}",
-                      "title": "Opportunity Status",
-                      "type": "string"
+                      "title": "Opportunity Status"
                     },
                     {
-                      "format": "date-time",
                       "formatString": "{0:MM/dd/yyyy}",
                       "property": "CloseDate",
-                      "title": "Close Date",
-                      "type": "string"
+                      "title": "Close Date"
                     },
                     {
-                      "property": "Name",
-                      "title": "Name",
-                      "type": "string"
-                    },
-                    {
-                      "bubble": false,
                       "filterable": false,
                       "sortable": false,
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "events": {
                             "click": [
                               {
-                                "argType": "RadzenCrm.Models.Crm.Opportunity",
+                                "condition": "await DialogService.Confirm(\"Are you sure you want to delete this record?\") == true",
                                 "error": [
                                   {
                                     "detail": "Unable to delete Opportunity",
@@ -132,7 +134,7 @@
                                 ],
                                 "then": [
                                   {
-                                    "code": "grid0.Reload();",
+                                    "code": "await grid0.Reload();",
                                     "condition": "result != null",
                                     "type": "execute"
                                   }
@@ -157,7 +159,6 @@
                     "loadData": [],
                     "rowSelect": [
                       {
-                        "argType": "RadzenCrm.Models.Crm.Opportunity",
                         "parameters": [
                           {
                             "name": "Id",
@@ -175,10 +176,11 @@
                       }
                     ]
                   },
+                  "filterMode": "advanced",
                   "itemType": "RadzenCrm.Models.Crm.Opportunity",
                   "name": "grid0",
                   "title": "",
-                  "type": "grid"
+                  "type": "datagrid"
                 }
               ],
               "type": "col"
@@ -195,12 +197,17 @@
     "load": [
       {
         "name": "CRM.getOpportunities",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "$expand",
+            "value": "Contact,OpportunityStatus"
+          }
+        ],
         "then": [
           {
             "name": "getOpportunitiesResult",
             "type": "set",
-            "value": "${result.value}",
+            "value": "${result}",
             "valueType": "IEnumerable<RadzenCrm.Models.Crm.Opportunity>"
           }
         ],

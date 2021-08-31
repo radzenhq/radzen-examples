@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Name",
                               "component": "Name",
+                              "name": "NameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -40,6 +41,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
                               "type": "textbox",
                               "name": "Name",
@@ -69,6 +71,9 @@
                             {
                               "type": "button",
                               "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
                               "text": "Cancel",
                               "events": {
                                 "click": [
@@ -107,8 +112,7 @@
                             "result": "${taskstatus}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "RadzenCrm.Models.Crm.TaskStatus"
+                        "type": "invoke"
                       }
                     ]
                   },
@@ -128,7 +132,7 @@
       {
         "name": "taskstatus",
         "type": "set",
-        "value": "new RadzenCrm.Models.Crm.TaskStatus()",
+        "value": "new RadzenCrm.Models.Crm.TaskStatus(){}",
         "valueType": "RadzenCrm.Models.Crm.TaskStatus"
       }
     ]

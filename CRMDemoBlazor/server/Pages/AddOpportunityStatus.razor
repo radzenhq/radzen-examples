@@ -5,10 +5,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddOpportunityStatus> L
 <RadzenContent Container="main">
@@ -31,7 +32,7 @@
               <div class="col offset-sm-3">
                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

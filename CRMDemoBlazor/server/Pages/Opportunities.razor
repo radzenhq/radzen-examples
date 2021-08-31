@@ -5,10 +5,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Opportunities> L
 <RadzenContent Container="main">
@@ -19,42 +20,42 @@
       <div class="col-md-12">
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getOpportunitiesResult" TItem="RadzenCrm.Models.Crm.Opportunity" RowSelect="@Grid0RowSelect">
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getOpportunitiesResult" FilterMode="FilterMode.Advanced" TItem="RadzenCrm.Models.Crm.Opportunity" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Property="Id" Title="Id" Type="integer">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Format="decimal" Property="Amount" Title="Amount" Type="number">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Property="UserId" Title="User Id" Type="string">
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Property="Id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Property="Amount" Title="Amount">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" FilterProperty="User.FirstName" Property="UserId" SortProperty="User.FirstName" Title="User Id">
               <Template Context="radzenCrmModelsCrmOpportunity">
                 <RadzenLabel Text="@($"{(radzenCrmModelsCrmOpportunity.User.FirstName)}")">
                 </RadzenLabel>
                 <RadzenLabel Text="@($"{(radzenCrmModelsCrmOpportunity.User.LastName)}")">
                 </RadzenLabel>
               </Template>
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" FilterProperty="Contact.Email" Property="ContactId" SortProperty="Contact.Email" Title="Contact" Type="string">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" FilterProperty="Contact.Email" GroupProperty="Contact.Email" Property="ContactId" SortProperty="Contact.Email" Title="Contact">
               <Template Context="data">
               @(data.Contact?.Email)
               </Template>
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" FilterProperty="OpportunityStatus.Name" Property="StatusId" SortProperty="OpportunityStatus.Name" Title="Opportunity Status" Type="string">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" FilterProperty="OpportunityStatus.Name" GroupProperty="OpportunityStatus.Name" Property="StatusId" SortProperty="OpportunityStatus.Name" Title="Opportunity Status">
               <Template Context="data">
               @(data.OpportunityStatus?.Name)
               </Template>
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Format="date-time" FormatString="{0:MM/dd/yyyy}" Property="CloseDate" Title="Close Date" Type="string">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Property="Name" Title="Name" Type="string">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" FormatString="{0:MM/dd/yyyy}" Property="CloseDate" Title="Close Date">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.Opportunity" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
               <Template Context="radzenCrmModelsCrmOpportunity">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmOpportunity))">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmOpportunity))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
-            </RadzenGridColumn>
+            </RadzenDataGridColumn>
           </Columns>
-        </RadzenGrid>
+        </RadzenDataGrid>
       </div>
     </div>
   </ChildContent>

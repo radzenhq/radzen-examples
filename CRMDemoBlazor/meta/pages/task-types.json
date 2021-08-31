@@ -32,7 +32,7 @@
                         "type": "popup",
                         "then": [
                           {
-                            "code": "grid0.Reload();",
+                            "code": "await grid0.Reload();",
                             "type": "execute"
                           },
                           {
@@ -47,6 +47,7 @@
                 {
                   "name": "grid0",
                   "allowFiltering": true,
+                  "filterMode": "advanced",
                   "allowPaging": true,
                   "allowSorting": true,
                   "data": "${getTaskTypesResult}",
@@ -62,7 +63,6 @@
                         ],
                         "path": "edit-task-type",
                         "type": "popup",
-                        "argType": "RadzenCrm.Models.Crm.TaskType",
                         "then": [
                           {
                             "code": "await InvokeAsync(() => { StateHasChanged(); });",
@@ -76,21 +76,25 @@
                   "columns": [
                     {
                       "property": "Id",
-                      "title": "Id",
-                      "type": "integer"
+                      "title": "Id"
                     },
                     {
                       "property": "Name",
-                      "title": "Name",
-                      "type": "string"
+                      "title": "Name"
                     },
                     {
                       "filterable": false,
                       "sortable": false,
-                      "bubble": false,
                       "width": "70px",
+                      "textAlign": "center",
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "icon": "close",
                           "name": "gridDeleteButton",
@@ -100,6 +104,7 @@
                           "events": {
                             "click": [
                               {
+                                "condition": "await DialogService.Confirm(\"Are you sure you want to delete this record?\") == true",
                                 "error": [
                                   {
                                     "detail": "Unable to delete TaskType",
@@ -117,13 +122,12 @@
                                 ],
                                 "then": [
                                   {
-                                    "code": "grid0.Reload();",
+                                    "code": "await grid0.Reload();",
                                     "condition": "result != null",
                                     "type": "execute"
                                   }
                                 ],
-                                "type": "invoke",
-                                "argType": "RadzenCrm.Models.Crm.TaskType"
+                                "type": "invoke"
                               }
                             ]
                           }
@@ -131,7 +135,7 @@
                       ]
                     }
                   ],
-                  "type": "grid",
+                  "type": "datagrid",
                   "itemType": "RadzenCrm.Models.Crm.TaskType"
                 }
               ]
@@ -150,7 +154,7 @@
           {
             "name": "getTaskTypesResult",
             "type": "set",
-            "value": "${result.value}",
+            "value": "${result}",
             "valueType": "IEnumerable<RadzenCrm.Models.Crm.TaskType>"
           }
         ],

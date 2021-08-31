@@ -5,27 +5,18 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
+
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditOpportunity> L
 <RadzenContent Container="main">
   <ChildContent>
-    <div  class="row">
-      <div class="col-md-9">
-        <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
-        </RadzenLabel>
-      </div>
-      <div class="col-md-3">
-        <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
-        </RadzenButton>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@opportunity" TItem="RadzenCrm.Models.Crm.Opportunity" Visible="@(opportunity != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@opportunity" TItem="RadzenCrm.Models.Crm.Opportunity" Visible="@(opportunity != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -59,7 +50,7 @@
               <div class="col-md-9">
                 <RadzenDropDown Data="@getContactsResult" Placeholder="Choose Contact" style="display: block; width: 100%" TextProperty="Email" @bind-Value="@(opportunity.ContactId)" ValueProperty="Id" Name="ContactId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="ContactId" style="position: absolute" Text="ContactId is required">
+                <RadzenRequiredValidator Component="ContactId" DefaultValue="0" style="position: absolute" Text="ContactId is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -71,7 +62,7 @@
               <div class="col-md-9">
                 <RadzenDropDown Data="@getOpportunityStatusesResult" Placeholder="Choose OpportunityStatus" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(opportunity.StatusId)" ValueProperty="Id" Name="StatusId">
                 </RadzenDropDown>
-                <RadzenRequiredValidator Component="StatusId" style="position: absolute" Text="StatusId is required">
+                <RadzenRequiredValidator Component="StatusId" DefaultValue="0" style="position: absolute" Text="StatusId is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -91,7 +82,7 @@
               <div class="col offset-sm-3">
                 <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button3Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

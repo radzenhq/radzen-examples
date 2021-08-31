@@ -1,296 +1,262 @@
 {
-  "access": [
-    "Authenticated"
-  ],
   "components": [
     {
+      "type": "content",
+      "container": "main",
       "components": [
         {
+          "type": "row",
           "components": [
             {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
-          "components": [
-            {
+              "type": "col",
               "class": "col-md-12",
               "components": [
                 {
+                  "type": "template-form",
+                  "name": "form0",
                   "components": [
                     {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
+                              "type": "label",
+                              "text": "Email",
                               "component": "Email",
+                              "name": "EmailLabel",
                               "style": {
                                 "width": "100%"
-                              },
-                              "text": "Email",
-                              "type": "label"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
+                              "type": "textbox",
                               "name": "Email",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox",
                               "value": "${contact.Email}"
                             },
                             {
-                              "component": "Email",
+                              "type": "required-validator",
                               "name": "EmailRequiredValidator",
+                              "component": "Email",
+                              "text": "Email is required",
                               "style": {
                                 "position": "absolute"
-                              },
-                              "text": "Email is required",
-                              "type": "required-validator"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
+                      ]
+                    },
+                    {
+                      "type": "row",
                       "style": {
                         "marginBottom": "1rem"
                       },
-                      "type": "row"
-                    },
-                    {
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
+                              "type": "label",
+                              "text": "Company",
                               "component": "Company",
+                              "name": "CompanyLabel",
                               "style": {
                                 "width": "100%"
-                              },
-                              "text": "Company",
-                              "type": "label"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
+                              "type": "textbox",
                               "name": "Company",
                               "style": {
                                 "width": "100%"
                               },
-                              "type": "textbox",
                               "value": "${contact.Company}"
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
+                      ]
+                    },
+                    {
+                      "type": "row",
                       "style": {
                         "marginBottom": "1rem"
                       },
-                      "type": "row"
-                    },
-                    {
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
+                              "type": "label",
+                              "text": "Last Name",
                               "component": "LastName",
+                              "name": "LastNameLabel",
                               "style": {
                                 "width": "100%"
-                              },
-                              "text": "Last Name",
-                              "type": "label"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
+                              "type": "textbox",
                               "name": "LastName",
                               "style": {
                                 "width": "100%"
                               },
-                              "type": "textbox",
                               "value": "${contact.LastName}"
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
+                      ]
+                    },
+                    {
+                      "type": "row",
                       "style": {
                         "marginBottom": "1rem"
                       },
-                      "type": "row"
-                    },
-                    {
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
+                              "type": "label",
+                              "text": "First Name",
                               "component": "FirstName",
+                              "name": "FirstNameLabel",
                               "style": {
                                 "width": "100%"
-                              },
-                              "text": "First Name",
-                              "type": "label"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
+                              "type": "textbox",
                               "name": "FirstName",
                               "style": {
                                 "width": "100%"
                               },
-                              "type": "textbox",
                               "value": "${contact.FirstName}"
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
+                      ]
+                    },
+                    {
+                      "type": "row",
                       "style": {
                         "marginBottom": "1rem"
                       },
-                      "type": "row"
-                    },
-                    {
                       "components": [
                         {
+                          "type": "col",
                           "class": "col-md-3",
                           "components": [
                             {
+                              "type": "label",
+                              "text": "Phone",
                               "component": "Phone",
+                              "name": "PhoneLabel",
                               "style": {
                                 "width": "100%"
-                              },
-                              "text": "Phone",
-                              "type": "label"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         },
                         {
+                          "type": "col",
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "maxLength": 256,
+                              "type": "textbox",
                               "name": "Phone",
                               "style": {
                                 "width": "100%"
                               },
-                              "type": "textbox",
                               "value": "${contact.Phone}"
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
+                      ]
                     },
                     {
+                      "type": "row",
                       "components": [
                         {
+                          "type": "col",
                           "class": "col offset-sm-3",
                           "components": [
                             {
-                              "buttonStyle": "primary",
+                              "type": "button",
                               "buttonType": "submit",
                               "icon": "save",
                               "text": "Save",
-                              "type": "button"
+                              "buttonStyle": "primary"
                             },
                             {
+                              "type": "button",
                               "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
                               "events": {
                                 "click": [
                                   {
                                     "type": "close-popup"
                                   }
                                 ]
-                              },
-                              "text": "Cancel",
-                              "type": "button"
+                              }
                             }
-                          ],
-                          "type": "col"
+                          ]
                         }
-                      ],
-                      "type": "row"
+                      ]
                     }
                   ],
-                  "data": "${contact}",
                   "events": {
                     "submit": [
                       {
-                        "argType": "RadzenCrm.Models.Crm.Contact",
                         "error": [
                           {
                             "detail": "Unable to update Contact",
@@ -312,8 +278,9 @@
                         ],
                         "then": [
                           {
+                            "type": "close-popup",
                             "result": "${contact}",
-                            "type": "close-popup"
+                            "condition": ""
                           }
                         ],
                         "type": "invoke"
@@ -321,31 +288,19 @@
                     ]
                   },
                   "itemType": "RadzenCrm.Models.Crm.Contact",
-                  "name": "form0",
-                  "type": "template-form",
-                  "visible": "${contact != null && canEdit}"
+                  "data": "${contact}",
+                  "visible": "${contact != null}"
                 }
-              ],
-              "type": "col"
+              ]
             }
-          ],
-          "type": "row"
+          ]
         }
-      ],
-      "container": "main",
-      "type": "content"
+      ]
     }
   ],
   "events": {
     "load": [
       {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
-      {
-        "error": [],
         "name": "CRM.getContactById",
         "parameters": [
           {
@@ -361,10 +316,14 @@
             "valueType": "RadzenCrm.Models.Crm.Contact"
           }
         ],
+        "error": [],
         "type": "invoke"
       }
     ]
   },
+  "name": "Edit Contact",
   "layout": "Main",
-  "name": "Edit Contact"
+  "access": [
+    "Authenticated"
+  ]
 }

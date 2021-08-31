@@ -3,29 +3,31 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> L
 <RadzenDialog />
 <RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
 
 <RadzenHeader>
   <ChildContent>
     <div class="row justify-content-start align-items-center">
-      <div class="col-md-6 d-flex align-items-center">
+      <div class="col-6 d-flex align-items-center">
         <RadzenSidebarToggle Click="@SidebarToggle0Click">
         </RadzenSidebarToggle>
         <RadzenLabel Text="RadzenCRM">
         </RadzenLabel>
       </div>
-      <div class="col-md-6 text-lg-right">
+      <div class="col-6 text-right">
         <RadzenProfileMenu Visible="@(Security.IsAuthenticated())" Click="@Profilemenu0Click">
           <ChildContent>
             <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
             </RadzenProfileMenuItem>
-            <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+            <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="@Security.IsInRole(new string[]{"Sales Manager"})">
             </RadzenProfileMenuItem>
-            <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+            <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="@Security.IsInRole(new string[]{"Sales Manager"})">
             </RadzenProfileMenuItem>
             <RadzenProfileMenuItem Text="Logout" Value="Logout" Icon="power_settings_new">
             </RadzenProfileMenuItem>
@@ -78,7 +80,7 @@
 </RadzenSidebar>
 <RadzenFooter>
   <ChildContent>
-    <RadzenLabel Text="RadzenCRM, Copyright &copy; 2019">
+    <RadzenLabel Text="RadzenCRM, Copyright Ⓒ 2021">
     </RadzenLabel>
   </ChildContent>
 </RadzenFooter>

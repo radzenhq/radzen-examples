@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
@@ -19,6 +20,14 @@ namespace RadzenCrm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+        public void Reload()
+        {
+            InvokeAsync(StateHasChanged);
+        }
+
+        public void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+        }
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -30,6 +39,12 @@ namespace RadzenCrm.Pages
         protected DialogService DialogService { get; set; }
 
         [Inject]
+        protected TooltipService TooltipService { get; set; }
+
+        [Inject]
+        protected ContextMenuService ContextMenuService { get; set; }
+
+        [Inject]
         protected NotificationService NotificationService { get; set; }
 
         [Inject]
@@ -38,6 +53,7 @@ namespace RadzenCrm.Pages
 
         [Inject]
         protected CrmService Crm { get; set; }
+
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
             await Load();
@@ -48,7 +64,7 @@ namespace RadzenCrm.Pages
 
             if (!string.IsNullOrEmpty(error))
             {
-                NotificationService.Notify(NotificationSeverity.Error, $"Error", $"{error}");
+                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error,Summary = $"Error",Detail = $"{error}" });
             }
         }
     }

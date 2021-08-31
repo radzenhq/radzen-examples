@@ -1,6 +1,6 @@
 {
   "access": [
-    "Authenticated"
+    "Sales Manager"
   ],
   "components": [
     {
@@ -23,7 +23,11 @@
                         "path": "add-application-user",
                         "then": [
                           {
-                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "code": "await Load();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "${await grid0.Reload()}",
                             "type": "execute"
                           }
                         ],
@@ -50,7 +54,6 @@
                     },
                     {
                       "property": "Email",
-                      "template": "",
                       "title": "Email"
                     },
                     {
@@ -66,6 +69,8 @@
                       "type": "string"
                     },
                     {
+                      "format": "",
+                      "property": "Picture",
                       "template": [
                         {
                           "name": "image0",
@@ -77,14 +82,20 @@
                           "type": "image"
                         }
                       ],
-                      "title": "Picture"
+                      "title": "Picture",
+                      "type": "string"
                     },
                     {
-                      "bubble": false,
                       "filterable": false,
                       "sortable": false,
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "events": {
                             "click": [
@@ -107,7 +118,11 @@
                                 ],
                                 "then": [
                                   {
-                                    "code": "grid0.Reload();",
+                                    "code": "await Load();",
+                                    "type": "execute"
+                                  },
+                                  {
+                                    "code": "await grid0.Reload();",
                                     "condition": "result != null",
                                     "type": "execute"
                                   }
@@ -141,7 +156,11 @@
                         "path": "edit-application-user",
                         "then": [
                           {
-                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "code": "await Load();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "${await grid0.Reload()}",
                             "type": "execute"
                           }
                         ],
@@ -152,7 +171,7 @@
                   "itemType": "ApplicationUser",
                   "name": "grid0",
                   "title": "",
-                  "type": "grid"
+                  "type": "datagrid"
                 }
               ],
               "type": "col"

@@ -6,10 +6,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Home> L
 <RadzenContent Container="main">
@@ -34,7 +35,7 @@
                 </RadzenHeading>
                 <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="LAST MONTH">
                 </RadzenHeading>
-                <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.Revenue.ToString("C"))">
+                <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats?.Revenue.ToString("C"))">
                 </RadzenHeading>
               </div>
             </div>
@@ -54,7 +55,7 @@
                 </RadzenHeading>
                 <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="LAST MONTH">
                 </RadzenHeading>
-                <RadzenHeading Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.Opportunities.ToString())">
+                <RadzenHeading Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats?.Opportunities.ToString())">
                 </RadzenHeading>
               </div>
             </div>
@@ -74,7 +75,7 @@
                 </RadzenHeading>
                 <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="LAST MONTH">
                 </RadzenHeading>
-                <RadzenHeading Size="H4" style="color: #ff6d41; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.AverageDealSize.ToString())">
+                <RadzenHeading Size="H4" style="color: #ff6d41; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats?.AverageDealSize.ToString())">
                 </RadzenHeading>
               </div>
             </div>
@@ -94,7 +95,7 @@
                 </RadzenHeading>
                 <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="LAST MONTH">
                 </RadzenHeading>
-                <RadzenHeading Size="H4" style="color: #479cc8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats.Ratio.ToString("P"))">
+                <RadzenHeading Size="H4" style="color: #479cc8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@(monthlyStats?.Ratio.ToString("P"))">
                 </RadzenHeading>
               </div>
             </div>

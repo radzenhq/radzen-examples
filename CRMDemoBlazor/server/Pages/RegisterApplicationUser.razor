@@ -5,26 +5,27 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RegisterApplicationUser> L
 <RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Method="post" Action="/account/register" Data="@(user)" TItem="ApplicationUser" Visible="@(user != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm Method="post" Action="account/register" Data="@user" TItem="ApplicationUser" Visible="@(user != null)">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
+                <RadzenLabel Component="userName" style="width: 100%" Text="Email">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" Name="UserName">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.Name)" Name="UserName">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="Email is required">
+                <RadzenRequiredValidator Component="UserName" style="position: absolute" Text="Email is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
@@ -34,7 +35,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword style="display: block; width: 100%" Name="Password">
+                <RadzenPassword style="display: block; width: 100%" @bind-Value="@(user.Password)" Name="Password">
                 </RadzenPassword>
                 <RadzenRequiredValidator Component="Password" style="position: absolute" Text="Password is required">
                 </RadzenRequiredValidator>
@@ -46,7 +47,7 @@
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenPassword style="display: block; width: 100%" Name="ConfirmPassword">
+                <RadzenPassword style="display: block; width: 100%" @bind-Value="@(user.ConfirmPassword)" Name="ConfirmPassword">
                 </RadzenPassword>
                 <RadzenRequiredValidator Component="ConfirmPassword" style="position: absolute" Text="ConfirmPassword is required">
                 </RadzenRequiredValidator>

@@ -5,43 +5,34 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
+
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditContact> L
 <RadzenContent Container="main">
   <ChildContent>
-    <div  class="row">
-      <div class="col-md-9">
-        <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
-        </RadzenLabel>
-      </div>
-      <div class="col-md-3">
-        <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
-        </RadzenButton>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm Data="@contact" TItem="RadzenCrm.Models.Crm.Contact" Visible="@(contact != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="RadzenCrm.Models.Crm.Contact" Data="@contact" Visible="@(contact != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Email" style="width: 100%" Text="Email">
+                <RadzenLabel Text="Email" Component="Email" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
                 <RadzenTextBox MaxLength="256" style="display: block; width: 100%" @bind-Value="@(contact.Email)" Name="Email">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Email" style="position: absolute" Text="Email is required">
+                <RadzenRequiredValidator Component="Email" Text="Email is required" style="position: absolute">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Company" style="width: 100%" Text="Company">
+                <RadzenLabel Text="Company" Component="Company" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
@@ -51,7 +42,7 @@
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="LastName" style="width: 100%" Text="Last Name">
+                <RadzenLabel Text="Last Name" Component="LastName" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
@@ -61,7 +52,7 @@
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="FirstName" style="width: 100%" Text="First Name">
+                <RadzenLabel Text="First Name" Component="FirstName" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
@@ -71,7 +62,7 @@
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Component="Phone" style="width: 100%" Text="Phone">
+                <RadzenLabel Text="Phone" Component="Phone" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
@@ -81,9 +72,9 @@
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button3Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

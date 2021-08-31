@@ -5,10 +5,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
+@attribute [Authorize(Roles="Sales Manager")]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddApplicationRole> L
 <RadzenContent Container="main">

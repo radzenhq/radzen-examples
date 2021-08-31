@@ -6,23 +6,23 @@
           "class": "justify-content-start align-items-center",
           "components": [
             {
-              "class": "col-md-6 d-flex align-items-center",
+              "class": "col-6 d-flex align-items-center",
               "components": [
                 {
+                  "name": "sidebar-toggle0",
+                  "type": "sidebar-toggle",
                   "events": {
                     "click": [
                       {
-                        "code": "sidebar0.Toggle();",
+                        "code": "await InvokeAsync(() => { sidebar0.Toggle(); });",
                         "type": "execute"
                       },
                       {
-                        "code": "body0.Toggle();",
+                        "code": "await InvokeAsync(() => { body0.Toggle(); });",
                         "type": "execute"
                       }
                     ]
-                  },
-                  "name": "sidebar-toggle0",
-                  "type": "sidebar-toggle"
+                  }
                 },
                 {
                   "name": "label0",
@@ -34,10 +34,14 @@
               "type": "col"
             },
             {
-              "class": "col-md-6 text-lg-right",
+              "class": "col-6 text-right",
+              "name": "rightCol",
+              "type": "col",
               "components": [
                 {
+                  "type": "profilemenu",
                   "name": "profilemenu0",
+                  "visible": "${Security.IsAuthenticated()}",
                   "template": [
                     {
                       "name": "label1",
@@ -59,13 +63,9 @@
                       },
                       "type": "image"
                     }
-                  ],
-                  "type": "profilemenu",
-                  "visible": "${Security.IsAuthenticated()}"
+                  ]
                 }
-              ],
-              "name": "rightCol",
-              "type": "col"
+              ]
             }
           ],
           "name": "headerRow",
@@ -143,7 +143,7 @@
       "components": [
         {
           "name": "footerText",
-          "text": "RadzenCRM, Copyright &copy; 2019",
+          "text": "RadzenCRM, Copyright Ⓒ 2021",
           "type": "label"
         }
       ],
@@ -151,19 +151,5 @@
       "type": "footer"
     }
   ],
-  "events": {
-    "load": [
-      {
-        "name": "Culture",
-        "type": "set",
-        "value": "\"\"",
-        "valueType": "string"
-      },
-      {
-        "code": "Culture = await JSRuntime.InvokeAsync<string>(\"Radzen.getCulture\");",
-        "type": "execute"
-      }
-    ]
-  },
   "name": "Main"
 }

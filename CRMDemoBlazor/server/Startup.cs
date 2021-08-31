@@ -85,6 +85,9 @@ namespace RadzenCrm
 
             services.AddScoped<DialogService>();
             services.AddScoped<NotificationService>();
+            services.AddScoped<TooltipService>();
+            services.AddScoped<ContextMenuService>();
+            services.AddScoped<GlobalsService>();
             services.AddLocalization();
 
             var supportedCultures = new[]

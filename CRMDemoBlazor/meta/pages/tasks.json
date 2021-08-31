@@ -23,7 +23,7 @@
                         "path": "add-task",
                         "then": [
                           {
-                            "code": "grid0.Reload();",
+                            "code": "await grid0.Reload();",
                             "type": "execute"
                           },
                           {
@@ -50,38 +50,40 @@
                   "columns": [
                     {
                       "property": "Id",
-                      "title": "Id",
-                      "type": "integer"
+                      "title": "Id"
                     },
                     {
                       "property": "Title",
-                      "title": "Title",
-                      "type": "string"
+                      "title": "Title"
                     },
                     {
                       "filterProperty": "Opportunity.Name",
-                      "format": "",
-                      "headerTemplate": "",
-                      "property": "Opportunity.Name",
+                      "groupProperty": "Opportunity.Name",
+                      "property": "OpportunityId",
                       "sortProperty": "Opportunity.Name",
-                      "template": "",
-                      "title": "Opportunity Name",
-                      "type": "string"
+                      "template": "${data.Opportunity?.Name}",
+                      "title": "Opportunity"
                     },
                     {
-                      "format": "date-time",
                       "formatString": "{0:MM/dd/yyyy}",
-                      "headerTemplate": "",
                       "property": "DueDate",
-                      "template": "",
-                      "title": "Due Date",
-                      "type": "string"
+                      "title": "Due Date"
                     },
                     {
                       "filterProperty": "TaskType.Name",
+                      "groupProperty": "TaskType.Name",
                       "property": "TypeId",
                       "sortProperty": "TaskType.Name",
                       "template": [
+                        {
+                          "icon": "settings_phone",
+                          "name": "icon0",
+                          "style": {
+                            "verticalAlign": "middle"
+                          },
+                          "type": "icon",
+                          "visible": "${data.TaskType.Name == \"Call\"}"
+                        },
                         {
                           "icon": "video_call",
                           "name": "icon1",
@@ -93,7 +95,7 @@
                         },
                         {
                           "icon": "email",
-                          "name": "icon3",
+                          "name": "icon2",
                           "style": {
                             "verticalAlign": "middle"
                           },
@@ -101,32 +103,22 @@
                           "visible": "${data.TaskType.Name == \"Email\"}"
                         },
                         {
-                          "icon": "settings_phone",
-                          "name": "icon2",
-                          "style": {
-                            "verticalAlign": "middle"
-                          },
-                          "type": "icon",
-                          "visible": "${data.TaskType.Name == \"Call\"}"
-                        },
-                        {
-                          "name": "label1",
+                          "name": "label0",
                           "text": "${data.TaskType.Name}",
                           "type": "label"
                         }
                       ],
-                      "title": "Task Type",
-                      "type": "string"
+                      "title": "Task Type"
                     },
                     {
                       "filterProperty": "TaskStatus.Name",
-                      "headerTemplate": "",
+                      "groupProperty": "TaskStatus.Name",
                       "property": "StatusId",
                       "sortProperty": "TaskStatus.Name",
                       "template": [
                         {
                           "icon": "check_circle",
-                          "name": "icon0",
+                          "name": "icon3",
                           "style": {
                             "verticalAlign": "middle"
                           },
@@ -152,25 +144,29 @@
                           "visible": "${data.TaskStatus.Name == \"In Progress\"}"
                         },
                         {
-                          "name": "label0",
+                          "name": "label1",
                           "text": "${data.TaskStatus.Name}",
                           "type": "label"
                         }
                       ],
-                      "title": "Task Status",
-                      "type": "string"
+                      "title": "Task Status"
                     },
                     {
-                      "bubble": false,
                       "filterable": false,
                       "sortable": false,
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "events": {
                             "click": [
                               {
-                                "argType": "RadzenCrm.Models.Crm.Task",
+                                "condition": "await DialogService.Confirm(\"Are you sure you want to delete this record?\") == true",
                                 "error": [
                                   {
                                     "detail": "Unable to delete Task",
@@ -188,7 +184,7 @@
                                 ],
                                 "then": [
                                   {
-                                    "code": "grid0.Reload();",
+                                    "code": "await grid0.Reload();",
                                     "condition": "result != null",
                                     "type": "execute"
                                   }
@@ -204,6 +200,7 @@
                           "type": "button"
                         }
                       ],
+                      "textAlign": "center",
                       "width": "70px"
                     }
                   ],
@@ -212,7 +209,6 @@
                     "loadData": [],
                     "rowSelect": [
                       {
-                        "argType": "RadzenCrm.Models.Crm.Task",
                         "parameters": [
                           {
                             "name": "Id",
@@ -230,10 +226,11 @@
                       }
                     ]
                   },
+                  "filterMode": "advanced",
                   "itemType": "RadzenCrm.Models.Crm.Task",
                   "name": "grid0",
                   "title": "",
-                  "type": "grid"
+                  "type": "datagrid"
                 }
               ],
               "type": "col"
@@ -250,12 +247,17 @@
     "load": [
       {
         "name": "CRM.getTasks",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "$expand",
+            "value": "Opportunity,TaskType,TaskStatus"
+          }
+        ],
         "then": [
           {
             "name": "getTasksResult",
             "type": "set",
-            "value": "${result.value}",
+            "value": "${result}",
             "valueType": "IEnumerable<RadzenCrm.Models.Crm.Task>"
           }
         ],

@@ -3,7 +3,7 @@
     "title": "CRM",
     "x-type": "odata",
     "x-connector": "mssql",
-    "x-connector-version": 14
+    "x-connector-version": 15
   },
   "definitions": {
     "Contact": {
@@ -17,6 +17,7 @@
           "x-key": true,
           "x-identity": true,
           "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-navigation": [
             {
@@ -27,6 +28,7 @@
           ]
         },
         "Email": {
+          "x-nullable": false,
           "type": "string",
           "length": 256
         },
@@ -70,6 +72,7 @@
           "x-key": true,
           "x-identity": true,
           "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-navigation": [
             {
@@ -80,14 +83,19 @@
           ]
         },
         "Amount": {
+          "x-nullable": false,
+          "x-precision": 19,
+          "x-scale": 4,
           "type": "number",
           "format": "decimal"
         },
         "Name": {
+          "x-nullable": false,
           "type": "string",
           "length": 256
         },
         "UserId": {
+          "x-nullable": false,
           "type": "string",
           "length": 450
         },
@@ -96,6 +104,8 @@
           "$ref": "#/definitions/Contact"
         },
         "ContactId": {
+          "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Contacts",
@@ -112,6 +122,8 @@
           "$ref": "#/definitions/OpportunityStatus"
         },
         "StatusId": {
+          "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "OpportunityStatuses",
@@ -124,6 +136,7 @@
           }
         },
         "CloseDate": {
+          "x-nullable": false,
           "type": "string",
           "format": "date-time",
           "x-datetime": "datetime"
@@ -145,6 +158,7 @@
           "x-key": true,
           "x-identity": true,
           "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-navigation": [
             {
@@ -178,6 +192,7 @@
           "x-key": true,
           "x-identity": true,
           "x-nullable": false,
+          "x-precision": 10,
           "type": "integer"
         },
         "Title": {
@@ -189,6 +204,8 @@
           "$ref": "#/definitions/Opportunity"
         },
         "OpportunityId": {
+          "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "Opportunities",
@@ -201,6 +218,7 @@
           }
         },
         "DueDate": {
+          "x-nullable": false,
           "type": "string",
           "format": "date-time",
           "x-datetime": "datetime"
@@ -210,6 +228,8 @@
           "$ref": "#/definitions/TaskType"
         },
         "TypeId": {
+          "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "TaskTypes",
@@ -226,6 +246,7 @@
           "$ref": "#/definitions/TaskStatus"
         },
         "StatusId": {
+          "x-precision": 10,
           "type": "integer",
           "x-foreignKey": {
             "parentTable": "TaskStatuses",
@@ -248,6 +269,7 @@
           "x-key": true,
           "x-identity": true,
           "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-navigation": [
             {
@@ -278,6 +300,7 @@
           "x-key": true,
           "x-identity": true,
           "x-nullable": false,
+          "x-precision": 10,
           "type": "integer",
           "x-navigation": [
             {
@@ -328,6 +351,11 @@
             "in": "query",
             "name": "$skip",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -404,6 +432,11 @@
             "in": "query",
             "name": "$skip",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -480,6 +513,11 @@
             "in": "query",
             "name": "$skip",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -556,6 +594,11 @@
             "in": "query",
             "name": "$skip",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -632,6 +675,11 @@
             "in": "query",
             "name": "$skip",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -708,6 +756,11 @@
             "in": "query",
             "name": "$skip",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -821,6 +874,26 @@
             }
           }
         }
+      },
+      "cancel": {
+        "operationId": "cancelContactChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Contact",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
     "/Opportunities({Id})": {
@@ -872,6 +945,26 @@
             "name": "Id",
             "type": "integer"
           },
+          {
+            "in": "body",
+            "name": "Opportunity",
+            "schema": {
+              "$ref": "#/definitions/Opportunity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelOpportunityChanges",
+        "parameters": [
           {
             "in": "body",
             "name": "Opportunity",
@@ -955,6 +1048,26 @@
             }
           }
         }
+      },
+      "cancel": {
+        "operationId": "cancelOpportunityStatusChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "OpportunityStatus",
+            "schema": {
+              "$ref": "#/definitions/OpportunityStatus"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
     "/Tasks({Id})": {
@@ -1006,6 +1119,26 @@
             "name": "Id",
             "type": "integer"
           },
+          {
+            "in": "body",
+            "name": "Task",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelTaskChanges",
+        "parameters": [
           {
             "in": "body",
             "name": "Task",
@@ -1089,6 +1222,26 @@
             }
           }
         }
+      },
+      "cancel": {
+        "operationId": "cancelTaskStatusChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "TaskStatus",
+            "schema": {
+              "$ref": "#/definitions/TaskStatus"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
     "/TaskTypes({Id})": {
@@ -1140,6 +1293,26 @@
             "name": "Id",
             "type": "integer"
           },
+          {
+            "in": "body",
+            "name": "TaskType",
+            "schema": {
+              "$ref": "#/definitions/TaskType"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelTaskTypeChanges",
+        "parameters": [
           {
             "in": "body",
             "name": "TaskType",

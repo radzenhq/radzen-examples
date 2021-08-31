@@ -12,85 +12,69 @@
           "type": "heading"
         },
         {
-          "components": [
-            {
-              "class": "col-md-12",
-              "components": [
-                {
-                  "name": "textbox0",
-                  "placeholder": "",
-                  "style": {
-                    "width": "234px"
-                  },
-                  "type": "textbox",
-                  "value": "${contactFilter}"
-                },
-                {
-                  "events": {
-                    "click": [
+          "name": "textbox0",
+          "placeholder": "",
+          "type": "textbox",
+          "value": "${contactFilter}"
+        },
+        {
+          "events": {
+            "click": [
+              {
+                "name": "CRM.getContacts",
+                "parameters": [
+                  {
+                    "name": "$filter",
+                    "operator": "and",
+                    "value": [
                       {
-                        "name": "CRM.getContacts",
-                        "parameters": [
+                        "filters": [
                           {
-                            "name": "$filter",
-                            "operator": "or",
-                            "value": [
-                              {
-                                "operation": "contains",
-                                "property": "Email",
-                                "type": "string",
-                                "value": "\"${contactFilter}\""
-                              },
-                              {
-                                "operation": "contains",
-                                "property": "Company",
-                                "type": "string",
-                                "value": "\"${contactFilter}\""
-                              },
-                              {
-                                "operation": "contains",
-                                "property": "FirstName",
-                                "type": "string",
-                                "value": "\"${contactFilter}\""
-                              },
-                              {
-                                "operation": "contains",
-                                "property": "LastName",
-                                "type": "string",
-                                "value": "\"${contactFilter}\""
-                              }
-                            ]
+                            "operation": "contains",
+                            "property": "Company",
+                            "type": "string",
+                            "value": "\"${contactFilter}\""
+                          },
+                          {
+                            "operation": "contains",
+                            "property": "FirstName",
+                            "type": "string",
+                            "value": "\"${contactFilter}\""
+                          },
+                          {
+                            "operation": "contains",
+                            "property": "LastName",
+                            "type": "string",
+                            "value": "\"${contactFilter}\""
+                          },
+                          {
+                            "operation": "contains",
+                            "property": "Email",
+                            "type": "string",
+                            "value": "\"${contactFilter}\""
                           }
                         ],
-                        "then": [
-                          {
-                            "name": "getContactsResult",
-                            "type": "set",
-                            "value": "${result}",
-                            "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
-                          }
-                        ],
-                        "type": "invoke"
+                        "operator": "or"
                       }
                     ]
-                  },
-                  "name": "button1",
-                  "style": {
-                    "marginLeft": "16px"
-                  },
-                  "text": "Search",
-                  "type": "button"
-                }
-              ],
-              "name": "col0",
-              "style": {
-                "textAlign": "right"
-              },
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "type": "row"
+                  }
+                ],
+                "then": [
+                  {
+                    "name": "getContactsResult",
+                    "type": "set",
+                    "value": "${result}",
+                    "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
+                  }
+                ],
+                "type": "invoke"
+              }
+            ]
+          },
+          "icon": "",
+          "name": "button1",
+          "text": "Search",
+          "type": "button"
         },
         {
           "components": [
@@ -104,7 +88,7 @@
                         "path": "add-contact",
                         "then": [
                           {
-                            "code": "grid0.Reload();",
+                            "code": "await grid0.Reload();",
                             "type": "execute"
                           },
                           {
@@ -131,40 +115,40 @@
                   "columns": [
                     {
                       "property": "Email",
-                      "title": "Email",
-                      "type": "string"
+                      "title": "Email"
                     },
                     {
                       "property": "Company",
-                      "title": "Company",
-                      "type": "string"
+                      "title": "Company"
                     },
                     {
                       "property": "LastName",
-                      "title": "Last Name",
-                      "type": "string"
+                      "title": "Last Name"
                     },
                     {
                       "property": "FirstName",
-                      "title": "First Name",
-                      "type": "string"
+                      "title": "First Name"
                     },
                     {
                       "property": "Phone",
-                      "title": "Phone",
-                      "type": "string"
+                      "title": "Phone"
                     },
                     {
-                      "bubble": false,
                       "filterable": false,
                       "sortable": false,
                       "template": [
                         {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
                           "buttonStyle": "danger",
                           "events": {
                             "click": [
                               {
-                                "argType": "RadzenCrm.Models.Crm.Contact",
+                                "condition": "await DialogService.Confirm(\"Are you sure you want to delete this record?\") == true",
                                 "error": [
                                   {
                                     "detail": "Unable to delete Contact",
@@ -182,7 +166,7 @@
                                 ],
                                 "then": [
                                   {
-                                    "code": "grid0.Reload();",
+                                    "code": "await grid0.Reload();",
                                     "condition": "result != null",
                                     "type": "execute"
                                   }
@@ -202,13 +186,11 @@
                       "width": "70px"
                     }
                   ],
-                  "count": "",
                   "data": "${getContactsResult}",
                   "events": {
                     "loadData": [],
                     "rowSelect": [
                       {
-                        "argType": "RadzenCrm.Models.Crm.Contact",
                         "parameters": [
                           {
                             "name": "Id",
@@ -226,10 +208,11 @@
                       }
                     ]
                   },
+                  "filterMode": "advanced",
                   "itemType": "RadzenCrm.Models.Crm.Contact",
                   "name": "grid0",
                   "title": "",
-                  "type": "grid"
+                  "type": "datagrid"
                 }
               ],
               "type": "col"
@@ -245,23 +228,23 @@
   "events": {
     "load": [
       {
+        "name": "contactFilter",
+        "type": "set",
+        "value": "\"\"",
+        "valueType": "string"
+      },
+      {
         "name": "CRM.getContacts",
         "parameters": [],
         "then": [
           {
             "name": "getContactsResult",
             "type": "set",
-            "value": "${result.value}",
+            "value": "${result}",
             "valueType": "IEnumerable<RadzenCrm.Models.Crm.Contact>"
           }
         ],
         "type": "invoke"
-      },
-      {
-        "name": "contactFilter",
-        "type": "set",
-        "value": "\"\"",
-        "valueType": "String"
       }
     ]
   },

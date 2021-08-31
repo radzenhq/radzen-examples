@@ -87,7 +87,7 @@
                                 "marginTop": "13px",
                                 "textAlign": "right"
                               },
-                              "text": "${monthlyStats.Revenue.ToString(\"C\")}",
+                              "text": "${monthlyStats?.Revenue.ToString(\"C\")}",
                               "type": "heading"
                             }
                           ],
@@ -170,7 +170,7 @@
                                 "marginTop": "13px",
                                 "textAlign": "right"
                               },
-                              "text": "${monthlyStats.Opportunities.ToString()}",
+                              "text": "${monthlyStats?.Opportunities.ToString()}",
                               "type": "heading"
                             }
                           ],
@@ -253,7 +253,7 @@
                                 "marginTop": "13px",
                                 "textAlign": "right"
                               },
-                              "text": "${monthlyStats.AverageDealSize.ToString()}",
+                              "text": "${monthlyStats?.AverageDealSize.ToString()}",
                               "type": "heading"
                             }
                           ],
@@ -336,7 +336,7 @@
                                 "marginTop": "13px",
                                 "textAlign": "right"
                               },
-                              "text": "${monthlyStats.Ratio.ToString(\"P\")}",
+                              "text": "${monthlyStats?.Ratio.ToString(\"P\")}",
                               "type": "heading"
                             }
                           ],

@@ -29,6 +29,7 @@
                               "type": "label",
                               "text": "Name",
                               "component": "Name",
+                              "name": "NameLabel",
                               "style": {
                                 "width": "100%"
                               }
@@ -40,6 +41,7 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "valueType": "string",
                               "type": "textbox",
                               "name": "Name",
                               "style": {
@@ -68,6 +70,9 @@
                             {
                               "type": "button",
                               "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
                               "text": "Cancel",
                               "events": {
                                 "click": [
@@ -106,8 +111,7 @@
                             "result": "${opportunitystatus}"
                           }
                         ],
-                        "type": "invoke",
-                        "argType": "RadzenCrm.Models.Crm.OpportunityStatus"
+                        "type": "invoke"
                       }
                     ]
                   },
@@ -127,7 +131,7 @@
       {
         "name": "opportunitystatus",
         "type": "set",
-        "value": "new RadzenCrm.Models.Crm.OpportunityStatus()",
+        "value": "new RadzenCrm.Models.Crm.OpportunityStatus(){}",
         "valueType": "RadzenCrm.Models.Crm.OpportunityStatus"
       }
     ]

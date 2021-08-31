@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
@@ -19,6 +20,14 @@ namespace RadzenCrm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+        public void Reload()
+        {
+            InvokeAsync(StateHasChanged);
+        }
+
+        public void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+        }
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -30,11 +39,19 @@ namespace RadzenCrm.Pages
         protected DialogService DialogService { get; set; }
 
         [Inject]
+        protected TooltipService TooltipService { get; set; }
+
+        [Inject]
+        protected ContextMenuService ContextMenuService { get; set; }
+
+        [Inject]
         protected NotificationService NotificationService { get; set; }
 
         [Inject]
         protected SecurityService Security { get; set; }
 
+        [Inject]
+        protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         [Inject]
         protected CrmService Crm { get; set; }
@@ -48,15 +65,19 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(!object.Equals(_user, value))
+                if (!object.Equals(_user, value))
                 {
+                    var args = new PropertyChangedEventArgs(){ Name = "user", NewValue = value, OldValue = _user };
                     _user = value;
-                    InvokeAsync(() => { StateHasChanged(); });
+                    OnPropertyChanged(args);
+                    Reload();
                 }
             }
         }
+
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
+            await Security.InitializeAsync(AuthenticationStateProvider);
             if (!Security.IsAuthenticated())
             {
                 UriHelper.NavigateTo("Login", true);
@@ -65,7 +86,6 @@ namespace RadzenCrm.Pages
             {
                 await Load();
             }
-
         }
         protected async System.Threading.Tasks.Task Load()
         {
@@ -79,7 +99,7 @@ namespace RadzenCrm.Pages
         protected async System.Threading.Tasks.Task TemplateForm0Submit(RadzenCrm.Models.ApplicationUser args)
         {
             var securityUpdateUserResult = await Security.UpdateUser($"{Security.User.Id}", user);
-                NotificationService.Notify(NotificationSeverity.Success, $"Success", $"Personal data updated successfully!");
+                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Success,Summary = $"Success",Detail = $"Personal data updated successfully!" });
         }
 
         protected async System.Threading.Tasks.Task Button1Click(MouseEventArgs args)

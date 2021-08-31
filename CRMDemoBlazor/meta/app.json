@@ -4,9 +4,6 @@
   ],
   "generator": "@radzen/blazor-server",
   "https": false,
-  "ignore": [
-    ""
-  ],
   "layouts": [
     "Login",
     "Main"
@@ -53,18 +50,17 @@
     "Task Types",
     "Add Task Type",
     "Edit Task Type",
-    "Application Roles",
-    "Register Application User",
-    "Add Application Role",
-    "Add Application User",
-    "Edit Application User",
-    "Unauthorized",
-    "Profile",
     "Login",
     "Application Users",
+    "Application Roles",
+    "Add Application Role",
+    "Add Application User",
+    "Profile",
+    "Edit Application User",
+    "Unauthorized",
+    "Register Application User",
     "Home"
   ],
-  "port": 8000,
   "security": {
     "autoGeneratePages": true,
     "dataSource": "CRM",
@@ -81,10 +77,8 @@
     "smtpUser": ""
   },
   "serverLang": "cs",
-  "serverPort": 5000,
   "serverProject": true,
-  "serverVersion": "3",
+  "serverVersion": "5",
   "startPage": "Home",
-  "theme": "dark",
-  "themeSettings": null
+  "theme": "dark"
 }

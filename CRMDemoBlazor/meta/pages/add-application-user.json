@@ -1,6 +1,6 @@
 {
   "access": [
-    "Authenticated"
+    "Sales Manager"
   ],
   "components": [
     {
@@ -37,8 +37,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "value": "${user.Email}",
-                              "type": "textbox"
+                              "type": "textbox",
+                              "value": "${user.Email}"
                             },
                             {
                               "component": "Email",
@@ -53,6 +53,155 @@
                           "type": "col"
                         }
                       ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "FirstName",
+                              "name": "FirstNameLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "FirstName",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col0",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "FirstName",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${user.FirstName}"
+                            },
+                            {
+                              "component": "FirstName",
+                              "name": "FirstNameRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "FirstName is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row0",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "LastName",
+                              "name": "LastNameLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "LastName",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "LastName",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${user.LastName}"
+                            },
+                            {
+                              "component": "LastName",
+                              "name": "LastNameRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "LastName is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col3",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row1",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Picture",
+                              "name": "PictureLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Picture",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col4",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "Picture",
+                              "style": {
+                                "display": "block"
+                              },
+                              "type": "file-input",
+                              "value": "${user.Picture}"
+                            },
+                            {
+                              "component": "Picture",
+                              "name": "PictureRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "Picture is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col5",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
                       "style": {
                         "marginBottom": "1rem"
                       },
@@ -84,9 +233,9 @@
                               "style": {
                                 "width": "100%"
                               },
-                              "value": "${user.RoleNames}",
                               "textProperty": "Name",
                               "type": "dropdown",
+                              "value": "${user.RoleNames}",
                               "valueProperty": "Name"
                             }
                           ],
@@ -123,8 +272,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "value": "${user.Password}",
-                              "type": "password"
+                              "type": "password",
+                              "value": "${user.Password}"
                             },
                             {
                               "component": "Password",
@@ -169,8 +318,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "value": "${user.ConfirmPassword}",
-                              "type": "password"
+                              "type": "password",
+                              "value": "${user.ConfirmPassword}"
                             },
                             {
                               "component": "ConfirmPassword",
@@ -207,7 +356,7 @@
                               "events": {
                                 "click": [
                                   {
-                                    "type": "back"
+                                    "type": "close-popup"
                                   }
                                 ]
                               },
@@ -221,6 +370,7 @@
                       "type": "row"
                     }
                   ],
+                  "data": "${user}",
                   "events": {
                     "submit": [
                       {
@@ -241,17 +391,16 @@
                         ],
                         "then": [
                           {
-                            "type": "back"
+                            "type": "close-popup"
                           }
                         ],
                         "type": "invoke"
                       }
                     ]
                   },
+                  "itemType": "ApplicationUser",
                   "name": "form0",
                   "type": "template-form",
-                  "itemType": "ApplicationUser",
-                  "data": "${user}",
                   "visible": "${user != null}"
                 }
               ],

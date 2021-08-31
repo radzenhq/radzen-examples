@@ -8,54 +8,6 @@
         {
           "components": [
             {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
-          "components": [
-            {
               "class": "col-md-12",
               "components": [
                 {
@@ -87,7 +39,8 @@
                                 "width": "100%"
                               },
                               "type": "numeric",
-                              "value": "${opportunity.Amount}"
+                              "value": "${opportunity.Amount}",
+                              "valueType": "decimal"
                             },
                             {
                               "component": "Amount",
@@ -135,7 +88,8 @@
                                 "width": "100%"
                               },
                               "type": "textbox",
-                              "value": "${opportunity.Name}"
+                              "value": "${opportunity.Name}",
+                              "valueType": "string"
                             },
                             {
                               "component": "Name",
@@ -186,10 +140,12 @@
                               "textProperty": "Email",
                               "type": "dropdown",
                               "value": "${opportunity.ContactId}",
-                              "valueProperty": "Id"
+                              "valueProperty": "Id",
+                              "valueType": "int"
                             },
                             {
                               "component": "ContactId",
+                              "defaultValue": "0",
                               "name": "ContactIdRequiredValidator",
                               "style": {
                                 "position": "absolute"
@@ -237,10 +193,12 @@
                               "textProperty": "Name",
                               "type": "dropdown",
                               "value": "${opportunity.StatusId}",
-                              "valueProperty": "Id"
+                              "valueProperty": "Id",
+                              "valueType": "int"
                             },
                             {
                               "component": "StatusId",
+                              "defaultValue": "0",
                               "name": "StatusIdRequiredValidator",
                               "style": {
                                 "position": "absolute"
@@ -285,7 +243,8 @@
                                 "width": "100%"
                               },
                               "type": "datepicker",
-                              "value": "${opportunity.CloseDate}"
+                              "value": "${opportunity.CloseDate}",
+                              "valueType": "DateTime"
                             },
                             {
                               "component": "CloseDate",
@@ -326,6 +285,9 @@
                                   }
                                 ]
                               },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
                               "text": "Cancel",
                               "type": "button"
                             }
@@ -361,6 +323,7 @@
                         ],
                         "then": [
                           {
+                            "condition": "",
                             "result": "${opportunity}",
                             "type": "close-popup"
                           }
@@ -372,7 +335,7 @@
                   "itemType": "RadzenCrm.Models.Crm.Opportunity",
                   "name": "form0",
                   "type": "template-form",
-                  "visible": "${opportunity != null && canEdit}"
+                  "visible": "${opportunity != null}"
                 }
               ],
               "type": "col"
@@ -387,12 +350,6 @@
   ],
   "events": {
     "load": [
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
       {
         "error": [],
         "name": "CRM.getOpportunityById",

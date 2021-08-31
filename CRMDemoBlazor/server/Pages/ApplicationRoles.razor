@@ -5,10 +5,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
+@attribute [Authorize(Roles="Sales Manager")]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<ApplicationRoles> L
 <RadzenContent Container="main">
@@ -19,18 +20,18 @@
       <div class="col-md-12">
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@roles" TItem="IdentityRole">
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@roles" TItem="IdentityRole">
           <Columns>
-            <RadzenGridColumn TItem="IdentityRole" Property="Name" Title="Name">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="IdentityRole" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+            <RadzenDataGridColumn TItem="IdentityRole" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="IdentityRole" Filterable="false" Sortable="false" Width="70px">
               <Template Context="identityRole">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, identityRole))">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, identityRole))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
-            </RadzenGridColumn>
+            </RadzenDataGridColumn>
           </Columns>
-        </RadzenGrid>
+        </RadzenDataGrid>
       </div>
     </div>
   </ChildContent>

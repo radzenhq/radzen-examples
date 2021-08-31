@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components.Authorization;
 using RadzenCrm.Models;
@@ -17,66 +18,91 @@ using RadzenCrm.Data;
 
 namespace RadzenCrm
 {
-    public class SecurityService
+    public partial class SecurityService
     {
+        public event Action Authenticated;
+
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IWebHostEnvironment env;
-        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly NavigationManager uriHelper;
-        private readonly AuthenticationStateProvider authenticationStateProvider;
+        private readonly GlobalsService globals;
 
         public SecurityService(ApplicationIdentityDbContext context,
             IWebHostEnvironment env,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
-            IHttpContextAccessor httpContextAccessor,
             NavigationManager uriHelper,
-            AuthenticationStateProvider authenticationStateProvider)
+            GlobalsService globals)
         {
             this.context = context;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
             this.env = env;
-            this.httpContextAccessor = httpContextAccessor;
             this.uriHelper = uriHelper;
-            this.authenticationStateProvider = authenticationStateProvider;
+            this.globals = globals;
         }
 
         public ApplicationIdentityDbContext context { get; set; }
 
-        private ApplicationUser user;
-
+        ApplicationUser user;
         public ApplicationUser User
         {
             get
             {
-                var name = Principal.Identity.Name;
-
-                if (env.EnvironmentName == "Development" && name == "admin")
+                if(user == null)
                 {
-                    return new ApplicationUser() { UserName = name };
-                }
-
-                if (user == null && name != null)
-                {
-                    user = userManager.FindByEmailAsync(name).Result;
+                    return new ApplicationUser() { Name = "Anonymous" };
                 }
 
                 return user;
             }
         }
 
-        public ClaimsPrincipal Principal
+        static System.Threading.SemaphoreSlim semaphoreSlim = new System.Threading.SemaphoreSlim(1, 1);
+        public async Task<bool> InitializeAsync(AuthenticationStateProvider authenticationStateProvider)
         {
-            get
+            var authenticationState = await authenticationStateProvider.GetAuthenticationStateAsync();
+            Principal = authenticationState.User;
+
+            var name = Principal.Identity.Name;
+
+            if (env.EnvironmentName == "Development" && name == "admin")
             {
-                return authenticationStateProvider.GetAuthenticationStateAsync().Result.User;
+                user = new ApplicationUser { UserName = name };
             }
+
+            if (user == null && name != null)
+            {
+                await semaphoreSlim.WaitAsync();
+                try
+                {
+                    user = await userManager.FindByEmailAsync(name);
+
+                    if(user == null)
+                    {
+                        user = await userManager.FindByNameAsync(name);
+                    }
+                }
+                finally
+                {
+                    semaphoreSlim.Release();
+                }
+            }
+
+            var result = IsAuthenticated();
+            if(result)
+            {
+                Authenticated?.Invoke();
+            }
+
+            return result;
         }
+
+        public ClaimsPrincipal Principal { get; set; }
 
         public bool IsInRole(params string[] roles)
         {
@@ -100,7 +126,7 @@ namespace RadzenCrm
 
         public bool IsAuthenticated()
         {
-            return Principal.Identity.IsAuthenticated;
+            return Principal != null ? Principal.Identity.IsAuthenticated : false;
         }
 
         public async Task Logout()
@@ -145,10 +171,9 @@ namespace RadzenCrm
         {
             return await Task.FromResult(context.Roles.Find(id));
         }
-
         public async Task<IEnumerable<ApplicationUser>> GetUsers()
         {
-            return await Task.FromResult(context.Users);
+            return await Task.FromResult(context.Users.AsNoTracking());
         }
 
         public async Task<ApplicationUser> CreateUser(ApplicationUser user)
@@ -168,6 +193,7 @@ namespace RadzenCrm
             }
 
             user.RoleNames = roles;
+
 
             return user;
         }
@@ -190,6 +216,7 @@ namespace RadzenCrm
 
             if (user != null)
             {
+                context.Entry(user).Reload();
                 user.RoleNames = await userManager.GetRolesAsync(user);
             }
 

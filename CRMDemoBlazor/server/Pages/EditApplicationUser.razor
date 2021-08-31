@@ -5,17 +5,18 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
+@attribute [Authorize(Roles="Sales Manager")]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditApplicationUser> L
 <RadzenContent Container="main">
   <ChildContent>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm TItem="ApplicationUser" Data="@user" Visible="@(user != null)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@user" TItem="ApplicationUser" Visible="@(user != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -35,6 +36,42 @@
               <div class="col-md-9">
                 <RadzenTextBox style="width: 100%" @bind-Value="@(user.Email)" Name="Email">
                 </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="FirstName" style="width: 100%" Text="FirstName">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.FirstName)" Name="FirstName">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="FirstName" style="position: absolute" Text="FirstName is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="LastName" style="width: 100%" Text="LastName">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(user.LastName)" Name="LastName">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="LastName" style="position: absolute" Text="LastName is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Picture" style="width: 100%" Text="Picture">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenFileInput style="display: block" @bind-Value="@(user.Picture)" Name="Picture">
+                </RadzenFileInput>
+                <RadzenRequiredValidator Component="Picture" style="position: absolute" Text="Picture is required">
+                </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">

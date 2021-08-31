@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Data;
+using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,16 @@ namespace RadzenCrm
         {
             if (query != null)
             {
-                var filter = query.ContainsKey("$filter") ? query["$filter"].ToString().Replace("i =>", "") : null;
+                if (query.ContainsKey("$expand"))
+                {
+                    var propertiesToExpand = query["$expand"].ToString().Split(',');
+                    foreach (var p in propertiesToExpand)
+                    {
+                        items = items.Include(p);
+                    }
+                }
+
+                var filter = query.ContainsKey("$filter") ? query["$filter"].ToString() : null;
                 if (!string.IsNullOrEmpty(filter))
                 {
                     items = items.Where(filter);
@@ -30,15 +40,6 @@ namespace RadzenCrm
                 if (query.ContainsKey("$orderBy"))
                 {
                     items = items.OrderBy(query["$orderBy"].ToString());
-                }
-
-                if (query.ContainsKey("$expand"))
-                {
-                    var propertiesToExpand = query["$expand"].ToString().Split(',');
-                    foreach (var p in propertiesToExpand)
-                    {
-                        items = items.Include(p);
-                    }
                 }
 
                 if (query.ContainsKey("$skip"))
@@ -50,12 +51,17 @@ namespace RadzenCrm
                 {
                     items = items.Take(int.Parse(query["$top"].ToString()));
                 }
+
+                if (query.ContainsKey("$select"))
+                {
+                    return items.Select($"new ({query["$select"].ToString()})");
+                }
             }
 
             return items;
         }
 
-        public FileStreamResult ToCSV(IQueryable query)
+        public FileStreamResult ToCSV(IQueryable query, string fileName = null)
         {
             var columns = GetProperties(query.ElementType);
 
@@ -75,12 +81,12 @@ namespace RadzenCrm
 
 
             var result = new FileStreamResult(new MemoryStream(UTF8Encoding.Default.GetBytes($"{string.Join(",", columns.Select(c => c.Key))}{System.Environment.NewLine}{sb.ToString()}")), "text/csv");
-            result.FileDownloadName = "Export.csv";
+            result.FileDownloadName = (!string.IsNullOrEmpty(fileName) ? fileName : "Export") + ".csv";
 
             return result;
         }
 
-        public FileStreamResult ToExcel(IQueryable query)
+        public FileStreamResult ToExcel(IQueryable query, string fileName = null)
         {
             var columns = GetProperties(query.ElementType);
             var stream = new MemoryStream();
@@ -136,9 +142,10 @@ namespace RadzenCrm
 
                         if (typeCode == TypeCode.DateTime)
                         {
-                            if (stringValue != string.Empty)
+                            if (!string.IsNullOrWhiteSpace(stringValue))
                             {
-                                cell.CellValue = new CellValue() { Text = DateTime.Parse(stringValue).ToOADate().ToString() };
+                                cell.CellValue = new CellValue() { Text = ((DateTime)value).ToOADate().ToString(System.Globalization.CultureInfo.InvariantCulture) };
+                                cell.DataType = new EnumValue<CellValues>(CellValues.Number);
                                 cell.StyleIndex = (UInt32Value)1U;
                             }
                         }
@@ -149,6 +156,10 @@ namespace RadzenCrm
                         }
                         else if (IsNumeric(typeCode))
                         {
+                            if (value != null)
+                            {
+                                stringValue = Convert.ToString(value, CultureInfo.InvariantCulture);
+                            }
                             cell.CellValue = new CellValue(stringValue);
                             cell.DataType = new EnumValue<CellValues>(CellValues.Number);
                         }
@@ -174,7 +185,7 @@ namespace RadzenCrm
             }
 
             var result = new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            result.FileDownloadName = "Export.xlsx";
+            result.FileDownloadName = (!string.IsNullOrEmpty(fileName) ? fileName : "Export") + ".xlsx";
 
             return result;
         }

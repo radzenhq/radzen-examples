@@ -26,5 +26,6 @@ namespace RadzenCrm.Data
 
             this.OnModelBuilding(builder);
         }
+
     }
 }

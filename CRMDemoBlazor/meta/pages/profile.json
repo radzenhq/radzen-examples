@@ -62,6 +62,9 @@
                         }
                       ],
                       "name": "row4",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
                       "type": "row"
                     },
                     {
@@ -109,6 +112,9 @@
                         }
                       ],
                       "name": "row6",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
                       "type": "row"
                     },
                     {
@@ -155,6 +161,9 @@
                         }
                       ],
                       "name": "row7",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
                       "type": "row"
                     },
                     {

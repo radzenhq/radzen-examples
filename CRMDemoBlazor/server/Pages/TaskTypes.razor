@@ -5,10 +5,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<TaskTypes> L
 <RadzenContent Container="main">
@@ -19,20 +20,20 @@
       <div class="col-md-12">
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
         </RadzenButton>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getTaskTypesResult" TItem="RadzenCrm.Models.Crm.TaskType" RowSelect="@Grid0RowSelect">
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getTaskTypesResult" TItem="RadzenCrm.Models.Crm.TaskType" RowSelect="@Grid0RowSelect">
           <Columns>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskType" Property="Id" Title="Id" Type="integer">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskType" Property="Name" Title="Name" Type="string">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="RadzenCrm.Models.Crm.TaskType" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.TaskType" Property="Id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.TaskType" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RadzenCrm.Models.Crm.TaskType" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
               <Template Context="radzenCrmModelsCrmTaskType">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmTaskType))">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radzenCrmModelsCrmTaskType))" @onclick:stopPropagation="true">
                 </RadzenButton>
               </Template>
-            </RadzenGridColumn>
+            </RadzenDataGridColumn>
           </Columns>
-        </RadzenGrid>
+        </RadzenDataGrid>
       </div>
     </div>
   </ChildContent>

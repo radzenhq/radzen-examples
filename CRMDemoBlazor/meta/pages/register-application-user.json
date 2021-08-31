@@ -18,7 +18,7 @@
                           "class": "col-md-3",
                           "components": [
                             {
-                              "component": "Email",
+                              "component": "userName",
                               "style": {
                                 "width": "100%"
                               },
@@ -37,10 +37,11 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox"
+                              "type": "textbox",
+                              "value": "${user.Name}"
                             },
                             {
-                              "component": "Email",
+                              "component": "userName",
                               "name": "EmailRequiredValidator",
                               "style": {
                                 "position": "absolute"
@@ -82,7 +83,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "password"
+                              "type": "password",
+                              "value": "${user.Password}"
                             },
                             {
                               "component": "Password",
@@ -127,7 +129,8 @@
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "password"
+                              "type": "password",
+                              "value": "${user.ConfirmPassword}"
                             },
                             {
                               "component": "ConfirmPassword",
@@ -178,16 +181,9 @@
                       "type": "row"
                     }
                   ],
-                  "events": {
-                    "submit": [
-                      {
-                        "type": "back"
-                      }
-                    ]
-                  },
                   "method": "post",
-                  "action": "/account/register",
-                  "data": "@(user)",
+                  "action": "account/register",
+                  "data": "${user}",
                   "name": "form0",
                   "type": "template-form",
                   "itemType": "ApplicationUser",

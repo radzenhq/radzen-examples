@@ -5,10 +5,11 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
+
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> L
 <RadzenContent Container="main">
@@ -21,7 +22,7 @@
           <ChildContent>
             <RadzenTemplateForm Data="@user" TItem="RadzenCrm.Models.ApplicationUser" Visible="@(user != null)" Submit="@TemplateForm0Submit">
               <ChildContent>
-                <div class="row">
+                <div style="margin-bottom: 1rem" class="row">
                   <div class="col-md-3">
                     <RadzenLabel Component="textBox1" style="width: 100%" Text="First Name">
                     </RadzenLabel>
@@ -33,7 +34,7 @@
                     </RadzenRequiredValidator>
                   </div>
                 </div>
-                <div class="row">
+                <div style="margin-bottom: 1rem" class="row">
                   <div class="col-md-3">
                     <RadzenLabel Component="textbox0" style="width: 100%" Text="Last Name">
                     </RadzenLabel>
@@ -45,7 +46,7 @@
                     </RadzenRequiredValidator>
                   </div>
                 </div>
-                <div class="row">
+                <div style="margin-bottom: 1rem" class="row">
                   <div class="col-md-3">
                     <RadzenLabel Component="fileInput0" style="width: 100%" Text="Picture">
                     </RadzenLabel>

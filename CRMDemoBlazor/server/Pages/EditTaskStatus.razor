@@ -5,27 +5,18 @@
 @using Radzen
 @using Radzen.Blazor
 @using RadzenCrm.Models.Crm
-@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity;
 @using RadzenCrm.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
+
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditTaskStatus> L
 <RadzenContent Container="main">
   <ChildContent>
-    <div  class="row">
-      <div class="col-md-9">
-        <RadzenLabel style="font-weight: bold" Text="Item no longer available." Visible="@(!canEdit)">
-        </RadzenLabel>
-      </div>
-      <div class="col-md-3">
-        <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="margin-bottom: 20px" Text="Close" Visible="@(!canEdit)" Click="@CloseButtonClick">
-        </RadzenButton>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm TItem="RadzenCrm.Models.Crm.TaskStatus" Data="@taskstatus" Visible="@(taskstatus != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm TItem="RadzenCrm.Models.Crm.TaskStatus" Data="@taskstatus" Visible="@(taskstatus != null)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
@@ -41,7 +32,7 @@
               <div class="col offset-sm-3">
                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@Button3Click">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
                 </RadzenButton>
               </div>
             </div>

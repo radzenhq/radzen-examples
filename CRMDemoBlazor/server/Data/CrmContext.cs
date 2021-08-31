@@ -61,6 +61,53 @@ namespace RadzenCrm.Data
               .Property(p => p.DueDate)
               .HasColumnType("datetime");
 
+        builder.Entity<RadzenCrm.Models.Crm.Contact>()
+              .Property(p => p.Id)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Opportunity>()
+              .Property(p => p.Id)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Opportunity>()
+              .Property(p => p.Amount)
+              .HasPrecision(19, 4);
+
+        builder.Entity<RadzenCrm.Models.Crm.Opportunity>()
+              .Property(p => p.ContactId)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Opportunity>()
+              .Property(p => p.StatusId)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.OpportunityStatus>()
+              .Property(p => p.Id)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Task>()
+              .Property(p => p.Id)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Task>()
+              .Property(p => p.OpportunityId)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Task>()
+              .Property(p => p.TypeId)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.Task>()
+              .Property(p => p.StatusId)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.TaskStatus>()
+              .Property(p => p.Id)
+              .HasPrecision(10, 0);
+
+        builder.Entity<RadzenCrm.Models.Crm.TaskType>()
+              .Property(p => p.Id)
+              .HasPrecision(10, 0);
         this.OnModelBuilding(builder);
     }
 

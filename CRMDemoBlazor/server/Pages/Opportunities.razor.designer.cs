@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
@@ -19,6 +20,14 @@ namespace RadzenCrm.Pages
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
 
+        public void Reload()
+        {
+            InvokeAsync(StateHasChanged);
+        }
+
+        public void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+        }
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -30,16 +39,23 @@ namespace RadzenCrm.Pages
         protected DialogService DialogService { get; set; }
 
         [Inject]
+        protected TooltipService TooltipService { get; set; }
+
+        [Inject]
+        protected ContextMenuService ContextMenuService { get; set; }
+
+        [Inject]
         protected NotificationService NotificationService { get; set; }
 
         [Inject]
         protected SecurityService Security { get; set; }
 
+        [Inject]
+        protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         [Inject]
         protected CrmService Crm { get; set; }
-
-        protected RadzenGrid<RadzenCrm.Models.Crm.Opportunity> grid0;
+        protected RadzenDataGrid<RadzenCrm.Models.Crm.Opportunity> grid0;
 
         IEnumerable<RadzenCrm.Models.Crm.Opportunity> _getOpportunitiesResult;
         protected IEnumerable<RadzenCrm.Models.Crm.Opportunity> getOpportunitiesResult
@@ -50,15 +66,19 @@ namespace RadzenCrm.Pages
             }
             set
             {
-                if(!object.Equals(_getOpportunitiesResult, value))
+                if (!object.Equals(_getOpportunitiesResult, value))
                 {
+                    var args = new PropertyChangedEventArgs(){ Name = "getOpportunitiesResult", NewValue = value, OldValue = _getOpportunitiesResult };
                     _getOpportunitiesResult = value;
-                    InvokeAsync(() => { StateHasChanged(); });
+                    OnPropertyChanged(args);
+                    Reload();
                 }
             }
         }
+
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
         {
+            await Security.InitializeAsync(AuthenticationStateProvider);
             if (!Security.IsAuthenticated())
             {
                 UriHelper.NavigateTo("Login", true);
@@ -67,18 +87,17 @@ namespace RadzenCrm.Pages
             {
                 await Load();
             }
-
         }
         protected async System.Threading.Tasks.Task Load()
         {
-            var crmGetOpportunitiesResult = await Crm.GetOpportunities();
+            var crmGetOpportunitiesResult = await Crm.GetOpportunities(new Query() { Expand = "Contact,OpportunityStatus" });
             getOpportunitiesResult = crmGetOpportunitiesResult;
         }
 
         protected async System.Threading.Tasks.Task Button0Click(MouseEventArgs args)
         {
             var dialogResult = await DialogService.OpenAsync<AddOpportunity>("Add Opportunity", null);
-            grid0.Reload();
+            await grid0.Reload();
 
             await InvokeAsync(() => { StateHasChanged(); });
         }
@@ -89,18 +108,22 @@ namespace RadzenCrm.Pages
             await InvokeAsync(() => { StateHasChanged(); });
         }
 
-        protected async System.Threading.Tasks.Task GridDeleteButtonClick(MouseEventArgs args, RadzenCrm.Models.Crm.Opportunity data)
+        protected async System.Threading.Tasks.Task GridDeleteButtonClick(MouseEventArgs args, dynamic data)
         {
             try
             {
-                var crmDeleteOpportunityResult = await Crm.DeleteOpportunity(data.Id);
-                if (crmDeleteOpportunityResult != null) {
-                    grid0.Reload();
-}
+                if (await DialogService.Confirm("Are you sure you want to delete this record?") == true)
+                {
+                    var crmDeleteOpportunityResult = await Crm.DeleteOpportunity(data.Id);
+                    if (crmDeleteOpportunityResult != null)
+                    {
+                        await grid0.Reload();
+                    }
+                }
             }
             catch (System.Exception crmDeleteOpportunityException)
             {
-                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to delete Opportunity");
+                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error,Summary = $"Error",Detail = $"Unable to delete Opportunity" });
             }
         }
     }
