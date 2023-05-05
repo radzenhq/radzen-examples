@@ -1,0 +1,20 @@
+@layout LoginLayout
+@page "/login"
+
+<PageTitle>Login</PageTitle>
+<RadzenText Text="Login" TextStyle="Radzen.Blazor.TextStyle.H5" class="mb-4" TagName="Radzen.Blazor.TagName.H2" />
+<RadzenRow>
+    <RadzenColumn SizeMD="12">
+        <RadzenTemplateForm Action="@($"account/login?redirectUrl={redirectUrl}")" Data="@("login")" Method="post">
+            <RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Danger" Visible="@errorVisible">@error</RadzenAlert>
+            <RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Info" Visible="@infoVisible">@info</RadzenAlert>
+            <RadzenLogin AllowResetPassword="false" AllowRegister="false" FormFieldVariant="Variant.Filled" ShowLoginButton="false" />
+            <RadzenSplitButton ButtonStyle="ButtonStyle.Primary" Text="Login" Style="float: right" Click="@SplitButton0Click">
+                <ChildContent>
+                    <RadzenSplitButtonItem Text="Sales Manager" />
+                    <RadzenSplitButtonItem Text="Sales Representative" />
+                </ChildContent>
+            </RadzenSplitButton>
+        </RadzenTemplateForm>
+    </RadzenColumn>
+</RadzenRow>

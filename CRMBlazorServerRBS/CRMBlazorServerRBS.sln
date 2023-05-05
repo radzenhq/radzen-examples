@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.0.0
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMBlazorServerRBS", "CRMBlazorServerRBS.csproj", "{98D7397F-A9BA-421F-9C8B-20ED3672EA87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Debug|x64.Build.0 = Debug|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Debug|x86.Build.0 = Debug|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Release|x64.ActiveCfg = Release|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Release|x64.Build.0 = Release|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Release|x86.ActiveCfg = Release|Any CPU
+		{98D7397F-A9BA-421F-9C8B-20ED3672EA87}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B784E8F8-7866-49B6-B864-56410DD03519}
+	EndGlobalSection
+EndGlobal

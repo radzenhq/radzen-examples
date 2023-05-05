@@ -1,0 +1,51 @@
+@page "/edit-task"
+@attribute [Authorize]
+
+<PageTitle>Edit Task</PageTitle>
+
+    <RadzenColumn SizeMD=12>
+        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Task</RadzenAlert>
+        <RadzenTemplateForm TItem="CRMBlazorServerRBS.Models.RadzenCRM.Task" Data="@task" Visible="@(task != null)" Submit="@FormSubmit">
+          <RadzenStack>
+            <RadzenFormField Text="Title" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@task.Title" Name="Title" />
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Due Date" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@task.DueDate" Name="DueDate" />
+                  </ChildContent>    
+                  <Helper>
+                    <RadzenRequiredValidator Component="DueDate" Text="DueDate is required" />
+                  </Helper>
+            </RadzenFormField>
+            <RadzenFormField Text="Opportunity" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDropDownDataGrid Data="@opportunitiesForOpportunityId" TextProperty="Name" ValueProperty="Id" AllowClear=true
+                          style="display: block; width: 100%" @bind-Value="@task.OpportunityId" Name="OpportunityId"
+                           />
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Task Status" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDropDownDataGrid Data="@taskStatusesForStatusId" TextProperty="Name" ValueProperty="Id" AllowClear=true
+                          style="display: block; width: 100%" @bind-Value="@task.StatusId" Name="StatusId"
+                           />
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Task Type" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDropDownDataGrid Data="@taskTypesForTypeId" TextProperty="Name" ValueProperty="Id" AllowClear=true
+                          style="display: block; width: 100%" @bind-Value="@task.TypeId" Name="TypeId"
+                           />
+              </ChildContent>
+            </RadzenFormField>
+          </RadzenStack>
+          <RadzenStack style="margin-top:1rem;" Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
+          </RadzenStack>
+        </RadzenTemplateForm>
+    </RadzenColumn>
+
