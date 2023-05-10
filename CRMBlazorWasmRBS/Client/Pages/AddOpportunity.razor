@@ -1,0 +1,55 @@
+@page "/add-opportunity"
+
+@attribute [Authorize]
+
+<PageTitle>Add Opportunity</PageTitle>
+    <RadzenColumn SizeMD=12>
+        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Opportunity</RadzenAlert>
+        <RadzenTemplateForm TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Opportunity" Data="@opportunity" Visible="@(opportunity != null)" Submit="@FormSubmit">
+          <RadzenStack>
+            <RadzenFormField Text="Amount" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@opportunity.Amount" Name="Amount" />
+                  </ChildContent>    
+                  <Helper>
+                    <RadzenRequiredValidator Component="Amount" Text="Amount is required" />
+                  </Helper>
+            </RadzenFormField>
+            <RadzenFormField Text="Name" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@opportunity.Name" Name="Name" />
+                  </ChildContent>    
+                  <Helper>
+                    <RadzenRequiredValidator Component="Name" Text="Name is required" />
+                  </Helper>
+            </RadzenFormField>
+            <RadzenFormField Text="Close Date" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@opportunity.CloseDate" Name="CloseDate" />
+                  </ChildContent>    
+                  <Helper>
+                    <RadzenRequiredValidator Component="CloseDate" Text="CloseDate is required" />
+                  </Helper>
+            </RadzenFormField>
+            <RadzenFormField Text="Contact" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDropDownDataGrid Data="@contactsForContactId" TextProperty="Email" ValueProperty="Id" AllowClear=true
+                          style="display: block; width: 100%" @bind-Value="@opportunity.ContactId" Name="ContactId"
+                        SelectedValue=@contactsForContactIdValue Count=@contactsForContactIdCount LoadData=@contactsForContactIdLoadData />
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Opportunity Status" Variant="Variant.Filled">
+                  <ChildContent>
+                    <RadzenDropDownDataGrid Data="@opportunityStatusesForStatusId" TextProperty="Name" ValueProperty="Id" AllowClear=true
+                          style="display: block; width: 100%" @bind-Value="@opportunity.StatusId" Name="StatusId"
+                        SelectedValue=@opportunityStatusesForStatusIdValue Count=@opportunityStatusesForStatusIdCount LoadData=@opportunityStatusesForStatusIdLoadData />
+              </ChildContent>
+            </RadzenFormField>
+          </RadzenStack>
+          <RadzenStack style="margin-top:1rem;" Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
+          </RadzenStack>
+        </RadzenTemplateForm>
+    </RadzenColumn>
+

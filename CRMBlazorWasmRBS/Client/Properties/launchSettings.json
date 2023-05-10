@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "CRMBlazorWasmRBS.Client": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:62565;http://localhost:62566"
+    }
+  }
+}

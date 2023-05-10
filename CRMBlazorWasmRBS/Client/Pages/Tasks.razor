@@ -1,0 +1,65 @@
+@page "/tasks"
+
+@attribute [Authorize]
+
+<PageTitle>Tasks</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Tasks" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" />
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@tasks" Count=count LoadData=@Grid0LoadData  TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" RowSelect="@EditRow" >
+            <Columns>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Property="Title" Title="Title">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Property="DueDate" Title="Due Date">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Property="Opportunity.Name" Title="Opportunity">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Property="TaskStatus.Name" Title="Task Status">
+                    <Template Context="task">
+                        <RadzenLabel Text="@task.TaskStatus.Name" />
+                        <RadzenIcon Icon="check_circle" Visible="@(task.TaskStatus.Name == "Complete")" Style="vertical-align: middle" />
+                        <RadzenIcon Icon="cancel" Visible="@(task.TaskStatus.Name == "Not Started")" Style="vertical-align: middle" />
+                        <RadzenIcon Icon="autorenew" Visible="@(task.TaskStatus.Name == "In Progress")" Style="vertical-align: middle" />
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Property="TaskType.Name" Title="Task Type">
+                    <Template Context="task">
+                        <RadzenLabel Text="@task.TaskType.Name" />
+                        <RadzenIcon Icon="settings_phone" Visible="@(task.TaskType.Name == "Call")" Style="vertical-align: middle" />
+                        <RadzenIcon Icon="video_call" Visible="@(task.TaskType.Name == "Online Meeting")" Style="vertical-align: middle" />
+                        <RadzenIcon Icon="email" Visible="@(task.TaskType.Name == "Email")" Style="vertical-align: middle" />
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="task">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, task)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

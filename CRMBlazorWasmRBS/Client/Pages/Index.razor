@@ -1,0 +1,138 @@
+@page "/"
+
+@attribute [Authorize]
+@attribute [Authorize]
+@attribute [Authorize]
+<PageTitle>Index</PageTitle>
+<RadzenRow Gap="5" RowGap="5">
+    <RadzenColumn SizeLG="6" SizeXL="3">
+        <RadzenCard Style="margin: 16px">
+            <RadzenRow>
+                <RadzenColumn SizeXS="4">
+                    <RadzenIcon Icon="attach_money" Style="width: 64px; height: 64px; font-size: 48px"></RadzenIcon>
+                </RadzenColumn>
+                <RadzenColumn SizeXS="8">
+                    <RadzenHeading Text="Revenue" Size="H4" Style="text-align: right; margin: 0px"></RadzenHeading>
+                    <RadzenHeading Text="LAST MONTH" Size="H4" Style="text-align: right; margin: 0px; font-size: 12px"></RadzenHeading>
+                    <RadzenHeading Text="@monthlyStats?.Revenue.ToString("C")" Size="H4" Style="text-align: right; font-size: 24px; margin-top: 13px"></RadzenHeading>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn SizeLG="6" SizeXL="3">
+        <RadzenCard Style="margin: 16px">
+            <RadzenRow>
+                <RadzenColumn SizeXS="4">
+                    <RadzenIcon Icon="shopping_cart" Style="width: 64px; height: 64px; font-size: 48px"></RadzenIcon>
+                </RadzenColumn>
+                <RadzenColumn SizeXS="8">
+                    <RadzenHeading Text="Opportunities" Size="H4" Style="text-align: right; margin: 0px"></RadzenHeading>
+                    <RadzenHeading Text="LAST MONTH" Size="H4" Style="text-align: right; margin: 0px; font-size: 12px"></RadzenHeading>
+                    <RadzenHeading Text="@monthlyStats?.Opportunities.ToString("C")" Size="H4" Style="text-align: right; font-size: 24px; margin-top: 13px"></RadzenHeading>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn SizeLG="6" SizeXL="3">
+        <RadzenCard Style="margin: 16px">
+            <RadzenRow>
+                <RadzenColumn SizeXS="4">
+                    <RadzenIcon Icon="account_balance_wallet" Style="width: 64px; height: 64px; font-size: 48px"></RadzenIcon>
+                </RadzenColumn>
+                <RadzenColumn SizeXS="8">
+                    <RadzenHeading Text="Average Deal Size" Size="H4" Style="text-align: right; margin: 0px"></RadzenHeading>
+                    <RadzenHeading Text="LAST MONTH" Size="H4" Style="text-align: right; margin: 0px; font-size: 12px"></RadzenHeading>
+                    <RadzenHeading Text="@monthlyStats?.AverageDealSize.ToString("C")" Size="H4" Style="text-align: right; font-size: 24px; margin-top: 13px"></RadzenHeading>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn SizeLG="6" SizeXL="3">
+        <RadzenCard Style="margin: 16px">
+            <RadzenRow>
+                <RadzenColumn SizeXS="4">
+                    <RadzenIcon Icon="thumb_up" Style="width: 64px; height: 64px; font-size: 48px"></RadzenIcon>
+                </RadzenColumn>
+                <RadzenColumn SizeXS="8">
+                    <RadzenHeading Text="Win Rate" Size="H4" Style="text-align: right; margin: 0px"></RadzenHeading>
+                    <RadzenHeading Text="LAST MONTH" Size="H4" Style="text-align: right; margin: 0px; font-size: 12px"></RadzenHeading>
+                    <RadzenHeading Text="@monthlyStats?.Ratio.ToString("P")" Size="H4" Style="text-align: right; font-size: 24px; margin-top: 13px"></RadzenHeading>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenRow>
+    <RadzenColumn SizeXL="4">
+        <RadzenCard Style="margin: 16px">
+            <RadzenHeading Text="Customer life time value"></RadzenHeading>
+            <RadzenChart Style="width: 100%">
+                <RadzenColumnSeries TItem="Pages.RevenueByCompany" Data="@revenueByCompany" ValueProperty="Revenue" CategoryProperty="Company"></RadzenColumnSeries>
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn SizeXL="4">
+        <RadzenCard Style="margin: 16px">
+            <RadzenHeading Text="Revenue"></RadzenHeading>
+            <RadzenChart Style="width: 100%">
+                <RadzenAreaSeries TItem="Pages.RevenueByMonth" Data="@revenueByMonth" ValueProperty="Revenue" CategoryProperty="Month"></RadzenAreaSeries>
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn SizeXL="4">
+        <RadzenCard Style="margin: 16px">
+            <RadzenHeading Text="Customer life time value"></RadzenHeading>
+            <RadzenChart Style="width: 100%">
+                <RadzenBarSeries TItem="Pages.RevenueByEmployee" Data="@revenueByEmployee" ValueProperty="Revenue" CategoryProperty="Employee"></RadzenBarSeries>
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenRow>
+    <RadzenColumn SizeXL="6">
+        <RadzenCard>
+            <RadzenHeading Text="Text"></RadzenHeading>
+            <RadzenDataGrid TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Opportunity" Data="@getOpportunitiesResult" AllowSorting="true" AllowPaging="true" LoadData="@getOpportunitiesResultLoadData" Count="@getOpportunitiesResultCount">
+                 <Columns>
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Opportunity" Title="Contact" SortProperty="Contact.FirstName">
+                        <Template>
+                            <RadzenLabel Text="@context.Contact.FirstName" />
+                            <RadzenLabel Text="@context.Contact.LastName" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Opportunity" Title="Amount" Property="Amount">
+                        <Template>
+                            <RadzenLabel Text="@context.Amount.ToString("C")" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Opportunity" Title="Status" Property="OpportunityStatus.Name" />
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Opportunity" Title="CloseDate" Property="CloseDate" />
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn SizeXL="6">
+        <RadzenCard>
+            <RadzenHeading Text="Active Tasks"></RadzenHeading>
+            <RadzenDataGrid TItem="CRMBlazorWasmRBS.Server.Models.RadzenCRM.Task" Data="@getTasksResult" AllowSorting="true" AllowPaging="true" LoadData="@getTasksResultLoadData" Count="@getTasksResultCount">
+                <Columns>
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Task" Title="Employee" SortProperty="Opportunity.User.FirstName">
+                        <Template>
+                            <RadzenImage Path="@context.Opportunity.User.Picture" style="width:30px;height:30px;border-radius:15px;" />
+                            <RadzenLabel Text="@context.Opportunity.User.FirstName" />
+                            <RadzenLabel Text="@context.Opportunity.User.LastName" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Task" Title="Title" Property="Title" SortProperty="Opportunity.Name">
+                        <Template>
+                            <RadzenLabel Text="@context.Opportunity.Name" style="display: block" />
+                            <RadzenLabel Text="@context.Opportunity.Contact.FirstName" />
+                            <RadzenLabel Text="@context.Opportunity.Contact.LastName" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Server.Models.RadzenCRM.Task" Title="DueDate" Property="DueDate" />
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
