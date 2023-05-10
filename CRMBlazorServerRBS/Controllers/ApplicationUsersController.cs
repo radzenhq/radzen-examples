@@ -88,19 +88,9 @@ namespace CRMBlazorServerRBS.Controllers
                 return NotFound();
             }
 
-            OnUserUpdated(user);
+            OnUserUpdated(data);
 
             IdentityResult result = null;
-
-            foreach (var property in user.GetType().GetProperties().Where(p => p.CanWrite && 
-                !p.GetCustomAttributes(typeof(DatabaseGeneratedAttribute), false).Cast<DatabaseGeneratedAttribute>().Any()))
-            {
-                var value = property.GetValue(data, null);
-                if (value != null)
-                {
-                    property.SetValue(user, value, null);
-                }
-            }
 
             user.Roles = null;
 
