@@ -16,8 +16,8 @@
                         <ChildContent>
 
                             <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" />
-                            <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" />
-                            <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" />
+                            <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="@Security.IsInRole("Sales Manager")" />
+                            <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="@Security.IsInRole("Sales Manager")" />
                             <RadzenProfileMenuItem Text="Logout" Value="Logout" Icon="power_settings_new" />
                         </ChildContent>
                         <Template>
@@ -42,13 +42,15 @@
             <RadzenText Text="CRMBlazorWasmRBS" TextStyle="Radzen.Blazor.TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-primary-light);" />
         </RadzenStack>
         <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Home" Path="" />
-            <RadzenPanelMenuItem Text="Contacts" Path="contacts" />
-            <RadzenPanelMenuItem Text="Opportunities" Path="opportunities" />
-            <RadzenPanelMenuItem Text="OpportunityStatuses" Path="opportunity-statuses" />
-            <RadzenPanelMenuItem Text="Tasks" Path="tasks" />
-            <RadzenPanelMenuItem Text="TaskStatuses" Path="task-statuses" />
-            <RadzenPanelMenuItem Text="TaskTypes" Path="task-types" />
+            <RadzenPanelMenuItem Text="Dashboard" Path="" Icon="home" />
+            <RadzenPanelMenuItem Text="Contacts" Path="contacts" Icon="perm_contact_calendar" />
+            <RadzenPanelMenuItem Text="Tasks" Path="tasks" Icon="work" />
+            <RadzenPanelMenuItem Text="Opportunities" Path="opportunities" Icon="shopping_cart" />
+            <RadzenPanelMenuItem Text="Settings" Visible="@Security.IsInRole("Sales Manager")">
+                <RadzenPanelMenuItem Text="OpportunityStatuses" Path="opportunity-statuses" />
+                <RadzenPanelMenuItem Text="TaskStatuses" Path="task-statuses" />
+                <RadzenPanelMenuItem Text="TaskTypes" Path="task-types" />
+            </RadzenPanelMenuItem>
         </RadzenPanelMenu>
         <RadzenStack AlignItems="Radzen.AlignItems.Center" Gap="0" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding);">
             <RadzenText Text="CRMBlazorWasmRBS v1.0.0" TextStyle="Radzen.Blazor.TextStyle.Caption" style="color: var(--rz-text-disabled-color);" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
