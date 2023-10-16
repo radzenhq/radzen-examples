@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using Radzen;
 
 using CRMBlazorServerRBS.Data;
@@ -17,17 +18,19 @@ namespace CRMBlazorServerRBS
 {
     public partial class RadzenCRMService
     {
-        private readonly SecurityService security;
+        IHttpContextAccessor httpContextAccessor;
+        ApplicationIdentityDbContext identityDbContext;
 
-        public RadzenCRMService(RadzenCRMContext context, NavigationManager navigationManager, SecurityService security)
+        public RadzenCRMService(RadzenCRMContext context, NavigationManager navigationManager, IHttpContextAccessor httpContextAccessor, ApplicationIdentityDbContext identityDbContext)
           : this(context, navigationManager)
         {
-            this.security = security;
+            this.httpContextAccessor = httpContextAccessor;
+            this.identityDbContext = identityDbContext;
         }
 
         partial void OnOpportunityCreated(Opportunity item)
         {
-            var userId = security.User.Id;
+            var userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // Set the UserId property of the opportunity to the current user's id
             item.UserId = userId;
@@ -35,9 +38,9 @@ namespace CRMBlazorServerRBS
 
         partial void OnOpportunitiesRead(ref IQueryable<Opportunity> items)
         {
-            if (!security.IsInRole("Sales Manager"))
+            if (!httpContextAccessor.HttpContext.User.IsInRole("Sales Manager"))
             {
-                var userId = security.User.Id;
+                var userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 // Filter the opportunities by the current user's id
                 items = items.Where(item => item.UserId == userId);
