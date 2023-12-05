@@ -3,7 +3,12 @@
     "title": "Test",
     "x-type": "odata",
     "x-connector": "mssql",
-    "x-connector-version": 14
+    "x-connector-version": 15,
+    "x-infer-aspnet": false,
+    "x-infer-tables": true,
+    "x-infer-relations": true,
+    "x-infer-views": true,
+    "x-infer-sps": true
   },
   "definitions": {
     "Product": {
@@ -17,22 +22,29 @@
         "Id": {
           "x-key": true,
           "x-identity": true,
-          "type": "integer"
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int"
         },
         "ProductName": {
-          "x-key": false,
+          "x-nullable": false,
           "type": "string",
+          "dbType": "nvarchar",
           "length": 255
         },
         "ProductPrice": {
-          "x-key": false,
+          "x-nullable": false,
+          "x-precision": 19,
+          "x-scale": 4,
           "type": "number",
-          "format": "decimal"
+          "format": "decimal",
+          "dbType": "money"
         },
         "ProductPicture": {
-          "x-key": false,
           "type": "string",
-          "format": "binary"
+          "format": "binary",
+          "dbType": "varbinary"
         }
       }
     }
@@ -108,6 +120,11 @@
         "operationId": "createProduct",
         "parameters": [
           {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "Product",
             "schema": {
@@ -152,6 +169,11 @@
         "operationId": "getProductById",
         "parameters": [
           {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
             "in": "path",
             "name": "Id",
             "type": "integer"
@@ -173,6 +195,11 @@
       "patch": {
         "operationId": "updateProduct",
         "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
           {
             "in": "path",
             "name": "Id",

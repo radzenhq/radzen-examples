@@ -1,15 +1,21 @@
 {
+  "cssFiles": [],
   "dataSources": [
     "Test"
   ],
   "generator": "@radzen/angular-generator",
   "https": false,
+  "ignore": [
+    ""
+  ],
+  "javaScriptFiles": [],
   "layouts": [
     "Login",
     "Main"
   ],
   "logo": "",
   "name": "MyApp",
+  "namespaces": [],
   "navigation": [
     "Products"
   ],
@@ -18,9 +24,12 @@
     "Add Product",
     "Edit Product"
   ],
+  "port": 8000,
   "serverLang": "cs",
+  "serverPort": 5000,
   "serverProject": true,
-  "serverVersion": "2",
+  "serverVersion": "7",
   "startPage": "Products",
-  "theme": "default"
+  "theme": "default",
+  "title": "MyApp"
 }

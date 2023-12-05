@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Linq.Expressions;
-using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,13 +10,16 @@ using Newtonsoft.Json.Linq;
 using Microsoft.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.UriParser;
-using Microsoft.AspNet.OData.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNet.OData.Formatter;
 using System.Collections.Concurrent;
+
+using Microsoft.AspNetCore.OData.Abstracts;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.OData.Extensions;
+
 
 namespace MyApp.Data
 {
@@ -53,8 +55,7 @@ namespace MyApp.Data
                 if (etagHeaderValue != null)
                 {
                     var values = request
-                        .GetRequestContainer()
-                        .GetRequiredService<IETagHandler>()
+                        .GetETagHandler()
                         .ParseETag(etagHeaderValue) ?? new Dictionary<string, object>();
 
                     return elementType

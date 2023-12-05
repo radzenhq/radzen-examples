@@ -21,6 +21,8 @@
                   "allowMultiSorting": false,
                   "allowPaging": true,
                   "allowSorting": true,
+                  "applyFilterText": "Apply",
+                  "clearFilterText": "Clear",
                   "columns": [
                     {
                       "property": "Id",
@@ -55,9 +57,16 @@
                       "type": "string"
                     }
                   ],
+                  "confirmDeleteCancelText": "Cancel",
+                  "confirmDeleteOkText": "Ok",
+                  "confirmDeleteText": "Are you sure you want to delete this record?",
+                  "confirmDeleteTitle": "Confirmation",
+                  "containsText": "Contains",
                   "count": "${getProductsCount}",
                   "data": "${getProductsResult}",
                   "emptyText": "No records to display.",
+                  "endsWithText": "Ends with",
+                  "equalsText": "Equals",
                   "events": {
                     "add": [
                       {
@@ -146,11 +155,23 @@
                           }
                         ],
                         "path": "edit-product",
+                        "then": [
+                          {
+                            "code": "this.load();",
+                            "type": "execute"
+                          }
+                        ],
                         "type": "popup"
                       }
                     ]
                   },
+                  "greaterThanOrEqualsText": "Greater than or equals",
+                  "greaterThanText": "Greater than",
+                  "lessThanOrEqualsText": "Less than or equals",
+                  "lessThanText": "Less than",
                   "name": "grid0",
+                  "notEqualsText": "Not equals",
+                  "startsWithText": "Starts with",
                   "title": "",
                   "type": "grid"
                 }

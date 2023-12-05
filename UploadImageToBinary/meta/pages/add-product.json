@@ -65,7 +65,8 @@
                       "required": false,
                       "requiredText": "is required",
                       "title": "Product Picture",
-                      "type": "file"
+                      "type": "file",
+                      "chooseText": "Choose"
                     }
                   ],
                   "name": "form0",

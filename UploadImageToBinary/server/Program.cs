@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
-
 namespace MyApp
 {
   public class Program
@@ -15,7 +14,7 @@ namespace MyApp
       public static IWebHost BuildWebHost(string[] args) =>
           WebHost.CreateDefaultBuilder(args)
               .UseKestrel()
-              .UseUrls("http://localhost:5000")
+              .UseUrls("http://*:5000")
               .UseStartup<Startup>()
               .Build();
   }

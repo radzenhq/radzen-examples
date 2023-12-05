@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Reflection;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,11 +16,11 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNet.OData.Query;
 
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Spreadsheet;
+using System.Collections;
 
 namespace MyApp.Data
 {
@@ -30,10 +31,14 @@ namespace MyApp.Data
             SupportedMediaTypes.Add("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             SupportedEncodings.Add(Encoding.UTF8);
         }
-
+        public override bool CanWriteResult(OutputFormatterCanWriteContext context)
+        {
+            return context.HttpContext.Request.Query.ContainsKey("$format") &&
+                context.HttpContext.Request.Query["$format"].ToString() == "xlsx";
+        }
         public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
         {
-            var query = (IQueryable)context.Object;
+            var query = context.Object is IQueryable ? (IQueryable)context.Object : ((IEnumerable)context.Object).AsQueryable();
 
             var queryString = context.HttpContext.Request.QueryString;
             var columns = queryString.Value.Contains("$select") ?
@@ -48,7 +53,7 @@ namespace MyApp.Data
                 var workbookPart = document.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
 
-                 var worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                var worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
                 worksheetPart.Worksheet = new Worksheet();
 
                 var workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
@@ -82,7 +87,7 @@ namespace MyApp.Data
                     foreach (var column in columns)
                     {
                         var value = OutputFormatter.GetValue(item, column.Key);
-                        var stringValue = value.ToString();
+                        var stringValue = $"{value}".Trim();
 
                         var cell = new Cell();
 
@@ -94,9 +99,10 @@ namespace MyApp.Data
 
                         if (typeCode == TypeCode.DateTime)
                         {
-                            if (stringValue != string.Empty)
+                            if (!string.IsNullOrWhiteSpace(stringValue))
                             {
-                                cell.CellValue = new CellValue() { Text = DateTime.Parse(stringValue).ToOADate().ToString() };
+                                cell.CellValue = new CellValue() { Text = DateTime.Parse(stringValue).ToOADate().ToString(System.Globalization.CultureInfo.InvariantCulture) };
+                                cell.DataType = new EnumValue<CellValues>(CellValues.Number);
                                 cell.StyleIndex = (UInt32Value)1U;
                             }
                         }
@@ -107,6 +113,11 @@ namespace MyApp.Data
                         }
                         else if (IsNumeric(typeCode))
                         {
+                            if (value != null)
+                            {
+                                stringValue = Convert.ToString(value, CultureInfo.InvariantCulture);
+                            }
+
                             cell.CellValue = new CellValue(stringValue);
                             cell.DataType = new EnumValue<CellValues>(CellValues.Number);
                         }
@@ -218,7 +229,7 @@ namespace MyApp.Data
             StylesheetExtension stylesheetExtension2 = new StylesheetExtension(){ Uri = "{9260A510-F301-46a8-8635-F512D64BE5F5}" };
             stylesheetExtension2.AddNamespaceDeclaration("x15", "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
 
-            OpenXmlUnknownElement openXmlUnknownElement4 = OpenXmlUnknownElement.CreateOpenXmlUnknownElement("<x15:timelineStyles defaultTimelineStyle=\"TimeSlicerStyleLight1\" xmlns:x15=\"http://schemas.microsoft.com/office/spreadsheetml/2010/11/main\" />");
+            OpenXmlUnknownElement openXmlUnknownElement4 = workbookStylesPart1.CreateUnknownElement("<x15:timelineStyles defaultTimelineStyle=\"TimeSlicerStyleLight1\" xmlns:x15=\"http://schemas.microsoft.com/office/spreadsheetml/2010/11/main\" />");
 
             stylesheetExtension2.Append(openXmlUnknownElement4);
 

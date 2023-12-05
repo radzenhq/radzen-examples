@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNet.OData.Query;
+using System.Collections;
 
 namespace MyApp.Data
 {
@@ -25,10 +25,14 @@ namespace MyApp.Data
             SupportedMediaTypes.Add("text/csv");
             SupportedEncodings.Add(Encoding.Unicode);
         }
-
+        public override bool CanWriteResult(OutputFormatterCanWriteContext context)
+        {
+            return context.HttpContext.Request.Query.ContainsKey("$format") && 
+                context.HttpContext.Request.Query["$format"].ToString() == "csv";
+        }
         public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
         {
-            var query = (IQueryable)context.Object;
+            var query = context.Object is IQueryable ? (IQueryable)context.Object : ((IEnumerable)context.Object).AsQueryable();
 
             var queryString = context.HttpContext.Request.QueryString;
             var columns = queryString.Value.Contains("$select") ?

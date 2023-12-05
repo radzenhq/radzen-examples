@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNetCore.OData.Query.Wrapper;
 
 namespace MyApp.Data
 {
@@ -50,6 +50,9 @@ namespace MyApp.Data
             var underlyingType = type.IsGenericType &&
                 type.GetGenericTypeDefinition() == typeof(Nullable<>) ?
                 Nullable.GetUnderlyingType(type) : type;
+
+            if(underlyingType == typeof(System.Guid))
+                return true;
 
             var typeCode = Type.GetTypeCode(underlyingType);
 

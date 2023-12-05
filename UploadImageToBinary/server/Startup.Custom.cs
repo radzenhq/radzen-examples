@@ -10,13 +10,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Builder;
+
+using Microsoft.OData.ModelBuilder;
+using Microsoft.AspNetCore.OData;
+
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.Extensions.Hosting;
 
 using MyApp.Data;
+
 
 namespace MyApp
 {

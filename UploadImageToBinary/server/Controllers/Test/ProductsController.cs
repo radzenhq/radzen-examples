@@ -2,15 +2,19 @@ using System;
 using System.Net;
 using System.Data;
 using System.Linq;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Routing;
+
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Microsoft.AspNetCore.OData.Results;
+using Microsoft.AspNetCore.OData.Deltas;
+using Microsoft.AspNetCore.OData.Formatter;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
 
 
 
@@ -20,8 +24,7 @@ namespace MyApp.Controllers.Test
   using Data;
   using Models.Test;
 
-  [ODataRoutePrefix("odata/Test/Products")]
-  [Route("mvc/odata/Test/Products")]
+  [Route("odata/Test/Products")]
   public partial class ProductsController : ODataController
   {
     private Data.TestContext context;
@@ -31,7 +34,7 @@ namespace MyApp.Controllers.Test
       this.context = context;
     }
     // GET /odata/Test/Products
-    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
+    [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet]
     public IEnumerable<Models.Test.Product> GetProducts()
     {
@@ -43,17 +46,22 @@ namespace MyApp.Controllers.Test
 
     partial void OnProductsRead(ref IQueryable<Models.Test.Product> items);
 
-    [EnableQuery(MaxExpansionDepth=10,MaxNodeCount=1000)]
-    [HttpGet("{Id}")]
+    [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
+    [HttpGet("/odata/Test/Products(Id={Id})")]
     public SingleResult<Product> GetProduct(int key)
     {
         var items = this.context.Products.Where(i=>i.Id == key);
+        this.OnProductsGet(ref items);
+
         return SingleResult.Create(items);
     }
+
+    partial void OnProductsGet(ref IQueryable<Models.Test.Product> items);
+
     partial void OnProductDeleted(Models.Test.Product item);
 
-    [HttpDelete("{Id}")]
-    public IActionResult DeleteProduct(int key) 
+    [HttpDelete("/odata/Test/Products(Id={Id})")]
+    public IActionResult DeleteProduct(int key)
     {
         try
         {
@@ -63,22 +71,23 @@ namespace MyApp.Controllers.Test
             }
 
 
-            var item = this.context.Products
+            var itemToDelete = this.context.Products
                 .Where(i => i.Id == key)
                 .FirstOrDefault();
 
-            if (item == null)
+            if (itemToDelete == null)
             {
-                return BadRequest();
-            }                
+                ModelState.AddModelError("", "Item no longer available");
+                return BadRequest(ModelState);
+            }
 
-            this.OnProductDeleted(item);
-            this.context.Products.Remove(item);
+            this.OnProductDeleted(itemToDelete);
+            this.context.Products.Remove(itemToDelete);
             this.context.SaveChanges();
 
             return new NoContentResult();
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -87,7 +96,8 @@ namespace MyApp.Controllers.Test
 
     partial void OnProductUpdated(Models.Test.Product item);
 
-    [HttpPut("{Id}")]
+    [HttpPut("/odata/Test/Products(Id={Id})")]
+    [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     public IActionResult PutProduct(int key, [FromBody]Models.Test.Product newItem)
     {
         try
@@ -106,16 +116,18 @@ namespace MyApp.Controllers.Test
             this.context.Products.Update(newItem);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.Products.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
         }
     }
 
-    [HttpPatch("{Id}")]
+    [HttpPatch("/odata/Test/Products(Id={Id})")]
+    [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     public IActionResult PatchProduct(int key, [FromBody]Delta<Models.Test.Product> patch)
     {
         try
@@ -125,22 +137,24 @@ namespace MyApp.Controllers.Test
                 return BadRequest(ModelState);
             }
 
-            var item = this.context.Products.Where(i=>i.Id == key).FirstOrDefault();
-            
-            if (item == null)
+            var itemToUpdate = this.context.Products.Where(i => i.Id == key).FirstOrDefault();
+
+            if (itemToUpdate == null)
             {
-                return BadRequest();
+                ModelState.AddModelError("", "Item no longer available");
+                return BadRequest(ModelState);
             }
 
-            patch.Patch(item);
+            patch.Patch(itemToUpdate);
 
-            this.OnProductUpdated(item);
-            this.context.Products.Update(item);
+            this.OnProductUpdated(itemToUpdate);
+            this.context.Products.Update(itemToUpdate);
             this.context.SaveChanges();
 
-            return new NoContentResult();
+            var itemToReturn = this.context.Products.Where(i => i.Id == key);
+            return new ObjectResult(SingleResult.Create(itemToReturn));
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);
@@ -150,6 +164,7 @@ namespace MyApp.Controllers.Test
     partial void OnProductCreated(Models.Test.Product item);
 
     [HttpPost]
+    [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     public IActionResult Post([FromBody] Models.Test.Product item)
     {
         try
@@ -170,7 +185,7 @@ namespace MyApp.Controllers.Test
 
             return Created($"odata/Test/Products/{item.Id}", item);
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return BadRequest(ModelState);

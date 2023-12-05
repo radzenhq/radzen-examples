@@ -65,36 +65,42 @@
                     ],
                     "submit": [
                       {
+                        "code": "delete ${event}.ProductPicture;",
+                        "type": "execute"
+                      },
+                      {
                         "error": [
                           {
-                            "name": "canEdit",
-                            "type": "set",
-                            "value": "!(result.status == 400)"
-                          },
-                          {
-                            "detail": "Unable to update Product",
+                            "detail": "Unable to update item",
                             "severity": "error",
                             "summary": "Error",
                             "type": "notify"
                           }
                         ],
-                        "name": "Test.updateProduct",
+                        "name": "ServerMethodsController.UpdateProduct",
                         "parameters": [
                           {
-                            "name": "Id",
+                            "in": "body",
+                            "name": "key",
+                            "required": true,
+                            "type": "integer",
                             "value": "${parameters.Id}"
                           },
                           {
-                            "name": "Product",
-                            "value": "${event}"
+                            "in": "body",
+                            "name": "patch",
+                            "type": "string",
+                            "value": "${JSON.stringify(event)}"
                           }
                         ],
+                        "path": "api/ServerMethods/UpdateProduct",
                         "then": [
                           {
                             "type": "back"
                           }
                         ],
-                        "type": "invoke"
+                        "type": "invoke-method",
+                        "verb": "post"
                       }
                     ]
                   },
@@ -117,6 +123,7 @@
                       "type": "number"
                     },
                     {
+                      "chooseText": "Choose",
                       "property": "ProductPictureAsString",
                       "required": false,
                       "requiredText": "is required",
